@@ -1,4 +1,5 @@
 import { Box, Text, SimpleGrid, Container } from "@chakra-ui/react";
+import { contactInfo } from "@/data/general";
 
 export default function Footer() {
     return (
@@ -7,7 +8,7 @@ export default function Footer() {
                 <SimpleGrid minChildWidth='120px' spacing='40px'>
                     <Box bg='tomato'>
                         <Text textAlign="center" color="gray.500">
-                            Tis Risk Managers 2024
+                            {contactInfo.name}
                         </Text>
                     </Box>
                     <Box bg='tomato'>

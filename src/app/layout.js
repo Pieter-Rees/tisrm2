@@ -2,12 +2,13 @@ import { Inter } from "next/font/google";
 import Header from "@/components/header/page";
 import Footer from "@/components/footer/page";
 import { Providers } from "./providers";
+import { pageInfo } from "@/data/general";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Tis Risk Managers",
-  description: "ToDO",
+  title: pageInfo.title,
+  description: pageInfo.pageDescription,
 };
 
 export default function RootLayout({ children }) {
