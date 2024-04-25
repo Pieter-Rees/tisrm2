@@ -5,12 +5,12 @@ export default function Footer() {
         <Box bg="gray.200" mt={8}>
             <Container maxW='2xl'>
                 <SimpleGrid minChildWidth='120px' spacing='40px'>
-                    <Box bg='tomato'>
+                    <Box>
                         <Text textAlign="center" color="gray.500">
                             {contactInfo.name}
                         </Text>
                     </Box>
-                    <Box bg='tomato'>
+                    <Box>
                         <Text textAlign="center" color="gray.500">
                             {contactInfo.name}
 
