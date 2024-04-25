@@ -37,7 +37,12 @@ const theme = extendTheme({
                 colorScheme: 'green', // default is gray
             },
         },
-    },
+        container: {
+            baseStyle: {
+                maxW: 'container.xl',
+            },
+        },
+    }
 })
 
 export default theme

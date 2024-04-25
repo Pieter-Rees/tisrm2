@@ -17,4 +17,6 @@ const pageInfo = {
     pageDescription: 'Web pagina van Tis Risk Managers'
 }
 
-export { pageInfo, contactInfo }  
+const currentYear = new Date().getFullYear();
+
+export { pageInfo, contactInfo, currentYear }  
