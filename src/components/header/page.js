@@ -1,17 +1,18 @@
-import { Box, Heading } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import Logo from "@/components/logo";
 import Navbar from "@/components/navbar/page";
 import Link from 'next/link'
-
+import { Divider } from '@chakra-ui/react'
+import { Box } from "@chakra-ui/react";
 export default function Header() {
     return (
-        <Box bg="brand.100" py={4} px={8}>
-            <Heading color="white" size="lg" display='flex' justifyContent='space-between'>
-                <Link href="/"><Logo /></Link>
-
-
+        <Box>
+            <Flex justifyContent='space-between' bg="white" py={4} px={8}>
+                <Link href="/"><Logo width='200px' /></Link>
                 <Navbar />
-            </Heading>
+            </Flex>
+            <Divider />
         </Box>
+
     );
 }
