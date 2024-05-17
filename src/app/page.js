@@ -1,3 +1,4 @@
+import CallUs from '@/components/call-us'
 import { Grid, GridItem } from '@chakra-ui/react'
 import Image from 'next/image'
 
@@ -19,7 +20,9 @@ export default function Homepage() {
           width={1000}
         />
       </GridItem>
-      <GridItem colSpan={2} bg='marine.500' />
+      <GridItem colSpan={2} bg='marine.500' >
+        <CallUs />
+      </GridItem>
     </Grid>
   )
 }

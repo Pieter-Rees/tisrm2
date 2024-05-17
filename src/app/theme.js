@@ -12,6 +12,8 @@ const theme = extendTheme({
         900: '#1a202c',
     },
 
+
+
     components: {
         Button: {
             baseStyle: {
@@ -39,6 +41,39 @@ const theme = extendTheme({
                 variant: 'sm', // default is solid
                 colorScheme: 'green', // default is gray
             },
+        },
+        heading: {
+            baseStyle: {
+                fontWeight: 'bold',
+            },
+            variants: {
+                h1: {
+                    color: 'marine.500',
+                    fontSize: '6xl',
+                    fontWeight: 'bold',
+                    lineHeight: '110%',
+                },
+                h2: {
+                    fontSize: '4xl',
+                    fontWeight: 'bold',
+                    lineHeight: '110%',
+                },
+                h3: {
+                    fontSize: '2xl',
+                    fontWeight: 'bold',
+                    lineHeight: '110%',
+                },
+                h4: {
+                    fontSize: 'xl',
+                    fontWeight: 'bold',
+                    lineHeight: '110%',
+                },
+                h5: {
+                    fontSize: 'lg',
+                    fontWeight: 'bold',
+                    lineHeight: '110%',
+                },
+            }
         },
         container: {
             baseStyle: {
