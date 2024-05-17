@@ -9,9 +9,9 @@ export default function Homepage() {
       <Grid
         width='full'
         templateRows='repeat(2, 1fr)'
-        templateColumns='repeat(6, 1fr)'
+        templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(6, 1fr)' }}
+
         gap={4}
-        height='300px'
       >
         <GridItem colSpan={4} bg='papayawhip' >
           <Image

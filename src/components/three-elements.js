@@ -7,7 +7,7 @@ export default function ThreeElements() {
             width='full'
 
             templateRows='repeat(1, 1fr)'
-            templateColumns='repeat(3, 1fr)'
+            templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(3, 1fr)' }}
             gap={8}
         >
             <GridItem >
