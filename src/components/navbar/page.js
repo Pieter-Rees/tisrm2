@@ -18,7 +18,7 @@ export default function Navbar() {
                 <Center height='50px'>
                     <Divider orientation='vertical' />
                 </Center>
-                <Button color='white'>Offerte aanvragen</Button>
+                <Button as='a' href="/offerte" color='white'>Offerte aanvragen</Button>
             </Show>
             <Show below="lg">
                 <Flex flexDir='column'>
