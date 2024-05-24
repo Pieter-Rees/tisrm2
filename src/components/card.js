@@ -1,7 +1,7 @@
 import React from 'react';
 import { Flex, Text, Button } from '@chakra-ui/react';
 import Image from 'next/image';
-const Card = ({ title, description }) => {
+const Card = ({ title, description, button, image, downloadLink }) => {
     return (
         <Flex
             borderWidth="1px"
@@ -12,19 +12,10 @@ const Card = ({ title, description }) => {
             boxShadow="md"
             flexDirection="column"
         >
-            <Image
-                src="/1.webp"
-                alt="Picture of the author"
-                height={800}
-                width={1000}
-            />
-            <Text fontSize="xl" fontWeight="bold" >
-                {title}
-            </Text>
-            <Text>{description}</Text>
-            <Button>
-                Click me
-            </Button>
+            {image && <Image src="/1.webp" alt="Picture of the author" height={500} width={1000} />}
+            {title && <Text fontSize="xl" fontWeight="bold" >{title}</Text>}
+            {description && <Text>{description}</Text>}
+            {downloadLink && <Button as='a' href={downloadLink}>Download</Button>}
         </Flex>
     );
 };
