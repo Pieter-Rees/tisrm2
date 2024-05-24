@@ -1,4 +1,5 @@
-import { extendTheme } from '@chakra-ui/react'
+import { background, Card, extendTheme } from '@chakra-ui/react'
+import { color } from 'framer-motion'
 
 const theme = extendTheme({
     colors: {
@@ -12,12 +13,15 @@ const theme = extendTheme({
         900: '#1a202c',
     },
 
-
-
     components: {
         Button: {
             baseStyle: {
                 fontWeight: 'bold', // Normally, it is "semibold"
+                bg: 'gray.600',
+                color: 'white',
+                _hover: {
+                    bg: 'red.300',
+                },
             },
             sizes: {
                 xl: {
@@ -28,18 +32,17 @@ const theme = extendTheme({
             },
             variants: {
                 'with-shadow': {
-                    bg: 'red.400',
                     boxShadow: '0 0 2px 2px #efdfde',
                 },
                 sm: {
-                    bg: 'teal.500',
                     fontSize: 'md',
                 },
             },
             defaultProps: {
                 size: 'lg', // default is md
                 variant: 'sm', // default is solid
-                colorScheme: 'green', // default is gray
+                colorScheme: 'brand', // default is gray
+
             },
         },
         heading: {

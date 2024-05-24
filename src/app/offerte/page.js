@@ -53,8 +53,8 @@ export default function Offerte() {
     })
 
     return (
-        <VStack alignItems='flex-start'>
-            <Stepper index={activeStep}>
+        <VStack alignItems='flex-start' width='full'>
+            <Stepper width='full' index={activeStep}>
                 {steps.map((step, index) => (
                     <Step key={index}>
                         <StepIndicator>
@@ -75,7 +75,7 @@ export default function Offerte() {
                 ))}
             </Stepper>
 
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form width='full' onSubmit={handleSubmit(onSubmit)}>
                 <FormControl isInvalid={errors.name}>
                     <FormLabel htmlFor='name'>First name</FormLabel>
                     <Input
