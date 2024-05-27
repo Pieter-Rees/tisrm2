@@ -42,34 +42,30 @@ const theme = extendTheme({
                 colorScheme: 'green', // default is gray
             },
         },
-        heading: {
+        Heading: {
             baseStyle: {
                 fontWeight: 'bold',
             },
             variants: {
-                h1: {
+                xl: {
                     color: 'marine.500',
                     fontSize: '6xl',
                     fontWeight: 'bold',
                     lineHeight: '110%',
+                    marginBottom: '4',
                 },
-                h2: {
+                lg: {
                     fontSize: '4xl',
                     fontWeight: 'bold',
                     lineHeight: '110%',
                 },
-                h3: {
+                md: {
                     fontSize: '2xl',
                     fontWeight: 'bold',
                     lineHeight: '110%',
                 },
-                h4: {
+                sm: {
                     fontSize: 'xl',
-                    fontWeight: 'bold',
-                    lineHeight: '110%',
-                },
-                h5: {
-                    fontSize: 'lg',
                     fontWeight: 'bold',
                     lineHeight: '110%',
                 },

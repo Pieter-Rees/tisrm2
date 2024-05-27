@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
           <Flex
             paddingY='4'
             width='100%'
-            maxWidth={{ xl: "1200px" }}
+            maxWidth={{ xl: "1700px" }}
             margin="0 auto"
           >
 

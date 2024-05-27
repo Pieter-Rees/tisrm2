@@ -1,3 +1,4 @@
+
 import { Text } from '@chakra-ui/react'
 import { Box } from '@chakra-ui/react'
 import { Heading } from '@chakra-ui/react'
@@ -6,11 +7,10 @@ import {
     ListItem,
     ListIcon,
 } from '@chakra-ui/react'
-import { CheckFill } from 'react-icons/bs'
+import Layout from '../layout'
 
 export default function Overons() {
     return (
-
         <Box>
             <Heading as='h1' variant='xl'>Over ons</Heading>
             <Text>
@@ -21,24 +21,23 @@ export default function Overons() {
             </Text>
             <List spacing={3} marginBottom='4'>
                 <ListItem>
-                    <ListIcon as={CheckFill} color='green.500' />
+                    <ListIcon color='green.500' />
                     Enthoven Beheer BV – Financial Holding
                 </ListItem>
                 <ListItem>
-                    <ListIcon as={CheckFill} color='green.500' />
+                    <ListIcon color='green.500' />
                     ENTO lease BV – Lease en financiering
                 </ListItem>
                 <ListItem>
-                    <ListIcon as={CheckFill} color='green.500' />
+                    <ListIcon color='green.500' />
                     ENTO Holding – bedrijfs adviezen
                 </ListItem>
-                {/* You can also use custom icons from react-icons */}
                 <ListItem>
-                    <ListIcon as={CheckFill} color='green.500' />
+                    <ListIcon color='green.500' />
                     Alan Jacktar BV – Risico Management
                 </ListItem>
                 <ListItem>
-                    <ListIcon as={CheckFill} color='green.500' />
+                    <ListIcon color='green.500' />
                     TIS RM – Assurantiën (Schade) voor particulier en MKB
                 </ListItem>
             </List>

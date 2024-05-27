@@ -10,8 +10,7 @@ export default function Homepage() {
         width='full'
         templateRows='repeat(1, 1fr)'
         templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(6, 1fr)' }}
-
-        gap={4}
+        gap={8}
       >
         <GridItem colSpan={4} bg='papayawhip' >
           <Image
