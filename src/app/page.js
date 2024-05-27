@@ -1,14 +1,14 @@
 import CallUs from '@/components/call-us'
-import { Grid, GridItem, Box } from '@chakra-ui/react'
+import { Grid, GridItem, Flex } from '@chakra-ui/react'
 import Image from 'next/image'
 import ThreeElements from '@/components/three-elements'
 
 export default function Homepage() {
   return (
-    <Box>
+    <Flex flexDirection='column' gap='4'>
       <Grid
         width='full'
-        templateRows='repeat(2, 1fr)'
+        templateRows='repeat(1, 1fr)'
         templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(6, 1fr)' }}
 
         gap={4}
@@ -26,7 +26,7 @@ export default function Homepage() {
         </GridItem>
       </Grid>
       <ThreeElements />
-    </Box>
+    </Flex>
 
   )
 }
