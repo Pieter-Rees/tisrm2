@@ -11,7 +11,7 @@ export default function Navbar() {
                 <Link href="/"><Text>Home</Text></Link>
                 <Link href="/verzekeringen">Verzekeringen</Link>
                 <Link href="/taxi">Taxi</Link>
-                <Link href="/risk-management">Risk management</Link>
+                <Link href="/risico-management">Risk management</Link>
                 <Link href="/over-ons">Over ons</Link>
                 <Link href="/bestanden">Bestanden</Link>
                 <Link href="/contact">Contact</Link>

@@ -7,7 +7,6 @@ const Sidebar = () => {
             <Card variant='sidebar' title="Card title" description="Card description" />
             <Card variant='sidebar' title="Card title" description="Card description" />
             <Card variant='sidebar' title="Card title" description="Card description" />
-
         </VStack>
     );
 };

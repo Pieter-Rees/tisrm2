@@ -1,18 +1,15 @@
 
 import { Text } from '@chakra-ui/react'
-import { Box } from '@chakra-ui/react'
-import { Heading } from '@chakra-ui/react'
 import {
     List,
     ListItem,
     ListIcon,
 } from '@chakra-ui/react'
-import Layout from '../layout'
+import ContainerLayout from '../containerLayout'
 
 export default function Overons() {
     return (
-        <Box>
-            <Heading as='h1' variant='xl'>Over ons</Heading>
+        <ContainerLayout title='Over ons'>
             <Text>
                 De ENTO Groep is opgericht in 1994 en is begonnen als zelfstandige auto lease maatschappij voor het MKB. In 1998 is daar de discipline verzekeringen aan toegevoegd. In 2002 werd middels een overname van een grote assurantie portefeuille uit het oosten van Nederland de basis voor het huidige concern gelegd. Inmiddels is de tweede generatie in het bedrijf gekomen. Door nieuwe impulsen zijn wij reeds ook gecertificeerd Risico Managers en als zodanig geregistreerd in het GRMC register.
             </Text>
@@ -44,6 +41,6 @@ export default function Overons() {
             <Text>
                 Uit een zeer modern en inspirerend kantoor wordt de onderneming gedreven met geavanceerde software en bedrijfsmodel. Door gebruik te maken van diverse gespecialiseerde diensten zoals een call center en een uitbesteedde schade afdeling zijn wij in staat met een relatief klein team een mooie omzet te genereren. Focus ligt op advisering in Risico management en financiële vraagstukken.
             </Text>
-        </Box >
+        </ContainerLayout >
     )
 }
