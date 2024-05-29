@@ -5,6 +5,8 @@ import FooterLogos from "@/components/footer-logos";
 export default function Footer() {
     return (
         <>
+            <FooterLogos />
+
             <Box bg="gray.200" mt={8}>
                 <Container maxW='2xl'>
                     <SimpleGrid minChildWidth='120px' spacing='40px'>
@@ -35,7 +37,6 @@ export default function Footer() {
                     </Box>
                 </Container>
             </Box>
-            <FooterLogos />
         </>
 
     )
