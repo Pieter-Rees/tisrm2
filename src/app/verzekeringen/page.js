@@ -1,3 +1,6 @@
+import ContainerLayout from "../containerLayout"
 export default function Verzekeringen() {
-    return <h1>Hello, Verzekeringen</h1>
+    return <ContainerLayout>
+        TEST
+    </ContainerLayout>
 }
