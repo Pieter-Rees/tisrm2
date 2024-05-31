@@ -2,7 +2,7 @@ import { Grid, GridItem } from '@chakra-ui/react'
 import Sidebar from '@/components/sidebar'
 import { Heading, Flex } from '@chakra-ui/react'
 
-export default function ContainerLayout({
+export default function GridLayout({
     children,
     title,
     sidebar = true

@@ -14,7 +14,7 @@ export default function Footer() {
             <FooterLogos />
 
             <Flex bg="gray.200" paddingY='16' alignItems='center' >
-                <Container maxW='full' >
+                <Container >
                     <SimpleGrid minChildWidth='120px' spacing='40px'>
                         <Box>
                             <Heading as='h3' variant='md'>

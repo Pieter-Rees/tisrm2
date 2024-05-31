@@ -1,6 +1,13 @@
-import ContainerLayout from "../containerLayout"
+import GridLayout from "@/components/gridLayout"
+import { Container } from '@chakra-ui/react'
+
+
 export default function Verzekeringen() {
-    return <ContainerLayout>
-        TEST
-    </ContainerLayout>
+    return (
+        <Container>
+            <GridLayout>
+                TEST
+            </GridLayout>
+        </Container>
+    )
 }

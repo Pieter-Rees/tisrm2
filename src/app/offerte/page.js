@@ -1,10 +1,6 @@
 "use client"
 
 import {
-    VStack,
-} from '@chakra-ui/react'
-
-import {
     Step,
     StepDescription,
     StepIcon,
@@ -15,9 +11,11 @@ import {
     StepTitle,
     Stepper,
     useSteps,
+    Box,
+    Container,
+    VStack
 } from '@chakra-ui/react'
 
-import { Box } from '@chakra-ui/react'
 import RegistrationForm from './form'
 
 export default function Offerte() {
@@ -33,29 +31,32 @@ export default function Offerte() {
     })
 
     return (
-        <VStack alignItems='flex-start' width='full'>
-            <Stepper width='full' index={activeStep}>
-                {steps.map((step, index) => (
-                    <Step key={index}>
-                        <StepIndicator>
-                            <StepStatus
-                                complete={<StepIcon />}
-                                incomplete={<StepNumber />}
-                                active={<StepNumber />}
-                            />
-                        </StepIndicator>
+        <Container>
 
-                        <Box flexShrink='0'>
-                            <StepTitle>{step.title}</StepTitle>
-                            <StepDescription>{step.description}</StepDescription>
-                        </Box>
+            <VStack alignItems='flex-start' width='full'>
+                <Stepper width='full' index={activeStep}>
+                    {steps.map((step, index) => (
+                        <Step key={index}>
+                            <StepIndicator>
+                                <StepStatus
+                                    complete={<StepIcon />}
+                                    incomplete={<StepNumber />}
+                                    active={<StepNumber />}
+                                />
+                            </StepIndicator>
 
-                        <StepSeparator />
-                    </Step>
-                ))}
-            </Stepper>
+                            <Box flexShrink='0'>
+                                <StepTitle>{step.title}</StepTitle>
+                                <StepDescription>{step.description}</StepDescription>
+                            </Box>
 
-            <RegistrationForm />
-        </VStack>
+                            <StepSeparator />
+                        </Step>
+                    ))}
+                </Stepper>
+
+                <RegistrationForm />
+            </VStack>
+        </Container>
     )
 }

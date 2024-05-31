@@ -74,9 +74,9 @@ const theme = extendTheme({
                 },
             }
         },
-        container: {
+        Container: {
             baseStyle: {
-                maxW: 'container.xl',
+                maxW: '1600px',
             },
         },
     }

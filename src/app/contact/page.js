@@ -1,3 +1,9 @@
+import { Container } from '@chakra-ui/react'
+
 export default function Contact() {
-    return <h1>Hello, Contact</h1>
+    return (
+        <Container>
+            <h1>Hello, Contact</h1>
+        </Container>
+    )
 }
