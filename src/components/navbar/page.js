@@ -8,7 +8,7 @@ export default function Navbar() {
     return (
         <HStack color='gray' gap='8'>
             <Show above="lg">
-                <Link href="/"><Text>Home</Text></Link>
+                <Link href="/">Home</Link>
                 <Link href="/verzekeringen">Verzekeringen</Link>
                 <Link href="/taxi">Taxi</Link>
                 <Link href="/risico-management">Risk management</Link>
@@ -18,7 +18,7 @@ export default function Navbar() {
                 <Center height='50px'>
                     <Divider orientation='vertical' />
                 </Center>
-                <Button as='a' href="/offerte" color='white'>Offerte aanvragen</Button>
+                <Button as='a' href="/offerte" variant='blue'>Offerte aanvragen</Button>
             </Show>
             <Show below="lg">
                 <Flex flexDir='column'>

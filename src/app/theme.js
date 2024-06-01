@@ -1,27 +1,22 @@
-import { background, Card, extendTheme } from '@chakra-ui/react'
+import { background, Button, Card, extendTheme, List, UnorderedList } from '@chakra-ui/react'
 import { color } from 'framer-motion'
 
 const theme = extendTheme({
     colors: {
-        marine: {
-            500: '#002D62',
+        'gray': {
+            500: '#abadaf',
+            600: '#7d7f83',
+            700: '#33373d',
+            800: '#1d2025',
+            900: '#171a1d',
         },
     },
-    brand: {
-        100: 'orange',
-        // ...
-        900: '#1a202c',
-    },
-
     components: {
         Button: {
             baseStyle: {
                 fontWeight: 'bold', // Normally, it is "semibold"
-                bg: 'gray.600',
                 color: 'white',
-                _hover: {
-                    bg: 'red.300',
-                },
+                backgroundColor: 'gray.500',
             },
             sizes: {
                 xl: {
@@ -31,27 +26,59 @@ const theme = extendTheme({
                 },
             },
             variants: {
-                'with-shadow': {
-                    boxShadow: '0 0 2px 2px #efdfde',
+                'blue': {
+                    bg: 'blue.700',
+                    color: 'white',
+                    _hover: {
+                        bg: 'blue.900',
+                    },
                 },
-                sm: {
-                    fontSize: 'md',
+                white: {
+                    bg: 'white',
+                    color: 'black',
+                    _hover: {
+                        bg: 'gray.100',
+                    },
                 },
             },
             defaultProps: {
                 size: 'lg', // default is md
                 variant: 'sm', // default is solid
-                colorScheme: 'brand', // default is gray
 
+            },
+        },
+        Text: {
+            baseStyle: {
+                marginBottom: '4',
+                color: 'gray.500',
+            },
+            sizes: {
+                xl: {
+                    fontSize: 'xl',
+                },
+            },
+            variants: {
+                'footer': {
+                    textColor: 'white'
+                },
+                gradient: {
+                    bgGradient: 'linear(to-r, red.400, orange.400, yellow.400)',
+                    bgClip: 'text',
+                    fontWeight: 'extrabold',
+                },
+            },
+            defaultProps: {
+                size: 'xl', // 'md' is the default value
             },
         },
         Heading: {
             baseStyle: {
+                color: 'gray.500',
+                marginBottom: '2',
                 fontWeight: 'bold',
             },
             variants: {
                 xl: {
-                    color: 'marine.500',
                     fontSize: '6xl',
                     fontWeight: 'bold',
                     lineHeight: '110%',
@@ -72,11 +99,47 @@ const theme = extendTheme({
                     fontWeight: 'bold',
                     lineHeight: '110%',
                 },
+                footer: {
+                    color: 'white',
+                }
             }
         },
         Container: {
             baseStyle: {
                 maxW: '1600px',
+            },
+        },
+        UnorderedList: {
+            baseStyle: {
+                color: 'gray.500',
+                listStyleType: 'none',
+            },
+            sizes: {
+                xl: {
+                    fontSize: 'xl',
+                },
+            },
+            variants: {
+                'footer': {
+                    color: 'white',
+                }
+            },
+        },
+        List: {
+            baseStyle: {
+                color: 'gray.500',
+                marginBottom: '4',
+                listStyleType: 'none',
+            },
+            sizes: {
+                xl: {
+                    fontSize: 'xl',
+                },
+            },
+            variants: {
+                'footer': {
+                    color: 'white',
+                }
             },
         },
     }

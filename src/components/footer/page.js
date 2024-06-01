@@ -2,6 +2,7 @@ import {
     ListItem,
     ListIcon,
     Divider,
+    Button,
     UnorderedList, Box, Flex, Text, SimpleGrid, Container, Heading
 } from "@chakra-ui/react";
 import { contactInfo, currentYear } from "@/data/general";
@@ -12,20 +13,20 @@ export default function Footer() {
     return (
         <>
             <FooterLogos />
-
-            <Flex bg="gray.200" paddingY='16' alignItems='center' >
+            <Flex bg="gray.700" paddingY='16' alignItems='center' >
                 <Container >
                     <SimpleGrid minChildWidth='120px' spacing='40px'>
                         <Box>
-                            <Heading as='h3' variant='md'>
+                            <Heading as='h3' variant='footer'>
                                 {contactInfo.name}
                             </Heading>
-                            <Text color="gray.500">
+                            <Text color="white">
                                 Het verdient aanbeveling dat verzekeraars een polis uitbrengen die de gevolgen dekt van een niet geheel begrepen verzekering!
                             </Text>
+                            <Button as='a' href="/offerte" variant='blue'>Offerte aanvragen</Button>
                         </Box>
                         <Box>
-                            <Heading as='h3' variant='md'>
+                            <Heading as='h3' variant='footer'>
                                 Navigatie
                             </Heading>
                             <Flex flexDir='column'>
@@ -39,7 +40,7 @@ export default function Footer() {
                             </Flex>
                         </Box>
                         <Box>
-                            <Heading as='h3' variant='md'>
+                            <Heading as='h3' variant='footer'>
                                 Contact informatie
                             </Heading>
 
