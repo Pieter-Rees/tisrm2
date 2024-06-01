@@ -1,4 +1,4 @@
-import { background, Button, Card, extendTheme, List, UnorderedList } from '@chakra-ui/react'
+import { background, Button, Card, extendTheme, List, ListItem, UnorderedList } from '@chakra-ui/react'
 import { color } from 'framer-motion'
 
 const theme = extendTheme({
@@ -109,39 +109,14 @@ const theme = extendTheme({
                 maxW: '1600px',
             },
         },
-        UnorderedList: {
-            baseStyle: {
-                color: 'gray.500',
-                listStyleType: 'none',
-            },
-            sizes: {
-                xl: {
-                    fontSize: 'xl',
-                },
-            },
-            variants: {
-                'footer': {
-                    color: 'white',
-                }
-            },
-        },
         List: {
             baseStyle: {
-                color: 'gray.500',
-                marginBottom: '4',
-                listStyleType: 'none',
-            },
-            sizes: {
-                xl: {
-                    fontSize: 'xl',
-                },
-            },
-            variants: {
-                'footer': {
+                item: {
                     color: 'white',
+                    listStyle: "none",
                 }
-            },
-        },
+            }
+        }
     }
 })
 
