@@ -111,7 +111,14 @@ const theme = extendTheme({
         },
         List: {
             baseStyle: {
+                container: {
+                    paddingLeft: '0',
+                    marginLeft: '0',
+                    marginInlineStart: '0',
+                },
                 item: {
+                    paddingLeft: '0',
+                    marginLeft: '0',
                     color: 'white',
                     listStyle: "none",
                 }

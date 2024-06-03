@@ -71,7 +71,7 @@ export default function Footer() {
                         </Box>
                     </SimpleGrid>
                     <Box marginTop='8' >
-                        <Text textAlign="center" size='xl' color="gray.500">
+                        <Text textAlign="center" size='xl' color="white">
                             Tis Risk Managers {currentYear}
                         </Text>
                     </Box>
