@@ -1,7 +1,7 @@
 import React from 'react';
 import { Flex, Text, Button } from '@chakra-ui/react';
 import Image from 'next/image';
-const Card = ({ title, description, button, image, downloadLink }) => {
+const Card = ({ title, description, image, downloadLink }) => {
     return (
         <Flex
             borderWidth="1px"

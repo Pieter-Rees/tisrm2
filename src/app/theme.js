@@ -59,16 +59,16 @@ const theme = extendTheme({
             },
             variants: {
                 'footer': {
-                    textColor: 'white'
+                    textColor: 'white',
+                    size: 'xl',
                 },
                 gradient: {
-                    bgGradient: 'linear(to-r, red.400, orange.400, yellow.400)',
                     bgClip: 'text',
                     fontWeight: 'extrabold',
                 },
             },
             defaultProps: {
-                size: 'xl', // 'md' is the default value
+                size: 'xl',
             },
         },
         Heading: {

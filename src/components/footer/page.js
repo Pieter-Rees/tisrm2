@@ -29,7 +29,7 @@ export default function Footer() {
                             <Heading as='h3' variant='footer'>
                                 Navigatie
                             </Heading>
-                            <Flex flexDir='column'>
+                            <Flex flexDir='column' textColor='white'>
                                 <Link href="/">Home</Link>
                                 <Link href="/verzekeringen">Verzekeringen</Link>
                                 <Link href="/taxi">Taxi</Link>
@@ -70,8 +70,8 @@ export default function Footer() {
                             </Box>
                         </Box>
                     </SimpleGrid>
-                    <Box >
-                        <Text textAlign="center" color="gray.500">
+                    <Box marginTop='8' >
+                        <Text textAlign="center" size='xl' color="gray.500">
                             Tis Risk Managers {currentYear}
                         </Text>
                     </Box>
