@@ -1,5 +1,6 @@
-import { background, Button, Card, extendTheme, List, ListItem, UnorderedList } from '@chakra-ui/react'
+import { background, border, Button, Card, extendTheme, List, ListItem, UnorderedList } from '@chakra-ui/react'
 import { color } from 'framer-motion'
+import { BsBorderWidth } from 'react-icons/bs'
 
 const theme = extendTheme({
     colors: {
@@ -54,6 +55,21 @@ const theme = extendTheme({
 
             },
         },
+
+        Card: {
+            baseStyle: {
+                header: {
+                    borderTopRadius: 'sm',
+                },
+                container: {
+                    border: '1px',
+                    borderRadius: 'lg',
+                    padding: '8',
+                },
+            }
+
+        },
+
         Text: {
             baseStyle: {
                 marginBottom: '4',

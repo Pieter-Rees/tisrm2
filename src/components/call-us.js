@@ -7,7 +7,7 @@ import { BsTelephoneFill } from 'react-icons/bs'
 
 export default function CallUs() {
     return (
-        <Flex justifyContent='center' height='full' flexDirection='column' padding='4' gap='8'>
+        <Flex justifyContent='center' height='full' flexDirection='column' padding='8' gap='8'>
             <Box color='white'>
                 <BsTelephoneFill size='32px' />
             </Box>

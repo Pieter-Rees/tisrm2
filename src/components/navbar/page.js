@@ -37,7 +37,7 @@ export default function Navbar() {
                     <Box cursor='pointer' onClick={handleToggle}>
                         <BsList size='64' />
                     </Box>
-                    {showSideNav && <Sidenav />}
+                    <Sidenav showSideNav={showSideNav} />
                 </Box>
 
             </Hide>

@@ -15,12 +15,12 @@ export default function GridLayout({
                 {breadcrumb}
             </Flex>
 
-            <Grid width='full' templateRows='repeat(1, 1fr)' templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(6, 1fr)' }} gap='16' >
+            <Grid width='full' templateRows='repeat(1, 1fr)' templateColumns={{ base: 'repeat(1, 1fr)', xl: 'repeat(6, 1fr)' }} gap='16' >
                 <GridItem colSpan={{ base: '4', lg: '4' }} >
                     {children}
                 </GridItem>
                 {sidebar &&
-                    <GridItem colSpan={{ base: '4', lg: '2' }} >
+                    <GridItem colSpan={{ base: '4', xl: '2' }} >
                         <Sidebar />
                     </GridItem>
                 }

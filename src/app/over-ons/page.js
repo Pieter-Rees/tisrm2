@@ -19,28 +19,28 @@ export default function Overons() {
                 <Text>
                     Thans bestaat de ENTO groep uit de ondernemingen:
                 </Text>
-                <List spacing={3} marginBottom='4'>
+                <List spacing={4} marginBottom='4'>
                     <ListItem display='flex' alignItems='center'>
                         <BsCheck color='green' size='36px' />
 
                         Enthoven Beheer BV – Financial Holding
                     </ListItem>
-                    <ListItem ListItem display='flex' alignItems='center'>
+                    <ListItem display='flex' alignItems='center'>
                         <BsCheck color='green' size='36px' />
 
                         ENTO lease BV – Lease en financiering
                     </ListItem>
-                    <ListItem ListItem display='flex' alignItems='center'>
+                    <ListItem display='flex' alignItems='center'>
                         <BsCheck color='green' size='36px' />
 
                         ENTO Holding – bedrijfs adviezen
                     </ListItem>
-                    <ListItem ListItem display='flex' alignItems='center'>
+                    <ListItem display='flex' alignItems='center'>
                         <BsCheck color='green' size='36px' />
 
                         Alan Jacktar BV – Risico Management
                     </ListItem>
-                    <ListItem ListItem display='flex' alignItems='center'>
+                    <ListItem display='flex' alignItems='center'>
                         <BsCheck color='green' size='36px' />
 
                         TIS RM – Assurantiën (Schade) voor particulier en MKB

@@ -14,10 +14,9 @@ export default function Homepage() {
           templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(6, 1fr)' }}
           gap='8'
         >
-          <GridItem justifyContent='center' alignItems='center' borderRadius='lg' colSpan={{ base: 1, lg: 4 }} width='full'>
-            <Box width='full' borderRadius='lg' overflow='hidden'>
+          <GridItem justifyContent='center' alignItems='center' colSpan={{ base: 1, lg: 4 }} width='full'>
+            <Box width='full' overflow='hidden'>
               <Image
-                borderRadius='lg'
                 src="/1.webp"
                 alt="Picture of the author"
                 width='2000'
@@ -25,7 +24,7 @@ export default function Homepage() {
               />
             </Box>
           </GridItem>
-          <GridItem colSpan={2} borderRadius='lg' bg='blue.700' >
+          <GridItem colSpan={2} bg='blue.700' >
             <CallUs />
           </GridItem>
         </Grid>

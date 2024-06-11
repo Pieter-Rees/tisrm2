@@ -15,7 +15,7 @@ export default function Footer() {
             <FooterLogos />
             <Flex bg="gray.700" paddingY='16' alignItems='center' >
                 <Container >
-                    <SimpleGrid minChildWidth={{ base: '100%', lg: '120px' }} spacing='40px'>
+                    <SimpleGrid minChildWidth={{ base: '100%', lg: '100px' }} spacing='16'>
                         <Box>
                             <Heading as='h3' variant='footer'>
                                 {contactInfo.name}

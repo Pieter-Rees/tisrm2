@@ -15,13 +15,11 @@ export default function Contact() {
                     <Divider orientation='horizontal' />
                 </GridItem>
                 <GridItem w='100%'  >
-                    <Flex width='full' borderRadius='lg' overflow='hidden' alignItems='center' height='full'>
+                    <Flex position='relative' width='full' overflow='hidden' alignItems='center' height='full'>
                         <Image
-                            borderRadius='lg'
                             src="/bb.jpg"
                             alt="Picture of the author"
-                            width='2000'
-                            height='1000'
+                            fill={true}
                         />
                     </Flex>
                 </GridItem>
