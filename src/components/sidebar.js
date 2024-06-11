@@ -1,12 +1,13 @@
 import { VStack } from '@chakra-ui/react';
 import React from 'react';
 import Card from './card';
+
 const Sidebar = () => {
     return (
-        <VStack>
-            <Card variant='sidebar' title="Card title" description="Card description" />
-            <Card variant='sidebar' title="Card title" description="Card description" />
-            <Card variant='sidebar' title="Card title" description="Card description" />
+        <VStack gap='4'>
+            <Card variant='sidebar' title="Verzekering afsluiten" cta='Offerte aanvragen' ctaLink='/offerte' />
+            <Card variant='sidebar' title="Formulieren" description="Download nu direct belangrijke formulieren voor uw schadeafhandeling" cta='Downloads' ctaLink='/downloads' />
+            <Card variant='sidebar' title="Vragen?" cta='Bel ons nu' phone='tel:+31612589043' />
         </VStack>
     );
 };

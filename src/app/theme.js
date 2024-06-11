@@ -50,7 +50,7 @@ const theme = extendTheme({
         Text: {
             baseStyle: {
                 marginBottom: '4',
-                color: 'gray.500',
+                color: 'gray.700',
             },
             sizes: {
                 xl: {
@@ -73,7 +73,7 @@ const theme = extendTheme({
         },
         Heading: {
             baseStyle: {
-                color: 'gray.500',
+                color: 'gray.700',
                 marginBottom: '2',
                 fontWeight: 'bold',
             },
@@ -110,16 +110,28 @@ const theme = extendTheme({
             },
         },
         List: {
+            variants: {
+                footer: {
+                    item: {
+                        fontSize: 'lg',
+                        color: 'white',
+                    }
+                },
+                contact: {
+                    container: {
+                        textAlign: 'center',
+                    },
+                }
+            },
+
             baseStyle: {
                 container: {
-                    paddingLeft: '0',
-                    marginLeft: '0',
+                    paddingY: '4',
                     marginInlineStart: '0',
                 },
                 item: {
-                    paddingLeft: '0',
-                    marginLeft: '0',
-                    color: 'white',
+                    color: 'gray.700',
+                    fontSize: 'lg',
                     listStyle: "none",
                 }
             }

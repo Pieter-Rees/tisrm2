@@ -10,7 +10,7 @@ export default function GridLayout({
     return (
         <Flex width='full' flexDirection='column'>
             <Heading as='h1' variant='xl'>{title}</Heading>
-            <Grid width='full' templateRows='repeat(1, 1fr)' templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(6, 1fr)' }} gap={4} >
+            <Grid width='full' templateRows='repeat(1, 1fr)' templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(6, 1fr)' }} gap='16' >
                 <GridItem colSpan={4} >
                     {children}
                 </GridItem>

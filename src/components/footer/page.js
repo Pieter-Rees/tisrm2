@@ -1,6 +1,5 @@
 import {
     ListItem,
-    ListIcon,
     Divider,
     Button,
     UnorderedList, Box, Flex, Text, SimpleGrid, Container, Heading
@@ -8,6 +7,7 @@ import {
 import { contactInfo, currentYear } from "@/data/general";
 import FooterLogos from "@/components/footer-logos";
 import Link from 'next/link'
+import ContactInfo from "@/components/contact-info";
 
 export default function Footer() {
     return (
@@ -29,7 +29,7 @@ export default function Footer() {
                             <Heading as='h3' variant='footer'>
                                 Navigatie
                             </Heading>
-                            <Flex flexDir='column' textColor='white'>
+                            <Flex flexDir='column' textColor='white' fontSize='lg'>
                                 <Link href="/">Home</Link>
                                 <Link href="/verzekeringen">Verzekeringen</Link>
                                 <Link href="/taxi">Taxi</Link>
@@ -44,30 +44,7 @@ export default function Footer() {
                                 Contact informatie
                             </Heading>
 
-                            <SimpleGrid minChildWidth='120px' spacing='40px'>
-                                <Box>
-                                    <UnorderedList>
-                                        <ListItem>{contactInfo.address}</ListItem>
-                                        <ListItem>{contactInfo.email}</ListItem>
-                                        <ListItem>{contactInfo.city}</ListItem>
-                                    </UnorderedList>
-                                </Box>
-                                <Box>
-                                    <UnorderedList>
-                                        <ListItem>{contactInfo.postalBox}</ListItem>
-                                        <ListItem>{contactInfo.postalCode}</ListItem>
-                                        <ListItem>{contactInfo.city}</ListItem>
-                                    </UnorderedList>
-                                </Box>
-                            </SimpleGrid>
-                            <Divider orientation='horizontal' />
-                            <Box>
-                                <UnorderedList>
-                                    <ListItem>{contactInfo.phone}</ListItem>
-                                    <ListItem>{contactInfo.email}</ListItem>
-                                    <ListItem>{contactInfo.linkedIn}</ListItem>
-                                </UnorderedList>
-                            </Box>
+                            <ContactInfo variant='footer' />
                         </Box>
                     </SimpleGrid>
                     <Box marginTop='8' >
