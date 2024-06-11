@@ -12,7 +12,7 @@ export default function Verzekeringen() {
                     width='full'
                     templateRows='repeat(1, 1fr)'
                     templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(6, 1fr)' }}
-                    gap='4'
+                    gap='8'
                 >
                     <GridItem colSpan={{ base: '1', lg: '2' }}>
                         <Card title='Particulier' description="U verwacht als particulier de beste service tegen scherpe premies, alsmede een snelle afhandeling van mogelijke schades. Bij TIS geniet u van adviseurs die op de juiste momenten bereikbaar zijn en de persoonlijke aandacht geven waar u als klant behoefte heeft." cta='Lees meer' ctaLink='/verzekeringen/particulier' buttonVariant='ghost' />

@@ -7,7 +7,7 @@ export default function ThreeElements() {
             width='full'
             templateRows='repeat(1, 1fr)'
             templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(6, 1fr)' }}
-            gap='4'
+            gap='8'
         >
             <GridItem colSpan={2}>
                 <Card title='Risk Managers' description="TIS is de laatste jaren meegegroeid met de ontwikkelingen in de verzekeringsmarkt, alsmede de veranderende behoefte van de klanten. Zodoende zijn de werknemers van TIS gediplomeerd als risico managers en geregistreerd in het register GRMC. Wilt u weten wat wij kunnen betekenen in het kader van risico management, lees hier verder of neem contact met ons op!" />

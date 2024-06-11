@@ -6,7 +6,7 @@ import Image from 'next/image'
 export default function Contact() {
     return (
         <Container>
-            <Grid templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(2, 1fr)' }} gap={6}>
+            <Grid templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(2, 1fr)' }} gap='8'>
                 <GridItem w='100%' >
                     <Flex width='100%' paddingY='12' justifyContent='center'>
                         <Logo />

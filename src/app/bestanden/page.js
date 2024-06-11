@@ -5,7 +5,7 @@ export default function Bestanden() {
     return (
         <Container>
             <GridLayout title='Bestanden'>
-                <Grid width='full' templateRows='repeat(2, 1fr)' templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(2, 1fr)' }} gap={4} >
+                <Grid width='full' templateRows='repeat(2, 1fr)' templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(2, 1fr)' }} gap='8' >
                     <GridItem >
                         <Card downloadLink='/test' title="Schadeaanrijdingsformulier" />
                         <Card variant='sidebar' title="Card title" description="Card description" />

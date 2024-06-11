@@ -7,12 +7,12 @@ import Talker from '@/components/talker'
 export default function Homepage() {
   return (
     <Container>
-      <Flex flexDirection='column' gap='4'>
+      <Flex flexDirection='column' gap='8'>
         <Grid
           width='full'
           templateRows='repeat(1, 1fr)'
           templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(6, 1fr)' }}
-          gap={4}
+          gap='8'
         >
           <GridItem justifyContent='center' alignItems='center' borderRadius='lg' colSpan={{ base: 1, lg: 4 }} width='full'>
             <Box width='full' borderRadius='lg' overflow='hidden'>
