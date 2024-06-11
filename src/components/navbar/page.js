@@ -19,7 +19,7 @@ export default function Navbar() {
         <Flex alignItems='center'>
             <Hide below='xl'>
                 <HStack gap='8' fontSize={{ base: 'md', '2xl': 'xl' }}>
-                    <Link Link href="/">Home</Link>
+                    <Link href="/">Home</Link>
                     <Link href="/verzekeringen">Verzekeringen</Link>
                     <Link href="/taxi">Taxi</Link>
                     <Link href="/risk-management">Risk management</Link>
@@ -33,8 +33,10 @@ export default function Navbar() {
                 </HStack >
             </Hide>
             <Hide above='xl'>
-                <Box cursor='pointer' onClick={handleToggle}>
-                    <BsList size='64' />
+                <Box>
+                    <Box cursor='pointer' onClick={handleToggle}>
+                        <BsList size='64' />
+                    </Box>
                     {showSideNav && <Sidenav />}
                 </Box>
 
