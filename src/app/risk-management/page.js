@@ -1,10 +1,10 @@
 import GridLayout from "@/components/gridLayout"
 import { Container, Text, List, ListItem, ListIcon } from '@chakra-ui/react'
+import { BsCheck } from 'react-icons/bs'
 
 export default function Riskmanagement() {
     return (
         <Container>
-
             <GridLayout title='Risk Management'>
                 <Text>
                     TIS RM wil haar dienstverlening altijd verbeteren, uitbreiden en professionaliseren.
@@ -25,24 +25,24 @@ export default function Riskmanagement() {
                     In de samenvatting splitsen wij de volgende zaken:
                 </Text>
                 <List spacing={3} marginBottom='4'>
-                    <ListItem>
-                        <ListIcon color='green.500' />
+                    <ListItem display='flex' alignItems='center'>
+                        <BsCheck color='green' size='36px' />
                         Bedrijfsmiddelen
                     </ListItem>
-                    <ListItem>
-                        <ListIcon color='green.500' />
+                    <ListItem display='flex' alignItems='center'>
+                        <BsCheck color='green' size='36px' />
                         Bedrijfsactiviteiten
                     </ListItem>
-                    <ListItem>
-                        <ListIcon color='green.500' />
+                    <ListItem display='flex' alignItems='center'>
+                        <BsCheck color='green' size='36px' />
                         Vervoer & Logistiek
                     </ListItem>
-                    <ListItem>
-                        <ListIcon color='green.500' />
+                    <ListItem display='flex' alignItems='center'>
+                        <BsCheck color='green' size='36px' />
                         Personeel
                     </ListItem>
-                    <ListItem>
-                        <ListIcon color='green.500' />
+                    <ListItem display='flex' alignItems='center'>
+                        <BsCheck color='green' size='36px' />
                         Preventie
                     </ListItem>
                 </List>

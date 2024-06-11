@@ -4,9 +4,9 @@ import {
     Text,
     List,
     ListItem,
-    ListIcon,
 } from '@chakra-ui/react'
 import GridLayout from '@/components/gridLayout'
+import { BsCheck } from 'react-icons/bs'
 
 export default function Overons() {
     return (
@@ -20,24 +20,29 @@ export default function Overons() {
                     Thans bestaat de ENTO groep uit de ondernemingen:
                 </Text>
                 <List spacing={3} marginBottom='4'>
-                    <ListItem>
-                        <ListIcon color='green.500' />
+                    <ListItem display='flex' alignItems='center'>
+                        <BsCheck color='green' size='36px' />
+
                         Enthoven Beheer BV – Financial Holding
                     </ListItem>
-                    <ListItem>
-                        <ListIcon color='green.500' />
+                    <ListItem ListItem display='flex' alignItems='center'>
+                        <BsCheck color='green' size='36px' />
+
                         ENTO lease BV – Lease en financiering
                     </ListItem>
-                    <ListItem>
-                        <ListIcon color='green.500' />
+                    <ListItem ListItem display='flex' alignItems='center'>
+                        <BsCheck color='green' size='36px' />
+
                         ENTO Holding – bedrijfs adviezen
                     </ListItem>
-                    <ListItem>
-                        <ListIcon color='green.500' />
+                    <ListItem ListItem display='flex' alignItems='center'>
+                        <BsCheck color='green' size='36px' />
+
                         Alan Jacktar BV – Risico Management
                     </ListItem>
-                    <ListItem>
-                        <ListIcon color='green.500' />
+                    <ListItem ListItem display='flex' alignItems='center'>
+                        <BsCheck color='green' size='36px' />
+
                         TIS RM – Assurantiën (Schade) voor particulier en MKB
                     </ListItem>
                 </List>
