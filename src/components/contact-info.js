@@ -1,5 +1,5 @@
 import { Box, SimpleGrid, UnorderedList, ListItem, Divider } from '@chakra-ui/react'
-import { contactInfo } from "@/data/general";
+import { contactInfo } from "../data/general";
 
 export default function ContactInfo({ variant }) {
     return (

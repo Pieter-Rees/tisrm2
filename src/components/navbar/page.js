@@ -6,7 +6,7 @@ import { Center } from "@chakra-ui/react"
 import { Divider } from "@chakra-ui/react"
 export default function Navbar() {
     return (
-        <HStack color='gray' gap='8'>
+        <HStack gap='8'>
             <Show above="lg">
                 <Link href="/">Home</Link>
                 <Link href="/verzekeringen">Verzekeringen</Link>
@@ -30,9 +30,7 @@ export default function Navbar() {
                     <Link href="/bestanden">Bestanden</Link>
                     <Link href="/contact">Contact</Link>
                 </Flex>
-
             </Show>
-
         </HStack>
     )
 }

@@ -16,7 +16,7 @@ const Card = ({ title, description, image, downloadLink, cta, ctaLink, phone }) 
             width='full'
         >
             {image && <Image src="/1.webp" alt="Picture of the author" height={500} width={1000} />}
-            {title && <Text fontSize="xl" fontWeight="bold" >{title}</Text>}
+            {title && <Text fontSize="2xl" fontWeight="bold" >{title}</Text>}
             {description && <Text>{description}</Text>}
             {cta && ctaLink &&
                 <Link width='full' href={ctaLink}><Button width='full'>{cta}</Button></Link>}

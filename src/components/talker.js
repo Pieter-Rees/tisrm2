@@ -4,7 +4,9 @@ import { BsQuote } from 'react-icons/bs'
 
 export default function Talker() {
     return (
-        <Flex paddingY='16' gap='16' justifyContent='center' alignItems='center'>
+        <Flex paddingY='16' gap={{ base: '4', lg: '16' }} flexDirection={{
+            base: 'column', lg: 'row'
+        }} justifyContent='center' alignItems='center' >
             <Flex justifyContent='center' width='140px' height='140px' borderRadius='50%' overflow='hidden'>
                 <Image
                     borderRadius='lg'

@@ -1,7 +1,7 @@
 import { Box, Flex } from '@chakra-ui/react'
 import { Heading } from '@chakra-ui/react'
 import { Text } from '@chakra-ui/react'
-import { contactInfo } from "@/data/general";
+import { contactInfo } from "../data/general";
 import { BsTelephoneFill } from 'react-icons/bs'
 
 

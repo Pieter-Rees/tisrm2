@@ -7,7 +7,7 @@ import { Box } from "@chakra-ui/react";
 export default function Header() {
     return (
         <Box>
-            <Flex justifyContent='space-between' bg="white" py={4} px={8}>
+            <Flex flexDirection={{ base: 'column', lg: 'row' }} justifyContent='space-between' bg="white" py={4} px={8} gap='4'>
                 <Link href="/"><Logo width='200px' /></Link>
                 <Navbar />
             </Flex>

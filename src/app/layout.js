@@ -2,7 +2,7 @@ import { Inter } from "next/font/google";
 import Header from "@/components/header/page";
 import Footer from "@/components/footer/page";
 import { Providers } from "./providers";
-import { pageInfo } from "@/data/general";
+import { pageInfo } from "../data/general";
 import { Flex } from "@chakra-ui/react";
 const inter = Inter({ subsets: ["latin"] });
 
