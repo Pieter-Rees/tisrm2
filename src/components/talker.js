@@ -7,13 +7,12 @@ export default function Talker() {
         <Flex paddingY='16' gap={{ base: '4', lg: '16' }} flexDirection={{
             base: 'column', lg: 'row'
         }} justifyContent='center' alignItems='center' >
-            <Flex justifyContent='center' width='140px' height='140px' borderRadius='50%' overflow='hidden'>
+            <Flex position='relative' justifyContent='center' width='250px' height='250px' borderRadius='50%' overflow='hidden'>
                 <Image
                     borderRadius='lg'
-                    src="/shrek.jpg"
+                    src="/rene.jpg"
                     alt="Picture of the author"
-                    width='140'
-                    height='140'
+                    fill={true}
                 />
             </Flex>
 

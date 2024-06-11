@@ -7,7 +7,7 @@ export default function Sidenav() {
     return (
         <Flex gap='8' flexDirection='column' zIndex='10' backgroundColor='white' position='fixed' left='0' top='0' alignItems='center' justifyContent='center' width='full' height='full' >
             <Flex width='100%' paddingY='12' justifyContent='center'>
-                <Logo />
+                <Link href="/"><Logo /></Link>
             </Flex>
             <VStack gap='8' fontSize={{ base: 'xl', '2xl': '2xl' }}>
                 <Link href="/verzekeringen">Verzekeringen</Link>
