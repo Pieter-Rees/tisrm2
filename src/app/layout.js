@@ -3,7 +3,8 @@ import Header from "@/components/header/page";
 import Footer from "@/components/footer/page";
 import { Providers } from "./providers";
 import { pageInfo } from "../data/general";
-import { Flex } from "@chakra-ui/react";
+import { Flex, Container } from "@chakra-ui/react";
+import Breadcrumb from "@/components/breadcrumb";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -22,9 +23,16 @@ export default function RootLayout({ children }) {
             width='100%'
             maxWidth={{ xl: "1700px" }}
             margin="0 auto"
+            flexDirection='column'
           >
 
+
             {children}
+            <Container
+              paddingTop='20'
+            >
+              <Breadcrumb capitalizeLinks />
+            </Container>
           </Flex>
 
           <Footer />

@@ -11,11 +11,11 @@ export default function GridLayout({
         <Flex width='full' flexDirection='column'>
             <Heading as='h1' variant='xl'>{title}</Heading>
             <Grid width='full' templateRows='repeat(1, 1fr)' templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(6, 1fr)' }} gap='16' >
-                <GridItem colSpan={{ base: '1', lg: '4' }} >
+                <GridItem colSpan={{ base: '4', lg: '4' }} >
                     {children}
                 </GridItem>
                 {sidebar &&
-                    <GridItem colSpan={2} >
+                    <GridItem colSpan={{ base: '4', lg: '2' }} >
                         <Sidebar />
                     </GridItem>
                 }
