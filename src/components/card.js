@@ -3,7 +3,7 @@ import { Flex, Text, Button } from '@chakra-ui/react';
 import Image from 'next/image';
 import Link from 'next/link'
 
-const Card = ({ title, description, image, downloadLink, cta, ctaLink, phone }) => {
+const Card = ({ title, description, image, downloadLink, cta, ctaLink, phone, buttonVariant = 'solid' }) => {
     return (
         <Flex
             borderWidth="1px"
@@ -19,9 +19,9 @@ const Card = ({ title, description, image, downloadLink, cta, ctaLink, phone }) 
             {title && <Text fontSize="2xl" fontWeight="bold" >{title}</Text>}
             {description && <Text>{description}</Text>}
             {cta && ctaLink &&
-                <Link width='full' href={ctaLink}><Button width='full'>{cta}</Button></Link>}
-            {phone && <Button as='a' href={phone}>Bel ons nu</Button>}
-            {downloadLink && <Button as='a' href={downloadLink}>Download</Button>}
+                <Link width='full' href={ctaLink}><Button width='full' variant={buttonVariant}>{cta}</Button></Link>}
+            {phone && <Button as='a' href={phone} variant={buttonVariant}>Bel ons nu</Button>}
+            {downloadLink && <Button as='a' href={downloadLink} variant={buttonVariant}>Download</Button>}
         </Flex>
     );
 };

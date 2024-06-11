@@ -4,7 +4,6 @@ import Footer from "@/components/footer/page";
 import { Providers } from "./providers";
 import { pageInfo } from "../data/general";
 import { Flex, Container } from "@chakra-ui/react";
-import Breadcrumb from "@/components/breadcrumb";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -28,11 +27,6 @@ export default function RootLayout({ children }) {
 
 
             {children}
-            <Container
-              paddingTop='20'
-            >
-              <Breadcrumb capitalizeLinks />
-            </Container>
           </Flex>
 
           <Footer />

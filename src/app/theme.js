@@ -40,6 +40,13 @@ const theme = extendTheme({
                         bg: 'gray.100',
                     },
                 },
+                ghost: {
+                    bg: 'transparent',
+                    color: 'gray.700',
+                    _hover: {
+                        bg: 'gray.300',
+                    },
+                }
             },
             defaultProps: {
                 size: 'lg', // default is md

@@ -1,11 +1,11 @@
 import GridLayout from "@/components/gridLayout"
 import { Container, Text } from '@chakra-ui/react'
-
+import Breadcrumb from "@/components/breadcrumb"
 
 export default function Zakelijk() {
     return (
         <Container>
-            <GridLayout title='Zakelijk'>
+            <GridLayout title='Zakelijk' breadcrumb={<Breadcrumb capitalizeLinks />}>
                 <Text>
                     TIS is al meer dan 15 jaar een landelijk werkend assurantiekantoor, welke altijd gespecialiseerd is geweest in verzekeren van het personenvervoer. Door onze jarenlange expertise in de personenvervoerbranche genieten wij veel vertrouwen bij de verzekeringsmaatschappijen. Als klant bent u degene die daar direct van profiteert. Doordat voorwaarden, mogelijkheden en premies per maatschappij verschillen en wij onafhankelijk zijn, kunnen wij voor de meest passende mogelijkheden combineren voor uw bedrijf. Dit resulteert in een zeer goede Prijs-Kwaliteit verhouding, waarmee u geniet van de meest uitgebreide voorwaarden tegen aantrekkelijke premies.
                 </Text>

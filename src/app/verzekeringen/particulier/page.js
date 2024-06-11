@@ -1,11 +1,12 @@
 import GridLayout from "@/components/gridLayout"
 import { Container } from '@chakra-ui/react'
 import { Text } from '@chakra-ui/react'
+import Breadcrumb from "@/components/breadcrumb"
 
 export default function Particulier() {
     return (
         <Container>
-            <GridLayout title='Particulier'>
+            <GridLayout title='Particulier' breadcrumb={<Breadcrumb capitalizeLinks />}>
                 <Text>
                     Iedereen is op zoek naar de goedkoopste verzekering, maar u verwacht van ons natuurlijk wél een goed advies als adviseur over de allerbeste dekkingen. TIS is daarbij een uitstekend partner als zijnde erkend Risico Manager en als zodanig geregistreerd in het GRMC register. Hierdoor bent u verzekerd van het beste advies.
                 </Text>

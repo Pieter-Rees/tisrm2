@@ -20,6 +20,7 @@ export default function Breadcrumb({ separator, listClasses, activeClasses, capi
                             <React.Fragment key={index}>
                                 <Box fontSize='xl' className={itemClasses} >
                                     <Link href={href}>{itemLink}</Link>
+
                                 </Box>
                                 {pathNames.length !== index + 1 && separator}
                             </React.Fragment>
