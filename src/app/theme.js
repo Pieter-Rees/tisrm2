@@ -62,9 +62,11 @@ const theme = extendTheme({
                     borderTopRadius: 'sm',
                 },
                 container: {
-                    border: '1px',
+                    width: 'full',
+                    border: '1px solid gray.500',
                     borderRadius: 'lg',
                     padding: '8',
+                    boxShadow: 'lg',
                 },
             }
 

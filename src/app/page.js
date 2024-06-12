@@ -14,7 +14,7 @@ export default function Homepage() {
           templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(6, 1fr)' }}
           gap='8'
         >
-          <GridItem justifyContent='center' alignItems='center' colSpan={{ base: 1, lg: 4 }} width='full'>
+          <GridItem justifyContent='center' alignItems='center' colSpan={{ base: 1, lg: 4 }} width='full' borderRadius='lg' overflow='hidden'>
             <Box width='full' overflow='hidden'>
               <Image
                 src="/1.webp"
@@ -24,7 +24,7 @@ export default function Homepage() {
               />
             </Box>
           </GridItem>
-          <GridItem colSpan={2} bg='blue.700' >
+          <GridItem colSpan={2} bg='blue.700' borderRadius='lg' overflow='hidden' >
             <CallUs />
           </GridItem>
         </Grid>
