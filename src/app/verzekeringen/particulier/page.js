@@ -59,7 +59,7 @@ export default function Particulier() {
                         <StarList listItems={list1} />
 
                     </GridItem>
-                    <GridItem >
+                    <GridItem height='20px'>
                         <Heading as='h3' size='md'>Gezinssituatie</Heading>
 
                         <StarList listItems={list2} />

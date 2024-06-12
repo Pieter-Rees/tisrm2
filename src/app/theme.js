@@ -66,6 +66,7 @@ const theme = extendTheme({
             baseStyle: {
                 header: {
                     borderTopRadius: 'sm',
+                    padding: '0',
                 },
                 container: {
                     width: 'full',
@@ -73,6 +74,19 @@ const theme = extendTheme({
                     borderRadius: 'lg',
                     padding: '8',
                     boxShadow: 'lg',
+                },
+            },
+            variants: {
+                downloads: {
+                    container: {
+                        padding: '4',
+                        color: 'gray.700',
+                    },
+                    header: {
+                        borderTopRadius: 'lg',
+                        padding: '4',
+                        color: 'gray.700',
+                    },
                 },
             }
 

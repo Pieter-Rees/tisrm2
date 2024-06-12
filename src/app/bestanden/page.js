@@ -7,21 +7,20 @@ export default function Bestanden() {
             <GridLayout title='Bestanden'>
                 <Grid width='full' templateRows='repeat(2, 1fr)' templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(2, 1fr)' }} gap='8' >
                     <GridItem >
-                        <Card downloadLink='/test' title="Schadeaanrijdingsformulier" />
-                        <Card variant='sidebar' title="Card title" description="Card description" />
-                    </GridItem>
-                    <GridItem >
-                        <Card downloadLink='/test' title="Diensten wijzer" />
-                    </GridItem>
-                    <GridItem >
-                        <Card downloadLink='/test' title="Algemene voorwaarden" />
-                    </GridItem>
-                    <GridItem >
-                        <Card downloadLink='/test' title="Privacyregelement" />
+                        <Card variant='downloads' title="Verzekering afsluiten" cta='Offerte aanvragen' ctaLink='/offerte' buttonVariant='blue' />
 
                     </GridItem>
                     <GridItem >
-                        <Card downloadLink='/test' title="Beloningsbeleid" />
+                        <Card variant='downloads' downloadLink='/test' title="Diensten wijzer" />
+                    </GridItem>
+                    <GridItem >
+                        <Card variant='downloads' downloadLink='/test' title="Algemene voorwaarden" />
+                    </GridItem>
+                    <GridItem >
+                        <Card variant='downloads' downloadLink='/test' title="Privacyregelement" />
+                    </GridItem>
+                    <GridItem >
+                        <Card variant='downloads' downloadLink='/test' title="Beloningsbeleid" />
                     </GridItem>
                 </Grid>
             </GridLayout>
