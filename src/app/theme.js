@@ -68,12 +68,19 @@ const theme = extendTheme({
                     borderTopRadius: 'sm',
                     padding: '0',
                 },
+                body: {
+                    padding: '0',
+                },
+                footer: {
+                    padding: '0',
+                },
                 container: {
                     width: 'full',
                     border: '1px solid gray.500',
                     borderRadius: 'lg',
                     padding: '8',
                     boxShadow: 'lg',
+
                 },
             },
             variants: {
