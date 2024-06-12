@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Button, Center, Divider, Flex, VStack } from "@chakra-ui/react"
+import { Box, Button, Center, Divider, Flex, VStack } from "@chakra-ui/react"
 import Logo from "@/components/logo"
 
 export default function Sidenav({ showSideNav }) {
