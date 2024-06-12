@@ -18,7 +18,7 @@ export default function Bestanden() {
                         <Card variant='downloads' title="Algemene voorwaarden" downloadLink='/documents/algemene-voorwaarden.pdf' />
                     </GridItem>
                     <GridItem >
-                        <Card variant='downloads' title="Privacyregelement" downloadLink='/documents/privacyregelement.pdf' />
+                        <Card variant='downloads' title="Privacyregelement" downloadLink='/documents/privecyregelement.pdf' />
                     </GridItem>
                     <GridItem >
                         <Card variant='downloads' title="Beloningsbeleid" downloadLink='/documents/beloningsbeleid.pdf' />
