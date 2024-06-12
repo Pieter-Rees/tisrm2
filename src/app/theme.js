@@ -85,14 +85,10 @@ const theme = extendTheme({
             },
             variants: {
                 downloads: {
-                    container: {
-                        padding: '4',
-                        color: 'gray.700',
-                    },
                     header: {
-                        borderTopRadius: 'lg',
                         padding: '4',
-                        color: 'gray.700',
+                        color: 'red',
+                        backgroundColor: 'red',
                     },
                 },
             }

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Flex, Text, Button, Card, CardHeader, CardBody, CardFooter } from '@chakra-ui/react';
 import Image from 'next/image';
-import Link from 'next/link'
 
 const CardElement = ({ title, description, image, downloadLink, cta, ctaLink, phone, buttonVariant = 'solid' }) => {
     const hasCta = cta || phone || downloadLink;
