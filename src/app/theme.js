@@ -11,6 +11,12 @@ const theme = extendTheme({
             800: '#1d2025',
             900: '#171a1d',
         },
+        'blue': {
+            500: '#00a3ff',
+            700: '#0077cc',
+            900: '#005299',
+        },
+
     },
     components: {
         Button: {

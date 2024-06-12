@@ -1,8 +1,10 @@
 import GridLayout from "@/components/gridLayout"
 import { Container, Text, List, ListItem, ListIcon } from '@chakra-ui/react'
-import { BsCheck } from 'react-icons/bs'
+import StarList from "@/components/star-list"
 
 export default function Riskmanagement() {
+    const list = ['Bedrijfsmiddelen', 'Bedrijfsactiviteiten', 'Vervoer & Logistiek', 'Personeel', 'Preventie']
+
     return (
         <Container>
             <GridLayout title='Risk Management'>
@@ -24,28 +26,7 @@ export default function Riskmanagement() {
                 <Text>
                     In de samenvatting splitsen wij de volgende zaken:
                 </Text>
-                <List spacing={3} marginBottom='4'>
-                    <ListItem display='flex' alignItems='center'>
-                        <BsCheck color='green' size='36px' />
-                        Bedrijfsmiddelen
-                    </ListItem>
-                    <ListItem display='flex' alignItems='center'>
-                        <BsCheck color='green' size='36px' />
-                        Bedrijfsactiviteiten
-                    </ListItem>
-                    <ListItem display='flex' alignItems='center'>
-                        <BsCheck color='green' size='36px' />
-                        Vervoer & Logistiek
-                    </ListItem>
-                    <ListItem display='flex' alignItems='center'>
-                        <BsCheck color='green' size='36px' />
-                        Personeel
-                    </ListItem>
-                    <ListItem display='flex' alignItems='center'>
-                        <BsCheck color='green' size='36px' />
-                        Preventie
-                    </ListItem>
-                </List>
+                <StarList listItems={list} />
             </GridLayout>
         </Container>
     )

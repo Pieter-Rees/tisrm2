@@ -1,9 +1,37 @@
 import GridLayout from "@/components/gridLayout"
-import { Container } from '@chakra-ui/react'
-import { Text } from '@chakra-ui/react'
+import { Container, Grid, GridItem, Heading, Text } from '@chakra-ui/react'
 import Breadcrumb from "@/components/breadcrumb"
+import StarList from "@/components/star-list"
 
 export default function Particulier() {
+    const list1 = [
+        'Autoverzekering',
+        'Oldtimer',
+        'Bromfiets',
+        'Motor',
+        'Aanhanger',
+        'Caravan',
+        'Camper'
+    ];
+
+    const list2 = [
+        'Aansprakelijkheid',
+        'Rechtsbijstand',
+        'Ongevallen'
+    ];
+
+    const list3 = [
+        'Opstal',
+        'Inboedel',
+        'Kostbaarheden',
+        'Recreatiewoning'
+    ];
+
+    const list4 = [
+        'Reis',
+        'Pleziervaartuigen',
+        'Recreatiegoederen'
+    ];
     return (
         <Container>
             <GridLayout title='Particulier' breadcrumb={<Breadcrumb capitalizeLinks />}>
@@ -25,6 +53,31 @@ export default function Particulier() {
                 <Text>
                     Bent u geïnteresseerd of heeft u vragen, neem dan gerust contact op via de mail of bel ons!
                 </Text>
+                <Grid marginTop='8' width='full' templateRows='repeat(2, 1fr)' templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(2, 1fr)' }} gap='8' >
+                    <GridItem >
+                        <Heading as='h3' size='md'>Onderweg</Heading>
+                        <StarList listItems={list1} />
+
+                    </GridItem>
+                    <GridItem >
+                        <Heading as='h3' size='md'>Gezinssituatie</Heading>
+
+                        <StarList listItems={list2} />
+
+                    </GridItem>
+                    <GridItem >
+                        <Heading as='h3' size='md'>Wonen</Heading>
+
+                        <StarList listItems={list3} />
+
+                    </GridItem>
+                    <GridItem >
+                        <Heading as='h3' size='md'>Vrije tijd</Heading>
+
+                        <StarList listItems={list4} />
+
+                    </GridItem>
+                </Grid>
             </GridLayout>
         </Container>
     )

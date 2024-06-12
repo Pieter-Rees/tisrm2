@@ -1,4 +1,3 @@
-
 import {
     Container,
     Text,
@@ -6,9 +5,17 @@ import {
     ListItem,
 } from '@chakra-ui/react'
 import GridLayout from '@/components/gridLayout'
-import { BsCheck } from 'react-icons/bs'
+import StarList from "@/components/star-list"
 
 export default function Overons() {
+    const list = [
+        'Enthoven Beheer BV – Financial Holding',
+        'ENTO lease BV – Lease en financiering',
+        'ENTO Holding – bedrijfs adviezen',
+        'Alan Jacktar BV – Risico Management',
+        'TIS RM – Assurantiën (Schade) voor particulier en MKB'
+    ]
+
     return (
         <Container>
 
@@ -19,33 +26,7 @@ export default function Overons() {
                 <Text>
                     Thans bestaat de ENTO groep uit de ondernemingen:
                 </Text>
-                <List spacing={4} marginBottom='4'>
-                    <ListItem display='flex' alignItems='center'>
-                        <BsCheck color='green' size='36px' />
-
-                        Enthoven Beheer BV – Financial Holding
-                    </ListItem>
-                    <ListItem display='flex' alignItems='center'>
-                        <BsCheck color='green' size='36px' />
-
-                        ENTO lease BV – Lease en financiering
-                    </ListItem>
-                    <ListItem display='flex' alignItems='center'>
-                        <BsCheck color='green' size='36px' />
-
-                        ENTO Holding – bedrijfs adviezen
-                    </ListItem>
-                    <ListItem display='flex' alignItems='center'>
-                        <BsCheck color='green' size='36px' />
-
-                        Alan Jacktar BV – Risico Management
-                    </ListItem>
-                    <ListItem display='flex' alignItems='center'>
-                        <BsCheck color='green' size='36px' />
-
-                        TIS RM – Assurantiën (Schade) voor particulier en MKB
-                    </ListItem>
-                </List>
+                <StarList listItems={list} />
                 <Text>
                     Uit een zeer modern en inspirerend kantoor wordt de onderneming gedreven met geavanceerde software en bedrijfsmodel. Door gebruik te maken van diverse gespecialiseerde diensten zoals een call center en een uitbesteedde schade afdeling zijn wij in staat met een relatief klein team een mooie omzet te genereren. Focus ligt op advisering in Risico management en financiële vraagstukken.
                 </Text>
