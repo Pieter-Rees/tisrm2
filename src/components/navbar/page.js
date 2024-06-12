@@ -4,17 +4,8 @@ import { HStack, Button, Show, Flex } from "@chakra-ui/react"
 import Link from 'next/link'
 import { Center, Box } from "@chakra-ui/react"
 import { Divider, Hide } from "@chakra-ui/react"
-import { BsList } from "react-icons/bs"
-import { useState } from "react"
-import Sidenav from "@/components/sidenav"
 
 export default function Navbar() {
-    const [showSideNav, setShowSideNav] = useState(false);
-
-    const handleToggle = () => {
-        setShowSideNav((showSideNav) => !showSideNav);
-    };
-
     return (
         <Flex alignItems='center'>
             <Hide below='xl'>
@@ -31,15 +22,6 @@ export default function Navbar() {
                     </Center>
                     <Button as='a' href="/offerte" variant='blue'>Offerte aanvragen</Button>
                 </HStack >
-            </Hide>
-            <Hide above='xl'>
-                <Box>
-                    <Box cursor='pointer' onClick={handleToggle}>
-                        <BsList size='64' />
-                    </Box>
-                    <Sidenav showSideNav={showSideNav} />
-                </Box>
-
             </Hide>
         </Flex >
 
