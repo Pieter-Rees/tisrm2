@@ -1,5 +1,6 @@
 import { background, border, Button, Card, extendTheme, List, ListItem, UnorderedList } from '@chakra-ui/react'
 import { color } from 'framer-motion'
+import Link from 'next/link'
 import { BsBorderWidth } from 'react-icons/bs'
 
 const theme = extendTheme({
@@ -31,6 +32,10 @@ const theme = extendTheme({
                     fontSize: 'lg',
                     px: '32px',
                 },
+                full: {
+                    width: 'full',
+                    height: 'full',
+                }
             },
             variants: {
                 'blue': {
@@ -53,6 +58,20 @@ const theme = extendTheme({
                     _hover: {
                         bg: 'gray.300',
                     },
+                },
+                link: {
+                    bg: 'transparent',
+                    color: 'white',
+                    fontWeight: 'normal',
+                    _hover: {
+                        textDecoration: 'none',
+
+                    },
+                    _active: {
+                        color: 'white',
+                    },
+
+
                 }
             },
             defaultProps: {

@@ -1,6 +1,7 @@
 import { Box, SimpleGrid, UnorderedList, ListItem, Divider } from '@chakra-ui/react'
 import { contactInfo } from "../data/general";
-
+import { Button } from '@chakra-ui/react'
+import { BsLinkedin } from 'react-icons/bs'
 export default function ContactInfo({ variant }) {
     return (
         <>
@@ -23,9 +24,25 @@ export default function ContactInfo({ variant }) {
             <Divider orientation='horizontal' />
             <Box>
                 <UnorderedList variant={variant}>
-                    <ListItem>{contactInfo.phone}</ListItem>
-                    <ListItem>{contactInfo.email}</ListItem>
-                    <ListItem>{contactInfo.linkedIn}</ListItem>
+                    <ListItem>
+                        <Button display='inline-flex' justifyContent='start' size='full' variant='link' as='a' href={'tel:' + 'pageInfo.phone'}>
+                            <span >
+                                {contactInfo.phone}
+
+                            </span>
+                        </Button>
+                    </ListItem>
+                    <ListItem >
+                        <Button display='inline-flex' justifyContent='start' size='full' variant='link' as='a' href={'mailto:' + 'pageInfo.email'}>
+                            {contactInfo.email}
+                        </Button>
+                    </ListItem>
+                    <ListItem>
+                        <Button marginTop='1' display='inline-flex' justifyContent='start' size='full' variant='link' as='a' target='_blank' href={contactInfo.linkedIn}>
+                            <BsLinkedin size='24' />
+
+                        </Button>
+                    </ListItem>
                 </UnorderedList>
             </Box>
         </>
