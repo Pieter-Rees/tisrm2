@@ -24,7 +24,7 @@ export default function Homepage() {
               />
             </Box>
           </GridItem>
-          <GridItem colSpan={2} bg='blue.700' borderRadius='lg' overflow='hidden' >
+          <GridItem colSpan={{ base: 1, lg: 2 }} bg='blue.700' borderRadius='lg' overflow='hidden' >
             <CallUs />
           </GridItem>
         </Grid>

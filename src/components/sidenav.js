@@ -9,6 +9,7 @@ export default function Sidenav({ showSideNav, handleToggle }) {
                 <Link href="/"><span onClick={() => handleToggle()}><Logo /></span></Link>
             </Flex>
             <VStack gap='8' fontSize={{ base: 'xl', '2xl': '2xl' }}>
+                <Link href="/"> <span onClick={() => handleToggle()}>Home</span></Link>
                 <Link href="/verzekeringen"> <span onClick={() => handleToggle()}>Verzekeringen</span></Link>
                 <Link href="/taxi"><span onClick={() => handleToggle()}>Taxi</span></Link>
                 <Link href="/risk-management"><span onClick={() => handleToggle()}>Risk Management</span></Link>

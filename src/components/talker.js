@@ -11,7 +11,8 @@ export default function Talker() {
                 <Image
                     src="/rene.jpg"
                     alt="Picture of the author"
-                    fill={true}
+                    width={250}
+                    height={250}
                 />
             </Flex>
 
