@@ -57,25 +57,18 @@ export default function Particulier() {
                     <GridItem >
                         <Heading as='h3' size='md'>Onderweg</Heading>
                         <StarList listItems={list1} />
-
                     </GridItem>
                     <GridItem height='20px'>
                         <Heading as='h3' size='md'>Gezinssituatie</Heading>
-
                         <StarList listItems={list2} />
-
                     </GridItem>
                     <GridItem >
                         <Heading as='h3' size='md'>Wonen</Heading>
-
                         <StarList listItems={list3} />
-
                     </GridItem>
                     <GridItem >
                         <Heading as='h3' size='md'>Vrije tijd</Heading>
-
                         <StarList listItems={list4} />
-
                     </GridItem>
                 </Grid>
             </GridLayout>

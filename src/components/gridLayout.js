@@ -26,7 +26,5 @@ export default function GridLayout({
                 }
             </Grid>
         </Flex >
-
     )
-
 }

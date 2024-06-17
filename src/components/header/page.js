@@ -27,14 +27,10 @@ export default function Header() {
                             <BsList size='64' />
                         </Box>
                     </Box>
-
                 </Hide>
             </Flex>
             <Divider />
             <Sidenav showSideNav={showSideNav} handleToggle={handleToggle} />
-
-
         </Box>
-
     );
 }

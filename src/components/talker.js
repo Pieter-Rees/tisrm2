@@ -15,20 +15,16 @@ export default function Talker() {
                     height={250}
                 />
             </Flex>
-
             <Flex textAlign='center' alignItems='center' flexDirection='column' justifyContent='center'>
                 <BsQuote color='gray' size='64px' />
-
                 <Text>
                     De weldaden van een verzekering komen samen met het onheil aan het licht.
                 </Text>
-
                 <Text fontWeight='bold'>
                     Rene Enthoven <br />
                     Directeur TIS Risk Managers
                 </Text>
             </Flex>
-
         </Flex >
     )
 }

@@ -4,7 +4,6 @@ import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { HStack, Box } from '@chakra-ui/react'
 export default function Breadcrumb({ separator, listClasses, activeClasses, capitalizeLinks }) {
-
     const paths = usePathname()
     const pathNames = paths.split('/').filter(path => path)
 
@@ -29,7 +28,6 @@ export default function Breadcrumb({ separator, listClasses, activeClasses, capi
                 }
             </HStack>
             {pathNames.length > 0 && separator}
-
         </>
     )
 }

@@ -28,10 +28,8 @@ export default function Homepage() {
             <CallUs />
           </GridItem>
         </Grid>
-
         <ThreeElements />
         <Talker />
-
       </Flex>
     </Container>
   )

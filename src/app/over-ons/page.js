@@ -1,8 +1,6 @@
 import {
     Container,
     Text,
-    List,
-    ListItem,
 } from '@chakra-ui/react'
 import GridLayout from '@/components/gridLayout'
 import StarList from "@/components/star-list"

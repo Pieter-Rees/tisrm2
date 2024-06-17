@@ -4,7 +4,7 @@ import {
     Button,
     UnorderedList, Box, Flex, Text, SimpleGrid, Container, Heading
 } from "@chakra-ui/react";
-import { contactInfo, currentYear } from "../../data/general";
+import { contactInfo, currentYear } from "../data/general";
 import FooterLogos from "@/components/footer-logos";
 import Link from 'next/link'
 import ContactInfo from "@/components/contact-info";
@@ -43,6 +43,7 @@ export default function Footer() {
                             <Heading as='h3' variant='footer'>
                                 Contact informatie
                             </Heading>
+
                             <ContactInfo variant='footer' />
                         </Box>
                     </SimpleGrid>
