@@ -5,7 +5,7 @@ import Navbar from "@/components/navbar/page";
 import Link from 'next/link'
 import { Flex, Box, Divider, Hide } from "@chakra-ui/react";
 import Sidenav from "@/components/sidenav"
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BsList } from "react-icons/bs"
 
 export default function Header() {
@@ -14,6 +14,7 @@ export default function Header() {
     const handleToggle = () => {
         setShowSideNav((showSideNav) => !showSideNav);
     };
+
 
     return (
         <Box>
@@ -30,7 +31,7 @@ export default function Header() {
                 </Hide>
             </Flex>
             <Divider />
-            <Sidenav showSideNav={showSideNav} />
+            <Sidenav showSideNav={showSideNav} handleToggle={handleToggle} />
 
 
         </Box>
