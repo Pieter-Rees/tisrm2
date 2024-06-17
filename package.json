@@ -23,6 +23,7 @@
     "devDependencies": {
         "eslint": "^8.57.0",
         "eslint-config-next": "14.1.4",
-        "eslint-config-prettier": "^9.1.0"
+        "eslint-config-prettier": "^9.1.0",
+        "react-hook-form": "^7.52.0"
     }
 }

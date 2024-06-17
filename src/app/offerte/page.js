@@ -34,7 +34,7 @@ export default function Offerte() {
         <Container>
 
             <VStack alignItems='flex-start' width='full'>
-                <Stepper width='full' index={activeStep}>
+                {/* <Stepper width='full' index={activeStep}>
                     {steps.map((step, index) => (
                         <Step key={index}>
                             <StepIndicator>
@@ -53,7 +53,7 @@ export default function Offerte() {
                             <StepSeparator />
                         </Step>
                     ))}
-                </Stepper>
+                </Stepper> */}
 
                 <RegistrationForm />
             </VStack>
