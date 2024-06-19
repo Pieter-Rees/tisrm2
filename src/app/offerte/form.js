@@ -1,7 +1,7 @@
 'use client'
 
 import React from "react";
-import { FormErrorMessage, FormLabel, FormControl, Input, Button } from "@chakra-ui/react";
+import { FormErrorMessage, FormLabel, FormControl, Input, Button, Divider } from "@chakra-ui/react";
 import { useForm } from 'react-hook-form'
 import { Flex } from "@chakra-ui/react";
 import axios, { isCancel, AxiosError } from 'axios';
@@ -53,6 +53,20 @@ export default function RegistrationForm() {
                     </FormErrorMessage>
                 </FormControl>
 
+                <FormControl isInvalid={errors.kvkno}>
+                    <FormLabel htmlFor='kvkno'>KVK Nummer</FormLabel>
+                    <Input
+                        id='kvkno'
+                        {...register('kvkno', {
+                            required: 'This is required',
+                            minLength: { value: 4, message: 'Minimum length should be 4' },
+                        })}
+                    />
+                    <FormErrorMessage>
+                        {errors.kvkno && errors.kvkno.message}
+                    </FormErrorMessage>
+                </FormControl>
+                <Divider orientation='horizontal' />
                 <FormControl isInvalid={errors.contactName}>
                     <FormLabel htmlFor='contactName'>Uw naam</FormLabel>
                     <Input
@@ -63,7 +77,7 @@ export default function RegistrationForm() {
                         })}
                     />
                     <FormErrorMessage>
-                        {errors.name && errors.name.message}
+                        {errors.contactName && errors.contactName.message}
                     </FormErrorMessage>
                 </FormControl>
 
@@ -74,10 +88,40 @@ export default function RegistrationForm() {
                         {...register('emailAddress', {
                             required: 'This is required',
                             minLength: { value: 4, message: 'Minimum length should be 4' },
+
                         })}
                     />
                     <FormErrorMessage>
                         {errors.emailAddress && errors.emailAddress.message}
+                    </FormErrorMessage>
+                </FormControl>
+
+                <FormControl isInvalid={errors.phoneNo}>
+                    <FormLabel htmlFor='phoneNo'>Uw telefoonnummer</FormLabel>
+                    <Input
+                        id='phoneNo'
+                        {...register('phoneNo', {
+                            required: 'This is required',
+                            minLength: { value: 4, message: 'Minimum length should be 4' },
+                        })}
+                    />
+                    <FormErrorMessage>
+                        {errors.phoneNo && errors.phoneNo.message}
+                    </FormErrorMessage>
+                </FormControl>
+                <Divider orientation='horizontal' />
+
+                <FormControl isInvalid={errors.licenseplate}>
+                    <FormLabel htmlFor='licenseplate'>Uw kenteken</FormLabel>
+                    <Input
+                        id='licenseplate'
+                        {...register('licenseplate', {
+                            required: 'This is required',
+                            minLength: { value: 4, message: 'Minimum length should be 4' },
+                        })}
+                    />
+                    <FormErrorMessage>
+                        {errors.licenseplate && errors.licenseplate.message}
                     </FormErrorMessage>
                 </FormControl>
 
@@ -95,6 +139,21 @@ export default function RegistrationForm() {
                     </FormErrorMessage>
                 </FormControl>
 
+                <Divider orientation='horizontal' />
+
+                <FormControl isInvalid={errors.years}>
+                    <FormLabel htmlFor='years'>Schadevrije jaren</FormLabel>
+                    <Input
+                        id='years'
+                        {...register('years', {
+                            required: 'This is required',
+                            minLength: { value: 4, message: 'Minimum length should be 4' },
+                        })}
+                    />
+                    <FormErrorMessage>
+                        {errors.years && errors.years.message}
+                    </FormErrorMessage>
+                </FormControl>
 
                 <Button mt={4} isLoading={isSubmitting} type='submit'>
                     Verstuur

@@ -1,4 +1,4 @@
-import { background, border, Button, Card, extendTheme, FormLabel, List, ListItem, UnorderedList } from '@chakra-ui/react'
+import { background, border, Button, Card, Divider, extendTheme, FormLabel, List, ListItem, UnorderedList } from '@chakra-ui/react'
 import { color } from 'framer-motion'
 import Link from 'next/link'
 import { Form } from 'react-hook-form'
@@ -21,26 +21,15 @@ const theme = extendTheme({
 
     },
     components: {
-        Form: {
-            baseStyle: {
-            },
-        },
         formControl: {
             baseStyle: {
-                marginBottom: '4',
+                margin: '4',
             },
         },
 
         FormLabel: {
             baseStyle: {
-                color: 'gray.700',
-                marginBottom: '2',
-                fontWeight: 'bold',
-            },
-            variants: {
-                'footer': {
-                    color: 'white',
-                },
+                margin: '4',
             },
         },
         Button: {
@@ -198,6 +187,23 @@ const theme = extendTheme({
             baseStyle: {
                 maxW: '1600px',
             },
+        },
+        Divider: {
+            baseStyle: {
+                borderColor: 'gray.700',
+                marginY: '8',
+
+            },
+            variants: {
+                form: {
+                    paddingY: '4',
+                    borderColor: 'gray.700',
+                    border: '1px solid red',
+                    border: '10px solid green',
+                    borderRadius: '5px',
+
+                },
+            }
         },
         List: {
             variants: {
