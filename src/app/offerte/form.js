@@ -25,8 +25,7 @@ export default function RegistrationForm() {
             url: formAddress,
 
             data: {
-                firstName: 'Fred',
-                lastName: 'Flintstone'
+                contactName: 'Fred',
             }
         })
             .then((response) => {
