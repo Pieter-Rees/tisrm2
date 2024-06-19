@@ -18,7 +18,7 @@ export default function RegistrationForm() {
         //     const email = 'https://pietsmailserver.nl:4000/email'
 
         // })
-        const formAddress = 'https://pietsmailserver.nl:4000/email'
+        const formAddress = 'https://pietserver.nl:4000/email'
 
         axios({
             method: 'post',
