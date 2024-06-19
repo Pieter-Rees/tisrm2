@@ -14,19 +14,13 @@ export default function RegistrationForm() {
     } = useForm()
 
     function onSubmit(values) {
-        // return new Promise((resolve) => {
-        //     const email = 'https://pietsmailserver.nl:4000/email'
-
-        // })
         const formAddress = 'https://pietserver.nl:4000/email'
-
+        console.log(values)
         axios({
             method: 'post',
             url: formAddress,
 
-            data: {
-                contactName: contactName,
-            }
+            data: values // Probably wrong
         })
             .then((response) => {
                 console.log(response)
@@ -45,17 +39,17 @@ export default function RegistrationForm() {
     return (
         <Flex width='full' justifyContent='center'>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <FormControl isInvalid={errors.onderneming}>
-                    <FormLabel htmlFor='onderneming'>Naam onderneming</FormLabel>
+                <FormControl isInvalid={errors.businessName}>
+                    <FormLabel htmlFor='businessName'>Naam onderneming</FormLabel>
                     <Input
-                        id='onderneming'
-                        {...register('onderneming', {
+                        id='businessName'
+                        {...register('businessName', {
                             required: 'This is required',
                             minLength: { value: 4, message: 'Minimum length should be 4' },
                         })}
                     />
                     <FormErrorMessage>
-                        {errors.onderneming && errors.onderneming.message}
+                        {errors.businessName && errors.businessName.message}
                     </FormErrorMessage>
                 </FormControl>
 
@@ -73,36 +67,36 @@ export default function RegistrationForm() {
                     </FormErrorMessage>
                 </FormControl>
 
-                <FormControl isInvalid={errors.email}>
-                    <FormLabel htmlFor='email'>Uw email adres</FormLabel>
+                <FormControl isInvalid={errors.emailAddress}>
+                    <FormLabel htmlFor='emailAddress'>Uw email adres</FormLabel>
                     <Input
-                        id='email'
-                        {...register('email', {
+                        id='emailAddress'
+                        {...register('emailAddress', {
                             required: 'This is required',
                             minLength: { value: 4, message: 'Minimum length should be 4' },
                         })}
                     />
                     <FormErrorMessage>
-                        {errors.email && errors.email.message}
+                        {errors.emailAddress && errors.emailAddress.message}
                     </FormErrorMessage>
                 </FormControl>
 
-                <FormControl isInvalid={errors.meldcode}>
-                    <FormLabel htmlFor='meldcode'>Uw meldcode</FormLabel>
+                <FormControl isInvalid={errors.carCode}>
+                    <FormLabel htmlFor='carCode'>Uw meldcode</FormLabel>
                     <Input
-                        id='meldcode'
-                        {...register('meldcode', {
+                        id='carCode'
+                        {...register('carCode', {
                             required: 'This is required',
                             minLength: { value: 4, message: 'Minimum length should be 4' },
                         })}
                     />
                     <FormErrorMessage>
-                        {errors.meldcode && errors.meldcode.message}
+                        {errors.carCode && errors.carCode.message}
                     </FormErrorMessage>
                 </FormControl>
 
 
-                <Button mt={4} colorScheme='teal' isLoading={isSubmitting} type='submit'>
+                <Button mt={4} isLoading={isSubmitting} type='submit'>
                     Verstuur
                 </Button>
             </form>
