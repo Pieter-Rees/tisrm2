@@ -25,7 +25,7 @@ export default function RegistrationForm() {
             url: formAddress,
 
             data: {
-                contactName: 'Fred',
+                contactName: contactName,
             }
         })
             .then((response) => {
@@ -46,7 +46,7 @@ export default function RegistrationForm() {
         <Flex width='full' justifyContent='center'>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <FormControl isInvalid={errors.onderneming}>
-                    <FormLabel htmlFor='name'>Naam onderneming</FormLabel>
+                    <FormLabel htmlFor='onderneming'>Naam onderneming</FormLabel>
                     <Input
                         id='onderneming'
                         {...register('onderneming', {
@@ -59,11 +59,11 @@ export default function RegistrationForm() {
                     </FormErrorMessage>
                 </FormControl>
 
-                <FormControl isInvalid={errors.name}>
-                    <FormLabel htmlFor='name'>Uw naam</FormLabel>
+                <FormControl isInvalid={errors.contactName}>
+                    <FormLabel htmlFor='contactName'>Uw naam</FormLabel>
                     <Input
-                        id='name'
-                        {...register('name', {
+                        id='contactName'
+                        {...register('contactName', {
                             required: 'This is required',
                             minLength: { value: 4, message: 'Minimum length should be 4' },
                         })}
