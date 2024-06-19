@@ -17,6 +17,7 @@ import {
 } from '@chakra-ui/react'
 
 import RegistrationForm from './form'
+import BaseLayout from "@/components/baseLayout"
 
 export default function Offerte() {
     const steps = [
@@ -31,10 +32,10 @@ export default function Offerte() {
     })
 
     return (
-        <Container>
-
-            <VStack alignItems='flex-start' width='full'>
-                {/* <Stepper width='full' index={activeStep}>
+        <Container >
+            <BaseLayout title='Offerte aanvragen'>
+                <VStack alignItems='flex-start' width='full'>
+                    {/* <Stepper width='full' index={activeStep}>
                     {steps.map((step, index) => (
                         <Step key={index}>
                             <StepIndicator>
@@ -55,8 +56,10 @@ export default function Offerte() {
                     ))}
                 </Stepper> */}
 
-                <RegistrationForm />
-            </VStack>
+                    <RegistrationForm />
+                </VStack>
+            </BaseLayout>
+
         </Container>
     )
 }

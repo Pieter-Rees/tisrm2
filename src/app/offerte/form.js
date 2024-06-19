@@ -1,3 +1,5 @@
+'use client'
+
 import React from "react";
 import { FormErrorMessage, FormLabel, FormControl, Input, Button } from "@chakra-ui/react";
 import { useForm } from 'react-hook-form'
@@ -19,8 +21,8 @@ export default function RegistrationForm() {
         })
     }
     return (
-        <Flex width='full'>
-            <form onSubmit={handleSubmit(onSubmit)} style={{ width: '100%;' }}>
+        <Flex width='full' justifyContent='center'>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <FormControl isInvalid={errors.onderneming}>
                     <FormLabel htmlFor='name'>Naam onderneming</FormLabel>
                     <Input
@@ -79,7 +81,7 @@ export default function RegistrationForm() {
 
 
                 <Button mt={4} colorScheme='teal' isLoading={isSubmitting} type='submit'>
-                    Submit
+                    Verstuur
                 </Button>
             </form>
         </Flex>

@@ -1,6 +1,7 @@
-import { background, border, Button, Card, extendTheme, List, ListItem, UnorderedList } from '@chakra-ui/react'
+import { background, border, Button, Card, extendTheme, FormLabel, List, ListItem, UnorderedList } from '@chakra-ui/react'
 import { color } from 'framer-motion'
 import Link from 'next/link'
+import { Form } from 'react-hook-form'
 import { BsBorderWidth } from 'react-icons/bs'
 
 const theme = extendTheme({
@@ -20,6 +21,28 @@ const theme = extendTheme({
 
     },
     components: {
+        Form: {
+            baseStyle: {
+            },
+        },
+        formControl: {
+            baseStyle: {
+                marginBottom: '4',
+            },
+        },
+
+        FormLabel: {
+            baseStyle: {
+                color: 'gray.700',
+                marginBottom: '2',
+                fontWeight: 'bold',
+            },
+            variants: {
+                'footer': {
+                    color: 'white',
+                },
+            },
+        },
         Button: {
             baseStyle: {
                 fontWeight: 'bold', // Normally, it is "semibold"
