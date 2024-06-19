@@ -4,6 +4,7 @@ import React from "react";
 import { FormErrorMessage, FormLabel, FormControl, Input, Button } from "@chakra-ui/react";
 import { useForm } from 'react-hook-form'
 import { Flex } from "@chakra-ui/react";
+import axios, { isCancel, AxiosError } from 'axios';
 
 export default function RegistrationForm() {
     const {
@@ -13,12 +14,34 @@ export default function RegistrationForm() {
     } = useForm()
 
     function onSubmit(values) {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                alert(JSON.stringify(values, null, 2))
-                resolve()
-            }, 3000)
+        // return new Promise((resolve) => {
+        //     const email = 'https://pietsmailserver.nl:4000/email'
+
+        // })
+        const formAddress = 'https://pietsmailserver.nl:4000/email'
+
+        axios({
+            method: 'post',
+            url: formAddress,
+
+            data: {
+                firstName: 'Fred',
+                lastName: 'Flintstone'
+            }
         })
+            .then((response) => {
+                console.log(response)
+                // this.showForm = false
+                console.log(response)
+            })
+            .catch((error) => {
+                // handle error
+                console.log(error)
+                alert('Contactformulier niet verzonden')
+            })
+            .finally(() => {
+                // always executed
+            })
     }
     return (
         <Flex width='full' justifyContent='center'>
