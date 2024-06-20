@@ -12,7 +12,6 @@ export default function Contact() {
                         <Logo />
                     </Flex>
                     <ContactInfo variant='contact' />
-                    <Divider orientation='horizontal' />
                 </GridItem>
                 <GridItem w='100%'>
                     <Flex borderRadius='lg' overflow='hidden' position='relative' width='full' alignItems='center' height='full'>

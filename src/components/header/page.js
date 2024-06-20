@@ -29,7 +29,6 @@ export default function Header() {
                     </Box>
                 </Hide>
             </Flex>
-            <Divider />
             <Sidenav showSideNav={showSideNav} handleToggle={handleToggle} />
         </Box>
     );

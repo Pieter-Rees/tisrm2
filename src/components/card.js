@@ -14,7 +14,7 @@ const CardElement = ({ title, description, image, downloadLink, cta, ctaLink, ph
                 <CardFooter>
                     {cta && ctaLink &&
                         <Button as='a' href={ctaLink} variant={buttonVariant} width='100%' minWidth='100%'>{cta}</Button>}
-                    {phone && <Button as='a' href={phone} variant={buttonVariant}>Bel ons nu</Button>}
+                    {phone && <Button as='a' href={phone} variant={buttonVariant} width='100%'>Bel ons nu</Button>}
                     {downloadLink && <Button as='a' href={downloadLink} variant={buttonVariant}>Download</Button>}
                 </CardFooter>}
         </Card>

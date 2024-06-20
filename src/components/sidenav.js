@@ -16,9 +16,8 @@ export default function Sidenav({ showSideNav, handleToggle }) {
                 <Link href="/over-ons"><span onClick={() => handleToggle()}>Over ons</span></Link>
                 <Link href="/bestanden"><span onClick={() => handleToggle()}>Bestanden</span></Link>
                 <Link href="/contact"><span onClick={() => handleToggle()}>Contact</span></Link>
-                <Center height='50px'>
-                    <Divider orientation='vertical' />
-                </Center>
+                <Divider orientation='horizontal' />
+
                 <Button as='a' href="/offerte" variant='blue'><span onClick={() => props.handleToggle()}>Offerte</span></Button>
             </VStack >
         </Flex >
