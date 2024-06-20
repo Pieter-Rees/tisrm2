@@ -6,6 +6,11 @@ import { BsBorderWidth } from 'react-icons/bs'
 
 const theme = extendTheme({
     colors: {
+        'blue': {
+            500: '#00a3ff',
+            700: '#0077cc',
+            900: '#005299',
+        },
         'gray': {
             500: '#abadaf',
             600: '#7d7f83',
@@ -13,52 +18,28 @@ const theme = extendTheme({
             800: '#1d2025',
             900: '#171a1d',
         },
-        'blue': {
-            500: '#00a3ff',
-            700: '#0077cc',
-            900: '#005299',
-        },
-
     },
     components: {
-        formControl: {
-            baseStyle: {
-                margin: '4',
-            },
-        },
-
-        FormLabel: {
-            baseStyle: {
-                fontSize: 'lg',
-                marginY: '4',
-            },
-        },
-        Input: {
-            baseStyle: {
-                marginY: '4',
-                padding: '4',
-                border: '1px solid gray.700',
-                borderRadius: 'md',
-                minHeight: '160px',
-                height: '160px',
-            },
-        },
         Button: {
             baseStyle: {
-                fontWeight: 'bold', // Normally, it is "semibold"
-                color: 'white',
                 backgroundColor: 'gray.500',
+                color: 'white',
+                fontWeight: 'bold',
+            },
+            defaultProps: {
+                size: 'lg',
+                variant: 'sm',
             },
             sizes: {
+                full: {
+                    height: 'full',
+                    width: 'full',
+                },
                 xl: {
-                    h: '56px',
                     fontSize: 'lg',
+                    h: '56px',
                     px: '32px',
                 },
-                full: {
-                    width: 'full',
-                    height: 'full',
-                }
             },
             variants: {
                 'blue': {
@@ -66,13 +47,6 @@ const theme = extendTheme({
                     color: 'white',
                     _hover: {
                         bg: 'blue.900',
-                    },
-                },
-                white: {
-                    bg: 'white',
-                    color: 'black',
-                    _hover: {
-                        bg: 'gray.100',
                     },
                 },
                 ghost: {
@@ -83,97 +57,100 @@ const theme = extendTheme({
                     },
                 },
                 link: {
-                    bg: 'transparent',
-                    color: 'white',
-                    fontWeight: 'normal',
-                    _hover: {
-                        textDecoration: 'none',
-
-                    },
                     _active: {
                         color: 'white',
                     },
-
-
-                }
-            },
-            defaultProps: {
-                size: 'lg', // default is md
-                variant: 'sm', // default is solid
-
+                    _hover: {
+                        textDecoration: 'none',
+                    },
+                    bg: 'transparent',
+                    color: 'white',
+                    fontWeight: 'normal',
+                },
+                linkDark: {
+                    _active: {
+                        color: 'gray.700',
+                    },
+                    _hover: {
+                        textDecoration: 'none',
+                    },
+                    bg: 'transparent',
+                    color: 'gray.700',
+                    fontWeight: 'normal'
+                },
+                white: {
+                    bg: 'white',
+                    color: 'black',
+                    _hover: {
+                        bg: 'gray.100',
+                    },
+                },
             },
         },
-
         Card: {
             baseStyle: {
-                header: {
-                    borderTopRadius: 'sm',
-                    padding: '0',
-                },
                 body: {
                     padding: '0',
+                },
+                container: {
+                    border: '1px solid gray.500',
+                    borderRadius: 'lg',
+                    boxShadow: 'lg',
+                    padding: '8',
+                    width: 'full',
                 },
                 footer: {
                     padding: '0',
                 },
-                container: {
-                    width: 'full',
-                    border: '1px solid gray.500',
-                    borderRadius: 'lg',
-                    padding: '8',
-                    boxShadow: 'lg',
-
+                header: {
+                    borderTopRadius: 'sm',
+                    padding: '0',
                 },
             },
             variants: {
                 downloads: {
                     header: {
-                        padding: '4',
-                        color: 'red',
                         backgroundColor: 'red',
+                        color: 'red',
+                        padding: '4',
                     },
                 },
-            }
-
-        },
-
-        Text: {
-            baseStyle: {
-                marginBottom: '4',
-                color: 'gray.700',
             },
-            sizes: {
-                xl: {
-                    fontSize: 'xl',
-                },
+        },
+        Container: {
+            baseStyle: {
+                maxW: '1600px',
+            },
+        },
+        Divider: {
+            baseStyle: {
+                borderColor: 'gray.700',
+                marginY: '8',
+                width: 'full',
             },
             variants: {
                 'footer': {
-                    textColor: 'white',
-                    size: 'xl',
-                },
-                gradient: {
-                    bgClip: 'text',
-                    fontWeight: 'extrabold',
+                    borderColor: 'blue.200',
+                    borderBottomWidth: '1px',
+                    height: '1px',
+                    marginY: '8',
                 },
             },
-            defaultProps: {
-                size: 'xl',
+        },
+        Form: {},
+        FormLabel: {
+            baseStyle: {
+                fontSize: 'lg',
+                marginY: '2',
             },
         },
         Heading: {
             baseStyle: {
                 color: 'gray.700',
-                marginBottom: '2',
                 fontWeight: 'bold',
+                marginBottom: '2',
             },
             variants: {
-                xl: {
-                    fontSize: '6xl',
-                    fontWeight: 'bold',
-                    lineHeight: '110%',
-                    marginBottom: '4',
-                },
                 lg: {
                     fontSize: '4xl',
                     fontWeight: 'bold',
@@ -189,69 +166,90 @@ const theme = extendTheme({
                     fontWeight: 'bold',
                     lineHeight: '110%',
                 },
+                xl: {
+                    fontSize: '6xl',
+                    fontWeight: 'bold',
+                    lineHeight: '110%',
+                    marginBottom: '4',
+                },
                 footer: {
                     color: 'white',
-                }
-            }
-        },
-        Container: {
-            baseStyle: {
-                maxW: '1600px',
+                    fontWeight: 'bold',
+                    marginBottom: '4',
+                },
             },
         },
-        Divider: {
+        Input: {
             baseStyle: {
-                marginY: '8',
-                width: 'full',
-                borderColor: 'gray.700',
-
-            },
-            variants: {
-                // form: {
-                //     borderColor: 'gray.700',
-
-                // },
-                // sidebar: {
-                //     borderColor: 'gray.700',
-                // },
-                'footer': {
-                    marginY: '8',
-                    borderBottomWidth: '1px',
-                    borderColor: 'blue.200',
-                    height: '1px',
-
-
-                }
+                border: '1px solid gray.700',
+                borderRadius: 'md',
+                height: '160px',
+                marginY: '4',
+                minHeight: '160px',
+                padding: '4',
             },
         },
         List: {
-            variants: {
-                footer: {
-                    item: {
-                        fontSize: 'lg',
-                        color: 'white',
-                    }
+            baseStyle: {
+                container: {
                 },
+
+                item: {
+                    color: 'gray.700',
+                    fontSize: 'xl',
+                    listStyle: 'none',
+                },
+
+
+            },
+            variants: {
                 contact: {
                     container: {
                         textAlign: 'center',
                     },
-                }
-            },
-
-            baseStyle: {
-                container: {
-                    paddingY: '4',
-                    marginInlineStart: '0',
+                    item: {
+                        color: 'gray.700',
+                        fontSize: 'xl',
+                    },
                 },
-                item: {
-                    color: 'gray.700',
-                    fontSize: 'lg',
-                    listStyle: "none",
-                }
-            }
-        }
-    }
+                footer: {
+                    container: {
+                        textAlign: 'left',
+                    },
+                    item: {
+                        color: 'white',
+                        fontSize: 'xl',
+                    },
+                },
+            },
+        },
+        ListItem: {},
+        Text: {
+            baseStyle: {
+                color: 'gray.700',
+                marginBottom: '4',
+            },
+            defaultProps: {
+                size: 'xl',
+            },
+            sizes: {
+                xl: {
+                    fontSize: 'xl',
+                },
+            },
+            variants: {
+                'footer': {
+                    size: 'xl',
+                    textColor: 'white',
+                },
+                gradient: {
+                    bgClip: 'text',
+                    fontWeight: 'extrabold',
+                },
+            },
+        },
+        UnorderedList: {},
+    },
 })
 
 export default theme

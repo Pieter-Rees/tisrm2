@@ -11,7 +11,7 @@ export default function Contact() {
                     <Flex width='100%' paddingY='12' justifyContent='center'>
                         <Logo />
                     </Flex>
-                    <ContactInfo variant='contact' />
+                    <ContactInfo variant='contact' buttonVariant='linkDark' />
                 </GridItem>
                 <GridItem w='100%'>
                     <Flex borderRadius='lg' overflow='hidden' position='relative' width='full' alignItems='center' height='full'>

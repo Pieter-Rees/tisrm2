@@ -8,6 +8,7 @@ import { contactInfo, currentYear } from "../../data/general";
 import FooterLogos from "@/components/footer-logos";
 import Link from 'next/link'
 import ContactInfo from "@/components/contact-info";
+import Logo from "@/components/logo";
 
 export default function Footer() {
     return (
@@ -16,15 +17,21 @@ export default function Footer() {
             <Flex bg="gray.700" paddingY='16' alignItems='center' >
                 <Container >
                     <SimpleGrid minChildWidth={{ base: '100%', lg: '100px' }} spacing='16'>
-                        <Box>
-                            <Heading as='h3' variant='footer'>
-                                {contactInfo.name}
-                            </Heading>
-                            <Text color="white">
-                                Het verdient aanbeveling dat verzekeraars een polis uitbrengen die de gevolgen dekt van een niet geheel begrepen verzekering!
-                            </Text>
-                            <Button as='a' href="/offerte" variant='blue'>Offerte aanvragen</Button>
-                        </Box>
+                        <Flex flexDirection='column' gap='4'>
+
+                            <Box>
+                                <Link href="/"><Logo width='200px' /></Link>
+                            </Box>
+                            <Box>
+                                <Text color="white">
+                                    Het verdient aanbeveling dat verzekeraars een polis uitbrengen die de gevolgen dekt van een niet geheel begrepen verzekering!
+                                </Text>
+                            </Box>
+                            <Box>
+                                <Button as='a' href="/offerte" variant='blue'>Offerte aanvragen</Button>
+                            </Box>
+                        </Flex>
+
                         <Box>
                             <Heading as='h3' variant='footer'>
                                 Navigatie
@@ -43,16 +50,16 @@ export default function Footer() {
                             <Heading as='h3' variant='footer'>
                                 Contact informatie
                             </Heading>
-                            <ContactInfo variant='footer' />
+                            <ContactInfo variant='footer' buttonVariant='link' />
                         </Box>
                     </SimpleGrid>
-                    <Box marginTop='8' >
-                        <Text textAlign="center" size='xl' color="white">
-                            Tis Risk Managers {currentYear}
-                        </Text>
-                    </Box>
                 </Container>
             </Flex>
+            <Box marginY='8' bg="white">
+                <Text textAlign="center" size='xl' color="gray.700" fontWeight='bold'>
+                    Tis Risk Managers {currentYear}
+                </Text>
+            </Box>
         </>
 
     )
