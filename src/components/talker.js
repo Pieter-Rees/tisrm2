@@ -7,7 +7,7 @@ export default function Talker() {
         <Flex paddingY='16' gap={{ base: '4', lg: '16' }} flexDirection={{
             base: 'column', lg: 'row'
         }} justifyContent='center' alignItems='center' >
-            <Flex position='relative' justifyContent='center' width='250px' height='250px' overflow='hidden' borderRadius='50%'>
+            <Flex position='relative' justifyContent='center' width='250px' height='250px' overflow='hidden' borderRadius='50%' boxShadow='lg'>
                 <Image
                     src="/rene.jpg"
                     alt="Picture of the author"

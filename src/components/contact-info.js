@@ -23,7 +23,7 @@ export default function ContactInfo({ variant, buttonVariant }) {
                 </Box>
             </SimpleGrid>
 
-            <Flex justifyContent='center' marginTop='8'>
+            <Flex justifyContent='start' marginTop='8'>
                 <UnorderedList variant={variant}>
                     <ListItem>
                         <Button size='full' variant={buttonVariant} as='a' href={'tel:' + 'pageInfo.phone'}>

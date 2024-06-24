@@ -28,7 +28,7 @@ export default function Footer() {
                                 </Text>
                             </Box>
                             <Box>
-                                <Button as='a' href="/offerte" variant='blue'>Offerte aanvragen</Button>
+                                <Button as='a' href="/offerte" variant='white'>Offerte aanvragen</Button>
                             </Box>
                         </Flex>
 
@@ -36,7 +36,7 @@ export default function Footer() {
                             <Heading as='h3' variant='footer'>
                                 Navigatie
                             </Heading>
-                            <Flex flexDir='column' textColor='white' fontSize='lg'>
+                            <Flex flexDir='column' textColor='white' fontSize='xl'>
                                 <Link href="/">Home</Link>
                                 <Link href="/verzekeringen">Verzekeringen</Link>
                                 <Link href="/taxi">Taxi</Link>

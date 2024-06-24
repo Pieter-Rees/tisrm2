@@ -1,13 +1,20 @@
 import React from 'react';
-import { Flex, Text, Button, Card, CardHeader, CardBody, CardFooter } from '@chakra-ui/react';
-import Image from 'next/image';
+import { Box, Text, Button, Card, CardHeader, CardBody, CardFooter } from '@chakra-ui/react';
 
-const CardElement = ({ title, description, image, downloadLink, cta, ctaLink, phone, buttonVariant = 'solid' }) => {
+const CardElement = ({ title, description, image, altText, downloadLink, cta, ctaLink, phone, buttonVariant = 'solid' }) => {
     const hasCta = cta || phone || downloadLink;
     return (
         <Card>
-            {image && <Image src="/1.webp" alt="Picture of the author" height={500} width={1000} />}
-            {title && <CardHeader><Text fontSize="2xl" fontWeight="bold" >{title}</Text></CardHeader>}
+            <CardHeader>
+                {image &&
+                    <Box overflow='hidden' borderRadius='lg' style={{ backgroundImage: `url(${image})`, backgroundSize: 'cover', backgroundPosition: 'center center' }} height='200px'>
+                    </Box>
+                }
+                {title &&
+                    <Box >
+                        <Text margin='0' fontSize="2xl" fontWeight="bold" paddingX='4' marginTop='4'>{title}</Text>
+                    </Box>}
+            </CardHeader>
             {description && <CardBody><Text>{description}</Text></CardBody>}
 
             {hasCta &&

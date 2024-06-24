@@ -14,7 +14,7 @@ export default function Contact() {
                     <ContactInfo variant='contact' buttonVariant='linkDark' />
                 </GridItem>
                 <GridItem w='100%'>
-                    <Flex borderRadius='lg' overflow='hidden' position='relative' width='full' alignItems='center' height='full'>
+                    <Flex borderRadius='lg' boxShadow='lg' overflow='hidden' position='relative' width='full' alignItems='center' height='full'>
                         <Image
                             src="/bb.jpg"
                             alt="Picture of the author"

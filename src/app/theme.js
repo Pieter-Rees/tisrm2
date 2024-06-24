@@ -33,7 +33,6 @@ const theme = extendTheme({
             sizes: {
                 full: {
                     height: 'full',
-                    width: 'full',
                 },
                 xl: {
                     fontSize: 'lg',
@@ -43,10 +42,10 @@ const theme = extendTheme({
             },
             variants: {
                 'blue': {
-                    bg: 'blue.700',
+                    bg: 'blue.800',
                     color: 'white',
                     _hover: {
-                        bg: 'blue.900',
+                        bg: 'blue.700',
                     },
                 },
                 ghost: {
@@ -89,23 +88,22 @@ const theme = extendTheme({
         },
         Card: {
             baseStyle: {
-                body: {
+                header: {
+                    borderTopRadius: 'sm',
+                    overflow: 'hidden',
                     padding: '0',
+                },
+                body: {
                 },
                 container: {
                     border: '1px solid gray.500',
                     borderRadius: 'lg',
                     boxShadow: 'lg',
-                    padding: '8',
                     width: 'full',
                 },
                 footer: {
-                    padding: '0',
                 },
-                header: {
-                    borderTopRadius: 'sm',
-                    padding: '0',
-                },
+
             },
             variants: {
                 downloads: {
@@ -205,7 +203,6 @@ const theme = extendTheme({
             variants: {
                 contact: {
                     container: {
-                        textAlign: 'center',
                     },
                     item: {
                         color: 'gray.700',
@@ -214,7 +211,6 @@ const theme = extendTheme({
                 },
                 footer: {
                     container: {
-                        textAlign: 'left',
                     },
                     item: {
                         color: 'white',
