@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Flex, Box, SimpleGrid, FormErrorMessage, FormLabel, FormControl, Input, Button, Divider, Heading } from "@chakra-ui/react";
+import { Flex, Box, Checkbox, SimpleGrid, FormErrorMessage, FormLabel, FormControl, Input, Button, Divider, Heading } from "@chakra-ui/react";
 import { useForm } from 'react-hook-form'
 import axios, { isCancel, AxiosError } from 'axios';
 import { Show } from '@chakra-ui/react'
@@ -114,18 +114,18 @@ export default function RegistrationForm() {
                         </Show>
 
                         <Box>
-                            <FormControl isInvalid={errors.licenseplate}>
-                                <FormLabel htmlFor='licenseplate'>Uw kenteken</FormLabel>
+                            <FormControl isInvalid={errors.plateNo}>
+                                <FormLabel htmlFor='plateNo'>Uw kenteken</FormLabel>
                                 <Input
-                                    id='licenseplate'
-                                    {...register('licenseplate', {
+                                    id='plateNo'
+                                    {...register('plateNo', {
                                         required: 'Vul uw kenteken in',
-                                        licenseplate: 'Kenteken is niet correct',
+                                        plateNo: 'Kenteken is niet correct',
                                         minLength: { value: 8, message: 'Vul uw kenteken in' },
                                     })}
                                 />
                                 <FormErrorMessage>
-                                    {errors.licenseplate && errors.licenseplate.message}
+                                    {errors.plateNo && errors.plateNo.message}
                                 </FormErrorMessage>
                             </FormControl>
 
@@ -145,21 +145,28 @@ export default function RegistrationForm() {
                             </FormControl>
 
 
-                            <FormControl isInvalid={errors.years}>
-                                <FormLabel htmlFor='years'>Schadevrije jaren</FormLabel>
+                            <FormControl isInvalid={errors.damageFreeYears}>
+                                <FormLabel htmlFor='damageFreeYears'>Schadevrije jaren</FormLabel>
                                 <Input
-                                    id='years'
-                                    {...register('years', {
+                                    id='damageFreeYears'
+                                    {...register('damageFreeYears', {
                                         required: 'Vul uw schadevrije jaren in',
                                         minLength: { value: 1, message: 'Vul uw schadevrije jaren in' },
                                     })}
                                 />
                                 <FormErrorMessage>
-                                    {errors.years && errors.years.message}
+                                    {errors.damageFreeYears && errors.damageFreeYears.message}
                                 </FormErrorMessage>
                             </FormControl>
 
-                            <Button mt={4} isLoading={isSubmitting} type='submit'>
+                            <FormControl marginTop='4' isInvalid={errors.damageFreeYears}>
+                                <Checkbox size='lg' defaultChecked>Verzend kopie</Checkbox>
+                                <FormErrorMessage>
+                                    {errors.damageFreeYears && errors.damageFreeYears.message}
+                                </FormErrorMessage>
+                            </FormControl>
+
+                            <Button mt='8' isLoading={isSubmitting} type='submit'>
                                 Verstuur
                             </Button>
                         </Box>
