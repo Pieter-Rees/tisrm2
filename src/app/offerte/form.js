@@ -159,10 +159,13 @@ export default function RegistrationForm() {
                                 </FormErrorMessage>
                             </FormControl>
 
-                            <FormControl marginTop='4' isInvalid={errors.damageFreeYears}>
-                                <Checkbox size='lg' defaultChecked>Verzend kopie</Checkbox>
+                            <FormControl marginTop='4' isInvalid={errors.sendCopy}>
+                                <Checkbox size='lg'
+                                    defaultChecked
+                                    id="sendCopy"
+                                    {...register('sendCopy')}>Verzend kopie</Checkbox>
                                 <FormErrorMessage>
-                                    {errors.damageFreeYears && errors.damageFreeYears.message}
+                                    {errors.sendCopy && errors.sendCopy.message}
                                 </FormErrorMessage>
                             </FormControl>
 
