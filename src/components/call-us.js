@@ -7,7 +7,7 @@ import { Button } from '@chakra-ui/react'
 
 export default function CallUs() {
     return (
-        <Button width='full' size='full' variant='blue' as='a' href={'tel:' + 'pageInfo.phone'}>
+        <Button width='full' size='full' variant='blue' as='a' href={'tel:' + 'contactInfo.phone'}>
             <Flex justifyContent='center' height='full' flexDirection='column' padding='8' gap='8'>
                 <Box color='white'>
                     <BsTelephoneFill size='32px' />

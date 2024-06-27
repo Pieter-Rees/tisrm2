@@ -1,2 +1,3 @@
-3. Navigatie footer meer ruimte
-4.
+1. Spacing logo/nav with content on page
+2. Change picture on homepage
+3.
