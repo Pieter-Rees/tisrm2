@@ -3,7 +3,7 @@
 import Logo from "@/components/logo";
 import Navbar from "@/components/navbar/page";
 import Link from 'next/link'
-import { Flex, Box, Divider, Hide } from "@chakra-ui/react";
+import { Flex, Box, Container, Hide } from "@chakra-ui/react";
 import Sidenav from "@/components/sidenav"
 import { useState } from "react";
 import { BsList } from "react-icons/bs"
@@ -17,8 +17,8 @@ export default function Header() {
 
 
     return (
-        <Box>
-            <Flex flexDirection='row' justifyContent='space-between' alignItems='center' bg="white" py={4} px={8} gap='8'>
+        <Container>
+            <Flex flexDirection='row' justifyContent='space-between' alignItems='center' bg="white" py={4} gap='8'>
                 <Link href="/"><Logo width='200px' /></Link>
                 <Navbar />
                 <Hide above='xl'>
@@ -30,6 +30,6 @@ export default function Header() {
                 </Hide>
             </Flex>
             <Sidenav showSideNav={showSideNav} handleToggle={handleToggle} />
-        </Box>
+        </Container>
     );
 }

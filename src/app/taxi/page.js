@@ -6,12 +6,6 @@ export default function Taxi() {
     return (
         <Container>
             <GridLayout title='Personenvervoer'>
-                <Text>
-                    TIS is al meer dan 15 jaar een landelijk werkend assurantiekantoor, welke altijd gespecialiseerd is geweest in verzekeren van het personenvervoer. Door onze jarenlange expertise in de personenvervoerbranche genieten wij veel vertrouwen bij de verzekeringsmaatschappijen. Als klant bent u degene die daar direct van profiteert. Doordat voorwaarden, mogelijkheden en premies per maatschappij verschillen en wij onafhankelijk zijn, kunnen wij de meest passende mogelijkheden combineren voor uw bedrijf. Dit resulteert in een zeer goede Prijs-Kwaliteit verhouding, waarmee u als klant, geniet van de meest uitgebreide voorwaarden tegen aantrekkelijke premies. Samen met de bestuursleden van meerdere gerenommeerde TTO’s en Belangenorganisaties sparren wij regelmatig voor het verbeteren van de service, voorwaarden en premies.
-                </Text>
-                <Text>
-                    Mocht u nog vragen hebben, neem dan gerust contact op met ons kantoor!
-                </Text>
                 <Heading as='h2' variant='lg'>
                     Taxiverzekering
                 </Heading>

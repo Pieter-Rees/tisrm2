@@ -198,6 +198,7 @@ const theme = extendTheme({
         List: {
             baseStyle: {
                 container: {
+                    margin: '0',
                 },
 
                 item: {

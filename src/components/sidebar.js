@@ -7,7 +7,7 @@ const Sidebar = () => {
         <VStack gap='8'>
             <Card variant='sidebar' title="Verzekering afsluiten" cta='Offerte aanvragen' ctaLink='/offerte' buttonVariant='blue' />
             <Card variant='sidebar' title="Formulieren" description="Download nu direct belangrijke formulieren voor uw schadeafhandeling" cta='Bestanden' ctaLink='/bestanden' />
-            <Card variant='sidebar' title="Vragen?" cta='Bel ons nu' phone='tel:+31612589043' />
+            <Card variant='sidebar' title="Vragen?" cta='Bel ons nu' phone={'tel:' + 'contactInfo.phone'} />
         </VStack>
     );
 };

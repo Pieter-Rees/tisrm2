@@ -15,7 +15,7 @@ const CardElement = ({ title, description, image, altText, downloadLink, cta, ct
                         <Text margin='0' fontSize="2xl" fontWeight="bold" paddingX='4' marginTop='4'>{title}</Text>
                     </Box>}
             </CardHeader>
-            {description && <CardBody><Text>{description}</Text></CardBody>}
+            {description && <CardBody><Text margin='0'>{description}</Text></CardBody>}
 
             {hasCta &&
                 <CardFooter>

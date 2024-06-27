@@ -2,6 +2,7 @@ import ContactInfo from "@/components/contact-info";
 import Logo from "@/components/logo";
 import { Grid, GridItem, Box, Container, Flex, Text, Divider } from "@chakra-ui/react";
 import Image from 'next/image'
+import { Button } from '@chakra-ui/react'
 
 export default function Contact() {
     return (
@@ -23,13 +24,12 @@ export default function Contact() {
                     </Flex>
                 </GridItem>
             </Grid>
-            <Box paddingY='20' textAlign='center'>
+            <Box paddingTop='20' textAlign='center'>
                 <Text>
                     Wil u uw schade inzien of een schade melden, klik op onderstaande link óf neem contact op met ons telefoonnummer, optie 1.
                 </Text>
-                <Text>
-                    www.schadehulp.nl
-                </Text>
+                <Button as='a' href='https://schadehulp.schadehulp.nl/extranet/' variant='ghost'>www.schadehulp.nl</Button>
+
             </Box>
         </Container>
     )

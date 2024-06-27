@@ -56,7 +56,6 @@ export default function RegistrationForm() {
                                 <Input
                                     id='kvkno'
                                     {...register('kvkno', {
-                                        required: 'Vul uw kvk nummer in',
                                         minLength: { value: 6, message: 'Vul uw kvk nummer in' },
                                     })}
                                 />
