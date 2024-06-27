@@ -7,7 +7,7 @@ const CardElement = ({ title, description, image, altText, downloadLink, cta, ct
         <Card>
             <CardHeader>
                 {image &&
-                    <Box overflow='hidden' borderRadius='lg' style={{ backgroundImage: `url(${image})`, backgroundSize: 'cover', backgroundPosition: 'center center' }} height='200px'>
+                    <Box overflow='hidden' borderTopRadius='lg' style={{ backgroundImage: `url(${image})`, backgroundSize: 'cover', backgroundPosition: 'center center' }} height='200px'>
                     </Box>
                 }
                 {title &&

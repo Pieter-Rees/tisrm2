@@ -26,13 +26,13 @@ export default function ContactInfo({ variant, buttonVariant }) {
             <Flex justifyContent='start' marginTop='8'>
                 <UnorderedList variant={variant}>
                     <ListItem>
-                        <Button size='full' variant={buttonVariant} as='a' href={'tel:' + 'contactInfo.phone'}>
-                            {contactInfo.phone}
+                        <Button size='full' variant={buttonVariant} as='a' href='tel:+310206368191'>
+                            +31 020 636 8191
                         </Button>
                     </ListItem>
                     <ListItem >
-                        <Button size='full' variant={buttonVariant} as='a' href={'mailto:' + 'pageInfo.email'}>
-                            {contactInfo.email}
+                        <Button size='full' variant={buttonVariant} as='a' href='mailto:info@tisrm.nl'>
+                            info@tisrm.nl
                         </Button>
                     </ListItem>
                     <ListItem>
@@ -42,7 +42,7 @@ export default function ContactInfo({ variant, buttonVariant }) {
                         </Button>
                     </ListItem>
                 </UnorderedList>
-            </Flex>
+            </Flex >
         </>
 
     )
