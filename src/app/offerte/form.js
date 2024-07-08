@@ -14,12 +14,13 @@ export default function RegistrationForm() {
 
 
     function onSubmit(values) {
+
+        values['tisrm'] = true
+
         const formAddress = 'https://pietserver.nl:4000/email'
-        console.log(values)
         axios({
             method: 'post',
             url: formAddress,
-
             data: values // Probably wrong
         })
             .then((response) => {
