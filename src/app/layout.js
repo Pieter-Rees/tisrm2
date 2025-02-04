@@ -22,6 +22,16 @@ export const metadata = {
     "Verzekering",
     "Verzekeraar",
     "Verzekeraars",
+    "Taxi",
+    "Taxi verzekering",
+    "Taxi verzekeringen",
+    "Taxi verzekeraar",
+    "Taxi verzekeraars",
+    "Tis Taxi",
+    "Tis Taxi verzekering",
+    "Tis Taxi verzekeringen",
+    "Tis Taxi verzekeraar",
+    "Tis Taxi verzekeraars"
   ],
 };
 
