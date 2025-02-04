@@ -6,9 +6,10 @@ import {
 } from "@chakra-ui/react";
 import { contactInfo, currentYear } from "../../data/general";
 import FooterLogos from "@/components/footer-logos";
-import Link from 'next/link'
+import { Link } from '@chakra-ui/react'
 import ContactInfo from "@/components/contact-info";
 import Logo from "@/components/logo";
+import NextLink from 'next/link'
 
 export default function Footer() {
     return (
@@ -37,13 +38,13 @@ export default function Footer() {
                                 Navigatie
                             </Heading>
                             <Flex flexDir='column' textColor='white' fontSize='xl'>
-                                <Link href="/">Home</Link>
-                                <Link href="/verzekeringen">Verzekeringen</Link>
-                                <Link href="/taxi">Taxi</Link>
-                                <Link href="/risk-management">Risk management</Link>
-                                <Link href="/over-ons">Over ons</Link>
-                                <Link href="/bestanden">Bestanden</Link>
-                                <Link href="/contact">Contact</Link>
+                                <Link as={NextLink} href="/">Home</Link>
+                                <Link as={NextLink} href="/verzekeringen">Verzekeringen</Link>
+                                <Link as={NextLink} href="/taxi">Taxi</Link>
+                                <Link as={NextLink} href="/risk-management">Risk management</Link>
+                                <Link as={NextLink} href="/over-ons">Over ons</Link>
+                                <Link as={NextLink} href="/bestanden">Bestanden</Link>
+                                <Link as={NextLink} href="/contact">Contact</Link>
                             </Flex>
                         </Box>
                         <Box>

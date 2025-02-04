@@ -1,7 +1,7 @@
 "use client"
 
 import { HStack, Button, Show, Flex } from "@chakra-ui/react"
-import Link from 'next/link'
+import { Link } from '@chakra-ui/react'
 import { Center, Box } from "@chakra-ui/react"
 import { Divider, Hide } from "@chakra-ui/react"
 import NextLink from 'next/link'
