@@ -27,7 +27,7 @@ export default function ContactInfo({ variant, buttonVariant }) {
                 <UnorderedList variant={variant}>
                     <ListItem>
                         <Button size='full' variant={buttonVariant} as='a' href='tel:+310206368191'>
-                            +31 020 636 8191
+                            020 636 8191
                         </Button>
                     </ListItem>
                     <ListItem >
