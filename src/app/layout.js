@@ -43,6 +43,28 @@ export default function RootLayout({ children }) {
           async
           strategy="afterInteractive"
           id="google-analytics"
+          src={`https://www.googletagmanager.com/gtag/js?id=G-NP59CHTPR8`}
+        />
+        <Script
+          async
+          strategy="afterInteractive"
+          id="google-analytics-inline"
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-NP59CHTPR8', {
+              page_path: window.location.pathname,
+            });
+          `,
+          }}
+        />
+
+        <Script
+          async
+          strategy="afterInteractive"
+          id="google-analytics"
           src={`https://www.googletagmanager.com/gtag/js?id=G-3HPHN1BV1Q`}
         />
         <Script
