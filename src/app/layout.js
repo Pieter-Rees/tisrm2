@@ -4,19 +4,54 @@ import Footer from "@/components/footer/page";
 import { Providers } from "./providers";
 import { pageInfo } from "../data/general";
 import { Flex, Container } from "@chakra-ui/react";
-import { GoogleTagManager } from '@next/third-parties/google'
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: pageInfo.title,
   description: pageInfo.pageDescription,
+  keywords: [
+    "TIS",
+    "TISRM",
+    "TIS RISK MANAGERS",
+    "TIS Risk Managers",
+    "TISRM.nl",
+    "Enthoven",
+    "Verzekeringen",
+    "Verzekering",
+    "Verzekeraar",
+    "Verzekeraars",
+  ],
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <GoogleTagManager gtmId="G-3HPHN1BV1Q" />
+      <head>
+        <Script
+          async
+          strategy="afterInteractive"
+          id="google-analytics"
+          src={`https://www.googletagmanager.com/gtag/js?id=G-3HPHN1BV1Q`}
+        />
+        <Script
+          async
+          strategy="afterInteractive"
+          id="google-analytics-inline"
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-3HPHN1BV1Q', {
+              page_path: window.location.pathname,
+            });
+          `,
+          }}
+        />
+      </head>
+
       <body className={inter.className}>
         <Providers>
           <Header />
