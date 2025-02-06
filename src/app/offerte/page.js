@@ -33,7 +33,7 @@ export default function Offerte() {
 
     return (
         <Container >
-            <BaseLayout title='Offerte aanvragen'>
+            <BaseLayout title='Offerte taxi verzekering'>
                 <VStack alignItems='flex-start' width='full'>
                     {/* <Stepper width='full' index={activeStep}>
                     {steps.map((step, index) => (

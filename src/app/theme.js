@@ -228,6 +228,21 @@ const theme = extendTheme({
                 },
             },
         },
+        Link: {
+            baseStyle: {
+                _hover: {
+                    textDecoration: 'underline',
+                },
+            },
+            variants: {
+                footer: {
+                    color: 'white',
+                    _hover: {
+                        textDecoration: 'underline',
+                    },
+                },
+            },
+        },
         ListItem: {},
         Text: {
             baseStyle: {

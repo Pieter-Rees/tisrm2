@@ -22,7 +22,7 @@ export default function CallUs() {
                         Direct antwoord op uw vragen?
                     </Text>
                     <Text color='white'>
-                        +31 020 636 8191
+                        020 636 8191
                     </Text>
                 </Box>
             </Flex>
