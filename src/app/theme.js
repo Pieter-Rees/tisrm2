@@ -60,7 +60,7 @@ const theme = extendTheme({
                         color: 'white',
                     },
                     _hover: {
-                        textDecoration: 'none',
+                        textDecoration: 'underline',
                     },
                     bg: 'transparent',
                     color: 'white',

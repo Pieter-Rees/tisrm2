@@ -1,12 +1,13 @@
 
 import { Text, Heading, Container } from '@chakra-ui/react'
 import GridLayout from '@/components/gridLayout'
+import Breadcrumb from "@/components/breadcrumb"
 
 export default function Taxi() {
     return (
-        <Container>
+        <Container breadcrumb={<Breadcrumb capitalizeLinks />}>
             <GridLayout title='Personenvervoer'>
-                <Heading as='h2' variant='lg'>
+                <Heading as='h3' variant='lg'>
                     Taxiverzekering
                 </Heading>
                 <Text>
@@ -15,7 +16,7 @@ export default function Taxi() {
                 <Text>
                     TIS Risk Managers biedt ook voor wagenparken oplossingen. Buiten het bieden van een scherpe offerte, kunnen wij een risico analyse van uw bedrijf maken. Waar zitten de risico’s, wordt er misschien risico’s over het hoofd gezien en hoe voorkomen e/o dekken wij dit af? Samen met de klant komen wij dan tot mooie resultaten en een langdurige samenwerking.
                 </Text>
-                <Heading as='h2' variant='lg'>
+                <Heading as='h3' variant='lg'>
                     Wagenpark
                 </Heading>
                 <Text>
@@ -24,7 +25,7 @@ export default function Taxi() {
                 <Text>
                     Bent u geïnteresseerd? Neem gerust contact met ons op, zodat wij een ontmoetingsgesprek kunnen inplannen!
                 </Text>
-                <Heading as='h2' variant='lg'>
+                <Heading as='h3' variant='lg'>
                     Schadeafhandeling
                 </Heading>
                 <Text>
