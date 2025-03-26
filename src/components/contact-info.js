@@ -26,7 +26,7 @@ export default function ContactInfo({ variant, buttonVariant }) {
             <Flex justifyContent='start' marginTop='8'>
                 <UnorderedList variant={variant}>
                     <ListItem>
-                        <Button size='full' variant={buttonVariant} as='a' href='tel:+310206368191'>
+                        <Button size='full' variant={buttonVariant} as='a' href='tel:+31206368191'>
                             020 636 8191
                         </Button>
                     </ListItem>

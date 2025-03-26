@@ -7,7 +7,7 @@ const contactInfo = {
     postalCode2: '1011 PZ',
     city: 'Amsterdam',
     country: 'Nederland',
-    phone: '+310206368191',
+    phone: '+31206368191',
     email: 'info@tisrm.nl',
     linkedIn: 'https://www.linkedin.com/company/tisrm/'
 };
