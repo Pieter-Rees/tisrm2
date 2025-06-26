@@ -39,13 +39,30 @@ export default function RegistrationForm() {
                 console.error('Error response:', error.response)
                 console.error('Error message:', error.message)
                 
+                let errorMessage = 'Contactformulier niet verzonden.';
+                
                 if (error.code === 'ERR_NETWORK') {
-                    alert('Netwerkfout: Kan geen verbinding maken met de server. Controleer uw internetverbinding.')
+                    errorMessage = 'Netwerkfout: Kan geen verbinding maken met de server. Controleer uw internetverbinding.'
                 } else if (error.response?.status === 502) {
-                    alert('Serverfout: Email service is momenteel niet beschikbaar. Probeer het later opnieuw.')
+                    errorMessage = 'Serverfout: Email service is momenteel niet beschikbaar. Probeer het later opnieuw.'
+                } else if (error.response?.status === 500) {
+                    // Handle our API route errors
+                    const apiError = error.response?.data;
+                    if (apiError?.message) {
+                        errorMessage = `Serverfout: ${apiError.message}`;
+                        if (apiError.error?.message) {
+                            errorMessage += ` (${apiError.error.message})`;
+                        }
+                    } else {
+                        errorMessage = 'Serverfout: Er is een probleem opgetreden bij het verwerken van uw aanvraag. Probeer het later opnieuw.'
+                    }
+                } else if (error.response?.data?.message) {
+                    errorMessage = `Fout: ${error.response.data.message}`;
                 } else {
-                    alert('Contactformulier niet verzonden. Fout: ' + (error.response?.data?.message || error.message))
+                    errorMessage += ` Fout: ${error.message}`;
                 }
+                
+                alert(errorMessage);
             })
     }
     return (
