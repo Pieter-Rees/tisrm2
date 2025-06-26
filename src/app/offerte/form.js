@@ -18,18 +18,34 @@ export default function RegistrationForm() {
         values['tisrm'] = true
 
         const formAddress = 'https://pieterrees.nl/email/'
+        console.log('Sending form data to:', formAddress)
+        console.log('Form data:', values)
+        
         axios({
             method: 'post',
             url: formAddress,
-            data: values // Probably wrong
+            data: values,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            timeout: 10000 // 10 second timeout
         })
             .then((response) => {
-                console.log(response)
+                console.log('Success response:', response)
                 setShowForm(false)
             })
             .catch((error) => {
-                console.log(error)
-                alert('Contactformulier niet verzonden')
+                console.error('Error details:', error)
+                console.error('Error response:', error.response)
+                console.error('Error message:', error.message)
+                
+                if (error.code === 'ERR_NETWORK') {
+                    alert('Netwerkfout: Kan geen verbinding maken met de server. Controleer uw internetverbinding.')
+                } else if (error.response?.status === 502) {
+                    alert('Serverfout: Email service is momenteel niet beschikbaar. Probeer het later opnieuw.')
+                } else {
+                    alert('Contactformulier niet verzonden. Fout: ' + (error.response?.data?.message || error.message))
+                }
             })
     }
     return (
@@ -100,7 +116,6 @@ export default function RegistrationForm() {
                                     id='phoneNo'
                                     {...register('phoneNo', {
                                         required: 'Vul uw telefoonnummer in',
-                                        phoneNo: 'Telefoonnummer is niet correct',
                                         minLength: { value: 10, message: 'Vul een correct telefoonnummer in' },
                                     })}
                                 />
@@ -120,7 +135,6 @@ export default function RegistrationForm() {
                                     id='plateNo'
                                     {...register('plateNo', {
                                         required: 'Vul uw kenteken in',
-                                        plateNo: 'Kenteken is niet correct',
                                         minLength: { value: 8, message: 'Vul uw kenteken in' },
                                     })}
                                 />
@@ -135,7 +149,6 @@ export default function RegistrationForm() {
                                     id='carCode'
                                     {...register('carCode', {
                                         required: 'Vul uw meldcode in',
-                                        carCode: 'Meldcode is niet correct',
                                         minLength: { value: 4, message: 'Minimale lengte meldcode is 4' },
                                     })}
                                 />

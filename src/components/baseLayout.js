@@ -1,6 +1,6 @@
 import { Heading, Flex } from '@chakra-ui/react'
 
-export default function GridLayout({
+export default function BaseLayout({
     title,
     children,
 }) {
