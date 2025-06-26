@@ -17,7 +17,7 @@ export default function RegistrationForm() {
 
         values['tisrm'] = true
 
-        const formAddress = 'https://pietserver.nl:4000/email'
+        const formAddress = 'https://pieterrees.nl/email/'
         axios({
             method: 'post',
             url: formAddress,
