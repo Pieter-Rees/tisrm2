@@ -17,7 +17,7 @@ export default function RegistrationForm() {
 
         values['tisrm'] = true
 
-        const formAddress = '/api/email'
+        const formAddress = 'https://www.pieterrees.nl/email'
         console.log('Sending form data to:', formAddress)
         console.log('Form data:', values)
         
