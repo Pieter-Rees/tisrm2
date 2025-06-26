@@ -25,9 +25,6 @@ export default function RegistrationForm() {
             method: 'post',
             url: formAddress,
             data: values,
-            headers: {
-                'Content-Type': 'application/json'
-            },
             timeout: 10000 // 10 second timeout
         })
             .then((response) => {
