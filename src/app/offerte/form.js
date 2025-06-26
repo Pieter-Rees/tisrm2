@@ -42,6 +42,14 @@ export default function RegistrationForm() {
                     errorMessage = 'Netwerkfout: Kan geen verbinding maken met de server. Controleer uw internetverbinding.'
                 } else if (error.response?.status === 502) {
                     errorMessage = 'Serverfout: Email service is momenteel niet beschikbaar. Probeer het later opnieuw.'
+                } else if (error.response?.status === 503) {
+                    // Handle service unavailable (external API down)
+                    const apiError = error.response?.data;
+                    if (apiError?.message) {
+                        errorMessage = apiError.message;
+                    } else {
+                        errorMessage = 'Email service is momenteel niet beschikbaar. Probeer het later opnieuw of neem contact met ons op.'
+                    }
                 } else if (error.response?.status === 500) {
                     // Handle our API route errors
                     const apiError = error.response?.data;
