@@ -9,7 +9,7 @@ import { Button } from '@chakra-ui/react'
 export default function Contact() {
     const handleSchadeClick = () => {
         // Open in new window without referrer
-        window.open('https://schade.emsclaimsengine.com/index.php?template=tis', '_blank', 'noopener,noreferrer');
+        window.open('https://schade.emsclaimsengine.com/index.php?template=tis&view=consument.login#identificatie_vragen', '_blank', 'noopener,noreferrer');
     };
 
     return (
