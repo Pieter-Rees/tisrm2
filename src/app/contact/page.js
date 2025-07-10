@@ -28,7 +28,7 @@ export default function Contact() {
                 <Text>
                     Wil u uw schade inzien of een schade melden, klik op onderstaande knop.
                 </Text>
-                <Button as='a' variant='blue' href='https://schade.emsclaimsengine.com/index.php?template=tis'>Schade melden</Button>
+                <Button as='a' variant='blue' href='https://schade.emsclaimsengine.com/index.php?template=tis' target='_blank' rel='noopener noreferrer'>Schade melden</Button>
 
             </Box>
         </Container>
