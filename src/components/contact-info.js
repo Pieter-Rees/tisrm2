@@ -36,7 +36,7 @@ export default function ContactInfo({ variant, buttonVariant }) {
                         </Button>
                     </ListItem>
                     <ListItem>
-                        <Button marginY='2' size='full' variant={buttonVariant} as='a' target='_blank' href={contactInfo.linkedIn}>
+                        <Button marginY='2' size='full' variant={buttonVariant} as='a' target='_blank' rel='noopener noreferrer' href={contactInfo.linkedIn}>
                             <BsLinkedin size='24' />
 
                         </Button>

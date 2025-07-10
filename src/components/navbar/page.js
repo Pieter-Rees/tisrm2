@@ -6,6 +6,11 @@ import { Center, Box } from "@chakra-ui/react"
 import { Divider, Hide } from "@chakra-ui/react"
 
 export default function Navbar() {
+    const handleSchadeClick = () => {
+        // Open in new window without referrer
+        window.open('https://schade.emsclaimsengine.com/index.php?template=tis', '_blank', 'noopener,noreferrer');
+    };
+
     return (
         <Flex alignItems='center'>
             <Hide below='xl'>
@@ -22,7 +27,7 @@ export default function Navbar() {
                     </Center>
                     <Flex flexDir='column' gap='4'>
                         <Button as='a' href="/offerte" variant='blue'>Offerte aanvragen</Button>
-                        <Button as='a' href="https://schade.emsclaimsengine.com/index.php?template=tis" target='_blank' rel='noopener noreferrer' variant='blue'>Schade melden</Button>
+                        <Button variant='blue' onClick={handleSchadeClick}>Schade melden</Button>
                     </Flex>
                 </HStack >
             </Hide>
