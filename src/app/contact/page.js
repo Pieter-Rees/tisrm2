@@ -26,9 +26,9 @@ export default function Contact() {
             </Grid>
             <Box paddingTop='20' textAlign='center'>
                 <Text>
-                    Wil u uw schade inzien of een schade melden, klik op onderstaande link óf neem contact op met ons telefoonnummer, optie 1.
+                    Wil u uw schade inzien of een schade melden, klik op onderstaande knop.
                 </Text>
-                <Button as='a' href='https://schadehulp.schadehulp.nl/extranet/' variant='ghost'>www.schadehulp.nl</Button>
+                <Button as='a' variant='blue' href='https://schade.emsclaimsengine.com/index.php?template=tis'>Schade melden</Button>
 
             </Box>
         </Container>

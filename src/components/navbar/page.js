@@ -20,7 +20,10 @@ export default function Navbar() {
                     <Center height='50px'>
                         <Divider orientation='vertical' />
                     </Center>
-                    <Button as='a' href="/offerte" variant='blue'>Offerte aanvragen</Button>
+                    <Flex flexDir='column' gap='4'>
+                        <Button as='a' href="/offerte" variant='blue'>Offerte aanvragen</Button>
+                        <Button as='a' href="https://schade.emsclaimsengine.com/index.php?template=tis" variant='blue'>Schade melden</Button>
+                    </Flex>
                 </HStack >
             </Hide>
         </Flex >
