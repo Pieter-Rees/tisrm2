@@ -3,6 +3,12 @@ import { Box, Button, Center, Divider, Flex, VStack } from "@chakra-ui/react"
 import Logo from "@/components/logo"
 
 export default function Sidenav({ showSideNav, handleToggle }) {
+    const handleSchadeClick = () => {
+        // Open in new window without referrer
+        window.open('https://schade.emsclaimsengine.com/index.php?template=tis&view=consument.login#identificatie_vragen', '_blank', 'noopener,noreferrer');
+        handleToggle(); // Close the mobile menu after clicking
+    };
+
     return (
         <Flex boxShadow='lg' transition='ease-in-out .3s all' padding='8' gap='8' flexDirection='column' zIndex='10' backgroundColor='white' position='fixed' left={showSideNav ? '0' : '-500px'} top='0' alignItems='center' justifyContent='center' height='full' >
             <Flex paddingY='12' justifyContent='center'>
@@ -18,7 +24,8 @@ export default function Sidenav({ showSideNav, handleToggle }) {
                 <Link href="/contact"><span onClick={() => handleToggle()}>Contact</span></Link>
                 <Divider orientation='horizontal' />
 
-                <Button as='a' href="/offerte" variant='blue'><span onClick={() => props.handleToggle()}>Offerte</span></Button>
+                <Button as='a' href="/offerte" variant='blue'><span onClick={() => handleToggle()}>Offerte</span></Button>
+                <Button variant='blue' onClick={handleSchadeClick}>Schade melden</Button>
             </VStack >
         </Flex >
     );
