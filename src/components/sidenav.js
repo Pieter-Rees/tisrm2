@@ -11,7 +11,7 @@ export default function Sidenav({ showSideNav, handleToggle }) {
 
     return (
         <Flex boxShadow='lg' transition='ease-in-out .3s all' padding='8' paddingY='4' gap='4' flexDirection='column' zIndex='10' backgroundColor='white' position='fixed' left={showSideNav ? '0' : '-500px'} top='0' alignItems='center' justifyContent='center' height='full' >
-            <Flex paddingY='4' justifyContent='center'>
+            <Flex paddingY='4' justifyContent='center' width='40'>
                 <Link href="/"><span onClick={() => handleToggle()}><Logo /></span></Link>
             </Flex>
             <VStack gap='8' fontSize={{ base: 'xl', '2xl': '2xl' }}>
@@ -22,7 +22,7 @@ export default function Sidenav({ showSideNav, handleToggle }) {
                 <Link href="/over-ons"><span onClick={() => handleToggle()}>Over ons</span></Link>
                 <Link href="/bestanden"><span onClick={() => handleToggle()}>Bestanden</span></Link>
                 <Link href="/contact"><span onClick={() => handleToggle()}>Contact</span></Link>
-                <Divider orientation='horizontal' />
+                <Divider marginY='1' orientation='horizontal' />
 
                 <Button as='a' href="/offerte" variant='blue'><span onClick={() => handleToggle()}>Offerte</span></Button>
                 <Button variant='blue' onClick={handleSchadeClick}>Schade melden</Button>
