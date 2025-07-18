@@ -10,8 +10,8 @@ export default function Sidenav({ showSideNav, handleToggle }) {
     };
 
     return (
-        <Flex boxShadow='lg' transition='ease-in-out .3s all' padding='8' gap='8' flexDirection='column' zIndex='10' backgroundColor='white' position='fixed' left={showSideNav ? '0' : '-500px'} top='0' alignItems='center' justifyContent='center' height='full' >
-            <Flex paddingY='12' justifyContent='center'>
+        <Flex boxShadow='lg' transition='ease-in-out .3s all' padding='8' paddingY='4' gap='4' flexDirection='column' zIndex='10' backgroundColor='white' position='fixed' left={showSideNav ? '0' : '-500px'} top='0' alignItems='center' justifyContent='center' height='full' >
+            <Flex paddingY='4' justifyContent='center'>
                 <Link href="/"><span onClick={() => handleToggle()}><Logo /></span></Link>
             </Flex>
             <VStack gap='8' fontSize={{ base: 'xl', '2xl': '2xl' }}>
