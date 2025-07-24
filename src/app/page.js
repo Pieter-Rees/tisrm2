@@ -1,8 +1,9 @@
 import CallUs from '@/components/call-us'
-import { Box, Grid, GridItem, Flex, Container } from '@chakra-ui/react'
+import { Box, Grid, GridItem, Flex, Container, Show } from '@chakra-ui/react'
 import Image from 'next/image'
 import ThreeElements from '@/components/three-elements'
 import Talker from '@/components/talker'
+import SchadeMelden from '@/components/schade-melden'
 
 export default function Homepage() {
   return (
@@ -27,6 +28,9 @@ export default function Homepage() {
           <GridItem colSpan={{ base: 1, lg: 2 }} bg='blue.700' borderRadius='lg' boxShadow='lg' overflow='hidden' >
             <CallUs />
           </GridItem>
+          <Show below='lg'>
+            <SchadeMelden />
+          </Show>
         </Grid>
         <ThreeElements />
         <Talker />

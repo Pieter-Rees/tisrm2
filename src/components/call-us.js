@@ -13,16 +13,15 @@ export default function CallUs() {
                     <BsTelephoneFill size='32px' />
                 </Box>
                 <Box>
-                    <Heading as='h1' size='xl' color='white'>
+                    <Heading as='h2' size='md' color='white'>
+                        Direct antwoord op uw vragen?
+                        <br />
                         Bel ons!
                     </Heading>
                 </Box>
                 <Box>
                     <Text color='white'>
-                        Direct antwoord op uw vragen?
-                    </Text>
-                    <Text color='white'>
-                        +31 020 636 8191
+                        +31 20 636 8191
                     </Text>
                 </Box>
             </Flex>
