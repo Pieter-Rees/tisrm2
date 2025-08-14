@@ -12,16 +12,22 @@ export default function Bestanden() {
                         <Card variant='downloads' title="Schadeaanrijdingsformulier" downloadLink='/documents/aanrijdingsformulier.pdf' />
                     </GridItem>
                     <GridItem >
-                        <Card variant='downloads' title="Diensten wijzer" downloadLink='/documents/dienstenwijzer.pdf' />
+                        <Card variant='downloads' title="Dienstverleningsdocument" downloadLink='/documents/dienstverleningsdocument.pdf' />
                     </GridItem>
                     <GridItem >
                         <Card variant='downloads' title="Algemene voorwaarden" downloadLink='/documents/algemene-voorwaarden.pdf' />
                     </GridItem>
                     <GridItem >
-                        <Card variant='downloads' title="Privacyregelement" downloadLink='/documents/privecyregelement.pdf' />
+                        <Card variant='downloads' title="Privacyverklaring" downloadLink='/documents/privacyverklaring.pdf' />
                     </GridItem>
                     <GridItem >
                         <Card variant='downloads' title="Beloningsbeleid" downloadLink='/documents/beloningsbeleid.pdf' />
+                    </GridItem>
+                    <GridItem >
+                        <Card variant='downloads' title="Incidentenregeling" downloadLink='/documents/incidentenregeling.pdf' />
+                    </GridItem>
+                    <GridItem >
+                        <Card variant='downloads' title="interne-klachtenprocedure" downloadLink='/documents/interne-klachtenprocedure.pdf' />
                     </GridItem>
                 </Grid>
             </GridLayout>
