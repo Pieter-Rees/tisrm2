@@ -1,65 +1,42 @@
 "use client"
 
-import {
-    Step,
-    StepDescription,
-    StepIcon,
-    StepIndicator,
-    StepNumber,
-    StepSeparator,
-    StepStatus,
-    StepTitle,
-    Stepper,
-    useSteps,
-    Box,
-    Container,
-    VStack
-} from '@chakra-ui/react'
+import GridLayout from "@/components/gridLayout"
+import { Container, VStack, Box } from '@chakra-ui/react'
+import Breadcrumb from "@/components/breadcrumb"
+import PageTransition from '@/components/page-transition'
+import { useState, useEffect } from 'react';
 
-import RegistrationForm from './form'
-import BaseLayout from "@/components/baseLayout"
+const FadeInForm = ({ children, delay = 0 }) => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsVisible(true), delay * 1000);
+    return () => clearTimeout(timer);
+  }, [delay]);
+
+  return (
+    <Box
+      opacity={isVisible ? 1 : 0}
+      transform={`translateY(${isVisible ? 0 : 20}px)`}
+      transition="all 0.5s ease-out"
+    >
+      {children}
+    </Box>
+  );
+};
 
 export default function Offerte() {
-    const steps = [
-        { title: 'First', description: 'Contact Info' },
-        { title: 'Second', description: 'Date & Time' },
-        { title: 'Third', description: 'Select Rooms' },
-    ]
-
-    const { activeStep } = useSteps({
-        index: 1,
-        count: steps.length,
-    })
-
     return (
-        <Container >
-            <BaseLayout title='Offerte aanvragen'>
-                <VStack alignItems='flex-start' width='full'>
-                    {/* <Stepper width='full' index={activeStep}>
-                    {steps.map((step, index) => (
-                        <Step key={index}>
-                            <StepIndicator>
-                                <StepStatus
-                                    complete={<StepIcon />}
-                                    incomplete={<StepNumber />}
-                                    active={<StepNumber />}
-                                />
-                            </StepIndicator>
-
-                            <Box flexShrink='0'>
-                                <StepTitle>{step.title}</StepTitle>
-                                <StepDescription>{step.description}</StepDescription>
-                            </Box>
-
-                            <StepSeparator />
-                        </Step>
-                    ))}
-                </Stepper> */}
-
-                    <RegistrationForm />
-                </VStack>
-            </BaseLayout>
-
-        </Container>
+        <PageTransition>
+            <Container>
+                <GridLayout title='Offerte' breadcrumb={<Breadcrumb capitalizeLinks />}>
+                    <FadeInForm delay={0.1}>
+                        <VStack spacing={8} align="stretch">
+                            {/* Form content here */}
+                        </VStack>
+                    </FadeInForm>
+                </GridLayout>
+            </Container>
+        </PageTransition>
     )
 }

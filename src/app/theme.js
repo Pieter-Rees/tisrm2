@@ -1,8 +1,4 @@
 import { background, border, Button, Card, Divider, extendTheme, FormControl, FormLabel, Input, List, ListItem, UnorderedList } from '@chakra-ui/react'
-import { color } from 'framer-motion'
-import Link from 'next/link'
-import { Form } from 'react-hook-form'
-import { BsBorderWidth } from 'react-icons/bs'
 
 const theme = extendTheme({
     colors: {

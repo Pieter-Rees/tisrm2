@@ -1,33 +1,94 @@
-import GridLayout from "@/components/gridLayout"
-import { Container, Text, List, ListItem, ListIcon } from '@chakra-ui/react'
-import StarList from "@/components/star-list"
+'use client'
 
-export default function Riskmanagement() {
-    const list = ['Bedrijfsmiddelen', 'Bedrijfsactiviteiten', 'Vervoer & Logistiek', 'Personeel', 'Preventie']
+import GridLayout from "@/components/gridLayout"
+import { Container, Text, Box } from '@chakra-ui/react'
+import Breadcrumb from "@/components/breadcrumb"
+import StarList from "@/components/star-list"
+import PageTransition from '@/components/page-transition'
+import { useState, useEffect } from 'react';
+
+const FadeInText = ({ children, delay = 0 }) => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsVisible(true), delay * 1000);
+    return () => clearTimeout(timer);
+  }, [delay]);
+
+  return (
+    <Text
+      opacity={isVisible ? 1 : 0}
+      transform={`translateY(${isVisible ? 0 : 20}px)`}
+      transition="all 0.5s ease-out"
+    >
+      {children}
+    </Text>
+  );
+};
+
+const FadeInList = ({ children, delay = 0 }) => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsVisible(true), delay * 1000);
+    return () => clearTimeout(timer);
+  }, [delay]);
+
+  return (
+    <Box
+      opacity={isVisible ? 1 : 0}
+      transform={`translateY(${isVisible ? 0 : 20}px)`}
+      transition="all 0.5s ease-out"
+    >
+      {children}
+    </Box>
+  );
+};
+
+export default function RiskManagement() {
+    const list = [
+        'Risico inventarisatie',
+        'Risico analyse',
+        'Risico evaluatie',
+        'Risico beheersing',
+        'Risico monitoring',
+        'Risico rapportage'
+    ];
 
     return (
-        <Container>
-            <GridLayout title='Risk Management'>
-                <Text>
-                    TIS RM wil haar dienstverlening altijd verbeteren, uitbreiden en professionaliseren.
-                </Text>
-                <Text>
-                    Wij kunnen voor u een risicoinventarisatie uitvoeren. Samen met u maken wij een rapport, waarin uw unieke bedrijfs- en risicoprofiel naar voren komt. Hiermee kunnen wij samen precies zien waar u en uw bedrijf risico’s lopen, waarmee wij kunnen bepalen in welke mate het risico invloed op u heeft. Is het verstandig om hier een verzekering voor af te sluiten, of is het beter om dit risico zelf te dragen?
-                </Text>
-                <Text>
-                    Ieder relevant risico komt in het onderzoek naar voren, welke wij duidelijk voor u rubriceren in een rapport. In de vorm van een risicoadvies geven wij vervolgens aan op welke wijze met ieder risico kan worden omgegaan, dit kan op een aantal manieren:
-                </Text>
-                <Text>
-                    Het vermijden van het risico Het verminderen/voorkomen van het risico Het verzekeren van het risico Het zelf-dragen van het risico Per risico brengen wij dan tevens in kaart in hoeverre uw huidige verzekeringspakket hiervoor al dan niet dekking biedt en wat de kwaliteit daarvan is.
-                </Text>
-                <Text>
-                    Het is de kunst om na een grondige risico-inventarisatie te komen tot een ‘onbewust (on)verzekerde situatie tot bewust (on)verzekerde situatie’ en dat met een doorlopend karakter.
-                </Text>
-                <Text>
-                    In de samenvatting splitsen wij de volgende zaken:
-                </Text>
-                <StarList listItems={list} />
-            </GridLayout>
-        </Container>
+        <PageTransition>
+            <Container>
+                <GridLayout title='Risk Management' breadcrumb={<Breadcrumb capitalizeLinks />}>
+                    <Box
+                        opacity={0}
+                        transition="opacity 0.5s ease-out"
+                        style={{ opacity: 1 }}
+                    >
+                        <FadeInText delay={0}>
+                            TIS is de laatste jaren meegegroeid met de ontwikkelingen in de verzekeringsmarkt, alsmede de veranderende behoefte van de klanten. Zodoende zijn de werknemers van TIS gediplomeerd als risico managers en geregistreerd in het register GRMC.
+                        </FadeInText>
+                        <FadeInText delay={0.1}>
+                            Wilt u weten wat wij kunnen betekenen in het kader van risico management, lees hier verder of neem contact met ons op!
+                        </FadeInText>
+                        <FadeInText delay={0.2}>
+                            Wij bieden u een volledig risico management traject aan, waarbij wij samen met u kijken naar de risico&apos;s binnen uw organisatie en hoe deze het beste kunnen worden beheerd.
+                        </FadeInText>
+                        <FadeInText delay={0.3}>
+                            Door onze jarenlange ervaring in de verzekeringsbranche kunnen wij u helpen bij het identificeren van risico&apos;s en het vinden van de beste oplossingen.
+                        </FadeInText>
+                        <FadeInText delay={0.4}>
+                            Onze risico managers zijn gecertificeerd en geregistreerd in het GRMC register, wat betekent dat wij voldoen aan de hoogste kwaliteitsstandaarden.
+                        </FadeInText>
+                        <FadeInText delay={0.5}>
+                            Neem contact met ons op voor een vrijblijvend gesprek over hoe wij u kunnen helpen bij het beheren van uw risico&apos;s.
+                        </FadeInText>
+                        
+                        <FadeInList delay={0.6}>
+                            <StarList listItems={list} />
+                        </FadeInList>
+                    </Box>
+                </GridLayout>
+            </Container>
+        </PageTransition>
     )
 }
