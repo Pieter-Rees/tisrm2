@@ -10,8 +10,8 @@ import type { ReactNode } from 'react';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: pageInfo.title,
-  description: pageInfo.pageDescription,
+  title: pageInfo.name,
+  description: pageInfo.description,
 };
 
 interface RootLayoutProps {

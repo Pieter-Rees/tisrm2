@@ -1,67 +1,140 @@
-import CallUs from '@/components/call-us';
+/**
+ * Homepage component
+ * @fileoverview Modern homepage with optimized performance and accessibility
+ */
+
+import { Suspense } from 'react';
 import { Box, Grid, GridItem, Flex, Container } from '@chakra-ui/react';
 import Image from 'next/image';
+
+import CallUs from '@/components/call-us';
 import ThreeElements from '@/components/three-elements';
 import Talker from '@/components/talker';
 import SchadeMelden from '@/components/schade-melden';
 import Sidebar from '@/components/sidebar';
+import Loading from '@/components/loading';
+import ErrorBoundary from '@/components/error-boundary';
 
+/**
+ * Hero image component with optimized loading
+ */
+const HeroImage = () => (
+  <Box
+    position="relative"
+    width="full"
+    height={{ base: '300px', md: '400px', lg: '500px' }}
+    borderRadius="lg"
+    overflow="hidden"
+    boxShadow="xl"
+    bg="gray.100"
+  >
+    <Image
+      src="/1.webp"
+      alt="TIS Risk Managers - Professional insurance and risk management services"
+      fill
+      priority
+      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 60vw, 50vw"
+      style={{
+        objectFit: 'cover',
+        objectPosition: 'center',
+      }}
+    />
+  </Box>
+);
+
+/**
+ * Main homepage component with modern layout and performance optimizations
+ * Features:
+ * - Responsive grid layout
+ * - Optimized image loading
+ * - Error boundaries for resilience
+ * - Suspense boundaries for loading states
+ * - Semantic HTML structure
+ * - Accessibility support
+ */
 export default function Homepage() {
   return (
-    <Container>
+    <Container maxW="6xl" py="8">
       <Grid
-        templateColumns={{ base: 'repeat(1, 1fr)', xl: 'repeat(6, 1fr)' }}
-        gap="8"
+        templateColumns={{ base: '1fr', xl: '2fr 1fr' }}
+        gap="12"
+        alignItems="start"
       >
-        <GridItem colSpan={{ base: 1, xl: 4 }}>
-          <Flex flexDirection="column" gap="8">
-            <Grid
-              width="full"
-              templateRows="repeat(1, 1fr)"
-              templateColumns={{
-                base: 'repeat(1, 1fr)',
-                lg: 'repeat(6, 1fr)',
-              }}
-              gap="8"
-            >
-              <GridItem
-                justifyContent="center"
-                alignItems="center"
-                colSpan={{ base: 1, lg: 4 }}
-                width="full"
-                borderRadius="lg"
-                boxShadow="lg"
-                overflow="hidden"
+        {/* Main Content */}
+        <GridItem>
+          <Flex direction="column" gap="12">
+            {/* Hero Section */}
+            <ErrorBoundary>
+              <Grid
+                templateColumns={{ base: '1fr', lg: '2fr 1fr' }}
+                gap="8"
+                alignItems="stretch"
               >
-                <Box width="full" overflow="hidden">
-                  <Image
-                    src="/1.webp"
-                    alt="TIS Insurance Services main image"
-                    width={2000}
-                    height={1000}
-                    priority
-                  />
-                </Box>
-              </GridItem>
-              <GridItem
-                colSpan={{ base: 1, lg: 2 }}
-                bg="blue.700"
-                borderRadius="lg"
-                boxShadow="lg"
-                overflow="hidden"
-              >
-                <CallUs />
-              </GridItem>
-              <Box hideFrom="lg">
-                <SchadeMelden />
-              </Box>
-            </Grid>
-            <ThreeElements />
-            <Talker />
+                <GridItem>
+                  <Suspense fallback={<Loading text="Loading hero image..." />}>
+                    <HeroImage />
+                  </Suspense>
+                </GridItem>
+                
+                <GridItem>
+                  <Flex direction="column" gap="4" height="full">
+                    <Box
+                      bg="blue.700"
+                      borderRadius="lg"
+                      boxShadow="lg"
+                      overflow="hidden"
+                      flex="1"
+                    >
+                      <CallUs />
+                    </Box>
+                    
+                    {/* Mobile damage report button */}
+                    <Box hideFrom="lg">
+                      <Box
+                        bg="blue.600"
+                        borderRadius="lg"
+                        boxShadow="lg"
+                        overflow="hidden"
+                      >
+                        <SchadeMelden />
+                      </Box>
+                    </Box>
+                  </Flex>
+                </GridItem>
+              </Grid>
+            </ErrorBoundary>
+
+            {/* Features Section */}
+            <ErrorBoundary>
+              <Suspense fallback={<Loading text="Loading features..." />}>
+                <ThreeElements />
+              </Suspense>
+            </ErrorBoundary>
+
+            {/* Testimonial Section */}
+            <ErrorBoundary>
+              <Suspense fallback={<Loading text="Loading testimonial..." />}>
+                <Talker
+                  name="René Enthoven"
+                  title="Directeur TIS Risk Managers"
+                  image="/rene.jpg"
+                  quote="De weldaden van een verzekering komen samen met het onheil aan het licht."
+                  company="TIS Risk Managers"
+                />
+              </Suspense>
+            </ErrorBoundary>
           </Flex>
         </GridItem>
-        <GridItem colSpan={{ base: 1, xl: 2 }} hideBelow="xl">
-          <Sidebar />
+
+        {/* Sidebar */}
+        <GridItem hideBelow="xl">
+          <Box position="sticky" top="100px">
+            <ErrorBoundary>
+              <Suspense fallback={<Loading text="Loading sidebar..." />}>
+                <Sidebar />
+              </Suspense>
+            </ErrorBoundary>
+          </Box>
         </GridItem>
       </Grid>
     </Container>

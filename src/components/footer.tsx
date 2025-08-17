@@ -9,7 +9,7 @@ import { Box, Container, Grid, GridItem, VStack, Heading, Text, Button } from '@
 const contactLinks = [
   { href: 'tel:+310206368191', label: '+31 020 636 8191', external: false },
   { href: 'mailto:info@tisrm.nl', label: 'info@tisrm.nl', external: false },
-  { href: contactInfo.linkedIn, label: 'LinkedIn', external: true },
+  { href: contactInfo.social.linkedIn, label: 'LinkedIn', external: true },
 ] as const;
 
 const navigationLinks = [

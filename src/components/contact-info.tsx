@@ -10,7 +10,7 @@ const contactButtons = [
   { href: 'tel:+310206368191', label: '+31 020 636 8191', external: false },
   { href: 'mailto:info@tisrm.nl', label: 'info@tisrm.nl', external: false },
   {
-    href: contactInfo.linkedIn,
+    href: contactInfo.social.linkedIn,
     label: <BsLinkedin size="24" />,
     external: true,
   },
@@ -21,22 +21,22 @@ export default function ContactInfo({
 }: ContactInfoProps) {
   return (
     <>
-      <SimpleGrid minChildWidth={{ base: 'full', md: '120px' }} gap="40px">
-        <Box>
-          <VStack align="start" gap="2">
-            <Text color="gray.800">{contactInfo.address}</Text>
-            <Text color="gray.800">{contactInfo.email}</Text>
-            <Text color="gray.800">{contactInfo.city}</Text>
-          </VStack>
-        </Box>
-        <Box>
-          <VStack align="start" gap="2">
-            <Text color="gray.800">{contactInfo.postalBox}</Text>
-            <Text color="gray.800">{contactInfo.postalCode}</Text>
-            <Text color="gray.800">{contactInfo.city}</Text>
-          </VStack>
-        </Box>
-      </SimpleGrid>
+                   <SimpleGrid minChildWidth={{ base: 'full', md: '120px' }} gap="40px">
+               <Box>
+                 <VStack align="start" gap="2">
+                   <Text color="gray.800">{contactInfo.address.street}</Text>
+                   <Text color="gray.800">{contactInfo.email}</Text>
+                   <Text color="gray.800">{contactInfo.address.city}</Text>
+                 </VStack>
+               </Box>
+               <Box>
+                 <VStack align="start" gap="2">
+                   <Text color="gray.800">{contactInfo.postalBox.box}</Text>
+                   <Text color="gray.800">{contactInfo.postalBox.postalCode}</Text>
+                   <Text color="gray.800">{contactInfo.postalBox.city}</Text>
+                 </VStack>
+               </Box>
+             </SimpleGrid>
 
       <Flex justifyContent="start" mt="8">
         <VStack align="start" gap="2">

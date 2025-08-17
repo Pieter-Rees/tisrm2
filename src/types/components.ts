@@ -1,107 +1,305 @@
-import type { ReactNode } from 'react';
-import React from 'react';
+/**
+ * Component type definitions
+ * @fileoverview Comprehensive TypeScript definitions for all components
+ */
 
-// Common component props
+import type { ReactNode, ComponentPropsWithoutRef, ElementType } from 'react';
+
+// === Base Types ===
+
+/**
+ * Common props for all components
+ */
 export interface BaseComponentProps {
-  children?: ReactNode;
-  className?: string;
+  readonly children?: ReactNode;
+  readonly className?: string;
+  readonly id?: string;
+  readonly 'data-testid'?: string;
 }
 
-// Layout props
+/**
+ * Polymorphic component props
+ */
+export type PolymorphicProps<T extends ElementType> = {
+  readonly as?: T;
+} & ComponentPropsWithoutRef<T>;
+
+// === Layout Types ===
+
+/**
+ * Layout component props
+ */
 export interface LayoutProps extends BaseComponentProps {
-  title?: string;
-  breadcrumb?: ReactNode;
-  sidebar?: boolean;
+  readonly title?: string;
+  readonly breadcrumb?: ReactNode;
+  readonly sidebar?: boolean;
+  readonly maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full';
 }
 
+/**
+ * Grid layout props
+ */
+export interface GridLayoutProps extends LayoutProps {
+  readonly columns?: number;
+  readonly gap?: number | string;
+}
 
+/**
+ * Base layout props
+ */
+export interface BaseLayoutProps extends BaseComponentProps {
+  readonly title: string;
+  readonly maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full';
+}
 
-// Navigation props
+// === Navigation Types ===
+
+/**
+ * Navigation link interface
+ */
 export interface NavigationLink {
-  href: string;
-  label: string;
+  readonly href: string;
+  readonly label: string;
+  readonly external?: boolean;
+  readonly icon?: ReactNode;
 }
 
-// Breadcrumb props
-export interface BreadcrumbProps {
-  separator?: ReactNode;
-  listClasses?: string;
-  activeClasses?: string;
-  capitalizeLinks?: boolean;
+/**
+ * Breadcrumb configuration
+ */
+export interface BreadcrumbProps extends BaseComponentProps {
+  readonly separator?: ReactNode;
+  readonly listClasses?: string;
+  readonly activeClasses?: string;
+  readonly capitalizeLinks?: boolean;
+  readonly maxItems?: number;
 }
 
-// Contact info props
-export interface ContactInfoProps {
-  buttonVariant?: 'solid' | 'outline' | 'ghost' | 'subtle';
+/**
+ * Navbar props
+ */
+export interface NavbarProps extends BaseComponentProps {
+  readonly links?: readonly NavigationLink[];
+  readonly showSearch?: boolean;
 }
 
-// Footer logos props
-export interface FooterLogosProps {
-  width?: string;
-  height?: string;
+/**
+ * Sidenav props
+ */
+export interface SidenavProps extends BaseComponentProps {
+  readonly showSideNav: boolean;
+  readonly handleToggle: () => void;
+  readonly variant?: 'overlay' | 'permanent';
 }
 
+// === UI Component Types ===
 
+/**
+ * Button variants
+ */
+export type ButtonVariant = 'solid' | 'outline' | 'ghost' | 'subtle' | 'plain';
 
-// Star list props
-export interface StarListProps {
-  listItems: string[];
+/**
+ * Card variants
+ */
+export type CardVariant = 'default' | 'sidebar' | 'downloads' | 'elevated';
+
+/**
+ * Card component props
+ */
+export interface CardProps extends BaseComponentProps {
+  readonly title: string;
+  readonly description?: string | undefined;
+  readonly image?: string | undefined;
+  readonly altText?: string | undefined;
+  readonly cta?: string | undefined;
+  readonly ctaLink?: string | undefined;
+  readonly phone?: string | undefined;
+  readonly downloadLink?: string | undefined;
+  readonly buttonVariant?: ButtonVariant | undefined;
+  readonly variant?: CardVariant | undefined;
+  readonly loading?: boolean | undefined;
+  readonly disabled?: boolean | undefined;
 }
 
-// Sidenav props
-export interface SidenavProps {
-  showSideNav: boolean;
-  handleToggle: () => void;
+/**
+ * Logo component props
+ */
+export interface LogoProps extends BaseComponentProps {
+  readonly width?: string | number;
+  readonly height?: string | number;
+  readonly variant?: 'default' | 'minimal' | 'text-only';
 }
 
-// Form data types
+/**
+ * Contact info props
+ */
+export interface ContactInfoProps extends BaseComponentProps {
+  readonly buttonVariant?: ButtonVariant;
+  readonly showSocial?: boolean;
+  readonly layout?: 'horizontal' | 'vertical';
+}
+
+/**
+ * Footer logos props
+ */
+export interface FooterLogosProps extends BaseComponentProps {
+  readonly width?: string;
+  readonly height?: string;
+  readonly logos?: readonly { src: string; alt: string; href?: string }[];
+}
+
+/**
+ * Star list props
+ */
+export interface StarListProps extends BaseComponentProps {
+  readonly listItems: readonly string[];
+  readonly variant?: 'default' | 'checkmarks' | 'bullets';
+  readonly size?: 'sm' | 'md' | 'lg';
+}
+
+/**
+ * Loading component props
+ */
+export interface LoadingProps extends BaseComponentProps {
+  readonly size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  readonly text?: string;
+  readonly fullScreen?: boolean;
+  readonly variant?: 'spinner' | 'dots' | 'pulse';
+}
+
+/**
+ * Error boundary props
+ */
+export interface ErrorBoundaryProps extends BaseComponentProps {
+  readonly fallback?: ReactNode;
+  readonly onError?: (error: Error, errorInfo: React.ErrorInfo) => void;
+}
+
+// === Form Types ===
+
+/**
+ * Form field props
+ */
+export interface FieldProps extends BaseComponentProps {
+  readonly label?: string;
+  readonly helperText?: string;
+  readonly errorText?: string;
+  readonly required?: boolean;
+  readonly invalid?: boolean;
+  readonly disabled?: boolean;
+}
+
+/**
+ * Quote form data interface
+ */
 export interface OfferteFormData {
-  firstName: string;
-  lastName: string;
-  emailAddress: string;
-  phoneNo: string;
-  companyName: string;
-  kvkNumber: string;
-  btwNumber: string;
-  postalCode: string;
-  message?: string;
+  readonly firstName: string;
+  readonly lastName: string;
+  readonly emailAddress: string;
+  readonly phoneNo: string;
+  readonly companyName: string;
+  readonly kvkNumber: string;
+  readonly btwNumber: string;
+  readonly postalCode: string;
+  readonly message?: string;
 }
 
-// Field component props
-export interface FieldProps {
-  label: string;
-  name: string;
-  type?: string;
-  placeholder?: string;
-  required?: boolean;
-  error?: string;
-  children?: React.ReactNode;
+/**
+ * Form validation errors
+ */
+export type FormErrors<T> = {
+  readonly [K in keyof T]?: string;
+};
+
+/**
+ * Form state
+ */
+export interface FormState<T> {
+  readonly data: T;
+  readonly errors: FormErrors<T>;
+  readonly isSubmitting: boolean;
+  readonly isValid: boolean;
 }
 
-// Logo component props
-export interface LogoProps {
-  width?: string | number;
-  height?: string | number;
+// === Content Types ===
+
+/**
+ * Testimonial/Talker props
+ */
+export interface TalkerProps extends BaseComponentProps {
+  readonly name: string;
+  readonly title: string;
+  readonly image: string;
+  readonly quote: string;
+  readonly company?: string;
 }
 
-// Card component props
-export interface CardProps {
-  title: string;
-  description?: string;
-  image?: string;
-  altText?: string;
-  cta?: string;
-  ctaLink?: string;
-  phone?: string;
-  downloadLink?: string;
-  buttonVariant?: 'solid' | 'outline' | 'ghost' | 'subtle';
-  variant?: 'default' | 'sidebar' | 'downloads';
+/**
+ * Three elements section props
+ */
+export interface ThreeElementsProps extends BaseComponentProps {
+  readonly elements?: readonly {
+    readonly id: string;
+    readonly title: string;
+    readonly description: string;
+    readonly image?: string | undefined;
+    readonly cta?: string | undefined;
+    readonly ctaLink?: string | undefined;
+    readonly variant?: CardVariant | undefined;
+    readonly buttonVariant?: ButtonVariant | undefined;
+    readonly external?: boolean | undefined;
+  }[] | undefined;
 }
 
-// Talker component props
-export interface TalkerProps {
-  name: string;
-  title: string;
-  image: string;
-  description: string;
+// === Utility Types ===
+
+/**
+ * Theme colors
+ */
+export type ThemeColor = 
+  | 'blue' 
+  | 'gray' 
+  | 'red' 
+  | 'green' 
+  | 'yellow' 
+  | 'purple' 
+  | 'pink' 
+  | 'orange';
+
+/**
+ * Responsive breakpoints
+ */
+export type Breakpoint = 'base' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+
+/**
+ * Responsive value type
+ */
+export type ResponsiveValue<T> = T | Partial<Record<Breakpoint, T>>;
+
+/**
+ * Animation variants
+ */
+export type AnimationVariant = 'fade' | 'slide' | 'scale' | 'bounce';
+
+// === API Types ===
+
+/**
+ * API response wrapper
+ */
+export interface ApiResponse<T = unknown> {
+  readonly data?: T;
+  readonly error?: string;
+  readonly success: boolean;
+  readonly timestamp: string;
+}
+
+/**
+ * Contact form submission
+ */
+export interface ContactSubmission {
+  readonly name: string;
+  readonly email: string;
+  readonly subject: string;
+  readonly message: string;
 }

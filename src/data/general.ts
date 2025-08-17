@@ -1,40 +1,16 @@
-interface ContactInfo {
-  name: string;
-  postalBox: string;
-  postalCode: string;
-  address: string;
-  postalCode2: string;
-  city: string;
-  country: string;
-  phone: string;
-  email: string;
-  linkedIn: string;
-}
+/**
+ * General application data and constants
+ * @fileoverview Centralized data exports for the TIS Risk Managers application
+ * @deprecated Use @/constants/app instead for new code
+ */
 
-interface PageInfo {
-  title: string;
-  pageDescription: string;
-}
+// Re-export from constants for backward compatibility
+export { 
+  CONTACT_INFO as contactInfo,
+  APP_CONFIG as pageInfo,
+  CURRENT_YEAR as currentYear 
+} from '@/constants/app';
 
-const contactInfo: ContactInfo = {
-  name: 'Tis Risk Managers',
-  postalBox: 'Postbus 12887',
-  postalCode: '1100 AW',
-  address: 'Muiderstraat 1',
-  postalCode2: '1011 PZ',
-  city: 'Amsterdam',
-  country: 'Nederland',
-  phone: '+310206368191',
-  email: 'info@tisrm.nl',
-  linkedIn: 'https://www.linkedin.com/company/tisrm/',
-};
-
-const pageInfo: PageInfo = {
-  title: contactInfo.name,
-  pageDescription: 'Web pagina van Tis Risk Managers',
-};
-
-const currentYear: number = new Date().getFullYear();
-
-export { pageInfo, contactInfo, currentYear };
-export type { ContactInfo, PageInfo };  
+// Legacy type exports for backward compatibility
+export type ContactInfo = typeof import('@/constants/app').CONTACT_INFO;
+export type PageInfo = typeof import('@/constants/app').APP_CONFIG;  

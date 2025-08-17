@@ -1,10 +1,59 @@
+/**
+ * Modern Card Component
+ * @fileoverview Reusable card component with performance optimizations and accessibility
+ */
+
 'use client';
 
-import React from 'react';
-import { Box, Heading, Text, LinkBox, LinkOverlay } from '@chakra-ui/react';
+import { memo, useMemo } from 'react';
+import { Box, Heading, Text, LinkBox, LinkOverlay, Button } from '@chakra-ui/react';
+import { BsDownload, BsTelephone, BsArrowRight } from 'react-icons/bs';
+import Image from 'next/image';
+
+import { cn } from '@/lib/utils';
 import type { CardProps } from '@/types/components';
 
-const Card: React.FC<CardProps> = ({
+/**
+ * Card variant styles configuration
+ */
+const CARD_VARIANTS = {
+  default: {
+    bg: 'white',
+    shadow: 'lg',
+    hoverShadow: 'xl',
+    transform: 'translateY(-2px)',
+  },
+  sidebar: {
+    bg: 'white',
+    shadow: 'md',
+    hoverShadow: 'lg',
+    transform: 'translateY(-1px)',
+  },
+  downloads: {
+    bg: 'blue.50',
+    shadow: 'md',
+    hoverShadow: 'lg',
+    transform: 'scale(1.02)',
+  },
+  elevated: {
+    bg: 'white',
+    shadow: 'xl',
+    hoverShadow: '2xl',
+    transform: 'translateY(-4px)',
+  },
+} as const;
+
+/**
+ * Modern Card component with performance optimizations
+ * Features:
+ * - Multiple variants for different use cases
+ * - Optimized image loading with Next.js Image
+ * - Accessibility support with proper ARIA labels
+ * - Performance optimized with memo and useMemo
+ * - Modern hover effects and animations
+ * - TypeScript support with comprehensive prop types
+ */
+const Card = memo<CardProps>(({
   title,
   description,
   image,
@@ -14,144 +63,179 @@ const Card: React.FC<CardProps> = ({
   ctaLink,
   phone,
   variant = 'default',
+  loading = false,
+  disabled = false,
+  className,
+  'data-testid': testId,
 }) => {
-  const hasCta = cta || phone || downloadLink;
+  // Memoize variant styles to prevent recalculation
+  const variantStyles = useMemo(() => CARD_VARIANTS[variant], [variant]);
+  
+  // Memoize derived state
+  const hasAction = useMemo(() => Boolean(cta || phone || downloadLink), [cta, phone, downloadLink]);
+  const isInteractive = useMemo(() => Boolean(ctaLink || phone || downloadLink), [ctaLink, phone, downloadLink]);
 
-  const getCardBg = () => {
-    switch (variant) {
-      case 'sidebar':
-        return 'white';
-      default:
-        return 'white';
-    }
-  };
+  // Base card styles
+  const cardStyles = useMemo(() => ({
+    border: '1px solid',
+    borderColor: disabled ? 'gray.300' : 'gray.200',
+    borderRadius: 'lg',
+    overflow: 'hidden',
+    bg: disabled ? 'gray.50' : variantStyles.bg,
+    boxShadow: variantStyles.shadow,
+    transition: 'all 0.2s ease-in-out',
+    opacity: disabled ? 0.6 : 1,
+    cursor: isInteractive && !disabled ? 'pointer' : 'default',
+    _hover: !disabled ? {
+      boxShadow: variantStyles.hoverShadow,
+      transform: variantStyles.transform,
+    } : {},
+    _focus: {
+      outline: '2px solid',
+      outlineColor: 'blue.500',
+      outlineOffset: '2px',
+    },
+  }), [disabled, variantStyles, isInteractive]);
 
-  // For cards with ctaLink, use LinkBox pattern
-  if (ctaLink && cta) {
-    return (
-      <LinkBox
-        as="article"
-        border="1px solid"
-        borderColor="gray.200"
-        borderRadius="lg"
-        overflow="hidden"
-        boxShadow="lg"
-        bg={getCardBg()}
-        _hover={{ boxShadow: 'xl', transform: 'translateY(-2px)' }}
-        transition="all 0.2s ease-in-out"
-      >
-        {image && (
-          <Box
-            overflow="hidden"
-            borderTopRadius="lg"
-            backgroundImage={`url(${image})`}
-            backgroundSize="cover"
-            backgroundPosition="center"
-            height="200px"
-            aria-label={altText || title}
-          />
-        )}
-        <Box p="4">
-          <Heading as="h2" size="lg" mb={image ? '4' : '0'} color="gray.900">
-            <LinkOverlay href={ctaLink}>{title}</LinkOverlay>
-          </Heading>
-          {description && (
-            <Text mb={hasCta ? '4' : '0'} color="gray.800">
-              {description}
-            </Text>
-          )}
-        </Box>
-      </LinkBox>
-    );
-  }
-
-  // For phone links
-  if (phone) {
-    return (
-      <LinkBox
-        as="article"
-        border="1px solid"
-        borderColor="gray.200"
-        borderRadius="lg"
-        overflow="hidden"
-        boxShadow="lg"
-        bg={getCardBg()}
-        _hover={{ boxShadow: 'xl', transform: 'translateY(-2px)' }}
-        transition="all 0.2s ease-in-out"
-      >
-        <Box p="4">
-          <Heading as="h2" size="lg" mb="4" color="gray.900">
-            <LinkOverlay href={phone}>{title}</LinkOverlay>
-          </Heading>
-          {description && (
-            <Text color="gray.800" textAlign="center">
-              {description}
-            </Text>
-          )}
-        </Box>
-      </LinkBox>
-    );
-  }
-
-  // For download links
-  if (downloadLink) {
-    return (
-      <LinkBox
-        as="article"
-        border="1px solid"
-        borderColor="gray.200"
-        borderRadius="lg"
-        overflow="hidden"
-        boxShadow="lg"
-        bg={getCardBg()}
-        _hover={{ boxShadow: 'xl', transform: 'translateY(-2px)' }}
-        transition="all 0.2s ease-in-out"
-      >
-        <Box p="4">
-          <Heading as="h2" size="lg" mb="4" color="gray.900">
-            <LinkOverlay href={downloadLink} download>
-              {title}
-            </LinkOverlay>
-          </Heading>
-          {description && (
-            <Text color="gray.800">{description}</Text>
-          )}
-        </Box>
-      </LinkBox>
-    );
-  }
-
-  // Static card (no link)
-  return (
-    <Box
-      border="1px solid"
-      borderColor="gray.200"
-      borderRadius="lg"
-      overflow="hidden"
-      boxShadow="lg"
-      bg={getCardBg()}
-    >
+  // Memoize card content
+  const cardContent = useMemo(() => (
+    <>
       {image && (
         <Box
+          position="relative"
           overflow="hidden"
           borderTopRadius="lg"
-          backgroundImage={`url(${image})`}
-          backgroundSize="cover"
-          backgroundPosition="center"
-          height="200px"
-          aria-label={altText || title}
-        />
+          height={{ base: '200px', md: '240px' }}
+          bg="gray.100"
+        >
+          <Image
+            src={image}
+            alt={altText || title}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            style={{
+              objectFit: 'cover',
+              objectPosition: 'center',
+            }}
+            loading={loading ? 'eager' : 'lazy'}
+          />
+        </Box>
       )}
-      <Box p="4">
-        <Heading as="h2" size="lg" mb={image ? '4' : '0'} color="gray.900">
+      
+      <Box p={{ base: '4', md: '6' }}>
+        <Heading 
+          as="h3" 
+          size={{ base: 'md', md: 'lg' }} 
+          mb={description ? '3' : '0'} 
+          color="gray.900"
+          fontWeight="semibold"
+        >
           {title}
         </Heading>
+        
         {description && (
-          <Text color="gray.800">{description}</Text>
+          <Text 
+            color="gray.700" 
+            fontSize={{ base: 'sm', md: 'md' }}
+            lineHeight="relaxed"
+            mb={hasAction ? '4' : '0'}
+          >
+            {description}
+          </Text>
+        )}
+
+        {/* Action Buttons */}
+        {hasAction && (
+          <Box mt="4">
+            {phone && (
+              <Button
+                asChild
+                size="sm"
+                variant="outline"
+                colorScheme="blue"
+                width="full"
+                gap="2"
+              >
+                <a href={phone}>
+                  <BsTelephone />
+                  Bel nu
+                </a>
+              </Button>
+            )}
+            
+            {downloadLink && (
+              <Button
+                asChild
+                size="sm"
+                variant="solid"
+                colorScheme="blue"
+                width="full"
+                gap="2"
+              >
+                <a href={downloadLink} download>
+                  <BsDownload />
+                  Download
+                </a>
+              </Button>
+            )}
+            
+            {cta && ctaLink && (
+              <Button
+                size="sm"
+                variant="outline"
+                colorScheme="blue"
+                width="full"
+                gap="2"
+              >
+                {cta}
+                <BsArrowRight />
+              </Button>
+            )}
+          </Box>
         )}
       </Box>
+    </>
+  ), [image, altText, title, description, hasAction, phone, downloadLink, cta, ctaLink, loading]);
+
+  // For interactive cards with links
+  if (isInteractive && !disabled) {
+    const linkProps = downloadLink 
+      ? { href: downloadLink, download: true }
+      : { href: phone || ctaLink || '#' };
+
+    return (
+      <LinkBox
+        as="article"
+        className={cn('card', className)}
+        data-testid={testId}
+        data-variant={variant}
+        {...cardStyles}
+        role="article"
+        aria-label={`${title}${description ? `: ${description}` : ''}`}
+      >
+        <LinkOverlay {...linkProps} aria-label={`Navigate to ${title}`}>
+          {cardContent}
+        </LinkOverlay>
+      </LinkBox>
+    );
+  }
+
+  // Static card (no interaction)
+  return (
+    <Box
+      as="article"
+      className={cn('card', className)}
+      data-testid={testId}
+      data-variant={variant}
+      {...cardStyles}
+      role="article"
+      aria-label={`${title}${description ? `: ${description}` : ''}`}
+    >
+      {cardContent}
     </Box>
   );
-};
+});
+
+Card.displayName = 'Card';
 
 export default Card;

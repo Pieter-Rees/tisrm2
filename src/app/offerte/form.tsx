@@ -1,6 +1,11 @@
+/**
+ * Modern Registration Form Component
+ * @fileoverview Built with React Hook Form, Chakra UI v3, and TypeScript with 2025 patterns
+ */
+
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useTransition } from 'react';
 import {
   Box,
   SimpleGrid,
@@ -9,129 +14,251 @@ import {
   Heading,
   Text,
   Textarea,
+  VStack,
 } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
-import axios from 'axios';
+import { BsCheck2Circle, BsExclamationTriangle } from 'react-icons/bs';
+
 import { Field } from '@/components/ui/field';
+import { isValidEmail, isValidDutchPostalCode } from '@/lib/utils';
 import type { OfferteFormData } from '@/types/components';
 
+type SubmissionState = 'idle' | 'success' | 'error';
+
+/**
+ * Modern form with enhanced validation, error handling, and user experience
+ * Features:
+ * - React Hook Form with TypeScript
+ * - Custom validation with utility functions
+ * - Optimistic UI updates with transitions
+ * - Comprehensive error handling
+ * - Accessibility support
+ * - Modern form patterns
+ */
 export default function RegistrationForm() {
+  const [submissionState, setSubmissionState] = useState<SubmissionState>('idle');
+  const [isPending, startTransition] = useTransition();
+  const [errorMessage, setErrorMessage] = useState<string>('');
+
   const {
     handleSubmit,
     register,
     formState: { errors, isSubmitting },
-  } = useForm<OfferteFormData>();
+    reset,
+    watch,
+  } = useForm<OfferteFormData>({
+    mode: 'onBlur', // Validate on blur for better UX
+    defaultValues: {
+      firstName: '',
+      lastName: '',
+      emailAddress: '',
+      phoneNo: '',
+      companyName: '',
+      kvkNumber: '',
+      btwNumber: '',
+      postalCode: '',
+      message: '',
+    },
+  });
 
-  const [showForm, setShowForm] = useState(true);
+  // Watch form values for real-time feedback
+  const watchedValues = watch();
 
   const onSubmit = useCallback(async (values: OfferteFormData) => {
-    const formData = { ...values, tisrm: true };
-    const formAddress = 'https://pieterrees.nl/email';
+    setErrorMessage('');
+    
+    startTransition(async () => {
+      try {
+        const payload = {
+          ...values,
+          tisrm: true,
+          timestamp: new Date().toISOString(),
+          userAgent: navigator.userAgent,
+        };
 
-    try {
-      await axios.post(formAddress, formData, {
-        timeout: 10000, // 10 second timeout
-      });
-      setShowForm(false);
-    } catch (error) {
-      console.error('Form submission error:', error);
-      // TODO: Add proper error handling UI
-    }
-  }, []);
+        const formAddress = 'https://pieterrees.nl/email';
+        
+        const response = await fetch(formAddress, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          body: JSON.stringify(payload),
+          signal: AbortSignal.timeout(15000), // 15 second timeout
+        });
 
-  if (!showForm) {
+        if (!response.ok) {
+          throw new Error(`Server responded with ${response.status}: ${response.statusText}`);
+        }
+
+        const result = await response.json();
+        console.log('Form submission successful:', result);
+        
+        setSubmissionState('success');
+        reset(); // Clear form on success
+        
+        // Scroll to top to show success message
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+      } catch (error) {
+        console.error('Form submission error:', error);
+        setSubmissionState('error');
+        
+        if (error instanceof Error) {
+          if (error.name === 'TimeoutError') {
+            setErrorMessage('De aanvraag duurde te lang. Probeer het opnieuw.');
+          } else if (error.message.includes('Network')) {
+            setErrorMessage('Netwerkfout. Controleer uw internetverbinding en probeer opnieuw.');
+          } else {
+            setErrorMessage(`Er is een fout opgetreden: ${error.message}`);
+          }
+        } else {
+          setErrorMessage('Er is een onbekende fout opgetreden. Probeer het later opnieuw.');
+        }
+      }
+    });
+  }, [reset]);
+
+  // Success state
+  if (submissionState === 'success') {
     return (
-      <Box textAlign="center" py="16">
-        <Heading as="h2" size="lg" mb="4" color="gray.900">
-          Bedankt voor uw aanmelding!
+      <VStack gap="6" textAlign="center" py="12">
+        <Box color="green.500" fontSize="4xl">
+          <BsCheck2Circle />
+        </Box>
+        <Heading as="h2" size="lg" color="green.700">
+          Bedankt voor uw aanvraag!
         </Heading>
-        <Text color="gray.800">
-          Wij nemen zo spoedig mogelijk contact met u op.
+        <Text color="gray.700" fontSize="lg" maxW="md">
+          Wij hebben uw aanvraag ontvangen en nemen binnen 24 uur contact met u op.
         </Text>
-      </Box>
+        <Button
+          onClick={() => setSubmissionState('idle')}
+          variant="outline"
+          colorScheme="green"
+          size="sm"
+        >
+          Nieuwe aanvraag indienen
+        </Button>
+      </VStack>
     );
   }
 
   return (
     <Box as="form" onSubmit={handleSubmit(onSubmit)}>
+      {/* Error Alert */}
+      {submissionState === 'error' && (
+        <Box
+          p="4"
+          mb="6"
+          borderRadius="md"
+          bg="red.50"
+          borderLeft="4px solid"
+          borderColor="red.500"
+        >
+          <Box display="flex" alignItems="center" gap="3">
+            <Box color="red.500">
+              <BsExclamationTriangle size="20" />
+            </Box>
+            <Box>
+              <Heading as="h4" size="sm" color="red.700" mb="1">
+                Fout bij verzenden!
+              </Heading>
+              <Text fontSize="sm" color="red.600">
+                {errorMessage}
+              </Text>
+            </Box>
+          </Box>
+        </Box>
+      )}
+
       <SimpleGrid columns={{ base: 1, lg: 2 }} gap="8">
-        <Box>
+        {/* Personal Information */}
+        <VStack gap="6" align="stretch">
+          <Heading as="h3" size="md" color="gray.800">
+            Persoonlijke gegevens
+          </Heading>
+          
           <Field
-            label="Uw voornaam"
+            label="Voornaam"
             required
             invalid={!!errors.firstName}
             errorText={errors.firstName?.message}
           >
             <Input
-              id="firstName"
-              type="text"
-              placeholder="Voornaam"
               {...register('firstName', {
-                required: 'Vul uw voornaam in',
-                minLength: { value: 2, message: 'Vul uw voornaam in' },
+                required: 'Voornaam is verplicht',
+                minLength: { value: 2, message: 'Voornaam moet minimaal 2 karakters zijn' },
+                pattern: { value: /^[a-zA-ZÀ-ÿ\s'-]+$/, message: 'Ongeldige karakters in voornaam' },
               })}
+              placeholder="Bijvoorbeeld: Jan"
+              autoComplete="given-name"
+              aria-describedby="firstName-help"
             />
           </Field>
 
           <Field
-            label="Uw achternaam"
+            label="Achternaam"
             required
             invalid={!!errors.lastName}
             errorText={errors.lastName?.message}
           >
             <Input
-              id="lastName"
-              type="text"
-              placeholder="Achternaam"
               {...register('lastName', {
-                required: 'Vul uw achternaam in',
-                minLength: { value: 2, message: 'Vul uw achternaam in' },
+                required: 'Achternaam is verplicht',
+                minLength: { value: 2, message: 'Achternaam moet minimaal 2 karakters zijn' },
+                pattern: { value: /^[a-zA-ZÀ-ÿ\s'-]+$/, message: 'Ongeldige karakters in achternaam' },
               })}
+              placeholder="Bijvoorbeeld: de Vries"
+              autoComplete="family-name"
             />
           </Field>
 
           <Field
-            label="Uw email adres"
+            label="E-mailadres"
             required
             invalid={!!errors.emailAddress}
             errorText={errors.emailAddress?.message}
           >
             <Input
-              id="emailAddress"
-              type="email"
-              placeholder="email@voorbeeld.nl"
               {...register('emailAddress', {
-                required: 'Vul uw email adres in',
-                pattern: {
-                  value: /^\S+@\S+$/i,
-                  message: 'Vul een geldig email adres in',
-                },
+                required: 'E-mailadres is verplicht',
+                validate: value => isValidEmail(value) || 'Voer een geldig e-mailadres in',
               })}
+              type="email"
+              placeholder="bijvoorbeeld@bedrijf.nl"
+              autoComplete="email"
             />
           </Field>
 
           <Field
-            label="Uw telefoonnummer"
+            label="Telefoonnummer"
             required
             invalid={!!errors.phoneNo}
             errorText={errors.phoneNo?.message}
           >
             <Input
-              id="phoneNo"
-              type="tel"
-              placeholder="06-12345678"
               {...register('phoneNo', {
-                required: 'Vul uw telefoonnummer in',
-                minLength: { value: 10, message: 'Vul een correct telefoonnummer in' },
+                required: 'Telefoonnummer is verplicht',
+                pattern: {
+                  value: /^(\+31|0)[0-9]{9}$/,
+                  message: 'Voer een geldig Nederlands telefoonnummer in',
+                },
               })}
+              type="tel"
+              placeholder="06-12345678 of +31612345678"
+              autoComplete="tel"
             />
           </Field>
-        </Box>
-        <Box hideFrom="lg">
-          <Box width="full" height="1px" bg="gray.300" />
-        </Box>
+        </VStack>
 
-        <Box>
+        {/* Business Information */}
+        <VStack gap="6" align="stretch">
+          <Heading as="h3" size="md" color="gray.800">
+            Bedrijfsgegevens
+          </Heading>
+          
           <Field
             label="Bedrijfsnaam"
             required
@@ -139,47 +266,50 @@ export default function RegistrationForm() {
             errorText={errors.companyName?.message}
           >
             <Input
-              id="companyName"
-              type="text"
-              placeholder="Uw bedrijfsnaam"
               {...register('companyName', {
-                required: 'Vul uw bedrijfsnaam in',
-                minLength: { value: 2, message: 'Vul uw bedrijfsnaam in' },
+                required: 'Bedrijfsnaam is verplicht',
+                minLength: { value: 2, message: 'Bedrijfsnaam moet minimaal 2 karakters zijn' },
               })}
+              placeholder="Uw bedrijfsnaam"
+              autoComplete="organization"
             />
           </Field>
 
           <Field
-            label="KVK nummer"
+            label="KVK-nummer"
             required
             invalid={!!errors.kvkNumber}
             errorText={errors.kvkNumber?.message}
           >
             <Input
-              id="kvkNumber"
-              type="text"
-              placeholder="12345678"
               {...register('kvkNumber', {
-                required: 'Vul uw KVK nummer in',
-                minLength: { value: 8, message: 'Vul een correct KVK nummer in' },
+                required: 'KVK-nummer is verplicht',
+                pattern: {
+                  value: /^[0-9]{8}$/,
+                  message: 'KVK-nummer moet 8 cijfers bevatten',
+                },
               })}
+              placeholder="12345678"
+              maxLength={8}
             />
           </Field>
 
           <Field
-            label="BTW nummer"
+            label="BTW-nummer"
             required
             invalid={!!errors.btwNumber}
             errorText={errors.btwNumber?.message}
           >
             <Input
-              id="btwNumber"
-              type="text"
-              placeholder="NL123456789B01"
               {...register('btwNumber', {
-                required: 'Vul uw BTW nummer in',
-                minLength: { value: 14, message: 'Vul een correct BTW nummer in' },
+                required: 'BTW-nummer is verplicht',
+                pattern: {
+                  value: /^NL[0-9]{9}B[0-9]{2}$/,
+                  message: 'Voer een geldig Nederlands BTW-nummer in (bijv. NL123456789B01)',
+                },
               })}
+              placeholder="NL123456789B01"
+              maxLength={14}
             />
           </Field>
 
@@ -190,49 +320,60 @@ export default function RegistrationForm() {
             errorText={errors.postalCode?.message}
           >
             <Input
-              id="postalCode"
-              type="text"
-              placeholder="1234 AB"
               {...register('postalCode', {
-                required: 'Vul uw postcode in',
-                pattern: {
-                  value: /^[1-9][0-9]{3} ?(?!sa|sd|ss)[a-z]{2}$/i,
-                  message: 'Vul een geldige Nederlandse postcode in',
-                },
+                required: 'Postcode is verplicht',
+                validate: value => isValidDutchPostalCode(value) || 'Voer een geldige Nederlandse postcode in',
               })}
+              placeholder="1234 AB"
+              maxLength={7}
             />
           </Field>
-        </Box>
+        </VStack>
       </SimpleGrid>
 
-      <Field
-        label="Aanvullende informatie (optioneel)"
-        helperText="Vertel ons meer over uw verzekeringsbehoefte"
-        invalid={!!errors.message}
-        errorText={errors.message?.message}
-      >
-        <Textarea
-          id="message"
-          placeholder="Beschrijf hier uw specifieke wensen of vragen..."
-          rows={4}
-          {...register('message')}
-        />
-      </Field>
+      {/* Additional Information */}
+      <Box mt="8">
+        <Field
+          label="Aanvullende informatie (optioneel)"
+          helperText="Vertel ons meer over uw specifieke verzekeringsbehoefte of stel eventuele vragen"
+          invalid={!!errors.message}
+          errorText={errors.message?.message}
+        >
+          <Textarea
+            {...register('message', {
+              maxLength: { value: 1000, message: 'Bericht mag maximaal 1000 karakters bevatten' },
+            })}
+            placeholder="Beschrijf hier uw specifieke wensen, vragen of opmerkingen..."
+            rows={4}
+            resize="vertical"
+          />
+        </Field>
+      </Box>
 
+      {/* Submit Button */}
       <Box mt="8">
         <Button
           type="submit"
-          loading={isSubmitting}
+          loading={isSubmitting || isPending}
           loadingText="Versturen..."
-          variant="solid"
-          bg="blue.500"
-          color="white"
           size="lg"
           width="full"
+          bg="blue.500"
+          color="white"
+          _hover={{ bg: 'blue.600' }}
+          _active={{ bg: 'blue.700' }}
+          disabled={Object.keys(errors).length > 0}
         >
           Offerte aanvragen
         </Button>
       </Box>
+
+      {/* Form Progress Indicator */}
+      {Object.keys(watchedValues).some(key => watchedValues[key as keyof OfferteFormData]) && (
+        <Text fontSize="sm" color="gray.600" mt="4" textAlign="center">
+          Voortgang: {Object.keys(watchedValues).filter(key => watchedValues[key as keyof OfferteFormData]).length} / {Object.keys(watchedValues).length - 1} velden ingevuld
+        </Text>
+      )}
     </Box>
   );
 }
