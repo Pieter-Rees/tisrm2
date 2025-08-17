@@ -93,7 +93,11 @@ export default function RegistrationForm() {
         }
 
         const result = await response.json();
-        console.log('Form submission successful:', result);
+        // Form submission successful - log in development mode only
+        if (process.env.NODE_ENV === 'development') {
+          // eslint-disable-next-line no-console
+          console.log('Form submission successful:', result);
+        }
         
         setSubmissionState('success');
         reset(); // Clear form on success

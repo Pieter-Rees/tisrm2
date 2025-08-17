@@ -2,8 +2,11 @@
 const nextConfig = {
   distDir: 'build',
   experimental: {
-    optimizePackageImports: ['@chakra-ui/react', 'framer-motion', 'react-icons'],
-    typedRoutes: true,
+    // Conditional optimizations based on Turbopack usage
+    ...(process.env.TURBOPACK !== '1' && {
+      optimizePackageImports: ['@chakra-ui/react', 'framer-motion', 'react-icons'],
+      typedRoutes: true,
+    }),
   },
   turbopack: {
     rules: {
@@ -11,6 +14,9 @@ const nextConfig = {
         loaders: ['@svgr/webpack'],
         as: '*.js',
       },
+    },
+    resolveAlias: {
+      '@': './src',
     },
   },
   images: {
@@ -28,16 +34,20 @@ const nextConfig = {
   poweredByHeader: false,
   compress: true,
   reactStrictMode: true,
-  modularizeImports: {
-    '@chakra-ui/react': {
-      transform: '@chakra-ui/react/{{member}}',
+  // Conditional modular imports based on Turbopack usage
+  ...(process.env.TURBOPACK !== '1' && {
+    modularizeImports: {
+      '@chakra-ui/react': {
+        transform: '@chakra-ui/react/{{member}}',
+      },
+      'react-icons': {
+        transform: 'react-icons/{{member}}',
+      },
     },
-    'react-icons': {
-      transform: 'react-icons/{{member}}',
-    },
-  },
+  }),
   bundlePagesRouterDependencies: true,
-  ...(process.env.ANALYZE === 'true' && {
+  // Conditional webpack config (only for webpack builds, not Turbopack)
+  ...(process.env.ANALYZE === 'true' && process.env.TURBOPACK !== '1' && {
     webpack: (config, { isServer }) => {
       if (!isServer) {
         const { BundleAnalyzerPlugin } = require('@next/bundle-analyzer')();

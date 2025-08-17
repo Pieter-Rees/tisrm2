@@ -1,9 +1,10 @@
 'use client';
 
 import { ClientOnly, IconButton, Skeleton, Span } from '@chakra-ui/react';
-import { ThemeProvider, useTheme } from 'next-themes';
+import { ThemeProvider } from 'next-themes';
 import * as React from 'react';
 import { LuMoon, LuSun } from 'react-icons/lu';
+import { useColorMode } from '@/hooks/use-color-mode';
 import type { ReactNode, ComponentProps } from 'react';
 
 interface ColorModeProviderProps {
@@ -20,23 +21,7 @@ export function ColorModeProvider({ children, attribute = 'class', ...props }: C
   );
 }
 
-export function useColorMode() {
-  const { resolvedTheme, setTheme, forcedTheme } = useTheme();
-  const colorMode = forcedTheme || resolvedTheme;
-  const toggleColorMode = () => {
-    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
-  };
-  return {
-    colorMode,
-    setColorMode: setTheme,
-    toggleColorMode,
-  };
-}
 
-export function useColorModeValue<T>(light: T, dark: T): T {
-  const { colorMode } = useColorMode();
-  return colorMode === 'dark' ? dark : light;
-}
 
 export function ColorModeIcon() {
   const { colorMode } = useColorMode();
@@ -92,3 +77,6 @@ export const DarkMode = React.forwardRef<HTMLSpanElement, ComponentProps<typeof 
     );
   }
 );
+
+// Export hooks at end of file to avoid fast refresh warnings
+export { useColorMode, useColorModeValue } from '@/hooks/use-color-mode';

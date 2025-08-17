@@ -2,17 +2,10 @@ import { Inter } from 'next/font/google';
 import Header from '@/components/header';
 import Footer from '@/components/footer';
 import { Providers } from './providers';
-import { pageInfo } from '../data/general';
 import { GoogleTagManager } from '@next/third-parties/google';
-import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
-
-export const metadata: Metadata = {
-  title: pageInfo.name,
-  description: pageInfo.description,
-};
 
 interface RootLayoutProps {
   children: ReactNode;
@@ -43,3 +36,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
     </html>
   );
 }
+
+// Export metadata at end of file to avoid fast refresh warnings
+export { metadata } from './metadata';

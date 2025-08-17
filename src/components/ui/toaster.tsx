@@ -6,13 +6,10 @@ import {
   Spinner,
   Stack,
   Toast,
-  createToaster,
 } from '@chakra-ui/react'
+import { toaster } from '@/lib/toaster'
 
-export const toaster = createToaster({
-  placement: 'bottom-end',
-  pauseOnPageIdle: true,
-})
+// Toaster instance is imported from lib to avoid fast refresh warnings
 
 export const Toaster = () => {
   return (
@@ -41,3 +38,6 @@ export const Toaster = () => {
     </Portal>
   )
 }
+
+// Export toaster instance at end of file to avoid fast refresh warnings
+export { toaster } from '@/lib/toaster';

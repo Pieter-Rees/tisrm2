@@ -28,7 +28,10 @@
     "react-hooks/exhaustive-deps": "warn",
     "react-refresh/only-export-components": [
       "warn",
-      { "allowConstantExport": true }
+      { 
+        "allowConstantExport": true,
+        "allowExportNames": ["metadata", "toaster", "useColorMode", "useColorModeValue"]
+      }
     ],
     "@typescript-eslint/no-explicit-any": "off",
     "prefer-const": "error",
