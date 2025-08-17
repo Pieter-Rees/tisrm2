@@ -12,31 +12,31 @@ export default function Sidenav({ showSideNav, handleToggle }) {
     };
 
     return (
-        <Flex boxShadow='lg' transition='ease-in-out .3s all' p='8' py='4' gap='4' flexDirection='column' zIndex='10' backgroundColor='white' position='fixed' left={showSideNav ? '0' : '-500px'} top='0' alignItems='center' justifyContent='center' height='full' >
+        <Flex boxShadow='lg' transition='ease-in-out .3s all' p='8' py='4' gap='4' flexDirection='column' zIndex='50' backgroundColor='white' position='fixed' left={showSideNav ? '0' : '-100%'} top='0' alignItems='center' justifyContent='center' height='full' width='80%' maxWidth='400px' >
             <Flex flexDirection='column' gap='4' alignItems='center' justifyContent='center' height='full'>
                 <Box as={Link} href="/" onClick={handleToggle}>
                     <Logo width='200px' />
                 </Box>
                 <VStack gap='4' alignItems='center' justifyContent='center'>
-                    <Button as={Link} href="/" onClick={handleToggle} variant='link' width='full' textAlign='center'>
+                    <Button as={Link} href="/" onClick={handleToggle} variant='link' color='gray.900' width='full' textAlign='center'>
                         Home
                     </Button>
-                    <Button as={Link} href="/verzekeringen" onClick={handleToggle} variant='link' width='full' textAlign='center'>
+                    <Button as={Link} href="/verzekeringen" onClick={handleToggle} variant='link' color='gray.900' width='full' textAlign='center'>
                         Verzekeringen
                     </Button>
-                    <Button as={Link} href="/taxi" onClick={handleToggle} variant='link' width='full' textAlign='center'>
+                    <Button as={Link} href="/taxi" onClick={handleToggle} variant='link' color='gray.900' width='full' textAlign='center'>
                         Taxi
                     </Button>
-                    <Button as={Link} href="/risk-management" onClick={handleToggle} variant='link' width='full' textAlign='center'>
+                    <Button as={Link} href="/risk-management" onClick={handleToggle} variant='link' color='gray.900' width='full' textAlign='center'>
                         Risk Management
                     </Button>
-                    <Button as={Link} href="/over-ons" onClick={handleToggle} variant='link' width='full' textAlign='center'>
+                    <Button as={Link} href="/over-ons" onClick={handleToggle} variant='link' color='gray.900' width='full' textAlign='center'>
                         Over ons
                     </Button>
-                    <Button as={Link} href="/bestanden" onClick={handleToggle} variant='link' width='full' textAlign='center'>
+                    <Button as={Link} href="/bestanden" onClick={handleToggle} variant='link' color='gray.900' width='full' textAlign='center'>
                         Bestanden
                     </Button>
-                    <Button as={Link} href="/contact" onClick={handleToggle} variant='link' width='full' textAlign='center'>
+                    <Button as={Link} href="/contact" onClick={handleToggle} variant='link' color='gray.900' width='full' textAlign='center'>
                         Contact
                     </Button>
                 </VStack>

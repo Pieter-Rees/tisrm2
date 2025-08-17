@@ -18,7 +18,7 @@ export default function Contact() {
                     <Flex width='100%' py='12' justifyContent='center'>
                         <Logo />
                     </Flex>
-                    <ContactInfo variant='contact' buttonVariant='linkDark' />
+                    <ContactInfo variant='contact' buttonVariant='link' />
                 </GridItem>
                 <GridItem w='100%'>
                     <Flex borderRadius='lg' boxShadow='lg' overflow='hidden' position='relative' width='full' alignItems='center' height='full'>
@@ -31,7 +31,7 @@ export default function Contact() {
                 </GridItem>
             </Grid>
             <Box pt='20' textAlign='center'>
-                <Text>
+                <Text color='gray.800' mb='4'>
                     Wil u uw schade inzien of een schade melden, klik op onderstaande knop.
                 </Text>
                 <Button bg='blue.500' color='white' onClick={handleSchadeClick}>Schade melden</Button>

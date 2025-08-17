@@ -1,5 +1,5 @@
 'use client'
-import { Box, Flex, SimpleGrid, List, ListItem, Button } from '@chakra-ui/react'
+import { Box, Flex, SimpleGrid, VStack, Text, Button } from '@chakra-ui/react'
 import { contactInfo } from "../data/general";
 import { BsLinkedin } from 'react-icons/bs'
 import Link from 'next/link'
@@ -9,45 +9,33 @@ export default function ContactInfo({ variant, buttonVariant }) {
         <>
             <SimpleGrid minChildWidth={{ base: 'full', md: '120px' }} gap='40px'>
                 <Box>
-                    <List variant={variant}>
-                        <ListItem>{contactInfo.address}</ListItem>
-                        <ListItem>{contactInfo.email}</ListItem>
-                        <ListItem>{contactInfo.city}</ListItem>
-                    </List>
+                    <VStack align="start" spacing={2}>
+                        <Text color="gray.800">{contactInfo.address}</Text>
+                        <Text color="gray.800">{contactInfo.email}</Text>
+                        <Text color="gray.800">{contactInfo.city}</Text>
+                    </VStack>
                 </Box>
                 <Box>
-                    <List variant={variant}>
-                        <ListItem>{contactInfo.postalBox}</ListItem>
-                        <ListItem>{contactInfo.postalCode}</ListItem>
-                        <ListItem>{contactInfo.city}</ListItem>
-                    </List>
+                    <VStack align="start" spacing={2}>
+                        <Text color="gray.800">{contactInfo.postalBox}</Text>
+                        <Text color="gray.800">{contactInfo.postalCode}</Text>
+                        <Text color="gray.800">{contactInfo.city}</Text>
+                    </VStack>
                 </Box>
             </SimpleGrid>
 
             <Flex justifyContent='start' mt='8'>
-                <List variant={variant}>
-                    <ListItem>
-                        <Link href='tel:+310206368191'>
-                            <Button width='full' height='full' variant={buttonVariant}>
-                                +31 020 636 8191
-                            </Button>
-                        </Link>
-                    </ListItem>
-                    <ListItem >
-                        <Link href='mailto:info@tisrm.nl'>
-                            <Button width='full' height='full' variant={buttonVariant}>
-                                info@tisrm.nl
-                            </Button>
-                        </Link>
-                    </ListItem>
-                    <ListItem>
-                        <Link target='_blank' rel='noopener noreferrer' href={contactInfo.linkedIn}>
-                            <Button my='2' width='full' height='full' variant={buttonVariant}>
-                                <BsLinkedin size='24' />
-                            </Button>
-                        </Link>
-                    </ListItem>
-                </List>
+                <VStack align="start" spacing={2}>
+                    <Button as={Link} href='tel:+310206368191' width='full' height='full' variant={buttonVariant}>
+                        +31 020 636 8191
+                    </Button>
+                    <Button as={Link} href='mailto:info@tisrm.nl' width='full' height='full' variant={buttonVariant}>
+                        info@tisrm.nl
+                    </Button>
+                    <Button as={Link} target='_blank' rel='noopener noreferrer' href={contactInfo.linkedIn} my='2' width='full' height='full' variant={buttonVariant}>
+                        <BsLinkedin size='24' />
+                    </Button>
+                </VStack>
             </Flex >
         </>
     )

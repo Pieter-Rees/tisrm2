@@ -22,11 +22,24 @@ export default function Header() {
                 <Link href="/"><Logo width='200px' /></Link>
                 <Navbar />
                 <Box hideFrom='xl'>
-                    <Button variant='ghost' onClick={handleToggle}>
+                    <Button variant='ghost' onClick={handleToggle} color='gray.900' aria-label="Open menu">
                         <BsList size='24px' />
                     </Button>
                 </Box>
             </Flex>
+            {/* Mobile menu overlay */}
+            {showSideNav && (
+                <Box
+                    position="fixed"
+                    top="0"
+                    left="0"
+                    width="100%"
+                    height="100%"
+                    bg="blackAlpha.600"
+                    zIndex="40"
+                    onClick={handleToggle}
+                />
+            )}
             <Sidenav showSideNav={showSideNav} handleToggle={handleToggle} />
         </Container>
     )

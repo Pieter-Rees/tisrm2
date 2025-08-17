@@ -40,10 +40,10 @@ export default function RegistrationForm() {
     if (!showForm) {
         return (
             <Box textAlign='center' py='16'>
-                <Heading as='h2' size='lg' mb='4'>
+                <Heading as='h2' size='lg' mb='4' color='gray.900'>
                     Bedankt voor uw aanmelding!
                 </Heading>
-                <Text>
+                <Text color='gray.800'>
                     Wij nemen zo spoedig mogelijk contact met u op.
                 </Text>
             </Box>
