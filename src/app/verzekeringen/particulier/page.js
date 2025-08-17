@@ -53,7 +53,7 @@ export default function Particulier() {
                 <Text>
                     Bent u geïnteresseerd of heeft u vragen, neem dan gerust contact op via de mail of bel ons!
                 </Text>
-                <Grid marginTop='8' width='full' templateRows='repeat(2, 1fr)' templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(2, 1fr)' }} gap='8' >
+                <Grid mt='8' width='full' templateRows='repeat(2, 1fr)' templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(2, 1fr)' }} gap='8' >
                     <GridItem >
                         <Heading as='h3' size='md'>Onderweg</Heading>
                         <StarList listItems={list1} />

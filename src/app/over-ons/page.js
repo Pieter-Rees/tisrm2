@@ -31,7 +31,7 @@ export default function Overons() {
                     Uit een zeer modern en inspirerend kantoor wordt de onderneming gedreven met geavanceerde software en bedrijfsmodel. Door gebruik te maken van diverse gespecialiseerde diensten zoals een call center en een uitbesteedde schade afdeling zijn wij in staat met een relatief klein team een mooie omzet te genereren. Focus ligt op advisering in Risico management en financiële vraagstukken.
                 </Text>
                 <Flex width='full' justifyContent='center'>
-                    <Flex transform={{ base: '', lg: 'rotate(2deg)' }} transition="all .25s ease" _hover={{ transform: 'scale(1.33)', filter: "brightness(120%)", }} marginTop='8' width='fit-content' borderRadius='lg' boxShadow='lg' overflow='hidden'>
+                    <Flex transform={{ base: '', lg: 'rotate(2deg)' }} transition="all .25s ease" _hover={{ transform: 'scale(1.33)', filter: "brightness(120%)", }} mt='8' width='fit-content' borderRadius='lg' boxShadow='lg' overflow='hidden'>
                         <Image
                             src="/team.jpg"
                             alt="Picture of the author"

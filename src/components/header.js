@@ -1,9 +1,9 @@
 'use client'
 
 import Logo from "@/components/logo";
-import Navbar from "@/components/navbar/page";
+import Navbar from "@/components/navbar";
 import Link from 'next/link'
-import { Flex, Box, Container, Hide } from "@chakra-ui/react";
+import { Flex, Box, Container, Button } from "@chakra-ui/react";
 import Sidenav from "@/components/sidenav"
 import { useState } from "react";
 import { BsList } from "react-icons/bs"
@@ -21,15 +21,13 @@ export default function Header() {
             <Flex flexDirection='row' justifyContent='space-between' alignItems='center' bg="white" py={4} gap='8'>
                 <Link href="/"><Logo width='200px' /></Link>
                 <Navbar />
-                <Hide above='xl'>
-                    <Box>
-                        <Box cursor='pointer' onClick={handleToggle}>
-                            <BsList size='64' />
-                        </Box>
-                    </Box>
-                </Hide>
+                <Box hideFrom='xl'>
+                    <Button variant='ghost' onClick={handleToggle}>
+                        <BsList size='24px' />
+                    </Button>
+                </Box>
             </Flex>
             <Sidenav showSideNav={showSideNav} handleToggle={handleToggle} />
         </Container>
-    );
+    )
 }

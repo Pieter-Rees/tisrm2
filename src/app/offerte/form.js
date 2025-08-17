@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Flex, Box, Checkbox, SimpleGrid, FormErrorMessage, FormLabel, FormControl, Input, Button, Divider, Heading } from "@chakra-ui/react";
+import { Flex, Box, Checkbox, SimpleGrid, Input, Button, Heading, Text } from "@chakra-ui/react";
 import { useForm } from 'react-hook-form'
 import axios, { isCancel, AxiosError } from 'axios';
-import { Show } from '@chakra-ui/react'
+
 export default function RegistrationForm() {
     const {
         handleSubmit,
@@ -33,191 +33,206 @@ export default function RegistrationForm() {
             })
             .catch((error) => {
                 console.error('Error details:', error)
-                console.error('Error response:', error.response)
-                console.error('Error message:', error.message)
-                
-                let errorMessage = 'Contactformulier niet verzonden.';
-                
-                if (error.code === 'ERR_NETWORK') {
-                    errorMessage = 'Netwerkfout: Kan geen verbinding maken met de server. Controleer uw internetverbinding.'
-                } else if (error.response?.status === 502) {
-                    errorMessage = 'Serverfout: Email service is momenteel niet beschikbaar. Probeer het later opnieuw.'
-                } else if (error.response?.status === 503) {
-                    // Handle service unavailable (external API down)
-                    const apiError = error.response?.data;
-                    if (apiError?.message) {
-                        errorMessage = apiError.message;
-                    } else {
-                        errorMessage = 'Email service is momenteel niet beschikbaar. Probeer het later opnieuw of neem contact met ons op.'
-                    }
-                } else if (error.response?.status === 500) {
-                    // Handle our API route errors
-                    const apiError = error.response?.data;
-                    if (apiError?.message) {
-                        errorMessage = `Serverfout: ${apiError.message}`;
-                        if (apiError.error?.message) {
-                            errorMessage += ` (${apiError.error.message})`;
-                        }
-                    } else {
-                        errorMessage = 'Serverfout: Er is een probleem opgetreden bij het verwerken van uw aanvraag. Probeer het later opnieuw.'
-                    }
-                } else if (error.response?.data?.message) {
-                    errorMessage = `Fout: ${error.response.data.message}`;
-                } else {
-                    errorMessage += ` Fout: ${error.message}`;
-                }
-                
-                alert(errorMessage);
-            })
+            }
+        )
     }
+
+    if (!showForm) {
+        return (
+            <Box textAlign='center' py='16'>
+                <Heading as='h2' size='lg' mb='4'>
+                    Bedankt voor uw aanmelding!
+                </Heading>
+                <Text>
+                    Wij nemen zo spoedig mogelijk contact met u op.
+                </Text>
+            </Box>
+        )
+    }
+
     return (
-        <Flex width='full' justifyContent='center'>
-            {showForm ? (
-                <form style={{ width: '100%', maxWidth: '1200px' }} onSubmit={handleSubmit(onSubmit)}>
-                    <SimpleGrid minChildWidth={{ base: '100%', lg: '100px' }} spacing={{ base: '0', lg: '144px' }}>
-                        <Box>
-                            <FormControl isInvalid={errors.businessName}>
-                                <FormLabel htmlFor='businessName'>Naam onderneming</FormLabel>
-                                <Input
-                                    id='businessName'
-                                    {...register('businessName', {
-                                        required: 'Vul de naam in van uw onderneming',
-                                        minLength: { value: 1, message: 'Vul de naam in van uw onderneming' },
-                                    })}
-                                />
-                                <FormErrorMessage>
-                                    {errors.businessName && errors.businessName.message}
-                                </FormErrorMessage>
-                            </FormControl>
-
-                            <FormControl isInvalid={errors.kvkno}>
-                                <FormLabel htmlFor='kvkno'>KVK Nummer</FormLabel>
-                                <Input
-                                    id='kvkno'
-                                    {...register('kvkno', {
-                                        minLength: { value: 6, message: 'Vul uw kvk nummer in' },
-                                    })}
-                                />
-                                <FormErrorMessage>
-                                    {errors.kvkno && errors.kvkno.message}
-                                </FormErrorMessage>
-                            </FormControl>
-                            <Divider orientation='horizontal' />
-                            <FormControl isInvalid={errors.contactName}>
-                                <FormLabel htmlFor='contactName'>Uw naam</FormLabel>
-                                <Input
-                                    id='contactName'
-                                    {...register('contactName', {
-                                        required: 'Vul uw naam in',
-                                        minLength: { value: 1, message: 'Vul uw naam in' },
-                                    })}
-                                />
-                                <FormErrorMessage>
-                                    {errors.contactName && errors.contactName.message}
-                                </FormErrorMessage>
-                            </FormControl>
-
-                            <FormControl isInvalid={errors.emailAddress}>
-                                <FormLabel htmlFor='emailAddress'>Uw email adres</FormLabel>
-                                <Input
-                                    id='emailAddress'
-                                    {...register('emailAddress', {
-                                        required: 'Vul uw email adres in',
-                                        minLength: { value: 6, message: 'Vul uw email adres in' },
-
-                                    })}
-                                />
-                                <FormErrorMessage>
-                                    {errors.emailAddress && errors.emailAddress.message}
-                                </FormErrorMessage>
-                            </FormControl>
-
-                            <FormControl isInvalid={errors.phoneNo}>
-                                <FormLabel htmlFor='phoneNo'>Uw telefoonnummer</FormLabel>
-                                <Input
-                                    id='phoneNo'
-                                    {...register('phoneNo', {
-                                        required: 'Vul uw telefoonnummer in',
-                                        minLength: { value: 10, message: 'Vul een correct telefoonnummer in' },
-                                    })}
-                                />
-                                <FormErrorMessage>
-                                    {errors.phoneNo && errors.phoneNo.message}
-                                </FormErrorMessage>
-                            </FormControl>
+        <Box as='form' onSubmit={handleSubmit(onSubmit)}>
+            <SimpleGrid columns={{ base: 1, lg: 2 }} gap='8'>
+                <Box>
+                    <Box mb='4'>
+                        <Box as='label' htmlFor='firstName' display='block' mb='2' fontWeight='medium'>
+                            Uw voornaam
                         </Box>
-                        <Show below='lg'>
-                            <Divider orientation='horizontal' />
-                        </Show>
+                        <Input
+                            id='firstName'
+                            type='text'
+                            {...register('firstName', {
+                                required: 'Vul uw voornaam in',
+                                minLength: { value: 2, message: 'Vul uw voornaam in' },
+                            })}
+                            borderColor={errors.firstName ? 'red.500' : 'gray.300'}
+                        />
+                        {errors.firstName && (
+                            <Box color='red.500' fontSize='sm' mt='1'>
+                                {errors.firstName.message}
+                            </Box>
+                        )}
+                    </Box>
 
-                        <Box>
-                            <FormControl isInvalid={errors.plateNo}>
-                                <FormLabel htmlFor='plateNo'>Uw kenteken</FormLabel>
-                                <Input
-                                    id='plateNo'
-                                    {...register('plateNo', {
-                                        required: 'Vul uw kenteken in',
-                                        minLength: { value: 8, message: 'Vul uw kenteken in' },
-                                    })}
-                                />
-                                <FormErrorMessage>
-                                    {errors.plateNo && errors.plateNo.message}
-                                </FormErrorMessage>
-                            </FormControl>
-
-                            <FormControl isInvalid={errors.carCode}>
-                                <FormLabel htmlFor='carCode'>Uw meldcode</FormLabel>
-                                <Input
-                                    id='carCode'
-                                    {...register('carCode', {
-                                        required: 'Vul uw meldcode in',
-                                        minLength: { value: 4, message: 'Minimale lengte meldcode is 4' },
-                                    })}
-                                />
-                                <FormErrorMessage>
-                                    {errors.carCode && errors.carCode.message}
-                                </FormErrorMessage>
-                            </FormControl>
-
-
-                            <FormControl isInvalid={errors.damageFreeYears}>
-                                <FormLabel htmlFor='damageFreeYears'>Schadevrije jaren</FormLabel>
-                                <Input
-                                    id='damageFreeYears'
-                                    {...register('damageFreeYears', {
-                                        required: 'Vul uw schadevrije jaren in',
-                                        minLength: { value: 1, message: 'Vul uw schadevrije jaren in' },
-                                    })}
-                                />
-                                <FormErrorMessage>
-                                    {errors.damageFreeYears && errors.damageFreeYears.message}
-                                </FormErrorMessage>
-                            </FormControl>
-
-                            <FormControl marginTop='4' isInvalid={errors.sendCopy}>
-                                <Checkbox size='lg'
-                                    defaultChecked
-                                    id="sendCopy"
-                                    {...register('sendCopy')}>Verzend kopie</Checkbox>
-                                <FormErrorMessage>
-                                    {errors.sendCopy && errors.sendCopy.message}
-                                </FormErrorMessage>
-                            </FormControl>
-
-                            <Button mt='8' isLoading={isSubmitting} type='submit'>
-                                Verstuur
-                            </Button>
+                    <Box mb='4'>
+                        <Box as='label' htmlFor='lastName' display='block' mb='2' fontWeight='medium'>
+                            Uw achternaam
                         </Box>
-                    </SimpleGrid>
-                </form>
-            ) : (
-                <Box textAlign='center'>
-                    <Heading as='h2' size='xl'>Bedankt voor uw aanvraag</Heading>
-                    <Heading as='h3' size='lg'>Er zal spoedig contact met u worden opgenomen!</Heading>
+                        <Input
+                            id='lastName'
+                            type='text'
+                            {...register('lastName', {
+                                required: 'Vul uw achternaam in',
+                                minLength: { value: 2, message: 'Vul uw achternaam in' },
+                            })}
+                            borderColor={errors.lastName ? 'red.500' : 'gray.300'}
+                        />
+                        {errors.lastName && (
+                            <Box color='red.500' fontSize='sm' mt='1'>
+                                {errors.lastName.message}
+                            </Box>
+                        )}
+                    </Box>
+
+                    <Box mb='4'>
+                        <Box as='label' htmlFor='emailAddress' display='block' mb='2' fontWeight='medium'>
+                            Uw email adres
+                        </Box>
+                        <Input
+                            id='emailAddress'
+                            type='email'
+                            {...register('emailAddress', {
+                                required: 'Vul uw email adres in',
+                                minLength: { value: 6, message: 'Vul uw email adres in' },
+
+                            })}
+                            borderColor={errors.emailAddress ? 'red.500' : 'gray.300'}
+                        />
+                        {errors.emailAddress && (
+                            <Box color='red.500' fontSize='sm' mt='1'>
+                                {errors.emailAddress.message}
+                            </Box>
+                        )}
+                    </Box>
+
+                    <Box mb='4'>
+                        <Box as='label' htmlFor='phoneNo' display='block' mb='2' fontWeight='medium'>
+                            Uw telefoonnummer
+                        </Box>
+                        <Input
+                            id='phoneNo'
+                            {...register('phoneNo', {
+                                required: 'Vul uw telefoonnummer in',
+                                minLength: { value: 10, message: 'Vul een correct telefoonnummer in' },
+                            })}
+                            borderColor={errors.phoneNo ? 'red.500' : 'gray.300'}
+                        />
+                        {errors.phoneNo && (
+                            <Box color='red.500' fontSize='sm' mt='1'>
+                                {errors.phoneNo.message}
+                            </Box>
+                        )}
+                    </Box>
                 </Box>
-            )}
+                <Box hideFrom='lg'>
+                    <Box width='full' height='1px' bg='gray.300' />
+                </Box>
 
-        </Flex >
+                <Box>
+                    <Box mb='4'>
+                        <Box as='label' htmlFor='companyName' display='block' mb='2' fontWeight='medium'>
+                            Bedrijfsnaam
+                        </Box>
+                        <Input
+                            id='companyName'
+                            type='text'
+                            {...register('companyName', {
+                                required: 'Vul uw bedrijfsnaam in',
+                                minLength: { value: 2, message: 'Vul uw bedrijfsnaam in' },
+                            })}
+                            borderColor={errors.companyName ? 'red.500' : 'gray.300'}
+                        />
+                        {errors.companyName && (
+                            <Box color='red.500' fontSize='sm' mt='1'>
+                                {errors.companyName.message}
+                            </Box>
+                        )}
+                    </Box>
 
-    );
+                    <Box mb='4'>
+                        <Box as='label' htmlFor='kvkNumber' display='block' mb='2' fontWeight='medium'>
+                            KVK nummer
+                        </Box>
+                        <Input
+                            id='kvkNumber'
+                            type='text'
+                            {...register('kvkNumber', {
+                                required: 'Vul uw KVK nummer in',
+                                minLength: { value: 8, message: 'Vul een correct KVK nummer in' },
+                            })}
+                            borderColor={errors.kvkNumber ? 'red.500' : 'gray.300'}
+                        />
+                        {errors.kvkNumber && (
+                            <Box color='red.500' fontSize='sm' mt='1'>
+                                {errors.kvkNumber.message}
+                            </Box>
+                        )}
+                    </Box>
+
+                    <Box mb='4'>
+                        <Box as='label' htmlFor='btwNumber' display='block' mb='2' fontWeight='medium'>
+                            BTW nummer
+                        </Box>
+                        <Input
+                            id='btwNumber'
+                            type='text'
+                            {...register('btwNumber', {
+                                required: 'Vul uw BTW nummer in',
+                                minLength: { value: 14, message: 'Vul een correct BTW nummer in' },
+                            })}
+                            borderColor={errors.btwNumber ? 'red.500' : 'gray.300'}
+                        />
+                        {errors.btwNumber && (
+                            <Box color='red.500' fontSize='sm' mt='1'>
+                                {errors.btwNumber.message}
+                            </Box>
+                        )}
+                    </Box>
+
+                    <Box mb='4'>
+                        <Box as='label' htmlFor='postalCode' display='block' mb='2' fontWeight='medium'>
+                            Postcode
+                        </Box>
+                        <Input
+                            id='postalCode'
+                            type='text'
+                            {...register('postalCode', {
+                                required: 'Vul uw postcode in',
+                                minLength: { value: 6, message: 'Vul een correct postcode in' },
+                            })}
+                            borderColor={errors.postalCode ? 'red.500' : 'gray.300'}
+                        />
+                        {errors.postalCode && (
+                            <Box color='red.500' fontSize='sm' mt='1'>
+                                {errors.postalCode.message}
+                            </Box>
+                        )}
+                    </Box>
+                </Box>
+            </SimpleGrid>
+
+            <Box mt='8'>
+                <Button
+                    type='submit'
+                    isLoading={isSubmitting}
+                    loadingText='Versturen...'
+                    colorScheme='blue'
+                    size='lg'
+                    width='full'
+                >
+                    Versturen
+                </Button>
+            </Box>
+        </Box>
+    )
 }

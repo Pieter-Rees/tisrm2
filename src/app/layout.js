@@ -1,9 +1,8 @@
 import { Inter } from "next/font/google";
-import Header from "@/components/header/page";
-import Footer from "@/components/footer/page";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
 import { Providers } from "./providers";
 import { pageInfo } from "../data/general";
-import { Flex, Container } from "@chakra-ui/react";
 import { GoogleTagManager } from '@next/third-parties/google'
 
 const inter = Inter({ subsets: ["latin"] });
@@ -20,18 +19,16 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <Providers>
           <Header />
-          <Flex
-            paddingY='4'
-            width='100%'
-            maxWidth={{ xl: "1700px" }}
-            margin="0 auto"
-            flexDirection='column'
+          <div
+            style={{
+              padding: '16px 0',
+              width: '100%',
+              maxWidth: '1700px',
+              margin: '0 auto'
+            }}
           >
-
-
             {children}
-          </Flex>
-
+          </div>
           <Footer />
         </Providers>
       </body>

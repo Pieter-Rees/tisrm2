@@ -1,5 +1,7 @@
+'use client'
+
 import Link from 'next/link'
-import { Box, Button, Center, Divider, Flex, VStack } from "@chakra-ui/react"
+import { Box, Button, Center, Flex, VStack } from "@chakra-ui/react"
 import Logo from "@/components/logo"
 
 export default function Sidenav({ showSideNav, handleToggle }) {
@@ -10,23 +12,67 @@ export default function Sidenav({ showSideNav, handleToggle }) {
     };
 
     return (
-        <Flex boxShadow='lg' transition='ease-in-out .3s all' padding='8' paddingY='4' gap='4' flexDirection='column' zIndex='10' backgroundColor='white' position='fixed' left={showSideNav ? '0' : '-500px'} top='0' alignItems='center' justifyContent='center' height='full' >
-            <Flex paddingY='4' justifyContent='center' width='40'>
-                <Link href="/"><span onClick={() => handleToggle()}><Logo /></span></Link>
+        <Flex boxShadow='lg' transition='ease-in-out .3s all' p='8' py='4' gap='4' flexDirection='column' zIndex='10' backgroundColor='white' position='fixed' left={showSideNav ? '0' : '-500px'} top='0' alignItems='center' justifyContent='center' height='full' >
+            <Flex flexDirection='column' gap='4' alignItems='center' justifyContent='center' height='full'>
+                <Link href="/" onClick={handleToggle}>
+                    <Logo width='200px' />
+                </Link>
+                <VStack gap='4' alignItems='center' justifyContent='center'>
+                    <Link href="/" onClick={handleToggle}>
+                        <Button variant='link' width='full' textAlign='center'>
+                            Home
+                        </Button>
+                    </Link>
+                    <Link href="/verzekeringen" onClick={handleToggle}>
+                        <Button variant='link' width='full' textAlign='center'>
+                            Verzekeringen
+                        </Button>
+                    </Link>
+                    <Link href="/taxi" onClick={handleToggle}>
+                        <Button variant='link' width='full' textAlign='center'>
+                            Taxi
+                        </Button>
+                    </Link>
+                    <Link href="/risk-management" onClick={handleToggle}>
+                        <Button variant='link' width='full' textAlign='center'>
+                            Risk Management
+                        </Button>
+                    </Link>
+                    <Link href="/over-ons" onClick={handleToggle}>
+                        <Button variant='link' width='full' textAlign='center'>
+                            Over ons
+                        </Button>
+                    </Link>
+                    <Link href="/bestanden" onClick={handleToggle}>
+                        <Button variant='link' width='full' textAlign='center'>
+                            Bestanden
+                        </Button>
+                    </Link>
+                    <Link href="/contact" onClick={handleToggle}>
+                        <Button variant='link' width='full' textAlign='center'>
+                            Contact
+                        </Button>
+                    </Link>
+                </VStack>
+                <Box width='full' height='1px' bg='gray.300' my='4' />
+                <VStack gap='4' alignItems='center' justifyContent='center'>
+                    <Button variant='blue' onClick={handleSchadeClick} width='full'>
+                        Schade melden
+                    </Button>
+                    <Link href="/offerte" onClick={handleToggle}>
+                        <Button variant='blue' width='full'>
+                            Offerte aanvragen
+                        </Button>
+                    </Link>
+                </VStack>
+                <Center>
+                    <Link href='tel:+310206368191' onClick={handleToggle}>
+                        <Button variant='link' color='gray.700' fontSize='xl'>
+                            +31 020 636 8191
+                        </Button>
+                    </Link>
+                </Center>
             </Flex>
-            <VStack gap='8' fontSize={{ base: 'xl', '2xl': '2xl' }}>
-                <Link href="/"> <span onClick={() => handleToggle()}>Home</span></Link>
-                <Link href="/verzekeringen"> <span onClick={() => handleToggle()}>Verzekeringen</span></Link>
-                <Link href="/taxi"><span onClick={() => handleToggle()}>Taxi</span></Link>
-                <Link href="/risk-management"><span onClick={() => handleToggle()}>Risk Management</span></Link>
-                <Link href="/over-ons"><span onClick={() => handleToggle()}>Over ons</span></Link>
-                <Link href="/bestanden"><span onClick={() => handleToggle()}>Bestanden</span></Link>
-                <Link href="/contact"><span onClick={() => handleToggle()}>Contact</span></Link>
-                <Divider marginY='1' orientation='horizontal' />
-
-                <Button as='a' href="/offerte" variant='blue'><span onClick={() => handleToggle()}>Offerte</span></Button>
-                <Button variant='blue' onClick={handleSchadeClick}>Schade melden</Button>
-            </VStack >
-        </Flex >
-    );
+        </Flex>
+    )
 }

@@ -1,14 +1,14 @@
 'use client'
 
 import { List, ListItem } from "@chakra-ui/react"
-import { StarIcon } from '@chakra-ui/icons'
+import { BsStarFill } from 'react-icons/bs'
 
 export default function StarList({ listItems }) {
     return (
-        <List spacing={3} marginBottom='4'>
+        <List gap={3} mb='4'>
             {listItems.map((item, index) => (
                 <ListItem key={index} display='flex' alignItems='center'>
-                    <StarIcon color='blue.800' boxSize='16px' marginRight='2' marginTop='-1' />
+                    <BsStarFill color='blue.800' size='16px' style={{ marginRight: '8px', marginTop: '-4px' }} />
                     {item}
                 </ListItem>
             ))}

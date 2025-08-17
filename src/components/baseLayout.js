@@ -1,3 +1,5 @@
+'use client'
+
 import { Heading, Flex } from '@chakra-ui/react'
 
 export default function BaseLayout({
@@ -6,7 +8,7 @@ export default function BaseLayout({
 }) {
     return (
         <Flex width='full' flexDirection='column'>
-            <Flex width='full' justifyContent='space-between' flexDirection={{ base: 'column', lg: 'row' }} marginBottom='4'>
+            <Flex width='full' justifyContent='space-between' flexDirection={{ base: 'column', lg: 'row' }} mb='4'>
                 <Heading as='h1' variant='xl'>{title}</Heading>
             </Flex>
             {children}
