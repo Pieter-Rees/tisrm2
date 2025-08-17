@@ -15,7 +15,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <GoogleTagManager gtmId="G-3HPHN1BV1Q" />
+      <head>
+        <GoogleTagManager gtmId="G-3HPHN1BV1Q" />
+      </head>
       <body className={inter.className}>
         <Providers>
           <Header />

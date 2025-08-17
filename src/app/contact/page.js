@@ -34,7 +34,7 @@ export default function Contact() {
                 <Text>
                     Wil u uw schade inzien of een schade melden, klik op onderstaande knop.
                 </Text>
-                <Button variant='blue' onClick={handleSchadeClick}>Schade melden</Button>
+                <Button bg='blue.500' color='white' onClick={handleSchadeClick}>Schade melden</Button>
 
             </Box>
         </Container>

@@ -226,7 +226,9 @@ export default function RegistrationForm() {
                     type='submit'
                     isLoading={isSubmitting}
                     loadingText='Versturen...'
-                    colorScheme='blue'
+                    variant='solid'
+                    bg='blue.500'
+                    color='white'
                     size='lg'
                     width='full'
                 >

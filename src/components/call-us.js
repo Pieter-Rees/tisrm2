@@ -7,8 +7,7 @@ import Link from 'next/link'
 
 export default function CallUs() {
     return (
-        <Link href='tel:+310206368191'>
-            <Button width='full' height='full' variant='blue'>
+        <Button as={Link} href='tel:+310206368191' width='full' height='full' bg='blue.500' color='white'>
                 <Flex justifyContent='center' height='full' flexDirection='column' p='8' gap='8'>
                     <Box color='white'>
                         <BsTelephoneFill size='32px' />
@@ -26,7 +25,6 @@ export default function CallUs() {
                         </Text>
                     </Box>
                 </Flex>
-            </Button>
-        </Link>
+        </Button>
     )
 }

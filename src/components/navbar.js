@@ -12,24 +12,22 @@ export default function Navbar() {
     return (
         <Flex alignItems='center'>
             <Box hideBelow='xl'>
-                <HStack gap='8' fontSize={{ base: 'md', '2xl': 'xl' }}>
-                    <Link href="/">Home</Link>
-                    <Link href="/verzekeringen">Verzekeringen</Link>
-                    <Link href="/taxi">Taxi</Link>
-                    <Link href="/risk-management">Risk Management</Link>
-                    <Link href="/over-ons">Over ons</Link>
-                    <Link href="/bestanden">Bestanden</Link>
-                    <Link href="/contact">Contact</Link>
+                <HStack gap='8' fontSize={{ base: 'md', '2xl': 'xl' }} color='gray.900'>
+                    <Link href="/" color='gray.900'>Home</Link>
+                    <Link href="/verzekeringen" color='gray.900'>Verzekeringen</Link>
+                    <Link href="/taxi" color='gray.900'>Taxi</Link>
+                    <Link href="/risk-management" color='gray.900'>Risk Management</Link>
+                    <Link href="/over-ons" color='gray.900'>Over ons</Link>
+                    <Link href="/bestanden" color='gray.900'>Bestanden</Link>
+                    <Link href="/contact" color='gray.900'>Contact</Link>
                 </HStack>
             </Box>
             <Box hideBelow='xl'>
                 <HStack gap='4'>
-                    <Button variant='blue' onClick={handleSchadeClick}>
+                    <Button bg='blue.500' color='white' onClick={handleSchadeClick}>
                         Schade melden
                     </Button>
-                    <Link href="/offerte">
-                        <Button variant='blue'>Offerte aanvragen</Button>
-                    </Link>
+                    <Button as={Link} href="/offerte" bg='blue.500' color='white'>Offerte aanvragen</Button>
                 </HStack>
             </Box>
             <Box hideBelow='xl'>
@@ -39,11 +37,9 @@ export default function Navbar() {
             </Box>
             <Box hideBelow='xl'>
                 <Center>
-                    <Link href='tel:+310206368191'>
-                        <Button variant='link' color='gray.700' fontSize={{ base: 'md', '2xl': 'xl' }}>
-                            +31 020 636 8191
-                        </Button>
-                    </Link>
+                    <Button as={Link} href='tel:+310206368191' variant='link' color='gray.900' fontSize={{ base: 'md', '2xl': 'xl' }}>
+                        +31 020 636 8191
+                    </Button>
                 </Center>
             </Box>
         </Flex>

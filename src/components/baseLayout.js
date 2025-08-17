@@ -9,7 +9,7 @@ export default function BaseLayout({
     return (
         <Flex width='full' flexDirection='column'>
             <Flex width='full' justifyContent='space-between' flexDirection={{ base: 'column', lg: 'row' }} mb='4'>
-                <Heading as='h1' variant='xl'>{title}</Heading>
+                <Heading as='h1' size='xl'>{title}</Heading>
             </Flex>
             {children}
         </Flex >

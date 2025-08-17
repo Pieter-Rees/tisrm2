@@ -18,11 +18,11 @@ export default function Talker() {
                 />
             </Flex>
             <Flex textAlign='center' alignItems='center' flexDirection='column' justifyContent='center'>
-                <BsQuote color='gray' size='64px' />
-                <Text>
+                <BsQuote color='#4A5568' size='64px' />
+                <Text color='gray.800'>
                     De weldaden van een verzekering komen samen met het onheil aan het licht.
                 </Text>
-                <Text fontWeight='bold'>
+                <Text fontWeight='bold' color='gray.900'>
                     Rene Enthoven <br />
                     Directeur TIS Risk Managers
                 </Text>

@@ -6,7 +6,7 @@ export default function Taxi() {
     return (
         <Container>
             <GridLayout title='Personenvervoer'>
-                <Heading as='h2' variant='lg'>
+                <Heading as='h2' size='lg'>
                     Taxiverzekering
                 </Heading>
                 <Text>
@@ -15,7 +15,7 @@ export default function Taxi() {
                 <Text>
                     TIS Risk Managers biedt ook voor wagenparken oplossingen. Buiten het bieden van een scherpe offerte, kunnen wij een risico analyse van uw bedrijf maken. Waar zitten de risico’s, wordt er misschien risico’s over het hoofd gezien en hoe voorkomen e/o dekken wij dit af? Samen met de klant komen wij dan tot mooie resultaten en een langdurige samenwerking.
                 </Text>
-                <Heading as='h2' variant='lg'>
+                <Heading as='h2' size='lg'>
                     Wagenpark
                 </Heading>
                 <Text>
@@ -24,7 +24,7 @@ export default function Taxi() {
                 <Text>
                     Bent u geïnteresseerd? Neem gerust contact met ons op, zodat wij een ontmoetingsgesprek kunnen inplannen!
                 </Text>
-                <Heading as='h2' variant='lg'>
+                <Heading as='h2' size='lg'>
                     Schadeafhandeling
                 </Heading>
                 <Text>

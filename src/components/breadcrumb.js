@@ -9,7 +9,7 @@ export default function Breadcrumb({ separator, listClasses, activeClasses, capi
 
     return (
         <>
-            <HStack gap='8' fontSize={{ base: 'md', xl: 'lg' }} color='gray.300'>
+            <HStack gap='8' fontSize={{ base: 'md', xl: 'lg' }} color='gray.700'>
                 {
                     pathNames.map((link, index) => {
                         let href = `/${pathNames.slice(0, index + 1).join('/')}`

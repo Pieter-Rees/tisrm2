@@ -1,5 +1,5 @@
 import GridLayout from "@/components/gridLayout"
-import { Container, Text, List, ListItem, ListIcon } from '@chakra-ui/react'
+import { Container, Text } from '@chakra-ui/react'
 import StarList from "@/components/star-list"
 
 export default function Riskmanagement() {

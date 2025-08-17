@@ -2,89 +2,85 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { Box, Heading, Text, Button } from '@chakra-ui/react';
 
 const Card = ({ title, description, image, altText, downloadLink, cta, ctaLink, phone, buttonVariant = 'solid', variant }) => {
     const hasCta = cta || phone || downloadLink;
     
-    const getCardStyles = () => {
+    const getCardBg = () => {
         switch (variant) {
             case 'sidebar':
-                return { border: "1px solid #e2e8f0", borderRadius: "8px", overflow: "hidden", boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)", backgroundColor: "white" };
+                return 'white';
             case 'downloads':
-                return { border: "1px solid #e2e8f0", borderRadius: "8px", overflow: "hidden", boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)", backgroundColor: "#f7fafc" };
+                return 'gray.50';
             default:
-                return { border: "1px solid #e2e8f0", borderRadius: "8px", overflow: "hidden", boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)" };
+                return 'white';
         }
     };
 
-    return (
-        <div style={getCardStyles()}>
-            <div style={{ padding: "16px" }}>
-                {image &&
-                    <div style={{ 
-                        overflow: 'hidden', 
-                        borderTopLeftRadius: '8px', 
-                        borderTopRightRadius: '8px',
-                        backgroundImage: `url(${image})`, 
-                        backgroundSize: 'cover', 
-                        backgroundPosition: 'center center', 
-                        height: '200px' 
-                    }}>
-                    </div>
-                }
-                {title &&
-                    <div>
-                        <h2 style={{ margin: '0', fontSize: "24px", fontWeight: "bold", padding: '0 16px', marginTop: '16px' }}>{title}</h2>
-                    </div>}
-            </div>
-            {description && <div style={{ padding: "16px", paddingTop: "0" }}><p style={{ margin: '0' }}>{description}</p></div>}
+    const getButtonVariant = () => {
+        if (buttonVariant === 'blue') {
+            return { 
+                variant: 'solid', 
+                bg: 'blue.500', 
+                color: 'white'
+            };
+        }
+        return { variant: 'outline' };
+    };
 
-            {hasCta &&
-                <div style={{ padding: "16px", paddingTop: "0" }}>
-                    {cta && ctaLink &&
-                        <Link href={ctaLink}>
-                            <button style={{ 
-                                width: '100%', 
-                                padding: '8px 16px', 
-                                backgroundColor: buttonVariant === 'blue' ? '#3182ce' : '#e2e8f0',
-                                color: buttonVariant === 'blue' ? 'white' : 'black',
-                                border: 'none', 
-                                borderRadius: '4px', 
-                                cursor: 'pointer' 
-                            }}>
+    return (
+        <Box 
+            border="1px solid" 
+            borderColor="gray.200" 
+            borderRadius="lg" 
+            overflow="hidden" 
+            boxShadow="lg"
+            bg={getCardBg()}
+        >
+            {image &&
+                <Box 
+                    overflow='hidden' 
+                    borderTopRadius='lg'
+                    backgroundImage={`url(${image})`}
+                    backgroundSize='cover' 
+                    backgroundPosition='center' 
+                    height='200px' 
+                />
+            }
+            <Box p="4">
+                {title &&
+                    <Heading as='h2' size='lg' mb={image ? "4" : "0"} color="gray.900">
+                        {title}
+                    </Heading>
+                }
+                {description && 
+                    <Text mb={hasCta ? "4" : "0"} color="gray.800">
+                        {description}
+                    </Text>
+                }
+                
+                {hasCta && (
+                    <>
+                        {cta && ctaLink &&
+                            <Button as={Link} href={ctaLink} width='full' {...getButtonVariant()}>
                                 {cta}
-                            </button>
-                        </Link>}
-                    {phone && 
-                        <Link href={phone}>
-                            <button style={{ 
-                                width: '100%', 
-                                padding: '8px 16px', 
-                                backgroundColor: buttonVariant === 'blue' ? '#3182ce' : '#e2e8f0',
-                                color: buttonVariant === 'blue' ? 'white' : 'black',
-                                border: 'none', 
-                                borderRadius: '4px', 
-                                cursor: 'pointer' 
-                            }}>
+                            </Button>
+                        }
+                        {phone && 
+                            <Button as={Link} href={phone} width='full' {...getButtonVariant()}>
                                 Bel ons nu
-                            </button>
-                        </Link>}
-                    {downloadLink && 
-                        <Link href={downloadLink}>
-                            <button style={{ 
-                                width: '100%', 
-                                padding: '8px 16px', 
-                                backgroundColor: buttonVariant === 'blue' ? '#3182ce' : '#e2e8f0',
-                                color: buttonVariant === 'blue' ? 'white' : 'black',
-                                border: 'none', 
-                                borderRadius: '4px', 
-                                cursor: 'pointer' 
-                            }}>
+                            </Button>
+                        }
+                        {downloadLink && 
+                            <Button as={Link} href={downloadLink} width='full' {...getButtonVariant()}>
                                 Download
-                            </button>
-                        </Link>}
-                </div>}
-        </div>
+                            </Button>
+                        }
+                    </>
+                )}
+            </Box>
+        </Box>
     );
 };
 

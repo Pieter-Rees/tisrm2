@@ -52,8 +52,8 @@ export const system = createSystem(defaultConfig, {
     },
     semanticTokens: {
       colors: {
-        'chakra-body-text': { value: 'gray.700' },
-        'chakra-placeholder-color': { value: 'gray.500' },
+        'chakra-body-text': { value: 'gray.900' },
+        'chakra-placeholder-color': { value: 'gray.600' },
       },
     },
   },
