@@ -63,15 +63,25 @@ const Navbar = memo(() => {
                   href={href}
                   style={{
                     textDecoration: 'none',
-                    color: isActive ? '#3182ce' : '#1a202c',
-                    fontWeight: isActive ? '600' : '500',
-                    transition: 'color 0.2s ease-in-out',
-                    borderBottom: isActive ? '2px solid #3182ce' : '2px solid transparent',
+                    display: 'block',
                     paddingBottom: '4px',
+                    position: 'relative',
+                    transition: 'all 0.3s ease',
                   }}
                   aria-current={isActive ? 'page' : undefined}
                 >
-                  {label}
+                  <Box
+                    color={isActive ? 'blue.500' : 'gray.900'}
+                    fontWeight={isActive ? '600' : '500'}
+                    borderBottom={isActive ? '2px solid' : '2px solid transparent'}
+                    borderBottomColor={isActive ? 'blue.500' : 'transparent'}
+                    _hover={!isActive ? {
+                      color: 'blue.500',
+                      borderBottomColor: 'blue.200',
+                    } : {}}
+                  >
+                    {label}
+                  </Box>
                 </Link>
               </Box>
             );
@@ -87,10 +97,18 @@ const Navbar = memo(() => {
               bg="blue.500"
               color="white"
               size="sm"
-              _hover={{ bg: 'blue.600' }}
-              _active={{ bg: 'blue.700' }}
+              _hover={{ 
+                bg: 'blue.600',
+                transform: 'translateY(-1px)',
+                boxShadow: 'md'
+              }}
+              _active={{ 
+                bg: 'blue.700',
+                transform: 'translateY(0)'
+              }}
               fontWeight="medium"
               gap="2"
+              transition="all 0.2s ease"
             >
               Acties
               <BsChevronDown />

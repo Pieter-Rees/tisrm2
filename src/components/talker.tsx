@@ -7,6 +7,7 @@ import { BsQuote } from 'react-icons/bs';
 
 import { cn } from '@/lib/utils';
 import type { TalkerProps } from '@/types/components';
+import { PARAGRAPH_STYLES, SECTION_SPACING } from '@/constants/typography';
 const DEFAULT_TESTIMONIAL = {
   name: 'René Enthoven',
   title: 'Directeur TIS Risk Managers',
@@ -99,9 +100,7 @@ const Talker = memo<TalkerProps>(({
 
           <Box
             position="relative"
-            fontSize={{ base: 'lg', lg: 'xl' }}
-            lineHeight="relaxed"
-            color="gray.700"
+            {...PARAGRAPH_STYLES.large}
             fontStyle="italic"
             pl="4"
             pr="4"
@@ -114,14 +113,14 @@ const Talker = memo<TalkerProps>(({
             <Text
               fontSize="lg"
               fontWeight="bold"
-              color="gray.900"
+              color="text.primary"
               lineHeight="tight"
             >
               {name}
             </Text>
             <Text
               fontSize="md"
-              color="blue.600"
+              color="text.accent"
               fontWeight="medium"
             >
               {title}
@@ -129,7 +128,7 @@ const Talker = memo<TalkerProps>(({
             {company && (
               <Text
                 fontSize="sm"
-                color="gray.600"
+                color="text.muted"
                 fontWeight="medium"
               >
                 {company}

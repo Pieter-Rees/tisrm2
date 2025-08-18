@@ -29,7 +29,6 @@ const Header = memo(() => {
         <Flex
           align="center"
           justify="space-between"
-          py="4"
           gap="8"
         >
 

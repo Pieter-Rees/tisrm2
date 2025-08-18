@@ -1,13 +1,12 @@
-'use client'
+'use client';
 
-import { Suspense, lazy } from 'react';
 import ContactInfo from "@/components/contact-info";
 import Logo from "@/components/logo";
-import ErrorBoundary from '@/components/error-boundary';
-import { Grid, GridItem, Box, Container, Flex, Text, Button, Heading } from "@chakra-ui/react";
-import Image from 'next/image'
-
-const Sidebar = lazy(() => import('@/components/sidebar'));
+import { Grid, GridItem, Box, Flex, Text, Button } from "@chakra-ui/react";
+import Image from 'next/image';
+import PageLayout from '@/components/page-layout';
+import { FadeInUp, SlideInLeft, SlideInRight, ScaleIn } from '@/components/page-animation';
+import { PARAGRAPH_STYLES, SECTION_SPACING } from '@/constants/typography';
 
 export default function Contact() {
     const handleSchadeClick = () => {
@@ -16,70 +15,87 @@ export default function Contact() {
     };
 
     return (
-        <Container py="8">
-            <Grid
-                templateColumns={{ base: '1fr', xl: '3fr 1fr' }}
-                gap="12"
-                alignItems="start"
-            >
-                <GridItem>
-                    <Flex direction="column" gap="12">
-                        <Heading
-                            as="h1"
-                            size={{ base: 'lg', md: 'xl', lg: '2xl' }}
-                            color="gray.900"
-                            fontWeight="bold"
-                            lineHeight="tight"
-                            mb={{ base: '6', lg: '8' }}
-                        >
-                            Contact
-                        </Heading>
-
-                        <Grid 
-                            templateColumns={{
-                                base: 'repeat(1, 1fr)',
-                                md: 'repeat(2, 1fr)',
-                            }}
-                            gap={{ base: '6', lg: '8' }}
-                            alignItems="stretch"
-                            width="100%"
-                        >
-                            <GridItem display="flex" flexDirection="column" minW="0">
-                                <Flex width='100%' py='12' justifyContent='center'>
-                                    <Logo />
-                                </Flex>
-                                <ContactInfo buttonVariant='outline' />
-                            </GridItem>
-                            <GridItem display="flex" minW="0">
-                                <Flex borderRadius='lg' boxShadow='lg' overflow='hidden' position='relative' width='full' alignItems='center' height='full'>
-                                    <Image
-                                        src="/bb.jpg"
-                                        alt="Picture of the author"
-                                        fill={true}
-                                    />
-                                </Flex>
-                            </GridItem>
-                        </Grid>
-                        
-                        <Box pt='20' textAlign='center'>
-                            <Text color='gray.800' mb='4'>
+        <PageLayout title="Contact">
+            <Flex direction="column" gap={SECTION_SPACING.medium}>
+                <Grid 
+                    templateColumns={{
+                        base: 'repeat(1, 1fr)',
+                        md: 'repeat(2, 1fr)',
+                    }}
+                    gap={SECTION_SPACING.small}
+                    alignItems="stretch"
+                    width="100%"
+                >
+                    <GridItem display="flex" flexDirection="column" minW="0">
+                        <SlideInLeft>
+                            <Flex width="100%" py={SECTION_SPACING.medium} justifyContent="center">
+                                <Logo />
+                            </Flex>
+                            <ContactInfo buttonVariant="outline" />
+                        </SlideInLeft>
+                    </GridItem>
+                    <GridItem display="flex" minW="0">
+                        <SlideInRight delay={0.2}>
+                            <Box 
+                                borderRadius="lg" 
+                                boxShadow="lg" 
+                                overflow="hidden" 
+                                position="relative" 
+                                width="full" 
+                                height={{ base: '300px', md: '400px', lg: '500px' }}
+                                minHeight="300px"
+                                transition="all 0.3s ease"
+                                _hover={{
+                                    transform: 'scale(1.02)',
+                                    boxShadow: 'xl',
+                                }}
+                            >
+                                <Image
+                                    src="/bb.jpg"
+                                    alt="Office building of TIS Risk Managers"
+                                    fill
+                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                    style={{ 
+                                        objectFit: 'cover',
+                                        objectPosition: 'center'
+                                    }}
+                                    priority
+                                />
+                            </Box>
+                        </SlideInRight>
+                    </GridItem>
+                </Grid>
+                
+                <ScaleIn delay={0.4}>
+                    <Box pt={SECTION_SPACING.large} textAlign="center">
+                        <FadeInUp delay={0.5}>
+                            <Text {...PARAGRAPH_STYLES.body} textAlign="center">
                                 Wil u uw schade inzien of een schade melden, klik op onderstaande knop.
                             </Text>
-                            <Button bg='blue.500' color='white' onClick={handleSchadeClick}>Schade melden</Button>
-                        </Box>
-                    </Flex>
-                </GridItem>
-
-                <GridItem hideBelow="xl">
-                    <Box position="sticky" top="100px">
-                        <ErrorBoundary>
-                            <Suspense fallback={<div>Loading sidebar...</div>}>
-                                <Sidebar />
-                            </Suspense>
-                        </ErrorBoundary>
+                        </FadeInUp>
+                        <FadeInUp delay={0.6}>
+                            <Button 
+                                bg="blue.500" 
+                                color="white" 
+                                onClick={handleSchadeClick}
+                                size="lg"
+                                borderRadius="lg"
+                                transition="all 0.3s ease"
+                                _hover={{
+                                    bg: 'blue.600',
+                                    transform: 'translateY(-2px)',
+                                    boxShadow: 'lg',
+                                }}
+                                _active={{
+                                    transform: 'translateY(0)',
+                                }}
+                            >
+                                Schade melden
+                            </Button>
+                        </FadeInUp>
                     </Box>
-                </GridItem>
-            </Grid>
-        </Container>
-    )
+                </ScaleIn>
+            </Flex>
+        </PageLayout>
+    );
 }

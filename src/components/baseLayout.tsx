@@ -9,7 +9,6 @@ import type { BaseLayoutProps } from '@/types/components';
 import type { FC } from 'react';
 
 // Constants for responsive styles
-const HEADER_SPACING = { base: '6', lg: '8' } as const;
 const HEADING_SIZE = { base: 'lg', md: 'xl', lg: '2xl' } as const;
 const HEADING_ALIGNMENT = { base: 'center', md: 'left' } as const;
 
@@ -30,7 +29,7 @@ const BaseLayout: FC<BaseLayoutProps> = memo(({
     mx="auto"
   >
     {title && (
-      <Box as="header" mb={HEADER_SPACING}>
+      <Box as="header">
         <Heading
           id="page-title"
           as="h1"

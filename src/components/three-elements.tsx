@@ -7,6 +7,7 @@ import Card from '@/components/card';
 import { NAVIGATION_ROUTES } from '@/constants/app';
 import { cn } from '@/lib/utils';
 import type { ThreeElementsProps } from '@/types/components';
+import { HEADING_STYLES, PARAGRAPH_STYLES, SECTION_SPACING } from '@/constants/typography';
 const FEATURE_CARDS = [
   {
     id: 'risk-management',
@@ -51,22 +52,20 @@ const ThreeElements = memo<ThreeElementsProps>(({
       aria-label="Key features and services"
     >
 
-      <Box mb={{ base: '8', lg: '12' }} textAlign="center">
+      <Box mb={SECTION_SPACING.medium} textAlign="center">
         <Heading
           as="h2"
-          size={{ base: 'lg', lg: 'xl' }}
-          color="gray.900"
-          fontWeight="bold"
-          mb="4"
+          {...HEADING_STYLES.h2}
+          textAlign="center"
         >
           Waarom kiezen voor TIS?
         </Heading>
         <Box
-          fontSize={{ base: 'md', lg: 'lg' }}
-          color="gray.600"
+          {...PARAGRAPH_STYLES.large}
+          color="text.muted"
           maxW="3xl"
           mx="auto"
-          lineHeight="relaxed"
+          textAlign="center"
         >
           Ontdek onze unieke aanpak en specialisaties die ons onderscheiden in de verzekeringsmarkt
         </Box>

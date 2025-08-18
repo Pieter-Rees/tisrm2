@@ -7,6 +7,7 @@ import Image from 'next/image';
 
 import { cn } from '@/lib/utils';
 import type { CardProps } from '@/types/components';
+import { HEADING_STYLES, PARAGRAPH_STYLES } from '@/constants/typography';
 const CARD_VARIANTS = {
   default: {
     bg: 'white',
@@ -106,19 +107,15 @@ const Card = memo<CardProps>(({
       <Box p={{ base: '4', md: '6' }} flex="1" display="flex" flexDirection="column">
         <Heading 
           as="h3" 
-          size={{ base: 'md', md: 'lg' }} 
-          mb={description ? '3' : '0'} 
-          color="gray.900"
-          fontWeight="semibold"
+          {...HEADING_STYLES.h4}
+          mb={description ? '3' : '0'}
         >
           {title}
         </Heading>
         
         {description && (
           <Text 
-            color="gray.700" 
-            fontSize={{ base: 'sm', md: 'md' }}
-            lineHeight="relaxed"
+            {...PARAGRAPH_STYLES.body}
             mb={hasAction ? '4' : '0'}
             flex="1"
           >
@@ -130,33 +127,40 @@ const Card = memo<CardProps>(({
           <Box mt="auto">
             {phone && (
               <Button
-                asChild
                 size="sm"
                 variant="outline"
                 colorScheme="blue"
                 width="full"
                 gap="2"
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.location.href = phone;
+                }}
               >
-                <a href={phone}>
-                  <BsTelephone />
-                  Bel nu
-                </a>
+                <BsTelephone />
+                Bel nu
               </Button>
             )}
             
             {downloadLink && (
               <Button
-                asChild
                 size="sm"
                 variant="solid"
                 colorScheme="blue"
                 width="full"
                 gap="2"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const link = document.createElement('a');
+                  link.href = downloadLink;
+                  link.download = '';
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
+                }}
               >
-                <a href={downloadLink} download>
-                  <BsDownload />
-                  Download
-                </a>
+                <BsDownload />
+                Download
               </Button>
             )}
             
@@ -167,6 +171,10 @@ const Card = memo<CardProps>(({
                 colorScheme="blue"
                 width="full"
                 gap="2"
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.location.href = ctaLink;
+                }}
               >
                 {cta}
                 <BsArrowRight />
@@ -179,27 +187,7 @@ const Card = memo<CardProps>(({
   );
 
 
-  if (isInteractive && !disabled) {
-    const linkProps = downloadLink 
-      ? { href: downloadLink, download: true }
-      : { href: phone || ctaLink || '#' };
-
-    return (
-      <LinkBox
-        as="article"
-        className={cn('card', className)}
-        data-testid={testId}
-        data-variant={variant}
-        {...cardStyles}
-        role="article"
-        aria-label={`${title}${description ? `: ${description}` : ''}`}
-      >
-        <LinkOverlay {...linkProps} aria-label={`Navigate to ${title}`}>
-          {cardContent}
-        </LinkOverlay>
-      </LinkBox>
-    );
-  }
+  // All cards now use the same non-interactive structure since buttons handle their own actions
 
 
   return (

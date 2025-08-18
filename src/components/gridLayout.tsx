@@ -38,7 +38,6 @@ const GridLayout = memo<GridLayoutProps>(({
         justify="space-between"
         align={{ base: 'flex-start', lg: 'center' }}
         direction={{ base: 'column', lg: 'row' }}
-        mb={{ base: '6', lg: '8' }}
         gap="4"
       >
         <Heading

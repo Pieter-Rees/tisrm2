@@ -25,16 +25,16 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body className={inter.className} style={{ backgroundColor: 'white', color: 'black' }}>
         <Providers>
           <Header />
-          <div
+          <main
             style={{
-              padding: '16px 0',
+              padding: '0 0 16px 0',
               width: '100%',
-              maxWidth: '1700px',
               margin: '0 auto',
+              minHeight: 'calc(100vh - 200px)', // Ensure minimum height for content
             }}
           >
             {children}
-          </div>
+          </main>
           <Footer />
         </Providers>
       </body>
