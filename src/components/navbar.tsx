@@ -1,41 +1,23 @@
-/**
- * Navigation bar component
- * @fileoverview Modern navbar with accessibility and performance optimizations
- */
-
 'use client';
 
 import { memo, useCallback } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { HStack, Button, Flex, Center, Box, VisuallyHidden } from '@chakra-ui/react';
-import { BsTelephone, BsShield } from 'react-icons/bs';
+import { MenuRoot, MenuTrigger, MenuContent, MenuItem } from '@chakra-ui/react';
+import { BsTelephone, BsShield, BsChevronDown } from 'react-icons/bs';
 
 import { NAVIGATION_ROUTES, EXTERNAL_LINKS, CONTACT_INFO } from '@/constants/app';
 import type { NavigationLink } from '@/types/components';
-
-/**
- * Navigation links configuration
- */
 const NAVIGATION_LINKS: readonly NavigationLink[] = [
   { href: NAVIGATION_ROUTES.home, label: 'Home' },
   { href: NAVIGATION_ROUTES.insurance, label: 'Verzekeringen' },
   { href: NAVIGATION_ROUTES.taxi, label: 'Taxi' },
   { href: NAVIGATION_ROUTES.riskManagement, label: 'Risk Management' },
   { href: NAVIGATION_ROUTES.about, label: 'Over ons' },
-  { href: NAVIGATION_ROUTES.downloads, label: 'Bestanden' },
+  { href: NAVIGATION_ROUTES.downloads, label: 'Downloads' },
   { href: NAVIGATION_ROUTES.contact, label: 'Contact' },
 ] as const;
-
-/**
- * Navigation bar component with responsive design and accessibility
- * Features:
- * - Active link highlighting
- * - Semantic navigation structure
- * - Keyboard navigation support
- * - Screen reader support
- * - Performance optimized with memo
- */
 const Navbar = memo(() => {
   const pathname = usePathname();
 
@@ -57,7 +39,7 @@ const Navbar = memo(() => {
       width="full"
       justify="space-between"
     >
-      {/* Main Navigation Links */}
+
       <Box hideBelow="xl">
         <HStack
           as="ul"
@@ -97,74 +79,52 @@ const Navbar = memo(() => {
         </HStack>
       </Box>
 
-      {/* Action Buttons */}
-      <Box hideBelow="xl">
-        <HStack gap="3">
-          <Button
-            onClick={handleDamageReportClick}
-            bg="blue.500"
-            color="white"
-            size="sm"
-            _hover={{ bg: 'blue.600' }}
-            _active={{ bg: 'blue.700' }}
-            fontWeight="medium"
-            gap="2"
-          >
-            <BsShield />
-            Schade melden
-            <VisuallyHidden>
-              - Opens external damage report form in new window
-            </VisuallyHidden>
-          </Button>
-          
-          <Button
-            asChild
-            bg="blue.500"
-            color="white"
-            size="sm"
-            _hover={{ bg: 'blue.600' }}
-            _active={{ bg: 'blue.700' }}
-            fontWeight="medium"
-          >
-            <Link href={NAVIGATION_ROUTES.quote}>
-              Offerte aanvragen
-            </Link>
-          </Button>
-        </HStack>
-      </Box>
 
-      {/* Divider */}
       <Box hideBelow="xl">
-        <Center>
-          <Box 
-            width="1px" 
-            height="40px" 
-            bg="gray.300"
-            role="separator"
-            aria-orientation="vertical"
-          />
-        </Center>
-      </Box>
-
-      {/* Contact Information */}
-      <Box hideBelow="xl">
-        <Button
-          asChild
-          variant="plain"
-          color="gray.700"
-          fontSize={{ base: 'sm', '2xl': 'md' }}
-          fontWeight="medium"
-          _hover={{ color: 'blue.500' }}
-          gap="2"
-        >
-          <Link href={`tel:${CONTACT_INFO.phone}`}>
-            <BsTelephone />
-            {CONTACT_INFO.phone}
-            <VisuallyHidden>
-              - Call us for immediate assistance
-            </VisuallyHidden>
-          </Link>
-        </Button>
+        <MenuRoot>
+          <MenuTrigger asChild>
+            <Button
+              bg="blue.500"
+              color="white"
+              size="sm"
+              _hover={{ bg: 'blue.600' }}
+              _active={{ bg: 'blue.700' }}
+              fontWeight="medium"
+              gap="2"
+            >
+              Acties
+              <BsChevronDown />
+            </Button>
+          </MenuTrigger>
+          <MenuContent>
+            <MenuItem
+              value="damage-report"
+              onClick={handleDamageReportClick}
+              gap="2"
+              _hover={{ bg: 'blue.50' }}
+            >
+              <BsShield />
+              Schade melden
+              <VisuallyHidden>
+                - Opens external damage report form in new window
+              </VisuallyHidden>
+            </MenuItem>
+            <MenuItem value="quote" asChild gap="2" _hover={{ bg: 'blue.50' }}>
+              <Link href={NAVIGATION_ROUTES.quote}>
+                Offerte aanvragen
+              </Link>
+            </MenuItem>
+            <MenuItem value="call" asChild gap="2" _hover={{ bg: 'blue.50' }}>
+              <Link href={`tel:${CONTACT_INFO.phone}`}>
+                <BsTelephone />
+                Bel nu
+                <VisuallyHidden>
+                  - Call us for immediate assistance: {CONTACT_INFO.phone}
+                </VisuallyHidden>
+              </Link>
+            </MenuItem>
+          </MenuContent>
+        </MenuRoot>
       </Box>
     </Flex>
   );

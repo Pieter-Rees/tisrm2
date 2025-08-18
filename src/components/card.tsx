@@ -1,21 +1,12 @@
-/**
- * Modern Card Component
- * @fileoverview Reusable card component with performance optimizations and accessibility
- */
-
 'use client';
 
-import { memo, useMemo } from 'react';
+import { memo } from 'react';
 import { Box, Heading, Text, LinkBox, LinkOverlay, Button } from '@chakra-ui/react';
 import { BsDownload, BsTelephone, BsArrowRight } from 'react-icons/bs';
 import Image from 'next/image';
 
 import { cn } from '@/lib/utils';
 import type { CardProps } from '@/types/components';
-
-/**
- * Card variant styles configuration
- */
 const CARD_VARIANTS = {
   default: {
     bg: 'white',
@@ -42,17 +33,6 @@ const CARD_VARIANTS = {
     transform: 'translateY(-4px)',
   },
 } as const;
-
-/**
- * Modern Card component with performance optimizations
- * Features:
- * - Multiple variants for different use cases
- * - Optimized image loading with Next.js Image
- * - Accessibility support with proper ARIA labels
- * - Performance optimized with memo and useMemo
- * - Modern hover effects and animations
- * - TypeScript support with comprehensive prop types
- */
 const Card = memo<CardProps>(({
   title,
   description,
@@ -68,15 +48,12 @@ const Card = memo<CardProps>(({
   className,
   'data-testid': testId,
 }) => {
-  // Memoize variant styles to prevent recalculation
-  const variantStyles = useMemo(() => CARD_VARIANTS[variant], [variant]);
-  
-  // Memoize derived state
-  const hasAction = useMemo(() => Boolean(cta || phone || downloadLink), [cta, phone, downloadLink]);
-  const isInteractive = useMemo(() => Boolean(ctaLink || phone || downloadLink), [ctaLink, phone, downloadLink]);
 
-  // Base card styles
-  const cardStyles = useMemo(() => ({
+  const variantStyles = CARD_VARIANTS[variant];
+  const hasAction = Boolean(cta || phone || downloadLink);
+  const isInteractive = Boolean(ctaLink || phone || downloadLink);
+
+  const cardStyles = {
     border: '1px solid',
     borderColor: disabled ? 'gray.300' : 'gray.200',
     borderRadius: 'lg',
@@ -95,10 +72,10 @@ const Card = memo<CardProps>(({
       outlineColor: 'blue.500',
       outlineOffset: '2px',
     },
-  }), [disabled, variantStyles, isInteractive]);
+  };
 
-  // Memoize card content
-  const cardContent = useMemo(() => (
+
+  const cardContent = (
     <>
       {image && (
         <Box
@@ -144,7 +121,6 @@ const Card = memo<CardProps>(({
           </Text>
         )}
 
-        {/* Action Buttons */}
         {hasAction && (
           <Box mt="4">
             {phone && (
@@ -195,9 +171,9 @@ const Card = memo<CardProps>(({
         )}
       </Box>
     </>
-  ), [image, altText, title, description, hasAction, phone, downloadLink, cta, ctaLink, loading]);
+  );
 
-  // For interactive cards with links
+
   if (isInteractive && !disabled) {
     const linkProps = downloadLink 
       ? { href: downloadLink, download: true }
@@ -220,7 +196,7 @@ const Card = memo<CardProps>(({
     );
   }
 
-  // Static card (no interaction)
+
   return (
     <Box
       as="article"

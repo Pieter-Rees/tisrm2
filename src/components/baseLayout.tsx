@@ -1,8 +1,3 @@
-/**
- * Modern Base Layout Component
- * @fileoverview Simple layout component for pages without sidebar
- */
-
 'use client';
 
 import { memo } from 'react';
@@ -11,67 +6,51 @@ import { Heading, Box } from '@chakra-ui/react';
 import { cn } from '@/lib/utils';
 import ErrorBoundary from '@/components/error-boundary';
 import type { BaseLayoutProps } from '@/types/components';
+import type { FC } from 'react';
 
-/**
- * Base layout component for simple page layouts
- * Features:
- * - Clean, minimal layout structure
- * - Responsive design with proper spacing
- * - Accessibility support with semantic HTML
- * - Error boundary protection
- * - Performance optimized with memo
- * - Modern TypeScript patterns
- */
-const BaseLayout = memo<BaseLayoutProps>(({
+// Constants for responsive styles
+const HEADER_SPACING = { base: '6', lg: '8' } as const;
+const HEADING_SIZE = { base: 'lg', md: 'xl', lg: '2xl' } as const;
+const HEADING_ALIGNMENT = { base: 'center', md: 'left' } as const;
+
+const BaseLayout: FC<BaseLayoutProps> = memo(({
   title,
   children,
   maxWidth = 'full',
   className,
   'data-testid': testId,
-}) => {
-  return (
-    <Box
-      className={cn('base-layout', className)}
-      data-testid={testId}
-      as="section"
-      role="main"
-      aria-labelledby="page-title"
-      width="full"
-      maxW={maxWidth}
-      mx="auto"
-    >
-      {/* Page Header */}
-      <Box
-        as="header"
-        mb={{ base: '6', lg: '8' }}
-      >
+}) => (
+  <Box
+    className={cn('base-layout', className)}
+    data-testid={testId}
+    as="section"
+    aria-labelledby={title ? 'page-title' : undefined}
+    w="full"
+    maxW={maxWidth}
+    mx="auto"
+  >
+    {title && (
+      <Box as="header" mb={HEADER_SPACING}>
         <Heading
           id="page-title"
           as="h1"
-          size={{ base: 'lg', md: 'xl', lg: '2xl' }}
+          size={HEADING_SIZE}
           color="gray.900"
           fontWeight="bold"
           lineHeight="tight"
-          textAlign={{ base: 'center', md: 'left' }}
+          textAlign={HEADING_ALIGNMENT}
         >
           {title}
         </Heading>
       </Box>
-
-      {/* Main Content */}
-      <ErrorBoundary>
-        <Box
-          as="main"
-          role="main"
-          aria-label="Main content"
-          minH="200px"
-        >
-          {children}
-        </Box>
-      </ErrorBoundary>
-    </Box>
-  );
-});
+    )}
+    <ErrorBoundary>
+      <Box as="main" minH="200px">
+        {children}
+      </Box>
+    </ErrorBoundary>
+  </Box>
+));
 
 BaseLayout.displayName = 'BaseLayout';
 

@@ -42,7 +42,7 @@ const SIDEBAR_CARDS = [
     variant: 'sidebar' as const,
     title: 'Vragen?',
     description: 'Neem direct contact met ons op voor persoonlijk advies',
-    cta: 'Bel ons nu',
+    cta: 'Bel nu',
     ctaLink: undefined,
     phone: `tel:${CONTACT_INFO.phone}`,
     buttonVariant: 'outline' as const,
@@ -71,20 +71,6 @@ const Sidebar = memo<BaseComponentProps>(({
       role="complementary"
       aria-label="Sidebar navigation and quick actions"
     >
-      {/* Sidebar Header */}
-      <Box mb="6">
-        <Heading
-          as="h2"
-          size="md"
-          color="gray.800"
-          fontWeight="semibold"
-          textAlign="center"
-        >
-          Snelle acties
-        </Heading>
-      </Box>
-
-      {/* Action Cards */}
       <VStack gap="6" align="stretch">
         {SIDEBAR_CARDS.map((card) => (
           <Card

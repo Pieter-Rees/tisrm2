@@ -1,8 +1,3 @@
-/**
- * Main application header component
- * @fileoverview Modern header with responsive navigation and accessibility features
- */
-
 'use client';
 
 import { memo } from 'react';
@@ -15,15 +10,6 @@ import Navbar from '@/components/navbar';
 import Sidenav from '@/components/sidenav';
 import { useDisclosure } from '@/hooks/use-disclosure';
 import { NAVIGATION_ROUTES, UI_CONSTANTS } from '@/constants/app';
-
-/**
- * Header component with responsive navigation
- * Features:
- * - Responsive design with mobile menu
- * - Accessibility support with ARIA labels
- * - Modern animation and transitions
- * - SEO optimized with semantic HTML
- */
 const Header = memo(() => {
   const { isOpen: showSideNav, onToggle: handleToggle, onClose: closeSideNav } = useDisclosure();
 
@@ -39,7 +25,7 @@ const Header = memo(() => {
       borderColor="gray.200"
       boxShadow="sm"
     >
-      <Container maxW="6xl">
+      <Container>
         <Flex
           align="center"
           justify="space-between"
@@ -47,7 +33,7 @@ const Header = memo(() => {
           gap="8"
           minH="80px"
         >
-          {/* Logo */}
+
           <Box flex="0 0 auto">
             <Link
               href={NAVIGATION_ROUTES.home}
@@ -58,12 +44,12 @@ const Header = memo(() => {
             </Link>
           </Box>
 
-          {/* Desktop Navigation */}
+
           <Box flex="1" hideBelow="xl">
             <Navbar />
           </Box>
 
-          {/* Mobile Menu Button */}
+
           <Box hideFrom="xl">
             <Button
               variant="ghost"
@@ -82,7 +68,7 @@ const Header = memo(() => {
         </Flex>
       </Container>
 
-      {/* Mobile Menu Overlay */}
+
       {showSideNav && (
         <Box
           position="fixed"
@@ -95,7 +81,7 @@ const Header = memo(() => {
         />
       )}
 
-      {/* Mobile Navigation */}
+
       <Sidenav showSideNav={showSideNav} handleToggle={handleToggle} />
     </Box>
   );

@@ -1,11 +1,6 @@
-/**
- * Modern Registration Form Component
- * @fileoverview Built with React Hook Form, Chakra UI v3, and TypeScript with 2025 patterns
- */
-
 'use client';
 
-import { useState, useCallback, useTransition } from 'react';
+import { useState, useCallback, useTransition, useMemo } from 'react';
 import {
   Box,
   SimpleGrid,
@@ -24,17 +19,6 @@ import { isValidEmail, isValidDutchPostalCode } from '@/lib/utils';
 import type { OfferteFormData } from '@/types/components';
 
 type SubmissionState = 'idle' | 'success' | 'error';
-
-/**
- * Modern form with enhanced validation, error handling, and user experience
- * Features:
- * - React Hook Form with TypeScript
- * - Custom validation with utility functions
- * - Optimistic UI updates with transitions
- * - Comprehensive error handling
- * - Accessibility support
- * - Modern form patterns
- */
 export default function RegistrationForm() {
   const [submissionState, setSubmissionState] = useState<SubmissionState>('idle');
   const [isPending, startTransition] = useTransition();
@@ -61,8 +45,14 @@ export default function RegistrationForm() {
     },
   });
 
-  // Watch form values for real-time feedback
   const watchedValues = watch();
+  
+  const filledFieldsCount = useMemo(() => 
+    Object.entries(watchedValues).filter(([key, value]) => key !== 'message' && value).length,
+    [watchedValues]
+  );
+  
+  const totalRequiredFields = 8;
 
   const onSubmit = useCallback(async (values: OfferteFormData) => {
     setErrorMessage('');
@@ -372,10 +362,9 @@ export default function RegistrationForm() {
         </Button>
       </Box>
 
-      {/* Form Progress Indicator */}
-      {Object.keys(watchedValues).some(key => watchedValues[key as keyof OfferteFormData]) && (
+      {filledFieldsCount > 0 && (
         <Text fontSize="sm" color="gray.600" mt="4" textAlign="center">
-          Voortgang: {Object.keys(watchedValues).filter(key => watchedValues[key as keyof OfferteFormData]).length} / {Object.keys(watchedValues).length - 1} velden ingevuld
+          Voortgang: {filledFieldsCount} / {totalRequiredFields} velden ingevuld
         </Text>
       )}
     </Box>

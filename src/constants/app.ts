@@ -1,8 +1,3 @@
-/**
- * Application constants and configuration
- * @fileoverview Global constants for the TIS Risk Managers application
- */
-
 export const APP_CONFIG = {
   name: 'TIS Risk Managers',
   description: 'Professional insurance and risk management services',

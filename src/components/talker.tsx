@@ -1,8 +1,3 @@
-/**
- * Modern Testimonial Component
- * @fileoverview Professional testimonial section with optimized image and typography
- */
-
 'use client';
 
 import { memo } from 'react';
@@ -12,10 +7,6 @@ import { BsQuote } from 'react-icons/bs';
 
 import { cn } from '@/lib/utils';
 import type { TalkerProps } from '@/types/components';
-
-/**
- * Default testimonial content
- */
 const DEFAULT_TESTIMONIAL = {
   name: 'René Enthoven',
   title: 'Directeur TIS Risk Managers',
@@ -23,17 +14,6 @@ const DEFAULT_TESTIMONIAL = {
   quote: 'De weldaden van een verzekering komen samen met het onheil aan het licht.',
   company: 'TIS Risk Managers',
 } as const;
-
-/**
- * Modern testimonial component with optimized performance and accessibility
- * Features:
- * - Responsive design with mobile-first approach
- * - Optimized image loading with Next.js Image
- * - Accessibility support with proper ARIA labels
- * - Performance optimized with memo
- * - Modern typography and spacing
- * - Professional styling with subtle animations
- */
 const Talker = memo<TalkerProps>(({
   name = DEFAULT_TESTIMONIAL.name,
   title = DEFAULT_TESTIMONIAL.title,
@@ -45,7 +25,6 @@ const Talker = memo<TalkerProps>(({
 }) => {
   return (
     <Box
-      className={cn('testimonial', className)}
       data-testid={testId}
       as="section"
       role="region"
@@ -64,7 +43,7 @@ const Talker = memo<TalkerProps>(({
         maxW="4xl"
         mx="auto"
       >
-        {/* Profile Image */}
+
         <Box
           position="relative"
           flexShrink={0}
@@ -104,7 +83,7 @@ const Talker = memo<TalkerProps>(({
           </Box>
         </Box>
 
-        {/* Testimonial Content */}
+
         <VStack
           align={{ base: 'center', lg: 'flex-start' }}
           textAlign={{ base: 'center', lg: 'left' }}
@@ -112,43 +91,25 @@ const Talker = memo<TalkerProps>(({
           flex="1"
           maxW={{ base: 'full', lg: '2xl' }}
         >
-          {/* Quote Icon */}
+
           <Box color="blue.500" opacity="0.8">
             <BsQuote size="48" />
           </Box>
 
-          {/* Quote Text */}
-          <Text
+
+          <Box
+            position="relative"
             fontSize={{ base: 'lg', lg: 'xl' }}
             lineHeight="relaxed"
             color="gray.700"
             fontStyle="italic"
-            position="relative"
-            _before={{
-              content: '"""',
-              position: 'absolute',
-              left: '-0.5em',
-              top: '0',
-              fontSize: '1.5em',
-              color: 'blue.500',
-              lineHeight: '1',
-            }}
-            _after={{
-              content: '"""',
-              position: 'absolute',
-              right: '-0.5em',
-              bottom: '0',
-              fontSize: '1.5em',
-              color: 'blue.500',
-              lineHeight: '1',
-            }}
             pl="4"
             pr="4"
           >
             {quote}
-          </Text>
+          </Box>
 
-          {/* Attribution */}
+
           <VStack gap="1" align={{ base: 'center', lg: 'flex-start' }}>
             <Text
               fontSize="lg"

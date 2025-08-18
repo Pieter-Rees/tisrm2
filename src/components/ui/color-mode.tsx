@@ -15,7 +15,13 @@ interface ColorModeProviderProps {
 
 export function ColorModeProvider({ children, attribute = 'class', ...props }: ColorModeProviderProps) {
   return (
-    <ThemeProvider attribute={attribute as any} disableTransitionOnChange {...props}>
+    <ThemeProvider 
+      attribute={attribute as any} 
+      disableTransitionOnChange 
+      defaultTheme="light"
+      forcedTheme="light"
+      {...props}
+    >
       {children}
     </ThemeProvider>
   );

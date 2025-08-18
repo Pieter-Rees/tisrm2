@@ -1,29 +1,14 @@
-/**
- * Modern Grid Layout Component
- * @fileoverview Responsive grid layout with sidebar support and accessibility
- */
-
 'use client';
 
-import { memo, Suspense } from 'react';
+import { memo, Suspense, lazy } from 'react';
 import { Grid, GridItem, Heading, Flex, Box } from '@chakra-ui/react';
 
-import Sidebar from '@/components/sidebar';
 import Loading from '@/components/loading';
 import ErrorBoundary from '@/components/error-boundary';
 import { cn } from '@/lib/utils';
 import type { GridLayoutProps } from '@/types/components';
 
-/**
- * Modern grid layout component with responsive design and performance optimizations
- * Features:
- * - Responsive grid system with customizable columns
- * - Optional sidebar with lazy loading
- * - Accessibility support with semantic structure
- * - Error boundaries for resilience
- * - Performance optimized with memo and suspense
- * - Modern TypeScript patterns
- */
+const Sidebar = lazy(() => import('@/components/sidebar'));
 const GridLayout = memo<GridLayoutProps>(({
   children,
   title,
@@ -46,7 +31,7 @@ const GridLayout = memo<GridLayoutProps>(({
       maxW={maxWidth}
       mx="auto"
     >
-      {/* Page Header */}
+
       <Flex
         as="header"
         width="full"
@@ -78,7 +63,7 @@ const GridLayout = memo<GridLayoutProps>(({
         )}
       </Flex>
 
-      {/* Main Content Grid */}
+
       <Grid
         templateColumns={{ 
           base: '1fr', 
@@ -88,7 +73,7 @@ const GridLayout = memo<GridLayoutProps>(({
         alignItems="start"
         width="full"
       >
-        {/* Main Content Area */}
+
         <GridItem
           colSpan={{
             base: 1,
@@ -107,7 +92,7 @@ const GridLayout = memo<GridLayoutProps>(({
           </ErrorBoundary>
         </GridItem>
 
-        {/* Sidebar */}
+
         {sidebar && (
           <GridItem
             colSpan={{

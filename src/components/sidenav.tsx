@@ -1,45 +1,25 @@
-/**
- * Modern Mobile Side Navigation Component
- * @fileoverview Responsive mobile navigation with accessibility and animations
- */
-
 'use client';
 
 import { memo, useCallback, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { Box, Button, Flex, VStack, Separator } from '@chakra-ui/react';
-import { BsShield, BsTelephone, BsX } from 'react-icons/bs';
+import { MenuRoot, MenuTrigger, MenuContent, MenuItem } from '@chakra-ui/react';
+import { BsShield, BsTelephone, BsX, BsChevronDown } from 'react-icons/bs';
 
 import Logo from '@/components/logo';
 import { NAVIGATION_ROUTES, EXTERNAL_LINKS, CONTACT_INFO, UI_CONSTANTS } from '@/constants/app';
 import { cn } from '@/lib/utils';
 import type { SidenavProps, NavigationLink } from '@/types/components';
-
-/**
- * Mobile navigation links configuration
- */
 const MOBILE_NAVIGATION_LINKS: readonly NavigationLink[] = [
   { href: NAVIGATION_ROUTES.home, label: 'Home' },
   { href: NAVIGATION_ROUTES.insurance, label: 'Verzekeringen' },
   { href: NAVIGATION_ROUTES.taxi, label: 'Taxi' },
   { href: NAVIGATION_ROUTES.riskManagement, label: 'Risk Management' },
   { href: NAVIGATION_ROUTES.about, label: 'Over ons' },
-  { href: NAVIGATION_ROUTES.downloads, label: 'Bestanden' },
+  { href: NAVIGATION_ROUTES.downloads, label: 'Downloads' },
   { href: NAVIGATION_ROUTES.contact, label: 'Contact' },
 ] as const;
-
-/**
- * Modern mobile side navigation component
- * Features:
- * - Smooth slide-in animation
- * - Active link highlighting
- * - Keyboard navigation support
- * - Focus management and trapping
- * - Accessibility with ARIA labels
- * - Performance optimized with memo
- * - Modern TypeScript patterns
- */
 const Sidenav = memo<SidenavProps>(({
   showSideNav,
   handleToggle,
@@ -48,7 +28,7 @@ const Sidenav = memo<SidenavProps>(({
 }) => {
   const pathname = usePathname();
 
-  // Handle external damage report link
+
   const handleDamageReportClick = useCallback(() => {
     window.open(
       EXTERNAL_LINKS.damageReport,
@@ -58,7 +38,7 @@ const Sidenav = memo<SidenavProps>(({
     handleToggle(); // Close menu after action
   }, [handleToggle]);
 
-  // Close menu on escape key
+
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === 'Escape' && showSideNav) {
@@ -78,7 +58,7 @@ const Sidenav = memo<SidenavProps>(({
     };
   }, [showSideNav, handleToggle]);
 
-  // Handle navigation link click
+
   const handleLinkClick = useCallback(() => {
     handleToggle();
   }, [handleToggle]);
@@ -107,7 +87,7 @@ const Sidenav = memo<SidenavProps>(({
       borderRight="1px solid"
       borderColor="gray.200"
     >
-      {/* Close Button */}
+
       <Box
         position="absolute"
         top="4"
@@ -125,7 +105,7 @@ const Sidenav = memo<SidenavProps>(({
         </Button>
       </Box>
 
-      {/* Navigation Content */}
+
       <Flex
         direction="column"
         height="full"
@@ -135,7 +115,7 @@ const Sidenav = memo<SidenavProps>(({
         pt="16"
         gap="8"
       >
-        {/* Logo */}
+
         <Box mb="4">
           <Link
             href={NAVIGATION_ROUTES.home}
@@ -146,7 +126,7 @@ const Sidenav = memo<SidenavProps>(({
           </Link>
         </Box>
 
-        {/* Navigation Links */}
+
         <VStack
           as="ul"
           gap="3"
@@ -189,56 +169,50 @@ const Sidenav = memo<SidenavProps>(({
           })}
         </VStack>
 
-        {/* Divider */}
+
         <Separator borderColor="gray.300" width="80%" />
 
-        {/* Action Buttons */}
-        <VStack gap="3" width="full" px="4">
-          <Button
-            onClick={handleDamageReportClick}
-            bg="blue.500"
-            color="white"
-            size="lg"
-            width="full"
-            _hover={{ bg: 'blue.600' }}
-            _active={{ bg: 'blue.700' }}
-            gap="2"
-          >
-            <BsShield />
-            Schade melden
-          </Button>
-          
-          <Button
-            asChild
-            bg="blue.500"
-            color="white"
-            size="lg"
-            width="full"
-            _hover={{ bg: 'blue.600' }}
-            _active={{ bg: 'blue.700' }}
-          >
-            <Link href={NAVIGATION_ROUTES.quote} onClick={handleLinkClick}>
-              Offerte aanvragen
-            </Link>
-          </Button>
-        </VStack>
 
-        {/* Contact */}
-        <Box mt="4">
-          <Button
-            asChild
-            variant="plain"
-            color="gray.700"
-            fontSize="lg"
-            fontWeight="medium"
-            _hover={{ color: 'blue.500' }}
-            gap="2"
-          >
-            <Link href={`tel:${CONTACT_INFO.phone}`} onClick={handleLinkClick}>
-              <BsTelephone />
-              {CONTACT_INFO.phone}
-            </Link>
-          </Button>
+        <Box width="full" px="4" mt="4">
+          <MenuRoot>
+            <MenuTrigger asChild>
+              <Button
+                bg="blue.500"
+                color="white"
+                size="lg"
+                width="full"
+                _hover={{ bg: 'blue.600' }}
+                _active={{ bg: 'blue.700' }}
+                fontWeight="medium"
+                gap="2"
+              >
+                Acties
+                <BsChevronDown />
+              </Button>
+            </MenuTrigger>
+            <MenuContent>
+              <MenuItem
+                value="damage-report"
+                onClick={handleDamageReportClick}
+                gap="2"
+                _hover={{ bg: 'blue.50' }}
+              >
+                <BsShield />
+                Schade melden
+              </MenuItem>
+              <MenuItem value="quote" asChild gap="2" _hover={{ bg: 'blue.50' }}>
+                <Link href={NAVIGATION_ROUTES.quote} onClick={handleLinkClick}>
+                  Offerte aanvragen
+                </Link>
+              </MenuItem>
+              <MenuItem value="call" asChild gap="2" _hover={{ bg: 'blue.50' }}>
+                <Link href={`tel:${CONTACT_INFO.phone}`} onClick={handleLinkClick}>
+                  <BsTelephone />
+                  Bel nu
+                </Link>
+              </MenuItem>
+            </MenuContent>
+          </MenuRoot>
         </Box>
       </Flex>
     </Flex>

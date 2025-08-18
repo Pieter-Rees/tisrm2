@@ -6,7 +6,7 @@ import Card from '@/components/card'
 export default function Bestanden() {
     return (
         <Container>
-            <GridLayout title='Bestanden'>
+            <GridLayout title='Downloads'>
                 <Grid width='full' templateRows='repeat(2, 1fr)' templateColumns={{ base: 'repeat(1, 1fr)', lg: 'repeat(2, 1fr)' }} gap='8' >
                     <GridItem >
                         <Card variant='downloads' title="Schadeaanrijdingsformulier" downloadLink='/documents/aanrijdingsformulier.pdf' />

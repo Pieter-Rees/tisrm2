@@ -1,8 +1,3 @@
-/**
- * Modern Three Elements Feature Section
- * @fileoverview Responsive feature showcase with optimized cards and modern layout
- */
-
 'use client';
 
 import { memo } from 'react';
@@ -12,10 +7,6 @@ import Card from '@/components/card';
 import { NAVIGATION_ROUTES } from '@/constants/app';
 import { cn } from '@/lib/utils';
 import type { ThreeElementsProps } from '@/types/components';
-
-/**
- * Feature cards data configuration
- */
 const FEATURE_CARDS = [
   {
     id: 'risk-management',
@@ -46,17 +37,6 @@ const FEATURE_CARDS = [
     external: true,
   },
 ] as const;
-
-/**
- * Modern three elements feature section component
- * Features:
- * - Responsive grid layout with mobile-first approach
- * - Performance optimized cards with lazy loading
- * - Accessibility support with proper ARIA labels
- * - SEO optimized with semantic structure
- * - Performance optimized with memo
- * - Modern spacing and typography
- */
 const ThreeElements = memo<ThreeElementsProps>(({
   elements = FEATURE_CARDS,
   className,
@@ -70,7 +50,7 @@ const ThreeElements = memo<ThreeElementsProps>(({
       role="region"
       aria-label="Key features and services"
     >
-      {/* Section Header */}
+
       <Box mb={{ base: '8', lg: '12' }} textAlign="center">
         <Heading
           as="h2"
@@ -92,7 +72,7 @@ const ThreeElements = memo<ThreeElementsProps>(({
         </Box>
       </Box>
 
-      {/* Feature Cards Grid */}
+
       <Grid
         templateColumns={{
           base: 'repeat(1, 1fr)',
@@ -119,7 +99,7 @@ const ThreeElements = memo<ThreeElementsProps>(({
         ))}
       </Grid>
 
-      {/* Call to Action Section */}
+
       <Box
         mt={{ base: '12', lg: '16' }}
         p={{ base: '6', lg: '8' }}
@@ -156,7 +136,7 @@ const ThreeElements = memo<ThreeElementsProps>(({
         >
           <Card
             title="Bel direct"
-            cta="020 636 8191"
+            cta="Bel nu"
             phone="tel:+310206368191"
             variant="sidebar"
             buttonVariant="solid"
