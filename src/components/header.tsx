@@ -31,7 +31,6 @@ const Header = memo(() => {
           justify="space-between"
           py="4"
           gap="8"
-          minH="80px"
         >
 
           <Box flex="0 0 auto">
@@ -40,7 +39,7 @@ const Header = memo(() => {
               aria-label="Go to homepage"
               onClick={closeSideNav}
             >
-              <Logo width="200px" height="auto" />
+              <Logo width="150px" height="auto" />
             </Link>
           </Box>
 

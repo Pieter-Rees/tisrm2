@@ -63,6 +63,10 @@ const Card = memo<CardProps>(({
     transition: 'all 0.2s ease-in-out',
     opacity: disabled ? 0.6 : 1,
     cursor: isInteractive && !disabled ? 'pointer' : 'default',
+    height: '100%',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
     _hover: !disabled ? {
       boxShadow: variantStyles.hoverShadow,
       transform: variantStyles.transform,
@@ -99,7 +103,7 @@ const Card = memo<CardProps>(({
         </Box>
       )}
       
-      <Box p={{ base: '4', md: '6' }}>
+      <Box p={{ base: '4', md: '6' }} flex="1" display="flex" flexDirection="column">
         <Heading 
           as="h3" 
           size={{ base: 'md', md: 'lg' }} 
@@ -116,13 +120,14 @@ const Card = memo<CardProps>(({
             fontSize={{ base: 'sm', md: 'md' }}
             lineHeight="relaxed"
             mb={hasAction ? '4' : '0'}
+            flex="1"
           >
             {description}
           </Text>
         )}
 
         {hasAction && (
-          <Box mt="4">
+          <Box mt="auto">
             {phone && (
               <Button
                 asChild

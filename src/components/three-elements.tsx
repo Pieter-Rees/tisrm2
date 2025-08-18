@@ -81,9 +81,10 @@ const ThreeElements = memo<ThreeElementsProps>(({
         }}
         gap={{ base: '6', lg: '8' }}
         alignItems="stretch"
+        width="100%"
       >
         {elements.map((element, index) => (
-          <GridItem key={element.id}>
+          <GridItem key={element.id} display="flex" minW="0">
             <Card
               image={element.image}
               title={element.title}

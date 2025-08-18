@@ -25,7 +25,7 @@ export default function Footer() {
     <>
       <FooterLogos width="auto" height="auto" />
       <Box bg="gray.700" py="16">
-        <Container maxW="6xl">
+        <Container>
           <Grid templateColumns={{ base: '1fr', md: 'repeat(3, 1fr)' }} gap="16">
             <GridItem>
               <VStack align="start" gap="4">

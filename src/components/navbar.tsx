@@ -80,7 +80,7 @@ const Navbar = memo(() => {
       </Box>
 
 
-      <Box hideBelow="xl">
+      <Box hideBelow="xl" position="relative">
         <MenuRoot>
           <MenuTrigger asChild>
             <Button
@@ -96,7 +96,19 @@ const Navbar = memo(() => {
               <BsChevronDown />
             </Button>
           </MenuTrigger>
-          <MenuContent>
+          <MenuContent
+            position="absolute"
+            top="100%"
+            right="0"
+            mt="1"
+            minW="200px"
+            bg="white"
+            border="1px solid"
+            borderColor="gray.200"
+            borderRadius="md"
+            boxShadow="lg"
+            zIndex="dropdown"
+          >
             <MenuItem
               value="damage-report"
               onClick={handleDamageReportClick}

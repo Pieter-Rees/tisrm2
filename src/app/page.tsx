@@ -36,9 +36,9 @@ const HeroImage = () => (
 );
 export default function Homepage() {
   return (
-    <Container maxW="6xl" py="8">
+    <Container py="8">
       <Grid
-        templateColumns={{ base: '1fr', xl: '2fr 1fr' }}
+        templateColumns={{ base: '1fr', xl: '3fr 1fr' }}
         gap="12"
         alignItems="start"
       >
@@ -46,7 +46,7 @@ export default function Homepage() {
           <Flex direction="column" gap="12">
             <ErrorBoundary>
               <Grid
-                templateColumns={{ base: '1fr', lg: '2fr 1fr' }}
+                templateColumns={{ base: '1fr', lg: '1fr 1fr' }}
                 gap="8"
                 alignItems="stretch"
               >
