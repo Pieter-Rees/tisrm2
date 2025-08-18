@@ -22,11 +22,6 @@ const HeroImage = () => (
       overflow="hidden"
       boxShadow="xl"
       bg="gray.100"
-      transition="all 0.3s ease"
-      _hover={{
-        transform: 'scale(1.02)',
-        boxShadow: '2xl',
-      }}
     >
       <Image
         src="/1.webp"

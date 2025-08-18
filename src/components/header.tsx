@@ -32,7 +32,7 @@ const Header = memo(() => {
           gap="8"
         >
 
-          <Box flex="0 0 auto">
+          <Box flex="0 0 auto" padding='4'>
             <Link
               href={NAVIGATION_ROUTES.home}
               aria-label="Go to homepage"

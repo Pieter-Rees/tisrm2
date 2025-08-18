@@ -17,7 +17,7 @@ export default function Contact() {
     return (
         <PageLayout title="Contact">
             <Flex direction="column" gap={SECTION_SPACING.medium}>
-                <Grid 
+                <Grid
                     templateColumns={{
                         base: 'repeat(1, 1fr)',
                         md: 'repeat(2, 1fr)',
@@ -35,37 +35,35 @@ export default function Contact() {
                         </SlideInLeft>
                     </GridItem>
                     <GridItem display="flex" minW="0">
-                        <SlideInRight delay={0.2}>
-                            <Box 
-                                borderRadius="lg" 
-                                boxShadow="lg" 
-                                overflow="hidden" 
-                                position="relative" 
-                                width="full" 
-                                height={{ base: '300px', md: '400px', lg: '500px' }}
-                                minHeight="300px"
-                                transition="all 0.3s ease"
-                                _hover={{
-                                    transform: 'scale(1.02)',
-                                    boxShadow: 'xl',
+                        <Box
+                            borderRadius="lg"
+                            boxShadow="lg"
+                            overflow="hidden"
+                            position="relative"
+                            width="full"
+                            height={{ base: '300px', md: '400px', lg: '500px' }}
+                            minHeight="300px"
+                            transition="all 0.3s ease"
+                            _hover={{
+                                transform: 'scale(1.02)',
+                                boxShadow: 'xl',
+                            }}
+                        >
+                            <Image
+                                src="/bb.jpg"
+                                alt="Office building of TIS Risk Managers"
+                                fill
+                                sizes="(max-width: 768px) 100vw, 50vw"
+                                style={{
+                                    objectFit: 'cover',
+                                    objectPosition: 'center'
                                 }}
-                            >
-                                <Image
-                                    src="/bb.jpg"
-                                    alt="Office building of TIS Risk Managers"
-                                    fill
-                                    sizes="(max-width: 768px) 100vw, 50vw"
-                                    style={{ 
-                                        objectFit: 'cover',
-                                        objectPosition: 'center'
-                                    }}
-                                    priority
-                                />
-                            </Box>
-                        </SlideInRight>
+                                priority
+                            />
+                        </Box>
                     </GridItem>
                 </Grid>
-                
+
                 <ScaleIn delay={0.4}>
                     <Box pt={SECTION_SPACING.large} textAlign="center">
                         <FadeInUp delay={0.5}>
@@ -74,9 +72,9 @@ export default function Contact() {
                             </Text>
                         </FadeInUp>
                         <FadeInUp delay={0.6}>
-                            <Button 
-                                bg="blue.500" 
-                                color="white" 
+                            <Button
+                                bg="blue.500"
+                                color="white"
                                 onClick={handleSchadeClick}
                                 size="lg"
                                 borderRadius="lg"

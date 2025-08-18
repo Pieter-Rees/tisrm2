@@ -44,15 +44,10 @@ export default function Overons() {
                         <Flex width="full" justifyContent="center" mt={SECTION_SPACING.medium}>
                             <Box 
                                 transform={{ base: '', lg: 'rotate(2deg)' }} 
-                                transition="all 0.4s ease" 
                                 width="fit-content" 
                                 borderRadius="lg" 
                                 boxShadow="lg" 
                                 overflow="hidden"
-                                _hover={{
-                                    transform: { base: 'scale(1.05)', lg: 'rotate(0deg) scale(1.05)' },
-                                    boxShadow: '2xl',
-                                }}
                             >
                                 <Image
                                     src="/team.jpg"

@@ -68,7 +68,7 @@ const Card = memo<CardProps>(({
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
-    _hover: !disabled ? {
+    _hover: !disabled && isInteractive ? {
       boxShadow: variantStyles.hoverShadow,
       transform: variantStyles.transform,
     } : {},
