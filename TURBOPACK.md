@@ -5,6 +5,7 @@ This project is fully configured to work with Turbopack, Next.js's new Rust-base
 ## 🏃‍♂️ Quick Start
 
 ### Development Mode
+
 ```bash
 # Use Turbopack for development (default)
 npm run dev
@@ -14,6 +15,7 @@ npm run dev -- --turbo
 ```
 
 ### Production Build
+
 ```bash
 # Build with Turbopack
 npm run build:turbo
@@ -25,12 +27,14 @@ npm run build
 ## ⚡ Performance Comparison
 
 ### Development Server
+
 - **Turbopack**: ~1-2 seconds startup time
 - **Webpack**: ~3-5 seconds startup time
 
 ### Build Performance
+
 | Bundler   | Build Time | Bundle Size | Optimizations |
-|-----------|------------|-------------|---------------|
+| --------- | ---------- | ----------- | ------------- |
 | Webpack   | ~6s        | 99.5 kB     | Full          |
 | Turbopack | ~5s        | 285 kB      | Experimental  |
 
@@ -39,12 +43,14 @@ npm run build
 The project automatically detects when Turbopack is being used and adjusts the configuration:
 
 ### Webpack Mode (Default)
+
 - ✅ `typedRoutes` enabled
-- ✅ `optimizePackageImports` enabled  
+- ✅ `optimizePackageImports` enabled
 - ✅ Tree shaking and modular imports
 - ✅ Bundle analyzer support
 
 ### Turbopack Mode
+
 - ❌ Advanced optimizations disabled (experimental)
 - ✅ Faster development builds
 - ✅ Modern Rust-based bundling
@@ -62,19 +68,25 @@ Turbopack is still experimental. The following features are disabled when using 
 ## 🎯 Recommendations
 
 ### For Development
+
 Use Turbopack for the fastest development experience:
+
 ```bash
 npm run dev  # Already uses --turbo by default
 ```
 
 ### For Production
+
 Use webpack for optimized production builds:
+
 ```bash
 npm run build  # Uses webpack with full optimizations
 ```
 
 ### For Experimentation
+
 Try Turbopack builds to see future performance:
+
 ```bash
 npm run build:turbo  # Experimental Turbopack build
 ```

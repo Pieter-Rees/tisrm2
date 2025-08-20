@@ -1,24 +1,24 @@
 'use client';
 
-import { useEffect, useState, useCallback, useTransition } from 'react';
-import { useRouter } from 'next/navigation';
-import {
-  Box,
-  Container,
-  VStack,
-  HStack,
-  Button,
-  Heading,
-  Text,
-  SimpleGrid,
-  Textarea,
-  Card,
-} from '@chakra-ui/react';
-import { useForm } from 'react-hook-form';
-import { BsCheck2Circle, BsExclamationTriangle } from 'react-icons/bs';
 import BaseLayout from '@/components/baseLayout';
 import { Field } from '@/components/ui/field';
 import { useLocalStorage } from '@/hooks/use-local-storage';
+import {
+  Box,
+  Button,
+  Card,
+  Container,
+  Heading,
+  HStack,
+  SimpleGrid,
+  Text,
+  Textarea,
+  VStack,
+} from '@chakra-ui/react';
+import { useRouter } from 'next/navigation';
+import { useCallback, useEffect, useState, useTransition } from 'react';
+import { useForm } from 'react-hook-form';
+import { BsCheck2Circle, BsExclamationTriangle } from 'react-icons/bs';
 
 interface Step1Data {
   firstName: string;
@@ -44,7 +44,8 @@ export default function OfferteStep3() {
   const router = useRouter();
   const [step1Data] = useLocalStorage<Step1Data | null>('offerte-step1', null);
   const [step2Data] = useLocalStorage<Step2Data | null>('offerte-step2', null);
-  const [submissionState, setSubmissionState] = useState<SubmissionState>('idle');
+  const [submissionState, setSubmissionState] =
+    useState<SubmissionState>('idle');
   const [isPending, startTransition] = useTransition();
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [isCheckingData, setIsCheckingData] = useState(true);
@@ -91,78 +92,80 @@ export default function OfferteStep3() {
     localStorage.removeItem('offerte-step2');
   }, []);
 
-  const onSubmit = useCallback(async (values: Step3FormData) => {
-    if (!step1Data || !step2Data) return;
+  const onSubmit = useCallback(
+    async (values: Step3FormData) => {
+      if (!step1Data || !step2Data) return;
 
-    setErrorMessage('');
-    
-    startTransition(async () => {
-      try {
-        const payload = {
-          ...step1Data,
-          ...step2Data,
-          ...values,
-          tisrm: true,
-          timestamp: new Date().toISOString(),
-          userAgent: navigator.userAgent,
-        };
+      setErrorMessage('');
 
-        // Debug logging to help identify the issue
-        console.log('=== FORM SUBMISSION DEBUG ===');
-        console.log('Step 1 Data:', step1Data);
-        console.log('Step 2 Data:', step2Data);
-        console.log('Step 3 Data (message):', values);
-        console.log('Final Payload:', payload);
-        console.log('=============================');
+      startTransition(async () => {
+        try {
+          const payload = {
+            ...step1Data,
+            ...step2Data,
+            ...values,
+            tisrm: true,
+            timestamp: new Date().toISOString(),
+            userAgent: navigator.userAgent,
+          };
 
-        const formAddress = 'https://pieterrees.nl/email';
-        
-        const response = await fetch(formAddress, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-          },
-          body: JSON.stringify(payload),
-          signal: AbortSignal.timeout(15000), // 15 second timeout
-        });
+          const formAddress = 'https://pieterrees.nl/email';
 
-        if (!response.ok) {
-          throw new Error(`Server responded with ${response.status}: ${response.statusText}`);
-        }
+          const response = await fetch(formAddress, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json',
+            },
+            body: JSON.stringify(payload),
+            signal: AbortSignal.timeout(15000), // 15 second timeout
+          });
 
-        const result = await response.json();
-        // Form submission successful - log in development mode only
-        if (process.env.NODE_ENV === 'development') {
-          // eslint-disable-next-line no-console
-          console.log('Form submission successful:', result);
-        }
-        
-        setSubmissionState('success');
-        reset();
-        clearAllData();
-        
-        // Scroll to top to show success message
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        
-      } catch (error) {
-        console.error('Form submission error:', error);
-        setSubmissionState('error');
-        
-        if (error instanceof Error) {
-          if (error.name === 'TimeoutError') {
-            setErrorMessage('De aanvraag duurde te lang. Probeer het opnieuw.');
-          } else if (error.message.includes('Network')) {
-            setErrorMessage('Netwerkfout. Controleer uw internetverbinding en probeer opnieuw.');
-          } else {
-            setErrorMessage(`Er is een fout opgetreden: ${error.message}`);
+          if (!response.ok) {
+            throw new Error(
+              `Server responded with ${response.status}: ${response.statusText}`,
+            );
           }
-        } else {
-          setErrorMessage('Er is een onbekende fout opgetreden. Probeer het later opnieuw.');
+
+          const result = await response.json();
+          // Form submission successful - log in development mode only
+          if (process.env.NODE_ENV === 'development') {
+            // eslint-disable-next-line no-console
+            console.log('Form submission successful:', result);
+          }
+
+          setSubmissionState('success');
+          reset();
+          clearAllData();
+
+          // Scroll to top to show success message
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } catch (error) {
+          console.error('Form submission error:', error);
+          setSubmissionState('error');
+
+          if (error instanceof Error) {
+            if (error.name === 'TimeoutError') {
+              setErrorMessage(
+                'De aanvraag duurde te lang. Probeer het opnieuw.',
+              );
+            } else if (error.message.includes('Network')) {
+              setErrorMessage(
+                'Netwerkfout. Controleer uw internetverbinding en probeer opnieuw.',
+              );
+            } else {
+              setErrorMessage(`Er is een fout opgetreden: ${error.message}`);
+            }
+          } else {
+            setErrorMessage(
+              'Er is een onbekende fout opgetreden. Probeer het later opnieuw.',
+            );
+          }
         }
-      }
-    });
-  }, [step1Data, step2Data, reset, clearAllData]);
+      });
+    },
+    [step1Data, step2Data, reset, clearAllData],
+  );
 
   const goBack = () => {
     router.push('/offerte/stap-2');
@@ -191,7 +194,8 @@ export default function OfferteStep3() {
               Bedankt voor uw aanvraag!
             </Heading>
             <Text color="gray.700" fontSize="lg" maxW="md">
-              Wij hebben uw aanvraag ontvangen en nemen binnen 24 uur contact met u op.
+              Wij hebben uw aanvraag ontvangen en nemen binnen 24 uur contact
+              met u op.
             </Text>
             <Button
               onClick={startNewRequest}
@@ -214,13 +218,23 @@ export default function OfferteStep3() {
           <Box width="full" py="6">
             <HStack justify="center" gap="8" width="full">
               {steps.map((step, index) => (
-                <Box key={index} textAlign="center" position="relative" flex="1">
-                                      <VStack gap="2">
+                <Box
+                  key={index}
+                  textAlign="center"
+                  position="relative"
+                  flex="1"
+                >
+                  <VStack gap="2">
                     <Box
                       width="10"
                       height="10"
                       borderRadius="full"
-                      bg={index === 2 ? "blue.500" : index < 2 ? "green.500" : "gray.300"}
+                      bg={
+                        index === 2 ? 'blue.500'
+                          : index < 2 ?
+                            'green.500'
+                            : 'gray.300'
+                      }
                       color="white"
                       display="flex"
                       alignItems="center"
@@ -231,7 +245,16 @@ export default function OfferteStep3() {
                       {index + 1}
                     </Box>
                     <Box>
-                      <Text fontWeight="medium" fontSize="sm" color={index === 2 ? "blue.600" : index < 2 ? "green.600" : "gray.600"}>
+                      <Text
+                        fontWeight="medium"
+                        fontSize="sm"
+                        color={
+                          index === 2 ? 'blue.600'
+                            : index < 2 ?
+                              'green.600'
+                              : 'gray.600'
+                        }
+                      >
                         {step.title}
                       </Text>
                       <Text fontSize="xs" color="gray.500">
@@ -246,7 +269,7 @@ export default function OfferteStep3() {
                       right="-16"
                       width="32"
                       height="0.5"
-                      bg={index < 2 ? "green.500" : "gray.300"}
+                      bg={index < 2 ? 'green.500' : 'gray.300'}
                       zIndex="-1"
                     />
                   )}
@@ -300,15 +323,21 @@ export default function OfferteStep3() {
                   <Card.Body>
                     <VStack align="stretch" gap="3">
                       <Box>
-                        <Text fontSize="sm" color="gray.600">Voornaam</Text>
+                        <Text fontSize="sm" color="gray.600">
+                          Voornaam
+                        </Text>
                         <Text fontWeight="medium">{step1Data.firstName}</Text>
                       </Box>
                       <Box>
-                        <Text fontSize="sm" color="gray.600">Achternaam</Text>
+                        <Text fontSize="sm" color="gray.600">
+                          Achternaam
+                        </Text>
                         <Text fontWeight="medium">{step1Data.lastName}</Text>
                       </Box>
                       <Box>
-                        <Text fontSize="sm" color="gray.600">Bedrijfsnaam</Text>
+                        <Text fontSize="sm" color="gray.600">
+                          Bedrijfsnaam
+                        </Text>
                         <Text fontWeight="medium">{step1Data.companyName}</Text>
                       </Box>
                     </VStack>
@@ -322,23 +351,35 @@ export default function OfferteStep3() {
                   <Card.Body>
                     <VStack align="stretch" gap="3">
                       <Box>
-                        <Text fontSize="sm" color="gray.600">E-mailadres</Text>
-                        <Text fontWeight="medium">{step2Data.emailAddress}</Text>
+                        <Text fontSize="sm" color="gray.600">
+                          E-mailadres
+                        </Text>
+                        <Text fontWeight="medium">
+                          {step2Data.emailAddress}
+                        </Text>
                       </Box>
                       <Box>
-                        <Text fontSize="sm" color="gray.600">Telefoonnummer</Text>
+                        <Text fontSize="sm" color="gray.600">
+                          Telefoonnummer
+                        </Text>
                         <Text fontWeight="medium">{step2Data.phoneNo}</Text>
                       </Box>
                       <Box>
-                        <Text fontSize="sm" color="gray.600">KVK-nummer</Text>
+                        <Text fontSize="sm" color="gray.600">
+                          KVK-nummer
+                        </Text>
                         <Text fontWeight="medium">{step2Data.kvkNumber}</Text>
                       </Box>
                       <Box>
-                        <Text fontSize="sm" color="gray.600">BTW-nummer</Text>
+                        <Text fontSize="sm" color="gray.600">
+                          BTW-nummer
+                        </Text>
                         <Text fontWeight="medium">{step2Data.btwNumber}</Text>
                       </Box>
                       <Box>
-                        <Text fontSize="sm" color="gray.600">Postcode</Text>
+                        <Text fontSize="sm" color="gray.600">
+                          Postcode
+                        </Text>
                         <Text fontWeight="medium">{step2Data.postalCode}</Text>
                       </Box>
                     </VStack>
@@ -357,7 +398,11 @@ export default function OfferteStep3() {
                   >
                     <Textarea
                       {...register('message', {
-                        maxLength: { value: 1000, message: 'Bericht mag maximaal 1000 karakters bevatten' },
+                        maxLength: {
+                          value: 1000,
+                          message:
+                            'Bericht mag maximaal 1000 karakters bevatten',
+                        },
                       })}
                       placeholder="Beschrijf hier uw specifieke wensen, vragen of opmerkingen..."
                       rows={4}

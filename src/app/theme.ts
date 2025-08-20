@@ -22,15 +22,15 @@ export const system = createSystem(defaultConfig, {
         body: { value: 'Inter, system-ui, sans-serif' },
       },
       fontSizes: {
-        xs: { value: '0.75rem' },    // 12px
-        sm: { value: '0.875rem' },   // 14px
-        md: { value: '1rem' },       // 16px
-        lg: { value: '1.125rem' },   // 18px
-        xl: { value: '1.25rem' },    // 20px
-        '2xl': { value: '1.5rem' },  // 24px
+        xs: { value: '0.75rem' }, // 12px
+        sm: { value: '0.875rem' }, // 14px
+        md: { value: '1rem' }, // 16px
+        lg: { value: '1.125rem' }, // 18px
+        xl: { value: '1.25rem' }, // 20px
+        '2xl': { value: '1.5rem' }, // 24px
         '3xl': { value: '1.875rem' }, // 30px
         '4xl': { value: '2.25rem' }, // 36px
-        '5xl': { value: '3rem' },    // 48px
+        '5xl': { value: '3rem' }, // 48px
         '6xl': { value: '3.75rem' }, // 60px
       },
       fontWeights: {
@@ -56,7 +56,10 @@ export const system = createSystem(defaultConfig, {
         lg: { value: '0.5rem' },
       },
       shadows: {
-        lg: { value: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)' },
+        lg: {
+          value:
+            '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+        },
       },
       sizes: {
         '56px': { value: '3.5rem' },

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 export function useMediaQuery(query: string): boolean {
   const [matches, setMatches] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
@@ -9,7 +9,6 @@ export function useMediaQuery(query: string): boolean {
     if (typeof window === 'undefined') return;
 
     const mediaQuery = window.matchMedia(query);
-    
 
     setMatches(mediaQuery.matches);
     setIsInitialized(true);
@@ -25,10 +24,8 @@ export function useMediaQuery(query: string): boolean {
     };
   }, [query]);
 
-
   return isInitialized ? matches : false;
 }
-
 
 export const useBreakpoints = () => ({
   isMobile: useMediaQuery('(max-width: 767px)'),

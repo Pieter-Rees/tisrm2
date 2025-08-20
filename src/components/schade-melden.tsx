@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Flex, Heading, Button } from '@chakra-ui/react';
+import { Box, Button, Flex, Heading } from '@chakra-ui/react';
 import Link from 'next/link';
 
 export default function SchadeMelden() {
@@ -11,7 +11,14 @@ export default function SchadeMelden() {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <Flex justifyContent="center" height="full" flexDirection="column" pt="8" pb="6" gap="8">
+        <Flex
+          justifyContent="center"
+          height="full"
+          flexDirection="column"
+          pt="8"
+          pb="6"
+          gap="8"
+        >
           <Box>
             <Heading as="h2" size="md" color="white">
               Schade melden

@@ -1,14 +1,20 @@
 'use client';
 
-import { Box, Flex, Heading, Text, Button } from '@chakra-ui/react';
-import { BsTelephoneFill } from 'react-icons/bs';
+import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
 import Link from 'next/link';
+import { BsTelephoneFill } from 'react-icons/bs';
 
 export default function CallUs() {
   return (
     <Button asChild width="full" height="full" bg="blue.500" color="white">
       <Link href="tel:+310206368191">
-        <Flex justifyContent="center" height="full" flexDirection="column" p="8" gap="8">
+        <Flex
+          justifyContent="center"
+          height="full"
+          flexDirection="column"
+          p="8"
+          gap="8"
+        >
           <Box color="white">
             <BsTelephoneFill size="32px" />
           </Box>

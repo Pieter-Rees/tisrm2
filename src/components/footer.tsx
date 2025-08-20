@@ -1,10 +1,20 @@
 'use client';
 
-import { contactInfo, currentYear } from '../data/general';
 import FooterLogos from '@/components/footer-logos';
-import Link from 'next/link';
 import Logo from '@/components/logo';
-import { Box, Container, Grid, GridItem, VStack, Heading, Text, Button } from '@chakra-ui/react';
+import { CURRENT_YEAR } from '@/constants/app';
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  GridItem,
+  Heading,
+  Text,
+  VStack,
+} from '@chakra-ui/react';
+import Link from 'next/link';
+import { contactInfo } from '../data/general';
 
 const contactLinks = [
   { href: 'tel:+310206368191', label: '+31 020 636 8191', external: false },
@@ -26,14 +36,18 @@ export default function Footer() {
       <FooterLogos width="auto" height="auto" />
       <Box bg="gray.700" py="16">
         <Container>
-          <Grid templateColumns={{ base: '1fr', md: 'repeat(3, 1fr)' }} gap="16">
+          <Grid
+            templateColumns={{ base: '1fr', md: 'repeat(3, 1fr)' }}
+            gap="16"
+          >
             <GridItem>
               <VStack align="start" gap="4">
                 <Link href="/">
                   <Logo width="200px" />
                 </Link>
                 <Text color="white" fontSize="sm">
-                  © {currentYear} {contactInfo.name}. Alle rechten voorbehouden.
+                  © {CURRENT_YEAR} {contactInfo.name}. Alle rechten
+                  voorbehouden.
                 </Text>
               </VStack>
             </GridItem>

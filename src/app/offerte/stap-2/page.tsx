@@ -1,22 +1,22 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import {
-  Box,
-  Container,
-  VStack,
-  HStack,
-  Input,
-  Button,
-  Heading,
-  Text,
-} from '@chakra-ui/react';
-import { useForm } from 'react-hook-form';
 import BaseLayout from '@/components/baseLayout';
 import { Field } from '@/components/ui/field';
 import { useLocalStorage } from '@/hooks/use-local-storage';
 import { isValidDutchPostalCode } from '@/lib/utils';
+import {
+  Box,
+  Button,
+  Container,
+  Heading,
+  HStack,
+  Input,
+  Text,
+  VStack,
+} from '@chakra-ui/react';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 interface Step1Data {
   firstName: string;
@@ -35,13 +35,16 @@ interface Step2FormData {
 export default function OfferteStep2() {
   const router = useRouter();
   const [step1Data] = useLocalStorage<Step1Data | null>('offerte-step1', null);
-  const [formData, setFormData] = useLocalStorage<Step2FormData>('offerte-step2', {
-    emailAddress: '',
-    phoneNo: '',
-    kvkNumber: '',
-    btwNumber: '',
-    postalCode: '',
-  });
+  const [formData, setFormData] = useLocalStorage<Step2FormData>(
+    'offerte-step2',
+    {
+      emailAddress: '',
+      phoneNo: '',
+      kvkNumber: '',
+      btwNumber: '',
+      postalCode: '',
+    },
+  );
   const [isCheckingData, setIsCheckingData] = useState(true);
 
   const {
@@ -55,10 +58,11 @@ export default function OfferteStep2() {
   });
 
   const watchedValues = watch();
-  const isFormValid = watchedValues.emailAddress && 
-    watchedValues.phoneNo && 
-    watchedValues.kvkNumber && 
-    watchedValues.btwNumber && 
+  const isFormValid =
+    watchedValues.emailAddress &&
+    watchedValues.phoneNo &&
+    watchedValues.kvkNumber &&
+    watchedValues.btwNumber &&
     watchedValues.postalCode;
 
   const steps = [
@@ -84,9 +88,7 @@ export default function OfferteStep2() {
   }, [step1Data, router, isCheckingData]);
 
   const onSubmit = (values: Step2FormData) => {
-    console.log('Step 2 - Saving data:', values);
     setFormData(values);
-    console.log('Step 2 - Data saved to localStorage');
     router.push('/offerte/stap-3');
   };
 
@@ -105,13 +107,23 @@ export default function OfferteStep2() {
           <Box width="full" py="6">
             <HStack justify="center" gap="8" width="full">
               {steps.map((step, index) => (
-                <Box key={index} textAlign="center" position="relative" flex="1">
-                                      <VStack gap="2">
+                <Box
+                  key={index}
+                  textAlign="center"
+                  position="relative"
+                  flex="1"
+                >
+                  <VStack gap="2">
                     <Box
                       width="10"
                       height="10"
                       borderRadius="full"
-                      bg={index === 1 ? "blue.500" : index < 1 ? "green.500" : "gray.300"}
+                      bg={
+                        index === 1 ? 'blue.500'
+                          : index < 1 ?
+                            'green.500'
+                            : 'gray.300'
+                      }
                       color="white"
                       display="flex"
                       alignItems="center"
@@ -122,7 +134,16 @@ export default function OfferteStep2() {
                       {index + 1}
                     </Box>
                     <Box>
-                      <Text fontWeight="medium" fontSize="sm" color={index === 1 ? "blue.600" : index < 1 ? "green.600" : "gray.600"}>
+                      <Text
+                        fontWeight="medium"
+                        fontSize="sm"
+                        color={
+                          index === 1 ? 'blue.600'
+                            : index < 1 ?
+                              'green.600'
+                              : 'gray.600'
+                        }
+                      >
                         {step.title}
                       </Text>
                       <Text fontSize="xs" color="gray.500">
@@ -137,7 +158,7 @@ export default function OfferteStep2() {
                       right="-16"
                       width="32"
                       height="0.5"
-                      bg={index < 1 ? "green.500" : "gray.300"}
+                      bg={index < 1 ? 'green.500' : 'gray.300'}
                       zIndex="-1"
                     />
                   )}
@@ -191,7 +212,8 @@ export default function OfferteStep2() {
                         required: 'Telefoonnummer is verplicht',
                         pattern: {
                           value: /^(\+31|0)[0-9]{9}$/,
-                          message: 'Voer een geldig Nederlands telefoonnummer in',
+                          message:
+                            'Voer een geldig Nederlands telefoonnummer in',
                         },
                       })}
                       type="tel"
@@ -232,7 +254,8 @@ export default function OfferteStep2() {
                         required: 'BTW-nummer is verplicht',
                         pattern: {
                           value: /^NL[0-9]{9}B[0-9]{2}$/,
-                          message: 'Voer een geldig Nederlands BTW-nummer in (bijv. NL123456789B01)',
+                          message:
+                            'Voer een geldig Nederlands BTW-nummer in (bijv. NL123456789B01)',
                         },
                       })}
                       placeholder="NL123456789B01"
@@ -250,7 +273,9 @@ export default function OfferteStep2() {
                     <Input
                       {...register('postalCode', {
                         required: 'Postcode is verplicht',
-                        validate: value => isValidDutchPostalCode(value) || 'Voer een geldige Nederlandse postcode in',
+                        validate: value =>
+                          isValidDutchPostalCode(value) ||
+                          'Voer een geldige Nederlandse postcode in',
                       })}
                       placeholder="1234 AB"
                       maxLength={7}

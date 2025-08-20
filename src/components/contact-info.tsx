@@ -1,10 +1,18 @@
 'use client';
 
-import { Box, Flex, SimpleGrid, VStack, Text, Button, HStack } from '@chakra-ui/react';
-import { contactInfo } from '../data/general';
-import { BsLinkedin } from 'react-icons/bs';
-import Link from 'next/link';
 import type { ContactInfoProps } from '@/types/components';
+import {
+  Box,
+  Button,
+  Flex,
+  HStack,
+  SimpleGrid,
+  Text,
+  VStack,
+} from '@chakra-ui/react';
+import Link from 'next/link';
+import { BsLinkedin } from 'react-icons/bs';
+import { contactInfo } from '../data/general';
 
 const contactButtons = [
   { href: 'tel:+310206368191', label: '+31 020 636 8191', external: false },

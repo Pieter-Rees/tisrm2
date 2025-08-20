@@ -1,5 +1,5 @@
-import { Box } from '@chakra-ui/react';
 import type { LogoProps } from '@/types/components';
+import { Box } from '@chakra-ui/react';
 
 export default function Logo({ width = '200px', height = 'auto' }: LogoProps) {
   return (

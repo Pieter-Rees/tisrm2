@@ -5,11 +5,7 @@
     "es2022": true,
     "node": true
   },
-  "extends": [
-    "next/core-web-vitals",
-    "next/typescript",
-    "prettier"
-  ],
+  "extends": ["next/core-web-vitals", "next/typescript", "prettier"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",
@@ -18,19 +14,20 @@
       "jsx": true
     }
   },
-  "plugins": [
-    "@typescript-eslint",
-    "react-hooks",
-    "react-refresh"
-  ],
+  "plugins": ["@typescript-eslint", "react-hooks", "react-refresh"],
   "rules": {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react-refresh/only-export-components": [
       "warn",
-      { 
+      {
         "allowConstantExport": true,
-        "allowExportNames": ["metadata", "toaster", "useColorMode", "useColorModeValue"]
+        "allowExportNames": [
+          "metadata",
+          "toaster",
+          "useColorMode",
+          "useColorModeValue"
+        ]
       }
     ],
     "@typescript-eslint/no-explicit-any": "off",

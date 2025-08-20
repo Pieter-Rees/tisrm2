@@ -1,13 +1,26 @@
 'use client';
 
-import { memo, useCallback } from 'react';
+import {
+  Box,
+  Button,
+  Flex,
+  HStack,
+  MenuContent,
+  MenuItem,
+  MenuRoot,
+  MenuTrigger,
+  VisuallyHidden,
+} from '@chakra-ui/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { HStack, Button, Flex, Center, Box, VisuallyHidden } from '@chakra-ui/react';
-import { MenuRoot, MenuTrigger, MenuContent, MenuItem } from '@chakra-ui/react';
-import { BsTelephone, BsShield, BsChevronDown } from 'react-icons/bs';
+import { memo, useCallback } from 'react';
+import { BsChevronDown, BsShield, BsTelephone } from 'react-icons/bs';
 
-import { NAVIGATION_ROUTES, EXTERNAL_LINKS, CONTACT_INFO } from '@/constants/app';
+import {
+  CONTACT_INFO,
+  EXTERNAL_LINKS,
+  NAVIGATION_ROUTES,
+} from '@/constants/app';
 import type { NavigationLink } from '@/types/components';
 const NAVIGATION_LINKS: readonly NavigationLink[] = [
   { href: NAVIGATION_ROUTES.home, label: 'Home' },
@@ -22,24 +35,19 @@ const Navbar = memo(() => {
   const pathname = usePathname();
 
   const handleDamageReportClick = useCallback(() => {
-    window.open(
-      EXTERNAL_LINKS.damageReport,
-      '_blank',
-      'noopener,noreferrer'
-    );
+    window.open(EXTERNAL_LINKS.damageReport, '_blank', 'noopener,noreferrer');
   }, []);
 
   return (
-    <Flex 
-      as="nav" 
-      role="navigation" 
+    <Flex
+      as="nav"
+      role="navigation"
       aria-label="Main navigation"
-      align="center" 
+      align="center"
       gap="8"
       width="full"
       justify="space-between"
     >
-
       <Box hideBelow="xl">
         <HStack
           as="ul"
@@ -51,14 +59,11 @@ const Navbar = memo(() => {
           padding="0"
         >
           {NAVIGATION_LINKS.map(({ href, label }) => {
-            const isActive = pathname === href || (href !== '/' && pathname.startsWith(href));
-            
+            const isActive =
+              pathname === href || (href !== '/' && pathname.startsWith(href));
+
             return (
-              <Box
-                key={href}
-                as="li"
-                role="none"
-              >
+              <Box key={href} as="li" role="none">
                 <Link
                   href={href}
                   style={{
@@ -73,12 +78,18 @@ const Navbar = memo(() => {
                   <Box
                     color={isActive ? 'blue.500' : 'gray.900'}
                     fontWeight={isActive ? '600' : '500'}
-                    borderBottom={isActive ? '2px solid' : '2px solid transparent'}
+                    borderBottom={
+                      isActive ? '2px solid' : '2px solid transparent'
+                    }
                     borderBottomColor={isActive ? 'blue.500' : 'transparent'}
-                    _hover={!isActive ? {
-                      color: 'blue.500',
-                      borderBottomColor: 'blue.200',
-                    } : {}}
+                    _hover={
+                      !isActive ?
+                        {
+                          color: 'blue.500',
+                          borderBottomColor: 'blue.200',
+                        }
+                        : {}
+                    }
                   >
                     {label}
                   </Box>
@@ -89,7 +100,6 @@ const Navbar = memo(() => {
         </HStack>
       </Box>
 
-
       <Box hideBelow="xl" position="relative">
         <MenuRoot>
           <MenuTrigger asChild>
@@ -97,14 +107,14 @@ const Navbar = memo(() => {
               bg="blue.500"
               color="white"
               size="sm"
-              _hover={{ 
+              _hover={{
                 bg: 'blue.600',
                 transform: 'translateY(-1px)',
-                boxShadow: 'md'
+                boxShadow: 'md',
               }}
-              _active={{ 
+              _active={{
                 bg: 'blue.700',
-                transform: 'translateY(0)'
+                transform: 'translateY(0)',
               }}
               fontWeight="medium"
               gap="2"
@@ -140,9 +150,7 @@ const Navbar = memo(() => {
               </VisuallyHidden>
             </MenuItem>
             <MenuItem value="quote" asChild gap="2" _hover={{ bg: 'blue.50' }}>
-              <Link href={NAVIGATION_ROUTES.quote}>
-                Offerte aanvragen
-              </Link>
+              <Link href={NAVIGATION_ROUTES.quote}>Offerte aanvragen</Link>
             </MenuItem>
             <MenuItem value="call" asChild gap="2" _hover={{ bg: 'blue.50' }}>
               <Link href={`tel:${CONTACT_INFO.phone}`}>

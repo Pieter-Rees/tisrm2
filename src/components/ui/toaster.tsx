@@ -1,13 +1,13 @@
-'use client'
+'use client';
 
+import { toaster } from '@/lib/toaster';
 import {
   Toaster as ChakraToaster,
   Portal,
   Spinner,
   Stack,
   Toast,
-} from '@chakra-ui/react'
-import { toaster } from '@/lib/toaster'
+} from '@chakra-ui/react';
 
 // Toaster instance is imported from lib to avoid fast refresh warnings
 
@@ -15,14 +15,12 @@ export const Toaster = () => {
   return (
     <Portal>
       <ChakraToaster toaster={toaster} insetInline={{ mdDown: '4' }}>
-        {(toast) => (
+        {toast => (
           <Toast.Root width={{ md: 'sm' }}>
-            {toast.type === 'loading' ? (
-              <Spinner size='sm' color='blue.solid' />
-            ) : (
-              <Toast.Indicator />
-            )}
-            <Stack gap='1' flex='1' maxWidth='100%'>
+            {toast.type === 'loading' ?
+              <Spinner size="sm" color="blue.solid" />
+            : <Toast.Indicator />}
+            <Stack gap="1" flex="1" maxWidth="100%">
               {toast.title && <Toast.Title>{toast.title}</Toast.Title>}
               {toast.description && (
                 <Toast.Description>{toast.description}</Toast.Description>
@@ -36,8 +34,8 @@ export const Toaster = () => {
         )}
       </ChakraToaster>
     </Portal>
-  )
-}
+  );
+};
 
 // Export toaster instance at end of file to avoid fast refresh warnings
 export { toaster } from '@/lib/toaster';

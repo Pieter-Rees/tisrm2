@@ -27,8 +27,8 @@ const pageVariants: Variants = {
 };
 
 const pageTransition = {
-  type: 'tween',
-  ease: 'anticipate',
+  type: 'tween' as const,
+  ease: 'easeInOut' as const,
   duration: 0.4,
 };
 
@@ -68,7 +68,10 @@ export const PageAnimation = ({ children, className }: PageAnimationProps) => {
   );
 };
 
-export const StaggerContainer = ({ children, className }: PageAnimationProps) => {
+export const StaggerContainer = ({
+  children,
+  className,
+}: PageAnimationProps) => {
   return (
     <motion.div
       initial="initial"
@@ -83,7 +86,13 @@ export const StaggerContainer = ({ children, className }: PageAnimationProps) =>
   );
 };
 
-export const FadeInUp = ({ children, delay = 0 }: { children: ReactNode; delay?: number }) => {
+export const FadeInUp = ({
+  children,
+  delay = 0,
+}: {
+  children: ReactNode;
+  delay?: number;
+}) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -99,7 +108,13 @@ export const FadeInUp = ({ children, delay = 0 }: { children: ReactNode; delay?:
   );
 };
 
-export const FadeIn = ({ children, delay = 0 }: { children: ReactNode; delay?: number }) => {
+export const FadeIn = ({
+  children,
+  delay = 0,
+}: {
+  children: ReactNode;
+  delay?: number;
+}) => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -115,7 +130,13 @@ export const FadeIn = ({ children, delay = 0 }: { children: ReactNode; delay?: n
   );
 };
 
-export const ScaleIn = ({ children, delay = 0 }: { children: ReactNode; delay?: number }) => {
+export const ScaleIn = ({
+  children,
+  delay = 0,
+}: {
+  children: ReactNode;
+  delay?: number;
+}) => {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
@@ -131,7 +152,13 @@ export const ScaleIn = ({ children, delay = 0 }: { children: ReactNode; delay?: 
   );
 };
 
-export const SlideInLeft = ({ children, delay = 0 }: { children: ReactNode; delay?: number }) => {
+export const SlideInLeft = ({
+  children,
+  delay = 0,
+}: {
+  children: ReactNode;
+  delay?: number;
+}) => {
   return (
     <motion.div
       initial={{ opacity: 0, x: -50 }}
@@ -147,7 +174,13 @@ export const SlideInLeft = ({ children, delay = 0 }: { children: ReactNode; dela
   );
 };
 
-export const SlideInRight = ({ children, delay = 0 }: { children: ReactNode; delay?: number }) => {
+export const SlideInRight = ({
+  children,
+  delay = 0,
+}: {
+  children: ReactNode;
+  delay?: number;
+}) => {
   return (
     <motion.div
       initial={{ opacity: 0, x: 50 }}

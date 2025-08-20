@@ -1,17 +1,21 @@
 'use client';
 
-import { memo } from 'react';
+import { Box, Button, Container, Flex } from '@chakra-ui/react';
 import Link from 'next/link';
-import { Flex, Box, Container, Button } from '@chakra-ui/react';
+import { memo } from 'react';
 import { BsList, BsX } from 'react-icons/bs';
 
 import Logo from '@/components/logo';
 import Navbar from '@/components/navbar';
 import Sidenav from '@/components/sidenav';
-import { useDisclosure } from '@/hooks/use-disclosure';
 import { NAVIGATION_ROUTES, UI_CONSTANTS } from '@/constants/app';
+import { useDisclosure } from '@/hooks/use-disclosure';
 const Header = memo(() => {
-  const { isOpen: showSideNav, onToggle: handleToggle, onClose: closeSideNav } = useDisclosure();
+  const {
+    isOpen: showSideNav,
+    onToggle: handleToggle,
+    onClose: closeSideNav,
+  } = useDisclosure();
 
   return (
     <Box
@@ -26,13 +30,8 @@ const Header = memo(() => {
       boxShadow="sm"
     >
       <Container>
-        <Flex
-          align="center"
-          justify="space-between"
-          gap="8"
-        >
-
-          <Box flex="0 0 auto" padding='4'>
+        <Flex align="center" justify="space-between" gap="8">
+          <Box flex="0 0 auto" padding="4">
             <Link
               href={NAVIGATION_ROUTES.home}
               aria-label="Go to homepage"
@@ -42,17 +41,17 @@ const Header = memo(() => {
             </Link>
           </Box>
 
-
           <Box flex="1" hideBelow="xl">
             <Navbar />
           </Box>
-
 
           <Box hideFrom="xl">
             <Button
               variant="ghost"
               onClick={handleToggle}
-              aria-label={showSideNav ? 'Close navigation menu' : 'Open navigation menu'}
+              aria-label={
+                showSideNav ? 'Close navigation menu' : 'Open navigation menu'
+              }
               aria-expanded={showSideNav}
               aria-controls="mobile-navigation"
               size="lg"
@@ -60,12 +59,13 @@ const Header = memo(() => {
               _hover={{ bg: 'gray.100' }}
               _active={{ bg: 'gray.200' }}
             >
-              {showSideNav ? <BsX size="24" /> : <BsList size="24" />}
+              {showSideNav ?
+                <BsX size="24" />
+                : <BsList size="24" />}
             </Button>
           </Box>
         </Flex>
       </Container>
-
 
       {showSideNav && (
         <Box
@@ -78,7 +78,6 @@ const Header = memo(() => {
           data-testid="mobile-menu-overlay"
         />
       )}
-
 
       <Sidenav showSideNav={showSideNav} handleToggle={handleToggle} />
     </Box>

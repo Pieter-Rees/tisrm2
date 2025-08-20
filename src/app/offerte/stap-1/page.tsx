@@ -1,22 +1,20 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import {
-  Box,
-  Container,
-  VStack,
-  HStack,
-  Steps,
-  Input,
-  Button,
-  Heading,
-  Text,
-} from '@chakra-ui/react';
-import { useForm } from 'react-hook-form';
 import BaseLayout from '@/components/baseLayout';
 import { Field } from '@/components/ui/field';
 import { useLocalStorage } from '@/hooks/use-local-storage';
+import {
+  Box,
+  Button,
+  Container,
+  Heading,
+  HStack,
+  Input,
+  Text,
+  VStack,
+} from '@chakra-ui/react';
+import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
 
 interface Step1FormData {
   firstName: string;
@@ -26,11 +24,14 @@ interface Step1FormData {
 
 export default function OfferteStep1() {
   const router = useRouter();
-  const [formData, setFormData] = useLocalStorage<Step1FormData>('offerte-step1', {
-    firstName: '',
-    lastName: '',
-    companyName: '',
-  });
+  const [formData, setFormData] = useLocalStorage<Step1FormData>(
+    'offerte-step1',
+    {
+      firstName: '',
+      lastName: '',
+      companyName: '',
+    },
+  );
 
   const {
     handleSubmit,
@@ -43,8 +44,9 @@ export default function OfferteStep1() {
   });
 
   const watchedValues = watch();
-  const isFormValid = Boolean(watchedValues.firstName?.trim()) && 
-    Boolean(watchedValues.lastName?.trim()) && 
+  const isFormValid =
+    Boolean(watchedValues.firstName?.trim()) &&
+    Boolean(watchedValues.lastName?.trim()) &&
     Boolean(watchedValues.companyName?.trim());
 
   const steps = [
@@ -54,9 +56,7 @@ export default function OfferteStep1() {
   ];
 
   const onSubmit = (values: Step1FormData) => {
-    console.log('Step 1 - Saving data:', values);
     setFormData(values);
-    console.log('Step 1 - Data saved to localStorage');
     router.push('/offerte/stap-2');
   };
 
@@ -67,13 +67,23 @@ export default function OfferteStep1() {
           <Box width="full" py="6">
             <HStack justify="center" gap="8" width="full">
               {steps.map((step, index) => (
-                <Box key={index} textAlign="center" position="relative" flex="1">
-                                      <VStack gap="2">
+                <Box
+                  key={index}
+                  textAlign="center"
+                  position="relative"
+                  flex="1"
+                >
+                  <VStack gap="2">
                     <Box
                       width="10"
                       height="10"
                       borderRadius="full"
-                      bg={index === 0 ? "blue.500" : index < 0 ? "green.500" : "gray.300"}
+                      bg={
+                        index === 0 ? 'blue.500'
+                          : index < 0 ?
+                            'green.500'
+                            : 'gray.300'
+                      }
                       color="white"
                       display="flex"
                       alignItems="center"
@@ -84,7 +94,11 @@ export default function OfferteStep1() {
                       {index + 1}
                     </Box>
                     <Box>
-                      <Text fontWeight="medium" fontSize="sm" color={index === 0 ? "blue.600" : "gray.600"}>
+                      <Text
+                        fontWeight="medium"
+                        fontSize="sm"
+                        color={index === 0 ? 'blue.600' : 'gray.600'}
+                      >
                         {step.title}
                       </Text>
                       <Text fontSize="xs" color="gray.500">
@@ -130,8 +144,14 @@ export default function OfferteStep1() {
                     <Input
                       {...register('firstName', {
                         required: 'Voornaam is verplicht',
-                        minLength: { value: 2, message: 'Voornaam moet minimaal 2 karakters zijn' },
-                        pattern: { value: /^[a-zA-ZÀ-ÿ\s'-]+$/, message: 'Ongeldige karakters in voornaam' },
+                        minLength: {
+                          value: 2,
+                          message: 'Voornaam moet minimaal 2 karakters zijn',
+                        },
+                        pattern: {
+                          value: /^[a-zA-ZÀ-ÿ\s'-]+$/,
+                          message: 'Ongeldige karakters in voornaam',
+                        },
                       })}
                       placeholder="Bijvoorbeeld: Jan"
                       autoComplete="given-name"
@@ -148,8 +168,14 @@ export default function OfferteStep1() {
                     <Input
                       {...register('lastName', {
                         required: 'Achternaam is verplicht',
-                        minLength: { value: 2, message: 'Achternaam moet minimaal 2 karakters zijn' },
-                        pattern: { value: /^[a-zA-ZÀ-ÿ\s'-]+$/, message: 'Ongeldige karakters in achternaam' },
+                        minLength: {
+                          value: 2,
+                          message: 'Achternaam moet minimaal 2 karakters zijn',
+                        },
+                        pattern: {
+                          value: /^[a-zA-ZÀ-ÿ\s'-]+$/,
+                          message: 'Ongeldige karakters in achternaam',
+                        },
                       })}
                       placeholder="Bijvoorbeeld: de Vries"
                       autoComplete="family-name"
@@ -166,7 +192,11 @@ export default function OfferteStep1() {
                     <Input
                       {...register('companyName', {
                         required: 'Bedrijfsnaam is verplicht',
-                        minLength: { value: 2, message: 'Bedrijfsnaam moet minimaal 2 karakters zijn' },
+                        minLength: {
+                          value: 2,
+                          message:
+                            'Bedrijfsnaam moet minimaal 2 karakters zijn',
+                        },
                       })}
                       placeholder="Uw bedrijfsnaam"
                       autoComplete="organization"

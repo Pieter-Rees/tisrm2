@@ -3,7 +3,11 @@ const nextConfig = {
   distDir: 'build',
   experimental: {
     ...(process.env.TURBOPACK !== '1' && {
-      optimizePackageImports: ['@chakra-ui/react', 'framer-motion', 'react-icons'],
+      optimizePackageImports: [
+        '@chakra-ui/react',
+        'framer-motion',
+        'react-icons',
+      ],
       typedRoutes: true,
       optimizeCss: true,
       scrollRestoration: true,
@@ -56,18 +60,21 @@ const nextConfig = {
     },
   }),
   bundlePagesRouterDependencies: true,
-  ...(process.env.ANALYZE === 'true' && process.env.TURBOPACK !== '1' && {
-    webpack: (config, { isServer }) => {
-      if (!isServer) {
-        const { BundleAnalyzerPlugin } = require('@next/bundle-analyzer')();
-        config.plugins.push(new BundleAnalyzerPlugin({
-          analyzerMode: 'static',
-          openAnalyzer: false,
-        }));
-      }
-      return config;
-    },
-  }),
+  ...(process.env.ANALYZE === 'true' &&
+    process.env.TURBOPACK !== '1' && {
+      webpack: (config, { isServer }) => {
+        if (!isServer) {
+          const { BundleAnalyzerPlugin } = require('@next/bundle-analyzer')();
+          config.plugins.push(
+            new BundleAnalyzerPlugin({
+              analyzerMode: 'static',
+              openAnalyzer: false,
+            }),
+          );
+        }
+        return config;
+      },
+    }),
 };
 
 export default nextConfig;

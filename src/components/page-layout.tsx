@@ -1,11 +1,22 @@
 'use client';
 
-import { Suspense, lazy, type ReactNode } from 'react';
-import { Container, Grid, GridItem, Box, Heading, Flex } from '@chakra-ui/react';
 import ErrorBoundary from '@/components/error-boundary';
 import Loading from '@/components/loading';
-import { PageAnimation, FadeInUp, SlideInRight } from '@/components/page-animation';
+import {
+  FadeInUp,
+  PageAnimation,
+  SlideInRight,
+} from '@/components/page-animation';
 import { HEADING_STYLES } from '@/constants/typography';
+import {
+  Box,
+  Container,
+  Flex,
+  Grid,
+  GridItem,
+  Heading,
+} from '@chakra-ui/react';
+import { Suspense, lazy, type ReactNode } from 'react';
 
 const Sidebar = lazy(() => import('@/components/sidebar'));
 
@@ -17,12 +28,12 @@ interface PageLayoutProps {
   maxWidth?: string;
 }
 
-export const PageLayout = ({ 
-  children, 
-  title, 
-  breadcrumb, 
+export const PageLayout = ({
+  children,
+  title,
+  breadcrumb,
   showSidebar = true,
-  maxWidth = 'auto'
+  maxWidth = 'auto',
 }: PageLayoutProps) => {
   return (
     <PageAnimation>
@@ -46,14 +57,11 @@ export const PageLayout = ({
                     gap="4"
                   >
                     {title && (
-                      <Heading
-                        as="h1"
-                        {...HEADING_STYLES.h1}
-                      >
+                      <Heading as="h1" {...HEADING_STYLES.h1}>
                         {title}
                       </Heading>
                     )}
-                    
+
                     {breadcrumb && (
                       <Box
                         as="nav"
@@ -66,10 +74,8 @@ export const PageLayout = ({
                   </Flex>
                 </FadeInUp>
               )}
-              
-              <FadeInUp delay={0.1}>
-                {children}
-              </FadeInUp>
+
+              <FadeInUp delay={0.1}>{children}</FadeInUp>
             </Flex>
           </GridItem>
 

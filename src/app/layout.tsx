@@ -1,15 +1,15 @@
-import { Inter } from 'next/font/google';
-import Header from '@/components/header';
 import Footer from '@/components/footer';
-import { Providers } from './providers';
+import Header from '@/components/header';
 import { GoogleTagManager } from '@next/third-parties/google';
+import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
+import { Providers } from './providers';
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   preload: true,
-  fallback: ['system-ui', 'arial']
+  fallback: ['system-ui', 'arial'],
 });
 
 interface RootLayoutProps {
@@ -22,7 +22,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <head>
         <GoogleTagManager gtmId="G-3HPHN1BV1Q" />
       </head>
-      <body className={inter.className} style={{ backgroundColor: 'white', color: 'black' }}>
+      <body
+        className={inter.className}
+        style={{ backgroundColor: 'white', color: 'black' }}
+      >
         <Providers>
           <Header />
           <main

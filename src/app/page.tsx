@@ -1,11 +1,17 @@
-import { Suspense, lazy } from 'react';
-import { Box, Grid, GridItem, Flex, Container } from '@chakra-ui/react';
+import { Box, Container, Flex, Grid, GridItem } from '@chakra-ui/react';
 import Image from 'next/image';
+import { Suspense, lazy } from 'react';
 
 import CallUs from '@/components/call-us';
-import Loading from '@/components/loading';
 import ErrorBoundary from '@/components/error-boundary';
-import { PageAnimation, FadeInUp, ScaleIn, SlideInLeft, SlideInRight, StaggerContainer } from '@/components/page-animation';
+import Loading from '@/components/loading';
+import {
+  FadeInUp,
+  PageAnimation,
+  ScaleIn,
+  SlideInRight,
+  StaggerContainer,
+} from '@/components/page-animation';
 
 const ThreeElements = lazy(() => import('@/components/three-elements'));
 const Talker = lazy(() => import('@/components/talker'));
@@ -58,11 +64,13 @@ export default function Homepage() {
                       alignItems="stretch"
                     >
                       <GridItem>
-                        <Suspense fallback={<Loading text="Loading hero image..." />}>
+                        <Suspense
+                          fallback={<Loading text="Loading hero image..." />}
+                        >
                           <HeroImage />
                         </Suspense>
                       </GridItem>
-                      
+
                       <GridItem>
                         <SlideInRight delay={0.2}>
                           <Flex direction="column" gap="4" height="full">
@@ -81,7 +89,7 @@ export default function Homepage() {
                             >
                               <CallUs />
                             </Box>
-                            
+
                             <Box hideFrom="lg">
                               <Box
                                 bg="blue.600"
@@ -115,7 +123,9 @@ export default function Homepage() {
 
                 <ErrorBoundary>
                   <FadeInUp delay={0.4}>
-                    <Suspense fallback={<Loading text="Loading testimonial..." />}>
+                    <Suspense
+                      fallback={<Loading text="Loading testimonial..." />}
+                    >
                       <Talker
                         name="René Enthoven"
                         title="Directeur TIS Risk Managers"

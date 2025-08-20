@@ -1,12 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2024",
-    "lib": [
-      "DOM",
-      "DOM.Iterable", 
-      "ES2024",
-      "WebWorker"
-    ],
+    "lib": ["DOM", "DOM.Iterable", "ES2024", "WebWorker"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -55,9 +50,5 @@
     "next-env.d.ts",
     "build/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules",
-    "build",
-    ".next"
-  ]
+  "exclude": ["node_modules", "build", ".next"]
 }

@@ -3,8 +3,8 @@
  * @fileoverview Centralized metadata for SEO and social sharing
  */
 
-import { pageInfo } from '../data/general';
 import type { Metadata } from 'next';
+import { pageInfo } from '../data/general';
 
 /**
  * Application metadata for SEO and social sharing
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     'schadeafhandeling',
     'bedrijfsverzekeringen',
     'particuliere verzekeringen',
-    'taxi verzekeringen'
+    'taxi verzekeringen',
   ],
   authors: [{ name: pageInfo.name }],
   creator: pageInfo.name,

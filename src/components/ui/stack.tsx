@@ -1,6 +1,9 @@
 'use client';
 
-import { VStack as ChakraVStack, HStack as ChakraHStack } from '@chakra-ui/react';
+import {
+  HStack as ChakraHStack,
+  VStack as ChakraVStack,
+} from '@chakra-ui/react';
 import type { ComponentProps } from 'react';
 
 interface StackProps extends Omit<ComponentProps<typeof ChakraVStack>, 'gap'> {

@@ -1,9 +1,9 @@
 'use client';
 
+import { LIST_STYLES } from '@/constants/typography';
+import type { StarListProps } from '@/types/components';
 import { Box } from '@chakra-ui/react';
 import { BsStarFill } from 'react-icons/bs';
-import type { StarListProps } from '@/types/components';
-import { LIST_STYLES } from '@/constants/typography';
 
 export default function StarList({ listItems }: StarListProps) {
   return (
@@ -13,9 +13,7 @@ export default function StarList({ listItems }: StarListProps) {
           <Box {...LIST_STYLES.itemIcon}>
             <BsStarFill size="16px" />
           </Box>
-          <Box as="span">
-            {item}
-          </Box>
+          <Box as="span">{item}</Box>
         </Box>
       ))}
     </Box>

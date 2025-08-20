@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Spinner, VStack, Text } from '@chakra-ui/react';
+import { Box, Spinner, Text, VStack } from '@chakra-ui/react';
 import type { ComponentProps } from 'react';
 
 interface LoadingProps {

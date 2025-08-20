@@ -1,8 +1,8 @@
 'use client';
 
 import { Field as ChakraField } from '@chakra-ui/react';
-import { forwardRef } from 'react';
 import type { ReactNode } from 'react';
+import { forwardRef } from 'react';
 
 interface FieldProps {
   label?: string;
@@ -24,11 +24,15 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(
           </ChakraField.Label>
         )}
         {children}
-        {helperText && <ChakraField.HelperText>{helperText}</ChakraField.HelperText>}
-        {errorText && <ChakraField.ErrorText>{errorText}</ChakraField.ErrorText>}
+        {helperText && (
+          <ChakraField.HelperText>{helperText}</ChakraField.HelperText>
+        )}
+        {errorText && (
+          <ChakraField.ErrorText>{errorText}</ChakraField.ErrorText>
+        )}
       </ChakraField.Root>
     );
-  }
+  },
 );
 
 Field.displayName = 'Field';

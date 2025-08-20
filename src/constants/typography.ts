@@ -103,16 +103,18 @@ export const SECTION_SPACING = {
 
 // Content max widths
 export const CONTENT_WIDTH = {
-  narrow: '2xl',   // 672px
-  medium: '3xl',   // 768px
-  wide: '4xl',     // 896px
+  narrow: '2xl', // 672px
+  medium: '3xl', // 768px
+  wide: '4xl', // 896px
   full: 'full',
 } as const;
 
-export default {
+const typography = {
   HEADING_STYLES,
   PARAGRAPH_STYLES,
   LIST_STYLES,
   SECTION_SPACING,
   CONTENT_WIDTH,
-};
+} as const;
+
+export default typography;

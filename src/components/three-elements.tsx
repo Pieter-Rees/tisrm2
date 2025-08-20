@@ -1,19 +1,24 @@
 'use client';
 
+import { Box, Grid, GridItem, Heading } from '@chakra-ui/react';
 import { memo } from 'react';
-import { Grid, GridItem, Box, Heading } from '@chakra-ui/react';
 
 import Card from '@/components/card';
 import { NAVIGATION_ROUTES } from '@/constants/app';
+import {
+  HEADING_STYLES,
+  PARAGRAPH_STYLES,
+  SECTION_SPACING,
+} from '@/constants/typography';
 import { cn } from '@/lib/utils';
 import type { ThreeElementsProps } from '@/types/components';
-import { HEADING_STYLES, PARAGRAPH_STYLES, SECTION_SPACING } from '@/constants/typography';
 const FEATURE_CARDS = [
   {
     id: 'risk-management',
     image: '/slider-2.jpg',
     title: 'Risk Managers',
-    description: 'TIS is de laatste jaren meegegroeid met de ontwikkelingen in de verzekeringsmarkt, alsmede de veranderende behoefte van de klanten. Zodoende zijn de werknemers van TIS gediplomeerd als risico managers en geregistreerd in het register GRMC.',
+    description:
+      'TIS is de laatste jaren meegegroeid met de ontwikkelingen in de verzekeringsmarkt, alsmede de veranderende behoefte van de klanten. Zodoende zijn de werknemers van TIS gediplomeerd als risico managers en geregistreerd in het register GRMC.',
     cta: 'Meer over Risk Management',
     ctaLink: NAVIGATION_ROUTES.riskManagement,
     variant: 'elevated' as const,
@@ -22,7 +27,8 @@ const FEATURE_CARDS = [
     id: 'maatwerk',
     image: '/unieke-kenmerken.jpg',
     title: 'Maatwerk Verzekeringen',
-    description: 'De verzekeringen van TIS zijn stuk voor stuk maatwerk. De standaard verzekeringsproducten zijn vaak niet toereikend, waardoor er een kans bestaat dat er geen dekking is óf juist dekking heeft voor zaken die geen betrekking hebben op u of uw bedrijf.',
+    description:
+      'De verzekeringen van TIS zijn stuk voor stuk maatwerk. De standaard verzekeringsproducten zijn vaak niet toereikend, waardoor er een kans bestaat dat er geen dekking is óf juist dekking heeft voor zaken die geen betrekking hebben op u of uw bedrijf.',
     cta: 'Bekijk onze verzekeringen',
     ctaLink: NAVIGATION_ROUTES.insurance,
     variant: 'elevated' as const,
@@ -31,128 +37,116 @@ const FEATURE_CARDS = [
     id: 'schadeafhandeling',
     image: '/slider-3.jpg',
     title: 'Digitale Schadeafhandeling',
-    description: 'TIS biedt u een volledig digitale schadeafhandeling. Door deze specialisatie staan wij bekend om het snel en vakkundig afwikkelen van uw schade, van een inbraak, stormschade of het verhalen van uw bedrijfsschade.',
+    description:
+      'TIS biedt u een volledig digitale schadeafhandeling. Door deze specialisatie staan wij bekend om het snel en vakkundig afwikkelen van uw schade, van een inbraak, stormschade of het verhalen van uw bedrijfsschade.',
     cta: 'Schade melden',
     ctaLink: '#',
     variant: 'elevated' as const,
     external: true,
   },
 ] as const;
-const ThreeElements = memo<ThreeElementsProps>(({
-  elements = FEATURE_CARDS,
-  className,
-  'data-testid': testId,
-}) => {
-  return (
-    <Box
-      className={cn('three-elements', className)}
-      data-testid={testId}
-      as="section"
-      role="region"
-      aria-label="Key features and services"
-    >
-
-      <Box mb={SECTION_SPACING.medium} textAlign="center">
-        <Heading
-          as="h2"
-          {...HEADING_STYLES.h2}
-          textAlign="center"
-        >
-          Waarom kiezen voor TIS?
-        </Heading>
-        <Box
-          {...PARAGRAPH_STYLES.large}
-          color="text.muted"
-          maxW="3xl"
-          mx="auto"
-          textAlign="center"
-        >
-          Ontdek onze unieke aanpak en specialisaties die ons onderscheiden in de verzekeringsmarkt
-        </Box>
-      </Box>
-
-
-      <Grid
-        templateColumns={{
-          base: 'repeat(1, 1fr)',
-          md: 'repeat(2, 1fr)',
-          lg: 'repeat(3, 1fr)',
-        }}
-        gap={{ base: '6', lg: '8' }}
-        alignItems="stretch"
-        width="100%"
-      >
-        {elements.map((element, index) => (
-          <GridItem key={element.id} display="flex" minW="0">
-            <Card
-              image={element.image}
-              title={element.title}
-              description={element.description}
-              cta={element.cta}
-              ctaLink={element.ctaLink}
-              variant={element.variant}
-              buttonVariant="outline"
-              loading={index === 0} // Prioritize first card
-              data-testid={`feature-card-${element.id}`}
-            />
-          </GridItem>
-        ))}
-      </Grid>
-
-
+const ThreeElements = memo<ThreeElementsProps>(
+  ({ elements = FEATURE_CARDS, className, 'data-testid': testId }) => {
+    return (
       <Box
-        mt={{ base: '12', lg: '16' }}
-        p={{ base: '6', lg: '8' }}
-        bg="blue.50"
-        borderRadius="xl"
-        border="1px solid"
-        borderColor="blue.200"
-        textAlign="center"
+        className={cn('three-elements', className)}
+        data-testid={testId}
+        as="section"
+        role="region"
+        aria-label="Key features and services"
       >
-        <Heading
-          as="h3"
-          size="md"
-          color="blue.900"
-          mb="3"
-          fontWeight="semibold"
-        >
-          Klaar voor persoonlijk advies?
-        </Heading>
-        <Box
-          fontSize="sm"
-          color="blue.700"
-          mb="4"
-          maxW="lg"
-          mx="auto"
-        >
-          Neem contact op voor een vrijblijvend gesprek over uw verzekeringsbehoefte
+        <Box mb={SECTION_SPACING.medium} textAlign="center">
+          <Heading as="h2" {...HEADING_STYLES.h2} textAlign="center">
+            Waarom kiezen voor TIS?
+          </Heading>
+          <Box
+            {...PARAGRAPH_STYLES.large}
+            color="text.muted"
+            maxW="3xl"
+            mx="auto"
+            textAlign="center"
+          >
+            Ontdek onze unieke aanpak en specialisaties die ons onderscheiden in
+            de verzekeringsmarkt
+          </Box>
         </Box>
-        
+
         <Grid
-          templateColumns={{ base: '1fr', sm: 'repeat(2, 1fr)' }}
-          gap="3"
-          maxW="md"
-          mx="auto"
+          templateColumns={{
+            base: 'repeat(1, 1fr)',
+            md: 'repeat(2, 1fr)',
+            lg: 'repeat(3, 1fr)',
+          }}
+          gap={{ base: '6', lg: '8' }}
+          alignItems="stretch"
+          width="100%"
         >
-          <Card
-            title="Bel direct"
-            cta="Bel nu"
-            phone="tel:+310206368191"
-            variant="sidebar"
-            buttonVariant="solid"
-          />
-          <Card
-            title="Offerte aanvragen"
-            cta="Start hier"
-            ctaLink={NAVIGATION_ROUTES.quote}
-            variant="sidebar"
-            buttonVariant="outline"
-          />
+          {elements.map((element, index) => (
+            <GridItem key={element.id} display="flex" minW="0">
+              <Card
+                image={element.image}
+                title={element.title}
+                description={element.description}
+                cta={element.cta}
+                ctaLink={element.ctaLink}
+                variant={element.variant}
+                buttonVariant="outline"
+                loading={index === 0} // Prioritize first card
+                data-testid={`feature-card-${element.id}`}
+              />
+            </GridItem>
+          ))}
         </Grid>
+
+        <Box
+          mt={{ base: '12', lg: '16' }}
+          p={{ base: '6', lg: '8' }}
+          bg="blue.50"
+          borderRadius="xl"
+          border="1px solid"
+          borderColor="blue.200"
+          textAlign="center"
+        >
+          <Heading
+            as="h3"
+            size="md"
+            color="blue.900"
+            mb="3"
+            fontWeight="semibold"
+          >
+            Klaar voor persoonlijk advies?
+          </Heading>
+          <Box fontSize="sm" color="blue.700" mb="4" maxW="lg" mx="auto">
+            Neem contact op voor een vrijblijvend gesprek over uw
+            verzekeringsbehoefte
+          </Box>
+
+          <Grid
+            templateColumns={{ base: '1fr', sm: 'repeat(2, 1fr)' }}
+            gap="3"
+            maxW="md"
+            mx="auto"
+          >
+            <Card
+              title="Bel direct"
+              cta="Bel nu"
+              phone="tel:+310206368191"
+              variant="sidebar"
+              buttonVariant="solid"
+            />
+            <Card
+              title="Offerte aanvragen"
+              cta="Start hier"
+              ctaLink={NAVIGATION_ROUTES.quote}
+              variant="sidebar"
+              buttonVariant="outline"
+            />
+          </Grid>
+        </Box>
       </Box>
-    </Box>
-  );
-});
+    );
+  },
+);
 
 ThreeElements.displayName = 'ThreeElements';
 

@@ -1,4 +1,4 @@
-import type { ReactNode, ComponentPropsWithoutRef, ElementType } from 'react';
+import type { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react';
 export interface BaseComponentProps {
   readonly children?: ReactNode;
   readonly className?: string;
@@ -6,11 +6,9 @@ export interface BaseComponentProps {
   readonly 'data-testid'?: string;
 }
 
-
 export type PolymorphicProps<T extends ElementType> = {
   readonly as?: T;
 } & ComponentPropsWithoutRef<T>;
-
 
 export interface LayoutProps extends BaseComponentProps {
   readonly title?: string;
@@ -19,18 +17,15 @@ export interface LayoutProps extends BaseComponentProps {
   readonly maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full';
 }
 
-
 export interface GridLayoutProps extends LayoutProps {
   readonly columns?: number;
   readonly gap?: number | string;
 }
 
-
 export interface BaseLayoutProps extends BaseComponentProps {
   readonly title?: string;
   readonly maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full';
 }
-
 
 export interface NavigationLink {
   readonly href: string;
@@ -38,7 +33,6 @@ export interface NavigationLink {
   readonly external?: boolean;
   readonly icon?: ReactNode;
 }
-
 
 export interface BreadcrumbProps extends BaseComponentProps {
   readonly separator?: ReactNode;
@@ -48,12 +42,10 @@ export interface BreadcrumbProps extends BaseComponentProps {
   readonly maxItems?: number;
 }
 
-
 export interface NavbarProps extends BaseComponentProps {
   readonly links?: readonly NavigationLink[];
   readonly showSearch?: boolean;
 }
-
 
 export interface SidenavProps extends BaseComponentProps {
   readonly showSideNav: boolean;
@@ -61,12 +53,9 @@ export interface SidenavProps extends BaseComponentProps {
   readonly variant?: 'overlay' | 'permanent';
 }
 
-
 export type ButtonVariant = 'solid' | 'outline' | 'ghost' | 'subtle' | 'plain';
 
-
 export type CardVariant = 'default' | 'sidebar' | 'downloads' | 'elevated';
-
 
 export interface CardProps extends BaseComponentProps {
   readonly title: string;
@@ -83,13 +72,11 @@ export interface CardProps extends BaseComponentProps {
   readonly disabled?: boolean | undefined;
 }
 
-
 export interface LogoProps extends BaseComponentProps {
   readonly width?: string | number;
   readonly height?: string | number;
   readonly variant?: 'default' | 'minimal' | 'text-only';
 }
-
 
 export interface ContactInfoProps extends BaseComponentProps {
   readonly buttonVariant?: ButtonVariant;
@@ -97,20 +84,17 @@ export interface ContactInfoProps extends BaseComponentProps {
   readonly layout?: 'horizontal' | 'vertical';
 }
 
-
 export interface FooterLogosProps extends BaseComponentProps {
   readonly width?: string;
   readonly height?: string;
   readonly logos?: readonly { src: string; alt: string; href?: string }[];
 }
 
-
 export interface StarListProps extends BaseComponentProps {
   readonly listItems: readonly string[];
   readonly variant?: 'default' | 'checkmarks' | 'bullets';
   readonly size?: 'sm' | 'md' | 'lg';
 }
-
 
 export interface LoadingProps extends BaseComponentProps {
   readonly size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
@@ -119,12 +103,10 @@ export interface LoadingProps extends BaseComponentProps {
   readonly variant?: 'spinner' | 'dots' | 'pulse';
 }
 
-
 export interface ErrorBoundaryProps extends BaseComponentProps {
   readonly fallback?: ReactNode;
   readonly onError?: (error: Error, errorInfo: React.ErrorInfo) => void;
 }
-
 
 export interface FieldProps extends BaseComponentProps {
   readonly label?: string;
@@ -134,7 +116,6 @@ export interface FieldProps extends BaseComponentProps {
   readonly invalid?: boolean;
   readonly disabled?: boolean;
 }
-
 
 export interface OfferteFormData {
   readonly firstName: string;
@@ -148,11 +129,9 @@ export interface OfferteFormData {
   readonly message?: string;
 }
 
-
 export type FormErrors<T> = {
   readonly [K in keyof T]?: string;
 };
-
 
 export interface FormState<T> {
   readonly data: T;
@@ -160,7 +139,6 @@ export interface FormState<T> {
   readonly isSubmitting: boolean;
   readonly isValid: boolean;
 }
-
 
 export interface TalkerProps extends BaseComponentProps {
   readonly name: string;
@@ -170,41 +148,37 @@ export interface TalkerProps extends BaseComponentProps {
   readonly company?: string;
 }
 
-
 export interface ThreeElementsProps extends BaseComponentProps {
-  readonly elements?: readonly {
-    readonly id: string;
-    readonly title: string;
-    readonly description: string;
-    readonly image?: string | undefined;
-    readonly cta?: string | undefined;
-    readonly ctaLink?: string | undefined;
-    readonly variant?: CardVariant | undefined;
-    readonly buttonVariant?: ButtonVariant | undefined;
-    readonly external?: boolean | undefined;
-  }[] | undefined;
+  readonly elements?:
+    | readonly {
+        readonly id: string;
+        readonly title: string;
+        readonly description: string;
+        readonly image?: string | undefined;
+        readonly cta?: string | undefined;
+        readonly ctaLink?: string | undefined;
+        readonly variant?: CardVariant | undefined;
+        readonly buttonVariant?: ButtonVariant | undefined;
+        readonly external?: boolean | undefined;
+      }[]
+    | undefined;
 }
 
-
-export type ThemeColor = 
-  | 'blue' 
-  | 'gray' 
-  | 'red' 
-  | 'green' 
-  | 'yellow' 
-  | 'purple' 
-  | 'pink' 
+export type ThemeColor =
+  | 'blue'
+  | 'gray'
+  | 'red'
+  | 'green'
+  | 'yellow'
+  | 'purple'
+  | 'pink'
   | 'orange';
-
 
 export type Breakpoint = 'base' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
-
 export type ResponsiveValue<T> = T | Partial<Record<Breakpoint, T>>;
 
-
 export type AnimationVariant = 'fade' | 'slide' | 'scale' | 'bounce';
-
 
 export interface ApiResponse<T = unknown> {
   readonly data?: T;
@@ -212,7 +186,6 @@ export interface ApiResponse<T = unknown> {
   readonly success: boolean;
   readonly timestamp: string;
 }
-
 
 export interface ContactSubmission {
   readonly name: string;

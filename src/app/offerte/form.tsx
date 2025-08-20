@@ -1,26 +1,27 @@
 'use client';
 
-import { useState, useCallback, useTransition, useMemo } from 'react';
 import {
   Box,
-  SimpleGrid,
-  Input,
   Button,
   Heading,
+  Input,
+  SimpleGrid,
   Text,
   Textarea,
   VStack,
 } from '@chakra-ui/react';
+import { useCallback, useMemo, useState, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { BsCheck2Circle, BsExclamationTriangle } from 'react-icons/bs';
 
 import { Field } from '@/components/ui/field';
-import { isValidEmail, isValidDutchPostalCode } from '@/lib/utils';
+import { isValidDutchPostalCode, isValidEmail } from '@/lib/utils';
 import type { OfferteFormData } from '@/types/components';
 
 type SubmissionState = 'idle' | 'success' | 'error';
 export default function RegistrationForm() {
-  const [submissionState, setSubmissionState] = useState<SubmissionState>('idle');
+  const [submissionState, setSubmissionState] =
+    useState<SubmissionState>('idle');
   const [isPending, startTransition] = useTransition();
   const [errorMessage, setErrorMessage] = useState<string>('');
 
@@ -46,73 +47,86 @@ export default function RegistrationForm() {
   });
 
   const watchedValues = watch();
-  
-  const filledFieldsCount = useMemo(() => 
-    Object.entries(watchedValues).filter(([key, value]) => key !== 'message' && value).length,
-    [watchedValues]
+
+  const filledFieldsCount = useMemo(
+    () =>
+      Object.entries(watchedValues).filter(
+        ([key, value]) => key !== 'message' && value,
+      ).length,
+    [watchedValues],
   );
-  
+
   const totalRequiredFields = 8;
 
-  const onSubmit = useCallback(async (values: OfferteFormData) => {
-    setErrorMessage('');
-    
-    startTransition(async () => {
-      try {
-        const payload = {
-          ...values,
-          tisrm: true,
-          timestamp: new Date().toISOString(),
-          userAgent: navigator.userAgent,
-        };
+  const onSubmit = useCallback(
+    async (values: OfferteFormData) => {
+      setErrorMessage('');
 
-        const formAddress = 'https://pieterrees.nl/email';
-        
-        const response = await fetch(formAddress, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-          },
-          body: JSON.stringify(payload),
-          signal: AbortSignal.timeout(15000), // 15 second timeout
-        });
+      startTransition(async () => {
+        try {
+          const payload = {
+            ...values,
+            tisrm: true,
+            timestamp: new Date().toISOString(),
+            userAgent: navigator.userAgent,
+          };
 
-        if (!response.ok) {
-          throw new Error(`Server responded with ${response.status}: ${response.statusText}`);
-        }
+          const formAddress = 'https://pieterrees.nl/email';
 
-        const result = await response.json();
-        // Form submission successful - log in development mode only
-        if (process.env.NODE_ENV === 'development') {
-          // eslint-disable-next-line no-console
-          console.log('Form submission successful:', result);
-        }
-        
-        setSubmissionState('success');
-        reset(); // Clear form on success
-        
-        // Scroll to top to show success message
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        
-      } catch (error) {
-        console.error('Form submission error:', error);
-        setSubmissionState('error');
-        
-        if (error instanceof Error) {
-          if (error.name === 'TimeoutError') {
-            setErrorMessage('De aanvraag duurde te lang. Probeer het opnieuw.');
-          } else if (error.message.includes('Network')) {
-            setErrorMessage('Netwerkfout. Controleer uw internetverbinding en probeer opnieuw.');
-          } else {
-            setErrorMessage(`Er is een fout opgetreden: ${error.message}`);
+          const response = await fetch(formAddress, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json',
+            },
+            body: JSON.stringify(payload),
+            signal: AbortSignal.timeout(15000), // 15 second timeout
+          });
+
+          if (!response.ok) {
+            throw new Error(
+              `Server responded with ${response.status}: ${response.statusText}`,
+            );
           }
-        } else {
-          setErrorMessage('Er is een onbekende fout opgetreden. Probeer het later opnieuw.');
+
+          const result = await response.json();
+          // Form submission successful - log in development mode only
+          if (process.env.NODE_ENV === 'development') {
+            // eslint-disable-next-line no-console
+            console.log('Form submission successful:', result);
+          }
+
+          setSubmissionState('success');
+          reset(); // Clear form on success
+
+          // Scroll to top to show success message
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } catch (error) {
+          console.error('Form submission error:', error);
+          setSubmissionState('error');
+
+          if (error instanceof Error) {
+            if (error.name === 'TimeoutError') {
+              setErrorMessage(
+                'De aanvraag duurde te lang. Probeer het opnieuw.',
+              );
+            } else if (error.message.includes('Network')) {
+              setErrorMessage(
+                'Netwerkfout. Controleer uw internetverbinding en probeer opnieuw.',
+              );
+            } else {
+              setErrorMessage(`Er is een fout opgetreden: ${error.message}`);
+            }
+          } else {
+            setErrorMessage(
+              'Er is een onbekende fout opgetreden. Probeer het later opnieuw.',
+            );
+          }
         }
-      }
-    });
-  }, [reset]);
+      });
+    },
+    [reset],
+  );
 
   // Success state
   if (submissionState === 'success') {
@@ -125,7 +139,8 @@ export default function RegistrationForm() {
           Bedankt voor uw aanvraag!
         </Heading>
         <Text color="gray.700" fontSize="lg" maxW="md">
-          Wij hebben uw aanvraag ontvangen en nemen binnen 24 uur contact met u op.
+          Wij hebben uw aanvraag ontvangen en nemen binnen 24 uur contact met u
+          op.
         </Text>
         <Button
           onClick={() => setSubmissionState('idle')}
@@ -173,7 +188,7 @@ export default function RegistrationForm() {
           <Heading as="h3" size="md" color="gray.800">
             Persoonlijke gegevens
           </Heading>
-          
+
           <Field
             label="Voornaam"
             required
@@ -183,8 +198,14 @@ export default function RegistrationForm() {
             <Input
               {...register('firstName', {
                 required: 'Voornaam is verplicht',
-                minLength: { value: 2, message: 'Voornaam moet minimaal 2 karakters zijn' },
-                pattern: { value: /^[a-zA-ZÀ-ÿ\s'-]+$/, message: 'Ongeldige karakters in voornaam' },
+                minLength: {
+                  value: 2,
+                  message: 'Voornaam moet minimaal 2 karakters zijn',
+                },
+                pattern: {
+                  value: /^[a-zA-ZÀ-ÿ\s'-]+$/,
+                  message: 'Ongeldige karakters in voornaam',
+                },
               })}
               placeholder="Bijvoorbeeld: Jan"
               autoComplete="given-name"
@@ -201,8 +222,14 @@ export default function RegistrationForm() {
             <Input
               {...register('lastName', {
                 required: 'Achternaam is verplicht',
-                minLength: { value: 2, message: 'Achternaam moet minimaal 2 karakters zijn' },
-                pattern: { value: /^[a-zA-ZÀ-ÿ\s'-]+$/, message: 'Ongeldige karakters in achternaam' },
+                minLength: {
+                  value: 2,
+                  message: 'Achternaam moet minimaal 2 karakters zijn',
+                },
+                pattern: {
+                  value: /^[a-zA-ZÀ-ÿ\s'-]+$/,
+                  message: 'Ongeldige karakters in achternaam',
+                },
               })}
               placeholder="Bijvoorbeeld: de Vries"
               autoComplete="family-name"
@@ -218,7 +245,8 @@ export default function RegistrationForm() {
             <Input
               {...register('emailAddress', {
                 required: 'E-mailadres is verplicht',
-                validate: value => isValidEmail(value) || 'Voer een geldig e-mailadres in',
+                validate: value =>
+                  isValidEmail(value) || 'Voer een geldig e-mailadres in',
               })}
               type="email"
               placeholder="bijvoorbeeld@bedrijf.nl"
@@ -252,7 +280,7 @@ export default function RegistrationForm() {
           <Heading as="h3" size="md" color="gray.800">
             Bedrijfsgegevens
           </Heading>
-          
+
           <Field
             label="Bedrijfsnaam"
             required
@@ -262,7 +290,10 @@ export default function RegistrationForm() {
             <Input
               {...register('companyName', {
                 required: 'Bedrijfsnaam is verplicht',
-                minLength: { value: 2, message: 'Bedrijfsnaam moet minimaal 2 karakters zijn' },
+                minLength: {
+                  value: 2,
+                  message: 'Bedrijfsnaam moet minimaal 2 karakters zijn',
+                },
               })}
               placeholder="Uw bedrijfsnaam"
               autoComplete="organization"
@@ -299,7 +330,8 @@ export default function RegistrationForm() {
                 required: 'BTW-nummer is verplicht',
                 pattern: {
                   value: /^NL[0-9]{9}B[0-9]{2}$/,
-                  message: 'Voer een geldig Nederlands BTW-nummer in (bijv. NL123456789B01)',
+                  message:
+                    'Voer een geldig Nederlands BTW-nummer in (bijv. NL123456789B01)',
                 },
               })}
               placeholder="NL123456789B01"
@@ -316,7 +348,9 @@ export default function RegistrationForm() {
             <Input
               {...register('postalCode', {
                 required: 'Postcode is verplicht',
-                validate: value => isValidDutchPostalCode(value) || 'Voer een geldige Nederlandse postcode in',
+                validate: value =>
+                  isValidDutchPostalCode(value) ||
+                  'Voer een geldige Nederlandse postcode in',
               })}
               placeholder="1234 AB"
               maxLength={7}
@@ -335,7 +369,10 @@ export default function RegistrationForm() {
         >
           <Textarea
             {...register('message', {
-              maxLength: { value: 1000, message: 'Bericht mag maximaal 1000 karakters bevatten' },
+              maxLength: {
+                value: 1000,
+                message: 'Bericht mag maximaal 1000 karakters bevatten',
+              },
             })}
             placeholder="Beschrijf hier uw specifieke wensen, vragen of opmerkingen..."
             rows={4}

@@ -1,8 +1,8 @@
 'use client';
 
-import { Flex, Box } from '@chakra-ui/react';
-import Image from 'next/image';
 import type { FooterLogosProps } from '@/types/components';
+import { Box, Flex } from '@chakra-ui/react';
+import Image from 'next/image';
 
 const logos = [
   { src: '/logos/sbb.png', alt: 'SBB Logo' },

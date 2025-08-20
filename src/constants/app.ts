@@ -40,7 +40,8 @@ export const NAVIGATION_ROUTES = {
 } as const;
 
 export const EXTERNAL_LINKS = {
-  damageReport: 'https://schade.emsclaimsengine.com/index.php?template=tis&view=consument.login#identificatie_vragen',
+  damageReport:
+    'https://schade.emsclaimsengine.com/index.php?template=tis&view=consument.login#identificatie_vragen',
   gtmId: 'G-3HPHN1BV1Q',
 } as const;
 
