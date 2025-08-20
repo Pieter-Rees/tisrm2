@@ -1,5 +1,5 @@
+import { pageInfo } from '@/data/general';
 import type { Metadata } from 'next';
-import { pageInfo } from '../data/general';
 
 export const metadata: Metadata = {
   title: pageInfo.name,

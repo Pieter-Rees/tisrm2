@@ -1,8 +1,8 @@
 'use client';
 
+import system from '@/app/theme';
 import { Provider } from '@/components/ui/provider';
 import type { ReactNode } from 'react';
-import system from './theme';
 
 interface ProvidersProps {
   children: ReactNode;

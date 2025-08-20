@@ -1,5 +1,6 @@
 'use client';
 
+import { contactInfo } from '@/data/general';
 import type { ContactInfoProps } from '@/types/components';
 import {
   Box,
@@ -12,7 +13,6 @@ import {
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import { BsLinkedin } from 'react-icons/bs';
-import { contactInfo } from '../data/general';
 
 const contactButtons = [
   { href: 'tel:+310206368191', label: '+31 020 636 8191', external: false },

@@ -3,6 +3,7 @@
 import FooterLogos from '@/components/footer-logos';
 import Logo from '@/components/logo';
 import { CURRENT_YEAR } from '@/constants/app';
+import { contactInfo } from '@/data/general';
 import {
   Box,
   Button,
@@ -14,7 +15,6 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import Link from 'next/link';
-import { contactInfo } from '../data/general';
 
 const contactLinks = [
   { href: 'tel:+310206368191', label: '+31 020 636 8191', external: false },

@@ -29,7 +29,7 @@ export const ButtonLink = forwardRef<HTMLButtonElement, ButtonLinkProps>(
             rel={
               external || href.startsWith('http') ?
                 'noopener noreferrer'
-                : undefined
+              : undefined
             }
             {...(download && { download })}
           >

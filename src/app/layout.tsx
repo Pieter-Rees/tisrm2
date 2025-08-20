@@ -45,4 +45,4 @@ export default function RootLayout({ children }: RootLayoutProps) {
   );
 }
 
-export { metadata } from './metadata';
+export { metadata } from '@/app/metadata';

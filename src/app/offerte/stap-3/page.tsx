@@ -126,7 +126,7 @@ export default function OfferteStep3() {
 
           const result = await response.json();
           if (process.env.NODE_ENV === 'development') {
-            console.log('Form submission successful:', result);
+            console.warn('Form submission successful:', result);
           }
 
           setSubmissionState('success');

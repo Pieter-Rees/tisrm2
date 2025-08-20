@@ -117,9 +117,9 @@ export default function OfferteStep2() {
                       borderRadius="full"
                       bg={
                         index === 1 ? 'blue.500'
-                          : index < 1 ?
-                            'green.500'
-                            : 'gray.300'
+                        : index < 1 ?
+                          'green.500'
+                        : 'gray.300'
                       }
                       color="white"
                       display="flex"
@@ -136,9 +136,9 @@ export default function OfferteStep2() {
                         fontSize="sm"
                         color={
                           index === 1 ? 'blue.600'
-                            : index < 1 ?
-                              'green.600'
-                              : 'gray.600'
+                          : index < 1 ?
+                            'green.600'
+                          : 'gray.600'
                         }
                       >
                         {step.title}
