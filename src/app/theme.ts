@@ -5,11 +5,19 @@ export const system = createSystem(defaultConfig, {
     tokens: {
       colors: {
         blue: {
+          50: { value: '#e6f7ff' },
+          100: { value: '#b3e0ff' },
+          200: { value: '#80c9ff' },
           500: { value: '#00a3ff' },
+          600: { value: '#0099f2' },
           700: { value: '#0077cc' },
           900: { value: '#005299' },
         },
         gray: {
+          50: { value: '#f9fafb' },
+          100: { value: '#f3f4f6' },
+          200: { value: '#e5e7eb' },
+          300: { value: '#d1d5db' },
           500: { value: '#abadaf' },
           600: { value: '#7d7f83' },
           700: { value: '#33373d' },

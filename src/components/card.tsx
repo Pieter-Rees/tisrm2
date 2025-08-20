@@ -5,38 +5,10 @@ import Image from 'next/image';
 import { memo } from 'react';
 import { BsArrowRight, BsDownload, BsTelephone } from 'react-icons/bs';
 
-import { UI_CONSTANTS } from '@/constants/app';
 import { HEADING_STYLES, PARAGRAPH_STYLES } from '@/constants/typography';
 import { cn } from '@/lib/utils';
+import { getCardStyles } from '@/styles/components/card.styles';
 import type { CardProps } from '@/types/components';
-const CARD_VARIANTS = {
-  default: {
-    bg: 'white',
-    shadow: 'lg',
-    hover: {
-      ...UI_CONSTANTS.hover.card,
-      transform: 'translateY(-2px)',
-    },
-  },
-  sidebar: {
-    bg: 'white',
-    shadow: 'md',
-    hover: UI_CONSTANTS.hover.subtle,
-  },
-  downloads: {
-    bg: 'blue.50',
-    shadow: 'md',
-    hover: {
-      ...UI_CONSTANTS.hover.card,
-      transform: 'scale(1.02)',
-    },
-  },
-  elevated: {
-    bg: 'white',
-    shadow: 'xl',
-    hover: UI_CONSTANTS.hover.card,
-  },
-} as const;
 const Card = memo<CardProps>(
   ({
     title,
@@ -53,31 +25,9 @@ const Card = memo<CardProps>(
     className,
     'data-testid': testId,
   }) => {
-    const variantStyles = CARD_VARIANTS[variant];
     const hasAction = Boolean(cta || phone || downloadLink);
     const isInteractive = Boolean(ctaLink || phone || downloadLink);
-
-    const cardStyles = {
-      border: '1px solid',
-      borderColor: disabled ? 'gray.300' : 'gray.200',
-      borderRadius: 'lg',
-      overflow: 'hidden',
-      bg: disabled ? 'gray.50' : variantStyles.bg,
-      boxShadow: variantStyles.shadow,
-      transition: variantStyles.hover.transition,
-      opacity: disabled ? 0.6 : 1,
-      cursor: isInteractive && !disabled ? 'pointer' : 'default',
-      height: '100%',
-      width: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-      _hover: !disabled && isInteractive ? variantStyles.hover : {},
-      _focus: {
-        outline: '2px solid',
-        outlineColor: 'blue.500',
-        outlineOffset: '2px',
-      },
-    };
+    const cardStyles = getCardStyles(variant, disabled, isInteractive);
 
     const cardContent = (
       <>
@@ -127,15 +77,18 @@ const Card = memo<CardProps>(
             <Box mt="auto">
               {phone && (
                 <Button
-                  size="sm"
-                  variant="outline"
-                  colorScheme="blue"
                   width="full"
                   gap="2"
-                  transition={UI_CONSTANTS.hover.button.transition}
-                  _hover={UI_CONSTANTS.hover.button}
+                  transition="all 0.2s ease-in-out"
+                  _hover={{
+                    transform: 'translateY(-2px)',
+                    boxShadow: 'lg',
+                  }}
+                  colorScheme="green"
+                  variant="outline"
                   onClick={e => {
                     e.preventDefault();
+                    e.stopPropagation();
                     window.location.href = phone;
                   }}
                 >
@@ -146,15 +99,18 @@ const Card = memo<CardProps>(
 
               {downloadLink && (
                 <Button
-                  size="sm"
-                  variant="solid"
-                  colorScheme="blue"
                   width="full"
                   gap="2"
-                  transition={UI_CONSTANTS.hover.button.transition}
-                  _hover={UI_CONSTANTS.hover.button}
+                  transition="all 0.2s ease-in-out"
+                  _hover={{
+                    transform: 'translateY(-2px)',
+                    boxShadow: 'lg',
+                  }}
+                  colorScheme="purple"
+                  variant="outline"
                   onClick={e => {
                     e.preventDefault();
+                    e.stopPropagation();
                     const link = document.createElement('a');
                     link.href = downloadLink;
                     link.download = '';
@@ -170,15 +126,18 @@ const Card = memo<CardProps>(
 
               {cta && ctaLink && (
                 <Button
-                  size="sm"
-                  variant="outline"
-                  colorScheme="blue"
                   width="full"
                   gap="2"
-                  transition={UI_CONSTANTS.hover.button.transition}
-                  _hover={UI_CONSTANTS.hover.button}
+                  transition="all 0.2s ease-in-out"
+                  _hover={{
+                    transform: 'translateY(-2px)',
+                    boxShadow: 'lg',
+                  }}
+                  colorScheme="blue"
+                  variant="solid"
                   onClick={e => {
                     e.preventDefault();
+                    e.stopPropagation();
                     window.location.href = ctaLink;
                   }}
                 >

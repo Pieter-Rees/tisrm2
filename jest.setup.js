@@ -72,3 +72,5 @@ jest.mock('next/navigation', () => ({
   useSearchParams: () => new URLSearchParams(),
   usePathname: () => '/',
 }));
+
+// Chakra UI and react-icons are mocked via moduleNameMapper in jest.config.js

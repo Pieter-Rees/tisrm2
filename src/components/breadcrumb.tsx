@@ -5,6 +5,11 @@ import { Box, HStack } from '@chakra-ui/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
+import {
+  breadcrumbContainerStyles,
+  getBreadcrumbItemStyles,
+  breadcrumbSeparatorStyles,
+} from '@/styles/components/utility.styles';
 
 export default function Breadcrumb({
   separator = '>',
@@ -25,19 +30,19 @@ export default function Breadcrumb({
         const itemLink =
           capitalizeLinks && link[0] ?
             link[0].toUpperCase() + link.slice(1, link.length)
-          : link;
+            : link;
 
         return (
           <React.Fragment key={index}>
             <Box
-              fontSize="xl"
               className={itemClasses}
+              fontSize="xl"
               fontWeight={isCurrentPage ? 'bold' : 'normal'}
               color={isCurrentPage ? 'blue.600' : 'gray.700'}
             >
               {isCurrentPage ?
                 <span>{itemLink}</span>
-              : <Link href={href as any}>{itemLink}</Link>}
+                : <Link href={href as any}>{itemLink}</Link>}
             </Box>
             {pathNames.length !== index + 1 && (
               <Box color="gray.400">{separator}</Box>

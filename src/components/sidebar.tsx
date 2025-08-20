@@ -6,6 +6,12 @@ import { memo } from 'react';
 import Card from '@/components/card';
 import { CONTACT_INFO, NAVIGATION_ROUTES } from '@/constants/app';
 import { cn } from '@/lib/utils';
+import {
+  sidebarContainerStyles,
+  sidebarHelpBoxStyles,
+  sidebarHelpTitleStyles,
+  sidebarHelpTextStyles,
+} from '@/styles/components/layout.styles';
 import type { BaseComponentProps } from '@/types/components';
 
 const SIDEBAR_CARDS = [
@@ -53,7 +59,7 @@ const Sidebar = memo<BaseComponentProps>(
         role="complementary"
         aria-label="Sidebar navigation and quick actions"
       >
-        <VStack gap="6" align="stretch">
+        <VStack gap="6" alignItems="stretch">
           {SIDEBAR_CARDS.map(card => (
             <Card
               key={card.id}
@@ -78,10 +84,18 @@ const Sidebar = memo<BaseComponentProps>(
           borderColor="blue.200"
           textAlign="center"
         >
-          <Box fontSize="sm" color="blue.700" fontWeight="medium" mb="1">
+          <Box
+            fontSize="sm"
+            color="blue.700"
+            fontWeight="medium"
+            mb="1"
+          >
             Hulp nodig?
           </Box>
-          <Box fontSize="xs" color="blue.600">
+          <Box
+            fontSize="xs"
+            color="blue.600"
+          >
             Onze experts helpen u graag verder met al uw verzekeringsvragen
           </Box>
         </Box>

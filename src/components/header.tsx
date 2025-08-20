@@ -8,8 +8,16 @@ import { BsList, BsX } from 'react-icons/bs';
 import Logo from '@/components/logo';
 import Navbar from '@/components/navbar';
 import Sidenav from '@/components/sidenav';
-import { NAVIGATION_ROUTES, UI_CONSTANTS } from '@/constants/app';
+import { NAVIGATION_ROUTES } from '@/constants/app';
 import { useDisclosure } from '@/hooks/use-disclosure';
+import {
+  headerStyles,
+  headerContainerStyles,
+  headerLogoStyles,
+  headerNavStyles,
+  headerMenuButtonStyles,
+  mobileMenuOverlayStyles,
+} from '@/styles/components/layout.styles';
 const Header = memo(() => {
   const {
     isOpen: showSideNav,
@@ -18,19 +26,9 @@ const Header = memo(() => {
   } = useDisclosure();
 
   return (
-    <Box
-      as="header"
-      role="banner"
-      position="sticky"
-      top="0"
-      zIndex={UI_CONSTANTS.zIndexes.sticky}
-      bg="white"
-      borderBottom="1px"
-      borderColor="gray.200"
-      boxShadow="sm"
-    >
+    <Box as="header" role="banner" {...headerStyles}>
       <Container>
-        <Flex align="center" justify="space-between" gap="8">
+        <Flex alignItems="center" justifyContent="space-between" gap="8">
           <Box flex="0 0 auto" padding="4">
             <Link
               href={NAVIGATION_ROUTES.home}
@@ -48,21 +46,19 @@ const Header = memo(() => {
           <Box hideFrom="xl">
             <Button
               variant="ghost"
+              color="gray.700"
+              transition="all 0.2s ease-in-out"
+              _hover={{ bg: 'gray.100', color: 'blue.600' }}
+              _active={{ bg: 'gray.200' }}
+              hideFrom="xl"
               onClick={handleToggle}
               aria-label={
                 showSideNav ? 'Close navigation menu' : 'Open navigation menu'
               }
               aria-expanded={showSideNav}
               aria-controls="mobile-navigation"
-              size="lg"
-              color="gray.900"
-              transition={UI_CONSTANTS.hover.subtle.transition}
-              _hover={UI_CONSTANTS.hover.subtle}
-              _active={{ bg: 'gray.200' }}
             >
-              {showSideNav ?
-                <BsX size="24" />
-                : <BsList size="24" />}
+              {showSideNav ? <BsX size="24" /> : <BsList size="24" />}
             </Button>
           </Box>
         </Flex>
@@ -70,10 +66,7 @@ const Header = memo(() => {
 
       {showSideNav && (
         <Box
-          position="fixed"
-          inset="0"
-          bg="blackAlpha.600"
-          zIndex={UI_CONSTANTS.zIndexes.modal - 10}
+          {...mobileMenuOverlayStyles}
           onClick={closeSideNav}
           aria-hidden="true"
           data-testid="mobile-menu-overlay"

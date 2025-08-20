@@ -44,7 +44,7 @@ const GridLayout = memo<GridLayoutProps>(
             id="page-title"
             as="h1"
             size={{ base: 'lg', md: 'xl', lg: '2xl' }}
-            color="gray.900"
+            color="gray.800"
             fontWeight="bold"
             lineHeight="tight"
           >

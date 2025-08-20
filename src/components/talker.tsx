@@ -6,6 +6,7 @@ import { memo } from 'react';
 import { BsQuote } from 'react-icons/bs';
 
 import { PARAGRAPH_STYLES } from '@/constants/typography';
+import { testimonialContainerStyles } from '@/styles/components/testimonial.styles';
 import type { TalkerProps } from '@/types/components';
 const DEFAULT_TESTIMONIAL = {
   name: 'René Enthoven',
@@ -30,40 +31,24 @@ const Talker = memo<TalkerProps>(
         as="section"
         role="region"
         aria-label="Customer testimonial"
-        py={{ base: '12', lg: '20' }}
-        px={{ base: '4', lg: '8' }}
-        bg="gray.50"
-        borderRadius="xl"
-        boxShadow="sm"
+        {...testimonialContainerStyles}
       >
         <Flex
-          direction={{ base: 'column', lg: 'row' }}
-          gap={{ base: '8', lg: '16' }}
-          justify="center"
-          align="center"
-          maxW="4xl"
-          mx="auto"
+          flexDirection={{ base: 'column', lg: 'row' }}
+          gap={{ base: '8', lg: '12' }}
+          alignItems="center"
+          justifyContent="center"
         >
-          <Box position="relative" flexShrink={0} order={{ base: 1, lg: 0 }}>
+          <Box flex="0 0 auto" mb={{ base: '4', lg: '0' }}>
             <Box
               position="relative"
               width={{ base: '200px', lg: '280px' }}
               height={{ base: '200px', lg: '280px' }}
               borderRadius="full"
               overflow="hidden"
+              border="4px solid"
+              borderColor="white"
               boxShadow="xl"
-              bg="gray.200"
-              _before={{
-                content: '""',
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                borderRadius: 'full',
-                boxShadow: 'inset 0 0 0 4px white',
-                zIndex: 1,
-              }}
             >
               <Image
                 src={image}
@@ -79,41 +64,30 @@ const Talker = memo<TalkerProps>(
             </Box>
           </Box>
 
-          <VStack
-            align={{ base: 'center', lg: 'flex-start' }}
-            textAlign={{ base: 'center', lg: 'left' }}
-            gap="6"
-            flex="1"
-            maxW={{ base: 'full', lg: '2xl' }}
-          >
-            <Box color="blue.500" opacity="0.8">
+          <VStack alignItems="center" gap="6" flex="1" textAlign="center">
+            <Box color="blue.500" opacity="0.6">
               <BsQuote size="48" />
             </Box>
 
             <Box
-              position="relative"
               {...PARAGRAPH_STYLES.large}
               fontStyle="italic"
-              pl="4"
-              pr="4"
+              lineHeight="1.8"
+              maxWidth="600px"
+              color="gray.700"
             >
               {quote}
             </Box>
 
-            <VStack gap="1" align={{ base: 'center', lg: 'flex-start' }}>
-              <Text
-                fontSize="lg"
-                fontWeight="bold"
-                color="text.primary"
-                lineHeight="tight"
-              >
+            <VStack alignItems="center" gap="1" mt="4">
+              <Text fontWeight="bold" fontSize="lg" color="gray.800">
                 {name}
               </Text>
-              <Text fontSize="md" color="text.accent" fontWeight="medium">
+              <Text fontSize="md" color="gray.600">
                 {title}
               </Text>
               {company && (
-                <Text fontSize="sm" color="text.muted" fontWeight="medium">
+                <Text fontSize="sm" color="blue.600" fontWeight="medium">
                   {company}
                 </Text>
               )}

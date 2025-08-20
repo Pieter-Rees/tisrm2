@@ -24,6 +24,21 @@ import {
   UI_CONSTANTS,
 } from '@/constants/app';
 import { cn } from '@/lib/utils';
+import {
+  sidenavContainerStyles,
+  getSidenavPositionStyles,
+  sidenavCloseButtonContainerStyles,
+  sidenavCloseButtonStyles,
+  sidenavContentContainerStyles,
+  sidenavLogoContainerStyles,
+  sidenavLinksContainerStyles,
+  sidenavLinkItemStyles,
+  getSidenavLinkButtonStyles,
+  sidenavSeparatorStyles,
+  sidenavActionsContainerStyles,
+  sidenavActionsButtonStyles,
+  navbarMenuItemStyles,
+} from '@/styles/components/navigation.styles';
 import type { NavigationLink, SidenavProps } from '@/types/components';
 const MOBILE_NAVIGATION_LINKS: readonly NavigationLink[] = [
   { href: NAVIGATION_ROUTES.home, label: 'Home' },
@@ -69,44 +84,36 @@ const Sidenav = memo<SidenavProps>(
       <Flex
         className={cn('sidenav', className)}
         data-testid={testId}
-        id="mobile-navigation"
-        as="nav"
-        role="navigation"
-        aria-label="Mobile navigation menu"
-        aria-hidden={!showSideNav}
         position="fixed"
         top="0"
-        left={showSideNav ? '0' : '-100%'}
         height="100vh"
         width={{ base: '85%', sm: '400px' }}
         maxW="400px"
         bg="white"
         boxShadow="2xl"
         zIndex={UI_CONSTANTS.zIndexes.modal}
-        direction="column"
+        flexDirection="column"
         transition="left 0.3s ease-in-out"
         overflowY="auto"
         borderRight="1px solid"
         borderColor="gray.200"
+        left={showSideNav ? '0' : '-100%'}
       >
         <Box position="absolute" top="4" right="4" zIndex="1">
           <Button
-            variant="ghost"
-            size="sm"
+            transition="all 0.2s ease-in-out"
+            _hover={{ bg: 'gray.100' }}
             onClick={handleToggle}
-            aria-label="Close navigation menu"
-            transition={UI_CONSTANTS.hover.subtle.transition}
-            _hover={UI_CONSTANTS.hover.subtle}
           >
             <BsX size="20" />
           </Button>
         </Box>
 
         <Flex
-          direction="column"
+          flexDirection="column"
           height="full"
-          justify="center"
-          align="center"
+          justifyContent="center"
+          alignItems="center"
           p="8"
           pt="16"
           gap="8"
@@ -122,9 +129,8 @@ const Sidenav = memo<SidenavProps>(
           </Box>
 
           <VStack
-            as="ul"
             gap="3"
-            align="center"
+            alignItems="center"
             width="full"
             listStyleType="none"
             margin="0"
@@ -136,21 +142,24 @@ const Sidenav = memo<SidenavProps>(
                 (href !== '/' && pathname.startsWith(href));
 
               return (
-                <Box key={href} as="li" width="full">
+                <Box key={href} width="full">
                   <Button
                     asChild
-                    variant="plain"
-                    size="lg"
                     width="full"
+                    bg={isActive ? 'blue.50' : 'white'}
                     color={isActive ? 'blue.600' : 'gray.700'}
                     fontWeight={isActive ? 'semibold' : 'medium'}
-                    transition={UI_CONSTANTS.hover.subtle.transition}
+                    border="1px solid"
+                    borderColor={isActive ? 'blue.200' : 'gray.200'}
+                    borderRadius="md"
+                    transition="all 0.2s ease-in-out"
                     _hover={{
-                      bg: 'gray.50',
+                      bg: isActive ? 'blue.100' : 'gray.50',
                       color: 'blue.600',
                       transform: 'translateX(4px)',
+                      borderColor: 'blue.300',
                     }}
-                    _active={{ bg: 'gray.100' }}
+                    _active={{ bg: isActive ? 'blue.200' : 'gray.100' }}
                     justifyContent="center"
                     py="3"
                   >
@@ -175,12 +184,12 @@ const Sidenav = memo<SidenavProps>(
                 <Button
                   bg="blue.500"
                   color="white"
-                  size="lg"
                   width="full"
-                  transition={UI_CONSTANTS.hover.button.transition}
+                  transition="all 0.2s ease-in-out"
                   _hover={{
                     bg: 'blue.600',
-                    ...UI_CONSTANTS.hover.button,
+                    transform: 'translateY(-2px)',
+                    boxShadow: 'lg',
                   }}
                   _active={{ bg: 'blue.700' }}
                   fontWeight="medium"

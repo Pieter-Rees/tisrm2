@@ -4,9 +4,16 @@ import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
 import Link from 'next/link';
 import { BsTelephoneFill } from 'react-icons/bs';
 
+import {
+  actionButtonBaseStyles,
+  actionVariants,
+} from '@/styles/components/action.styles';
+
 export default function CallUs() {
+  const { content, icon, heading, text } = actionVariants.callUs;
+
   return (
-    <Button asChild width="full" height="full" bg="blue.500" color="white">
+    <Button asChild {...actionButtonBaseStyles}>
       <Link href="tel:+310206368191">
         <Flex
           justifyContent="center"
@@ -19,7 +26,7 @@ export default function CallUs() {
             <BsTelephoneFill size="32px" />
           </Box>
           <Box>
-            <Heading as="h2" size="md" color="white">
+            <Heading as="h2" fontSize="md" color="white">
               Direct antwoord op uw vragen?
               <br />
               Bel ons!

@@ -8,8 +8,18 @@ import { NAVIGATION_ROUTES } from '@/constants/app';
 import {
   HEADING_STYLES,
   PARAGRAPH_STYLES,
-  SECTION_SPACING,
 } from '@/constants/typography';
+import {
+  featureSectionContainerStyles,
+  featureHeaderStyles,
+  featureDescriptionStyles,
+  featureGridStyles,
+  featureGridItemStyles,
+  featureCtaStyles,
+  featureCtaHeadingStyles,
+  featureCtaTextStyles,
+  featureCtaButtonStyles,
+} from '@/styles/components/feature.styles';
 import { cn } from '@/lib/utils';
 import type { ThreeElementsProps } from '@/types/components';
 const FEATURE_CARDS = [
@@ -51,38 +61,25 @@ const ThreeElements = memo<ThreeElementsProps>(
       <Box
         className={cn('three-elements', className)}
         data-testid={testId}
-        as="section"
-        role="region"
+        {...featureSectionContainerStyles}
         aria-label="Key features and services"
       >
-        <Box mb={SECTION_SPACING.medium} textAlign="center">
+        <Box {...featureHeaderStyles}>
           <Heading as="h2" {...HEADING_STYLES.h2} textAlign="center">
             Waarom kiezen voor TIS?
           </Heading>
           <Box
             {...PARAGRAPH_STYLES.large}
-            color="text.muted"
-            maxW="3xl"
-            mx="auto"
-            textAlign="center"
+            {...featureDescriptionStyles}
           >
             Ontdek onze unieke aanpak en specialisaties die ons onderscheiden in
             de verzekeringsmarkt
           </Box>
         </Box>
 
-        <Grid
-          templateColumns={{
-            base: 'repeat(1, 1fr)',
-            md: 'repeat(2, 1fr)',
-            lg: 'repeat(3, 1fr)',
-          }}
-          gap={{ base: '6', lg: '8' }}
-          alignItems="stretch"
-          width="100%"
-        >
+        <Grid {...featureGridStyles}>
           {elements.map((element, index) => (
-            <GridItem key={element.id} display="flex" minW="0">
+            <GridItem key={element.id} {...featureGridItemStyles}>
               <Card
                 image={element.image}
                 title={element.title}

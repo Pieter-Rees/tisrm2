@@ -3,9 +3,16 @@
 import { Box, Button, Flex, Heading } from '@chakra-ui/react';
 import Link from 'next/link';
 
+import {
+  actionButtonBaseStyles,
+  actionVariants,
+} from '@/styles/components/action.styles';
+
 export default function SchadeMelden() {
+  const { content, heading } = actionVariants.schadeMelden;
+
   return (
-    <Button asChild width="full" height="full" bg="blue.500" color="white">
+    <Button asChild {...actionButtonBaseStyles}>
       <Link
         href="https://schade.emsclaimsengine.com/index.php?template=tis&view=consument.login#identificatie_vragen"
         target="_blank"
@@ -20,7 +27,7 @@ export default function SchadeMelden() {
           gap="8"
         >
           <Box>
-            <Heading as="h2" size="md" color="white">
+            <Heading as="h2" fontSize="md" color="white">
               Schade melden
             </Heading>
           </Box>

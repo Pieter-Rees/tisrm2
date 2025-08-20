@@ -27,8 +27,17 @@ const customJestConfig = {
       statements: 80,
     },
   },
-  moduleNameMapping: {
+  moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
+    // Mock Chakra UI main module and subpath imports (Next.js transforms named imports to subpaths)
+    '^@chakra-ui/react$': '<rootDir>/src/__mocks__/chakra-ui-simple.tsx',
+    '^@chakra-ui/react/(.*)$': '<rootDir>/src/__mocks__/chakra-ui-simple.tsx',
+    // Mock react-icons
+    '^react-icons/bs/(.*)$': '<rootDir>/src/__mocks__/react-icons-simple.tsx',
+    '^react-icons/bs$': '<rootDir>/src/__mocks__/react-icons-simple.tsx',
+    // Mock Next.js components
+    '^next/image$': '<rootDir>/src/__mocks__/next-image.tsx',
+    '^next/link$': '<rootDir>/src/__mocks__/next-link.tsx',
   },
   testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/'],
   transformIgnorePatterns: [

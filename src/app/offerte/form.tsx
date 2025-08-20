@@ -17,7 +17,7 @@ import { BsCheck2Circle, BsExclamationTriangle } from 'react-icons/bs';
 import { Field } from '@/components/ui/field';
 import { UI_CONSTANTS } from '@/constants/app';
 import { isValidDutchPostalCode, isValidEmail } from '@/lib/utils';
-import type { OfferteFormData } from '@/types/components';
+import type { OfferteFormData } from '@/types/forms';
 
 type SubmissionState = 'idle' | 'success' | 'error';
 export default function RegistrationForm() {
@@ -383,10 +383,11 @@ export default function RegistrationForm() {
           width="full"
           bg="blue.500"
           color="white"
-          transition={UI_CONSTANTS.hover.button.transition}
+          transition="all 0.2s ease-in-out"
           _hover={{
             bg: 'blue.600',
-            ...UI_CONSTANTS.hover.button,
+            transform: 'translateY(-2px)',
+            boxShadow: 'lg',
           }}
           _active={{ bg: 'blue.700' }}
           disabled={Object.keys(errors).length > 0}

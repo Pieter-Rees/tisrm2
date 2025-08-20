@@ -3,25 +3,20 @@ import {
   ScaleIn,
   StaggerContainer,
 } from '@/components/page-animation';
-import PageLayout from '@/components/page-layout';
+import { UnifiedLayout } from '@/components/layout';
 import StarList from '@/components/star-list';
-import { PARAGRAPH_STYLES, SECTION_SPACING } from '@/constants/typography';
+import { PARAGRAPH_STYLES } from '@/constants/typography';
+import { SPACING_SCALE } from '@/constants/layout';
+import { COMPANY_ENTITIES } from '@/data/content';
 import { Box, Flex, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 
 export default function Overons() {
-  const list = [
-    'Enthoven Beheer BV – Financial Holding',
-    'ENTO lease BV – Lease en financiering',
-    'ENTO Holding – bedrijfs adviezen',
-    'Alan Jacktar BV – Risico Management',
-    'TIS RM – Assurantiën (Schade) voor particulier en MKB',
-  ];
 
   return (
-    <PageLayout title="Over ons">
+    <UnifiedLayout title="Over ons">
       <StaggerContainer>
-        <Flex direction="column" gap={SECTION_SPACING.small}>
+        <Flex direction="column" gap={SPACING_SCALE.md}>
           <FadeInUp>
             <Text {...PARAGRAPH_STYLES.body}>
               De ENTO Groep is opgericht in 1994 en is begonnen als zelfstandige
@@ -42,7 +37,7 @@ export default function Overons() {
           </FadeInUp>
 
           <FadeInUp delay={0.2}>
-            <StarList listItems={list} />
+            <StarList listItems={COMPANY_ENTITIES} />
           </FadeInUp>
 
           <FadeInUp delay={0.3}>
@@ -60,7 +55,7 @@ export default function Overons() {
             <Flex
               width="full"
               justifyContent="center"
-              mt={SECTION_SPACING.medium}
+              mt={SPACING_SCALE.lg}
             >
               <Box
                 transform={{ base: '', lg: 'rotate(2deg)' }}
@@ -81,6 +76,6 @@ export default function Overons() {
           </ScaleIn>
         </Flex>
       </StaggerContainer>
-    </PageLayout>
+    </UnifiedLayout>
   );
 }

@@ -4,6 +4,7 @@ import BaseLayout from '@/components/baseLayout';
 import { Field } from '@/components/ui/field';
 import { UI_CONSTANTS } from '@/constants/app';
 import { useLocalStorage } from '@/hooks/use-local-storage';
+import OfferteStepNavigation from '@/components/offerte-step-navigation';
 import {
   Box,
   Button,
@@ -62,11 +63,7 @@ export default function OfferteStep3() {
     },
   });
 
-  const steps = [
-    { title: 'Contactgegevens', description: 'Vul uw gegevens in' },
-    { title: 'Bedrijfsgegevens', description: 'Bedrijfsinformatie' },
-    { title: 'Controleren', description: 'Controleer en verstuur' },
-  ];
+
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -180,25 +177,36 @@ export default function OfferteStep3() {
     return (
       <Container>
         <BaseLayout>
-          <VStack gap="6" textAlign="center" py="12">
-            <Box color="green.500" fontSize="4xl">
-              <BsCheck2Circle />
-            </Box>
-            <Heading as="h2" size="lg" color="green.700">
-              Bedankt voor uw aanvraag!
-            </Heading>
-            <Text color="gray.700" fontSize="lg" maxW="md">
-              Wij hebben uw aanvraag ontvangen en nemen binnen 24 uur contact
-              met u op.
-            </Text>
-            <Button
-              onClick={startNewRequest}
-              variant="outline"
-              colorScheme="green"
-              size="lg"
-            >
-              Nieuwe aanvraag indienen
-            </Button>
+          <VStack alignItems="flex-start" width="full" gap="8">
+            <OfferteStepNavigation
+              currentStep={2}
+              totalSteps={3}
+              steps={[
+                { title: 'Contactgegevens', isCompleted: true },
+                { title: 'Project Details', isCompleted: true },
+                { title: 'Bevestiging', isCompleted: false }
+              ]}
+            />
+            <VStack gap="6" textAlign="center" py="12" width="full">
+              <Box color="green.500" fontSize="4xl">
+                <BsCheck2Circle />
+              </Box>
+              <Heading as="h2" size="lg" color="green.700">
+                Bedankt voor uw aanvraag!
+              </Heading>
+              <Text color="gray.700" fontSize="lg" maxW="md">
+                Wij hebben uw aanvraag ontvangen en nemen binnen 24 uur contact
+                met u op.
+              </Text>
+              <Button
+                onClick={startNewRequest}
+                variant="outline"
+                colorScheme="green"
+                size="lg"
+              >
+                Nieuwe aanvraag indienen
+              </Button>
+            </VStack>
           </VStack>
         </BaseLayout>
       </Container>
@@ -209,68 +217,15 @@ export default function OfferteStep3() {
     <Container>
       <BaseLayout title="Offerte aanvragen - Stap 3">
         <VStack alignItems="flex-start" width="full" gap="8">
-          <Box width="full" py="6">
-            <HStack justify="center" gap="8" width="full">
-              {steps.map((step, index) => (
-                <Box
-                  key={index}
-                  textAlign="center"
-                  position="relative"
-                  flex="1"
-                >
-                  <VStack gap="2">
-                    <Box
-                      width="10"
-                      height="10"
-                      borderRadius="full"
-                      bg={
-                        index === 2 ? 'blue.500'
-                          : index < 2 ?
-                            'green.500'
-                            : 'gray.300'
-                      }
-                      color="white"
-                      display="flex"
-                      alignItems="center"
-                      justifyContent="center"
-                      fontWeight="bold"
-                      fontSize="sm"
-                    >
-                      {index + 1}
-                    </Box>
-                    <Box>
-                      <Text
-                        fontWeight="medium"
-                        fontSize="sm"
-                        color={
-                          index === 2 ? 'blue.600'
-                            : index < 2 ?
-                              'green.600'
-                              : 'gray.600'
-                        }
-                      >
-                        {step.title}
-                      </Text>
-                      <Text fontSize="xs" color="gray.500">
-                        {step.description}
-                      </Text>
-                    </Box>
-                  </VStack>
-                  {index < steps.length - 1 && (
-                    <Box
-                      position="absolute"
-                      top="5"
-                      right="-16"
-                      width="32"
-                      height="0.5"
-                      bg={index < 2 ? 'green.500' : 'gray.300'}
-                      zIndex="-1"
-                    />
-                  )}
-                </Box>
-              ))}
-            </HStack>
-          </Box>
+          <OfferteStepNavigation
+            currentStep={2}
+            totalSteps={3}
+            steps={[
+              { title: 'Contactgegevens', isCompleted: true },
+              { title: 'Project Details', isCompleted: true },
+              { title: 'Bevestiging', isCompleted: false }
+            ]}
+          />
 
           <Box width="full" maxW="2xl" mx="auto">
             <VStack gap="8" align="stretch">
@@ -424,10 +379,11 @@ export default function OfferteStep3() {
                       flex="1"
                       bg="green.500"
                       color="white"
-                      transition={UI_CONSTANTS.hover.button.transition}
+                      transition="all 0.2s ease-in-out"
                       _hover={{
                         bg: 'green.600',
-                        ...UI_CONSTANTS.hover.button,
+                        transform: 'translateY(-2px)',
+                        boxShadow: 'lg',
                       }}
                       _active={{ bg: 'green.700' }}
                     >

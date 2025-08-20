@@ -1,7 +1,14 @@
+'use client';
+
 import { FadeInUp, StaggerContainer } from '@/components/page-animation';
 import PageLayout from '@/components/page-layout';
 import StarList from '@/components/star-list';
 import { PARAGRAPH_STYLES, SECTION_SPACING } from '@/constants/typography';
+import {
+  riskHighlightBoxStyles,
+  riskSummaryBoxStyles,
+  riskItalicTextStyles,
+} from '@/styles/components/page.styles';
 import { Box, Flex, Text } from '@chakra-ui/react';
 
 export default function Riskmanagement() {
@@ -46,19 +53,13 @@ export default function Riskmanagement() {
           </FadeInUp>
 
           <FadeInUp delay={0.3}>
-            <Box
-              bg="blue.50"
-              p="6"
-              borderRadius="lg"
-              borderLeft="4px solid"
-              borderColor="blue.500"
-            >
+            <Box {...riskHighlightBoxStyles}>
               <Text {...PARAGRAPH_STYLES.body}>
                 Het vermijden van het risico • Het verminderen/voorkomen van het
                 risico • Het verzekeren van het risico • Het zelf-dragen van het
                 risico
               </Text>
-              <Text {...PARAGRAPH_STYLES.body} mt="3">
+              <Text {...PARAGRAPH_STYLES.body} {...riskItalicTextStyles}>
                 Per risico brengen wij dan tevens in kaart in hoeverre uw
                 huidige verzekeringspakket hiervoor al dan niet dekking biedt en
                 wat de kwaliteit daarvan is.
@@ -78,7 +79,7 @@ export default function Riskmanagement() {
             <Text {...PARAGRAPH_STYLES.body}>
               In de samenvatting splitsen wij de volgende zaken:
             </Text>
-            <Box bg="gray.50" p="6" borderRadius="lg" boxShadow="sm">
+            <Box {...riskSummaryBoxStyles}>
               <StarList listItems={list} />
             </Box>
           </FadeInUp>

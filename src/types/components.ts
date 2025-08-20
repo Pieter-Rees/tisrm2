@@ -55,7 +55,7 @@ export interface SidenavProps extends BaseComponentProps {
 
 export type ButtonVariant = 'solid' | 'outline' | 'ghost' | 'subtle' | 'plain';
 
-export type CardVariant = 'default' | 'sidebar' | 'downloads' | 'elevated';
+export type CardVariant = 'default' | 'sidebar' | 'downloads' | 'elevated' | 'featured';
 
 export interface CardProps extends BaseComponentProps {
   readonly title: string;
@@ -117,28 +117,7 @@ export interface FieldProps extends BaseComponentProps {
   readonly disabled?: boolean;
 }
 
-export interface OfferteFormData {
-  readonly firstName: string;
-  readonly lastName: string;
-  readonly emailAddress: string;
-  readonly phoneNo: string;
-  readonly companyName: string;
-  readonly kvkNumber: string;
-  readonly btwNumber: string;
-  readonly postalCode: string;
-  readonly message?: string;
-}
-
-export type FormErrors<T> = {
-  readonly [K in keyof T]?: string;
-};
-
-export interface FormState<T> {
-  readonly data: T;
-  readonly errors: FormErrors<T>;
-  readonly isSubmitting: boolean;
-  readonly isValid: boolean;
-}
+// Form types moved to forms.ts
 
 export interface TalkerProps extends BaseComponentProps {
   readonly name: string;
@@ -179,6 +158,22 @@ export type Breakpoint = 'base' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 export type ResponsiveValue<T> = T | Partial<Record<Breakpoint, T>>;
 
 export type AnimationVariant = 'fade' | 'slide' | 'scale' | 'bounce';
+
+export type LayoutVariant = 'page' | 'grid' | 'base' | 'centered';
+
+export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+
+export interface UnifiedLayoutProps extends BaseComponentProps {
+  readonly variant?: LayoutVariant;
+  readonly title?: string;
+  readonly breadcrumb?: ReactNode;
+  readonly showSidebar?: boolean;
+  readonly maxWidth?: ResponsiveValue<string>;
+  readonly columns?: number;
+  readonly gap?: ResponsiveValue<string | number>;
+  readonly animated?: boolean;
+  readonly padding?: ResponsiveValue<string | number>;
+}
 
 export interface ApiResponse<T = unknown> {
   readonly data?: T;

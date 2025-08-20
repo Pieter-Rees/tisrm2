@@ -2,8 +2,17 @@
 
 import FooterLogos from '@/components/footer-logos';
 import Logo from '@/components/logo';
-import { CURRENT_YEAR, UI_CONSTANTS } from '@/constants/app';
+import { CURRENT_YEAR } from '@/constants/app';
 import { contactInfo } from '@/data/general';
+import {
+  footerContainerStyles,
+  footerGridStyles,
+  footerColumnStyles,
+  footerHeadingStyles,
+  footerTextStyles,
+  footerLinksContainerStyles,
+  footerLinkButtonStyles,
+} from '@/styles/components/footer.styles';
 import {
   Box,
   Button,
@@ -34,14 +43,11 @@ export default function Footer() {
   return (
     <>
       <FooterLogos width="auto" height="auto" />
-      <Box bg="gray.700" py="16">
+      <Box {...footerContainerStyles}>
         <Container>
-          <Grid
-            templateColumns={{ base: '1fr', md: 'repeat(3, 1fr)' }}
-            gap="16"
-          >
+          <Grid gridTemplateColumns={{ base: '1fr', md: 'repeat(3, 1fr)' }} gap="16">
             <GridItem>
-              <VStack align="start" gap="4">
+              <VStack alignItems="start" gap="4">
                 <Link href="/">
                   <Logo width="200px" />
                 </Link>
@@ -52,21 +58,20 @@ export default function Footer() {
               </VStack>
             </GridItem>
             <GridItem>
-              <VStack align="start" gap="4">
-                <Heading as="h3" size="md" color="white">
+              <VStack alignItems="start" gap="4">
+                <Heading fontSize="md" color="white">
                   Contact
                 </Heading>
-                <VStack align="start" gap="2">
+                <VStack alignItems="start" gap="2">
                   {contactLinks.map(({ href, label, external }) => (
                     <Button
                       key={href}
                       asChild
-                      variant="plain"
                       color="white"
                       fontSize="sm"
                       p="0"
                       justifyContent="flex-start"
-                      transition={UI_CONSTANTS.hover.link.transition}
+                      variant="plain"
                       _hover={{
                         color: 'blue.200',
                         transform: 'translateX(4px)',
@@ -88,21 +93,20 @@ export default function Footer() {
             </GridItem>
 
             <GridItem>
-              <VStack align="start" gap="4">
-                <Heading as="h3" size="md" color="white">
+              <VStack alignItems="start" gap="4">
+                <Heading fontSize="md" color="white">
                   Links
                 </Heading>
-                <VStack align="start" gap="2">
+                <VStack alignItems="start" gap="2">
                   {navigationLinks.map(({ href, label }) => (
                     <Button
                       key={href}
                       asChild
-                      variant="plain"
                       color="white"
                       fontSize="sm"
                       p="0"
                       justifyContent="flex-start"
-                      transition={UI_CONSTANTS.hover.link.transition}
+                      variant="plain"
                       _hover={{
                         color: 'blue.200',
                         transform: 'translateX(4px)',

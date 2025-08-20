@@ -20,8 +20,19 @@ import {
   CONTACT_INFO,
   EXTERNAL_LINKS,
   NAVIGATION_ROUTES,
-  UI_CONSTANTS,
 } from '@/constants/app';
+import {
+  navbarContainerStyles,
+  navbarLinksContainerStyles,
+  navbarLinksListStyles,
+  navbarLinkItemStyles,
+  navbarLinkWrapperStyles,
+  getNavbarLinkStyles,
+  navbarActionsContainerStyles,
+  navbarActionsButtonStyles,
+  navbarMenuContentStyles,
+  navbarMenuItemStyles,
+} from '@/styles/components/navigation.styles';
 import type { NavigationLink } from '@/types/components';
 const NAVIGATION_LINKS: readonly NavigationLink[] = [
   { href: NAVIGATION_ROUTES.home, label: 'Home' },
@@ -40,58 +51,34 @@ const Navbar = memo(() => {
   }, []);
 
   return (
-    <Flex
-      as="nav"
-      role="navigation"
-      aria-label="Main navigation"
-      align="center"
-      gap="8"
-      width="full"
-      justify="space-between"
-    >
+    <Flex alignItems="center" gap="8" width="full" justifyContent="space-between">
       <Box hideBelow="xl">
-        <HStack
-          as="ul"
-          gap="6"
-          fontSize={{ base: 'sm', '2xl': 'md' }}
-          fontWeight="medium"
-          listStyleType="none"
-          margin="0"
-          padding="0"
-        >
+        <HStack gap="6" fontSize={{ base: 'sm', '2xl': 'md' }} fontWeight="medium" listStyleType="none" margin="0" padding="0">
           {NAVIGATION_LINKS.map(({ href, label }) => {
             const isActive =
               pathname === href || (href !== '/' && pathname.startsWith(href));
 
             return (
-              <Box key={href} as="li" role="none">
+              <Box key={href}>
                 <Link
                   href={href}
-                  style={{
-                    textDecoration: 'none',
-                    display: 'block',
-                    paddingBottom: '4px',
-                    position: 'relative',
-                  }}
                   aria-current={isActive ? 'page' : undefined}
                 >
                   <Box
-                    color={isActive ? 'blue.500' : 'gray.900'}
+                    textDecoration="none"
+                    display="block"
+                    paddingBottom="4px"
+                    position="relative"
+                    color={isActive ? 'blue.500' : 'gray.700'}
                     fontWeight={isActive ? '600' : '500'}
-                    borderBottom={
-                      isActive ? '2px solid' : '2px solid transparent'
-                    }
+                    borderBottom="2px solid"
                     borderBottomColor={isActive ? 'blue.500' : 'transparent'}
-                    transition={UI_CONSTANTS.hover.link.transition}
-                    _hover={
-                      !isActive ?
-                        {
-                          color: 'blue.500',
-                          borderBottomColor: 'blue.200',
-                          transform: 'translateY(-1px)',
-                        }
-                        : {}
-                    }
+                    transition="all 0.2s ease-in-out"
+                    _hover={!isActive ? {
+                      color: 'blue.500',
+                      borderBottomColor: 'blue.200',
+                      transform: 'translateY(-1px)',
+                    } : {}}
                   >
                     {label}
                   </Box>
@@ -108,11 +95,11 @@ const Navbar = memo(() => {
             <Button
               bg="blue.500"
               color="white"
-              size="sm"
-              transition={UI_CONSTANTS.hover.button.transition}
+              transition="all 0.2s ease-in-out"
               _hover={{
                 bg: 'blue.600',
-                ...UI_CONSTANTS.hover.button,
+                transform: 'translateY(-2px)',
+                boxShadow: 'lg',
               }}
               _active={{
                 bg: 'blue.700',

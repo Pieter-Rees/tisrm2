@@ -2,6 +2,13 @@
 
 import { Box, Button, Heading, Text, VStack } from '@chakra-ui/react';
 import { Component, type ErrorInfo, type ReactNode } from 'react';
+import {
+  errorBoundaryContainerStyles,
+  errorBoundaryContentStyles,
+  errorBoundaryHeadingStyles,
+  errorBoundaryTextStyles,
+  errorBoundaryButtonStyles,
+} from '@/styles/components/utility.styles';
 
 interface Props {
   children: ReactNode;
@@ -42,7 +49,7 @@ export default class ErrorBoundary extends Component<Props, State> {
           p="8"
         >
           <VStack gap="4" textAlign="center">
-            <Heading size="lg" color="red.500">
+            <Heading fontSize="lg" color="red.500">
               Er is iets misgegaan
             </Heading>
             <Text color="gray.600">

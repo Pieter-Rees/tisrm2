@@ -2,14 +2,13 @@
 
 import BaseLayout from '@/components/baseLayout';
 import { Field } from '@/components/ui/field';
-import { UI_CONSTANTS } from '@/constants/app';
 import { useLocalStorage } from '@/hooks/use-local-storage';
+import OfferteStepNavigation from '@/components/offerte-step-navigation';
 import {
   Box,
   Button,
   Container,
   Heading,
-  HStack,
   Input,
   Text,
   VStack,
@@ -50,11 +49,7 @@ export default function OfferteStep1() {
     Boolean(watchedValues.lastName?.trim()) &&
     Boolean(watchedValues.companyName?.trim());
 
-  const steps = [
-    { title: 'Contactgegevens', description: 'Vul uw gegevens in' },
-    { title: 'Bedrijfsgegevens', description: 'Bedrijfsinformatie' },
-    { title: 'Controleren', description: 'Controleer en verstuur' },
-  ];
+
 
   const onSubmit = (values: Step1FormData) => {
     setFormData(values);
@@ -65,63 +60,15 @@ export default function OfferteStep1() {
     <Container>
       <BaseLayout>
         <VStack alignItems="flex-start" width="full" gap="8">
-          <Box width="full" py="6">
-            <HStack justify="center" gap="8" width="full">
-              {steps.map((step, index) => (
-                <Box
-                  key={index}
-                  textAlign="center"
-                  position="relative"
-                  flex="1"
-                >
-                  <VStack gap="2">
-                    <Box
-                      width="10"
-                      height="10"
-                      borderRadius="full"
-                      bg={
-                        index === 0 ? 'blue.500'
-                          : index < 0 ?
-                            'green.500'
-                            : 'gray.300'
-                      }
-                      color="white"
-                      display="flex"
-                      alignItems="center"
-                      justifyContent="center"
-                      fontWeight="bold"
-                      fontSize="sm"
-                    >
-                      {index + 1}
-                    </Box>
-                    <Box>
-                      <Text
-                        fontWeight="medium"
-                        fontSize="sm"
-                        color={index === 0 ? 'blue.600' : 'gray.600'}
-                      >
-                        {step.title}
-                      </Text>
-                      <Text fontSize="xs" color="gray.500">
-                        {step.description}
-                      </Text>
-                    </Box>
-                  </VStack>
-                  {index < steps.length - 1 && (
-                    <Box
-                      position="absolute"
-                      top="5"
-                      right="-16"
-                      width="32"
-                      height="0.5"
-                      bg="gray.300"
-                      zIndex="-1"
-                    />
-                  )}
-                </Box>
-              ))}
-            </HStack>
-          </Box>
+          <OfferteStepNavigation
+            currentStep={0}
+            totalSteps={3}
+            steps={[
+              { title: 'Contactgegevens', isCompleted: false },
+              { title: 'Project Details', isCompleted: false },
+              { title: 'Bevestiging', isCompleted: false }
+            ]}
+          />
 
           <Box width="full" maxW="md" mx="auto">
             <VStack gap="6" align="stretch">
@@ -211,10 +158,11 @@ export default function OfferteStep1() {
                     width="full"
                     bg="blue.500"
                     color="white"
-                    transition={UI_CONSTANTS.hover.button.transition}
+                    transition="all 0.2s ease-in-out"
                     _hover={{
                       bg: 'blue.600',
-                      ...UI_CONSTANTS.hover.button,
+                      transform: 'translateY(-2px)',
+                      boxShadow: 'lg',
                     }}
                     _active={{ bg: 'blue.700' }}
                     disabled={!isFormValid || Object.keys(errors).length > 0}

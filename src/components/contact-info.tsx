@@ -3,6 +3,13 @@
 import { contactInfo } from '@/data/general';
 import type { ContactInfoProps } from '@/types/components';
 import {
+  contactInfoGridStyles,
+  contactInfoColumnStyles,
+  contactInfoTextStyles,
+  contactInfoButtonsContainerStyles,
+  contactInfoButtonsListStyles,
+} from '@/styles/components/utility.styles';
+import {
   Box,
   Button,
   Flex,
@@ -29,16 +36,16 @@ export default function ContactInfo({
 }: ContactInfoProps) {
   return (
     <>
-      <SimpleGrid minChildWidth={{ base: 'full', md: '120px' }} gap="10">
+      <SimpleGrid gap="10">
         <Box>
-          <VStack align="start" gap="2">
+          <VStack alignItems="start" gap="2">
             <Text color="gray.800">{contactInfo.address.street}</Text>
             <Text color="gray.800">{contactInfo.email}</Text>
             <Text color="gray.800">{contactInfo.address.city}</Text>
           </VStack>
         </Box>
         <Box>
-          <VStack align="start" gap="2">
+          <VStack alignItems="start" gap="2">
             <Text color="gray.800">{contactInfo.postalBox.box}</Text>
             <Text color="gray.800">{contactInfo.postalBox.postalCode}</Text>
             <Text color="gray.800">{contactInfo.postalBox.city}</Text>
@@ -47,7 +54,7 @@ export default function ContactInfo({
       </SimpleGrid>
 
       <Flex justifyContent="start" mt="8">
-        <HStack align="start" gap="2">
+        <HStack alignItems="start" gap="2">
           {contactButtons.map(({ href, label, external }) => (
             <Button
               key={href}
