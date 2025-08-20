@@ -2,7 +2,7 @@
 
 import FooterLogos from '@/components/footer-logos';
 import Logo from '@/components/logo';
-import { CURRENT_YEAR } from '@/constants/app';
+import { CURRENT_YEAR, UI_CONSTANTS } from '@/constants/app';
 import { contactInfo } from '@/data/general';
 import {
   Box,
@@ -63,10 +63,14 @@ export default function Footer() {
                       asChild
                       variant="plain"
                       color="white"
-                      textDecoration="underline"
                       fontSize="sm"
                       p="0"
                       justifyContent="flex-start"
+                      transition={UI_CONSTANTS.hover.link.transition}
+                      _hover={{
+                        color: 'blue.200',
+                        transform: 'translateX(4px)',
+                      }}
                     >
                       <Link
                         href={href as any}
@@ -95,10 +99,14 @@ export default function Footer() {
                       asChild
                       variant="plain"
                       color="white"
-                      textDecoration="underline"
                       fontSize="sm"
                       p="0"
                       justifyContent="flex-start"
+                      transition={UI_CONSTANTS.hover.link.transition}
+                      _hover={{
+                        color: 'blue.200',
+                        transform: 'translateX(4px)',
+                      }}
                     >
                       <Link href={href}>{label}</Link>
                     </Button>

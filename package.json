@@ -7,6 +7,9 @@
     "dev": "next dev --turbo",
     "build": "next build",
     "build:turbo": "next build --turbo",
+    "build:static": "NEXT_EXPORT=true next build",
+    "export": "npm run build:static && next export",
+    "export:static": "npm run build:static && next export -o static",
     "start": "next start -p 3002",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
@@ -17,7 +20,7 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "analyze": "ANALYZE=true npm run build",
-    "clean": "rm -rf .next build",
+    "clean": "rm -rf .next build static",
     "pre-commit": "npm run type-check && npm run lint && npm run format:check"
   },
   "dependencies": {

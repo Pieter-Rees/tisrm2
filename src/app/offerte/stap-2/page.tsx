@@ -2,6 +2,7 @@
 
 import BaseLayout from '@/components/baseLayout';
 import { Field } from '@/components/ui/field';
+import { UI_CONSTANTS } from '@/constants/app';
 import { useLocalStorage } from '@/hooks/use-local-storage';
 import { isValidDutchPostalCode } from '@/lib/utils';
 import {
@@ -117,9 +118,9 @@ export default function OfferteStep2() {
                       borderRadius="full"
                       bg={
                         index === 1 ? 'blue.500'
-                        : index < 1 ?
-                          'green.500'
-                        : 'gray.300'
+                          : index < 1 ?
+                            'green.500'
+                            : 'gray.300'
                       }
                       color="white"
                       display="flex"
@@ -136,9 +137,9 @@ export default function OfferteStep2() {
                         fontSize="sm"
                         color={
                           index === 1 ? 'blue.600'
-                          : index < 1 ?
-                            'green.600'
-                          : 'gray.600'
+                            : index < 1 ?
+                              'green.600'
+                              : 'gray.600'
                         }
                       >
                         {step.title}
@@ -287,6 +288,8 @@ export default function OfferteStep2() {
                       flex="1"
                       variant="outline"
                       colorScheme="gray"
+                      transition={UI_CONSTANTS.hover.subtle.transition}
+                      _hover={UI_CONSTANTS.hover.subtle}
                     >
                       Vorige stap
                     </Button>
@@ -296,7 +299,11 @@ export default function OfferteStep2() {
                       flex="1"
                       bg="blue.500"
                       color="white"
-                      _hover={{ bg: 'blue.600' }}
+                      transition={UI_CONSTANTS.hover.button.transition}
+                      _hover={{
+                        bg: 'blue.600',
+                        ...UI_CONSTANTS.hover.button,
+                      }}
                       _active={{ bg: 'blue.700' }}
                       disabled={!isFormValid || Object.keys(errors).length > 0}
                       onClick={handleSubmit(onSubmit)}

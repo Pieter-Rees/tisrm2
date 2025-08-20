@@ -95,7 +95,8 @@ const Sidenav = memo<SidenavProps>(
             size="sm"
             onClick={handleToggle}
             aria-label="Close navigation menu"
-            _hover={{ bg: 'gray.100' }}
+            transition={UI_CONSTANTS.hover.subtle.transition}
+            _hover={UI_CONSTANTS.hover.subtle}
           >
             <BsX size="20" />
           </Button>
@@ -143,9 +144,11 @@ const Sidenav = memo<SidenavProps>(
                     width="full"
                     color={isActive ? 'blue.600' : 'gray.700'}
                     fontWeight={isActive ? 'semibold' : 'medium'}
+                    transition={UI_CONSTANTS.hover.subtle.transition}
                     _hover={{
                       bg: 'gray.50',
                       color: 'blue.600',
+                      transform: 'translateX(4px)',
                     }}
                     _active={{ bg: 'gray.100' }}
                     justifyContent="center"
@@ -174,7 +177,11 @@ const Sidenav = memo<SidenavProps>(
                   color="white"
                   size="lg"
                   width="full"
-                  _hover={{ bg: 'blue.600' }}
+                  transition={UI_CONSTANTS.hover.button.transition}
+                  _hover={{
+                    bg: 'blue.600',
+                    ...UI_CONSTANTS.hover.button,
+                  }}
                   _active={{ bg: 'blue.700' }}
                   fontWeight="medium"
                   gap="2"

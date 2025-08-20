@@ -2,6 +2,7 @@
 
 import BaseLayout from '@/components/baseLayout';
 import { Field } from '@/components/ui/field';
+import { UI_CONSTANTS } from '@/constants/app';
 import { useLocalStorage } from '@/hooks/use-local-storage';
 import {
   Box,
@@ -410,6 +411,8 @@ export default function OfferteStep3() {
                       flex="1"
                       variant="outline"
                       colorScheme="gray"
+                      transition={UI_CONSTANTS.hover.subtle.transition}
+                      _hover={UI_CONSTANTS.hover.subtle}
                     >
                       Vorige stap
                     </Button>
@@ -421,7 +424,11 @@ export default function OfferteStep3() {
                       flex="1"
                       bg="green.500"
                       color="white"
-                      _hover={{ bg: 'green.600' }}
+                      transition={UI_CONSTANTS.hover.button.transition}
+                      _hover={{
+                        bg: 'green.600',
+                        ...UI_CONSTANTS.hover.button,
+                      }}
                       _active={{ bg: 'green.700' }}
                     >
                       Offerte aanvragen

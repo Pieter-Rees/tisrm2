@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { memo } from 'react';
 import { BsArrowRight, BsDownload, BsTelephone } from 'react-icons/bs';
 
+import { UI_CONSTANTS } from '@/constants/app';
 import { HEADING_STYLES, PARAGRAPH_STYLES } from '@/constants/typography';
 import { cn } from '@/lib/utils';
 import type { CardProps } from '@/types/components';
@@ -12,26 +13,28 @@ const CARD_VARIANTS = {
   default: {
     bg: 'white',
     shadow: 'lg',
-    hoverShadow: 'xl',
-    transform: 'translateY(-2px)',
+    hover: {
+      ...UI_CONSTANTS.hover.card,
+      transform: 'translateY(-2px)',
+    },
   },
   sidebar: {
     bg: 'white',
     shadow: 'md',
-    hoverShadow: 'lg',
-    transform: 'translateY(-1px)',
+    hover: UI_CONSTANTS.hover.subtle,
   },
   downloads: {
     bg: 'blue.50',
     shadow: 'md',
-    hoverShadow: 'lg',
-    transform: 'scale(1.02)',
+    hover: {
+      ...UI_CONSTANTS.hover.card,
+      transform: 'scale(1.02)',
+    },
   },
   elevated: {
     bg: 'white',
     shadow: 'xl',
-    hoverShadow: '2xl',
-    transform: 'translateY(-4px)',
+    hover: UI_CONSTANTS.hover.card,
   },
 } as const;
 const Card = memo<CardProps>(
@@ -61,20 +64,14 @@ const Card = memo<CardProps>(
       overflow: 'hidden',
       bg: disabled ? 'gray.50' : variantStyles.bg,
       boxShadow: variantStyles.shadow,
-      transition: 'all 0.2s ease-in-out',
+      transition: variantStyles.hover.transition,
       opacity: disabled ? 0.6 : 1,
       cursor: isInteractive && !disabled ? 'pointer' : 'default',
       height: '100%',
       width: '100%',
       display: 'flex',
       flexDirection: 'column',
-      _hover:
-        !disabled && isInteractive ?
-          {
-            boxShadow: variantStyles.hoverShadow,
-            transform: variantStyles.transform,
-          }
-        : {},
+      _hover: !disabled && isInteractive ? variantStyles.hover : {},
       _focus: {
         outline: '2px solid',
         outlineColor: 'blue.500',
@@ -135,6 +132,8 @@ const Card = memo<CardProps>(
                   colorScheme="blue"
                   width="full"
                   gap="2"
+                  transition={UI_CONSTANTS.hover.button.transition}
+                  _hover={UI_CONSTANTS.hover.button}
                   onClick={e => {
                     e.preventDefault();
                     window.location.href = phone;
@@ -152,6 +151,8 @@ const Card = memo<CardProps>(
                   colorScheme="blue"
                   width="full"
                   gap="2"
+                  transition={UI_CONSTANTS.hover.button.transition}
+                  _hover={UI_CONSTANTS.hover.button}
                   onClick={e => {
                     e.preventDefault();
                     const link = document.createElement('a');
@@ -174,6 +175,8 @@ const Card = memo<CardProps>(
                   colorScheme="blue"
                   width="full"
                   gap="2"
+                  transition={UI_CONSTANTS.hover.button.transition}
+                  _hover={UI_CONSTANTS.hover.button}
                   onClick={e => {
                     e.preventDefault();
                     window.location.href = ctaLink;

@@ -67,6 +67,33 @@ export const UI_CONSTANTS = {
     tooltip: 1060,
     toast: 1070,
   },
+  hover: {
+    card: {
+      transition: 'all 0.3s ease',
+      transform: 'translateY(-4px)',
+      boxShadow: 'xl',
+    },
+    button: {
+      transition: 'all 0.2s ease-in-out',
+      transform: 'translateY(-2px)',
+      boxShadow: 'lg',
+    },
+    image: {
+      transition: 'all 0.3s ease',
+      transform: 'scale(1.02)',
+      boxShadow: 'xl',
+    },
+    link: {
+      transition: 'all 0.2s ease',
+      color: 'blue.500',
+      transform: 'translateX(2px)',
+    },
+    subtle: {
+      transition: 'all 0.2s ease',
+      transform: 'translateY(-1px)',
+      bg: 'gray.50',
+    },
+  },
 } as const;
 
 export const CURRENT_YEAR = new Date().getFullYear();

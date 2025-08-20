@@ -15,6 +15,7 @@ import { useForm } from 'react-hook-form';
 import { BsCheck2Circle, BsExclamationTriangle } from 'react-icons/bs';
 
 import { Field } from '@/components/ui/field';
+import { UI_CONSTANTS } from '@/constants/app';
 import { isValidDutchPostalCode, isValidEmail } from '@/lib/utils';
 import type { OfferteFormData } from '@/types/components';
 
@@ -382,7 +383,11 @@ export default function RegistrationForm() {
           width="full"
           bg="blue.500"
           color="white"
-          _hover={{ bg: 'blue.600' }}
+          transition={UI_CONSTANTS.hover.button.transition}
+          _hover={{
+            bg: 'blue.600',
+            ...UI_CONSTANTS.hover.button,
+          }}
           _active={{ bg: 'blue.700' }}
           disabled={Object.keys(errors).length > 0}
         >

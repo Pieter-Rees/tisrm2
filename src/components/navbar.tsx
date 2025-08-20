@@ -20,6 +20,7 @@ import {
   CONTACT_INFO,
   EXTERNAL_LINKS,
   NAVIGATION_ROUTES,
+  UI_CONSTANTS,
 } from '@/constants/app';
 import type { NavigationLink } from '@/types/components';
 const NAVIGATION_LINKS: readonly NavigationLink[] = [
@@ -71,7 +72,6 @@ const Navbar = memo(() => {
                     display: 'block',
                     paddingBottom: '4px',
                     position: 'relative',
-                    transition: 'all 0.3s ease',
                   }}
                   aria-current={isActive ? 'page' : undefined}
                 >
@@ -82,13 +82,15 @@ const Navbar = memo(() => {
                       isActive ? '2px solid' : '2px solid transparent'
                     }
                     borderBottomColor={isActive ? 'blue.500' : 'transparent'}
+                    transition={UI_CONSTANTS.hover.link.transition}
                     _hover={
                       !isActive ?
                         {
                           color: 'blue.500',
                           borderBottomColor: 'blue.200',
+                          transform: 'translateY(-1px)',
                         }
-                      : {}
+                        : {}
                     }
                   >
                     {label}
@@ -107,10 +109,10 @@ const Navbar = memo(() => {
               bg="blue.500"
               color="white"
               size="sm"
+              transition={UI_CONSTANTS.hover.button.transition}
               _hover={{
                 bg: 'blue.600',
-                transform: 'translateY(-1px)',
-                boxShadow: 'md',
+                ...UI_CONSTANTS.hover.button,
               }}
               _active={{
                 bg: 'blue.700',
@@ -118,7 +120,6 @@ const Navbar = memo(() => {
               }}
               fontWeight="medium"
               gap="2"
-              transition="all 0.2s ease"
             >
               Acties
               <BsChevronDown />

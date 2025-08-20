@@ -56,12 +56,13 @@ const Header = memo(() => {
               aria-controls="mobile-navigation"
               size="lg"
               color="gray.900"
-              _hover={{ bg: 'gray.100' }}
+              transition={UI_CONSTANTS.hover.subtle.transition}
+              _hover={UI_CONSTANTS.hover.subtle}
               _active={{ bg: 'gray.200' }}
             >
               {showSideNav ?
                 <BsX size="24" />
-              : <BsList size="24" />}
+                : <BsList size="24" />}
             </Button>
           </Box>
         </Flex>

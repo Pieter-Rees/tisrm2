@@ -4,6 +4,7 @@ import ContactInfo from '@/components/contact-info';
 import Logo from '@/components/logo';
 import { FadeInUp, ScaleIn, SlideInLeft } from '@/components/page-animation';
 import PageLayout from '@/components/page-layout';
+import { UI_CONSTANTS } from '@/constants/app';
 import { PARAGRAPH_STYLES, SECTION_SPACING } from '@/constants/typography';
 import { Box, Button, Flex, Grid, GridItem, Text } from '@chakra-ui/react';
 import Image from 'next/image';
@@ -50,11 +51,8 @@ export default function Contact() {
               width="full"
               height={{ base: '300px', md: '400px', lg: '500px' }}
               minHeight="300px"
-              transition="all 0.3s ease"
-              _hover={{
-                transform: 'scale(1.02)',
-                boxShadow: 'xl',
-              }}
+              transition={UI_CONSTANTS.hover.image.transition}
+              _hover={UI_CONSTANTS.hover.image}
             >
               <Image
                 src="/bb.jpg"
@@ -86,11 +84,10 @@ export default function Contact() {
                 onClick={handleSchadeClick}
                 size="lg"
                 borderRadius="lg"
-                transition="all 0.3s ease"
+                transition={UI_CONSTANTS.hover.button.transition}
                 _hover={{
                   bg: 'blue.600',
-                  transform: 'translateY(-2px)',
-                  boxShadow: 'lg',
+                  ...UI_CONSTANTS.hover.button,
                 }}
                 _active={{
                   transform: 'translateY(0)',

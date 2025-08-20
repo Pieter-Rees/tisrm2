@@ -12,6 +12,7 @@ import {
   SlideInRight,
   StaggerContainer,
 } from '@/components/page-animation';
+import { UI_CONSTANTS } from '@/constants/app';
 
 const ThreeElements = lazy(() => import('@/components/three-elements'));
 const Talker = lazy(() => import('@/components/talker'));
@@ -80,11 +81,10 @@ export default function Homepage() {
                               boxShadow="lg"
                               overflow="hidden"
                               flex="1"
-                              transition="all 0.3s ease"
+                              transition={UI_CONSTANTS.hover.button.transition}
                               _hover={{
                                 bg: 'blue.600',
-                                transform: 'translateY(-2px)',
-                                boxShadow: 'xl',
+                                ...UI_CONSTANTS.hover.button,
                               }}
                             >
                               <CallUs />
@@ -96,11 +96,12 @@ export default function Homepage() {
                                 borderRadius="lg"
                                 boxShadow="lg"
                                 overflow="hidden"
-                                transition="all 0.3s ease"
+                                transition={
+                                  UI_CONSTANTS.hover.button.transition
+                                }
                                 _hover={{
                                   bg: 'blue.500',
-                                  transform: 'translateY(-2px)',
-                                  boxShadow: 'xl',
+                                  ...UI_CONSTANTS.hover.button,
                                 }}
                               >
                                 <SchadeMelden />

@@ -2,6 +2,7 @@
 
 import BaseLayout from '@/components/baseLayout';
 import { Field } from '@/components/ui/field';
+import { UI_CONSTANTS } from '@/constants/app';
 import { useLocalStorage } from '@/hooks/use-local-storage';
 import {
   Box,
@@ -80,9 +81,9 @@ export default function OfferteStep1() {
                       borderRadius="full"
                       bg={
                         index === 0 ? 'blue.500'
-                        : index < 0 ?
-                          'green.500'
-                        : 'gray.300'
+                          : index < 0 ?
+                            'green.500'
+                            : 'gray.300'
                       }
                       color="white"
                       display="flex"
@@ -210,7 +211,11 @@ export default function OfferteStep1() {
                     width="full"
                     bg="blue.500"
                     color="white"
-                    _hover={{ bg: 'blue.600' }}
+                    transition={UI_CONSTANTS.hover.button.transition}
+                    _hover={{
+                      bg: 'blue.600',
+                      ...UI_CONSTANTS.hover.button,
+                    }}
                     _active={{ bg: 'blue.700' }}
                     disabled={!isFormValid || Object.keys(errors).length > 0}
                     onClick={handleSubmit(onSubmit)}

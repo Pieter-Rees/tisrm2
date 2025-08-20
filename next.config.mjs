@@ -1,6 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   distDir: 'build',
+  output: process.env.NEXT_EXPORT === 'true' ? 'export' : undefined,
+  trailingSlash: process.env.NEXT_EXPORT === 'true' ? true : false,
+  images: process.env.NEXT_EXPORT === 'true' ? { unoptimized: true } : {
+    formats: ['image/webp', 'image/avif'],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 60 * 60 * 24 * 30,
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    remotePatterns: [],
+    unoptimized: false,
+  },
   experimental: {
     ...(process.env.TURBOPACK !== '1' && {
       optimizePackageImports: [
@@ -24,17 +37,6 @@ const nextConfig = {
     resolveAlias: {
       '@': './src',
     },
-  },
-  images: {
-    formats: ['image/webp', 'image/avif'],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 60 * 60 * 24 * 30,
-    dangerouslyAllowSVG: true,
-    contentDispositionType: 'attachment',
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    remotePatterns: [],
-    unoptimized: false,
   },
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
