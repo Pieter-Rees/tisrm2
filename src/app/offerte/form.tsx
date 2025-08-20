@@ -32,7 +32,7 @@ export default function RegistrationForm() {
     reset,
     watch,
   } = useForm<OfferteFormData>({
-    mode: 'onBlur', // Validate on blur for better UX
+    mode: 'onBlur',
     defaultValues: {
       firstName: '',
       lastName: '',
@@ -80,7 +80,7 @@ export default function RegistrationForm() {
               Accept: 'application/json',
             },
             body: JSON.stringify(payload),
-            signal: AbortSignal.timeout(15000), // 15 second timeout
+            signal: AbortSignal.timeout(15000),
           });
 
           if (!response.ok) {
@@ -90,16 +90,13 @@ export default function RegistrationForm() {
           }
 
           const result = await response.json();
-          // Form submission successful - log in development mode only
           if (process.env.NODE_ENV === 'development') {
-            // eslint-disable-next-line no-console
             console.log('Form submission successful:', result);
           }
 
           setSubmissionState('success');
-          reset(); // Clear form on success
+          reset();
 
-          // Scroll to top to show success message
           window.scrollTo({ top: 0, behavior: 'smooth' });
         } catch (error) {
           console.error('Form submission error:', error);
@@ -128,7 +125,6 @@ export default function RegistrationForm() {
     [reset],
   );
 
-  // Success state
   if (submissionState === 'success') {
     return (
       <VStack gap="6" textAlign="center" py="12">
@@ -156,7 +152,6 @@ export default function RegistrationForm() {
 
   return (
     <Box as="form" onSubmit={handleSubmit(onSubmit)}>
-      {/* Error Alert */}
       {submissionState === 'error' && (
         <Box
           p="4"
@@ -183,7 +178,6 @@ export default function RegistrationForm() {
       )}
 
       <SimpleGrid columns={{ base: 1, lg: 2 }} gap="8">
-        {/* Personal Information */}
         <VStack gap="6" align="stretch">
           <Heading as="h3" size="md" color="gray.800">
             Persoonlijke gegevens
@@ -275,7 +269,6 @@ export default function RegistrationForm() {
           </Field>
         </VStack>
 
-        {/* Business Information */}
         <VStack gap="6" align="stretch">
           <Heading as="h3" size="md" color="gray.800">
             Bedrijfsgegevens
@@ -359,7 +352,6 @@ export default function RegistrationForm() {
         </VStack>
       </SimpleGrid>
 
-      {/* Additional Information */}
       <Box mt="8">
         <Field
           label="Aanvullende informatie (optioneel)"
@@ -381,7 +373,6 @@ export default function RegistrationForm() {
         </Field>
       </Box>
 
-      {/* Submit Button */}
       <Box mt="8">
         <Button
           type="submit"

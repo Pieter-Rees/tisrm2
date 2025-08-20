@@ -1,14 +1,6 @@
-/**
- * Application metadata configuration
- * @fileoverview Centralized metadata for SEO and social sharing
- */
-
 import type { Metadata } from 'next';
 import { pageInfo } from '../data/general';
 
-/**
- * Application metadata for SEO and social sharing
- */
 export const metadata: Metadata = {
   title: pageInfo.name,
   description: pageInfo.description,

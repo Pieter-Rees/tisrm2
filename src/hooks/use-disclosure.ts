@@ -1,8 +1,3 @@
-/**
- * Modern disclosure hook for modal/dropdown state management
- * @fileoverview Reusable hook for open/close state management
- */
-
 'use client';
 
 import { useCallback, useState } from 'react';
@@ -14,11 +9,6 @@ export interface UseDisclosureReturn {
   onToggle: () => void;
 }
 
-/**
- * Custom hook for managing disclosure state (modals, dropdowns, etc.)
- * @param defaultIsOpen - Initial open state
- * @returns Disclosure state and controls
- */
 export function useDisclosure(defaultIsOpen = false): UseDisclosureReturn {
   const [isOpen, setIsOpen] = useState(defaultIsOpen);
 

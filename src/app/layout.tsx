@@ -33,7 +33,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
               padding: '0 0 16px 0',
               width: '100%',
               margin: '0 auto',
-              minHeight: 'calc(100vh - 200px)', // Ensure minimum height for content
+              minHeight: 'calc(100vh - 200px)',
             }}
           >
             {children}
@@ -45,5 +45,4 @@ export default function RootLayout({ children }: RootLayoutProps) {
   );
 }
 
-// Export metadata at end of file to avoid fast refresh warnings
 export { metadata } from './metadata';

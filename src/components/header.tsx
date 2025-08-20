@@ -61,7 +61,7 @@ const Header = memo(() => {
             >
               {showSideNav ?
                 <BsX size="24" />
-                : <BsList size="24" />}
+              : <BsList size="24" />}
             </Button>
           </Box>
         </Flex>

@@ -10,7 +10,6 @@ import Image from 'next/image';
 
 export default function Contact() {
     const handleSchadeClick = () => {
-        // Open in new window without referrer
         window.open(
             'https://schade.emsclaimsengine.com/index.php?template=tis&view=consument.login#identificatie_vragen',
             '_blank',

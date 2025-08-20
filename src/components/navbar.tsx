@@ -88,7 +88,7 @@ const Navbar = memo(() => {
                           color: 'blue.500',
                           borderBottomColor: 'blue.200',
                         }
-                        : {}
+                      : {}
                     }
                   >
                     {label}

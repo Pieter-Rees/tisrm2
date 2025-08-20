@@ -71,16 +71,13 @@ export default function OfferteStep2() {
     { title: 'Controleren', description: 'Controleer en verstuur' },
   ];
 
-  // Give localStorage time to load before checking for data
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsCheckingData(false);
-    }, 100); // Small delay to allow localStorage to load
+    }, 100);
 
     return () => clearTimeout(timer);
   }, []);
-
-  // Redirect to step 1 if no data found (after initial load)
   useEffect(() => {
     if (!isCheckingData && !step1Data) {
       router.push('/offerte/stap-1');

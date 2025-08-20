@@ -12,9 +12,6 @@ interface ButtonLinkProps
   download?: boolean;
 }
 
-/**
- * Modern Button Link component that properly handles Chakra UI v3 asChild pattern
- */
 export const ButtonLink = forwardRef<HTMLButtonElement, ButtonLinkProps>(
   ({ href, external = false, download = false, children, ...props }, ref) => {
     const isExternal =
@@ -32,7 +29,7 @@ export const ButtonLink = forwardRef<HTMLButtonElement, ButtonLinkProps>(
             rel={
               external || href.startsWith('http') ?
                 'noopener noreferrer'
-              : undefined
+                : undefined
             }
             {...(download && { download })}
           >
@@ -42,7 +39,6 @@ export const ButtonLink = forwardRef<HTMLButtonElement, ButtonLinkProps>(
       );
     }
 
-    // Internal Next.js Link
     return (
       <Button asChild ref={ref} {...props}>
         <Link href={href as any}>{children}</Link>

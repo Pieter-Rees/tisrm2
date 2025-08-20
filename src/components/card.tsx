@@ -74,7 +74,7 @@ const Card = memo<CardProps>(
             boxShadow: variantStyles.hoverShadow,
             transform: variantStyles.transform,
           }
-          : {},
+        : {},
       _focus: {
         outline: '2px solid',
         outlineColor: 'blue.500',

@@ -80,9 +80,9 @@ export default function OfferteStep1() {
                       borderRadius="full"
                       bg={
                         index === 0 ? 'blue.500'
-                          : index < 0 ?
-                            'green.500'
-                            : 'gray.300'
+                        : index < 0 ?
+                          'green.500'
+                        : 'gray.300'
                       }
                       color="white"
                       display="flex"

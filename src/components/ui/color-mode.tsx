@@ -89,5 +89,4 @@ export const DarkMode = React.forwardRef<
   );
 });
 
-// Export hooks at end of file to avoid fast refresh warnings
 export { useColorMode, useColorModeValue } from '@/hooks/use-color-mode';

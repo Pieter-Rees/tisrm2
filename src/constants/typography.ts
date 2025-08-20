@@ -1,6 +1,3 @@
-// Typography constants for consistent design system
-
-// Heading styles
 export const HEADING_STYLES = {
   h1: {
     fontSize: { base: '2xl', md: '3xl', lg: '4xl' },
@@ -41,7 +38,6 @@ export const HEADING_STYLES = {
   },
 } as const;
 
-// Paragraph styles
 export const PARAGRAPH_STYLES = {
   body: {
     fontSize: { base: 'md', lg: 'lg' },
@@ -70,7 +66,6 @@ export const PARAGRAPH_STYLES = {
   },
 } as const;
 
-// List styles
 export const LIST_STYLES = {
   unordered: {
     mb: { base: '4', lg: '6' },
@@ -94,18 +89,16 @@ export const LIST_STYLES = {
   },
 } as const;
 
-// Section spacing
 export const SECTION_SPACING = {
   small: { base: '8', lg: '4' },
   medium: { base: '12', lg: '8' },
   large: { base: '16', lg: '20' },
 } as const;
 
-// Content max widths
 export const CONTENT_WIDTH = {
-  narrow: '2xl', // 672px
-  medium: '3xl', // 768px
-  wide: '4xl', // 896px
+  narrow: '2xl',
+  medium: '3xl',
+  wide: '4xl',
   full: 'full',
 } as const;
 

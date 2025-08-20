@@ -67,16 +67,13 @@ export default function OfferteStep3() {
     { title: 'Controleren', description: 'Controleer en verstuur' },
   ];
 
-  // Give localStorage time to load before checking for data
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsCheckingData(false);
-    }, 100); // Small delay to allow localStorage to load
+    }, 100);
 
     return () => clearTimeout(timer);
   }, []);
-
-  // Redirect to appropriate step if data is missing (after initial load)
   useEffect(() => {
     if (!isCheckingData) {
       if (!step1Data) {
@@ -118,7 +115,7 @@ export default function OfferteStep3() {
               Accept: 'application/json',
             },
             body: JSON.stringify(payload),
-            signal: AbortSignal.timeout(15000), // 15 second timeout
+            signal: AbortSignal.timeout(15000),
           });
 
           if (!response.ok) {
@@ -128,9 +125,7 @@ export default function OfferteStep3() {
           }
 
           const result = await response.json();
-          // Form submission successful - log in development mode only
           if (process.env.NODE_ENV === 'development') {
-            // eslint-disable-next-line no-console
             console.log('Form submission successful:', result);
           }
 
@@ -138,7 +133,6 @@ export default function OfferteStep3() {
           reset();
           clearAllData();
 
-          // Scroll to top to show success message
           window.scrollTo({ top: 0, behavior: 'smooth' });
         } catch (error) {
           console.error('Form submission error:', error);
@@ -178,10 +172,9 @@ export default function OfferteStep3() {
   };
 
   if (isCheckingData || !step1Data || !step2Data) {
-    return null; // Loading or will redirect
+    return null;
   }
 
-  // Success state
   if (submissionState === 'success') {
     return (
       <Container>

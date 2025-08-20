@@ -8,7 +8,6 @@ import { cn } from '@/lib/utils';
 import type { BaseLayoutProps } from '@/types/components';
 import type { FC } from 'react';
 
-// Constants for responsive styles
 const HEADING_SIZE = { base: 'lg', md: 'xl', lg: '2xl' } as const;
 const HEADING_ALIGNMENT = { base: 'center', md: 'left' } as const;
 
