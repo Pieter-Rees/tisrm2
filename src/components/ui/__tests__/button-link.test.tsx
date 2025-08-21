@@ -1,11 +1,11 @@
 // Mock the Button component directly - must be at the top
 jest.mock('@chakra-ui/react', () => ({
-  Button: ({ children, asChild, ...props }: any) => {
-    if (asChild) {
-      return <div {...props}>{children}</div>;
-    }
-    return <button {...props}>{children}</button>;
-  },
+    Button: ({ children, asChild, ...props }: any) => {
+        if (asChild) {
+            return <div {...props}>{children}</div>;
+        }
+        return <button {...props}>{children}</button>;
+    },
 }));
 
 import { render, screen } from '@testing-library/react';

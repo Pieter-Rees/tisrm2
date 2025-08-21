@@ -3,7 +3,7 @@
 import { Box, Heading } from '@chakra-ui/react';
 import { memo } from 'react';
 
-import ErrorBoundary from '@/components/error-boundary';
+import ErrorBoundary from './error-boundary';
 import { cn } from '@/lib/utils';
 import type { BaseLayoutProps } from '@/types/components';
 import type { FC } from 'react';

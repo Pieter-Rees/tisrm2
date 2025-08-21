@@ -52,6 +52,19 @@ const customJestConfig = {
     'jest-watch-typeahead/filename',
     'jest-watch-typeahead/testname',
   ],
+  // Temporarily remove ts-jest configuration to use default Next.js Jest
+  // transform: {
+  //   '^.+\\.(ts|tsx)$': ['ts-jest', {
+  //     tsconfig: 'tsconfig.json',
+  //     useESM: true,
+  //   }],
+  // },
+  // extensionsToTreatAsEsm: ['.ts', '.tsx'],
+  // globals: {
+  //   'ts-jest': {
+  //     useESM: true,
+  //   },
+  // },
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async

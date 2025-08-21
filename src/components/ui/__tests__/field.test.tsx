@@ -151,7 +151,7 @@ describe('Field Component', () => {
 
         const label = screen.getByText('Username');
         const input = screen.getByRole('textbox');
-        
+
         // Check that label and input are properly associated
         expect(label).toBeInTheDocument();
         expect(input).toBeInTheDocument();
