@@ -56,6 +56,7 @@ export const Spacer = createMockComponent('div', 'Spacer');
 export const Divider = createMockComponent('hr', 'Divider');
 export const Icon = createMockComponent('span', 'Icon');
 export const Tag = createMockComponent('span', 'Tag');
+export const Circle = createMockComponent('div', 'Circle');
 export const List = createMockComponent('ul', 'List');
 export const ListItem = createMockComponent('li', 'ListItem');
 export const OrderedList = createMockComponent('ol', 'OrderedList');

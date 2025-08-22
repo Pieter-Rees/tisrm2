@@ -23,6 +23,7 @@ export { default as StarList } from './star-list';
 export { default as Breadcrumb } from './breadcrumb';
 export { default as Talker } from './talker';
 export { default as ThreeElements } from './three-elements';
+export { default as CallToAction } from './call-to-action';
 
 // Navigation components
 export { default as Header } from './header';

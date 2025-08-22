@@ -24,6 +24,7 @@ const DEFAULT_COLUMNS = {
     base: 'repeat(1, 1fr)',
     md: 'repeat(2, 1fr)',
     lg: 'repeat(3, 1fr)',
+    xl: 'repeat(3, 1fr)',
 } as const;
 
 const AnimatedGrid = memo<AnimatedGridProps>(({
@@ -40,7 +41,7 @@ const AnimatedGrid = memo<AnimatedGridProps>(({
     const renderContent = () => {
         if (items && renderItem) {
             return items.map((item, index) => (
-                <GridItem key={item.id || index} display={stretch ? 'flex' : 'block'} minW="0">
+                <GridItem key={item.id || index} display={stretch ? 'flex' : 'block'} minW="0" w="100%" h="100%">
                     <FadeInUp delay={index * staggerDelay}>
                         {renderItem(item, index)}
                     </FadeInUp>
@@ -52,12 +53,15 @@ const AnimatedGrid = memo<AnimatedGridProps>(({
     };
 
     return (
-        <StaggerContainer className={className || ''} data-testid={testId || ''}>
+        <StaggerContainer className={className || ''} data-testid={testId || ''} w="100%">
             <Grid
                 templateColumns={columns}
                 gap={gap}
                 alignItems={stretch ? 'stretch' : 'start'}
                 width="100%"
+                justifyItems="stretch"
+                maxW="100%"
+                minW="0"
             >
                 {renderContent()}
             </Grid>

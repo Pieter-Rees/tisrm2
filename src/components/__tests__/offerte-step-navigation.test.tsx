@@ -3,12 +3,12 @@ import { render, screen } from '@testing-library/react';
 import OfferteStepNavigation from '../offerte-step-navigation';
 
 const mockProps = {
-    currentStep: 1,
+    currentStep: 0,
     totalSteps: 3,
     steps: [
-        { title: 'Stap 1', isCompleted: false },
-        { title: 'Stap 2', isCompleted: false },
-        { title: 'Stap 3', isCompleted: false },
+        { title: 'Stap 1', description: 'Description 1', isCompleted: false },
+        { title: 'Stap 2', description: 'Description 2', isCompleted: false },
+        { title: 'Stap 3', description: 'Description 3', isCompleted: false },
     ],
 };
 
@@ -23,22 +23,26 @@ describe('OfferteStepNavigation', () => {
         expect(screen.getByText('Stap 1 van 3')).toBeInTheDocument();
     });
 
-    it('renders step navigation badges', () => {
+    it('renders step navigation with titles and descriptions', () => {
         render(<OfferteStepNavigation {...mockProps} />);
-        // Should have badges for each step
+        // Should have titles for each step
         expect(screen.getByText('Stap 1')).toBeInTheDocument();
         expect(screen.getByText('Stap 2')).toBeInTheDocument();
         expect(screen.getByText('Stap 3')).toBeInTheDocument();
+        // Should have descriptions
+        expect(screen.getByText('Description 1')).toBeInTheDocument();
+        expect(screen.getByText('Description 2')).toBeInTheDocument();
+        expect(screen.getByText('Description 3')).toBeInTheDocument();
     });
 
     it('applies correct styling to current step', () => {
         render(<OfferteStepNavigation {...mockProps} />);
-        const currentStepBadge = screen.getByText('Stap 1');
-        expect(currentStepBadge).toBeInTheDocument();
+        const currentStepTitle = screen.getByText('Stap 1');
+        expect(currentStepTitle).toBeInTheDocument();
     });
 
     it('handles different current steps', () => {
-        const step2Props = { ...mockProps, currentStep: 2 };
+        const step2Props = { ...mockProps, currentStep: 1 };
         render(<OfferteStepNavigation {...step2Props} />);
         expect(screen.getByText('Stap 2 van 3')).toBeInTheDocument();
     });

@@ -21,11 +21,16 @@ export const CARD_VARIANTS = {
     hover: UI_CONSTANTS.hover.subtle,
   },
   downloads: {
-    bg: 'blue.50',
-    shadow: 'md',
+    bg: 'white',
+    border: '1px solid',
+    borderColor: 'blue.200',
+    shadow: 'sm',
+    p: { base: '5', md: '6' },
+    transition: 'all 0.2s ease-in-out',
     hover: {
-      ...UI_CONSTANTS.hover.card,
-      transform: 'scale(1.02)',
+      transform: 'translateY(-2px)',
+      shadow: 'md',
+      borderColor: 'blue.300',
     },
   },
   elevated: {
@@ -54,6 +59,8 @@ export const cardBaseStyles: SystemStyleObject = {
   display: 'flex',
   flexDirection: 'column',
   position: 'relative',
+  minHeight: 'fit-content',
+  transition: 'all 0.2s ease-in-out',
 };
 
 // Card states
@@ -131,17 +138,18 @@ export const getCardStyles = (
 ): SystemStyleObject => {
   const variantStyles = CARD_VARIANTS[variant];
   const stateStyles = disabled ? cardStateStyles.disabled : cardStateStyles.normal;
-  const interactionStyles = isInteractive && !disabled 
-    ? cardStateStyles.interactive 
+  const interactionStyles = isInteractive && !disabled
+    ? cardStateStyles.interactive
     : cardStateStyles.static;
 
   return {
     ...cardBaseStyles,
     ...stateStyles,
     ...interactionStyles,
+    ...variantStyles,
     bg: disabled ? cardStateStyles.disabled.bg : variantStyles.bg,
     boxShadow: variantStyles.shadow,
-    transition: variantStyles.hover.transition,
+    transition: variantStyles.hover?.transition || cardBaseStyles.transition,
     _hover: !disabled && isInteractive ? variantStyles.hover : {},
     _focus: cardFocusStyles,
   };

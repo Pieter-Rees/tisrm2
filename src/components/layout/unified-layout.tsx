@@ -58,7 +58,7 @@ const UnifiedLayout = memo<UnifiedLayoutProps>(({
     showSidebar = true,
     maxWidth = 'auto',
     columns = 6,
-    gap = '4',
+    gap = '8',
     animated = true,
     padding = '8',
     className,
@@ -81,7 +81,7 @@ const UnifiedLayout = memo<UnifiedLayoutProps>(({
                     p={variant === 'centered' ? padding : undefined}
                 >
                     {title && (
-                        <Box as="header" mb={{ base: '6', lg: '8' }}>
+                        <Box as="header">
                             <Heading
                                 id="page-title"
                                 as="h1"
@@ -93,7 +93,7 @@ const UnifiedLayout = memo<UnifiedLayoutProps>(({
                         </Box>
                     )}
                     <ErrorBoundary>
-                        <Box as="main" minH="200px">
+                        <Box as="main">
                             {children}
                         </Box>
                     </ErrorBoundary>
@@ -120,8 +120,7 @@ const UnifiedLayout = memo<UnifiedLayoutProps>(({
                                         justifyContent="space-between"
                                         alignItems={{ base: 'flex-start', lg: 'center' }}
                                         flexDirection={{ base: 'column', lg: 'row' }}
-                                        mb={{ base: '6', lg: '8' }}
-                                        gap="4"
+                                        gap="8"
                                     >
                                         {title && (
                                             <Heading as="h1" {...HEADING_STYLES.h1}>

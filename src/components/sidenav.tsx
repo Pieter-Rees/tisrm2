@@ -14,7 +14,7 @@ import {
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { memo, useCallback, useEffect } from 'react';
-import { BsChevronDown, BsShield, BsTelephone, BsX } from 'react-icons/bs';
+import { BsChevronDown, BsShield, BsTelephone, BsX, BsFileText } from 'react-icons/bs';
 
 import Logo from '@/components/logo';
 import {
@@ -219,6 +219,7 @@ const Sidenav = memo<SidenavProps>(
                     href={NAVIGATION_ROUTES.quote}
                     onClick={handleLinkClick}
                   >
+                    <BsFileText />
                     Offerte aanvragen
                   </Link>
                 </MenuItem>

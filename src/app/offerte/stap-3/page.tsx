@@ -182,9 +182,9 @@ export default function OfferteStep3() {
               currentStep={2}
               totalSteps={3}
               steps={[
-                { title: 'Contactgegevens', isCompleted: true },
-                { title: 'Project Details', isCompleted: true },
-                { title: 'Bevestiging', isCompleted: false }
+                { title: 'Contactgegevens', description: 'Persoonlijke gegevens', isCompleted: true },
+                { title: 'Project Details', description: 'Bedrijfsinformatie', isCompleted: true },
+                { title: 'Bevestiging', description: 'Aanvraag versturen', isCompleted: false }
               ]}
             />
             <VStack gap="6" textAlign="center" py="12" width="full">
@@ -221,9 +221,9 @@ export default function OfferteStep3() {
             currentStep={2}
             totalSteps={3}
             steps={[
-              { title: 'Contactgegevens', isCompleted: true },
-              { title: 'Project Details', isCompleted: true },
-              { title: 'Bevestiging', isCompleted: false }
+              { title: 'Contactgegevens', description: 'Persoonlijke gegevens', isCompleted: true },
+              { title: 'Project Details', description: 'Bedrijfsinformatie', isCompleted: true },
+              { title: 'Bevestiging', description: 'Aanvraag versturen', isCompleted: false }
             ]}
           />
 

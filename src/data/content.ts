@@ -36,13 +36,13 @@ export const INSURANCE_CATEGORIES = [
 export const AVAILABLE_DOCUMENTS = [
   {
     id: 'aanrijdingsformulier',
-    title: 'Schadeaanrijdingsformulier',
+    title: 'Schadeaanrijdings formulier',
     link: '/documents/aanrijdingsformulier.pdf',
     category: 'schade',
   },
   {
     id: 'dienstverleningsdocument',
-    title: 'Dienstverleningsdocument',
+    title: 'Dienstverlenings document',
     link: '/documents/dienstverleningsdocument.pdf',
     category: 'algemeen',
   },

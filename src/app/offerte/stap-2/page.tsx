@@ -103,9 +103,9 @@ export default function OfferteStep2() {
             currentStep={1}
             totalSteps={3}
             steps={[
-              { title: 'Contactgegevens', isCompleted: true },
-              { title: 'Project Details', isCompleted: false },
-              { title: 'Bevestiging', isCompleted: false }
+              { title: 'Contactgegevens', description: 'Persoonlijke gegevens', isCompleted: true },
+              { title: 'Project Details', description: 'Bedrijfsinformatie', isCompleted: false },
+              { title: 'Bevestiging', description: 'Aanvraag versturen', isCompleted: false }
             ]}
           />
 

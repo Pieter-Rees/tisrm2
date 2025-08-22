@@ -17,6 +17,7 @@ import {
   Box,
   Button,
   Container,
+  Flex,
   Grid,
   GridItem,
   Heading,
@@ -46,17 +47,7 @@ export default function Footer() {
       <Box {...footerContainerStyles}>
         <Container>
           <Grid gridTemplateColumns={{ base: '1fr', md: 'repeat(3, 1fr)' }} gap="16">
-            <GridItem>
-              <VStack alignItems="start" gap="4">
-                <Link href="/">
-                  <Logo width="200px" />
-                </Link>
-                <Text color="white" fontSize="sm">
-                  © {CURRENT_YEAR} {contactInfo.name}. Alle rechten
-                  voorbehouden.
-                </Text>
-              </VStack>
-            </GridItem>
+
             <GridItem>
               <VStack alignItems="start" gap="4">
                 <Heading fontSize="md" color="white">
@@ -116,6 +107,21 @@ export default function Footer() {
                     </Button>
                   ))}
                 </VStack>
+              </VStack>
+            </GridItem>
+            <GridItem>
+              <VStack alignItems="start" gap="4">
+                <Flex justifyContent="center" alignItems="center" w="100%">
+                  <Link href="/">
+                    <Logo width="200px" />
+                  </Link>
+                </Flex>
+                <Flex textAlign="center">
+                  <Text color="white" fontSize="sm">
+                    © {CURRENT_YEAR} {contactInfo.name}. Alle rechten
+                    voorbehouden.
+                  </Text>
+                </Flex>
               </VStack>
             </GridItem>
           </Grid>

@@ -14,7 +14,7 @@ import {
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { memo, useCallback } from 'react';
-import { BsChevronDown, BsShield, BsTelephone } from 'react-icons/bs';
+import { BsChevronDown, BsShield, BsTelephone, BsFileText } from 'react-icons/bs';
 
 import {
   CONTACT_INFO,
@@ -138,7 +138,10 @@ const Navbar = memo(() => {
               </VisuallyHidden>
             </MenuItem>
             <MenuItem value="quote" asChild gap="2" _hover={{ bg: 'blue.50' }}>
-              <Link href={NAVIGATION_ROUTES.quote}>Offerte aanvragen</Link>
+              <Link href={NAVIGATION_ROUTES.quote}>
+                <BsFileText />
+                Offerte aanvragen
+              </Link>
             </MenuItem>
             <MenuItem value="call" asChild gap="2" _hover={{ bg: 'blue.50' }}>
               <Link href={`tel:${CONTACT_INFO.phone}`}>

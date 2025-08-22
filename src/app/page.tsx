@@ -2,6 +2,7 @@ import { Box, Flex, Grid, GridItem } from '@chakra-ui/react';
 import Image from 'next/image';
 import { Suspense, lazy } from 'react';
 
+import CallToAction from '@/components/call-to-action';
 import CallUs from '@/components/call-us';
 import ErrorBoundary from '@/components/error-boundary';
 import Loading from '@/components/loading';
@@ -24,7 +25,8 @@ const HeroImage = () => (
     <Box
       position="relative"
       width="full"
-      height={{ base: '100px', md: '200px', lg: '250px' }}
+      minHeight={{ base: '100px', md: '150px', lg: '230px' }}
+      height="full"
       borderRadius="lg"
       overflow="hidden"
       boxShadow="xl"
@@ -49,15 +51,15 @@ export default function Homepage() {
   return (
     <UnifiedLayout variant="page" showSidebar={true}>
       <StaggerContainer>
-        <Flex direction="column" gap="4">
+        <Flex direction="column" gap="12">
           <ErrorBoundary>
             <FadeInUp>
               <Grid
-                templateColumns={{ base: '1fr', lg: '1fr 1fr' }}
+                templateColumns={{ base: '1fr', lg: '2fr 1fr' }}
                 gap="8"
                 alignItems="stretch"
               >
-                <GridItem>
+                <GridItem height="full">
                   <Suspense
                     fallback={<Loading text="Loading hero image..." />}
                   >
@@ -66,6 +68,7 @@ export default function Homepage() {
                 </GridItem>
 
                 <GridItem>
+                  <Box height="full">  
                   <SlideInRight delay={0.2}>
                     <Flex direction="column" gap="4" height="full">
                       <Box
@@ -73,6 +76,7 @@ export default function Homepage() {
                         borderRadius="lg"
                         boxShadow="lg"
                         overflow="hidden"
+
                         flex="1"
                         transition={UI_CONSTANTS.hover.button.transition}
                         _hover={{
@@ -102,6 +106,7 @@ export default function Homepage() {
                       </Box>
                     </Flex>
                   </SlideInRight>
+                  </Box>
                 </GridItem>
               </Grid>
             </FadeInUp>
@@ -111,6 +116,14 @@ export default function Homepage() {
             <FadeInUp delay={0.3}>
               <Suspense fallback={<Loading text="Loading features..." />}>
                 <ThreeElements />
+              </Suspense>
+            </FadeInUp>
+          </ErrorBoundary>
+
+          <ErrorBoundary>
+            <FadeInUp delay={0.35}>
+              <Suspense fallback={<Loading text="Loading call to action..." />}>
+                <CallToAction />
               </Suspense>
             </FadeInUp>
           </ErrorBoundary>

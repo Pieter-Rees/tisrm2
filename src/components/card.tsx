@@ -1,9 +1,9 @@
 'use client';
 
-import { Box, Button, Heading, Text } from '@chakra-ui/react';
+import { Box, Button, Heading, Text, Icon } from '@chakra-ui/react';
 import Image from 'next/image';
 import { memo } from 'react';
-import { BsArrowRight, BsDownload, BsTelephone } from 'react-icons/bs';
+import { BsArrowRight, BsDownload, BsTelephone, BsFileEarmarkText } from 'react-icons/bs';
 
 import { HEADING_STYLES, PARAGRAPH_STYLES } from '@/constants/typography';
 import { cn } from '@/lib/utils';
@@ -54,14 +54,33 @@ const Card = memo<CardProps>(
         )}
 
         <Box
-          p={{ base: '4', md: '6' }}
+          p={variant === 'downloads' ? '0' : { base: '4', md: '6' }}
           flex="1"
           display="flex"
           flexDirection="column"
         >
-          <Heading as="h3" {...HEADING_STYLES.h4} mb={description ? '3' : '0'}>
-            {title}
-          </Heading>
+          {variant === 'downloads' && (
+            <Box
+              display="flex"
+              alignItems="center"
+              gap="3"
+              mb="4"
+            >
+              <Icon
+                as={BsFileEarmarkText}
+                color="blue.500"
+                boxSize="5"
+              />
+              <Heading as="h3" {...HEADING_STYLES.h4} mb="0">
+                {title}
+              </Heading>
+            </Box>
+          )}
+          {variant !== 'downloads' && (
+            <Heading as="h3" {...HEADING_STYLES.h4} mb={description ? '3' : '0'}>
+              {title}
+            </Heading>
+          )}
 
           {description && (
             <Text
@@ -103,11 +122,15 @@ const Card = memo<CardProps>(
                   gap="2"
                   transition="all 0.2s ease-in-out"
                   _hover={{
-                    transform: 'translateY(-2px)',
-                    boxShadow: 'lg',
+                    transform: 'translateY(-1px)',
+                    boxShadow: 'md',
                   }}
-                  colorScheme="purple"
-                  variant="outline"
+                  bg="blue.500"
+                  color="white"
+                  variant="solid"
+                  size="md"
+                  fontWeight="medium"
+                  borderRadius="md"
                   onClick={e => {
                     e.preventDefault();
                     e.stopPropagation();
@@ -160,6 +183,8 @@ const Card = memo<CardProps>(
         {...cardStyles}
         role="article"
         aria-label={`${title}${description ? `: ${description}` : ''}`}
+        w="100%"
+        h="100%"
       >
         {cardContent}
       </Box>

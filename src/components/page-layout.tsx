@@ -40,21 +40,19 @@ export const PageLayout = ({
       <Container py="8" maxW={maxWidth}>
         <Grid
           templateColumns={{ base: '1fr', xl: showSidebar ? '3fr 1fr' : '1fr' }}
-          gap="4"
+          gap="8"
           alignItems="start"
         >
           <GridItem>
-            <Flex direction="column" gap="4">
+            <Flex direction="column" gap="8">
               {(title || breadcrumb) && (
                 <FadeInUp>
                   <Flex
-                    as="header"
                     width="full"
                     justify="space-between"
                     align={{ base: 'flex-start', lg: 'center' }}
                     direction={{ base: 'column', lg: 'row' }}
-                    mb={{ base: '6', lg: '8' }}
-                    gap="4"
+                    gap="8"
                   >
                     {title && (
                       <Heading as="h1" {...HEADING_STYLES.h1}>

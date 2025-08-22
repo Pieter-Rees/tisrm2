@@ -80,12 +80,12 @@ export const sidebarHelpTextStyles: SystemStyleObject = {
 export const layoutGridStyles = {
   withSidebar: {
     templateColumns: { base: '1fr', xl: '3fr 1fr' },
-    gap: '4',
+    gap: '8',
     alignItems: 'start',
   },
   withoutSidebar: {
     templateColumns: '1fr',
-    gap: '4',
+    gap: '8',
     alignItems: 'start',
   },
 } as const;
@@ -93,7 +93,7 @@ export const layoutGridStyles = {
 // Content area styles
 export const contentAreaStyles: SystemStyleObject = {
   flexDirection: 'column' as const,
-  gap: '4',
+  gap: '8',
 };
 
 // Header section within content
@@ -103,7 +103,7 @@ export const contentHeaderStyles: SystemStyleObject = {
   alignItems: { base: 'flex-start', lg: 'center' },
   flexDirection: { base: 'column', lg: 'row' } as const,
   mb: { base: '6', lg: '8' },
-  gap: '4',
+  gap: '8',
 };
 
 // Breadcrumb container styles - moved to utility.styles.ts
