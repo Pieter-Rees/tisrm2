@@ -41,8 +41,8 @@ const CallToAction = memo<CallToActionProps>(
 
         <Grid
           templateColumns={{ base: '1fr', sm: 'repeat(2, 1fr)' }}
-          gap="3"
-          maxW="md"
+          gap="8"
+          maxW="lg"
           mx="auto"
         >
           <Card

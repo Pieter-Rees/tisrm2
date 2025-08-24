@@ -3,7 +3,7 @@
 import { Box } from '@chakra-ui/react';
 import Card from '@/components/card';
 import AnimatedGrid from '@/components/common/animated-grid';
-import UnifiedLayout from '@/components/layout/unified-layout';
+import { UnifiedLayout } from '@/components/layout';
 import { AVAILABLE_DOCUMENTS } from '@/data/content';
 
 export default function Bestanden() {
@@ -29,9 +29,9 @@ export default function Bestanden() {
           justifyItems="stretch"
         >
           {AVAILABLE_DOCUMENTS.map((doc, index) => (
-            <Box 
-              key={doc.id || index} 
-              w="100%" 
+            <Box
+              key={doc.id || index}
+              w="100%"
               h="100%"
               display="flex"
               alignItems="stretch"

@@ -1,6 +1,6 @@
 import Breadcrumb from '@/components/breadcrumb';
 import { FadeInUp, StaggerContainer } from '@/components/page-animation';
-import PageLayout from '@/components/page-layout';
+import { UnifiedLayout } from '@/components/layout';
 import StarList from '@/components/star-list';
 import {
   HEADING_STYLES,
@@ -27,7 +27,7 @@ export default function Particulier() {
   const list4 = ['Reis', 'Pleziervaartuigen', 'Recreatiegoederen'];
 
   return (
-    <PageLayout title="Particulier" breadcrumb={<Breadcrumb capitalizeLinks />}>
+    <UnifiedLayout title="Particulier" breadcrumb={<Breadcrumb capitalizeLinks />}>
       <StaggerContainer>
         <Flex direction="column" gap={SECTION_SPACING.medium}>
           <Flex direction="column" gap={SECTION_SPACING.small}>
@@ -160,6 +160,6 @@ export default function Particulier() {
           </FadeInUp>
         </Flex>
       </StaggerContainer>
-    </PageLayout>
+    </UnifiedLayout>
   );
 }

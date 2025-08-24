@@ -1,6 +1,6 @@
 'use client';
 
-import BaseLayout from '@/components/baseLayout';
+import { BaseLayout } from '@/components/layout';
 import { Field } from '@/components/ui/field';
 import { useLocalStorage } from '@/hooks/use-local-storage';
 import OfferteStepNavigation from '@/components/offerte-step-navigation';

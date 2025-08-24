@@ -3,7 +3,7 @@
 import ContactInfo from '@/components/contact-info';
 import Logo from '@/components/logo';
 import { FadeInUp, ScaleIn, SlideInLeft } from '@/components/page-animation';
-import PageLayout from '@/components/page-layout';
+import { UnifiedLayout } from '@/components/layout';
 import { PARAGRAPH_STYLES, SECTION_SPACING } from '@/constants/typography';
 import {
   contactGridStyles,
@@ -27,7 +27,7 @@ export default function Contact() {
   };
 
   return (
-    <PageLayout title="Contact">
+    <UnifiedLayout title="Contact">
       <Flex direction="column" gap={SECTION_SPACING.medium}>
         <Grid
           gridTemplateColumns={{
@@ -106,6 +106,6 @@ export default function Contact() {
           </Box>
         </ScaleIn>
       </Flex>
-    </PageLayout>
+    </UnifiedLayout>
   );
 }

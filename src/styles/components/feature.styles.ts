@@ -26,14 +26,13 @@ export const featureDescriptionStyles: SystemStyleObject = {
 
 // Feature grid styles
 export const featureGridStyles: SystemStyleObject = {
-  gridTemplateColumns: {
-    base: 'repeat(1, 1fr)',
-    md: 'repeat(2, 1fr)',
-    lg: 'repeat(3, 1fr)',
-  },
-  gap: { base: '6', lg: '8' },
+  gridTemplateColumns: 'repeat(3, 1fr)',
+  gap: { base: '3', sm: '4', md: '6', lg: '8' },
   alignItems: 'stretch',
   width: '100%',
+  // Ensure cards don't get too cramped on small screens
+  minWidth: '0',
+  overflow: 'hidden',
 };
 
 // Feature grid item styles

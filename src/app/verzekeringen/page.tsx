@@ -3,7 +3,7 @@
 import Breadcrumb from '@/components/breadcrumb';
 import Card from '@/components/card';
 import AnimatedGrid from '@/components/common/animated-grid';
-import UnifiedLayout from '@/components/layout/unified-layout';
+import { UnifiedLayout } from '@/components/layout';
 import { INSURANCE_CATEGORIES } from '@/data/content';
 
 export default function Verzekeringen() {

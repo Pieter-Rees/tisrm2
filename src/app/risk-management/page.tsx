@@ -1,7 +1,7 @@
 'use client';
 
 import { FadeInUp, StaggerContainer } from '@/components/page-animation';
-import PageLayout from '@/components/page-layout';
+import { UnifiedLayout } from '@/components/layout';
 import StarList from '@/components/star-list';
 import { PARAGRAPH_STYLES, SECTION_SPACING } from '@/constants/typography';
 import {
@@ -21,7 +21,7 @@ export default function Riskmanagement() {
   ];
 
   return (
-    <PageLayout title="Risk Management">
+    <UnifiedLayout title="Risk Management">
       <StaggerContainer>
         <Flex direction="column" gap={SECTION_SPACING.small}>
           <FadeInUp>
@@ -85,6 +85,6 @@ export default function Riskmanagement() {
           </FadeInUp>
         </Flex>
       </StaggerContainer>
-    </PageLayout>
+    </UnifiedLayout>
   );
 }

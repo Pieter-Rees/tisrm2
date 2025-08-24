@@ -1,5 +1,5 @@
 import { FadeInUp, StaggerContainer } from '@/components/page-animation';
-import PageLayout from '@/components/page-layout';
+import { UnifiedLayout } from '@/components/layout';
 import {
   HEADING_STYLES,
   PARAGRAPH_STYLES,
@@ -9,7 +9,7 @@ import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 
 export default function Taxi() {
   return (
-    <PageLayout title="Personenvervoer">
+    <UnifiedLayout title="Personenvervoer">
       <StaggerContainer>
         <Flex direction="column" gap={SECTION_SPACING.medium}>
           <FadeInUp>
@@ -78,6 +78,6 @@ export default function Taxi() {
           </FadeInUp>
         </Flex>
       </StaggerContainer>
-    </PageLayout>
+    </UnifiedLayout>
   );
 }

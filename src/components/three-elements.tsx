@@ -29,7 +29,7 @@ const FEATURE_CARDS = [
     title: 'Risk Managers',
     description:
       'TIS is de laatste jaren meegegroeid met de ontwikkelingen in de verzekeringsmarkt, alsmede de veranderende behoefte van de klanten. Zodoende zijn de werknemers van TIS gediplomeerd als risico managers en geregistreerd in het register GRMC.',
-    cta: 'Meer over Risk Management',
+    cta: 'Lees meer',
     ctaLink: NAVIGATION_ROUTES.riskManagement,
     variant: 'elevated' as const,
   },
@@ -39,7 +39,7 @@ const FEATURE_CARDS = [
     title: 'Maatwerk Verzekeringen',
     description:
       'De verzekeringen van TIS zijn stuk voor stuk maatwerk. De standaard verzekeringsproducten zijn vaak niet toereikend, waardoor er een kans bestaat dat er geen dekking is óf juist dekking heeft voor zaken die geen betrekking hebben op u of uw bedrijf.',
-    cta: 'Bekijk onze verzekeringen',
+    cta: 'Lees meer',
     ctaLink: NAVIGATION_ROUTES.insurance,
     variant: 'elevated' as const,
   },
@@ -49,7 +49,7 @@ const FEATURE_CARDS = [
     title: 'Digitale Schadeafhandeling',
     description:
       'TIS biedt u een volledig digitale schadeafhandeling. Door deze specialisatie staan wij bekend om het snel en vakkundig afwikkelen van uw schade, van een inbraak, stormschade of het verhalen van uw bedrijfsschade.',
-    cta: 'Schade melden',
+    cta: 'Lees meer',
     ctaLink: '#',
     variant: 'elevated' as const,
     external: true,

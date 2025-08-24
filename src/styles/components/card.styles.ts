@@ -75,7 +75,8 @@ export const cardStateStyles = {
     opacity: 0.6,
   },
   interactive: {
-    cursor: 'pointer',
+    // Removed cursor: 'pointer' since the card container is not clickable
+    // Only the buttons within the card are clickable
   },
   static: {
     cursor: 'default',
@@ -94,13 +95,13 @@ export const cardImageStyles: SystemStyleObject = {
   position: 'relative',
   overflow: 'hidden',
   borderTopRadius: 'lg',
-  height: { base: '200px', md: '240px' },
+  height: { base: '140px', sm: '160px', md: '180px', lg: '200px', xl: '240px' },
   bg: 'gray.100',
 };
 
 // Content container styles
 export const cardContentStyles: SystemStyleObject = {
-  p: { base: '4', md: '6' },
+  p: { base: '2', sm: '3', md: '4', lg: '5', xl: '6' },
   flex: '1',
   display: 'flex',
   flexDirection: 'column',

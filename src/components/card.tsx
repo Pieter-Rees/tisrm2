@@ -36,7 +36,7 @@ const Card = memo<CardProps>(
             position="relative"
             overflow="hidden"
             borderTopRadius="lg"
-            height={{ base: '200px', md: '240px' }}
+            height={{ base: '140px', sm: '160px', md: '180px', lg: '200px', xl: '240px' }}
             bg="gray.100"
           >
             <Image
@@ -54,7 +54,7 @@ const Card = memo<CardProps>(
         )}
 
         <Box
-          p={variant === 'downloads' ? '0' : { base: '4', md: '6' }}
+          p={variant === 'downloads' ? '0' : { base: '2', sm: '3', md: '4', lg: '5', xl: '6' }}
           flex="1"
           display="flex"
           flexDirection="column"

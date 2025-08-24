@@ -1,12 +1,12 @@
 import Breadcrumb from '@/components/breadcrumb';
 import { FadeInUp, StaggerContainer } from '@/components/page-animation';
-import PageLayout from '@/components/page-layout';
+import { UnifiedLayout } from '@/components/layout';
 import { PARAGRAPH_STYLES, SECTION_SPACING } from '@/constants/typography';
 import { Flex, Text } from '@chakra-ui/react';
 
 export default function Zakelijk() {
   return (
-    <PageLayout title="Zakelijk" breadcrumb={<Breadcrumb capitalizeLinks />}>
+    <UnifiedLayout title="Zakelijk" breadcrumb={<Breadcrumb capitalizeLinks />}>
       <StaggerContainer>
         <Flex direction="column" gap={SECTION_SPACING.small}>
           <FadeInUp>
@@ -43,6 +43,6 @@ export default function Zakelijk() {
           </FadeInUp>
         </Flex>
       </StaggerContainer>
-    </PageLayout>
+    </UnifiedLayout>
   );
 }
