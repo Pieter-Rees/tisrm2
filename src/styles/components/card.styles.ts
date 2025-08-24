@@ -149,7 +149,7 @@ export const getCardStyles = (
     ...variantStyles,
     bg: disabled ? cardStateStyles.disabled.bg : variantStyles.bg,
     boxShadow: variantStyles.shadow,
-    transition: variantStyles.hover?.transition || cardBaseStyles.transition,
+    transition: cardBaseStyles.transition,
     _hover: !disabled && isInteractive ? variantStyles.hover : {},
     _focus: cardFocusStyles,
   };

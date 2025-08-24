@@ -172,11 +172,7 @@ describe('Field Component', () => {
 
     it('should handle undefined props gracefully', () => {
         render(
-            <FieldComponent
-                label={undefined}
-                helperText={undefined}
-                errorText={undefined}
-            >
+            <FieldComponent>
                 <input type="text" />
             </FieldComponent>
         );

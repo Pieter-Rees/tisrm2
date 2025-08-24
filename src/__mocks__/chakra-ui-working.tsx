@@ -1,157 +1,199 @@
 import React from 'react';
 
-// Simple working mock for Chakra UI components
-const Box = React.forwardRef(({ children, as, ...props }, ref) => {
+interface MockProps {
+  children?: React.ReactNode;
+  as?: string;
+  [key: string]: any;
+}
+
+const Box = React.forwardRef<HTMLDivElement, MockProps>(({ children, as, ...props }, ref) => {
   const Component = as || 'div';
   return React.createElement(Component, { ref, ...props }, children);
 });
+
 Box.displayName = 'Box';
 
-const Button = React.forwardRef(({ children, ...props }, ref) => {
+const Button = React.forwardRef<HTMLButtonElement, MockProps>(({ children, ...props }, ref) => {
   return React.createElement('button', { ref, ...props }, children);
 });
+
 Button.displayName = 'Button';
 
-const Text = React.forwardRef(({ children, ...props }, ref) => {
+const Text = React.forwardRef<HTMLParagraphElement, MockProps>(({ children, ...props }, ref) => {
   return React.createElement('p', { ref, ...props }, children);
 });
+
 Text.displayName = 'Text';
 
-const Heading = React.forwardRef(({ children, as, ...props }, ref) => {
+const Heading = React.forwardRef<HTMLHeadingElement, MockProps>(({ children, as, ...props }, ref) => {
   const Component = as || 'h3';
   return React.createElement(Component, { ref, ...props }, children);
 });
+
 Heading.displayName = 'Heading';
 
-const HStack = React.forwardRef(({ children, ...props }, ref) => {
+const HStack = React.forwardRef<HTMLDivElement, MockProps>(({ children, ...props }, ref) => {
   return React.createElement('div', { ref, ...props }, children);
 });
+
 HStack.displayName = 'HStack';
 
-const VStack = React.forwardRef(({ children, ...props }, ref) => {
+const VStack = React.forwardRef<HTMLDivElement, MockProps>(({ children, ...props }, ref) => {
   return React.createElement('div', { ref, ...props }, children);
 });
+
 VStack.displayName = 'VStack';
 
-const Container = React.forwardRef(({ children, ...props }, ref) => {
+const Container = React.forwardRef<HTMLDivElement, MockProps>(({ children, ...props }, ref) => {
   return React.createElement('div', { ref, ...props }, children);
 });
+
 Container.displayName = 'Container';
 
-const Badge = React.forwardRef(({ children, ...props }, ref) => {
+const Badge = React.forwardRef<HTMLSpanElement, MockProps>(({ children, ...props }, ref) => {
   return React.createElement('span', { ref, ...props }, children);
 });
+
 Badge.displayName = 'Badge';
 
-const Link = React.forwardRef(({ children, ...props }, ref) => {
+const Link = React.forwardRef<HTMLAnchorElement, MockProps>(({ children, ...props }, ref) => {
   return React.createElement('a', { ref, ...props }, children);
 });
+
 Link.displayName = 'Link';
 
-const Image = React.forwardRef(({ ...props }, ref) => {
+const Image = React.forwardRef<HTMLImageElement, MockProps>(({ ...props }, ref) => {
   return React.createElement('img', { ref, ...props });
 });
+
 Image.displayName = 'Image';
 
-const Input = React.forwardRef(({ ...props }, ref) => {
+const Input = React.forwardRef<HTMLInputElement, MockProps>(({ ...props }, ref) => {
   return React.createElement('input', { ref, ...props });
 });
+
 Input.displayName = 'Input';
 
-const Flex = React.forwardRef(({ children, ...props }, ref) => {
+const Flex = React.forwardRef<HTMLDivElement, MockProps>(({ children, ...props }, ref) => {
   return React.createElement('div', { ref, ...props }, children);
 });
+
 Flex.displayName = 'Flex';
 
-const SimpleGrid = React.forwardRef(({ children, ...props }, ref) => {
+const SimpleGrid = React.forwardRef<HTMLDivElement, MockProps>(({ children, ...props }, ref) => {
   return React.createElement('div', { ref, ...props }, children);
 });
+
 SimpleGrid.displayName = 'SimpleGrid';
 
-const Stack = React.forwardRef(({ children, ...props }, ref) => {
+const Stack = React.forwardRef<HTMLDivElement, MockProps>(({ children, ...props }, ref) => {
   return React.createElement('div', { ref, ...props }, children);
 });
+
 Stack.displayName = 'Stack';
 
-const Grid = React.forwardRef(({ children, ...props }, ref) => {
+const Grid = React.forwardRef<HTMLDivElement, MockProps>(({ children, ...props }, ref) => {
   return React.createElement('div', { ref, ...props }, children);
 });
+
 Grid.displayName = 'Grid';
 
-const GridItem = React.forwardRef(({ children, ...props }, ref) => {
+const GridItem = React.forwardRef<HTMLDivElement, MockProps>(({ children, ...props }, ref) => {
   return React.createElement('div', { ref, ...props }, children);
 });
+
 GridItem.displayName = 'GridItem';
 
-const Center = React.forwardRef(({ children, ...props }, ref) => {
+const Center = React.forwardRef<HTMLDivElement, MockProps>(({ children, ...props }, ref) => {
   return React.createElement('div', { ref, ...props }, children);
 });
+
 Center.displayName = 'Center';
 
-const Spacer = React.forwardRef((props, ref) => {
+const Spacer = React.forwardRef<HTMLDivElement, MockProps>((props, ref) => {
   return React.createElement('div', { ref, ...props });
 });
+
 Spacer.displayName = 'Spacer';
 
-const Divider = React.forwardRef((props, ref) => {
+const Divider = React.forwardRef<HTMLHRElement, MockProps>((props, ref) => {
   return React.createElement('hr', { ref, ...props });
 });
+
 Divider.displayName = 'Divider';
 
-const Icon = React.forwardRef(({ children, ...props }, ref) => {
+const Icon = React.forwardRef<HTMLSpanElement, MockProps>(({ children, ...props }, ref) => {
   return React.createElement('span', { ref, ...props }, children);
 });
+
 Icon.displayName = 'Icon';
 
-const Tag = React.forwardRef(({ children, ...props }, ref) => {
+const Tag = React.forwardRef<HTMLSpanElement, MockProps>(({ children, ...props }, ref) => {
   return React.createElement('span', { ref, ...props }, children);
 });
+
 Tag.displayName = 'Tag';
 
-const List = React.forwardRef(({ children, ...props }, ref) => {
+const Circle = React.forwardRef<HTMLDivElement, MockProps>(({ children, ...props }, ref) => {
+  return React.createElement('div', { ref, ...props }, children);
+});
+
+Circle.displayName = 'Circle';
+
+const List = React.forwardRef<HTMLUListElement, MockProps>(({ children, ...props }, ref) => {
   return React.createElement('ul', { ref, ...props }, children);
 });
+
 List.displayName = 'List';
 
-const ListItem = React.forwardRef(({ children, ...props }, ref) => {
+const ListItem = React.forwardRef<HTMLLIElement, MockProps>(({ children, ...props }, ref) => {
   return React.createElement('li', { ref, ...props }, children);
 });
+
 ListItem.displayName = 'ListItem';
 
-const OrderedList = React.forwardRef(({ children, ...props }, ref) => {
+const OrderedList = React.forwardRef<HTMLOListElement, MockProps>(({ children, ...props }, ref) => {
   return React.createElement('ol', { ref, ...props }, children);
 });
+
 OrderedList.displayName = 'OrderedList';
 
-const UnorderedList = React.forwardRef(({ children, ...props }, ref) => {
+const UnorderedList = React.forwardRef<HTMLUListElement, MockProps>(({ children, ...props }, ref) => {
   return React.createElement('ul', { ref, ...props }, children);
 });
+
 UnorderedList.displayName = 'UnorderedList';
 
-// Field components
-const FieldRoot = React.forwardRef(({ children, ...props }, ref) => {
+const FieldRoot = React.forwardRef<HTMLDivElement, MockProps>(({ children, ...props }, ref) => {
   return React.createElement('div', { ref, ...props }, children);
 });
+
 FieldRoot.displayName = 'FieldRoot';
 
-const FieldLabel = React.forwardRef(({ children, ...props }, ref) => {
+const FieldLabel = React.forwardRef<HTMLLabelElement, MockProps>(({ children, ...props }, ref) => {
   return React.createElement('label', { ref, ...props }, children);
 });
+
 FieldLabel.displayName = 'FieldLabel';
 
-const FieldRequiredIndicator = React.forwardRef(({ children, ...props }, ref) => {
-  return React.createElement('span', { ref, ...props }, children);
-});
+const FieldRequiredIndicator = React.forwardRef<HTMLSpanElement, MockProps>(
+  ({ children, ...props }, ref) => {
+    return React.createElement('span', { ref, ...props }, children);
+  },
+);
+
 FieldRequiredIndicator.displayName = 'FieldRequiredIndicator';
 
-const FieldHelperText = React.forwardRef(({ children, ...props }, ref) => {
+const FieldHelperText = React.forwardRef<HTMLDivElement, MockProps>(({ children, ...props }, ref) => {
   return React.createElement('div', { ref, ...props }, children);
 });
+
 FieldHelperText.displayName = 'FieldHelperText';
 
-const FieldErrorText = React.forwardRef(({ children, ...props }, ref) => {
+const FieldErrorText = React.forwardRef<HTMLDivElement, MockProps>(({ children, ...props }, ref) => {
   return React.createElement('div', { ref, ...props }, children);
 });
+
 FieldErrorText.displayName = 'FieldErrorText';
 
 const Field = {
@@ -162,24 +204,7 @@ const Field = {
   ErrorText: FieldErrorText,
 };
 
-// Hooks
-const useDisclosure = () => ({
-  isOpen: false,
-  onOpen: jest.fn(),
-  onClose: jest.fn(),
-  onToggle: jest.fn(),
-});
-
-const useToast = () => ({
-  toast: jest.fn(),
-});
-
-const useColorMode = () => ({
-  colorMode: 'light',
-  toggleColorMode: jest.fn(),
-});
-
-const useBreakpointValue = (values) => values?.base || values;
+const useBreakpointValue = (values: any) => values?.base || values;
 
 const useMediaQuery = () => false;
 
@@ -208,13 +233,22 @@ const useTheme = () => ({
   transition: {},
 });
 
-// React utilities
-const forwardRef = React.forwardRef;
-const memo = React.memo;
-const createContext = React.createContext;
-const useContext = React.useContext;
-const useState = React.useState;
-const useEffect = React.useEffect;
+const useDisclosure = () => ({
+  isOpen: false,
+  onOpen: jest.fn(),
+  onClose: jest.fn(),
+  onToggle: jest.fn(),
+});
+
+const useToast = () => ({
+  toast: jest.fn(),
+});
+
+const useColorMode = () => ({
+  colorMode: 'light',
+  toggleColorMode: jest.fn(),
+});
+
 const useCallback = React.useCallback;
 const useMemo = React.useMemo;
 const useRef = React.useRef;
@@ -242,75 +276,80 @@ const Component = React.Component;
 const PureComponent = React.PureComponent;
 const createRef = React.createRef;
 const version = React.version;
+const forwardRef = React.forwardRef;
+const memo = React.memo;
+const createContext = React.createContext;
+const useContext = React.useContext;
+const useState = React.useState;
+const useEffect = React.useEffect;
 
-// Export everything
 export {
+  Badge,
   Box,
   Button,
-  Text,
-  Heading,
-  HStack,
-  VStack,
+  Center,
+  Children,
+  Component,
   Container,
-  Badge,
-  Link,
-  Image,
-  Input,
+  Divider,
+  Field,
   Flex,
-  SimpleGrid,
-  Stack,
+  Fragment,
   Grid,
   GridItem,
-  Center,
-  Spacer,
-  Divider,
+  HStack,
+  Heading,
   Icon,
-  Tag,
+  Image,
+  Input,
+  Link,
   List,
   ListItem,
   OrderedList,
-  UnorderedList,
-  Field,
-  useDisclosure,
-  useToast,
-  useColorMode,
-  useBreakpointValue,
-  useMediaQuery,
-  useToken,
-  useStyleConfig,
-  useMultiStyleConfig,
-  useTheme,
-  forwardRef,
-  memo,
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  useCallback,
-  useMemo,
-  useRef,
-  useImperativeHandle,
-  useLayoutEffect,
-  useReducer,
-  useId,
-  useDeferredValue,
-  useTransition,
-  useSyncExternalStore,
-  useInsertionEffect,
-  useDebugValue,
-  use,
-  startTransition,
-  createElement,
-  cloneElement,
-  isValidElement,
-  Children,
-  Fragment,
+  Profiler,
+  PureComponent,
+  SimpleGrid,
+  Spacer,
+  Stack,
   StrictMode,
   Suspense,
-  Profiler,
-  lazy,
-  Component,
-  PureComponent,
+  Tag,
+  Text,
+  UnorderedList,
+  VStack,
+  cloneElement,
+  createContext,
+  createElement,
   createRef,
+  forwardRef,
+  isValidElement,
+  lazy,
+  memo,
+  startTransition,
+  use,
+  useBreakpointValue,
+  useCallback,
+  useColorMode,
+  useContext,
+  useDebugValue,
+  useDeferredValue,
+  useDisclosure,
+  useEffect,
+  useId,
+  useImperativeHandle,
+  useInsertionEffect,
+  useLayoutEffect,
+  useMediaQuery,
+  useMemo,
+  useMultiStyleConfig,
+  useReducer,
+  useRef,
+  useState,
+  useStyleConfig,
+  useSyncExternalStore,
+  useTheme,
+  useToast,
+  useToken,
+  useTransition,
   version,
 };

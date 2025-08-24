@@ -1,40 +1,60 @@
 import React from 'react';
 
-// Simple, working mock for Chakra UI components
+interface MockProps {
+  children?: React.ReactNode;
+  as?: string;
+  role?: string;
+  [key: string]: any;
+}
+
 const createMockComponent = (tag: string, displayName: string) => {
-    const Component = React.forwardRef<any, any>((props: any, ref) => {
-        const { children, as, asChild, variant, size, spacing, gap, alignItems, justifyContent, direction, ...rest } = props;
-        const Element = as || tag;
+  const Component = React.forwardRef<any, MockProps>((props: MockProps, ref) => {
+    const {
+      children,
+      as,
+      asChild,
+      variant,
+      size,
+      spacing,
+      gap,
+      alignItems,
+      justifyContent,
+      direction,
+      ...rest
+    } = props;
+    const Element = as || tag;
 
-        // Handle asChild pattern (used by Button)
-        if (asChild && React.Children.count(children) === 1) {
-            const child = React.Children.only(children) as React.ReactElement;
-            return React.cloneElement(child, {
-                ...rest,
-                ...(child.props || {}),
-                variant,
-                role: child.props?.role || (tag === 'button' ? 'button' : undefined),
-            } as any);
-        }
+    if (asChild && React.Children.count(children) === 1) {
+      const child = React.Children.only(children) as React.ReactElement<any>;
+      return React.cloneElement(child, {
+        ...rest,
+        ...(child.props || {}),
+        variant,
+        role: (child.props as any)?.role || (tag === 'button' ? 'button' : undefined),
+      } as any);
+    }
 
-        return React.createElement(Element, {
-            ref,
-            variant,
-            size,
-            spacing,
-            gap,
-            alignItems,
-            justifyContent,
-            direction,
-            role: tag === 'button' ? 'button' : undefined,
-            ...rest
-        }, children);
-    });
-    Component.displayName = displayName;
-    return Component;
+    return React.createElement(
+      Element,
+      {
+        ref,
+        variant,
+        size,
+        spacing,
+        gap,
+        alignItems,
+        justifyContent,
+        direction,
+        role: tag === 'button' ? 'button' : undefined,
+        ...rest,
+      },
+      children,
+    );
+  });
+  Component.displayName = displayName;
+  return Component;
 };
 
-// Export all components as named exports
 export const Box = createMockComponent('div', 'Box');
 export const Button = createMockComponent('button', 'Button');
 export const Text = createMockComponent('p', 'Text');
@@ -62,30 +82,28 @@ export const ListItem = createMockComponent('li', 'ListItem');
 export const OrderedList = createMockComponent('ol', 'OrderedList');
 export const UnorderedList = createMockComponent('ul', 'UnorderedList');
 
-// Field components
 export const Field = {
-    Root: createMockComponent('div', 'FieldRoot'),
-    Label: createMockComponent('label', 'FieldLabel'),
-    RequiredIndicator: createMockComponent('span', 'FieldRequiredIndicator'),
-    HelperText: createMockComponent('div', 'FieldHelperText'),
-    ErrorText: createMockComponent('div', 'FieldErrorText'),
+  Root: createMockComponent('div', 'FieldRoot'),
+  Label: createMockComponent('label', 'FieldLabel'),
+  RequiredIndicator: createMockComponent('span', 'FieldRequiredIndicator'),
+  HelperText: createMockComponent('div', 'FieldHelperText'),
+  ErrorText: createMockComponent('div', 'FieldErrorText'),
 };
 
-// Hooks
 export const useDisclosure = () => ({
-    isOpen: false,
-    onOpen: jest.fn(),
-    onClose: jest.fn(),
-    onToggle: jest.fn(),
+  isOpen: false,
+  onOpen: jest.fn(),
+  onClose: jest.fn(),
+  onToggle: jest.fn(),
 });
 
 export const useToast = () => ({
-    toast: jest.fn(),
+  toast: jest.fn(),
 });
 
 export const useColorMode = () => ({
-    colorMode: 'light',
-    toggleColorMode: jest.fn(),
+  colorMode: 'light',
+  toggleColorMode: jest.fn(),
 });
 
 export const useBreakpointValue = (values: any) => values?.base || values;
@@ -99,25 +117,24 @@ export const useStyleConfig = () => ({});
 export const useMultiStyleConfig = () => ({});
 
 export const useTheme = () => ({
-    colors: {},
-    space: {},
-    sizes: {},
-    fonts: {},
-    fontSizes: {},
-    fontWeights: {},
-    lineHeights: {},
-    letterSpacings: {},
-    borders: {},
-    borderWidths: {},
-    borderStyles: {},
-    shadows: {},
-    zIndices: {},
-    radii: {},
-    breakpoints: {},
-    transition: {},
+  colors: {},
+  space: {},
+  sizes: {},
+  fonts: {},
+  fontSizes: {},
+  fontWeights: {},
+  lineHeights: {},
+  letterSpacings: {},
+  borders: {},
+  borderWidths: {},
+  borderStyles: {},
+  shadows: {},
+  zIndices: {},
+  radii: {},
+  breakpoints: {},
+  transition: {},
 });
 
-// React utilities
 export const forwardRef = React.forwardRef;
 export const memo = React.memo;
 export const createContext = React.createContext;
