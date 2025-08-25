@@ -2,13 +2,13 @@
 
 import { contactInfo } from '@/data/general';
 import type { ContactInfoProps } from '@/types/components';
-import {
-  contactInfoGridStyles,
-  contactInfoColumnStyles,
-  contactInfoTextStyles,
-  contactInfoButtonsContainerStyles,
-  contactInfoButtonsListStyles,
-} from '@/styles/components/utility.styles';
+// import {
+//   contactInfoGridStyles,
+//   contactInfoColumnStyles,
+//   contactInfoTextStyles,
+//   contactInfoButtonsContainerStyles,
+//   contactInfoButtonsListStyles,
+// } from '@/styles/components/utility.styles';
 import {
   Box,
   Button,

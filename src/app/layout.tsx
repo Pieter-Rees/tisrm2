@@ -1,5 +1,6 @@
 import Footer from '@/components/footer';
 import Header from '@/components/header';
+import { DevPerformanceMonitor } from '@/components/performance-monitor';
 import { GoogleTagManager } from '@next/third-parties/google';
 import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
@@ -27,6 +28,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         style={{ backgroundColor: 'white', color: 'black' }}
       >
         <Providers>
+          <DevPerformanceMonitor />
           <Header />
           <main
             style={{

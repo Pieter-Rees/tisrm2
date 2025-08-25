@@ -1,4 +1,4 @@
-import type { FieldPath, FieldValues, UseFormReturn } from 'react-hook-form';
+import type { FieldPath, FieldValues, UseFormReturn, FieldErrors } from 'react-hook-form';
 
 // Re-export FieldValues for convenience
 export type { FieldValues };
@@ -42,21 +42,30 @@ export interface ContactFormData {
   readonly submittedAt?: string;
 }
 
-// Form state management
-export type FormErrors<T extends FieldValues> = Partial<Record<FieldPath<T>, string>>;
-
+// Form state management  
 export interface FormState<T extends FieldValues> {
   readonly data: T;
-  readonly errors: FormErrors<T>;
+  readonly errors: FieldErrors<T>;
   readonly isSubmitting: boolean;
   readonly isValid: boolean;
   readonly isDirty: boolean;
+  readonly isLoading: boolean;
+  readonly isSubmitted: boolean;
+  readonly isSubmitSuccessful: boolean;
+  readonly isValidating: boolean;
+  readonly submitCount: number;
+  readonly defaultValues?: T | undefined;
+  readonly disabled: boolean;
+  readonly dirtyFields: any;
+  readonly touchedFields: any;
+  readonly validatingFields: any;
+  readonly isReady: boolean;
   readonly currentStep?: number;
   readonly totalSteps?: number;
 }
 
 // Form hooks
-export type FormHookReturn<T extends FieldValues> = UseFormReturn<T> & {
+export type FormHookReturn<T extends FieldValues> = Omit<UseFormReturn<T>, 'formState'> & {
   readonly formState: FormState<T>;
   readonly isStepValid: (step: number) => boolean;
   readonly goToStep: (step: number) => void;
@@ -79,7 +88,7 @@ export interface ValidationRule {
     readonly value: number;
     readonly message: string;
   };
-  readonly validate?: (value: any) => boolean | string;
+  readonly validate?: (value: unknown) => boolean | string;
 }
 
 export type ValidationRules<T extends FieldValues> = Partial<Record<FieldPath<T>, ValidationRule>>;
@@ -89,7 +98,7 @@ export interface SubmissionResult {
   readonly success: boolean;
   readonly message?: string;
   readonly errors?: Record<string, string>;
-  readonly data?: any;
+  readonly data?: unknown;
 }
 
 export type SubmissionHandler<T extends FieldValues> = (data: T) => Promise<SubmissionResult>;

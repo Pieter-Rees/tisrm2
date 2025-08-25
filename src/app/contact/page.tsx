@@ -6,13 +6,13 @@ import { FadeInUp, ScaleIn, SlideInLeft } from '@/components/page-animation';
 import { UnifiedLayout } from '@/components/layout';
 import { PARAGRAPH_STYLES, SECTION_SPACING } from '@/constants/typography';
 import {
-  contactGridStyles,
-  contactGridItemStyles,
-  contactLogoContainerStyles,
-  contactImageContainerStyles,
-  contactImageStyles,
-  contactCtaSectionStyles,
-  contactCtaButtonStyles,
+  // contactGridStyles,
+  // contactGridItemStyles,
+  // contactLogoContainerStyles,
+  // contactImageContainerStyles,
+  // contactImageStyles,
+  // contactCtaSectionStyles,
+  // contactCtaButtonStyles,
 } from '@/styles/components/page.styles';
 import { Box, Button, Flex, Grid, GridItem, Text } from '@chakra-ui/react';
 import Image from 'next/image';

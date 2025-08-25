@@ -21,8 +21,8 @@ import { HEADING_STYLES } from '@/constants/typography';
 import { cn } from '@/lib/utils';
 import {
     layoutGridStyles,
-    contentAreaStyles,
-    contentHeaderStyles,
+    // contentAreaStyles,
+    // contentHeaderStyles,
     sidebarColumnStyles,
 } from '@/styles/components/layout.styles';
 import type { BaseComponentProps, ResponsiveValue } from '@/types/components';
@@ -57,7 +57,7 @@ const UnifiedLayout = memo<UnifiedLayoutProps>(({
     breadcrumb,
     showSidebar = true,
     maxWidth = 'auto',
-    columns = 6,
+    columns: _columns = 6,
     gap = '8',
     animated = true,
     padding = '8',

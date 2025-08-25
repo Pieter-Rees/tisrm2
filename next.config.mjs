@@ -14,6 +14,7 @@ const nextConfig = {
     remotePatterns: [],
     unoptimized: false,
   },
+  typedRoutes: true,
   experimental: {
     ...(process.env.TURBOPACK !== '1' && {
       optimizePackageImports: [
@@ -21,7 +22,6 @@ const nextConfig = {
         'framer-motion',
         'react-icons',
       ],
-      typedRoutes: true,
       optimizeCss: true,
       scrollRestoration: true,
     }),

@@ -130,7 +130,7 @@ export const createAnimationWithDelay = (
   visible: {
     ...animationVariants[variant].visible,
     transition: {
-      ...((animationVariants[variant].visible as any)?.transition || {}),
+      ...((animationVariants[variant].visible as { transition?: object })?.transition || {}),
       delay,
     },
   },

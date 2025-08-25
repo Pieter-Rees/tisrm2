@@ -23,7 +23,7 @@ export const capitalize = (str: string): string =>
 export const truncate = (str: string, length: number): string =>
   str.length <= length ? str : `${str.substring(0, length - 3)}...`;
 
-export const debounce = <T extends (...args: any[]) => any>(
+export const debounce = <T extends (...args: unknown[]) => unknown>(
   func: T,
   wait: number,
 ): ((...args: Parameters<T>) => void) => {

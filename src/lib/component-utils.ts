@@ -14,16 +14,16 @@ export const createResponsiveValue = <T>(
   ...overrides,
 });
 
-export const isResponsiveValue = <T>(value: any): value is ResponsiveValue<T> => {
+export const isResponsiveValue = <T>(value: unknown): value is ResponsiveValue<T> => {
   return typeof value === 'object' && value !== null && 'base' in value;
 };
 
 // Component validation helpers
-export const isReactElement = (element: any): element is ReactElement => {
+export const isReactElement = (element: unknown): element is ReactElement => {
   return isValidElement(element);
 };
 
-export const hasChildren = (children: any): boolean => {
+export const hasChildren = (children: unknown): boolean => {
   if (Array.isArray(children)) {
     return children.length > 0 && children.some(child => child !== null && child !== undefined);
   }
@@ -99,7 +99,7 @@ export const getOptimalImageSizes = (maxWidth?: number): string => {
 };
 
 // Performance helpers
-export const createMemoComponent = <T extends Record<string, any>>(
+export const createMemoComponent = <T extends Record<string, unknown>>(
   component: React.ComponentType<T>,
   displayName: string,
   compareProps?: (prevProps: T, nextProps: T) => boolean
@@ -137,16 +137,16 @@ export const getFieldHelperId = (fieldId: string): string => {
 };
 
 // Data transformation helpers
-export const filterDefinedValues = <T extends Record<string, any>>(obj: T): Partial<T> => {
+export const filterDefinedValues = <T extends Record<string, unknown>>(obj: T): Partial<T> => {
   return Object.entries(obj).reduce((acc, [key, value]) => {
     if (value !== undefined && value !== null) {
-      acc[key as keyof T] = value;
+      (acc as any)[key] = value;
     }
     return acc;
   }, {} as Partial<T>);
 };
 
-export const omitProps = <T extends Record<string, any>, K extends keyof T>(
+export const omitProps = <T extends Record<string, unknown>, K extends keyof T>(
   obj: T,
   keys: readonly K[]
 ): Omit<T, K> => {

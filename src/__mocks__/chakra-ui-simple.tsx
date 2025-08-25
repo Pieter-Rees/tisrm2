@@ -7,6 +7,8 @@ interface MockProps {
   [key: string]: any;
 }
 
+// Ensure all components are properly exported and available
+
 const createMockComponent = (tag: string, displayName: string) => {
   const Component = React.forwardRef<any, MockProps>((props: MockProps, ref) => {
     const {
@@ -20,6 +22,53 @@ const createMockComponent = (tag: string, displayName: string) => {
       alignItems,
       justifyContent,
       direction,
+      bg,
+      backgroundColor,
+      color,
+      p,
+      m,
+      px,
+      py,
+      mx,
+      my,
+      w,
+      h,
+      width,
+      height,
+      maxW,
+      maxH,
+      minW,
+      minH,
+      borderRadius,
+      boxShadow,
+      border,
+      borderColor,
+      borderWidth,
+      borderStyle,
+      position,
+      top,
+      left,
+      right,
+      bottom,
+      zIndex,
+      display,
+      visibility,
+      overflow,
+      transform,
+      transition,
+      fontSize,
+      fontWeight,
+      lineHeight,
+      textAlign,
+      cursor,
+      hideFrom,
+      showFrom,
+      hideBelow,
+      showBelow,
+      _hover,
+      _focus,
+      _active,
+      _disabled,
       ...rest
     } = props;
     const Element = as || tag;
@@ -29,24 +78,29 @@ const createMockComponent = (tag: string, displayName: string) => {
       return React.cloneElement(child, {
         ...rest,
         ...(child.props || {}),
-        variant,
         role: (child.props as any)?.role || (tag === 'button' ? 'button' : undefined),
       } as any);
     }
+
+    // Filter out Chakra-specific props and only pass valid HTML attributes
+    const validHtmlProps = Object.keys(rest).reduce((acc, key) => {
+      // Only include standard HTML attributes or data-* attributes
+      if (
+        key.startsWith('data-') ||
+        key.startsWith('aria-') ||
+        ['id', 'className', 'style', 'onClick', 'onSubmit', 'type', 'value', 'onChange', 'placeholder', 'disabled', 'required', 'name', 'role', 'tabIndex', 'href', 'target', 'rel', 'src', 'alt'].includes(key)
+      ) {
+        acc[key] = rest[key];
+      }
+      return acc;
+    }, {} as any);
 
     return React.createElement(
       Element,
       {
         ref,
-        variant,
-        size,
-        spacing,
-        gap,
-        alignItems,
-        justifyContent,
-        direction,
         role: tag === 'button' ? 'button' : undefined,
-        ...rest,
+        ...validHtmlProps,
       },
       children,
     );
@@ -55,32 +109,32 @@ const createMockComponent = (tag: string, displayName: string) => {
   return Component;
 };
 
-export const Box = createMockComponent('div', 'Box');
-export const Button = createMockComponent('button', 'Button');
-export const Text = createMockComponent('p', 'Text');
-export const Heading = createMockComponent('h3', 'Heading');
-export const HStack = createMockComponent('div', 'HStack');
-export const VStack = createMockComponent('div', 'VStack');
-export const Container = createMockComponent('div', 'Container');
-export const Badge = createMockComponent('span', 'Badge');
-export const Link = createMockComponent('a', 'Link');
-export const Image = createMockComponent('img', 'Image');
-export const Input = createMockComponent('input', 'Input');
-export const Flex = createMockComponent('div', 'Flex');
-export const SimpleGrid = createMockComponent('div', 'SimpleGrid');
-export const Stack = createMockComponent('div', 'Stack');
-export const Grid = createMockComponent('div', 'Grid');
-export const GridItem = createMockComponent('div', 'GridItem');
-export const Center = createMockComponent('div', 'Center');
-export const Spacer = createMockComponent('div', 'Spacer');
-export const Divider = createMockComponent('hr', 'Divider');
-export const Icon = createMockComponent('span', 'Icon');
-export const Tag = createMockComponent('span', 'Tag');
-export const Circle = createMockComponent('div', 'Circle');
-export const List = createMockComponent('ul', 'List');
-export const ListItem = createMockComponent('li', 'ListItem');
-export const OrderedList = createMockComponent('ol', 'OrderedList');
-export const UnorderedList = createMockComponent('ul', 'UnorderedList');
+const Box = createMockComponent('div', 'Box');
+const Button = createMockComponent('button', 'Button');
+const Text = createMockComponent('p', 'Text');
+const Heading = createMockComponent('h3', 'Heading');
+const HStack = createMockComponent('div', 'HStack');
+const VStack = createMockComponent('div', 'VStack');
+const Container = createMockComponent('div', 'Container');
+const Badge = createMockComponent('span', 'Badge');
+const Link = createMockComponent('a', 'Link');
+const Image = createMockComponent('img', 'Image');
+const Input = createMockComponent('input', 'Input');
+const Flex = createMockComponent('div', 'Flex');
+const SimpleGrid = createMockComponent('div', 'SimpleGrid');
+const Stack = createMockComponent('div', 'Stack');
+const Grid = createMockComponent('div', 'Grid');
+const GridItem = createMockComponent('div', 'GridItem');
+const Center = createMockComponent('div', 'Center');
+const Spacer = createMockComponent('div', 'Spacer');
+const Divider = createMockComponent('hr', 'Divider');
+const Icon = createMockComponent('span', 'Icon');
+const Tag = createMockComponent('span', 'Tag');
+const Circle = createMockComponent('div', 'Circle');
+const List = createMockComponent('ul', 'List');
+const ListItem = createMockComponent('li', 'ListItem');
+const OrderedList = createMockComponent('ol', 'OrderedList');
+const UnorderedList = createMockComponent('ul', 'UnorderedList');
 
 export const Field = {
   Root: createMockComponent('div', 'FieldRoot'),
@@ -168,3 +222,76 @@ export const Component = React.Component;
 export const PureComponent = React.PureComponent;
 export const createRef = React.createRef;
 export const version = React.version;
+
+// Default export for the entire module
+export default {
+  Box,
+  Button,
+  Text,
+  Heading,
+  HStack,
+  VStack,
+  Container,
+  Badge,
+  Link,
+  Image,
+  Input,
+  Flex,
+  SimpleGrid,
+  Stack,
+  Grid,
+  GridItem,
+  Center,
+  Spacer,
+  Divider,
+  Icon,
+  Tag,
+  Circle,
+  List,
+  ListItem,
+  OrderedList,
+  UnorderedList,
+  Field,
+  useDisclosure,
+  useToast,
+  useColorMode,
+  useBreakpointValue,
+  useMediaQuery,
+  useToken,
+  useStyleConfig,
+  useMultiStyleConfig,
+  useTheme,
+  forwardRef,
+  memo,
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+  useRef,
+  useImperativeHandle,
+  useLayoutEffect,
+  useReducer,
+  useId,
+  useDeferredValue,
+  useTransition,
+  useSyncExternalStore,
+  useInsertionEffect,
+  useDebugValue,
+  use,
+  startTransition,
+  createElement,
+  cloneElement,
+  isValidElement,
+  Children,
+  Fragment,
+  StrictMode,
+  Suspense,
+  Profiler,
+  lazy,
+  Component,
+  PureComponent,
+  createRef,
+  version,
+};

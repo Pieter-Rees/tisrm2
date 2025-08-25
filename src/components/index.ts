@@ -49,3 +49,4 @@ export * from './page-animation';
 // Optimization components
 export { default as LazyWrapper, withLazyWrapper, createOptimizedLazy } from './optimization/lazy-wrapper';
 export { default as OptimizedImage } from './optimization/optimized-image';
+export { default as PerformanceMonitor, DevPerformanceMonitor } from './performance-monitor';

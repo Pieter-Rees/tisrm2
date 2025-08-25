@@ -19,7 +19,7 @@ interface LazyWrapperProps extends BaseComponentProps {
 /**
  * Higher-order component for lazy loading with consistent error boundaries and loading states
  */
-export function withLazyWrapper<P extends Record<string, any>>(
+export function withLazyWrapper<P extends Record<string, unknown>>(
     loadingText = 'Loading component...',
     withErrorBoundary = true
 ) {
@@ -72,7 +72,7 @@ export function withLazyWrapper<P extends Record<string, any>>(
 export const createOptimizedLazy = {
     /** For sidebar components */
     sidebar: (
-        importFn: () => Promise<{ default: ComponentType<Record<string, any>> }>
+        importFn: () => Promise<{ default: ComponentType<Record<string, unknown>> }>
     ) => {
         const LazyComponent = lazy(importFn);
         return withLazyWrapper('Loading sidebar...', true)(LazyComponent);
@@ -80,7 +80,7 @@ export const createOptimizedLazy = {
 
     /** For page sections */
     section: (
-        importFn: () => Promise<{ default: ComponentType<Record<string, any>> }>,
+        importFn: () => Promise<{ default: ComponentType<Record<string, unknown>> }>,
         loadingText?: string
     ) => {
         const LazyComponent = lazy(importFn);
@@ -89,7 +89,7 @@ export const createOptimizedLazy = {
 
     /** For modals and overlays */
     modal: (
-        importFn: () => Promise<{ default: ComponentType<Record<string, any>> }>
+        importFn: () => Promise<{ default: ComponentType<Record<string, unknown>> }>
     ) => {
         const LazyComponent = lazy(importFn);
         return withLazyWrapper('Loading...', false)(LazyComponent);
@@ -97,7 +97,7 @@ export const createOptimizedLazy = {
 
     /** For charts and heavy components */
     heavy: (
-        importFn: () => Promise<{ default: ComponentType<Record<string, any>> }>,
+        importFn: () => Promise<{ default: ComponentType<Record<string, unknown>> }>,
         loadingText?: string
     ) => {
         const LazyComponent = lazy(importFn);

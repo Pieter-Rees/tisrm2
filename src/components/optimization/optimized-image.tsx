@@ -4,7 +4,7 @@ import { memo, useState } from 'react';
 import Image, { type ImageProps } from 'next/image';
 import { Box, Skeleton } from '@chakra-ui/react';
 import { getOptimalImageSizes } from '@/lib/component-utils';
-import type { BaseComponentProps } from '@/types/components';
+// import type { BaseComponentProps } from '@/types/components';
 
 interface OptimizedImageProps extends Omit<ImageProps, 'className'> {
     className?: string;

@@ -15,7 +15,7 @@ import { useForm } from 'react-hook-form';
 import { BsCheck2Circle, BsExclamationTriangle } from 'react-icons/bs';
 
 import { Field } from '@/components/ui/field';
-import { UI_CONSTANTS } from '@/constants/app';
+// import { UI_CONSTANTS } from '@/constants/app';
 import { isValidDutchPostalCode, isValidEmail } from '@/lib/utils';
 import type { OfferteFormData } from '@/types/forms';
 

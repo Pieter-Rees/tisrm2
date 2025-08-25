@@ -2,7 +2,7 @@ import React from 'react';
 
 // Simple mock for react-icons components
 const createIconMock = (name: string) => {
-    return React.forwardRef<SVGSVGElement, any>(({ size, ...props }, ref) => (
+    const IconComponent = React.forwardRef<SVGSVGElement, any>(({ size, ...props }, ref) => (
         <svg
             ref={ref}
             data-testid={`icon-${name}`}
@@ -16,6 +16,8 @@ const createIconMock = (name: string) => {
             <title>{name}</title>
         </svg>
     ));
+    IconComponent.displayName = name;
+    return IconComponent;
 };
 
 // Export all icons as named exports

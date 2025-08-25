@@ -10,7 +10,7 @@ import {
 } from '@/styles/components/action.styles';
 
 export default function CallUs() {
-  const { content, icon, heading, text } = actionVariants.callUs;
+  const { content } = actionVariants.callUs;
 
   return (
     <Button asChild {...actionButtonBaseStyles}>

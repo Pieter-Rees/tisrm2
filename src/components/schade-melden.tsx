@@ -9,7 +9,7 @@ import {
 } from '@/styles/components/action.styles';
 
 export default function SchadeMelden() {
-  const { content, heading } = actionVariants.schadeMelden;
+  const { content } = actionVariants.schadeMelden;
 
   return (
     <Button asChild {...actionButtonBaseStyles}>

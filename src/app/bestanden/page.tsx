@@ -2,7 +2,7 @@
 
 import { Box } from '@chakra-ui/react';
 import Card from '@/components/card';
-import AnimatedGrid from '@/components/common/animated-grid';
+
 import { UnifiedLayout } from '@/components/layout';
 import { AVAILABLE_DOCUMENTS } from '@/data/content';
 

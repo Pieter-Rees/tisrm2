@@ -5,11 +5,11 @@ import { Box, HStack } from '@chakra-ui/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
-import {
-  breadcrumbContainerStyles,
-  getBreadcrumbItemStyles,
-  breadcrumbSeparatorStyles,
-} from '@/styles/components/utility.styles';
+// import {
+//   breadcrumbContainerStyles,
+//   getBreadcrumbItemStyles,
+//   breadcrumbSeparatorStyles,
+// } from '@/styles/components/utility.styles';
 
 export default function Breadcrumb({
   separator = '>',

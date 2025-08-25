@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom';
+import React from 'react';
 
 // Mock IntersectionObserver
 global.IntersectionObserver = class IntersectionObserver {
@@ -73,4 +74,37 @@ jest.mock('next/navigation', () => ({
   usePathname: () => '/',
 }));
 
-// Chakra UI and react-icons are mocked via moduleNameMapper in jest.config.js
+// Global console suppression for tests (optional - comment out if you want to see console output)
+const originalConsoleError = console.error;
+const originalConsoleWarn = console.warn;
+
+beforeEach(() => {
+  // Suppress React warnings in tests unless they're critical
+  console.error = (...args) => {
+    if (
+      typeof args[0] === 'string' &&
+      (args[0].includes('Warning: React.forwardRef') ||
+       args[0].includes('Warning: Function components cannot be given refs') ||
+       args[0].includes('Warning: Each child in a list should have a unique "key" prop'))
+    ) {
+      return;
+    }
+    originalConsoleError.call(console, ...args);
+  };
+  
+  console.warn = (...args) => {
+    if (
+      typeof args[0] === 'string' &&
+      (args[0].includes('componentWillReceiveProps') ||
+       args[0].includes('componentWillUpdate'))
+    ) {
+      return;
+    }
+    originalConsoleError.call(console, ...args);
+  };
+});
+
+afterEach(() => {
+  console.error = originalConsoleError;
+  console.warn = originalConsoleWarn;
+});

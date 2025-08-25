@@ -3,9 +3,9 @@ import React from 'react';
 
 // Create a simple mock component that mimics StarList behavior
 const MockStarList = ({ listItems }: { listItems: string[] }) => (
-    <ul role="list">
+    <ul>
         {listItems.map((item, index) => (
-            <li key={index} role="listitem">
+            <li key={index}>
                 <svg data-testid={`icon-BsStarFill`} width="16px" height="16px">
                     <title>BsStarFill</title>
                 </svg>

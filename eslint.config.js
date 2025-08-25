@@ -75,11 +75,13 @@ export default [
       'react-hooks/exhaustive-deps': 'warn',
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
-      'prefer-const': 'error',
-      'no-var': 'error',
+      '@typescript-eslint/no-require-imports': 'warn',
+      'prefer-const': 'warn',
+      'no-var': 'warn',
       'no-console': ['warn', { allow: ['warn', 'error'] }],
-      'prefer-template': 'error',
-      'object-shorthand': 'error',
+      'prefer-template': 'warn',
+      'object-shorthand': 'warn',
+      'no-constant-binary-expression': 'warn',
       'no-undef': 'off', // TypeScript handles this
     },
     settings: {

@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, type FieldPath, type DefaultValues, type UseFormReturn, type SubmitHandler } from 'react-hook-form';
 import { useLocalStorage } from './use-local-storage';
 import type { 
   FieldValues, 
@@ -34,7 +34,7 @@ export function useMultiStepForm<T extends FieldValues>({
 
   const mergedDefaults = persistData ? { ...defaultValues, ...persistedData } : defaultValues;
   const form = useForm<T>({
-    defaultValues: mergedDefaults as any,
+    defaultValues: mergedDefaults as DefaultValues<T>,
     mode: 'onChange',
   });
 
@@ -58,7 +58,7 @@ export function useMultiStepForm<T extends FieldValues>({
     
     // Check if all required fields in this step are filled and valid
     return stepFields.every(field => {
-      const value = getValues(field as any);
+      const value = getValues(field as FieldPath<T>);
       const hasError = currentErrors[field as keyof typeof currentErrors];
       const isEmpty = value === '' || value === null || value === undefined;
       
@@ -78,7 +78,7 @@ export function useMultiStepForm<T extends FieldValues>({
     if (!stepConfig) return;
 
     // Trigger validation for current step fields
-    const isValid = await trigger(stepConfig.fields as any);
+    const isValid = await trigger(stepConfig.fields as FieldPath<T>[]);
     
     if (isValid && currentStep < config.steps.length - 1) {
       setCurrentStep(prev => prev + 1);
@@ -107,20 +107,29 @@ export function useMultiStepForm<T extends FieldValues>({
 
   // Enhanced form state
   const enhancedFormState = {
-    ...formState,
     data: getValues(),
     errors: formState.errors,
     isSubmitting,
     isValid: formState.isValid,
     isDirty: formState.isDirty,
+    isLoading: formState.isLoading,
+    isSubmitted: formState.isSubmitted,
+    isSubmitSuccessful: formState.isSubmitSuccessful,
+    isValidating: formState.isValidating,
+    submitCount: formState.submitCount,
+    defaultValues: formState.defaultValues as T | undefined,
+    disabled: formState.disabled,
+    dirtyFields: formState.dirtyFields,
+    touchedFields: formState.touchedFields,
+    validatingFields: formState.validatingFields,
+    isReady: true,
     currentStep,
     totalSteps: config.steps.length,
-  } as any;
+  };
 
   return {
     ...form,
     formState: enhancedFormState,
-    handleSubmit: form.handleSubmit(handleFormSubmit) as any,
     isStepValid,
     goToStep,
     nextStep,

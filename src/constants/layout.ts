@@ -1,4 +1,4 @@
-import type { ResponsiveValue } from '@/types/components';
+// import type { ResponsiveValue } from '@/types/components';
 
 /**
  * Consolidated layout constants to reduce duplication

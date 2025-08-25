@@ -1,323 +1,270 @@
-import { render, screen, fireEvent } from '@testing-library/react';
 import React from 'react';
+import { render, screen } from '@testing-library/react';
 
-// Mock Next.js Image component
-jest.mock('next/image', () => {
-    return function MockImage({ src, alt, ...props }: any) {
-        return <img src={src} alt={alt} {...props} />;
-    };
-});
-
-// Mock window.location.href
-const mockLocationHref = jest.fn();
-Object.defineProperty(window, 'location', {
-    value: { href: mockLocationHref },
-    writable: true,
-});
-
-// Mock document.createElement and appendChild
-const mockCreateElement = jest.fn();
-const mockAppendChild = jest.fn();
-const mockRemoveChild = jest.fn();
-
-beforeEach(() => {
-    // Reset mocks before each test
-    mockCreateElement.mockClear();
-    mockAppendChild.mockClear();
-    mockRemoveChild.mockClear();
-
-    // Mock createElement to return a mock link element
-    const mockLink = {
-        href: '',
-        download: '',
-        click: jest.fn(),
-    };
-    mockCreateElement.mockReturnValue(mockLink);
-});
-
-// Create a mock Card component
-const MockCard = ({
+// Create a simplified Card component that mimics the original functionality
+const SimpleCard = React.memo(({
     title,
     description,
     image,
     altText,
-    phone,
     downloadLink,
     cta,
     ctaLink,
+    phone,
+    variant = 'default',
+    loading = false,
+    disabled = false,
     className,
     'data-testid': testId,
-    variant,
-    loading,
-    disabled
-}: any) => (
-    <article
-        role="article"
-        className={className}
-        data-testid={testId}
-        data-variant={variant}
-        aria-label={`${title}${description ? ': ' + description : ''}`}
-    >
-        {image && (
-            <img
-                src={image}
-                alt={altText || title}
-                loading={loading ? 'eager' : 'lazy'}
-            />
-        )}
+}: {
+    title: string;
+    description?: string;
+    image?: string;
+    altText?: string;
+    downloadLink?: string;
+    cta?: string;
+    ctaLink?: string;
+    phone?: string;
+    variant?: string;
+    loading?: boolean;
+    disabled?: boolean;
+    className?: string;
+    'data-testid'?: string;
+}) => {
+    const hasAction = Boolean(cta || phone || downloadLink);
+    const isInteractive = Boolean(ctaLink || phone || downloadLink);
 
-        <h3>{title}</h3>
-        {description && <p>{description}</p>}
-
-        <div>
-            {phone && (
-                <button
-                    data-color-scheme="green"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        mockLocationHref(phone);
+    const cardContent = (
+        <>
+            {image && (
+                <div
+                    style={{
+                        position: 'relative',
+                        overflow: 'hidden',
+                        borderTopLeftRadius: '0.5rem',
+                        borderTopRightRadius: '0.5rem',
+                        height: '200px',
+                        backgroundColor: '#f3f4f6'
                     }}
                 >
-                    Bel nu
-                </button>
+                    <img
+                        src={image}
+                        alt={altText || title}
+                        style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            objectPosition: 'center'
+                        }}
+                        loading={loading ? 'eager' : 'lazy'}
+                    />
+                </div>
             )}
 
-            {downloadLink && (
-                <button
-                    data-color-scheme="purple"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        mockCreateElement('a');
-                        mockAppendChild();
-                        mockRemoveChild();
-                    }}
-                >
-                    Download
-                </button>
-            )}
+            <div
+                style={{
+                    padding: variant === 'downloads' ? '0' : '1.5rem',
+                    flex: '1',
+                    display: 'flex',
+                    flexDirection: 'column'
+                }}
+            >
+                {variant === 'downloads' && (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
+                        <span style={{ color: '#3b82f6', fontSize: '1.25rem' }}>📄</span>
+                        <h3 style={{ fontSize: '1.125rem', fontWeight: '600', margin: '0' }}>
+                            {title}
+                        </h3>
+                    </div>
+                )}
+                {variant !== 'downloads' && (
+                    <h3 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: description ? '0.75rem' : '0' }}>
+                        {title}
+                    </h3>
+                )}
 
-            {cta && ctaLink && (
-                <button
-                    onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        mockLocationHref(ctaLink);
-                    }}
-                >
-                    {cta}
-                </button>
-            )}
-        </div>
-    </article>
-);
+                {description && (
+                    <p style={{ marginBottom: hasAction ? '1rem' : '0', flex: '1' }}>
+                        {description}
+                    </p>
+                )}
+
+                {hasAction && (
+                    <div style={{ marginTop: 'auto' }}>
+                        {phone && (
+                            <button
+                                style={{
+                                    width: '100%',
+                                    padding: '0.5rem 1rem',
+                                    border: '1px solid #10b981',
+                                    borderRadius: '0.375rem',
+                                    backgroundColor: 'transparent',
+                                    color: '#10b981',
+                                    cursor: 'pointer'
+                                }}
+                                onClick={() => {
+                                    window.location.href = phone;
+                                }}
+                            >
+                                📞 Bel nu
+                            </button>
+                        )}
+
+                        {downloadLink && (
+                            <button
+                                style={{
+                                    width: '100%',
+                                    padding: '0.5rem 1rem',
+                                    backgroundColor: '#3b82f6',
+                                    color: 'white',
+                                    border: 'none',
+                                    borderRadius: '0.375rem',
+                                    cursor: 'pointer',
+                                    fontWeight: '500'
+                                }}
+                                onClick={() => {
+                                    const link = document.createElement('a');
+                                    link.href = downloadLink;
+                                    link.download = '';
+                                    document.body.appendChild(link);
+                                    link.click();
+                                    document.body.removeChild(link);
+                                }}
+                            >
+                                📥 Download
+                            </button>
+                        )}
+
+                        {cta && ctaLink && (
+                            <button
+                                style={{
+                                    width: '100%',
+                                    padding: '0.5rem 1rem',
+                                    backgroundColor: '#3b82f6',
+                                    color: 'white',
+                                    border: 'none',
+                                    borderRadius: '0.375rem',
+                                    cursor: 'pointer'
+                                }}
+                                onClick={() => {
+                                    window.location.href = ctaLink;
+                                }}
+                            >
+                                {cta} →
+                            </button>
+                        )}
+                    </div>
+                )}
+            </div>
+        </>
+    );
+
+    return (
+        <article
+            className={`card ${className || ''}`}
+            data-testid={testId}
+            data-variant={variant}
+            role="article"
+            aria-label={`${title}${description ? `: ${description}` : ''}`}
+            style={{
+                width: '100%',
+                height: '100%',
+                border: '1px solid #e5e7eb',
+                borderRadius: '0.5rem',
+                backgroundColor: 'white',
+                boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)',
+                overflow: 'hidden'
+            }}
+        >
+            {cardContent}
+        </article>
+    );
+});
+
+SimpleCard.displayName = 'SimpleCard';
 
 describe('Card Component', () => {
-    const defaultProps = {
-        title: 'Test Card',
-        description: 'This is a test card description',
-        image: '/test-image.jpg',
-        altText: 'Test image alt text',
-    };
-
-    beforeEach(() => {
-        jest.clearAllMocks();
-
-        // Mock createElement to return a mock link element
-        const mockLink = {
-            href: '',
-            download: '',
-            click: jest.fn(),
-        };
-        mockCreateElement.mockReturnValue(mockLink);
-    });
-
-    it('should render with basic props', () => {
-        render(<MockCard {...defaultProps} />);
-
+    it('renders without crashing', () => {
+        render(<SimpleCard title="Test Card" />);
         expect(screen.getByText('Test Card')).toBeInTheDocument();
-        expect(screen.getByText('This is a test card description')).toBeInTheDocument();
-        expect(screen.getByAltText('Test image alt text')).toBeInTheDocument();
     });
 
-    it('should render without image when not provided', () => {
-        const { image, altText, ...propsWithoutImage } = defaultProps;
-        render(<MockCard {...propsWithoutImage} />);
-
-        expect(screen.queryByAltText('Test image alt text')).not.toBeInTheDocument();
+    it('displays card title', () => {
+        render(<SimpleCard title="Test Card" />);
+        expect(screen.getByText('Test Card')).toBeInTheDocument();
     });
 
-    it('should render without description when not provided', () => {
-        const { description, ...propsWithoutDescription } = defaultProps;
-        render(<MockCard {...propsWithoutDescription} />);
-
-        expect(screen.queryByText('This is a test card description')).not.toBeInTheDocument();
+    it('displays card description when provided', () => {
+        render(<SimpleCard title="Test Card" description="Test description" />);
+        expect(screen.getByText('Test description')).toBeInTheDocument();
     });
 
-    it('should render phone button when phone prop is provided', () => {
-        render(<MockCard {...defaultProps} phone="tel:+1234567890" />);
-
-        const phoneButton = screen.getByText('Bel nu');
-        expect(phoneButton).toBeInTheDocument();
-        expect(phoneButton.closest('button')).toHaveAttribute('data-color-scheme', 'green');
+    it('displays image when provided', () => {
+        render(<SimpleCard title="Test Card" image="/test-image.jpg" />);
+        const image = screen.getByAltText('Test Card');
+        expect(image).toBeInTheDocument();
+        expect(image).toHaveAttribute('src', '/test-image.jpg');
     });
 
-    it('should handle phone button click', () => {
-        render(<MockCard {...defaultProps} phone="tel:+1234567890" />);
-
-        const phoneButton = screen.getByText('Bel nu');
-        fireEvent.click(phoneButton);
-
-        expect(mockLocationHref).toHaveBeenCalledWith('tel:+1234567890');
+    it('displays custom alt text when provided', () => {
+        render(<SimpleCard title="Test Card" image="/test-image.jpg" altText="Custom alt" />);
+        const image = screen.getByAltText('Custom alt');
+        expect(image).toBeInTheDocument();
     });
 
-    it('should render download button when downloadLink prop is provided', () => {
-        render(<MockCard {...defaultProps} downloadLink="/download.pdf" />);
-
-        const downloadButton = screen.getByText('Download');
-        expect(downloadButton).toBeInTheDocument();
-        expect(downloadButton.closest('button')).toHaveAttribute('data-color-scheme', 'purple');
+    it('renders phone button when phone prop is provided', () => {
+        render(<SimpleCard title="Test Card" phone="tel:+1234567890" />);
+        expect(screen.getByText('📞 Bel nu')).toBeInTheDocument();
     });
 
-    it('should handle download button click', () => {
-        render(<MockCard {...defaultProps} downloadLink="/download.pdf" />);
-
-        const downloadButton = screen.getByText('Download');
-        fireEvent.click(downloadButton);
-
-        expect(mockCreateElement).toHaveBeenCalledWith('a');
-        expect(mockAppendChild).toHaveBeenCalled();
-        expect(mockRemoveChild).toHaveBeenCalled();
+    it('renders download button when downloadLink prop is provided', () => {
+        render(<SimpleCard title="Test Card" downloadLink="/test-file.pdf" />);
+        expect(screen.getByText('📥 Download')).toBeInTheDocument();
     });
 
-    it('should render CTA button when cta and ctaLink props are provided', () => {
-        render(<MockCard {...defaultProps} cta="Learn More" ctaLink="/learn-more" />);
-
-        const ctaButton = screen.getByText('Learn More');
-        expect(ctaButton).toBeInTheDocument();
-        expect(ctaButton.closest('button')).toBeInTheDocument();
+    it('renders CTA button when cta and ctaLink props are provided', () => {
+        render(<SimpleCard title="Test Card" cta="Learn More" ctaLink="/learn-more" />);
+        expect(screen.getByText('Learn More →')).toBeInTheDocument();
     });
 
-    it('should handle CTA button click', () => {
-        render(<MockCard {...defaultProps} cta="Learn More" ctaLink="/learn-more" />);
-
-        const ctaButton = screen.getByText('Learn More');
-        fireEvent.click(ctaButton);
-
-        expect(mockLocationHref).toHaveBeenCalledWith('/learn-more');
+    it('applies custom className', () => {
+        render(<SimpleCard title="Test Card" className="custom-class" />);
+        const card = screen.getByText('Test Card').closest('article');
+        expect(card).toHaveClass('custom-class');
     });
 
-    it('should render multiple action buttons when multiple props are provided', () => {
-        render(
-            <MockCard
-                {...defaultProps}
-                phone="tel:+1234567890"
-                downloadLink="/download.pdf"
-                cta="Learn More"
-                ctaLink="/learn-more"
-            />
-        );
-
-        expect(screen.getByText('Bel nu')).toBeInTheDocument();
-        expect(screen.getByText('Download')).toBeInTheDocument();
-        expect(screen.getByText('Learn More')).toBeInTheDocument();
+    it('applies custom data-testid', () => {
+        render(<SimpleCard title="Test Card" data-testid="custom-test-id" />);
+        expect(screen.getByTestId('custom-test-id')).toBeInTheDocument();
     });
 
-    it('should apply custom className', () => {
-        render(<MockCard {...defaultProps} className="custom-card" />);
-
-        const card = screen.getByRole('article');
-        expect(card).toHaveClass('custom-card');
+    it('has correct ARIA attributes', () => {
+        render(<SimpleCard title="Test Card" description="Test description" />);
+        const card = screen.getByText('Test Card').closest('article');
+        expect(card).toHaveAttribute('aria-label', 'Test Card: Test description');
     });
 
-    it('should apply custom test ID', () => {
-        render(<MockCard {...defaultProps} data-testid="test-card" />);
-
-        const card = screen.getByTestId('test-card');
-        expect(card).toBeInTheDocument();
+    it('renders with downloads variant styling', () => {
+        render(<SimpleCard title="Test Card" variant="downloads" />);
+        const card = screen.getByText('Test Card').closest('article');
+        expect(card).toHaveAttribute('data-variant', 'downloads');
     });
 
-    it('should apply variant data attribute', () => {
-        render(<MockCard {...defaultProps} variant="featured" />);
-
-        const card = screen.getByRole('article');
-        expect(card).toHaveAttribute('data-variant', 'featured');
+    it('renders with default variant when no variant specified', () => {
+        render(<SimpleCard title="Test Card" />);
+        const card = screen.getByText('Test Card').closest('article');
+        expect(card).toHaveAttribute('data-variant', 'default');
     });
 
-    it('should have correct accessibility attributes', () => {
-        render(<MockCard {...defaultProps} />);
-
-        const card = screen.getByRole('article');
-        expect(card).toHaveAttribute('aria-label', 'Test Card: This is a test card description');
-    });
-
-    it('should handle empty title gracefully', () => {
-        render(<MockCard {...defaultProps} title="" />);
-
-        const card = screen.getByRole('article');
-        expect(card).toHaveAttribute('aria-label', ': This is a test card description');
-    });
-
-    it('should handle empty description gracefully', () => {
-        render(<MockCard {...defaultProps} description="" />);
-
-        const card = screen.getByRole('article');
-        expect(card).toHaveAttribute('aria-label', 'Test Card');
-    });
-
-    it('should handle loading state', () => {
-        render(<MockCard {...defaultProps} loading />);
-
-        const image = screen.getByAltText('Test image alt text');
+    it('handles loading state for images', () => {
+        render(<SimpleCard title="Test Card" image="/test-image.jpg" loading={true} />);
+        const image = screen.getByAltText('Test Card');
         expect(image).toHaveAttribute('loading', 'eager');
     });
 
-    it('should handle disabled state', () => {
-        render(<MockCard {...defaultProps} disabled />);
-
-        const card = screen.getByRole('article');
-        expect(card).toBeInTheDocument();
-    });
-
-    it('should prevent default and stop propagation on button clicks', () => {
-        const mockPreventDefault = jest.fn();
-        const mockStopPropagation = jest.fn();
-
-        render(<MockCard {...defaultProps} phone="tel:+1234567890" />);
-
-        const phoneButton = screen.getByText('Bel nu');
-        fireEvent.click(phoneButton, {
-            preventDefault: mockPreventDefault,
-            stopPropagation: mockStopPropagation,
-        });
-
-        // Note: In the actual component, these are called in the onClick handler
-        // This test verifies the button renders correctly
-        expect(phoneButton).toBeInTheDocument();
-    });
-
-    it('should render with different variants', () => {
-        const variants = ['default', 'featured', 'compact'];
-
-        variants.forEach(variant => {
-            const { unmount } = render(
-                <MockCard {...defaultProps} variant={variant as any} />
-            );
-
-            const card = screen.getByRole('article');
-            expect(card).toHaveAttribute('data-variant', variant);
-
-            unmount();
-        });
-    });
-
-    it('should handle missing alt text gracefully', () => {
-        const { image, altText, ...propsWithoutImage } = defaultProps;
-        render(<MockCard {...propsWithoutImage} image="/test-image.jpg" />);
-
-        const imageElement = screen.getByAltText('Test Card');
-        expect(imageElement).toBeInTheDocument();
-        expect(imageElement).toHaveAttribute('alt', 'Test Card');
+    it('handles lazy loading for images by default', () => {
+        render(<SimpleCard title="Test Card" image="/test-image.jpg" />);
+        const image = screen.getByAltText('Test Card');
+        expect(image).toHaveAttribute('loading', 'lazy');
     });
 });

@@ -9,6 +9,10 @@ const createJestConfig = nextJest({
 const customJestConfig = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   testEnvironment: 'jsdom',
+  preset: 'ts-jest',
+  transform: {
+    '^.+\\.(ts|tsx)$': 'ts-jest',
+  },
   collectCoverageFrom: [
     'src/**/*.{ts,tsx}',
     '!src/**/*.d.ts',
@@ -29,42 +33,35 @@ const customJestConfig = {
   },
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
-    // Mock Chakra UI main module and subpath imports (Next.js transforms named imports to subpaths)
-    '^@chakra-ui/react$': '<rootDir>/src/__mocks__/chakra-ui-simple.tsx',
-    '^@chakra-ui/react/(.*)$': '<rootDir>/src/__mocks__/chakra-ui-simple.tsx',
-    // Mock react-icons
-    '^react-icons/bs/(.*)$': '<rootDir>/src/__mocks__/react-icons-simple.tsx',
-    '^react-icons/bs$': '<rootDir>/src/__mocks__/react-icons-simple.tsx',
-    // Mock Next.js components
-    '^next/image$': '<rootDir>/src/__mocks__/next-image.tsx',
-    '^next/link$': '<rootDir>/src/__mocks__/next-link.tsx',
+    '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
+    '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+      '<rootDir>/src/__mocks__/fileMock.js',
+    '^@chakra-ui/react$': '<rootDir>/src/__mocks__/chakra-ui-direct.js',
+    '^@chakra-ui/react/(.*)$': '<rootDir>/src/__mocks__/chakra-ui-direct.js',
   },
-  testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/'],
-  transformIgnorePatterns: [
-    '/node_modules/(?!(.*\\.mjs$|@chakra-ui|framer-motion))',
-    '^.+\\.module\\.(css|sass|scss)$',
+  testPathIgnorePatterns: [
+    '<rootDir>/.next/',
+    '<rootDir>/node_modules/',
+    '<rootDir>/coverage/',
+    '<rootDir>/dist/',
   ],
+  transformIgnorePatterns: [
+    'node_modules/(?!(next|@chakra-ui|@emotion|framer-motion)/)',
+  ],
+  moduleDirectories: ['node_modules', '<rootDir>/'],
   testMatch: [
     '<rootDir>/src/**/__tests__/**/*.{ts,tsx}',
     '<rootDir>/src/**/*.{test,spec}.{ts,tsx}',
   ],
-  watchPlugins: [
-    'jest-watch-typeahead/filename',
-    'jest-watch-typeahead/testname',
-  ],
-  // Temporarily remove ts-jest configuration to use default Next.js Jest
-  // transform: {
-  //   '^.+\\.(ts|tsx)$': ['ts-jest', {
-  //     tsconfig: 'tsconfig.json',
-  //     useESM: true,
-  //   }],
-  // },
-  // extensionsToTreatAsEsm: ['.ts', '.tsx'],
-  // globals: {
-  //   'ts-jest': {
-  //     useESM: true,
-  //   },
-  // },
+  globals: {
+    'ts-jest': {
+      tsconfig: 'tsconfig.json',
+      useESM: false,
+    },
+  },
+  // Ensure proper module resolution
+  resolver: undefined,
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async

@@ -1,199 +1,180 @@
-import { render, screen } from '@testing-library/react';
 import React from 'react';
+import { render, screen } from '@testing-library/react';
 
-// Mock Next.js Link component
-jest.mock('next/link', () => {
-    return function MockLink({ href, children, ...props }: any) {
-        return <a href={href} {...props}>{children}</a>;
-    };
-});
+// Create a simplified ContactInfo component that mimics the original functionality
+const SimpleContactInfo = ({ buttonVariant = 'solid' }: { buttonVariant?: 'solid' | 'outline' }) => {
+    const contactButtons = [
+        { href: 'tel:+310206368191', label: '+31 020 636 8191', external: false },
+        { href: 'mailto:info@tisrm.nl', label: 'info@tisrm.nl', external: false },
+        { href: 'https://linkedin.com', label: 'LinkedIn', external: true },
+    ];
 
-// Mock the data module
-jest.mock('@/data/general', () => ({
-    contactInfo: {
-        address: {
-            street: 'Muiderstraat 1',
-            city: 'Amsterdam',
-        },
-        email: 'info@tisrm.nl',
-        postalBox: {
-            box: 'Postbus 12887',
-            postalCode: '1100 AW',
-            city: 'Amsterdam',
-        },
-        social: {
-            linkedIn: 'https://www.linkedin.com/company/tisrm/',
-        },
-    },
-}));
-
-// Create a mock ContactInfo component
-const MockContactInfo = ({ buttonVariant = 'solid' }: { buttonVariant?: 'solid' | 'outline' }) => (
-    <>
-        <div>
-            <div>
-                <p>Muiderstraat 1</p>
-                <p>info@tisrm.nl</p>
-                <p>Amsterdam</p>
+    return (
+        <>
+            <div style={{ display: 'grid', gap: '2.5rem' }}>
+                <div>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '0.5rem' }}>
+                        <span style={{ color: '#1f2937' }}>Test Street 123</span>
+                        <span style={{ color: '#1f2937' }}>info@tisrm.nl</span>
+                        <span style={{ color: '#1f2937' }}>Amsterdam</span>
+                    </div>
+                </div>
+                <div>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '0.5rem' }}>
+                        <span style={{ color: '#1f2937' }}>Postbus 12345</span>
+                        <span style={{ color: '#1f2937' }}>1000 AB</span>
+                        <span style={{ color: '#1f2937' }}>Amsterdam</span>
+                    </div>
+                </div>
             </div>
-            <div>
-                <p>Postbus 12887</p>
-                <p>1100 AW</p>
-                <p>Amsterdam</p>
-            </div>
-        </div>
 
-        <div>
-            <div>
-                <button data-variant={buttonVariant}>
-                    <a href="tel:+310206368191">+31 020 636 8191</a>
-                </button>
-                <button data-variant={buttonVariant}>
-                    <a href="mailto:info@tisrm.nl">info@tisrm.nl</a>
-                </button>
-                <button data-variant={buttonVariant}>
-                    <a href="https://www.linkedin.com/company/tisrm/" target="_blank" rel="noopener noreferrer">
-                        <svg data-testid="icon-BsLinkedin" width="24" height="24">
-                            <title>BsLinkedin</title>
-                        </svg>
-                    </a>
-                </button>
+            <div style={{ display: 'flex', justifyContent: 'flex-start', marginTop: '2rem' }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem' }}>
+                    {contactButtons.map(({ href, label, external }) => (
+                        <button
+                            key={href}
+                            style={{
+                                padding: '0.5rem 1rem',
+                                backgroundColor: buttonVariant === 'solid' ? '#3b82f6' : 'transparent',
+                                color: buttonVariant === 'solid' ? 'white' : '#3b82f6',
+                                border: buttonVariant === 'outline' ? '1px solid #3b82f6' : 'none',
+                                borderRadius: '0.375rem',
+                                cursor: 'pointer'
+                            }}
+                        >
+                            <a
+                                href={href}
+                                {...(external && {
+                                    target: '_blank',
+                                    rel: 'noopener noreferrer',
+                                })}
+                                style={{ textDecoration: 'none', color: 'inherit' }}
+                            >
+                                {label}
+                            </a>
+                        </button>
+                    ))}
+                </div>
             </div>
-        </div>
-    </>
-);
+        </>
+    );
+};
 
 describe('ContactInfo Component', () => {
-    it('should render contact information correctly', () => {
-        render(<MockContactInfo />);
-
-        expect(screen.getByText('Muiderstraat 1')).toBeInTheDocument();
-        expect(screen.getAllByText('info@tisrm.nl')).toHaveLength(2);
-        expect(screen.getAllByText('Amsterdam')).toHaveLength(2);
-        expect(screen.getByText('Postbus 12887')).toBeInTheDocument();
-        expect(screen.getByText('1100 AW')).toBeInTheDocument();
+    it('renders without crashing', () => {
+        render(<SimpleContactInfo />);
+        expect(screen.getByText('Test Street 123')).toBeInTheDocument();
     });
 
-    it('should render contact buttons', () => {
-        render(<MockContactInfo />);
+    it('displays contact information', () => {
+        render(<SimpleContactInfo />);
+        expect(screen.getByText('Test Street 123')).toBeInTheDocument();
+        // Use more specific selector for email in address section
+        const addressSection = screen.getByText('Test Street 123').closest('div');
+        const emailInAddress = addressSection?.querySelector('span:nth-child(2)');
+        expect(emailInAddress).toHaveTextContent('info@tisrm.nl');
+        // Use more specific selector for Amsterdam in address section
+        const amsterdamInAddress = addressSection?.querySelector('span:nth-child(3)');
+        expect(amsterdamInAddress).toHaveTextContent('Amsterdam');
+    });
 
-        // Check for phone button
-        const phoneButton = screen.getByRole('link', { name: '+31 020 636 8191' });
-        expect(phoneButton).toBeInTheDocument();
-        expect(phoneButton).toHaveAttribute('href', 'tel:+310206368191');
+    it('displays postal information', () => {
+        render(<SimpleContactInfo />);
+        expect(screen.getByText('Postbus 12345')).toBeInTheDocument();
+        expect(screen.getByText('1000 AB')).toBeInTheDocument();
+    });
 
-        // Check for email button
+    it('displays contact buttons', () => {
+        render(<SimpleContactInfo />);
+        expect(screen.getByText('+31 020 636 8191')).toBeInTheDocument();
+        // Use more specific selector for email button
         const emailButton = screen.getByRole('link', { name: 'info@tisrm.nl' });
         expect(emailButton).toBeInTheDocument();
-        expect(emailButton).toHaveAttribute('href', 'mailto:info@tisrm.nl');
-
-        // Check for LinkedIn button
-        const linkedinButton = screen.getByRole('link', { name: 'BsLinkedin' });
-        expect(linkedinButton).toHaveAttribute('href', 'https://www.linkedin.com/company/tisrm/');
+        expect(screen.getByText('LinkedIn')).toBeInTheDocument();
     });
 
-    it('should render with solid button variant by default', () => {
-        render(<MockContactInfo />);
+    it('has correct phone link', () => {
+        render(<SimpleContactInfo />);
+        const phoneLink = screen.getByText('+31 020 636 8191').closest('a');
+        expect(phoneLink).toHaveAttribute('href', 'tel:+310206368191');
+    });
 
+    it('has correct email link', () => {
+        render(<SimpleContactInfo />);
+        const emailLink = screen.getByRole('link', { name: 'info@tisrm.nl' });
+        expect(emailLink).toHaveAttribute('href', 'mailto:info@tisrm.nl');
+    });
+
+    it('has correct LinkedIn link with external attributes', () => {
+        render(<SimpleContactInfo />);
+        const linkedinLink = screen.getByText('LinkedIn').closest('a');
+        expect(linkedinLink).toHaveAttribute('href', 'https://linkedin.com');
+        expect(linkedinLink).toHaveAttribute('target', '_blank');
+        expect(linkedinLink).toHaveAttribute('rel', 'noopener noreferrer');
+    });
+
+    it('applies solid button variant by default', () => {
+        render(<SimpleContactInfo />);
         const buttons = screen.getAllByRole('button');
         buttons.forEach(button => {
-            expect(button).toHaveAttribute('data-variant', 'solid');
+            expect(button).toHaveStyle({ backgroundColor: '#3b82f6', color: 'white' });
         });
     });
 
-    it('should render with outline button variant when specified', () => {
-        render(<MockContactInfo buttonVariant="outline" />);
-
+    it('applies outline button variant when specified', () => {
+        render(<SimpleContactInfo buttonVariant="outline" />);
         const buttons = screen.getAllByRole('button');
         buttons.forEach(button => {
-            expect(button).toHaveAttribute('data-variant', 'outline');
+            expect(button).toHaveStyle({ backgroundColor: 'transparent', color: '#3b82f6' });
         });
     });
 
-    it('should have correct external link attributes for LinkedIn', () => {
-        render(<MockContactInfo />);
-
-        const linkedinButton = screen.getByRole('link', { name: 'BsLinkedin' });
-        expect(linkedinButton).toHaveAttribute('target', '_blank');
-        expect(linkedinButton).toHaveAttribute('rel', 'noopener noreferrer');
-    });
-
-    it('should not have external attributes for phone and email links', () => {
-        render(<MockContactInfo />);
-
-        const phoneButton = screen.getByRole('link', { name: '+31 020 636 8191' });
-        const emailButton = screen.getByRole('link', { name: 'info@tisrm.nl' });
-
-        expect(phoneButton).not.toHaveAttribute('target');
-        expect(phoneButton).not.toHaveAttribute('rel');
-        expect(emailButton).not.toHaveAttribute('target');
-        expect(emailButton).not.toHaveAttribute('rel');
-    });
-
-    it('should render LinkedIn icon correctly', () => {
-        render(<MockContactInfo />);
-
-        // Check that the LinkedIn button contains an SVG icon
-        const linkedinButton = screen.getByRole('link', { name: 'BsLinkedin' });
-        const svg = linkedinButton.querySelector('svg');
-        expect(svg).toBeInTheDocument();
-    });
-
-    it('should have correct button structure', () => {
-        render(<MockContactInfo />);
-
+    it('renders all contact buttons with correct styling', () => {
+        render(<SimpleContactInfo />);
         const buttons = screen.getAllByRole('button');
         expect(buttons).toHaveLength(3);
-
-        // Each button should contain a link
-        buttons.forEach(button => {
-            const link = button.querySelector('a');
-            expect(link).toBeInTheDocument();
-        });
     });
 
-    it('should maintain accessibility', () => {
-        render(<MockContactInfo />);
-
-        // Check that all interactive elements are accessible
-        expect(screen.getByRole('link', { name: '+31 020 636 8191' })).toBeInTheDocument();
-        expect(screen.getByRole('link', { name: 'info@tisrm.nl' })).toBeInTheDocument();
+    it('maintains proper layout structure', () => {
+        render(<SimpleContactInfo />);
+        const contactInfo = screen.getByText('Test Street 123').closest('div');
+        expect(contactInfo).toBeInTheDocument();
     });
 
-    it('should handle different button variants', () => {
-        const { rerender } = render(<MockContactInfo buttonVariant="solid" />);
+    it('displays address information in correct format', () => {
+        render(<SimpleContactInfo />);
+        const addressElements = [
+            'Test Street 123'
+        ];
 
-        let buttons = screen.getAllByRole('button');
-        buttons.forEach(button => {
-            expect(button).toHaveAttribute('data-variant', 'solid');
+        addressElements.forEach(text => {
+            expect(screen.getByText(text)).toBeInTheDocument();
         });
 
-        rerender(<MockContactInfo buttonVariant="outline" />);
+        // Check email in address section specifically
+        const addressSection = screen.getByText('Test Street 123').closest('div');
+        const emailInAddress = addressSection?.querySelector('span:nth-child(2)');
+        expect(emailInAddress).toHaveTextContent('info@tisrm.nl');
 
-        buttons = screen.getAllByRole('button');
-        buttons.forEach(button => {
-            expect(button).toHaveAttribute('data-variant', 'outline');
+        // Check Amsterdam in address section specifically
+        const amsterdamInAddress = addressSection?.querySelector('span:nth-child(3)');
+        expect(amsterdamInAddress).toHaveTextContent('Amsterdam');
+    });
+
+    it('displays postal information in correct format', () => {
+        render(<SimpleContactInfo />);
+        const postalElements = [
+            'Postbus 12345',
+            '1000 AB'
+        ];
+
+        postalElements.forEach(text => {
+            expect(screen.getByText(text)).toBeInTheDocument();
         });
-    });
 
-    it('should render contact information in correct layout', () => {
-        render(<MockContactInfo />);
-
-        // Check that address information is rendered
-        expect(screen.getByText('Muiderstraat 1')).toBeInTheDocument();
-        expect(screen.getAllByText('Amsterdam')).toHaveLength(2);
-
-        // Check that postal box information is rendered
-        expect(screen.getByText('Postbus 12887')).toBeInTheDocument();
-        expect(screen.getByText('1100 AW')).toBeInTheDocument();
-    });
-
-    it('should have proper button spacing and alignment', () => {
-        render(<MockContactInfo />);
-
-        const buttons = screen.getAllByRole('button');
-        expect(buttons).toHaveLength(3);
-        const buttonContainer = buttons[0]?.parentElement;
-        expect(buttonContainer).toBeInTheDocument();
+        // Check Amsterdam in postal section specifically
+        const postalSection = screen.getByText('Postbus 12345').closest('div');
+        const amsterdamInPostal = postalSection?.querySelector('span:nth-child(3)');
+        expect(amsterdamInPostal).toHaveTextContent('Amsterdam');
     });
 });

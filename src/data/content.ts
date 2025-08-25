@@ -2,7 +2,7 @@
  * Centralized content data to reduce duplication and improve maintainability
  */
 
-import type { CardProps, ButtonVariant } from '@/types/components';
+import type { ButtonVariant } from '@/types/components';
 
 // Insurance cards data
 export const INSURANCE_CATEGORIES = [

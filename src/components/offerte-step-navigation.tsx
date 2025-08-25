@@ -5,7 +5,6 @@ import {
     Box,
     Text,
     HStack,
-    VStack,
     Circle,
     Icon,
     Flex
@@ -24,7 +23,7 @@ interface OfferteStepNavigationProps {
 
 export default function OfferteStepNavigation({
     currentStep,
-    totalSteps,
+    totalSteps: _totalSteps,
     steps
 }: OfferteStepNavigationProps) {
     return (
