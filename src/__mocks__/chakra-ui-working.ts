@@ -1,4 +1,4 @@
-const React = require('react');
+import React from 'react';
 
 const createMockComponent = (tag, displayName) => {
   const Component = React.forwardRef(({ children, as, ...props }, ref) => {
@@ -31,7 +31,7 @@ const Spacer = createMockComponent('div', 'Spacer');
 const Divider = createMockComponent('hr', 'Divider');
 const Icon = createMockComponent('span', 'Icon');
 const Tag = createMockComponent('span', 'Tag');
-const Circle = createMockComponent('div', 'Circle');
+// const Circle = createMockComponent('div', 'Circle'); // Unused, commented out
 const List = createMockComponent('ul', 'List');
 const ListItem = createMockComponent('li', 'ListItem');
 const OrderedList = createMockComponent('ol', 'OrderedList');
@@ -133,5 +133,41 @@ const chakraUI = {
 };
 
 // Export as both default and named exports
-module.exports = chakraUI;
-module.exports.default = chakraUI;
+export default chakraUI;
+export const {
+  Badge,
+  Box,
+  Button,
+  Center,
+  Container,
+  Divider,
+  Field,
+  Flex,
+  Grid,
+  GridItem,
+  HStack,
+  Heading,
+  Icon,
+  Image,
+  Input,
+  Link,
+  List,
+  ListItem,
+  OrderedList,
+  SimpleGrid,
+  Spacer,
+  Stack,
+  Tag,
+  Text,
+  UnorderedList,
+  VStack,
+  useBreakpointValue,
+  useColorMode,
+  useDisclosure,
+  useMediaQuery,
+  useMultiStyleConfig,
+  useStyleConfig,
+  useTheme,
+  useToast,
+  useToken,
+} = chakraUI;

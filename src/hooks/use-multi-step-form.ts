@@ -1,13 +1,14 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
-import { useForm, type FieldPath, type DefaultValues, type UseFormReturn, type SubmitHandler } from 'react-hook-form';
+import { useForm, type FieldPath, type DefaultValues } from 'react-hook-form';
 import { useLocalStorage } from './use-local-storage';
 import type { 
   FieldValues, 
   MultiStepFormConfig, 
   FormHookReturn,
   SubmissionHandler,
+  FormState,
 } from '@/types/forms';
 
 interface UseMultiStepFormOptions<T extends FieldValues> {
@@ -92,7 +93,7 @@ export function useMultiStepForm<T extends FieldValues>({
   }, [currentStep]);
 
   // Enhanced form submission
-  const handleFormSubmit = useCallback(async (data: T) => {
+  const _handleFormSubmit = useCallback(async (data: T) => {
     setIsSubmitting(true);
     try {
       const result = await onSubmit(data);
@@ -129,7 +130,7 @@ export function useMultiStepForm<T extends FieldValues>({
 
   return {
     ...form,
-    formState: enhancedFormState,
+    formState: enhancedFormState as FormState<T>,
     isStepValid,
     goToStep,
     nextStep,

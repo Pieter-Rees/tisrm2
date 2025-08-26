@@ -1,6 +1,12 @@
 import React from 'react';
 
-const MockImage = React.forwardRef<HTMLImageElement, any>(({ src, alt, ...props }, ref) => (
+interface ImageProps {
+    src?: string;
+    alt?: string;
+    [key: string]: unknown;
+}
+
+const MockImage = React.forwardRef<HTMLImageElement, ImageProps>(({ src, alt, ...props }, ref) => (
     <img
         ref={ref}
         src={src}

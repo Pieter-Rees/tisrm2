@@ -140,7 +140,7 @@ export const getFieldHelperId = (fieldId: string): string => {
 export const filterDefinedValues = <T extends Record<string, unknown>>(obj: T): Partial<T> => {
   return Object.entries(obj).reduce((acc, [key, value]) => {
     if (value !== undefined && value !== null) {
-      (acc as any)[key] = value;
+      (acc as Record<string, unknown>)[key] = value;
     }
     return acc;
   }, {} as Partial<T>);

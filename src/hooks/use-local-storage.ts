@@ -22,7 +22,7 @@ export function useLocalStorage<T>(
     } finally {
       setIsInitialized(true);
     }
-  }, [key]);
+  }, [key, initialValue]);
 
   const setValue: SetValue<T> = useCallback(
     value => {

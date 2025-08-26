@@ -2,13 +2,13 @@
 
 import { Box, Spinner, Text, VStack } from '@chakra-ui/react';
 import type { ComponentProps } from 'react';
-import {
-  loadingContentStyles,
-  loadingSpinnerStyles,
-  loadingTextStyles,
-  loadingFullScreenStyles,
-  loadingInlineStyles,
-} from '@/styles/components/utility.styles';
+// import {
+//   loadingContentStyles,
+//   loadingSpinnerStyles,
+//   loadingTextStyles,
+//   loadingFullScreenStyles,
+//   loadingInlineStyles,
+// } from '@/styles/components/utility.styles';
 
 interface LoadingProps {
   size?: ComponentProps<typeof Spinner>['size'];

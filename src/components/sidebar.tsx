@@ -6,12 +6,12 @@ import { memo } from 'react';
 import Card from '@/components/card';
 import { CONTACT_INFO, NAVIGATION_ROUTES } from '@/constants/app';
 import { cn } from '@/lib/utils';
-import {
-  sidebarContainerStyles,
-  sidebarHelpBoxStyles,
-  sidebarHelpTitleStyles,
-  sidebarHelpTextStyles,
-} from '@/styles/components/layout.styles';
+// import {
+//   sidebarContainerStyles,
+//   sidebarHelpBoxStyles,
+//   sidebarHelpTitleStyles,
+//   sidebarHelpTextStyles,
+// } from '@/styles/components/layout.styles';
 import type { BaseComponentProps } from '@/types/components';
 
 const SIDEBAR_CARDS = [

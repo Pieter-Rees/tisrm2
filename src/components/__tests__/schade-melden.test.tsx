@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 // Create a simplified SchadeMelden component that mimics the original functionality
 const SimpleSchadeMelden = () => {
     return (
-        <button role="button" aria-label="Schade melden">
+        <button aria-label="Schade melden">
             <a
                 href="https://schade.emsclaimsengine.com/index.php?template=tis&view=consument.login#identificatie_vragen"
                 target="_blank"

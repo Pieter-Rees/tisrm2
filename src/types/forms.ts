@@ -1,4 +1,4 @@
-import type { FieldPath, FieldValues, UseFormReturn, FieldErrors } from 'react-hook-form';
+import type { FieldPath, FieldValues, UseFormReturn, FieldErrors, FormState as ReactHookFormState } from 'react-hook-form';
 
 // Re-export FieldValues for convenience
 export type { FieldValues };
@@ -43,22 +43,8 @@ export interface ContactFormData {
 }
 
 // Form state management  
-export interface FormState<T extends FieldValues> {
+export interface FormState<T extends FieldValues> extends Omit<ReactHookFormState<T>, 'data'> {
   readonly data: T;
-  readonly errors: FieldErrors<T>;
-  readonly isSubmitting: boolean;
-  readonly isValid: boolean;
-  readonly isDirty: boolean;
-  readonly isLoading: boolean;
-  readonly isSubmitted: boolean;
-  readonly isSubmitSuccessful: boolean;
-  readonly isValidating: boolean;
-  readonly submitCount: number;
-  readonly defaultValues?: T | undefined;
-  readonly disabled: boolean;
-  readonly dirtyFields: any;
-  readonly touchedFields: any;
-  readonly validatingFields: any;
   readonly isReady: boolean;
   readonly currentStep?: number;
   readonly totalSteps?: number;
@@ -132,7 +118,7 @@ export interface FormStepConfig {
   readonly title: string;
   readonly description?: string;
   readonly fields: readonly string[];
-  readonly validation?: ValidationRules<any>;
+  readonly validation?: ValidationRules<Record<string, unknown>>;
   readonly isOptional?: boolean;
 }
 

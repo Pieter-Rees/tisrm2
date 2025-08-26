@@ -1,6 +1,12 @@
 import React from 'react';
 
-const MockLink = React.forwardRef<HTMLAnchorElement, any>(({ href, children, ...props }, ref) => (
+interface LinkProps {
+    href?: string;
+    children?: React.ReactNode;
+    [key: string]: unknown;
+}
+
+const MockLink = React.forwardRef<HTMLAnchorElement, LinkProps>(({ href, children, ...props }, ref) => (
     <a
         ref={ref}
         href={href}
