@@ -1,0 +1,42 @@
+{
+  "ignore-dirs": [
+    "build",
+    ".next",
+    "coverage",
+    "dist",
+    "static"
+  ],
+  "ignore-patterns": [
+    "*.d.ts",
+    "*.test.*",
+    "*.spec.*"
+  ],
+  "skip-missing": true,
+  "ignore-matches": [
+    "@types/*",
+    "eslint-*",
+    "prettier*",
+    "jest*",
+    "@testing-library/*",
+    "@next/bundle-analyzer",
+    "web-vitals"
+  ],
+  "specials": [
+    "eslint",
+    "prettier",
+    "jest",
+    "babel"
+  ],
+  "parsers": {
+    "*.js": "es6",
+    "*.jsx": "jsx",
+    "*.ts": "typescript",
+    "*.tsx": "tsx"
+  },
+  "detectors": [
+    "requireCallExpression",
+    "importDeclaration",
+    "importCallExpression",
+    "exportDeclaration"
+  ]
+}

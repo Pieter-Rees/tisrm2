@@ -1,10 +1,10 @@
 {
-	"folders": [
-		{
-			"path": "."
-		},
-		{
-			"path": "../tis-risk-managers-backend"
-		}
-	]
+  "folders": [
+    {
+      "path": ".",
+    },
+    {
+      "path": "../tis-risk-managers-backend",
+    },
+  ],
 }
