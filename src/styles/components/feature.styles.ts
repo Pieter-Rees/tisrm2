@@ -26,7 +26,7 @@ export const featureDescriptionStyles: SystemStyleObject = {
 
 // Feature grid styles
 export const featureGridStyles: SystemStyleObject = {
-  gridTemplateColumns: 'repeat(3, 1fr)',
+  gridTemplateColumns: { base: '1fr', md: 'repeat(3, 1fr)' },
   gap: { base: '3', sm: '4', md: '6', lg: '8' },
   alignItems: 'stretch',
   width: '100%',

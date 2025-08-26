@@ -4,7 +4,7 @@ import { Box, Grid, Heading } from '@chakra-ui/react';
 import { memo } from 'react';
 
 import Card from '@/components/card';
-import { NAVIGATION_ROUTES } from '@/constants/app';
+import { NAVIGATION_ROUTES, EXTERNAL_LINKS } from '@/constants/app';
 
 interface CallToActionProps {
   className?: string;
@@ -40,15 +40,21 @@ const CallToAction = memo<CallToActionProps>(
         </Box>
 
         <Grid
-          templateColumns={{ base: '1fr', sm: 'repeat(2, 1fr)' }}
+          templateColumns={{ base: '1fr', md: 'repeat(3, 1fr)' }}
           gap="8"
-          maxW="lg"
           mx="auto"
         >
           <Card
             title="Bel direct"
             cta="Bel nu"
             phone="tel:+310206368191"
+            variant="sidebar"
+            buttonVariant="solid"
+          />
+          <Card
+            title="Schade melden"
+            cta="Start hier"
+            ctaLink={EXTERNAL_LINKS.damageReport}
             variant="sidebar"
             buttonVariant="solid"
           />
