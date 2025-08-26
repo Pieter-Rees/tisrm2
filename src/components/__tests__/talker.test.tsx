@@ -6,7 +6,6 @@ const SimpleTalker = ({ name, title, image, quote, company, 'data-testid': testI
     return (
         <section
             data-testid={testId}
-            role="region"
             aria-label="Customer testimonial"
             style={{
                 padding: '2rem',
@@ -54,7 +53,7 @@ const SimpleTalker = ({ name, title, image, quote, company, 'data-testid': testI
                     textAlign: 'center',
                 }}>
                     <div style={{ color: '#3b82f6', opacity: '0.6', fontSize: '3rem' }}>
-                        "
+                        &ldquo;
                     </div>
 
                     <div style={{

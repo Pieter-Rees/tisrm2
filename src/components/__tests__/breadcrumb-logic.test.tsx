@@ -19,7 +19,7 @@ jest.mock('@/types/components', () => ({
 
 
 const createSimpleBreadcrumb = () => {
-    return function SimpleBreadcrumb({ separator = '>' }: { separator?: string }) {
+    return function SimpleBreadcrumb({ separator: _separator = '>' }: { separator?: string }) {
         const paths = mockUsePathname();
         const pathNames = paths.split('/').filter((path: string) => path);
 

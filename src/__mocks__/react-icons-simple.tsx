@@ -1,8 +1,13 @@
 import React from 'react';
 
+interface IconProps {
+    size?: string | number;
+    [key: string]: unknown;
+}
+
 // Simple mock for react-icons components
 const createIconMock = (name: string) => {
-    const IconComponent = React.forwardRef<SVGSVGElement, any>(({ size, ...props }, ref) => (
+    const IconComponent = React.forwardRef<SVGSVGElement, IconProps>(({ size, ...props }, ref) => (
         <svg
             ref={ref}
             data-testid={`icon-${name}`}

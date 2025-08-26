@@ -21,18 +21,18 @@ import {
   EXTERNAL_LINKS,
   NAVIGATION_ROUTES,
 } from '@/constants/app';
-import {
-  navbarContainerStyles,
-  navbarLinksContainerStyles,
-  navbarLinksListStyles,
-  navbarLinkItemStyles,
-  navbarLinkWrapperStyles,
-  getNavbarLinkStyles,
-  navbarActionsContainerStyles,
-  navbarActionsButtonStyles,
-  navbarMenuContentStyles,
-  navbarMenuItemStyles,
-} from '@/styles/components/navigation.styles';
+// import {
+//   navbarContainerStyles,
+//   navbarLinksContainerStyles,
+//   navbarLinksListStyles,
+//   navbarLinkItemStyles,
+//   navbarLinkWrapperStyles,
+//   getNavbarLinkStyles,
+//   navbarActionsContainerStyles,
+//   navbarActionsButtonStyles,
+//   navbarMenuContentStyles,
+//   navbarMenuItemStyles,
+// } from '@/styles/components/navigation.styles';
 import type { NavigationLink } from '@/types/components';
 const NAVIGATION_LINKS: readonly NavigationLink[] = [
   { href: NAVIGATION_ROUTES.home, label: 'Home' },

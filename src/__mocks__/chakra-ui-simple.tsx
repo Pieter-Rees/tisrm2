@@ -4,82 +4,83 @@ interface MockProps {
   children?: React.ReactNode;
   as?: string;
   role?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 // Ensure all components are properly exported and available
 
 const createMockComponent = (tag: string, displayName: string) => {
-  const Component = React.forwardRef<any, MockProps>((props: MockProps, ref) => {
+  const Component = React.forwardRef<HTMLElement, MockProps>((props: MockProps, ref) => {
     const {
       children,
       as,
       asChild,
-      variant,
-      size,
-      spacing,
-      gap,
-      alignItems,
-      justifyContent,
-      direction,
-      bg,
-      backgroundColor,
-      color,
-      p,
-      m,
-      px,
-      py,
-      mx,
-      my,
-      w,
-      h,
-      width,
-      height,
-      maxW,
-      maxH,
-      minW,
-      minH,
-      borderRadius,
-      boxShadow,
-      border,
-      borderColor,
-      borderWidth,
-      borderStyle,
-      position,
-      top,
-      left,
-      right,
-      bottom,
-      zIndex,
-      display,
-      visibility,
-      overflow,
-      transform,
-      transition,
-      fontSize,
-      fontWeight,
-      lineHeight,
-      textAlign,
-      cursor,
-      hideFrom,
-      showFrom,
-      hideBelow,
-      showBelow,
-      _hover,
-      _focus,
-      _active,
-      _disabled,
+      // Note: These Chakra-specific props are extracted but not used in basic mock
+      // variant,
+      // size,
+      // spacing,
+      // gap,
+      // alignItems,
+      // justifyContent,
+      // direction,
+      // bg,
+      // backgroundColor,
+      // color,
+      // p,
+      // m,
+      // px,
+      // py,
+      // mx,
+      // my,
+      // w,
+      // h,
+      // width,
+      // height,
+      // maxW,
+      // maxH,
+      // minW,
+      // minH,
+      // borderRadius,
+      // boxShadow,
+      // border,
+      // borderColor,
+      // borderWidth,
+      // borderStyle,
+      // position,
+      // top,
+      // left,
+      // right,
+      // bottom,
+      // zIndex,
+      // display,
+      // visibility,
+      // overflow,
+      // transform,
+      // transition,
+      // fontSize,
+      // fontWeight,
+      // lineHeight,
+      // textAlign,
+      // cursor,
+      // hideFrom,
+      // showFrom,
+      // hideBelow,
+      // showBelow,
+      // _hover,
+      // _focus,
+      // _active,
+      // _disabled,
       ...rest
     } = props;
     const Element = as || tag;
 
     if (asChild && React.Children.count(children) === 1) {
-      const child = React.Children.only(children) as React.ReactElement<any>;
+      const child = React.Children.only(children) as React.ReactElement<Record<string, unknown>>;
       return React.cloneElement(child, {
         ...rest,
         ...(child.props || {}),
-        role: (child.props as any)?.role || (tag === 'button' ? 'button' : undefined),
-      } as any);
+        role: (child.props as Record<string, unknown>)?.role || (tag === 'button' ? 'button' : undefined),
+      } as Record<string, unknown>);
     }
 
     // Filter out Chakra-specific props and only pass valid HTML attributes
@@ -93,7 +94,7 @@ const createMockComponent = (tag: string, displayName: string) => {
         acc[key] = rest[key];
       }
       return acc;
-    }, {} as any);
+    }, {} as Record<string, unknown>);
 
     return React.createElement(
       Element,
@@ -160,7 +161,7 @@ export const useColorMode = () => ({
   toggleColorMode: jest.fn(),
 });
 
-export const useBreakpointValue = (values: any) => values?.base || values;
+export const useBreakpointValue = (values: Record<string, unknown>) => values?.base || values;
 
 export const useMediaQuery = () => false;
 

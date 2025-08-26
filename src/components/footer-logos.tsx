@@ -3,10 +3,10 @@
 import type { FooterLogosProps } from '@/types/components';
 import { Box, Flex } from '@chakra-ui/react';
 import Image from 'next/image';
-import {
-  footerLogosContainerStyles,
-  footerLogoItemStyles,
-} from '@/styles/components/utility.styles';
+// import {
+//   footerLogosContainerStyles,
+//   footerLogoItemStyles,
+// } from '@/styles/components/utility.styles';
 
 const logos = [
   { src: '/logos/sbb.png', alt: 'SBB Logo' },

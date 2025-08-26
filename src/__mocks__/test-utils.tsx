@@ -21,8 +21,13 @@ export * from '@testing-library/react';
 export { customRender as render };
 
 
+interface MockComponentProps {
+    children?: React.ReactNode;
+    [key: string]: unknown;
+}
+
 export const createMockComponent = (name: string, testId?: string) => {
-    const MockComponent = React.forwardRef<any, any>((props, ref) => {
+    const MockComponent = React.forwardRef<HTMLDivElement, MockComponentProps>((props, ref) => {
         const { children, ...rest } = props;
         return (
             <div
@@ -40,7 +45,7 @@ export const createMockComponent = (name: string, testId?: string) => {
 
 // Mock component with proper roles
 export const createMockComponentWithRole = (name: string, role: string, testId?: string) => {
-    const MockComponent = React.forwardRef<any, any>((props, ref) => {
+    const MockComponent = React.forwardRef<HTMLDivElement, MockComponentProps>((props, ref) => {
         const { children, ...rest } = props;
         return (
             <div
@@ -128,7 +133,7 @@ export const mockHooks = {
         colorMode: 'light',
         toggleColorMode: jest.fn(),
     }),
-    useLocalStorage: (key: string, defaultValue: any) => [
+    useLocalStorage: (key: string, defaultValue: unknown) => [
         defaultValue,
         jest.fn(),
         jest.fn(),

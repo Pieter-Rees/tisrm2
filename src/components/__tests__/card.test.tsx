@@ -13,7 +13,7 @@ const SimpleCard = React.memo(({
     phone,
     variant = 'default',
     loading = false,
-    disabled = false,
+    _disabled = false,
     className,
     'data-testid': testId,
 }: {
@@ -164,7 +164,6 @@ const SimpleCard = React.memo(({
             className={`card ${className || ''}`}
             data-testid={testId}
             data-variant={variant}
-            role="article"
             aria-label={`${title}${description ? `: ${description}` : ''}`}
             style={{
                 width: '100%',

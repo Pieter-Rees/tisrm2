@@ -2,13 +2,13 @@
 
 import { Box, Button, Heading, Text, VStack } from '@chakra-ui/react';
 import { Component, type ErrorInfo, type ReactNode } from 'react';
-import {
-  errorBoundaryContainerStyles,
-  errorBoundaryContentStyles,
-  errorBoundaryHeadingStyles,
-  errorBoundaryTextStyles,
-  errorBoundaryButtonStyles,
-} from '@/styles/components/utility.styles';
+// import {
+//   errorBoundaryContainerStyles,
+//   errorBoundaryContentStyles,
+//   errorBoundaryHeadingStyles,
+//   errorBoundaryTextStyles,
+//   errorBoundaryButtonStyles,
+// } from '@/styles/components/utility.styles';
 
 interface Props {
   children: ReactNode;

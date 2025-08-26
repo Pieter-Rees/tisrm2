@@ -12,10 +12,10 @@ import { NAVIGATION_ROUTES } from '@/constants/app';
 import { useDisclosure } from '@/hooks/use-disclosure';
 import {
   headerStyles,
-  headerContainerStyles,
-  headerLogoStyles,
-  headerNavStyles,
-  headerMenuButtonStyles,
+  // headerContainerStyles,
+  // headerLogoStyles,
+  // headerNavStyles,
+  // headerMenuButtonStyles,
   mobileMenuOverlayStyles,
 } from '@/styles/components/layout.styles';
 const Header = memo(() => {

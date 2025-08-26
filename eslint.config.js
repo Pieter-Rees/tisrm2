@@ -4,10 +4,12 @@ import typescriptParser from '@typescript-eslint/parser';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
+import nextPlugin from 'eslint-config-next';
 import prettier from 'eslint-config-prettier';
 
 export default [
   js.configs.recommended,
+  ...nextPlugin,
   {
     files: ['**/*.{ts,tsx,js,jsx}'],
     ignores: [

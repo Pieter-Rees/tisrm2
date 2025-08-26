@@ -62,7 +62,7 @@ const SimpleUnifiedLayout = ({ children, variant = 'page', title, breadcrumb, sh
                     </div>
                 </div>
                 {showSidebar && (
-                    <aside role="complementary" aria-label="Sidebar content">
+                    <aside aria-label="Sidebar content">
                         <div>Sidebar</div>
                     </aside>
                 )}

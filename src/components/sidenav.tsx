@@ -24,21 +24,21 @@ import {
   UI_CONSTANTS,
 } from '@/constants/app';
 import { cn } from '@/lib/utils';
-import {
-  sidenavContainerStyles,
-  getSidenavPositionStyles,
-  sidenavCloseButtonContainerStyles,
-  sidenavCloseButtonStyles,
-  sidenavContentContainerStyles,
-  sidenavLogoContainerStyles,
-  sidenavLinksContainerStyles,
-  sidenavLinkItemStyles,
-  getSidenavLinkButtonStyles,
-  sidenavSeparatorStyles,
-  sidenavActionsContainerStyles,
-  sidenavActionsButtonStyles,
-  navbarMenuItemStyles,
-} from '@/styles/components/navigation.styles';
+// import {
+//   sidenavContainerStyles,
+//   getSidenavPositionStyles,
+//   sidenavCloseButtonContainerStyles,
+//   sidenavCloseButtonStyles,
+//   sidenavContentContainerStyles,
+//   sidenavLogoContainerStyles,
+//   sidenavLinksContainerStyles,
+//   sidenavLinkItemStyles,
+//   getSidenavLinkButtonStyles,
+//   sidenavSeparatorStyles,
+//   sidenavActionsContainerStyles,
+//   sidenavActionsButtonStyles,
+//   navbarMenuItemStyles,
+// } from '@/styles/components/navigation.styles';
 import type { NavigationLink, SidenavProps } from '@/types/components';
 const MOBILE_NAVIGATION_LINKS: readonly NavigationLink[] = [
   { href: NAVIGATION_ROUTES.home, label: 'Home' },

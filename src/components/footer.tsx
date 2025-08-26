@@ -6,12 +6,12 @@ import { CURRENT_YEAR } from '@/constants/app';
 import { contactInfo } from '@/data/general';
 import {
   footerContainerStyles,
-  footerGridStyles,
-  footerColumnStyles,
-  footerHeadingStyles,
-  footerTextStyles,
-  footerLinksContainerStyles,
-  footerLinkButtonStyles,
+  // footerGridStyles,
+  // footerColumnStyles,
+  // footerHeadingStyles,
+  // footerTextStyles,
+  // footerLinksContainerStyles,
+  // footerLinkButtonStyles,
 } from '@/styles/components/footer.styles';
 import {
   Box,

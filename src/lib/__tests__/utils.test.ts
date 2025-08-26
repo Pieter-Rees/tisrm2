@@ -15,13 +15,17 @@ describe('Utility Functions', () => {
   describe('cn (className utility)', () => {
     it('should combine class names correctly', () => {
       expect(cn('class1', 'class2')).toBe('class1 class2');
-      expect(cn('class1', false && 'class2', 'class3')).toBe('class1 class3');
+      const condition = false;
+      expect(cn('class1', condition && 'class2', 'class3')).toBe('class1 class3');
       expect(cn('class1', null, undefined, 'class2')).toBe('class1 class2');
     });
 
     it('should handle conditional classes', () => {
-      expect(cn('base', true && 'active', false && 'inactive')).toBe('base active');
-      expect(cn('base', false && 'hidden')).toBe('base');
+      const isActive = true;
+      const isInactive = false;
+      const isHidden = false;
+      expect(cn('base', isActive && 'active', isInactive && 'inactive')).toBe('base active');
+      expect(cn('base', isHidden && 'hidden')).toBe('base');
     });
   });
 
