@@ -1,7 +1,7 @@
 'use client';
 
 import { safeJsonParse } from '@/lib/utils';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 type SetValue<T> = (value: T | ((prevValue: T) => T)) => void;
 export function useLocalStorage<T>(
@@ -10,19 +10,20 @@ export function useLocalStorage<T>(
 ): [T, SetValue<T>, () => void] {
   const [storedValue, setStoredValue] = useState<T>(initialValue);
   const [isInitialized, setIsInitialized] = useState(false);
+  const initialValueRef = useRef(initialValue);
 
   useEffect(() => {
     try {
       const item = window.localStorage.getItem(key);
       if (item) {
-        setStoredValue(safeJsonParse(item, initialValue));
+        setStoredValue(safeJsonParse(item, initialValueRef.current));
       }
     } catch (error) {
       console.warn(`Error reading localStorage key "${key}":`, error);
     } finally {
       setIsInitialized(true);
     }
-  }, [key, initialValue]);
+  }, [key]); // Remove initialValue from dependencies to prevent infinite loops
 
   const setValue: SetValue<T> = useCallback(
     value => {
@@ -46,14 +47,14 @@ export function useLocalStorage<T>(
 
   const removeValue = useCallback(() => {
     try {
-      setStoredValue(initialValue);
+      setStoredValue(initialValueRef.current);
       if (typeof window !== 'undefined') {
         window.localStorage.removeItem(key);
       }
     } catch (error) {
       console.warn(`Error removing localStorage key "${key}":`, error);
     }
-  }, [key, initialValue]);
+  }, [key]); // Use ref to avoid dependency on initialValue
 
   return [isInitialized ? storedValue : initialValue, setValue, removeValue];
 }
