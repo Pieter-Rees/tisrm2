@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-// Create a simplified PageLayout component for testing
+
 const SimplePageLayout = ({ children, title, breadcrumb, showSidebar = true, maxWidth = 'auto' }: any) => {
     const containerStyle = {
         padding: '2rem',

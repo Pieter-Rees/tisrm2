@@ -1,18 +1,18 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-// Create a simplified ButtonLink component for testing
-const SimpleButtonLink = ({ 
-    href, 
-    external = false, 
-    download = false, 
-    children, 
+
+const SimpleButtonLink = ({
+    href,
+    external = false,
+    download = false,
+    children,
     variant = 'primary',
     size = 'md',
     disabled = false,
     className,
     'data-testid': testId,
-    ...props 
+    ...props
 }: any) => {
     const isExternal =
         external ||
@@ -23,10 +23,10 @@ const SimpleButtonLink = ({
     const buttonStyle = {
         padding: size === 'sm' ? '0.5rem 1rem' : size === 'lg' ? '1rem 2rem' : '0.75rem 1.5rem',
         fontSize: size === 'sm' ? '0.875rem' : size === 'lg' ? '1.125rem' : '1rem',
-        backgroundColor: variant === 'primary' ? '#3b82f6' : 
-                       variant === 'secondary' ? '#6b7280' :
-                       variant === 'outline' ? 'transparent' :
-                       variant === 'ghost' ? 'transparent' : '#3b82f6',
+        backgroundColor: variant === 'primary' ? '#3b82f6' :
+            variant === 'secondary' ? '#6b7280' :
+                variant === 'outline' ? 'transparent' :
+                    variant === 'ghost' ? 'transparent' : '#3b82f6',
         color: variant === 'outline' || variant === 'ghost' ? '#3b82f6' : 'white',
         border: variant === 'outline' ? '1px solid #3b82f6' : 'none',
         borderRadius: '0.375rem',
@@ -44,7 +44,7 @@ const SimpleButtonLink = ({
                 rel={
                     external || href.startsWith('http') ?
                         'noopener noreferrer'
-                    : undefined
+                        : undefined
                 }
                 download={download || undefined}
                 style={buttonStyle}
@@ -222,7 +222,7 @@ describe('ButtonLink Component', () => {
 
     it('should apply different variants correctly', () => {
         const variants = ['primary', 'secondary', 'outline', 'ghost'];
-        
+
         variants.forEach(variant => {
             const { unmount } = render(<SimpleButtonLink {...defaultProps} variant={variant} />);
             const link = screen.getByRole('link');

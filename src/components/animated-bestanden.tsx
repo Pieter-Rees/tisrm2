@@ -32,7 +32,7 @@ const itemVariants = {
     },
 } as const;
 
-export default function AnimatedBestanden() {
+export default function AnimatedDownloads() {
     const documents = [
         {
             title: 'Algemene Voorwaarden',

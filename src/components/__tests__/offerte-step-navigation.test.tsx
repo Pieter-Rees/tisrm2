@@ -1,12 +1,12 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-// Create a simplified OfferteStepNavigation component for testing
-const SimpleOfferteStepNavigation = ({ 
-    currentStep, 
-    totalSteps, 
-    steps, 
-    'data-testid': testId 
+
+const SimpleOfferteStepNavigation = ({
+    currentStep,
+    totalSteps,
+    steps,
+    'data-testid': testId
 }: any) => {
     return (
         <div data-testid={testId || 'offerte-step-navigation'} style={{ margin: '2rem 0', width: '100%' }}>
@@ -117,7 +117,7 @@ describe('OfferteStepNavigation Component', () => {
 
     it('renders all steps', () => {
         render(<SimpleOfferteStepNavigation {...defaultProps} />);
-        
+
         expect(screen.getByText('Step 1')).toBeInTheDocument();
         expect(screen.getByText('Step 2')).toBeInTheDocument();
         expect(screen.getByText('Step 3')).toBeInTheDocument();
@@ -125,7 +125,7 @@ describe('OfferteStepNavigation Component', () => {
 
     it('displays step numbers correctly', () => {
         render(<SimpleOfferteStepNavigation {...defaultProps} />);
-        
+
         expect(screen.getByText('1')).toBeInTheDocument();
         expect(screen.getByText('2')).toBeInTheDocument();
         expect(screen.getByText('3')).toBeInTheDocument();
@@ -133,11 +133,11 @@ describe('OfferteStepNavigation Component', () => {
 
     it('shows current step as active', () => {
         render(<SimpleOfferteStepNavigation {...defaultProps} currentStep={1} />);
-        
+
         const step1Circle = screen.getByTestId('step-circle-0');
         const step2Circle = screen.getByTestId('step-circle-1');
         const step3Circle = screen.getByTestId('step-circle-2');
-        
+
         expect(step1Circle).toHaveAttribute('data-step-status', 'completed');
         expect(step2Circle).toHaveAttribute('data-step-status', 'active');
         expect(step3Circle).toHaveAttribute('data-step-status', 'upcoming');
@@ -145,7 +145,7 @@ describe('OfferteStepNavigation Component', () => {
 
     it('shows completed steps with checkmark', () => {
         render(<SimpleOfferteStepNavigation {...defaultProps} currentStep={2} />);
-        
+
         expect(screen.getByTestId('step-check-0')).toBeInTheDocument();
         expect(screen.getByTestId('step-check-1')).toBeInTheDocument();
         expect(screen.getByText('3')).toBeInTheDocument(); // Current step shows number
@@ -153,7 +153,7 @@ describe('OfferteStepNavigation Component', () => {
 
     it('displays step descriptions when provided', () => {
         render(<SimpleOfferteStepNavigation {...defaultProps} />);
-        
+
         expect(screen.getByText('First step description')).toBeInTheDocument();
         expect(screen.getByText('Second step description')).toBeInTheDocument();
         expect(screen.getByText('Third step description')).toBeInTheDocument();
@@ -165,29 +165,29 @@ describe('OfferteStepNavigation Component', () => {
             { title: 'Step 2' },
             { title: 'Step 3' },
         ];
-        
+
         render(<SimpleOfferteStepNavigation {...defaultProps} steps={stepsWithoutDescriptions} />);
-        
+
         expect(screen.getByText('Step 1')).toBeInTheDocument();
         expect(screen.getByText('Step 2')).toBeInTheDocument();
         expect(screen.getByText('Step 3')).toBeInTheDocument();
-        
+
         // Should not have description elements
         expect(screen.queryByTestId('step-description-0')).not.toBeInTheDocument();
     });
 
     it('renders correct number of steps', () => {
         render(<SimpleOfferteStepNavigation {...defaultProps} />);
-        
+
         const stepCircles = screen.getAllByTestId(/step-circle-/);
         expect(stepCircles).toHaveLength(3);
     });
 
     it('handles single step', () => {
         const singleStep = [{ title: 'Single Step', description: 'Only one step' }];
-        
+
         render(<SimpleOfferteStepNavigation {...defaultProps} steps={singleStep} totalSteps={1} />);
-        
+
         expect(screen.getByText('Single Step')).toBeInTheDocument();
         expect(screen.getByText('Only one step')).toBeInTheDocument();
         expect(screen.getByText('1')).toBeInTheDocument();
@@ -206,7 +206,7 @@ describe('OfferteStepNavigation Component', () => {
 
     it('maintains proper step order', () => {
         render(<SimpleOfferteStepNavigation {...defaultProps} />);
-        
+
         const stepTitles = screen.getAllByTestId(/step-title-/);
         expect(stepTitles[0]).toHaveTextContent('Step 1');
         expect(stepTitles[1]).toHaveTextContent('Step 2');

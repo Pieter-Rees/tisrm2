@@ -68,7 +68,7 @@ export default function Riskmanagement() {
           </FadeInUp>
 
           <FadeInUp delay={0.4}>
-            <Text {...PARAGRAPH_STYLES.body} fontStyle="italic">
+            <Text {...PARAGRAPH_STYLES.body}>
               Het is de kunst om na een grondige risico-inventarisatie te komen
               tot een &apos;onbewust (on)verzekerde situatie tot bewust
               (on)verzekerde situatie&apos; en dat met een doorlopend karakter.

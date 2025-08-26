@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-// Create a simplified AnimatedGrid component for testing
+
 const SimpleAnimatedGrid = ({ children, columns, gap, className, 'data-testid': testId }: any) => {
     const gridStyle = {
         display: 'grid',

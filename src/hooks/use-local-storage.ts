@@ -22,7 +22,7 @@ export function useLocalStorage<T>(
     } finally {
       setIsInitialized(true);
     }
-  }, [key, initialValue]);
+  }, [key]);
 
   const setValue: SetValue<T> = useCallback(
     value => {
@@ -41,7 +41,7 @@ export function useLocalStorage<T>(
         console.warn(`Error setting localStorage key "${key}":`, error);
       }
     },
-    [key], // Removed storedValue from dependencies to prevent infinite loop
+    [key],
   );
 
   const removeValue = useCallback(() => {

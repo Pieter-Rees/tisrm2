@@ -17,7 +17,7 @@ jest.mock('@/types/components', () => ({
     },
 }));
 
-// Create a simplified version of the Breadcrumb component for testing
+
 const createSimpleBreadcrumb = () => {
     return function SimpleBreadcrumb({ separator = '>' }: { separator?: string }) {
         const paths = mockUsePathname();

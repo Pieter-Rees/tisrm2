@@ -39,8 +39,8 @@ export default function RegistrationForm() {
       lastName: '',
       emailAddress: '',
       phoneNo: '',
-      companyName: '',
-      kvkNumber: '',
+      businessName: '',
+      kvkno: '',
       btwNumber: '',
       postalCode: '',
       message: '',
@@ -278,11 +278,11 @@ export default function RegistrationForm() {
           <Field
             label="Bedrijfsnaam"
             required
-            invalid={!!errors.companyName}
-            errorText={errors.companyName?.message}
+            invalid={!!errors.businessName}
+            errorText={errors.businessName?.message}
           >
             <Input
-              {...register('companyName', {
+              {...register('businessName', {
                 required: 'Bedrijfsnaam is verplicht',
                 minLength: {
                   value: 2,
@@ -297,11 +297,11 @@ export default function RegistrationForm() {
           <Field
             label="KVK-nummer"
             required
-            invalid={!!errors.kvkNumber}
-            errorText={errors.kvkNumber?.message}
+            invalid={!!errors.kvkno}
+            errorText={errors.kvkno?.message}
           >
             <Input
-              {...register('kvkNumber', {
+              {...register('kvkno', {
                 required: 'KVK-nummer is verplicht',
                 pattern: {
                   value: /^[0-9]{8}$/,

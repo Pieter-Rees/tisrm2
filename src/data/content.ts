@@ -130,7 +130,7 @@ export const MAIN_NAVIGATION = [
   },
   {
     label: 'Downloads',
-    href: '/bestanden',
+    href: '/downloads',
     external: false,
   },
 ] as const;

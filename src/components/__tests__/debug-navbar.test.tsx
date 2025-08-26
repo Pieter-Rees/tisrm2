@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-// Debug imports
+
 import { Box, Button, Flex, HStack } from '@chakra-ui/react';
 
 describe('Debug Navbar Imports', () => {
@@ -14,7 +14,7 @@ describe('Debug Navbar Imports', () => {
     console.log('Flex:', Flex);
     console.log('HStack type:', typeof HStack);
     console.log('HStack:', HStack);
-    
+
     // Try to render a simple component
     try {
       render(<Box>Test Box</Box>);
@@ -22,7 +22,7 @@ describe('Debug Navbar Imports', () => {
     } catch (error) {
       console.log('Box render error:', error);
     }
-    
+
     expect(true).toBe(true); // Always pass for debugging
   });
 });

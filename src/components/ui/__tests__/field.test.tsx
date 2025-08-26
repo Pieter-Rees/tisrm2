@@ -1,15 +1,15 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-// Create a simplified Field component for testing
-const SimpleField = ({ 
-    label, 
-    helperText, 
-    errorText, 
-    required, 
-    invalid, 
-    children, 
-    'data-testid': testId 
+
+const SimpleField = ({
+    label,
+    helperText,
+    errorText,
+    required,
+    invalid,
+    children,
+    'data-testid': testId
 }: any) => {
     return (
         <div data-testid={testId || 'field'}>

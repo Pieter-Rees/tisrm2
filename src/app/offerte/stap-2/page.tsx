@@ -23,15 +23,17 @@ import { useForm } from 'react-hook-form';
 interface Step1Data {
   firstName: string;
   lastName: string;
-  companyName: string;
+  businessName: string;
 }
 
 interface Step2FormData {
   emailAddress: string;
   phoneNo: string;
-  kvkNumber: string;
-  btwNumber: string;
+  kvkno: string;
+  plateNo: string;
   postalCode: string;
+  carCode: string;
+  damageFreeYears: string;
 }
 
 export default function OfferteStep2() {
@@ -42,9 +44,11 @@ export default function OfferteStep2() {
     {
       emailAddress: '',
       phoneNo: '',
-      kvkNumber: '',
-      btwNumber: '',
+      kvkno: '',
+      plateNo: '',
       postalCode: '',
+      carCode: '',
+      damageFreeYears: '',
     },
   );
   const [isCheckingData, setIsCheckingData] = useState(true);
@@ -63,9 +67,11 @@ export default function OfferteStep2() {
   const isFormValid =
     Boolean(watchedValues.emailAddress?.trim()) &&
     Boolean(watchedValues.phoneNo?.trim()) &&
-    Boolean(watchedValues.kvkNumber?.trim()) &&
-    Boolean(watchedValues.btwNumber?.trim()) &&
-    Boolean(watchedValues.postalCode?.trim());
+    Boolean(watchedValues.kvkno?.trim()) &&
+    Boolean(watchedValues.plateNo?.trim()) &&
+    Boolean(watchedValues.postalCode?.trim()) &&
+    Boolean(watchedValues.carCode?.trim()) &&
+    Boolean(watchedValues.damageFreeYears?.trim());
 
 
 
@@ -103,9 +109,9 @@ export default function OfferteStep2() {
             currentStep={1}
             totalSteps={3}
             steps={[
-              { title: 'Contactgegevens', description: 'Persoonlijke gegevens', isCompleted: true },
-              { title: 'Project Details', description: 'Bedrijfsinformatie', isCompleted: false },
-              { title: 'Bevestiging', description: 'Aanvraag versturen', isCompleted: false }
+              { title: 'Contactgegevens', isCompleted: false },
+              { title: 'Bedrijfsinformatie', isCompleted: false },
+              { title: 'Bevestiging', isCompleted: false }
             ]}
           />
 
@@ -122,6 +128,7 @@ export default function OfferteStep2() {
 
               <Box as="form" onSubmit={handleSubmit(onSubmit)}>
                 <VStack gap="6" align="stretch">
+
                   <Field
                     label="E-mailadres"
                     required
@@ -168,11 +175,11 @@ export default function OfferteStep2() {
                   <Field
                     label="KVK-nummer"
                     required
-                    invalid={!!errors.kvkNumber}
-                    errorText={errors.kvkNumber?.message}
+                    invalid={!!errors.kvkno}
+                    errorText={errors.kvkno?.message}
                   >
                     <Input
-                      {...register('kvkNumber', {
+                      {...register('kvkno', {
                         required: 'KVK-nummer is verplicht',
                         pattern: {
                           value: /^[0-9]{8}$/,
@@ -186,22 +193,72 @@ export default function OfferteStep2() {
                   </Field>
 
                   <Field
-                    label="BTW-nummer"
+                    label="Kenteken"
                     required
-                    invalid={!!errors.btwNumber}
-                    errorText={errors.btwNumber?.message}
+                    invalid={!!errors.plateNo}
+                    errorText={errors.plateNo?.message}
                   >
                     <Input
-                      {...register('btwNumber', {
-                        required: 'BTW-nummer is verplicht',
+                      {...register('plateNo', {
+                        required: 'Kenteken is verplicht',
                         pattern: {
-                          value: /^NL[0-9]{9}B[0-9]{2}$/,
+                          value: /^[A-Z0-9]{1,3}-[A-Z0-9]{1,3}-[A-Z0-9]{1,3}$/,
                           message:
-                            'Voer een geldig Nederlands BTW-nummer in (bijv. NL123456789B01)',
+                            'Voer een geldig Nederlands kenteken in (bijv. AB-12-CD)',
                         },
                       })}
-                      placeholder="NL123456789B01"
-                      maxLength={14}
+                      placeholder="AB-12-CD"
+                      maxLength={9}
+                      size="lg"
+                    />
+                  </Field>
+
+                  <Field
+                    label="Meldcode"
+                    required
+                    invalid={!!errors.carCode}
+                    errorText={errors.carCode?.message}
+                  >
+                    <Input
+                      {...register('carCode', {
+                        required: 'Meldcode is verplicht',
+                        pattern: {
+                          value: /^[A-Z0-9]{3,6}$/,
+                          message: 'Voer een geldige meldcode in (3-6 karakters)',
+                        },
+                      })}
+                      placeholder="ABC123"
+                      maxLength={6}
+                      size="lg"
+                    />
+                  </Field>
+
+                  <Field
+                    label="Schade vrije jaren"
+                    required
+                    invalid={!!errors.damageFreeYears}
+                    errorText={errors.damageFreeYears?.message}
+                  >
+                    <Input
+                      {...register('damageFreeYears', {
+                        required: 'Schade vrije jaren is verplicht',
+                        pattern: {
+                          value: /^[0-9]+$/,
+                          message: 'Voer het aantal schade vrije jaren in',
+                        },
+                        min: {
+                          value: 0,
+                          message: 'Schade vrije jaren kan niet negatief zijn',
+                        },
+                        max: {
+                          value: 50,
+                          message: 'Schade vrije jaren kan niet meer dan 50 zijn',
+                        },
+                      })}
+                      type="number"
+                      placeholder="0"
+                      min="0"
+                      max="50"
                       size="lg"
                     />
                   </Field>

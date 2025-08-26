@@ -62,7 +62,7 @@ describe('App Constants', () => {
       expect(NAVIGATION_ROUTES.about).toBe('/over-ons');
       expect(NAVIGATION_ROUTES.contact).toBe('/contact');
       expect(NAVIGATION_ROUTES.quote).toBe('/offerte');
-      expect(NAVIGATION_ROUTES.downloads).toBe('/bestanden');
+      expect(NAVIGATION_ROUTES.downloads).toBe('/downloads');
     });
 
     it('should have consistent route structure', () => {
@@ -142,12 +142,6 @@ describe('App Constants', () => {
     });
 
     describe('hover effects', () => {
-      it('should have card hover effects', () => {
-        expect(UI_CONSTANTS.hover.card.transition).toBe('all 0.3s ease');
-        expect(UI_CONSTANTS.hover.card.transform).toBe('translateY(-4px)');
-        expect(UI_CONSTANTS.hover.card.boxShadow).toBe('xl');
-      });
-
       it('should have button hover effects', () => {
         expect(UI_CONSTANTS.hover.button.transition).toBe('all 0.2s ease-in-out');
         expect(UI_CONSTANTS.hover.button.transform).toBe('translateY(-2px)');

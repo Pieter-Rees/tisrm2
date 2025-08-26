@@ -13,13 +13,13 @@ export interface StepFormData {
 export interface PersonalInfoStep extends StepFormData {
   readonly firstName: string;
   readonly lastName: string;
-  readonly companyName: string;
+  readonly businessName: string;
 }
 
 export interface ContactInfoStep extends StepFormData {
   readonly emailAddress: string;
   readonly phoneNo: string;
-  readonly kvkNumber: string;
+  readonly kvkno: string;
   readonly btwNumber: string;
   readonly postalCode: string;
 }

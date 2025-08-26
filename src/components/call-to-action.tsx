@@ -34,7 +34,7 @@ const CallToAction = memo<CallToActionProps>(
         >
           Klaar voor persoonlijk advies?
         </Heading>
-        <Box fontSize="sm" color="blue.700" mb="4" maxW="lg" mx="auto">
+        <Box fontSize="sm" color="blue.700" mb="8" maxW="lg" mx="auto">
           Neem contact op voor een vrijblijvend gesprek over uw
           verzekeringsbehoefte
         </Box>

@@ -77,7 +77,7 @@ const Card = memo<CardProps>(
             </Box>
           )}
           {variant !== 'downloads' && (
-            <Heading as="h3" {...HEADING_STYLES.h4} mb={description ? '3' : '0'}>
+            <Heading as="h3" {...HEADING_STYLES.h4}>
               {title}
             </Heading>
           )}
@@ -85,7 +85,6 @@ const Card = memo<CardProps>(
           {description && (
             <Text
               {...PARAGRAPH_STYLES.body}
-              mb={hasAction ? '4' : '0'}
               flex="1"
             >
               {description}
@@ -181,7 +180,6 @@ const Card = memo<CardProps>(
         data-testid={testId}
         data-variant={variant}
         {...cardStyles}
-        role="article"
         aria-label={`${title}${description ? `: ${description}` : ''}`}
         w="100%"
         h="100%"

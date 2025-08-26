@@ -3,22 +3,16 @@
  */
 
 import type { SystemStyleObject } from '@chakra-ui/react';
-import { UI_CONSTANTS } from '@/constants/app';
 
 // Card variant definitions
 export const CARD_VARIANTS = {
   default: {
     bg: 'white',
     shadow: 'lg',
-    hover: {
-      ...UI_CONSTANTS.hover.card,
-      transform: 'translateY(-2px)',
-    },
   },
   sidebar: {
     bg: 'white',
     shadow: 'md',
-    hover: UI_CONSTANTS.hover.subtle,
   },
   downloads: {
     bg: 'white',
@@ -27,25 +21,14 @@ export const CARD_VARIANTS = {
     shadow: 'sm',
     p: { base: '5', md: '6' },
     transition: 'all 0.2s ease-in-out',
-    hover: {
-      transform: 'translateY(-2px)',
-      shadow: 'md',
-      borderColor: 'blue.300',
-    },
   },
   elevated: {
     bg: 'white',
     shadow: 'xl',
-    hover: UI_CONSTANTS.hover.card,
   },
   featured: {
     bg: 'blue.50',
     shadow: '2xl',
-    hover: {
-      ...UI_CONSTANTS.hover.card,
-      transform: 'translateY(-4px)',
-      boxShadow: '2xl',
-    },
   },
 } as const;
 
@@ -74,10 +57,7 @@ export const cardStateStyles = {
     bg: 'gray.50',
     opacity: 0.6,
   },
-  interactive: {
-    // Removed cursor: 'pointer' since the card container is not clickable
-    // Only the buttons within the card are clickable
-  },
+  interactive: {},
   static: {
     cursor: 'default',
   },
@@ -117,8 +97,11 @@ export const cardButtonStyles = {
   base: {
     width: 'full',
     gap: '2',
-    transition: UI_CONSTANTS.hover.button.transition,
-    _hover: UI_CONSTANTS.hover.button,
+    transition: 'all 0.2s ease-in-out',
+    _hover: {
+      transform: 'translateY(-2px)',
+      boxShadow: 'lg',
+    },
   },
   phone: {
     // Component props handled in JSX
@@ -151,7 +134,6 @@ export const getCardStyles = (
     bg: disabled ? cardStateStyles.disabled.bg : variantStyles.bg,
     boxShadow: variantStyles.shadow,
     transition: cardBaseStyles.transition,
-    _hover: !disabled && isInteractive ? variantStyles.hover : {},
     _focus: cardFocusStyles,
   };
 };

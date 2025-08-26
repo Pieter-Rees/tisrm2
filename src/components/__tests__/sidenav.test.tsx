@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-// Create a simplified Sidenav component for testing
+
 const SimpleSidenav = ({ showSideNav, handleToggle, className, 'data-testid': testId }: any) => {
     const navigationLinks = [
         { href: '/', label: 'Home' },

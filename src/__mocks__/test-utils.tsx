@@ -20,7 +20,7 @@ const customRender = (
 export * from '@testing-library/react';
 export { customRender as render };
 
-// Common test utilities
+
 export const createMockComponent = (name: string, testId?: string) => {
     const MockComponent = React.forwardRef<any, any>((props, ref) => {
         const { children, ...rest } = props;
@@ -151,7 +151,7 @@ export const mockHooks = {
     }),
 };
 
-// Common test setup
+
 export const setupTest = () => {
     // Clear all mocks
     jest.clearAllMocks();

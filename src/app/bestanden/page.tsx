@@ -6,7 +6,7 @@ import Card from '@/components/card';
 import { UnifiedLayout } from '@/components/layout';
 import { AVAILABLE_DOCUMENTS } from '@/data/content';
 
-export default function Bestanden() {
+export default function Downloads() {
   return (
     <UnifiedLayout title="Downloads">
       <Box

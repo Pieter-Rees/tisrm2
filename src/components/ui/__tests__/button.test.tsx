@@ -1,28 +1,28 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 
-// Create a simplified Button component for testing
-const SimpleButton = ({ 
-    variant = 'primary', 
-    size = 'md', 
-    children, 
-    onClick, 
+
+const SimpleButton = ({
+    variant = 'primary',
+    size = 'md',
+    children,
+    onClick,
     disabled = false,
     isLoading = false,
     leftIcon,
     rightIcon,
     'data-testid': testId,
-    ...props 
+    ...props
 }: any) => {
     const buttonStyle = {
         padding: size === 'sm' ? '0.5rem 1rem' : size === 'lg' ? '1rem 2rem' : '0.75rem 1.5rem',
         fontSize: size === 'sm' ? '0.875rem' : size === 'lg' ? '1.125rem' : '1rem',
-        backgroundColor: variant === 'primary' ? '#3b82f6' : 
-                       variant === 'secondary' ? '#6b7280' :
-                       variant === 'outline' ? 'transparent' :
-                       variant === 'ghost' ? 'transparent' :
-                       variant === 'danger' ? '#ef4444' :
-                       variant === 'success' ? '#10b981' : '#3b82f6',
+        backgroundColor: variant === 'primary' ? '#3b82f6' :
+            variant === 'secondary' ? '#6b7280' :
+                variant === 'outline' ? 'transparent' :
+                    variant === 'ghost' ? 'transparent' :
+                        variant === 'danger' ? '#ef4444' :
+                            variant === 'success' ? '#10b981' : '#3b82f6',
         color: variant === 'outline' || variant === 'ghost' ? '#3b82f6' : 'white',
         border: variant === 'outline' ? '1px solid #3b82f6' : 'none',
         borderRadius: '0.375rem',
@@ -71,10 +71,10 @@ describe('Button Component', () => {
     it('calls onClick when clicked', () => {
         const mockOnClick = jest.fn();
         render(<SimpleButton {...defaultProps} onClick={mockOnClick} />);
-        
+
         const button = screen.getByTestId('button');
         fireEvent.click(button);
-        
+
         expect(mockOnClick).toHaveBeenCalledTimes(1);
     });
 
@@ -86,7 +86,7 @@ describe('Button Component', () => {
 
     it('applies different variants correctly', () => {
         const variants = ['primary', 'secondary', 'outline', 'ghost', 'danger', 'success'];
-        
+
         variants.forEach(variant => {
             const { unmount } = render(<SimpleButton {...defaultProps} variant={variant} />);
             const button = screen.getByTestId('button');
@@ -103,7 +103,7 @@ describe('Button Component', () => {
 
     it('applies different sizes correctly', () => {
         const sizes = ['xs', 'sm', 'md', 'lg', 'xl'];
-        
+
         sizes.forEach(size => {
             const { unmount } = render(<SimpleButton {...defaultProps} size={size} />);
             const button = screen.getByTestId('button');

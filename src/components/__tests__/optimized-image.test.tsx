@@ -1,23 +1,23 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-// Create a simplified OptimizedImage component for testing
-const SimpleOptimizedImage = ({ 
-    src, 
-    alt, 
-    width, 
-    height, 
-    className, 
+
+const SimpleOptimizedImage = ({
+    src,
+    alt,
+    width,
+    height,
+    className,
     'data-testid': testId,
     responsive,
-    ...props 
+    ...props
 }: any) => {
     return (
-        <div 
-            className={className || ''} 
+        <div
+            className={className || ''}
             data-testid={testId || 'optimized-image'}
-            style={{ 
-                width: responsive ? '100%' : width, 
+            style={{
+                width: responsive ? '100%' : width,
                 height: height,
                 position: 'relative'
             }}

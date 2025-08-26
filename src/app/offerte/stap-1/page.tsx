@@ -19,7 +19,7 @@ import { useForm } from 'react-hook-form';
 interface Step1FormData {
   firstName: string;
   lastName: string;
-  companyName: string;
+  businessName: string;
 }
 
 export default function OfferteStep1() {
@@ -29,7 +29,7 @@ export default function OfferteStep1() {
     {
       firstName: '',
       lastName: '',
-      companyName: '',
+      businessName: '',
     },
   );
 
@@ -47,7 +47,7 @@ export default function OfferteStep1() {
   const isFormValid =
     Boolean(watchedValues.firstName?.trim()) &&
     Boolean(watchedValues.lastName?.trim()) &&
-    Boolean(watchedValues.companyName?.trim());
+    Boolean(watchedValues.businessName?.trim());
 
 
 
@@ -64,9 +64,9 @@ export default function OfferteStep1() {
             currentStep={0}
             totalSteps={3}
             steps={[
-              { title: 'Contactgegevens', description: 'Persoonlijke gegevens', isCompleted: false },
-              { title: 'Project Details', description: 'Bedrijfsinformatie', isCompleted: false },
-              { title: 'Bevestiging', description: 'Aanvraag versturen', isCompleted: false }
+              { title: 'Contactgegevens', isCompleted: false },
+              { title: 'Bedrijfsinformatie', isCompleted: false },
+              { title: 'Bevestiging', isCompleted: false }
             ]}
           />
 
@@ -82,7 +82,7 @@ export default function OfferteStep1() {
               </Box>
 
               <Box as="form" onSubmit={handleSubmit(onSubmit)}>
-                <VStack gap="6" align="stretch">
+                <VStack gap="6" >
                   <Field
                     label="Voornaam"
                     required
@@ -134,11 +134,11 @@ export default function OfferteStep1() {
                   <Field
                     label="Bedrijfsnaam"
                     required
-                    invalid={!!errors.companyName}
-                    errorText={errors.companyName?.message}
+                    invalid={!!errors.businessName}
+                    errorText={errors.businessName?.message}
                   >
                     <Input
-                      {...register('companyName', {
+                      {...register('businessName', {
                         required: 'Bedrijfsnaam is verplicht',
                         minLength: {
                           value: 2,

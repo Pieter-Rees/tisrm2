@@ -32,7 +32,7 @@ const SIDEBAR_CARDS = [
     title: 'Formulieren & Documenten',
     description:
       'Download direct belangrijke formulieren voor uw schadeafhandeling en verzekeringsaanvragen',
-    cta: 'Naar bestanden',
+    cta: 'Naar downloads',
     ctaLink: NAVIGATION_ROUTES.downloads,
     buttonVariant: 'outline' as const,
     phone: undefined,

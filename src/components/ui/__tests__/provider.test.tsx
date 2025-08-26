@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-// Create a simplified Provider component for testing
+
 const SimpleProvider = ({ children, 'data-testid': testId }: any) => {
     return (
         <div data-testid={testId || 'provider'}>

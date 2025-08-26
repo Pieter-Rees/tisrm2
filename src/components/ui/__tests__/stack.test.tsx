@@ -1,13 +1,13 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-// Create simplified Stack components for testing
-const SimpleVStack = ({ 
-    spacing = '1rem', 
-    children, 
+
+const SimpleVStack = ({
+    spacing = '1rem',
+    children,
     direction = 'column',
     'data-testid': testId,
-    ...props 
+    ...props
 }: any) => {
     const stackStyle = {
         display: 'flex',
@@ -17,8 +17,8 @@ const SimpleVStack = ({
     };
 
     return (
-        <div 
-            style={stackStyle} 
+        <div
+            style={stackStyle}
             data-testid={testId || 'vstack'}
             data-direction={direction}
             data-spacing={spacing}
@@ -29,12 +29,12 @@ const SimpleVStack = ({
     );
 };
 
-const SimpleHStack = ({ 
-    spacing = '1rem', 
-    children, 
+const SimpleHStack = ({
+    spacing = '1rem',
+    children,
     direction = 'row',
     'data-testid': testId,
-    ...props 
+    ...props
 }: any) => {
     const stackStyle = {
         display: 'flex',
@@ -44,8 +44,8 @@ const SimpleHStack = ({
     };
 
     return (
-        <div 
-            style={stackStyle} 
+        <div
+            style={stackStyle}
             data-testid={testId || 'hstack'}
             data-direction={direction}
             data-spacing={spacing}
@@ -83,7 +83,7 @@ describe('Stack', () => {
                 <div>Stack item 3</div>
             </SimpleVStack>
         );
-        
+
         expect(screen.getByText('Stack item 1')).toBeInTheDocument();
         expect(screen.getByText('Stack item 2')).toBeInTheDocument();
         expect(screen.getByText('Stack item 3')).toBeInTheDocument();
@@ -177,12 +177,12 @@ describe('HStack', () => {
                 <div>Right item</div>
             </SimpleHStack>
         );
-        
+
         const leftItem = screen.getByText('Left item');
         const rightItem = screen.getByText('Right item');
         expect(leftItem).toBeInTheDocument();
         expect(rightItem).toBeInTheDocument();
-        
+
         const stack = screen.getByTestId('hstack');
         expect(stack).toHaveStyle({ flexDirection: 'row' });
     });

@@ -36,7 +36,7 @@ export const NAVIGATION_ROUTES = {
   about: '/over-ons',
   contact: '/contact',
   quote: '/offerte',
-  downloads: '/bestanden',
+  downloads: '/downloads',
 } as const;
 
 export const EXTERNAL_LINKS = {
@@ -68,11 +68,6 @@ export const UI_CONSTANTS = {
     toast: 1070,
   },
   hover: {
-    card: {
-      transition: 'all 0.3s ease',
-      transform: 'translateY(-4px)',
-      boxShadow: 'xl',
-    },
     button: {
       transition: 'all 0.2s ease-in-out',
       transform: 'translateY(-2px)',

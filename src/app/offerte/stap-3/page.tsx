@@ -25,13 +25,13 @@ import { BsCheck2Circle, BsExclamationTriangle } from 'react-icons/bs';
 interface Step1Data {
   firstName: string;
   lastName: string;
-  companyName: string;
+  businessName: string;
 }
 
 interface Step2Data {
   emailAddress: string;
   phoneNo: string;
-  kvkNumber: string;
+  kvkno: string;
   btwNumber: string;
   postalCode: string;
 }
@@ -95,8 +95,10 @@ export default function OfferteStep3() {
 
       startTransition(async () => {
         try {
+          const { firstName, lastName, ...restStep1Data } = step1Data;
           const payload = {
-            ...step1Data,
+            contactName: `${firstName} ${lastName}`,
+            ...restStep1Data,
             ...step2Data,
             ...values,
             tisrm: true,
@@ -182,9 +184,9 @@ export default function OfferteStep3() {
               currentStep={2}
               totalSteps={3}
               steps={[
-                { title: 'Contactgegevens', description: 'Persoonlijke gegevens', isCompleted: true },
-                { title: 'Project Details', description: 'Bedrijfsinformatie', isCompleted: true },
-                { title: 'Bevestiging', description: 'Aanvraag versturen', isCompleted: false }
+                { title: 'Contactgegevens', isCompleted: false },
+                { title: 'Bedrijfsinformatie', isCompleted: false },
+                { title: 'Bevestiging', isCompleted: false }
               ]}
             />
             <VStack gap="6" textAlign="center" py="12" width="full">
@@ -221,13 +223,13 @@ export default function OfferteStep3() {
             currentStep={2}
             totalSteps={3}
             steps={[
-              { title: 'Contactgegevens', description: 'Persoonlijke gegevens', isCompleted: true },
-              { title: 'Project Details', description: 'Bedrijfsinformatie', isCompleted: true },
-              { title: 'Bevestiging', description: 'Aanvraag versturen', isCompleted: false }
+              { title: 'Contactgegevens', isCompleted: false },
+              { title: 'Bedrijfsinformatie', isCompleted: false },
+              { title: 'Bevestiging', isCompleted: false }
             ]}
           />
 
-          <Box width="full" maxW="2xl" mx="auto">
+          <Box width="full" maxW="xl" mx="auto">
             <VStack gap="8" align="stretch">
               <Box textAlign="center">
                 <Heading as="h2" size="lg" mb="2">
@@ -273,21 +275,15 @@ export default function OfferteStep3() {
                     <VStack align="stretch" gap="3">
                       <Box>
                         <Text fontSize="sm" color="gray.600">
-                          Voornaam
+                          Naam
                         </Text>
-                        <Text fontWeight="medium">{step1Data.firstName}</Text>
-                      </Box>
-                      <Box>
-                        <Text fontSize="sm" color="gray.600">
-                          Achternaam
-                        </Text>
-                        <Text fontWeight="medium">{step1Data.lastName}</Text>
+                        <Text fontWeight="medium">{step1Data.firstName} {step1Data.lastName}</Text>
                       </Box>
                       <Box>
                         <Text fontSize="sm" color="gray.600">
                           Bedrijfsnaam
                         </Text>
-                        <Text fontWeight="medium">{step1Data.companyName}</Text>
+                        <Text fontWeight="medium">{step1Data.businessName}</Text>
                       </Box>
                     </VStack>
                   </Card.Body>
@@ -317,7 +313,7 @@ export default function OfferteStep3() {
                         <Text fontSize="sm" color="gray.600">
                           KVK-nummer
                         </Text>
-                        <Text fontWeight="medium">{step2Data.kvkNumber}</Text>
+                        <Text fontWeight="medium">{step2Data.kvkno}</Text>
                       </Box>
                       <Box>
                         <Text fontSize="sm" color="gray.600">

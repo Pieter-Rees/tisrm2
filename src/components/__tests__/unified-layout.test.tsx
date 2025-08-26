@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-// Create a simplified UnifiedLayout component for testing
+
 const SimpleUnifiedLayout = ({ children, variant = 'page', title, breadcrumb, showSidebar = true, maxWidth = 'auto', className, 'data-testid': testId }: any) => {
     const containerStyle = {
         padding: '2rem',

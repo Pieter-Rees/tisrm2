@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-// Create a simplified Header component for testing
+
 const SimpleHeader = () => {
     const [showSideNav, setShowSideNav] = React.useState(false);
 

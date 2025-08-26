@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-// Create a simplified Toaster component for testing
+
 const SimpleToaster = ({ 'data-testid': testId }: any) => {
     return (
         <div data-testid={testId || 'toaster'} role="status" aria-live="polite">

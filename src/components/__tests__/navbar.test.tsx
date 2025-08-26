@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-// Create a simplified Navbar component for testing
+
 const SimpleNavbar = () => {
     const navigationLinks = [
         { href: '/', label: 'Home' },

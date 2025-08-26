@@ -205,6 +205,7 @@ const Sidenav = memo<SidenavProps>(
                   onClick={handleDamageReportClick}
                   gap="2"
                   _hover={{ bg: 'blue.50' }}
+                  cursor="pointer"
                 >
                   <BsShield />
                   Schade melden
@@ -214,6 +215,7 @@ const Sidenav = memo<SidenavProps>(
                   asChild
                   gap="2"
                   _hover={{ bg: 'blue.50' }}
+                  cursor="pointer"
                 >
                   <Link
                     href={NAVIGATION_ROUTES.quote}
@@ -228,6 +230,7 @@ const Sidenav = memo<SidenavProps>(
                   asChild
                   gap="2"
                   _hover={{ bg: 'blue.50' }}
+                  cursor="pointer"
                 >
                   <Link
                     href={`tel:${CONTACT_INFO.phone}`}

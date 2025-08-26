@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-// Simple test component that should always work
+
 const SimpleComponent: React.FC<{ children?: React.ReactNode; testId?: string }> = ({
     children,
     testId = 'simple-component'

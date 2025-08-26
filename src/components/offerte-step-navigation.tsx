@@ -77,18 +77,6 @@ export default function OfferteStepNavigation({
                                 </Text>
                             )}
 
-                            {/* Connector Line */}
-                            {index < steps.length - 1 && (
-                                <Box
-                                    position="absolute"
-                                    top="24px"
-                                    left={`calc(${(index + 1) * 100}% - 24px)`}
-                                    width="calc(100% - 48px)"
-                                    height="2px"
-                                    bg={isCompleted ? "green.200" : "gray.200"}
-                                    zIndex={1}
-                                />
-                            )}
                         </Flex>
                     );
                 })}

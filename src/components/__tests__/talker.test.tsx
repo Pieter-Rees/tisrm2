@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-// Create a simplified Talker component for testing
+
 const SimpleTalker = ({ name, title, image, quote, company, 'data-testid': testId }: any) => {
     return (
         <section

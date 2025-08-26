@@ -18,7 +18,7 @@ export default function PerformanceMonitor({
     slowRenderThreshold = 16, // 60fps = 16.67ms per frame
 }: PerformanceMonitorProps) {
     useEffect(() => {
-        // Only run in development or when explicitly enabled in production
+
         if (process.env.NODE_ENV === 'production' && !enableInProduction) {
             return;
         }
@@ -122,7 +122,7 @@ export default function PerformanceMonitor({
     return null;
 }
 
-// Development-only wrapper
+
 export const DevPerformanceMonitor = () => {
     if (process.env.NODE_ENV !== 'development') {
         return null;

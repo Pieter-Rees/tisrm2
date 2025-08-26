@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-// Create a simplified ThreeElements component for testing
+
 const SimpleThreeElements = ({ elements, className, 'data-testid': testId }: any) => {
     const defaultElements = [
         {

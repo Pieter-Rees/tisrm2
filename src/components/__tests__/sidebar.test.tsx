@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-// Create a simplified Sidebar component for testing
+
 const SimpleSidebar = ({ className, 'data-testid': testId }: any) => {
     const sidebarCards = [
         {
@@ -19,7 +19,7 @@ const SimpleSidebar = ({ className, 'data-testid': testId }: any) => {
             title: 'Formulieren & Documenten',
             description:
                 'Download direct belangrijke formulieren voor uw schadeafhandeling en verzekeringsaanvragen',
-            cta: 'Naar bestanden',
+            cta: 'Naar downloads',
             ctaLink: '/downloads',
             buttonVariant: 'outline',
             phone: undefined,

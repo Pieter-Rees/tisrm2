@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-// Create a simplified ErrorBoundary component for testing
+
 interface ErrorBoundaryProps {
     children: React.ReactNode;
     fallback?: React.ReactNode;
@@ -34,21 +34,21 @@ class SimpleErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBound
             }
 
             return (
-                <div 
+                <div
                     data-testid={this.props['data-testid'] || 'error-boundary'}
-                    style={{ 
-                        display: 'flex', 
-                        alignItems: 'center', 
-                        justifyContent: 'center', 
-                        minHeight: '200px', 
-                        padding: '2rem' 
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        minHeight: '200px',
+                        padding: '2rem'
                     }}
                 >
-                    <div style={{ 
-                        display: 'flex', 
-                        flexDirection: 'column', 
-                        gap: '1rem', 
-                        textAlign: 'center' 
+                    <div style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '1rem',
+                        textAlign: 'center'
                     }}>
                         <h2 style={{ fontSize: '1.125rem', color: '#ef4444' }}>
                             Er is iets misgegaan

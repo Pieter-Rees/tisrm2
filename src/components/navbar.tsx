@@ -130,6 +130,7 @@ const Navbar = memo(() => {
               onClick={handleDamageReportClick}
               gap="2"
               _hover={{ bg: 'blue.50' }}
+              cursor="pointer"
             >
               <BsShield />
               Schade melden
@@ -137,13 +138,13 @@ const Navbar = memo(() => {
                 - Opens external damage report form in new window
               </VisuallyHidden>
             </MenuItem>
-            <MenuItem value="quote" asChild gap="2" _hover={{ bg: 'blue.50' }}>
+            <MenuItem value="quote" asChild gap="2" _hover={{ bg: 'blue.50' }} cursor="pointer">
               <Link href={NAVIGATION_ROUTES.quote}>
                 <BsFileText />
                 Offerte aanvragen
               </Link>
             </MenuItem>
-            <MenuItem value="call" asChild gap="2" _hover={{ bg: 'blue.50' }}>
+            <MenuItem value="call" asChild gap="2" _hover={{ bg: 'blue.50' }} cursor="pointer">
               <Link href={`tel:${CONTACT_INFO.phone}`}>
                 <BsTelephone />
                 Bel nu

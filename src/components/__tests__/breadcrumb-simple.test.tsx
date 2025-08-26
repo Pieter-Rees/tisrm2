@@ -6,7 +6,7 @@ jest.mock('next/navigation', () => ({
     usePathname: () => '/verzekeringen/particulier',
 }));
 
-// Create a simple test component that mimics the Breadcrumb functionality
+
 const SimpleBreadcrumb = ({ separator = '>' }: { separator?: string }) => {
     const paths = ['verzekeringen', 'particulier'];
 
