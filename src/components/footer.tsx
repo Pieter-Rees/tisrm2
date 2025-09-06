@@ -4,15 +4,7 @@ import FooterLogos from '@/components/footer-logos';
 import Logo from '@/components/logo';
 import { CURRENT_YEAR } from '@/constants/app';
 import { contactInfo } from '@/data/general';
-import {
-  footerContainerStyles,
-  // footerGridStyles,
-  // footerColumnStyles,
-  // footerHeadingStyles,
-  // footerTextStyles,
-  // footerLinksContainerStyles,
-  // footerLinkButtonStyles,
-} from '@/styles/components/footer.styles';
+import { footerContainerStyles } from '@/styles/components/footer.styles';
 import {
   Box,
   Button,
@@ -27,7 +19,7 @@ import {
 import Link from 'next/link';
 
 const contactLinks = [
-  { href: 'tel:+310206368191', label: '+31 020 636 8191', external: false },
+  { href: 'tel:+310206368191', label: '+31 20 636 8191', external: false },
   { href: 'mailto:info@tisrm.nl', label: 'info@tisrm.nl', external: false },
   { href: contactInfo.social.linkedIn, label: 'LinkedIn', external: true },
 ] as const;
@@ -46,8 +38,10 @@ export default function Footer() {
       <FooterLogos width="auto" height="auto" />
       <Box {...footerContainerStyles}>
         <Container>
-          <Grid gridTemplateColumns={{ base: '1fr', md: 'repeat(3, 1fr)' }} gap="16">
-
+          <Grid
+            gridTemplateColumns={{ base: '1fr', md: 'repeat(3, 1fr)' }}
+            gap="16"
+          >
             <GridItem>
               <VStack alignItems="start" gap="4">
                 <Heading fontSize="md" color="white">

@@ -22,7 +22,7 @@ import Link from 'next/link';
 import { BsLinkedin } from 'react-icons/bs';
 
 const contactButtons = [
-  { href: 'tel:+310206368191', label: '+31 020 636 8191', external: false },
+  { href: 'tel:+310206368191', label: '+31 20 636 8191', external: false },
   { href: 'mailto:info@tisrm.nl', label: 'info@tisrm.nl', external: false },
   {
     href: contactInfo.social.linkedIn,
