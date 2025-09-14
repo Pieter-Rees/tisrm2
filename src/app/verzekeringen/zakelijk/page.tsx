@@ -1,14 +1,47 @@
 import Breadcrumb from '@/components/breadcrumb';
-import { FadeInUp, StaggerContainer } from '@/components/page-animation';
 import { UnifiedLayout } from '@/components/layout';
-import { PARAGRAPH_STYLES, SECTION_SPACING } from '@/constants/typography';
-import { Flex, Text } from '@chakra-ui/react';
+import { FadeInUp, StaggerContainer } from '@/components/page-animation';
+import StarList from '@/components/star-list';
+import {
+  HEADING_STYLES,
+  PARAGRAPH_STYLES,
+  SECTION_SPACING,
+} from '@/constants/typography';
+import { Box, Flex, Grid, GridItem, Heading, Text } from '@chakra-ui/react';
 
 export default function Zakelijk() {
+  const vastgoedList = ['Opstal', 'Huurderving', 'Taxaties'];
+
+  const inhoudHorecaList = [
+    'Bedrijfsschade',
+    'Huurdersbelang',
+    'Inventaris en goederen',
+    'Elektronica',
+  ];
+
+  const bouwTransportList = [
+    'Construction Allrisk (CAR)',
+    'Goederentransport',
+    'Transport eigen vervoer',
+    'Transport en verblijf verzekering',
+  ];
+
+  const aansprakelijkheidList = [
+    'Bedrijfs- en/of beroepsaansprakelijkheid',
+    'Vervoerdersaansprakelijkheid',
+    'Bestuurdersaansprakelijkheid',
+    'Milieuschade',
+    'Werkgeversaansprakelijkheid',
+  ];
+
+  const motorrijtuigenList = ['Personen en bedrijfswagens', 'Wagenparken'];
+
+  const overigeList = ['Rechtsbijstand', 'Collectieve ongevallen'];
+
   return (
     <UnifiedLayout title="Zakelijk" breadcrumb={<Breadcrumb capitalizeLinks />}>
       <StaggerContainer>
-        <Flex direction="column" gap={SECTION_SPACING.small}>
+        <Flex direction="column" gap={SECTION_SPACING.large}>
           <FadeInUp>
             <Text {...PARAGRAPH_STYLES.body}>
               TIS is al meer dan 25 jaar een landelijk werkend
@@ -40,6 +73,127 @@ export default function Zakelijk() {
               Wilt u uw verzekeringspakket een grondig met ons doorlopen? Neem
               dan gerust contact met ons op!
             </Text>
+          </FadeInUp>
+
+          <FadeInUp delay={0.6}>
+            <Grid
+              templateColumns={{
+                base: '1fr',
+                md: 'repeat(2, 1fr)',
+                lg: 'repeat(3, 1fr)',
+              }}
+              gap={6}
+              mt={8}
+            >
+              <GridItem display="flex" flexDirection="column" minW="0">
+                <Box
+                  bg="gray.50"
+                  p="6"
+                  borderRadius="lg"
+                  boxShadow="sm"
+                  transition="all 0.3s ease"
+                  _hover={{
+                    boxShadow: 'md',
+                    transform: 'translateY(-2px)',
+                  }}
+                >
+                  <Heading as="h3" {...HEADING_STYLES.h4}>
+                    Vastgoed en bedrijfsgebouwen
+                  </Heading>
+                  <StarList listItems={vastgoedList} />
+                </Box>
+              </GridItem>
+              <GridItem display="flex" flexDirection="column" minW="0">
+                <Box
+                  bg="gray.50"
+                  p="6"
+                  borderRadius="lg"
+                  boxShadow="sm"
+                  transition="all 0.3s ease"
+                  _hover={{
+                    boxShadow: 'md',
+                    transform: 'translateY(-2px)',
+                  }}
+                >
+                  <Heading as="h3" {...HEADING_STYLES.h4}>
+                    Inhoud en horeca
+                  </Heading>
+                  <StarList listItems={inhoudHorecaList} />
+                </Box>
+              </GridItem>
+              <GridItem display="flex" flexDirection="column" minW="0">
+                <Box
+                  bg="gray.50"
+                  p="6"
+                  borderRadius="lg"
+                  boxShadow="sm"
+                  transition="all 0.3s ease"
+                  _hover={{
+                    boxShadow: 'md',
+                    transform: 'translateY(-2px)',
+                  }}
+                >
+                  <Heading as="h3" {...HEADING_STYLES.h4}>
+                    Bouw en transport
+                  </Heading>
+                  <StarList listItems={bouwTransportList} />
+                </Box>
+              </GridItem>
+              <GridItem display="flex" flexDirection="column" minW="0">
+                <Box
+                  bg="gray.50"
+                  p="6"
+                  borderRadius="lg"
+                  boxShadow="sm"
+                  transition="all 0.3s ease"
+                  _hover={{
+                    boxShadow: 'md',
+                    transform: 'translateY(-2px)',
+                  }}
+                >
+                  <Heading as="h3" {...HEADING_STYLES.h4}>
+                    Aansprakelijkheid
+                  </Heading>
+                  <StarList listItems={aansprakelijkheidList} />
+                </Box>
+              </GridItem>
+              <GridItem display="flex" flexDirection="column" minW="0">
+                <Box
+                  bg="gray.50"
+                  p="6"
+                  borderRadius="lg"
+                  boxShadow="sm"
+                  transition="all 0.3s ease"
+                  _hover={{
+                    boxShadow: 'md',
+                    transform: 'translateY(-2px)',
+                  }}
+                >
+                  <Heading as="h3" {...HEADING_STYLES.h4}>
+                    Motorrijtuigen
+                  </Heading>
+                  <StarList listItems={motorrijtuigenList} />
+                </Box>
+              </GridItem>
+              <GridItem display="flex" flexDirection="column" minW="0">
+                <Box
+                  bg="gray.50"
+                  p="6"
+                  borderRadius="lg"
+                  boxShadow="sm"
+                  transition="all 0.3s ease"
+                  _hover={{
+                    boxShadow: 'md',
+                    transform: 'translateY(-2px)',
+                  }}
+                >
+                  <Heading as="h3" {...HEADING_STYLES.h4}>
+                    Overige
+                  </Heading>
+                  <StarList listItems={overigeList} />
+                </Box>
+              </GridItem>
+            </Grid>
           </FadeInUp>
         </Flex>
       </StaggerContainer>
