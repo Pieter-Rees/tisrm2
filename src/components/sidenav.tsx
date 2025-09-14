@@ -14,7 +14,13 @@ import {
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { memo, useCallback, useEffect } from 'react';
-import { BsChevronDown, BsShield, BsTelephone, BsX, BsFileText } from 'react-icons/bs';
+import {
+  BsChevronDown,
+  BsFileText,
+  BsShield,
+  BsTelephone,
+  BsX,
+} from 'react-icons/bs';
 
 import Logo from '@/components/logo';
 import {
@@ -23,6 +29,7 @@ import {
   NAVIGATION_ROUTES,
   UI_CONSTANTS,
 } from '@/constants/app';
+import { SPACING_PATTERNS } from '@/constants/layout';
 import { cn } from '@/lib/utils';
 // import {
 //   sidenavContainerStyles,
@@ -99,7 +106,12 @@ const Sidenav = memo<SidenavProps>(
         borderColor="gray.200"
         left={showSideNav ? '0' : '-100%'}
       >
-        <Box position="absolute" top="4" right="4" zIndex="1">
+        <Box
+          position="absolute"
+          top={SPACING_PATTERNS.navigation.item}
+          right={SPACING_PATTERNS.navigation.item}
+          zIndex="1"
+        >
           <Button
             transition="all 0.2s ease-in-out"
             _hover={{ bg: 'gray.100' }}
@@ -114,11 +126,11 @@ const Sidenav = memo<SidenavProps>(
           height="full"
           justifyContent="center"
           alignItems="center"
-          p="8"
-          pt="16"
-          gap="8"
+          p={SPACING_PATTERNS.page.section}
+          pt={SPACING_PATTERNS.page.section}
+          gap={SPACING_PATTERNS.page.section}
         >
-          <Box mb="4">
+          <Box mb={SPACING_PATTERNS.navigation.item}>
             <Link
               href={NAVIGATION_ROUTES.home}
               onClick={handleLinkClick}
@@ -129,7 +141,7 @@ const Sidenav = memo<SidenavProps>(
           </Box>
 
           <VStack
-            gap="3"
+            gap={SPACING_PATTERNS.navigation.group}
             alignItems="center"
             width="full"
             listStyleType="none"

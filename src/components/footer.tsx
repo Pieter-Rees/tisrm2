@@ -4,7 +4,10 @@ import FooterLogos from '@/components/footer-logos';
 import Logo from '@/components/logo';
 import { CURRENT_YEAR } from '@/constants/app';
 import { contactInfo } from '@/data/general';
-import { footerContainerStyles } from '@/styles/components/footer.styles';
+import {
+  footerContainerStyles,
+  footerGridStyles,
+} from '@/styles/components/footer.styles';
 import {
   Box,
   Button,
@@ -38,10 +41,7 @@ export default function Footer() {
       <FooterLogos width="auto" height="auto" />
       <Box {...footerContainerStyles}>
         <Container>
-          <Grid
-            gridTemplateColumns={{ base: '1fr', md: 'repeat(3, 1fr)' }}
-            gap="16"
-          >
+          <Grid {...footerGridStyles}>
             <GridItem>
               <VStack alignItems="start" gap="4">
                 <Heading fontSize="md" color="white">

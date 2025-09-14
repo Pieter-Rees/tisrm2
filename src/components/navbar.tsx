@@ -14,13 +14,19 @@ import {
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { memo, useCallback } from 'react';
-import { BsChevronDown, BsShield, BsTelephone, BsFileText } from 'react-icons/bs';
+import {
+  BsChevronDown,
+  BsFileText,
+  BsShield,
+  BsTelephone,
+} from 'react-icons/bs';
 
 import {
   CONTACT_INFO,
   EXTERNAL_LINKS,
   NAVIGATION_ROUTES,
 } from '@/constants/app';
+import { SPACING_PATTERNS } from '@/constants/layout';
 // import {
 //   navbarContainerStyles,
 //   navbarLinksContainerStyles,
@@ -51,34 +57,47 @@ const Navbar = memo(() => {
   }, []);
 
   return (
-    <Flex alignItems="center" gap="8" width="full" justifyContent="space-between">
+    <Flex
+      alignItems="center"
+      gap={SPACING_PATTERNS.navigation.container}
+      width="full"
+      justifyContent="space-between"
+    >
       <Box hideBelow="xl">
-        <HStack gap="6" fontSize={{ base: 'sm', '2xl': 'md' }} fontWeight="medium" listStyleType="none" margin="0" padding="0">
+        <HStack
+          gap={SPACING_PATTERNS.navigation.group}
+          fontSize={{ base: 'sm', '2xl': 'md' }}
+          fontWeight="medium"
+          listStyleType="none"
+          margin="0"
+          padding="0"
+        >
           {NAVIGATION_LINKS.map(({ href, label }) => {
             const isActive =
               pathname === href || (href !== '/' && pathname.startsWith(href));
 
             return (
               <Box key={href}>
-                <Link
-                  href={href}
-                  aria-current={isActive ? 'page' : undefined}
-                >
+                <Link href={href} aria-current={isActive ? 'page' : undefined}>
                   <Box
                     textDecoration="none"
                     display="block"
-                    paddingBottom="4px"
+                    pb={SPACING_PATTERNS.navigation.item}
                     position="relative"
                     color={isActive ? 'blue.500' : 'gray.700'}
                     fontWeight={isActive ? '600' : '500'}
                     borderBottom="2px solid"
                     borderBottomColor={isActive ? 'blue.500' : 'transparent'}
                     transition="all 0.2s ease-in-out"
-                    _hover={!isActive ? {
-                      color: 'blue.500',
-                      borderBottomColor: 'blue.200',
-                      transform: 'translateY(-1px)',
-                    } : {}}
+                    _hover={
+                      !isActive ?
+                        {
+                          color: 'blue.500',
+                          borderBottomColor: 'blue.200',
+                          transform: 'translateY(-1px)',
+                        }
+                      : {}
+                    }
                   >
                     {label}
                   </Box>
@@ -138,13 +157,25 @@ const Navbar = memo(() => {
                 - Opens external damage report form in new window
               </VisuallyHidden>
             </MenuItem>
-            <MenuItem value="quote" asChild gap="2" _hover={{ bg: 'blue.50' }} cursor="pointer">
+            <MenuItem
+              value="quote"
+              asChild
+              gap="2"
+              _hover={{ bg: 'blue.50' }}
+              cursor="pointer"
+            >
               <Link href={NAVIGATION_ROUTES.quote}>
                 <BsFileText />
                 Offerte aanvragen
               </Link>
             </MenuItem>
-            <MenuItem value="call" asChild gap="2" _hover={{ bg: 'blue.50' }} cursor="pointer">
+            <MenuItem
+              value="call"
+              asChild
+              gap="2"
+              _hover={{ bg: 'blue.50' }}
+              cursor="pointer"
+            >
               <Link href={`tel:${CONTACT_INFO.phone}`}>
                 <BsTelephone />
                 Bel nu
