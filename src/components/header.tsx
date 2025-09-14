@@ -11,9 +11,9 @@ import Sidenav from '@/components/sidenav';
 import { NAVIGATION_ROUTES } from '@/constants/app';
 import { useDisclosure } from '@/hooks/use-disclosure';
 import {
+  headerContainerStyles,
+  headerLogoStyles,
   headerStyles,
-  // headerContainerStyles,
-  // headerLogoStyles,
   // headerNavStyles,
   // headerMenuButtonStyles,
   mobileMenuOverlayStyles,
@@ -28,8 +28,8 @@ const Header = memo(() => {
   return (
     <Box as="header" role="banner" {...headerStyles}>
       <Container>
-        <Flex alignItems="center" justifyContent="space-between" gap="8">
-          <Box flex="0 0 auto" padding="4">
+        <Flex {...headerContainerStyles}>
+          <Box {...headerLogoStyles}>
             <Link
               href={NAVIGATION_ROUTES.home}
               aria-label="Go to homepage"
@@ -58,7 +58,9 @@ const Header = memo(() => {
               aria-expanded={showSideNav}
               aria-controls="mobile-navigation"
             >
-              {showSideNav ? <BsX size="24" /> : <BsList size="24" />}
+              {showSideNav ?
+                <BsX size="24" />
+              : <BsList size="24" />}
             </Button>
           </Box>
         </Flex>

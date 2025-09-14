@@ -8,16 +8,16 @@
 export const GRID_CONFIGS = {
   singleColumn: { base: 'repeat(1, 1fr)' },
   doubleColumn: { base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' },
-  tripleColumn: { 
-    base: 'repeat(1, 1fr)', 
-    md: 'repeat(2, 1fr)', 
-    lg: 'repeat(3, 1fr)' 
+  tripleColumn: {
+    base: 'repeat(1, 1fr)',
+    md: 'repeat(2, 1fr)',
+    lg: 'repeat(3, 1fr)'
   },
-  quadColumn: { 
-    base: 'repeat(1, 1fr)', 
-    md: 'repeat(2, 1fr)', 
+  quadColumn: {
+    base: 'repeat(1, 1fr)',
+    md: 'repeat(2, 1fr)',
     lg: 'repeat(3, 1fr)',
-    xl: 'repeat(4, 1fr)' 
+    xl: 'repeat(4, 1fr)'
   },
   adaptive: (columns: number) => ({
     base: 'repeat(1, 1fr)',
@@ -27,7 +27,7 @@ export const GRID_CONFIGS = {
   }),
 } as const;
 
-// Spacing scales
+// Comprehensive spacing system
 export const SPACING_SCALE = {
   none: '0',
   xs: { base: '1', md: '2' },
@@ -37,6 +37,100 @@ export const SPACING_SCALE = {
   xl: { base: '8', md: '12' },
   '2xl': { base: '12', md: '16' },
   '3xl': { base: '16', md: '20' },
+  '4xl': { base: '20', md: '24' },
+  '5xl': { base: '24', md: '32' },
+} as const;
+
+// Component-specific spacing patterns
+export const COMPONENT_SPACING = {
+  // Container padding
+  container: {
+    xs: { base: '4', md: '6' },
+    sm: { base: '6', md: '8' },
+    md: { base: '8', md: '12' },
+    lg: { base: '12', md: '16' },
+    xl: { base: '16', md: '20' },
+  },
+  // Section spacing
+  section: {
+    xs: { base: '8', md: '12' },
+    sm: { base: '12', md: '16' },
+    md: { base: '16', md: '20' },
+    lg: { base: '20', md: '24' },
+    xl: { base: '24', md: '32' },
+  },
+  // Card padding
+  card: {
+    xs: { base: '2', md: '3' },
+    sm: { base: '3', md: '4' },
+    md: { base: '4', md: '6' },
+    lg: { base: '6', md: '8' },
+    xl: { base: '8', md: '12' },
+  },
+  // Button padding
+  button: {
+    xs: { base: '2', md: '3' },
+    sm: { base: '3', md: '4' },
+    md: { base: '4', md: '6' },
+    lg: { base: '6', md: '8' },
+    xl: { base: '8', md: '10' },
+  },
+  // Form spacing
+  form: {
+    field: { base: '4', md: '6' },
+    group: { base: '6', md: '8' },
+    section: { base: '8', md: '12' },
+  },
+  // Navigation spacing
+  nav: {
+    item: { base: '2', md: '3' },
+    group: { base: '4', md: '6' },
+    container: { base: '6', md: '8' },
+  },
+  // Grid gaps
+  grid: {
+    xs: { base: '2', md: '3' },
+    sm: { base: '4', md: '6' },
+    md: { base: '6', md: '8' },
+    lg: { base: '8', md: '12' },
+    xl: { base: '12', md: '16' },
+  },
+} as const;
+
+// Common spacing patterns
+export const SPACING_PATTERNS = {
+  // Page layouts
+  page: {
+    padding: COMPONENT_SPACING.container.md,
+    section: COMPONENT_SPACING.section.md,
+  },
+  // Cards
+  card: {
+    padding: COMPONENT_SPACING.card.md,
+    gap: SPACING_SCALE.md,
+  },
+  // Headers
+  header: {
+    padding: COMPONENT_SPACING.container.sm,
+    gap: SPACING_SCALE.lg,
+  },
+  // Footers
+  footer: {
+    padding: COMPONENT_SPACING.section.lg,
+    gap: SPACING_SCALE.lg,
+  },
+  // Forms
+  form: {
+    field: COMPONENT_SPACING.form.field,
+    group: COMPONENT_SPACING.form.group,
+    section: COMPONENT_SPACING.form.section,
+  },
+  // Navigation
+  navigation: {
+    item: COMPONENT_SPACING.nav.item,
+    group: COMPONENT_SPACING.nav.group,
+    container: COMPONENT_SPACING.nav.container,
+  },
 } as const;
 
 // Container widths
@@ -93,23 +187,23 @@ export const RESPONSIVE_VALUES = {
 export const FLEX_PATTERNS = {
   column: { direction: 'column' as const },
   row: { direction: 'row' as const },
-  center: { 
-    align: 'center' as const, 
-    justify: 'center' as const 
+  center: {
+    align: 'center' as const,
+    justify: 'center' as const
   },
-  spaceBetween: { 
-    justify: 'space-between' as const 
+  spaceBetween: {
+    justify: 'space-between' as const
   },
-  spaceAround: { 
-    justify: 'space-around' as const 
+  spaceAround: {
+    justify: 'space-around' as const
   },
-  start: { 
-    align: 'flex-start' as const, 
-    justify: 'flex-start' as const 
+  start: {
+    align: 'flex-start' as const,
+    justify: 'flex-start' as const
   },
-  end: { 
-    align: 'flex-end' as const, 
-    justify: 'flex-end' as const 
+  end: {
+    align: 'flex-end' as const,
+    justify: 'flex-end' as const
   },
 } as const;
 

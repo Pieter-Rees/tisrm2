@@ -19,5 +19,5 @@ export * from './animations';
 
 // Re-export constants for convenience
 export { HEADING_STYLES, PARAGRAPH_STYLES, LIST_STYLES, SECTION_SPACING, CONTENT_WIDTH } from '@/constants/typography';
-export { SPACING_SCALE, GRID_CONFIGS, RESPONSIVE_VALUES, Z_INDEX_SCALE } from '@/constants/layout';
+export { SPACING_SCALE, COMPONENT_SPACING, SPACING_PATTERNS, GRID_CONFIGS, RESPONSIVE_VALUES, Z_INDEX_SCALE } from '@/constants/layout';
 export { UI_CONSTANTS } from '@/constants/app';

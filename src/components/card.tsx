@@ -1,10 +1,16 @@
 'use client';
 
-import { Box, Button, Heading, Text, Icon } from '@chakra-ui/react';
+import { Box, Button, Heading, Icon, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 import { memo } from 'react';
-import { BsArrowRight, BsDownload, BsTelephone, BsFileEarmarkText } from 'react-icons/bs';
+import {
+  BsArrowRight,
+  BsDownload,
+  BsFileEarmarkText,
+  BsTelephone,
+} from 'react-icons/bs';
 
+import { SPACING_PATTERNS } from '@/constants/layout';
 import { HEADING_STYLES, PARAGRAPH_STYLES } from '@/constants/typography';
 import { cn } from '@/lib/utils';
 import { getCardStyles } from '@/styles/components/card.styles';
@@ -36,7 +42,13 @@ const Card = memo<CardProps>(
             position="relative"
             overflow="hidden"
             borderTopRadius="lg"
-            height={{ base: '140px', sm: '160px', md: '180px', lg: '200px', xl: '240px' }}
+            height={{
+              base: '140px',
+              sm: '160px',
+              md: '180px',
+              lg: '200px',
+              xl: '240px',
+            }}
             bg="gray.100"
           >
             <Image
@@ -54,23 +66,14 @@ const Card = memo<CardProps>(
         )}
 
         <Box
-          p={variant === 'downloads' ? '0' : { base: '2', sm: '3', md: '4', lg: '5', xl: '6' }}
+          p={variant === 'downloads' ? '0' : SPACING_PATTERNS.card.padding}
           flex="1"
           display="flex"
           flexDirection="column"
         >
           {variant === 'downloads' && (
-            <Box
-              display="flex"
-              alignItems="center"
-              gap="3"
-              mb="4"
-            >
-              <Icon
-                as={BsFileEarmarkText}
-                color="blue.500"
-                boxSize="5"
-              />
+            <Box display="flex" alignItems="center" gap="3" mb="4">
+              <Icon as={BsFileEarmarkText} color="blue.500" boxSize="5" />
               <Heading as="h3" {...HEADING_STYLES.h4} mb="0">
                 {title}
               </Heading>
@@ -83,10 +86,7 @@ const Card = memo<CardProps>(
           )}
 
           {description && (
-            <Text
-              {...PARAGRAPH_STYLES.body}
-              flex="1"
-            >
+            <Text {...PARAGRAPH_STYLES.body} flex="1">
               {description}
             </Text>
           )}

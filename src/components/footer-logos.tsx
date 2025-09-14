@@ -1,5 +1,6 @@
 'use client';
 
+import { SPACING_PATTERNS } from '@/constants/layout';
 import type { FooterLogosProps } from '@/types/components';
 import { Box, Flex } from '@chakra-ui/react';
 import Image from 'next/image';
@@ -19,12 +20,12 @@ export default function FooterLogos({ height = 'auto' }: FooterLogosProps) {
     <Flex
       backgroundColor="gray.100"
       flexDirection={{ base: 'column', md: 'row' }}
-      py="8"
-      gap="8"
+      py={SPACING_PATTERNS.page.section}
+      gap={SPACING_PATTERNS.page.section}
       width="full"
       justifyContent="center"
       alignItems="center"
-      mt="16"
+      mt={SPACING_PATTERNS.page.section}
     >
       {logos.map(({ src, alt }) => (
         <Box key={src} height={height} width="200px">

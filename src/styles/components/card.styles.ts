@@ -3,6 +3,7 @@
  */
 
 import type { SystemStyleObject } from '@chakra-ui/react';
+import { SPACING_PATTERNS } from '@/constants/layout';
 
 // Card variant definitions
 export const CARD_VARIANTS = {
@@ -19,7 +20,7 @@ export const CARD_VARIANTS = {
     border: '1px solid',
     borderColor: 'blue.200',
     shadow: 'sm',
-    p: { base: '5', md: '6' },
+    p: SPACING_PATTERNS.card.padding,
     transition: 'all 0.2s ease-in-out',
   },
   elevated: {
@@ -81,7 +82,7 @@ export const cardImageStyles: SystemStyleObject = {
 
 // Content container styles
 export const cardContentStyles: SystemStyleObject = {
-  p: { base: '2', sm: '3', md: '4', lg: '5', xl: '6' },
+  p: SPACING_PATTERNS.card.padding,
   flex: '1',
   display: 'flex',
   flexDirection: 'column',

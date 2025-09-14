@@ -4,17 +4,18 @@
 
 import type { SystemStyleObject } from '@chakra-ui/react';
 import { UI_CONSTANTS } from '@/constants/app';
+import { SPACING_PATTERNS } from '@/constants/layout';
 
 // Footer container styles
 export const footerContainerStyles: SystemStyleObject = {
   bg: 'gray.700',
-  py: '16',
+  py: SPACING_PATTERNS.footer.padding,
 };
 
 // Footer grid layout
 export const footerGridStyles: SystemStyleObject = {
   gridTemplateColumns: { base: '1fr', md: 'repeat(3, 1fr)' },
-  gap: '16',
+  gap: SPACING_PATTERNS.footer.gap,
 };
 
 // Footer column styles

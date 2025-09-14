@@ -3,12 +3,13 @@
  */
 
 import type { SystemStyleObject } from '@chakra-ui/react';
+import { SPACING_PATTERNS } from '@/constants/layout';
 
 // Style extractors removed due to TypeScript type conflicts
 
 // Breadcrumb styles
 export const breadcrumbContainerStyles: SystemStyleObject = {
-  gap: '8',
+  gap: SPACING_PATTERNS.page.section,
   fontSize: { base: 'md', xl: 'lg' },
   color: 'gray.700',
 };

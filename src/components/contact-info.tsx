@@ -1,5 +1,6 @@
 'use client';
 
+import { SPACING_PATTERNS } from '@/constants/layout';
 import { contactInfo } from '@/data/general';
 import type { ContactInfoProps } from '@/types/components';
 // import {
@@ -36,16 +37,16 @@ export default function ContactInfo({
 }: ContactInfoProps) {
   return (
     <>
-      <SimpleGrid gap="10">
+      <SimpleGrid gap={SPACING_PATTERNS.page.section}>
         <Box>
-          <VStack alignItems="start" gap="2">
+          <VStack alignItems="start" gap={SPACING_PATTERNS.navigation.item}>
             <Text color="gray.800">{contactInfo.address.street}</Text>
             <Text color="gray.800">{contactInfo.email}</Text>
             <Text color="gray.800">{contactInfo.address.city}</Text>
           </VStack>
         </Box>
         <Box>
-          <VStack alignItems="start" gap="2">
+          <VStack alignItems="start" gap={SPACING_PATTERNS.navigation.item}>
             <Text color="gray.800">{contactInfo.postalBox.box}</Text>
             <Text color="gray.800">{contactInfo.postalBox.postalCode}</Text>
             <Text color="gray.800">{contactInfo.postalBox.city}</Text>
@@ -53,8 +54,8 @@ export default function ContactInfo({
         </Box>
       </SimpleGrid>
 
-      <Flex justifyContent="start" mt="8">
-        <HStack alignItems="start" gap="2">
+      <Flex justifyContent="start" mt={SPACING_PATTERNS.page.section}>
+        <HStack alignItems="start" gap={SPACING_PATTERNS.navigation.item}>
           {contactButtons.map(({ href, label, external }) => (
             <Button
               key={href}

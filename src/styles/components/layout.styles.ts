@@ -4,6 +4,7 @@
 
 import type { SystemStyleObject } from '@chakra-ui/react';
 import { UI_CONSTANTS } from '@/constants/app';
+import { SPACING_PATTERNS } from '@/constants/layout';
 
 // Header styles
 export const headerStyles: SystemStyleObject = {
@@ -19,12 +20,12 @@ export const headerStyles: SystemStyleObject = {
 export const headerContainerStyles: SystemStyleObject = {
   alignItems: 'center',
   justifyContent: 'space-between',
-  gap: '8',
+  gap: SPACING_PATTERNS.header.gap,
 };
 
 export const headerLogoStyles: SystemStyleObject = {
   flex: '0 0 auto',
-  padding: '4',
+  padding: SPACING_PATTERNS.header.padding,
 };
 
 export const headerNavStyles: SystemStyleObject = {
@@ -80,12 +81,12 @@ export const sidebarHelpTextStyles: SystemStyleObject = {
 export const layoutGridStyles = {
   withSidebar: {
     templateColumns: { base: '1fr', xl: '3fr 1fr' },
-    gap: '8',
+    gap: SPACING_PATTERNS.page.section,
     alignItems: 'start',
   },
   withoutSidebar: {
     templateColumns: '1fr',
-    gap: '8',
+    gap: SPACING_PATTERNS.page.section,
     alignItems: 'start',
   },
 } as const;
@@ -93,7 +94,7 @@ export const layoutGridStyles = {
 // Content area styles
 export const contentAreaStyles: SystemStyleObject = {
   flexDirection: 'column' as const,
-  gap: '8',
+  gap: SPACING_PATTERNS.page.section,
 };
 
 // Header section within content
