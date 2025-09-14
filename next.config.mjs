@@ -13,6 +13,11 @@ const nextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     remotePatterns: [],
     unoptimized: false,
+    loader: 'default',
+    path: '/_next/image',
+    domains: [],
+    loaderFile: undefined,
+    disableStaticImages: false,
   },
   typedRoutes: true,
   experimental: {
@@ -21,9 +26,14 @@ const nextConfig = {
         '@chakra-ui/react',
         'framer-motion',
         'react-icons',
+        'react-hook-form',
+        'axios',
+        'clsx',
       ],
       optimizeCss: true,
       scrollRestoration: true,
+      optimizeServerReact: true,
+      webVitalsAttribution: ['CLS', 'LCP', 'FCP', 'FID', 'TTFB'],
     }),
   },
   serverExternalPackages: ['@next/bundle-analyzer'],
@@ -42,6 +52,7 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV === 'production',
     reactRemoveProperties: process.env.NODE_ENV === 'production',
   },
+  generateEtags: true,
   poweredByHeader: false,
   compress: true,
   reactStrictMode: true,
@@ -62,21 +73,73 @@ const nextConfig = {
     },
   }),
   bundlePagesRouterDependencies: true,
-  ...(process.env.ANALYZE === 'true' &&
-    process.env.TURBOPACK !== '1' && {
-      webpack: (config, { isServer }) => {
-        if (!isServer) {
-          const { BundleAnalyzerPlugin } = require('@next/bundle-analyzer')();
-          config.plugins.push(
-            new BundleAnalyzerPlugin({
-              analyzerMode: 'static',
-              openAnalyzer: false,
-            }),
-          );
-        }
-        return config;
-      },
-    }),
+  webpack: (config, { isServer, dev }) => {
+    // Production optimizations
+    if (!dev && !isServer) {
+      // Enhanced code splitting
+      config.optimization.splitChunks = {
+        chunks: 'all',
+        minSize: 30000,
+        maxSize: 500000,
+        minChunks: 1,
+        cacheGroups: {
+          ...config.optimization.splitChunks.cacheGroups,
+          styles: {
+            name: 'styles',
+            test: /\.(css|scss|sass)$/,
+            chunks: 'all',
+            enforce: true,
+            priority: 30,
+          },
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendors',
+            chunks: 'all',
+            priority: 10,
+            minSize: 50000,
+            maxSize: 500000,
+          },
+          chakra: {
+            test: /[\\/]node_modules[\\/]@chakra-ui[\\/]/,
+            name: 'chakra',
+            chunks: 'all',
+            priority: 25,
+            minSize: 30000,
+            maxSize: 300000,
+          },
+          framer: {
+            test: /[\\/]node_modules[\\/]framer-motion[\\/]/,
+            name: 'framer',
+            chunks: 'all',
+            priority: 25,
+            minSize: 30000,
+            maxSize: 200000,
+          },
+          react: {
+            test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+            name: 'react',
+            chunks: 'all',
+            priority: 20,
+            minSize: 30000,
+            maxSize: 200000,
+          },
+        },
+      };
+
+      // Add performance hints
+      config.performance = {
+        hints: 'warning',
+        maxEntrypointSize: 400000,
+        maxAssetSize: 300000,
+      };
+    }
+
+    // Add webpack optimizations for all builds
+    config.optimization.usedExports = true;
+    config.optimization.sideEffects = false;
+
+    return config;
+  },
 };
 
 export default nextConfig;

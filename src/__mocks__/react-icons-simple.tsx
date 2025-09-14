@@ -1,28 +1,30 @@
 import React from 'react';
 
 interface IconProps {
-    size?: string | number;
-    [key: string]: unknown;
+  size?: string | number;
+  [key: string]: unknown;
 }
 
 // Simple mock for react-icons components
 const createIconMock = (name: string) => {
-    const IconComponent = React.forwardRef<SVGSVGElement, IconProps>(({ size, ...props }, ref) => (
-        <svg
-            ref={ref}
-            data-testid={`icon-${name}`}
-            data-size={size}
-            width={size || "1em"}
-            height={size || "1em"}
-            fill="currentColor"
-            viewBox="0 0 16 16"
-            {...props}
-        >
-            <title>{name}</title>
-        </svg>
-    ));
-    IconComponent.displayName = name;
-    return IconComponent;
+  const IconComponent = React.forwardRef<SVGSVGElement, IconProps>(
+    ({ size, ...props }, ref) => (
+      <svg
+        ref={ref}
+        data-testid={`icon-${name}`}
+        data-size={size}
+        width={(size as string) || '1em'}
+        height={(size as string) || '1em'}
+        fill="currentColor"
+        viewBox="0 0 16 16"
+        {...props}
+      >
+        <title>{name}</title>
+      </svg>
+    ),
+  );
+  IconComponent.displayName = name;
+  return IconComponent;
 };
 
 // Export all icons as named exports

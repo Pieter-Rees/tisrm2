@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import { useDisclosure } from '../use-disclosure';
+import { useDisclosure } from '@/hooks/use-disclosure';
 
 describe('useDisclosure', () => {
   it('should initialize with default value', () => {

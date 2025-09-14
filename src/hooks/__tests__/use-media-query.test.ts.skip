@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react';
-import { useMediaQuery, useBreakpoints } from '../use-media-query';
+import { useMediaQuery, useBreakpoints } from '@/hooks/use-media-query';
 
 // Mock matchMedia
 const mockMatchMedia = (matches: boolean) => {

@@ -28,7 +28,7 @@ const Header = memo(() => {
   return (
     <Box as="header" role="banner" {...headerStyles}>
       <Container>
-        <Flex {...headerContainerStyles}>
+        <Flex {...headerContainerStyles} direction="row">
           <Box {...headerLogoStyles}>
             <Link
               href={NAVIGATION_ROUTES.home}

@@ -1,10 +1,10 @@
 'use client';
 
 import { BaseLayout } from '@/components/layout';
+import OfferteStepNavigation from '@/components/offerte-step-navigation';
 import { Field } from '@/components/ui/field';
 import { UI_CONSTANTS } from '@/constants/app';
 import { useLocalStorage } from '@/hooks/use-local-storage';
-import OfferteStepNavigation from '@/components/offerte-step-navigation';
 import {
   Box,
   Button,
@@ -62,8 +62,6 @@ export default function OfferteStep3() {
       message: '',
     },
   });
-
-
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -186,7 +184,7 @@ export default function OfferteStep3() {
               steps={[
                 { title: 'Contactgegevens', isCompleted: false },
                 { title: 'Bedrijfsinformatie', isCompleted: false },
-                { title: 'Bevestiging', isCompleted: false }
+                { title: 'Bevestiging', isCompleted: false },
               ]}
             />
             <VStack gap="6" textAlign="center" py="12" width="full">
@@ -225,7 +223,7 @@ export default function OfferteStep3() {
             steps={[
               { title: 'Contactgegevens', isCompleted: false },
               { title: 'Bedrijfsinformatie', isCompleted: false },
-              { title: 'Bevestiging', isCompleted: false }
+              { title: 'Bevestiging', isCompleted: false },
             ]}
           />
 
@@ -277,13 +275,17 @@ export default function OfferteStep3() {
                         <Text fontSize="sm" color="gray.600">
                           Naam
                         </Text>
-                        <Text fontWeight="medium">{step1Data.firstName} {step1Data.lastName}</Text>
+                        <Text fontWeight="medium">
+                          {step1Data.firstName} {step1Data.lastName}
+                        </Text>
                       </Box>
                       <Box>
                         <Text fontSize="sm" color="gray.600">
                           Bedrijfsnaam
                         </Text>
-                        <Text fontWeight="medium">{step1Data.businessName}</Text>
+                        <Text fontWeight="medium">
+                          {step1Data.businessName}
+                        </Text>
                       </Box>
                     </VStack>
                   </Card.Body>

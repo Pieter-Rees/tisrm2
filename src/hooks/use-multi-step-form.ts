@@ -2,10 +2,10 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { useForm, type FieldPath, type DefaultValues } from 'react-hook-form';
-import { useLocalStorage } from './use-local-storage';
-import type { 
-  FieldValues, 
-  MultiStepFormConfig, 
+import { useLocalStorage } from '@/hooks/use-local-storage';
+import type {
+  FieldValues,
+  MultiStepFormConfig,
   FormHookReturn,
   SubmissionHandler,
   FormState,
@@ -26,7 +26,7 @@ export function useMultiStepForm<T extends FieldValues>({
 }: UseMultiStepFormOptions<T>): FormHookReturn<T> {
   const [currentStep, setCurrentStep] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
+
   const storageKey = persistData ? (config.storageKey || 'form-data') : '';
   const [persistedData, setPersistentData, clearPersistentData] = useLocalStorage<Partial<T>>(
     storageKey,
@@ -56,13 +56,13 @@ export function useMultiStepForm<T extends FieldValues>({
 
     const stepFields = stepConfig.fields;
     const currentErrors = formState.errors;
-    
+
     // Check if all required fields in this step are filled and valid
     return stepFields.every(field => {
       const value = getValues(field as FieldPath<T>);
       const hasError = currentErrors[field as keyof typeof currentErrors];
       const isEmpty = value === '' || value === null || value === undefined;
-      
+
       return !hasError && (!isEmpty || stepConfig.isOptional);
     });
   }, [config.steps, formState.errors, getValues]);
@@ -80,7 +80,7 @@ export function useMultiStepForm<T extends FieldValues>({
 
     // Trigger validation for current step fields
     const isValid = await trigger(stepConfig.fields as FieldPath<T>[]);
-    
+
     if (isValid && currentStep < config.steps.length - 1) {
       setCurrentStep(prev => prev + 1);
     }

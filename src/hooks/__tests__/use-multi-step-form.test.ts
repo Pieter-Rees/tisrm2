@@ -1,12 +1,12 @@
 import { renderHook, act } from '@testing-library/react';
-import { useMultiStepForm } from '../use-multi-step-form';
+import { useMultiStepForm } from '@/hooks/use-multi-step-form';
 
 // Mock useLocalStorage hook
-jest.mock('../use-local-storage', () => ({
+jest.mock('@/hooks/use-local-storage', () => ({
   useLocalStorage: jest.fn(),
 }));
 
-const mockUseLocalStorage = require('../use-local-storage').useLocalStorage;
+const mockUseLocalStorage = require('@/hooks/use-local-storage').useLocalStorage;
 
 describe('useMultiStepForm', () => {
   const mockConfig = {
@@ -285,7 +285,7 @@ describe('useMultiStepForm', () => {
       address: '',
       comments: ''
     });
-    
+
     // The handleSubmit method from react-hook-form doesn't return a value,
     // it just calls the submit handler. The actual result comes from the handler itself.
     expect(mockOnSubmit).toHaveBeenCalledTimes(1);
@@ -293,7 +293,7 @@ describe('useMultiStepForm', () => {
 
   it('should clear persistent data on successful submission', async () => {
     const mockOnSubmit = jest.fn().mockResolvedValue({ success: true });
-    
+
     // Mock the useLocalStorage hook to track calls
     const mockSetPersistentData = jest.fn();
     const mockClearPersistentData = jest.fn();
@@ -342,7 +342,7 @@ describe('useMultiStepForm', () => {
   it('should not clear persistent data on failed submission', async () => {
     const formData = { name: 'John', email: 'john@example.com', phone: '', address: '', comments: '' };
     const mockClearPersistentData = jest.fn();
-    
+
     mockUseLocalStorage.mockReturnValue([
       formData,
       jest.fn(),

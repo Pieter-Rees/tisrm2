@@ -1,11 +1,11 @@
 'use client';
 
 import { BaseLayout } from '@/components/layout';
+import OfferteStepNavigation from '@/components/offerte-step-navigation';
 import { Field } from '@/components/ui/field';
 import { UI_CONSTANTS } from '@/constants/app';
 import { useLocalStorage } from '@/hooks/use-local-storage';
 import { isValidDutchPostalCode } from '@/lib/utils';
-import OfferteStepNavigation from '@/components/offerte-step-navigation';
 import {
   Box,
   Button,
@@ -73,8 +73,6 @@ export default function OfferteStep2() {
     Boolean(watchedValues.carCode?.trim()) &&
     Boolean(watchedValues.damageFreeYears?.trim());
 
-
-
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsCheckingData(false);
@@ -111,7 +109,7 @@ export default function OfferteStep2() {
             steps={[
               { title: 'Contactgegevens', isCompleted: false },
               { title: 'Bedrijfsinformatie', isCompleted: false },
-              { title: 'Bevestiging', isCompleted: false }
+              { title: 'Bevestiging', isCompleted: false },
             ]}
           />
 
@@ -128,7 +126,6 @@ export default function OfferteStep2() {
 
               <Box as="form" onSubmit={handleSubmit(onSubmit)}>
                 <VStack gap="6" align="stretch">
-
                   <Field
                     label="E-mailadres"
                     required
@@ -224,7 +221,8 @@ export default function OfferteStep2() {
                         required: 'Meldcode is verplicht',
                         pattern: {
                           value: /^[A-Z0-9]{3,6}$/,
-                          message: 'Voer een geldige meldcode in (3-6 karakters)',
+                          message:
+                            'Voer een geldige meldcode in (3-6 karakters)',
                         },
                       })}
                       placeholder="ABC123"
@@ -252,7 +250,8 @@ export default function OfferteStep2() {
                         },
                         max: {
                           value: 50,
-                          message: 'Schade vrije jaren kan niet meer dan 50 zijn',
+                          message:
+                            'Schade vrije jaren kan niet meer dan 50 zijn',
                         },
                       })}
                       type="number"
