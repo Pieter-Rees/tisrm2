@@ -104,7 +104,9 @@ export default function OfferteStep3() {
             userAgent: navigator.userAgent,
           };
 
-          const formAddress = 'https://pieterrees.nl/email';
+          const formAddress = process.env['NEXT_PUBLIC_API_URL'] 
+            ? `${process.env['NEXT_PUBLIC_API_URL']}/email`
+            : 'https://pieterrees.nl/email';
 
           const response = await fetch(formAddress, {
             method: 'POST',

@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: /home/pieter/Development/tisrm2
+      dockerfile: Dockerfile
+    container_name: tisrm2-frontend
+    ports:
+      - "3002:3002"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=http://localhost:4000
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  backend:
+    build:
+      context: /home/pieter/Development/tis-risk-managers-backend
+      dockerfile: Dockerfile
+    container_name: tisrm2-backend
+    ports:
+      - "4000:4000"
+    environment:
+      - NODE_ENV=production
+      - PORT=4000
+      - FRONTEND_URL=http://localhost:3002
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+

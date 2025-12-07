@@ -1,3 +1,9 @@
+import { fileURLToPath } from 'url';
+import { dirname, resolve } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   distDir: 'build',
@@ -73,7 +79,22 @@ const nextConfig = {
     },
   }),
   bundlePagesRouterDependencies: true,
-  webpack: (config, { isServer, dev }) => {
+  webpack: (config, { isServer, dev, webpack }) => {
+    if (isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+      };
+      
+      config.plugins.push(
+        new webpack.BannerPlugin({
+          banner: "if (typeof global !== 'undefined' && typeof global.File === 'undefined') { global.File = class File { constructor() { return {}; } }; }",
+          raw: true,
+          entryOnly: false,
+        })
+      );
+    }
+
     // Production optimizations
     if (!dev && !isServer) {
       // Enhanced code splitting
