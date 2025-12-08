@@ -16,7 +16,7 @@ import { BsCheck2Circle, BsExclamationTriangle } from 'react-icons/bs';
 
 import { Field } from '@/components/ui/field';
 // import { UI_CONSTANTS } from '@/constants/app';
-import { isValidDutchPostalCode, isValidEmail } from '@/lib/utils';
+import { getEmailApiUrl, isValidDutchPostalCode, isValidEmail } from '@/lib/utils';
 import type { OfferteFormData } from '@/types/forms';
 
 type SubmissionState = 'idle' | 'success' | 'error';
@@ -72,11 +72,7 @@ export default function RegistrationForm() {
             userAgent: navigator.userAgent,
           };
 
-          const formAddress = process.env['NEXT_PUBLIC_API_URL'] 
-            ? `${process.env['NEXT_PUBLIC_API_URL']}/email`
-            : 'https://pieterrees.nl/email';
-
-          const response = await fetch(formAddress, {
+          const response = await fetch(getEmailApiUrl(), {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

@@ -59,3 +59,9 @@ export const formatFileSize = (bytes: number): string => {
   const i = Math.floor(Math.log(bytes) / Math.log(1024));
   return `${Math.round((bytes / Math.pow(1024, i)) * 100) / 100} ${sizes[i]}`;
 };
+
+export const getEmailApiUrl = (): string => {
+  return process.env['NEXT_PUBLIC_API_URL'] 
+    ? `${process.env['NEXT_PUBLIC_API_URL']}/email`
+    : 'https://tisrm.nl/email';
+};
