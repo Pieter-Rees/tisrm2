@@ -11,6 +11,8 @@ import { COMPANY_ENTITIES } from '@/data/content';
 import { Box, Flex, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 
+export const dynamic = 'force-dynamic';
+
 export default function Overons() {
 
   return (

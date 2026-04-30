@@ -5,6 +5,7 @@ import OfferteStepNavigation from '@/components/offerte-step-navigation';
 import { Field } from '@/components/ui/field';
 import { UI_CONSTANTS } from '@/constants/app';
 import { useLocalStorage } from '@/hooks/use-local-storage';
+import { getEmailApiUrl } from '@/lib/utils';
 import {
   Box,
   Button,
@@ -104,9 +105,7 @@ export default function OfferteStep3() {
             userAgent: navigator.userAgent,
           };
 
-          const formAddress = 'https://pieterrees.nl/email';
-
-          const response = await fetch(formAddress, {
+          const response = await fetch(getEmailApiUrl(), {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
