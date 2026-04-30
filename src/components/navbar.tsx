@@ -52,7 +52,7 @@ const NAVIGATION_LINKS: readonly NavigationLink[] = [
 const Navbar = memo(() => {
   const pathname = usePathname();
 
-  const handleDamageReportClick = useCallback(() => {
+  const handleExternalDamageReportClick = useCallback(() => {
     window.open(EXTERNAL_LINKS.damageReport, '_blank', 'noopener,noreferrer');
   }, []);
 
@@ -66,6 +66,7 @@ const Navbar = memo(() => {
       <Box hideBelow="xl">
         <HStack
           gap={SPACING_PATTERNS.navigation.group}
+          alignItems="center"
           fontSize={{ base: 'sm', '2xl': 'md' }}
           fontWeight="medium"
           listStyleType="none"
@@ -81,8 +82,9 @@ const Navbar = memo(() => {
                 <Link href={href} aria-current={isActive ? 'page' : undefined}>
                   <Box
                     textDecoration="none"
-                    display="block"
-                    pb={SPACING_PATTERNS.navigation.item}
+                    display="flex"
+                    alignItems="center"
+                    py={SPACING_PATTERNS.navigation.item}
                     position="relative"
                     color={isActive ? 'blue.500' : 'gray.700'}
                     fontWeight={isActive ? '600' : '500'}
@@ -146,13 +148,25 @@ const Navbar = memo(() => {
           >
             <MenuItem
               value="damage-report"
-              onClick={handleDamageReportClick}
+              asChild
+              gap="2"
+              _hover={{ bg: 'blue.50' }}
+              cursor="pointer"
+            >
+              <Link href={NAVIGATION_ROUTES.damageReport}>
+                <BsShield />
+                Schade melden
+              </Link>
+            </MenuItem>
+            <MenuItem
+              value="damage-report-external"
+              onClick={handleExternalDamageReportClick}
               gap="2"
               _hover={{ bg: 'blue.50' }}
               cursor="pointer"
             >
               <BsShield />
-              Schade melden
+              Extern schadeportaal
               <VisuallyHidden>
                 - Opens external damage report form in new window
               </VisuallyHidden>

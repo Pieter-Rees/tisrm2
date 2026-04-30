@@ -17,7 +17,7 @@ import {
   PageAnimation,
   SlideInRight,
 } from '@/components/page-animation';
-import { SPACING_PATTERNS } from '@/constants/layout';
+import { COMPONENT_SPACING, SPACING_PATTERNS } from '@/constants/layout';
 import { HEADING_STYLES } from '@/constants/typography';
 import { cn } from '@/lib/utils';
 import {
@@ -88,6 +88,7 @@ const UnifiedLayout = memo<UnifiedLayoutProps>(
                   id="page-title"
                   as="h1"
                   {...HEADING_STYLES.h1}
+                  mb={{ base: '4', md: '6' }}
                   textAlign={variant === 'centered' ? 'center' : undefined}
                 >
                   {title}
@@ -113,7 +114,10 @@ const UnifiedLayout = memo<UnifiedLayoutProps>(
             gap={gap}
           >
             <GridItem>
-              <Flex flexDirection="column" gap={gap}>
+              <Flex
+                flexDirection="column"
+                gap={COMPONENT_SPACING.section.xs}
+              >
                 {(title || breadcrumb) && (
                   <FadeInUp>
                     <Flex
@@ -125,7 +129,7 @@ const UnifiedLayout = memo<UnifiedLayoutProps>(
                       gap="8"
                     >
                       {title && (
-                        <Heading as="h1" {...HEADING_STYLES.h1}>
+                        <Heading as="h1" {...HEADING_STYLES.h1} mb="0">
                           {title}
                         </Heading>
                       )}

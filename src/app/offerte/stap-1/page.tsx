@@ -58,7 +58,7 @@ export default function OfferteStep1() {
 
   return (
     <Container>
-      <BaseLayout>
+      <BaseLayout title="Offerte aanvragen - Stap 1">
         <VStack alignItems="flex-start" width="full" gap="8">
           <OfferteStepNavigation
             currentStep={0}

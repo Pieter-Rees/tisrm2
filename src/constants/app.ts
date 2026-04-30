@@ -35,6 +35,7 @@ export const NAVIGATION_ROUTES = {
   riskManagement: '/risk-management',
   about: '/over-ons',
   contact: '/contact',
+  damageReport: '/schade-melden',
   quote: '/offerte',
   downloads: '/downloads',
 } as const;

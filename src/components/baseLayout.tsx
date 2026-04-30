@@ -29,7 +29,7 @@ const BaseLayout: FC<BaseLayoutProps> = memo(
       mx="auto"
     >
       {title && (
-        <Box as="header">
+        <Box as="header" pt={{ base: 3, md: 4 }}>
           <Heading
             id="page-title"
             as="h1"

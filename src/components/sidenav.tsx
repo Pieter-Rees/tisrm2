@@ -10,6 +10,7 @@ import {
   MenuTrigger,
   Separator,
   VStack,
+  VisuallyHidden,
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -60,7 +61,7 @@ const Sidenav = memo<SidenavProps>(
   ({ showSideNav, handleToggle, className, 'data-testid': testId }) => {
     const pathname = usePathname();
 
-    const handleDamageReportClick = useCallback(() => {
+    const handleExternalDamageReportClick = useCallback(() => {
       window.open(EXTERNAL_LINKS.damageReport, '_blank', 'noopener,noreferrer');
       handleToggle();
     }, [handleToggle]);
@@ -214,13 +215,31 @@ const Sidenav = memo<SidenavProps>(
               <MenuContent>
                 <MenuItem
                   value="damage-report"
-                  onClick={handleDamageReportClick}
+                  asChild
+                  gap="2"
+                  _hover={{ bg: 'blue.50' }}
+                  cursor="pointer"
+                >
+                  <Link
+                    href={NAVIGATION_ROUTES.damageReport}
+                    onClick={handleLinkClick}
+                  >
+                    <BsShield />
+                    Schade melden
+                  </Link>
+                </MenuItem>
+                <MenuItem
+                  value="damage-report-external"
+                  onClick={handleExternalDamageReportClick}
                   gap="2"
                   _hover={{ bg: 'blue.50' }}
                   cursor="pointer"
                 >
                   <BsShield />
-                  Schade melden
+                  Extern schadeportaal
+                  <VisuallyHidden>
+                    - Opens external damage report form in new window
+                  </VisuallyHidden>
                 </MenuItem>
                 <MenuItem
                   value="quote"

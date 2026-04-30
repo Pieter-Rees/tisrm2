@@ -24,6 +24,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <GoogleTagManager gtmId="G-3HPHN1BV1Q" />
       </head>
       <body
+        suppressHydrationWarning
         className={inter.className}
         style={{ backgroundColor: 'white', color: 'black' }}
       >

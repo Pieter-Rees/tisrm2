@@ -25,7 +25,7 @@ export const headerContainerStyles: SystemStyleObject = {
 
 export const headerLogoStyles: SystemStyleObject = {
   flex: '0 0 auto',
-  padding: SPACING_PATTERNS.header.padding,
+  py: { base: '2', md: '3' },
 };
 
 export const headerNavStyles: SystemStyleObject = {

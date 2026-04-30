@@ -65,3 +65,9 @@ export const getEmailApiUrl = (): string => {
     ? `${process.env['NEXT_PUBLIC_API_URL']}/email`
     : 'https://tisrm.nl/email';
 };
+
+export const getSchadeApiUrl = (): string => {
+  return process.env['NEXT_PUBLIC_API_URL']
+    ? `${process.env['NEXT_PUBLIC_API_URL']}/schade`
+    : 'https://tisrm.nl/schade';
+};
