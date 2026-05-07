@@ -5,7 +5,12 @@ import OfferteStepNavigation from '@/components/offerte-step-navigation';
 import { Field } from '@/components/ui/field';
 import { UI_CONSTANTS } from '@/constants/app';
 import { useLocalStorage } from '@/hooks/use-local-storage';
-import { isValidDutchPostalCode } from '@/lib/utils';
+import {
+  isValidDutchLicensePlate,
+  isValidDutchPhoneNumber,
+  isValidDutchPostalCode,
+  isValidEmail,
+} from '@/lib/utils';
 import {
   Box,
   Button,
@@ -135,10 +140,8 @@ export default function OfferteStep2() {
                     <Input
                       {...register('emailAddress', {
                         required: 'E-mailadres is verplicht',
-                        pattern: {
-                          value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                          message: 'Voer een geldig e-mailadres in',
-                        },
+                        validate: value =>
+                          isValidEmail(value) || 'Voer een geldig e-mailadres in',
                       })}
                       type="email"
                       placeholder="bijvoorbeeld@bedrijf.nl"
@@ -156,11 +159,9 @@ export default function OfferteStep2() {
                     <Input
                       {...register('phoneNo', {
                         required: 'Telefoonnummer is verplicht',
-                        pattern: {
-                          value: /^(\+31|0)[0-9]{9}$/,
-                          message:
-                            'Voer een geldig Nederlands telefoonnummer in',
-                        },
+                        validate: value =>
+                          isValidDutchPhoneNumber(value) ||
+                          'Voer een geldig Nederlands telefoonnummer in',
                       })}
                       type="tel"
                       placeholder="06-12345678 of +31612345678"
@@ -198,11 +199,9 @@ export default function OfferteStep2() {
                     <Input
                       {...register('plateNo', {
                         required: 'Kenteken is verplicht',
-                        pattern: {
-                          value: /^[A-Z0-9]{1,3}-[A-Z0-9]{1,3}-[A-Z0-9]{1,3}$/,
-                          message:
-                            'Voer een geldig Nederlands kenteken in (bijv. AB-12-CD)',
-                        },
+                        validate: value =>
+                          isValidDutchLicensePlate(value) ||
+                          'Voer een geldig Nederlands kenteken in (bijv. AB-12-CD)',
                       })}
                       placeholder="AB-12-CD"
                       maxLength={9}

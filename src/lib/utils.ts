@@ -38,8 +38,14 @@ export const debounce = <T extends (...args: unknown[]) => unknown>(
 export const isValidEmail = (email: string): boolean =>
   /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
+export const isValidDutchPhoneNumber = (phone: string): boolean =>
+  /^(\+31|0)[0-9]{9}$/.test(phone.trim());
+
 export const isValidDutchPostalCode = (postalCode: string): boolean =>
   /^[1-9][0-9]{3}\s?[a-zA-Z]{2}$/.test(postalCode);
+
+export const isValidDutchLicensePlate = (plate: string): boolean =>
+  /^[A-Z0-9]{1,3}-[A-Z0-9]{1,3}-[A-Z0-9]{1,3}$/.test(plate.trim().toUpperCase());
 
 export const generateId = (prefix = 'id'): string =>
   `${prefix}-${Math.random().toString(36).substring(2, 9)}`;

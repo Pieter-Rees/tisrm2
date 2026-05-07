@@ -5,6 +5,8 @@ import {
   truncate,
   debounce,
   isValidEmail,
+  isValidDutchLicensePlate,
+  isValidDutchPhoneNumber,
   isValidDutchPostalCode,
   generateId,
   safeJsonParse,
@@ -140,6 +142,20 @@ describe('Utility Functions', () => {
     });
   });
 
+  describe('isValidDutchPhoneNumber', () => {
+    it('should validate correct Dutch phone numbers', () => {
+      expect(isValidDutchPhoneNumber('0612345678')).toBe(true);
+      expect(isValidDutchPhoneNumber('+31612345678')).toBe(true);
+      expect(isValidDutchPhoneNumber('0201234567')).toBe(true);
+    });
+
+    it('should reject invalid Dutch phone numbers', () => {
+      expect(isValidDutchPhoneNumber('12345')).toBe(false);
+      expect(isValidDutchPhoneNumber('+3112345678')).toBe(false);
+      expect(isValidDutchPhoneNumber('')).toBe(false);
+    });
+  });
+
   describe('isValidDutchPostalCode', () => {
     it('should validate correct Dutch postal codes', () => {
       expect(isValidDutchPostalCode('1011 PZ')).toBe(true);
@@ -153,6 +169,20 @@ describe('Utility Functions', () => {
       expect(isValidDutchPostalCode('1234')).toBe(false); // Missing letters
       expect(isValidDutchPostalCode('ABCD 12')).toBe(false); // Wrong format
       expect(isValidDutchPostalCode('')).toBe(false);
+    });
+  });
+
+  describe('isValidDutchLicensePlate', () => {
+    it('should validate correct Dutch-style license plates used by forms', () => {
+      expect(isValidDutchLicensePlate('AB-12-CD')).toBe(true);
+      expect(isValidDutchLicensePlate('12-ab-34')).toBe(true);
+      expect(isValidDutchLicensePlate('1-ABC-23')).toBe(true);
+    });
+
+    it('should reject invalid license plate formats', () => {
+      expect(isValidDutchLicensePlate('AB12CD')).toBe(false);
+      expect(isValidDutchLicensePlate('AB-1234-CD')).toBe(false);
+      expect(isValidDutchLicensePlate('')).toBe(false);
     });
   });
 

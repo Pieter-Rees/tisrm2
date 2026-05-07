@@ -16,7 +16,12 @@ import { BsCheck2Circle, BsExclamationTriangle } from 'react-icons/bs';
 
 import { Field } from '@/components/ui/field';
 // import { UI_CONSTANTS } from '@/constants/app';
-import { getEmailApiUrl, isValidDutchPostalCode, isValidEmail } from '@/lib/utils';
+import {
+  getEmailApiUrl,
+  isValidDutchPhoneNumber,
+  isValidDutchPostalCode,
+  isValidEmail,
+} from '@/lib/utils';
 import type { OfferteFormData } from '@/types/forms';
 
 type SubmissionState = 'idle' | 'success' | 'error';
@@ -258,10 +263,9 @@ export default function RegistrationForm() {
             <Input
               {...register('phoneNo', {
                 required: 'Telefoonnummer is verplicht',
-                pattern: {
-                  value: /^(\+31|0)[0-9]{9}$/,
-                  message: 'Voer een geldig Nederlands telefoonnummer in',
-                },
+                validate: value =>
+                  isValidDutchPhoneNumber(value) ||
+                  'Voer een geldig Nederlands telefoonnummer in',
               })}
               type="tel"
               placeholder="06-12345678 of +31612345678"

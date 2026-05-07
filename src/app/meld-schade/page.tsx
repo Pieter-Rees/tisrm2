@@ -24,7 +24,12 @@ import { BsCheck2Circle, BsExclamationTriangle } from 'react-icons/bs';
 
 import { BaseLayout } from '@/components/layout';
 import { Field } from '@/components/ui/field';
-import { getSchadeApiUrl } from '@/lib/utils';
+import {
+  getSchadeApiUrl,
+  isValidDutchLicensePlate,
+  isValidDutchPhoneNumber,
+  isValidEmail,
+} from '@/lib/utils';
 import {
   MAX_TOTAL_UPLOAD_SIZE_BYTES,
   getUploadHttpErrorMessage,
@@ -35,6 +40,7 @@ type SubmissionState = 'idle' | 'success' | 'error';
 
 interface SchadeFormData {
   name: string;
+  kenteken: string;
   phone: string;
   email: string;
   description: string;
@@ -81,6 +87,7 @@ export default function MeldSchadePage() {
     mode: 'onBlur',
     defaultValues: {
       name: '',
+      kenteken: '',
       phone: '',
       email: '',
       description: '',
@@ -194,6 +201,7 @@ export default function MeldSchadePage() {
         try {
           const formData = new FormData();
           formData.append('name', values.name.trim());
+          formData.append('kenteken', values.kenteken.trim());
           formData.append('phone', values.phone.trim());
           formData.append('email', values.email.trim());
           formData.append('description', values.description.trim());
@@ -331,6 +339,30 @@ export default function MeldSchadePage() {
                     </Field>
 
                     <Field
+                      label="Kenteken"
+                      invalid={!!errors.kenteken}
+                      errorText={errors.kenteken?.message}
+                    >
+                      <Input
+                        {...register('kenteken', {
+                          validate: value => {
+                            const trimmedValue = value.trim();
+                            if (trimmedValue.length === 0) {
+                              return true;
+                            }
+
+                            return (
+                              isValidDutchLicensePlate(trimmedValue) ||
+                              'Voer een geldig Nederlands kenteken in (bijv. AB-12-CD)'
+                            );
+                          },
+                        })}
+                        placeholder="Uw kenteken"
+                        autoComplete="off"
+                      />
+                    </Field>
+
+                    <Field
                       label="Telefoonnummer"
                       required
                       invalid={!!errors.phone}
@@ -339,11 +371,9 @@ export default function MeldSchadePage() {
                       <Input
                         {...register('phone', {
                           required: 'Telefoonnummer is verplicht',
-                          minLength: {
-                            value: 6,
-                            message:
-                              'Telefoonnummer moet minimaal 6 karakters bevatten',
-                          },
+                          validate: value =>
+                            isValidDutchPhoneNumber(value) ||
+                            'Voer een geldig Nederlands telefoonnummer in',
                         })}
                         placeholder="Uw telefoonnummer"
                         autoComplete="tel"
@@ -360,10 +390,8 @@ export default function MeldSchadePage() {
                       <Input
                         {...register('email', {
                           required: 'E-mailadres is verplicht',
-                          pattern: {
-                            value: /\S+@\S+\.\S+/,
-                            message: 'Vul een geldig e-mailadres in',
-                          },
+                          validate: value =>
+                            isValidEmail(value) || 'Voer een geldig e-mailadres in',
                         })}
                         type="email"
                         placeholder="uw@email.nl"
