@@ -35,6 +35,8 @@ type SubmissionState = 'idle' | 'success' | 'error';
 
 interface SchadeFormData {
   name: string;
+  phone: string;
+  email: string;
   description: string;
 }
 
@@ -78,6 +80,8 @@ export default function MeldSchadePage() {
     mode: 'onBlur',
     defaultValues: {
       name: '',
+      phone: '',
+      email: '',
       description: '',
     },
   });
@@ -188,6 +192,8 @@ export default function MeldSchadePage() {
         try {
           const formData = new FormData();
           formData.append('name', values.name.trim());
+          formData.append('phone', values.phone.trim());
+          formData.append('email', values.email.trim());
           formData.append('description', values.description.trim());
 
           selectedDocuments.forEach(file => {
@@ -318,6 +324,47 @@ export default function MeldSchadePage() {
                         })}
                         placeholder="Uw naam"
                         autoComplete="name"
+                      />
+                    </Field>
+
+                    <Field
+                      label="Telefoonnummer"
+                      required
+                      invalid={!!errors.phone}
+                      errorText={errors.phone?.message}
+                    >
+                      <Input
+                        {...register('phone', {
+                          required: 'Telefoonnummer is verplicht',
+                          minLength: {
+                            value: 6,
+                            message:
+                              'Telefoonnummer moet minimaal 6 karakters bevatten',
+                          },
+                        })}
+                        placeholder="Uw telefoonnummer"
+                        autoComplete="tel"
+                        inputMode="tel"
+                      />
+                    </Field>
+
+                    <Field
+                      label="E-mailadres"
+                      required
+                      invalid={!!errors.email}
+                      errorText={errors.email?.message}
+                    >
+                      <Input
+                        {...register('email', {
+                          required: 'E-mailadres is verplicht',
+                          pattern: {
+                            value: /\S+@\S+\.\S+/,
+                            message: 'Vul een geldig e-mailadres in',
+                          },
+                        })}
+                        type="email"
+                        placeholder="uw@email.nl"
+                        autoComplete="email"
                       />
                     </Field>
 
