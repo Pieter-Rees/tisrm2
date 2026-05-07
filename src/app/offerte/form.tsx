@@ -44,6 +44,7 @@ export default function RegistrationForm() {
       btwNumber: '',
       postalCode: '',
       message: '',
+      sendCopy: false,
     },
   });
 
@@ -52,7 +53,7 @@ export default function RegistrationForm() {
   const filledFieldsCount = useMemo(
     () =>
       Object.entries(watchedValues).filter(
-        ([key, value]) => key !== 'message' && value,
+        ([key, value]) => key !== 'message' && key !== 'sendCopy' && value,
       ).length,
     [watchedValues],
   );
@@ -67,6 +68,7 @@ export default function RegistrationForm() {
         try {
           const payload = {
             ...values,
+            sendCopy: Boolean(values.sendCopy),
             tisrm: true,
             timestamp: new Date().toISOString(),
             userAgent: navigator.userAgent,
@@ -370,6 +372,20 @@ export default function RegistrationForm() {
             resize="vertical"
           />
         </Field>
+      </Box>
+
+      <Box mt="8">
+        <label
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            cursor: 'pointer',
+          }}
+        >
+          <input type="checkbox" {...register('sendCopy')} />
+          <Text color="gray.700">Stuur mij een kopie van deze aanvraag per e-mail</Text>
+        </label>
       </Box>
 
       <Box mt="8">

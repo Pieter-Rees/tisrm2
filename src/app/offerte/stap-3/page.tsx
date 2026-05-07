@@ -39,6 +39,7 @@ interface Step2Data {
 
 interface Step3FormData {
   message: string;
+  sendCopy: boolean;
 }
 
 type SubmissionState = 'idle' | 'success' | 'error';
@@ -61,6 +62,7 @@ export default function OfferteStep3() {
   } = useForm<Step3FormData>({
     defaultValues: {
       message: '',
+      sendCopy: false,
     },
   });
 
@@ -100,6 +102,7 @@ export default function OfferteStep3() {
             ...restStep1Data,
             ...step2Data,
             ...values,
+            sendCopy: Boolean(values.sendCopy),
             tisrm: true,
             timestamp: new Date().toISOString(),
             userAgent: navigator.userAgent,
@@ -355,6 +358,20 @@ export default function OfferteStep3() {
                       resize="vertical"
                     />
                   </Field>
+
+                  <label
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.5rem',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    <input type="checkbox" {...register('sendCopy')} />
+                    <Text color="gray.700">
+                      Stuur mij een kopie van deze aanvraag per e-mail
+                    </Text>
+                  </label>
 
                   <HStack gap="4">
                     <Button

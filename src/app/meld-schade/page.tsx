@@ -38,6 +38,7 @@ interface SchadeFormData {
   phone: string;
   email: string;
   description: string;
+  sendCopy: boolean;
 }
 
 const ACCEPTED_DOCUMENT_FILE_TYPES =
@@ -83,6 +84,7 @@ export default function MeldSchadePage() {
       phone: '',
       email: '',
       description: '',
+      sendCopy: false,
     },
   });
 
@@ -195,6 +197,7 @@ export default function MeldSchadePage() {
           formData.append('phone', values.phone.trim());
           formData.append('email', values.email.trim());
           formData.append('description', values.description.trim());
+          formData.append('sendCopy', values.sendCopy ? 'true' : 'false');
 
           selectedDocuments.forEach(file => {
             formData.append('files', file);
@@ -577,6 +580,20 @@ export default function MeldSchadePage() {
                       Totaal geselecteerd (documenten + foto&apos;s):{' '}
                       {formatFileSize(totalSelectedBytes)}
                     </Text>
+
+                    <label
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                        cursor: 'pointer',
+                      }}
+                    >
+                      <input type="checkbox" {...register('sendCopy')} />
+                      <Text color="gray.700">
+                        Stuur mij een kopie van deze melding per e-mail
+                      </Text>
+                    </label>
 
                     <Button
                       type="submit"

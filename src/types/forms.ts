@@ -26,6 +26,7 @@ export interface ContactInfoStep extends StepFormData {
 
 export interface MessageStep extends StepFormData {
   readonly message?: string;
+  readonly sendCopy?: boolean;
 }
 
 // Complete form data types
