@@ -1,8 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-// Create a simplified SchadeMelden component that mimics the original functionality
-const SimpleSchadeMelden = () => {
+// Create a simplified MeldSchade component that mimics the original functionality
+const SimpleMeldSchade = () => {
     return (
         <button aria-label="Schade melden">
             <a
@@ -20,51 +20,51 @@ const SimpleSchadeMelden = () => {
     );
 };
 
-describe('SchadeMelden', () => {
+describe('MeldSchade', () => {
     it('renders without crashing', () => {
-        render(<SimpleSchadeMelden />);
+        render(<SimpleMeldSchade />);
         expect(screen.getByRole('button')).toBeInTheDocument();
     });
 
     it('displays damage reporting text', () => {
-        render(<SimpleSchadeMelden />);
+        render(<SimpleMeldSchade />);
         expect(screen.getByText(/Schade melden/i)).toBeInTheDocument();
     });
 
     it('has proper button styling', () => {
-        render(<SimpleSchadeMelden />);
+        render(<SimpleMeldSchade />);
         const button = screen.getByRole('button');
         expect(button).toBeInTheDocument();
     });
 
     it('displays urgency or importance indicator', () => {
-        render(<SimpleSchadeMelden />);
+        render(<SimpleMeldSchade />);
         // Look for any text that indicates urgency
         const button = screen.getByRole('button');
         expect(button).toBeInTheDocument();
     });
 
     it('is accessible', () => {
-        render(<SimpleSchadeMelden />);
+        render(<SimpleMeldSchade />);
         const button = screen.getByRole('button');
         expect(button).toHaveAttribute('aria-label');
     });
 
     it('has correct link attributes', () => {
-        render(<SimpleSchadeMelden />);
+        render(<SimpleMeldSchade />);
         const link = screen.getByRole('link');
         expect(link).toHaveAttribute('target', '_blank');
         expect(link).toHaveAttribute('rel', 'noopener noreferrer');
     });
 
     it('has correct href', () => {
-        render(<SimpleSchadeMelden />);
+        render(<SimpleMeldSchade />);
         const link = screen.getByRole('link');
         expect(link).toHaveAttribute('href', 'https://schade.emsclaimsengine.com/index.php?template=tis&view=consument.login#identificatie_vragen');
     });
 
     it('renders heading element', () => {
-        render(<SimpleSchadeMelden />);
+        render(<SimpleMeldSchade />);
         const heading = screen.getByRole('heading', { level: 2 });
         expect(heading).toBeInTheDocument();
         expect(heading).toHaveTextContent('Schade melden');

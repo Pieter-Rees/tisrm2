@@ -60,7 +60,7 @@ const formatFileSize = (bytes: number): string => {
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 };
 
-export default function SchadeMeldenPage() {
+export default function MeldSchadePage() {
   const [submissionState, setSubmissionState] =
     useState<SubmissionState>('idle');
   const [errorMessage, setErrorMessage] = useState('');
@@ -247,7 +247,8 @@ export default function SchadeMeldenPage() {
           <VStack gap="8" align="stretch">
             <Box textAlign="center">
               <Text color="gray.600">
-                Vul uw gegevens in en voeg documenten en foto's van de schade toe.
+                Vul uw gegevens in en voeg documenten en foto&apos;s van de schade
+                toe.
               </Text>
             </Box>
 
@@ -301,231 +302,234 @@ export default function SchadeMeldenPage() {
               <Box>
                 <form noValidate onSubmit={handleSubmit(onSubmit)}>
                   <VStack align="stretch" gap="6">
-                  <Field
-                    label="Naam"
-                    required
-                    invalid={!!errors.name}
-                    errorText={errors.name?.message}
-                  >
-                    <Input
-                      {...register('name', {
-                        required: 'Naam is verplicht',
-                        minLength: {
-                          value: 2,
-                          message: 'Naam moet minimaal 2 karakters bevatten',
-                        },
-                      })}
-                      placeholder="Uw naam"
-                      autoComplete="name"
-                    />
-                  </Field>
+                    <Field
+                      label="Naam"
+                      required
+                      invalid={!!errors.name}
+                      errorText={errors.name?.message}
+                    >
+                      <Input
+                        {...register('name', {
+                          required: 'Naam is verplicht',
+                          minLength: {
+                            value: 2,
+                            message: 'Naam moet minimaal 2 karakters bevatten',
+                          },
+                        })}
+                        placeholder="Uw naam"
+                        autoComplete="name"
+                      />
+                    </Field>
 
-                  <Field
-                    label="Beschrijving"
-                    required
-                    invalid={!!errors.description}
-                    errorText={errors.description?.message}
-                  >
-                    <Textarea
-                      {...register('description', {
-                        required: 'Beschrijving is verplicht',
-                        minLength: {
-                          value: 10,
-                          message:
-                            'Beschrijving moet minimaal 10 karakters bevatten',
-                        },
-                      })}
-                      placeholder="Beschrijf kort wat er is gebeurd en welke schade u heeft."
-                      rows={4}
-                    />
-                  </Field>
+                    <Field
+                      label="Beschrijving"
+                      required
+                      invalid={!!errors.description}
+                      errorText={errors.description?.message}
+                    >
+                      <Textarea
+                        {...register('description', {
+                          required: 'Beschrijving is verplicht',
+                          minLength: {
+                            value: 10,
+                            message:
+                              'Beschrijving moet minimaal 10 karakters bevatten',
+                          },
+                        })}
+                        placeholder="Beschrijf kort wat er is gebeurd en welke schade u heeft."
+                        rows={4}
+                      />
+                    </Field>
 
-                  <Field
-                    label="Bestanden en foto's"
-                    required
-                    invalid={!!uploadError}
-                    errorText={uploadError}
-                  >
-                    <VStack align="stretch" gap="3" width="full">
-                      <Box
-                        width="full"
-                        borderRadius="lg"
-                        border="1px solid"
-                        borderColor={uploadError ? 'red.300' : 'gray.200'}
-                        bg={uploadError ? 'red.50' : 'gray.50'}
-                        px="4"
-                        py="3"
-                      >
-                        <VStack align="stretch" gap="3" width="full">
-                          <input
-                            id="damage-upload"
-                            type="file"
-                            multiple
-                            accept={ACCEPTED_UPLOAD_FILE_TYPES}
-                            onChange={event => {
-                              const files = Array.from(event.target.files ?? []);
-                              handleAddUploads(files);
-                              event.currentTarget.value = '';
-                            }}
-                            style={{ display: 'none' }}
-                          />
-                          <label
-                            htmlFor="damage-upload"
-                            style={{
-                              border: '1px dashed',
-                              borderColor: uploadError ? '#FC8181' : '#90CDF4',
-                              borderRadius: '0.375rem',
-                              background: '#FFFFFF',
-                              padding: '1.25rem 1rem',
-                              textAlign: 'center',
-                              cursor: 'pointer',
-                              transition: 'all 0.2s ease-in-out',
-                              display: 'block',
-                            }}
-                          >
-                            <Text fontWeight="semibold" color="gray.800" mb="1">
-                              Klik om bestanden te kiezen
-                            </Text>
+                    <Field
+                      label="Bestanden en foto's"
+                      required
+                      invalid={!!uploadError}
+                      errorText={uploadError}
+                    >
+                      <VStack align="stretch" gap="3" width="full">
+                        <Box
+                          width="full"
+                          borderRadius="lg"
+                          border="1px solid"
+                          borderColor={uploadError ? 'red.300' : 'gray.200'}
+                          bg={uploadError ? 'red.50' : 'gray.50'}
+                          px="4"
+                          py="3"
+                        >
+                          <VStack align="stretch" gap="3" width="full">
+                            <input
+                              id="damage-upload"
+                              type="file"
+                              multiple
+                              accept={ACCEPTED_UPLOAD_FILE_TYPES}
+                              onChange={event => {
+                                const files = Array.from(event.target.files ?? []);
+                                handleAddUploads(files);
+                                event.currentTarget.value = '';
+                              }}
+                              style={{ display: 'none' }}
+                            />
+                            <label
+                              htmlFor="damage-upload"
+                              style={{
+                                border: '1px dashed',
+                                borderColor: uploadError ? '#FC8181' : '#90CDF4',
+                                borderRadius: '0.375rem',
+                                background: '#FFFFFF',
+                                padding: '1.25rem 1rem',
+                                textAlign: 'center',
+                                cursor: 'pointer',
+                                transition: 'all 0.2s ease-in-out',
+                                display: 'block',
+                              }}
+                            >
+                              <Text fontWeight="semibold" color="gray.800" mb="1">
+                                Klik om bestanden te kiezen
+                              </Text>
+                              <Text fontSize="sm" color="gray.600">
+                                {`Voeg documenten en foto's toe (maximaal ${Math.floor(MAX_TOTAL_UPLOAD_SIZE_BYTES / (1024 * 1024))} MB in totaal).`}
+                              </Text>
+                            </label>
                             <Text fontSize="sm" color="gray.600">
-                              {`Voeg documenten en foto's toe (maximaal ${Math.floor(MAX_TOTAL_UPLOAD_SIZE_BYTES / (1024 * 1024))} MB in totaal).`}
+                              {selectedDocuments.length + selectedPhotos.length === 0 ?
+                                'Nog geen bestanden of foto\'s gekozen'
+                              : `${selectedDocuments.length} document(en), ${selectedPhotos.length} foto's`}
                             </Text>
-                          </label>
-                          <Text fontSize="sm" color="gray.600">
-                            {selectedDocuments.length + selectedPhotos.length === 0 ?
-                              'Nog geen bestanden of foto\'s gekozen'
-                            : `${selectedDocuments.length} document(en), ${selectedPhotos.length} foto's`}
-                          </Text>
-                        </VStack>
-                      </Box>
+                          </VStack>
+                        </Box>
 
-                      <Text fontSize="sm" color="gray.600" fontWeight="medium">
-                        Documenten
-                      </Text>
-                      {selectedDocuments.length > 0 && (
-                        <VStack align="stretch" gap="2">
-                          {selectedDocuments.map(file => {
-                            const identity = getFileIdentity(file);
+                        <Text fontSize="sm" color="gray.600" fontWeight="medium">
+                          Documenten
+                        </Text>
+                        {selectedDocuments.length > 0 && (
+                          <VStack align="stretch" gap="2">
+                            {selectedDocuments.map(file => {
+                              const identity = getFileIdentity(file);
 
-                            return (
-                              <HStack
+                              return (
+                                <HStack
+                                  key={identity}
+                                  justify="space-between"
+                                  align="center"
+                                  border="1px solid"
+                                  borderColor="gray.200"
+                                  borderRadius="md"
+                                  px="3"
+                                  py="2"
+                                  bg="white"
+                                >
+                                  <Box>
+                                    <Text
+                                      fontSize="sm"
+                                      fontWeight="medium"
+                                      color="gray.800"
+                                    >
+                                      {file.name}
+                                    </Text>
+                                    <Text fontSize="xs" color="gray.500">
+                                      {formatFileSize(file.size)}
+                                    </Text>
+                                  </Box>
+                                  <Button
+                                    type="button"
+                                    size="xs"
+                                    variant="ghost"
+                                    colorScheme="red"
+                                    onClick={() => handleRemoveDocument(identity)}
+                                  >
+                                    Verwijderen
+                                  </Button>
+                                </HStack>
+                              );
+                            })}
+                          </VStack>
+                        )}
+                        {selectedDocuments.length === 0 && (
+                          <Box
+                            border="1px solid"
+                            borderColor="gray.200"
+                            borderRadius="md"
+                            bg="gray.50"
+                            px="3"
+                            py="2"
+                          >
+                            <Text fontSize="sm" color="gray.500">
+                              Nog geen documenten gekozen
+                            </Text>
+                          </Box>
+                        )}
+
+                        <Text fontSize="sm" color="gray.600" fontWeight="medium" pt="2">
+                          Foto&apos;s
+                        </Text>
+                        {selectedPhotos.length > 0 && (
+                          <HStack align="stretch" wrap="wrap" gap="3">
+                            {photoPreviews.map(({ file, identity, previewUrl }) => (
+                              <Box
                                 key={identity}
-                                justify="space-between"
-                                align="center"
                                 border="1px solid"
                                 borderColor="gray.200"
                                 borderRadius="md"
-                                px="3"
-                                py="2"
+                                p="2"
                                 bg="white"
+                                width="140px"
                               >
-                                <Box>
-                                  <Text fontSize="sm" fontWeight="medium" color="gray.800">
-                                    {file.name}
-                                  </Text>
-                                  <Text fontSize="xs" color="gray.500">
-                                    {formatFileSize(file.size)}
-                                  </Text>
-                                </Box>
+                                <Image
+                                  src={previewUrl}
+                                  alt={file.name}
+                                  borderRadius="sm"
+                                  objectFit="cover"
+                                  width="100%"
+                                  height="90px"
+                                  mb="2"
+                                />
+                                <Text
+                                  fontSize="xs"
+                                  color="gray.700"
+                                  fontWeight="medium"
+                                  lineClamp={2}
+                                  mb="1"
+                                >
+                                  {file.name}
+                                </Text>
+                                <Text fontSize="xs" color="gray.500" mb="1">
+                                  {formatFileSize(file.size)}
+                                </Text>
                                 <Button
                                   type="button"
                                   size="xs"
                                   variant="ghost"
                                   colorScheme="red"
-                                  onClick={() => handleRemoveDocument(identity)}
+                                  onClick={() => handleRemovePhoto(identity)}
                                 >
                                   Verwijderen
                                 </Button>
-                              </HStack>
-                            );
-                          })}
-                        </VStack>
-                      )}
-                      {selectedDocuments.length === 0 && (
-                        <Box
-                          border="1px solid"
-                          borderColor="gray.200"
-                          borderRadius="md"
-                          bg="gray.50"
-                          px="3"
-                          py="2"
-                        >
-                          <Text fontSize="sm" color="gray.500">
-                            Nog geen documenten gekozen
-                          </Text>
-                        </Box>
-                      )}
+                              </Box>
+                            ))}
+                          </HStack>
+                        )}
+                        {selectedPhotos.length === 0 && (
+                          <Box
+                            border="1px solid"
+                            borderColor="gray.200"
+                            borderRadius="md"
+                            bg="gray.50"
+                            px="3"
+                            py="2"
+                          >
+                            <Text fontSize="sm" color="gray.500">
+                              Nog geen foto&apos;s gekozen
+                            </Text>
+                          </Box>
+                        )}
+                      </VStack>
+                    </Field>
 
-                      <Text fontSize="sm" color="gray.600" fontWeight="medium" pt="2">
-                        Foto's
-                      </Text>
-                      {selectedPhotos.length > 0 && (
-                        <HStack align="stretch" wrap="wrap" gap="3">
-                          {photoPreviews.map(({ file, identity, previewUrl }) => (
-                            <Box
-                              key={identity}
-                              border="1px solid"
-                              borderColor="gray.200"
-                              borderRadius="md"
-                              p="2"
-                              bg="white"
-                              width="140px"
-                            >
-                              <Image
-                                src={previewUrl}
-                                alt={file.name}
-                                borderRadius="sm"
-                                objectFit="cover"
-                                width="100%"
-                                height="90px"
-                                mb="2"
-                              />
-                              <Text
-                                fontSize="xs"
-                                color="gray.700"
-                                fontWeight="medium"
-                                lineClamp={2}
-                                mb="1"
-                              >
-                                {file.name}
-                              </Text>
-                              <Text fontSize="xs" color="gray.500" mb="1">
-                                {formatFileSize(file.size)}
-                              </Text>
-                              <Button
-                                type="button"
-                                size="xs"
-                                variant="ghost"
-                                colorScheme="red"
-                                onClick={() => handleRemovePhoto(identity)}
-                              >
-                                Verwijderen
-                              </Button>
-                            </Box>
-                          ))}
-                        </HStack>
-                      )}
-                      {selectedPhotos.length === 0 && (
-                        <Box
-                          border="1px solid"
-                          borderColor="gray.200"
-                          borderRadius="md"
-                          bg="gray.50"
-                          px="3"
-                          py="2"
-                        >
-                          <Text fontSize="sm" color="gray.500">
-                            Nog geen foto's gekozen
-                          </Text>
-                        </Box>
-                      )}
-
-                    </VStack>
-                  </Field>
-
-                  <Text fontSize="sm" color="gray.600">
-                    Totaal geselecteerd (documenten + foto's):{' '}
-                    {formatFileSize(totalSelectedBytes)}
-                  </Text>
+                    <Text fontSize="sm" color="gray.600">
+                      Totaal geselecteerd (documenten + foto&apos;s):{' '}
+                      {formatFileSize(totalSelectedBytes)}
+                    </Text>
 
                     <Button
                       type="submit"

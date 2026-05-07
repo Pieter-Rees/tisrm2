@@ -1,5 +1,5 @@
 /**
- * Action component styles - extracted from call-us, schade-melden components
+ * Action component styles - extracted from call-us, meld-schade components
  */
 
 import type { SystemStyleObject } from '@chakra-ui/react';

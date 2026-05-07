@@ -8,7 +8,7 @@ import {
   actionVariants,
 } from '@/styles/components/action.styles';
 
-export default function SchadeMelden() {
+export default function MeldSchade() {
   const { content: _content } = actionVariants.schadeMelden;
 
   return (

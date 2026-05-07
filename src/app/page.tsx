@@ -18,7 +18,7 @@ import { UI_CONSTANTS } from '@/constants/app';
 // Optimize lazy loading with better grouping
 const ThreeElements = lazy(() => import('@/components/three-elements'));
 const Talker = lazy(() => import('@/components/talker'));
-const SchadeMelden = lazy(() => import('@/components/schade-melden'));
+const MeldSchade = lazy(() => import('@/components/meld-schade'));
 
 const HeroImage = () => (
   <ScaleIn>
@@ -101,7 +101,7 @@ export default function Homepage() {
                             ...UI_CONSTANTS.hover.button,
                           }}
                         >
-                          <SchadeMelden />
+                          <MeldSchade />
                         </Box>
                       </Box>
                     </Flex>

@@ -38,7 +38,7 @@ export { default as Logo } from './logo';
 
 // Action components
 export { default as CallUs } from './call-us';
-export { default as SchadeMelden } from './schade-melden';
+export { default as MeldSchade } from './meld-schade';
 export { default as ContactInfo } from './contact-info';
 export { default as FooterLogos } from './footer-logos';
 
