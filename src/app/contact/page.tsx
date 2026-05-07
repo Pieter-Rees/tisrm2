@@ -16,14 +16,13 @@ import {
 } from '@/styles/components/page.styles';
 import { Box, Button, Flex, Grid, GridItem, Text } from '@chakra-ui/react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 export default function Contact() {
+  const router = useRouter();
+
   const handleSchadeClick = () => {
-    window.open(
-      'https://schade.emsclaimsengine.com/index.php?template=tis&view=consument.login#identificatie_vragen',
-      '_blank',
-      'noopener,noreferrer',
-    );
+    router.push('/meld-schade');
   };
 
   return (
