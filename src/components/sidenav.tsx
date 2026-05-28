@@ -229,19 +229,6 @@ const Sidenav = memo<SidenavProps>(
                   </Link>
                 </MenuItem>
                 <MenuItem
-                  value="damage-report-external"
-                  onClick={handleExternalDamageReportClick}
-                  gap="2"
-                  _hover={{ bg: 'blue.50' }}
-                  cursor="pointer"
-                >
-                  <BsShield />
-                  Extern schadeportaal
-                  <VisuallyHidden>
-                    - Opens external damage report form in new window
-                  </VisuallyHidden>
-                </MenuItem>
-                <MenuItem
                   value="quote"
                   asChild
                   gap="2"

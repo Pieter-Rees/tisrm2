@@ -98,7 +98,7 @@ const Navbar = memo(() => {
                           borderBottomColor: 'blue.200',
                           transform: 'translateY(-1px)',
                         }
-                      : {}
+                        : {}
                     }
                   >
                     {label}
@@ -157,19 +157,6 @@ const Navbar = memo(() => {
                 <BsShield />
                 Schade melden
               </Link>
-            </MenuItem>
-            <MenuItem
-              value="damage-report-external"
-              onClick={handleExternalDamageReportClick}
-              gap="2"
-              _hover={{ bg: 'blue.50' }}
-              cursor="pointer"
-            >
-              <BsShield />
-              Extern schadeportaal
-              <VisuallyHidden>
-                - Opens external damage report form in new window
-              </VisuallyHidden>
             </MenuItem>
             <MenuItem
               value="quote"
