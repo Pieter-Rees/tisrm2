@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { memo, useCallback } from 'react';
+import { memo } from 'react';
 import {
   BsChevronDown,
   BsFileText,
@@ -21,11 +21,7 @@ import {
   BsTelephone,
 } from 'react-icons/bs';
 
-import {
-  CONTACT_INFO,
-  EXTERNAL_LINKS,
-  NAVIGATION_ROUTES,
-} from '@/constants/app';
+import { CONTACT_INFO, NAVIGATION_ROUTES } from '@/constants/app';
 import { SPACING_PATTERNS } from '@/constants/layout';
 // import {
 //   navbarContainerStyles,
@@ -51,10 +47,6 @@ const NAVIGATION_LINKS: readonly NavigationLink[] = [
 ] as const;
 const Navbar = memo(() => {
   const pathname = usePathname();
-
-  const handleExternalDamageReportClick = useCallback(() => {
-    window.open(EXTERNAL_LINKS.damageReport, '_blank', 'noopener,noreferrer');
-  }, []);
 
   return (
     <Flex

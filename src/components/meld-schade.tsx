@@ -3,6 +3,7 @@
 import { Box, Button, Flex, Heading } from '@chakra-ui/react';
 import Link from 'next/link';
 
+import { NAVIGATION_ROUTES } from '@/constants/app';
 import {
   actionButtonBaseStyles,
   actionVariants,
@@ -13,11 +14,7 @@ export default function MeldSchade() {
 
   return (
     <Button asChild {...actionButtonBaseStyles}>
-      <Link
-        href="https://schade.emsclaimsengine.com/index.php?template=tis&view=consument.login#identificatie_vragen"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <Link href={NAVIGATION_ROUTES.damageReport}>
         <Flex
           justifyContent="center"
           height="full"

@@ -24,12 +24,7 @@ import {
 } from 'react-icons/bs';
 
 import Logo from '@/components/logo';
-import {
-  CONTACT_INFO,
-  EXTERNAL_LINKS,
-  NAVIGATION_ROUTES,
-  UI_CONSTANTS,
-} from '@/constants/app';
+import { CONTACT_INFO, NAVIGATION_ROUTES, UI_CONSTANTS } from '@/constants/app';
 import { SPACING_PATTERNS } from '@/constants/layout';
 import { cn } from '@/lib/utils';
 // import {
@@ -60,11 +55,6 @@ const MOBILE_NAVIGATION_LINKS: readonly NavigationLink[] = [
 const Sidenav = memo<SidenavProps>(
   ({ showSideNav, handleToggle, className, 'data-testid': testId }) => {
     const pathname = usePathname();
-
-    const handleExternalDamageReportClick = useCallback(() => {
-      window.open(EXTERNAL_LINKS.damageReport, '_blank', 'noopener,noreferrer');
-      handleToggle();
-    }, [handleToggle]);
 
     useEffect(() => {
       const handleEscape = (event: KeyboardEvent) => {

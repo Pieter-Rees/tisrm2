@@ -4,7 +4,7 @@ import { Box, Grid, Heading } from '@chakra-ui/react';
 import { memo } from 'react';
 
 import Card from '@/components/card';
-import { NAVIGATION_ROUTES, EXTERNAL_LINKS } from '@/constants/app';
+import { NAVIGATION_ROUTES } from '@/constants/app';
 
 interface CallToActionProps {
   className?: string;
@@ -54,7 +54,7 @@ const CallToAction = memo<CallToActionProps>(
           <Card
             title="Schade melden"
             cta="Start hier"
-            ctaLink={EXTERNAL_LINKS.damageReport}
+            ctaLink={NAVIGATION_ROUTES.damageReport}
             variant="sidebar"
             buttonVariant="solid"
           />

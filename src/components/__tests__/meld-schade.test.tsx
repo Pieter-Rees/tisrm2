@@ -6,9 +6,7 @@ const SimpleMeldSchade = () => {
     return (
         <button aria-label="Schade melden">
             <a
-                href="https://schade.emsclaimsengine.com/index.php?template=tis&view=consument.login#identificatie_vragen"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/meld-schade"
             >
                 <div className="button-content">
                     <div className="button-text">
@@ -50,17 +48,10 @@ describe('MeldSchade', () => {
         expect(button).toHaveAttribute('aria-label');
     });
 
-    it('has correct link attributes', () => {
-        render(<SimpleMeldSchade />);
-        const link = screen.getByRole('link');
-        expect(link).toHaveAttribute('target', '_blank');
-        expect(link).toHaveAttribute('rel', 'noopener noreferrer');
-    });
-
     it('has correct href', () => {
         render(<SimpleMeldSchade />);
         const link = screen.getByRole('link');
-        expect(link).toHaveAttribute('href', 'https://schade.emsclaimsengine.com/index.php?template=tis&view=consument.login#identificatie_vragen');
+        expect(link).toHaveAttribute('href', '/meld-schade');
     });
 
     it('renders heading element', () => {
