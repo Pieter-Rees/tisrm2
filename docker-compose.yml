@@ -3,7 +3,7 @@ version: '3.8'
 services:
   frontend:
     build:
-      context: /home/pieter/Development/tisrm2
+      context: .
       dockerfile: Dockerfile
       args:
         NEXT_PUBLIC_SERVER_URL: ${NEXT_PUBLIC_SERVER_URL:-http://localhost:3011}
@@ -14,7 +14,7 @@ services:
     environment:
       - NODE_ENV=production
       - DATABASE_URL=postgres://payload:payload@postgres:5432/payload
-      - PAYLOAD_SECRET=${PAYLOAD_SECRET:?PAYLOAD_SECRET must be set}
+      - PAYLOAD_SECRET=${PAYLOAD_SECRET:-tisrm-docker-default-change-me-later}
       - NEXT_PUBLIC_SERVER_URL=${NEXT_PUBLIC_SERVER_URL:-http://localhost:3011}
       - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:4000}
     volumes:
@@ -48,7 +48,7 @@ services:
 
   backend:
     build:
-      context: /home/pieter/Development/tis-risk-managers-backend
+      context: ../tis-risk-managers-backend
       dockerfile: Dockerfile
     container_name: tisrm2-backend
     ports:
@@ -56,7 +56,7 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=4000
-      - FRONTEND_URL=http://localhost:3011
+      - FRONTEND_URL=${FRONTEND_URL:-http://localhost:3011}
     networks:
       - app-network
 
