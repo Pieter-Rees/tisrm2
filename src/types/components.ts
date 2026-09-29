@@ -128,6 +128,8 @@ export interface TalkerProps extends BaseComponentProps {
 }
 
 export interface ThreeElementsProps extends BaseComponentProps {
+  readonly heading?: string;
+  readonly description?: string;
   readonly elements?:
     | readonly {
         readonly id: string;

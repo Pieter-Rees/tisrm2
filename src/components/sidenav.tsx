@@ -24,37 +24,19 @@ import {
 } from 'react-icons/bs';
 
 import Logo from '@/components/logo';
-import { CONTACT_INFO, NAVIGATION_ROUTES, UI_CONSTANTS } from '@/constants/app';
+import {
+  toTelHref,
+  useSiteSettings,
+} from '@/components/site-settings-provider';
+import { NAVIGATION_ROUTES, UI_CONSTANTS } from '@/constants/app';
 import { SPACING_PATTERNS } from '@/constants/layout';
 import { cn } from '@/lib/utils';
-// import {
-//   sidenavContainerStyles,
-//   getSidenavPositionStyles,
-//   sidenavCloseButtonContainerStyles,
-//   sidenavCloseButtonStyles,
-//   sidenavContentContainerStyles,
-//   sidenavLogoContainerStyles,
-//   sidenavLinksContainerStyles,
-//   sidenavLinkItemStyles,
-//   getSidenavLinkButtonStyles,
-//   sidenavSeparatorStyles,
-//   sidenavActionsContainerStyles,
-//   sidenavActionsButtonStyles,
-//   navbarMenuItemStyles,
-// } from '@/styles/components/navigation.styles';
-import type { NavigationLink, SidenavProps } from '@/types/components';
-const MOBILE_NAVIGATION_LINKS: readonly NavigationLink[] = [
-  { href: NAVIGATION_ROUTES.home, label: 'Home' },
-  { href: NAVIGATION_ROUTES.insurance, label: 'Verzekeringen' },
-  { href: NAVIGATION_ROUTES.taxi, label: 'Taxi' },
-  { href: NAVIGATION_ROUTES.riskManagement, label: 'Risk Management' },
-  { href: NAVIGATION_ROUTES.about, label: 'Over ons' },
-  { href: NAVIGATION_ROUTES.downloads, label: 'Downloads' },
-  { href: NAVIGATION_ROUTES.contact, label: 'Contact' },
-] as const;
+import type { SidenavProps } from '@/types/components';
 const Sidenav = memo<SidenavProps>(
   ({ showSideNav, handleToggle, className, 'data-testid': testId }) => {
     const pathname = usePathname();
+    const settings = useSiteSettings();
+    const navigationLinks = settings.navItems;
 
     useEffect(() => {
       const handleEscape = (event: KeyboardEvent) => {
@@ -139,7 +121,7 @@ const Sidenav = memo<SidenavProps>(
             margin="0"
             padding="0"
           >
-            {MOBILE_NAVIGATION_LINKS.map(({ href, label }) => {
+            {navigationLinks.map(({ href, label }) => {
               const isActive =
                 pathname === href ||
                 (href !== '/' && pathname.startsWith(href));
@@ -241,7 +223,7 @@ const Sidenav = memo<SidenavProps>(
                   cursor="pointer"
                 >
                   <Link
-                    href={`tel:${CONTACT_INFO.phone}`}
+                    href={toTelHref(settings.phone)}
                     onClick={handleLinkClick}
                   >
                     <BsTelephone />

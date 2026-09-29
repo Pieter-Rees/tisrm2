@@ -2,14 +2,11 @@
 
 import { SPACING_PATTERNS } from '@/constants/layout';
 import { contactInfo } from '@/data/general';
+import {
+  toTelHref,
+  useSiteSettings,
+} from '@/components/site-settings-provider';
 import type { ContactInfoProps } from '@/types/components';
-// import {
-//   contactInfoGridStyles,
-//   contactInfoColumnStyles,
-//   contactInfoTextStyles,
-//   contactInfoButtonsContainerStyles,
-//   contactInfoButtonsListStyles,
-// } from '@/styles/components/utility.styles';
 import {
   Box,
   Button,
@@ -22,27 +19,37 @@ import {
 import Link from 'next/link';
 import { BsLinkedin } from 'react-icons/bs';
 
-const contactButtons = [
-  { href: 'tel:+310206368191', label: '+31 20 636 8191', external: false },
-  { href: 'mailto:info@tisrm.nl', label: 'info@tisrm.nl', external: false },
-  {
-    href: contactInfo.social.linkedIn,
-    label: <BsLinkedin size="24" />,
-    external: true,
-  },
-] as const;
-
 export default function ContactInfo({
   buttonVariant = 'solid',
 }: ContactInfoProps) {
+  const settings = useSiteSettings();
+
+  const contactButtons = [
+    {
+      href: toTelHref(settings.phone),
+      label: settings.phone,
+      external: false,
+    },
+    {
+      href: `mailto:${settings.email}`,
+      label: settings.email,
+      external: false,
+    },
+    {
+      href: contactInfo.social.linkedIn,
+      label: <BsLinkedin size="24" />,
+      external: true,
+    },
+  ] as const;
+
   return (
     <>
       <SimpleGrid gap={SPACING_PATTERNS.page.section}>
         <Box>
           <VStack alignItems="start" gap={SPACING_PATTERNS.navigation.item}>
-            <Text color="gray.800">{contactInfo.address.street}</Text>
-            <Text color="gray.800">{contactInfo.email}</Text>
-            <Text color="gray.800">{contactInfo.address.city}</Text>
+            <Text color="gray.800">{settings.address.street}</Text>
+            <Text color="gray.800">{settings.email}</Text>
+            <Text color="gray.800">{settings.address.city}</Text>
           </VStack>
         </Box>
         <Box>

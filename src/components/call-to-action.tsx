@@ -4,15 +4,28 @@ import { Box, Grid, Heading } from '@chakra-ui/react';
 import { memo } from 'react';
 
 import Card from '@/components/card';
+import {
+  toTelHref,
+  useSiteSettings,
+} from '@/components/site-settings-provider';
 import { NAVIGATION_ROUTES } from '@/constants/app';
 
 interface CallToActionProps {
   className?: string;
   'data-testid'?: string;
+  heading?: string;
+  description?: string;
 }
 
 const CallToAction = memo<CallToActionProps>(
-  ({ className, 'data-testid': testId }) => {
+  ({
+    className,
+    'data-testid': testId,
+    heading = 'Klaar voor persoonlijk advies?',
+    description = 'Neem contact op voor een vrijblijvend gesprek over uw verzekeringsbehoefte',
+  }) => {
+    const settings = useSiteSettings();
+
     return (
       <Box
         className={className}
@@ -32,11 +45,10 @@ const CallToAction = memo<CallToActionProps>(
           mb="3"
           fontWeight="semibold"
         >
-          Klaar voor persoonlijk advies?
+          {heading}
         </Heading>
         <Box fontSize="sm" color="blue.700" mb="8" maxW="lg" mx="auto">
-          Neem contact op voor een vrijblijvend gesprek over uw
-          verzekeringsbehoefte
+          {description}
         </Box>
 
         <Grid
@@ -47,7 +59,7 @@ const CallToAction = memo<CallToActionProps>(
           <Card
             title="Bel direct"
             cta="Bel nu"
-            phone="tel:+310206368191"
+            phone={toTelHref(settings.phone)}
             variant="sidebar"
             buttonVariant="solid"
           />

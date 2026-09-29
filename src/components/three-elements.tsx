@@ -56,7 +56,13 @@ const FEATURE_CARDS = [
   },
 ] as const;
 const ThreeElements = memo<ThreeElementsProps>(
-  ({ elements = FEATURE_CARDS, className, 'data-testid': testId }) => {
+  ({
+    elements = FEATURE_CARDS,
+    heading = 'Waarom kiezen voor TIS?',
+    description = 'Ontdek onze unieke aanpak en specialisaties die ons onderscheiden in de verzekeringsmarkt',
+    className,
+    'data-testid': testId,
+  }) => {
     return (
       <Box
         className={cn('three-elements', className)}
@@ -66,14 +72,13 @@ const ThreeElements = memo<ThreeElementsProps>(
       >
         <Box {...featureHeaderStyles}>
           <Heading as="h2" {...HEADING_STYLES.h2} textAlign="center">
-            Waarom kiezen voor TIS?
+            {heading}
           </Heading>
           <Box
             {...PARAGRAPH_STYLES.large}
             {...featureDescriptionStyles}
           >
-            Ontdek onze unieke aanpak en specialisaties die ons onderscheiden in
-            de verzekeringsmarkt
+            {description}
           </Box>
         </Box>
 

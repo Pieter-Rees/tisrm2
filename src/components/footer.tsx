@@ -2,6 +2,10 @@
 
 import FooterLogos from '@/components/footer-logos';
 import Logo from '@/components/logo';
+import {
+  toTelHref,
+  useSiteSettings,
+} from '@/components/site-settings-provider';
 import { CURRENT_YEAR } from '@/constants/app';
 import { contactInfo } from '@/data/general';
 import {
@@ -21,21 +25,43 @@ import {
 } from '@chakra-ui/react';
 import Link from 'next/link';
 
-const contactLinks = [
-  { href: 'tel:+310206368191', label: '+31 20 636 8191', external: false },
-  { href: 'mailto:info@tisrm.nl', label: 'info@tisrm.nl', external: false },
-  { href: contactInfo.social.linkedIn, label: 'LinkedIn', external: true },
-] as const;
-
-const navigationLinks = [
-  { href: '/verzekeringen', label: 'Verzekeringen' },
-  { href: '/taxi', label: 'Taxi' },
-  { href: '/risk-management', label: 'Risk Management' },
-  { href: '/over-ons', label: 'Over ons' },
-  { href: '/contact', label: 'Contact' },
+const FOOTER_NAV_HREFS = [
+  '/verzekeringen',
+  '/taxi',
+  '/risk-management',
+  '/over-ons',
+  '/contact',
 ] as const;
 
 export default function Footer() {
+  const settings = useSiteSettings();
+
+  const contactLinks = [
+    {
+      href: toTelHref(settings.phone),
+      label: settings.phone,
+      external: false,
+    },
+    {
+      href: `mailto:${settings.email}`,
+      label: settings.email,
+      external: false,
+    },
+    {
+      href: contactInfo.social.linkedIn,
+      label: 'LinkedIn',
+      external: true,
+    },
+  ] as const;
+
+  const navigationLinks = FOOTER_NAV_HREFS.map((href) => {
+    const fromCms = settings.navItems.find((item) => item.href === href);
+    return {
+      href,
+      label: fromCms?.label ?? href.replace(/^\//, ''),
+    };
+  });
+
   return (
     <>
       <FooterLogos width="auto" height="auto" />
@@ -112,7 +138,7 @@ export default function Footer() {
                 </Flex>
                 <Flex textAlign="center">
                   <Text color="white" fontSize="sm">
-                    © {CURRENT_YEAR} {contactInfo.name}. Alle rechten
+                    © {CURRENT_YEAR} {settings.companyName}. Alle rechten
                     voorbehouden.
                   </Text>
                 </Flex>

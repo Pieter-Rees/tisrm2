@@ -7,12 +7,39 @@ services:
       dockerfile: Dockerfile
     container_name: tisrm2-frontend
     ports:
-      - "3002:3002"
+      - "3011:3011"
     environment:
       - NODE_ENV=production
+      - DATABASE_URL=postgres://payload:payload@postgres:5432/payload
+      - PAYLOAD_SECRET=${PAYLOAD_SECRET}
+      - NEXT_PUBLIC_SERVER_URL=http://localhost:3011
       - NEXT_PUBLIC_API_URL=http://localhost:4000
+    volumes:
+      - payload_media:/app/media
     depends_on:
-      - backend
+      postgres:
+        condition: service_healthy
+      backend:
+        condition: service_started
+    networks:
+      - app-network
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: tisrm2-postgres
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: payload
+      POSTGRES_PASSWORD: payload
+      POSTGRES_DB: payload
+    volumes:
+      - payload_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U payload -d payload"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
     networks:
       - app-network
 
@@ -26,11 +53,14 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=4000
-      - FRONTEND_URL=http://localhost:3002
+      - FRONTEND_URL=http://localhost:3011
     networks:
       - app-network
+
+volumes:
+  payload_pgdata:
+  payload_media:
 
 networks:
   app-network:
     driver: bridge
-

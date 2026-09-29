@@ -87,6 +87,9 @@
       ],
       "@/styles/*": [
         "./src/styles/*"
+      ],
+      "@payload-config": [
+        "./src/payload.config.ts"
       ]
     }
   },

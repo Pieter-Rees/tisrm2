@@ -21,32 +21,16 @@ import {
   BsTelephone,
 } from 'react-icons/bs';
 
-import { CONTACT_INFO, NAVIGATION_ROUTES } from '@/constants/app';
+import {
+  toTelHref,
+  useSiteSettings,
+} from '@/components/site-settings-provider';
+import { NAVIGATION_ROUTES } from '@/constants/app';
 import { SPACING_PATTERNS } from '@/constants/layout';
-// import {
-//   navbarContainerStyles,
-//   navbarLinksContainerStyles,
-//   navbarLinksListStyles,
-//   navbarLinkItemStyles,
-//   navbarLinkWrapperStyles,
-//   getNavbarLinkStyles,
-//   navbarActionsContainerStyles,
-//   navbarActionsButtonStyles,
-//   navbarMenuContentStyles,
-//   navbarMenuItemStyles,
-// } from '@/styles/components/navigation.styles';
-import type { NavigationLink } from '@/types/components';
-const NAVIGATION_LINKS: readonly NavigationLink[] = [
-  { href: NAVIGATION_ROUTES.home, label: 'Home' },
-  { href: NAVIGATION_ROUTES.insurance, label: 'Verzekeringen' },
-  { href: NAVIGATION_ROUTES.taxi, label: 'Taxi' },
-  { href: NAVIGATION_ROUTES.riskManagement, label: 'Risk Management' },
-  { href: NAVIGATION_ROUTES.about, label: 'Over ons' },
-  { href: NAVIGATION_ROUTES.downloads, label: 'Downloads' },
-  { href: NAVIGATION_ROUTES.contact, label: 'Contact' },
-] as const;
 const Navbar = memo(() => {
   const pathname = usePathname();
+  const settings = useSiteSettings();
+  const navigationLinks = settings.navItems;
 
   return (
     <Flex
@@ -65,7 +49,7 @@ const Navbar = memo(() => {
           margin="0"
           padding="0"
         >
-          {NAVIGATION_LINKS.map(({ href, label }) => {
+          {navigationLinks.map(({ href, label }) => {
             const isActive =
               pathname === href || (href !== '/' && pathname.startsWith(href));
 
@@ -169,11 +153,11 @@ const Navbar = memo(() => {
               _hover={{ bg: 'blue.50' }}
               cursor="pointer"
             >
-              <Link href={`tel:${CONTACT_INFO.phone}`}>
+              <Link href={toTelHref(settings.phone)}>
                 <BsTelephone />
                 Bel nu
                 <VisuallyHidden>
-                  - Call us for immediate assistance: {CONTACT_INFO.phone}
+                  - Call us for immediate assistance: {settings.phone}
                 </VisuallyHidden>
               </Link>
             </MenuItem>

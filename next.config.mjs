@@ -1,4 +1,5 @@
 import bundleAnalyzer from '@next/bundle-analyzer';
+import { withPayload } from '@payloadcms/next/withPayload';
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
@@ -7,7 +8,12 @@ const withBundleAnalyzer = bundleAnalyzer({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   distDir: 'build',
-  output: process.env.NEXT_EXPORT === 'true' ? 'export' : undefined,
+  // CMS/admin (Payload) requires a non-export build; use standalone for Docker.
+  // NEXT_EXPORT=true keeps static export for non-CMS builds only.
+  output:
+    process.env.NEXT_EXPORT === 'true'
+      ? 'export'
+      : 'standalone',
   trailingSlash: process.env.NEXT_EXPORT === 'true' ? true : false,
   images: process.env.NEXT_EXPORT === 'true' ? { unoptimized: true } : {
     formats: ['image/webp', 'image/avif'],
@@ -144,4 +150,4 @@ const nextConfig = {
   },
 };
 
-export default withBundleAnalyzer(nextConfig);
+export default withPayload(withBundleAnalyzer(nextConfig));
