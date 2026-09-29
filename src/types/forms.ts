@@ -1,4 +1,4 @@
-import type { FieldPath, FieldValues, UseFormReturn, FieldErrors, FormState as ReactHookFormState } from 'react-hook-form';
+import type { FieldPath, FieldValues, UseFormReturn, FormState as ReactHookFormState } from 'react-hook-form';
 
 // Re-export FieldValues for convenience
 export type { FieldValues };

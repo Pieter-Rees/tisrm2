@@ -2,14 +2,13 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import PerformanceMonitor from '../performance-monitor';
 
-// Mock performance API
 const mockPerformance = {
     now: jest.fn(() => 1000),
     mark: jest.fn(),
     measure: jest.fn(),
 };
 
-const mockPerformanceObserver = jest.fn().mockImplementation((callback) => ({
+const mockPerformanceObserver = jest.fn().mockImplementation(() => ({
     observe: jest.fn(),
     disconnect: jest.fn(),
 }));
@@ -17,17 +16,29 @@ const mockPerformanceObserver = jest.fn().mockImplementation((callback) => ({
 Object.defineProperty(window, 'performance', {
     value: mockPerformance,
     writable: true,
+    configurable: true,
 });
 
 Object.defineProperty(window, 'PerformanceObserver', {
     value: mockPerformanceObserver,
     writable: true,
+    configurable: true,
 });
 
 describe('PerformanceMonitor', () => {
     beforeEach(() => {
         jest.clearAllMocks();
-        jest.spyOn(console, 'warn').mockImplementation(() => { });
+        jest.spyOn(console, 'warn').mockImplementation(() => {});
+        Object.defineProperty(window, 'performance', {
+            value: mockPerformance,
+            writable: true,
+            configurable: true,
+        });
+        Object.defineProperty(window, 'PerformanceObserver', {
+            value: mockPerformanceObserver,
+            writable: true,
+            configurable: true,
+        });
     });
 
     afterEach(() => {
@@ -36,7 +47,7 @@ describe('PerformanceMonitor', () => {
 
     it('renders without crashing', () => {
         const { container } = render(<PerformanceMonitor />);
-        expect(container.firstChild).toBeNull(); // Component doesn't render anything visible
+        expect(container.firstChild).toBeNull();
     });
 
     it('renders with custom props', () => {
@@ -50,23 +61,20 @@ describe('PerformanceMonitor', () => {
     });
 
     it('does not crash when PerformanceObserver is not available', () => {
-        // Temporarily remove PerformanceObserver
-        delete (window as any).PerformanceObserver;
+        Reflect.deleteProperty(window, 'PerformanceObserver');
 
         const { container } = render(<PerformanceMonitor />);
         expect(container.firstChild).toBeNull();
     });
 
     it('does not crash when performance API is not available', () => {
-        // Temporarily remove performance API
-        delete (window as any).performance;
+        Reflect.deleteProperty(window, 'performance');
 
         const { container } = render(<PerformanceMonitor />);
         expect(container.firstChild).toBeNull();
     });
 
     it('handles errors gracefully', () => {
-        // Mock PerformanceObserver to throw an error
         const mockObserverWithError = jest.fn().mockImplementation(() => {
             throw new Error('PerformanceObserver not supported');
         });
@@ -74,12 +82,13 @@ describe('PerformanceMonitor', () => {
         Object.defineProperty(window, 'PerformanceObserver', {
             value: mockObserverWithError,
             writable: true,
+            configurable: true,
         });
 
-        // Keep performance API available for this test
         Object.defineProperty(window, 'performance', {
             value: mockPerformance,
             writable: true,
+            configurable: true,
         });
 
         const { container } = render(<PerformanceMonitor />);

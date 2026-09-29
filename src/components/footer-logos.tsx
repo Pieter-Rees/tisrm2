@@ -28,7 +28,7 @@ export default function FooterLogos({ height = 'auto' }: FooterLogosProps) {
       mt={SPACING_PATTERNS.page.section}
     >
       {logos.map(({ src, alt }) => (
-        <Box key={src} height={height} width="200px">
+        <Box key={src} width="200px" height={height}>
           <Image src={src} alt={alt} width={1000} height={1000} />
         </Box>
       ))}

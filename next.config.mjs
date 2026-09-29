@@ -1,9 +1,3 @@
-import { fileURLToPath } from 'url';
-import { dirname, resolve } from 'path';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   distDir: 'build',
@@ -21,26 +15,23 @@ const nextConfig = {
     unoptimized: false,
     loader: 'default',
     path: '/_next/image',
-    domains: [],
     loaderFile: undefined,
     disableStaticImages: false,
   },
   typedRoutes: true,
   experimental: {
-    ...(process.env.TURBOPACK !== '1' && {
-      optimizePackageImports: [
-        '@chakra-ui/react',
-        'framer-motion',
-        'react-icons',
-        'react-hook-form',
-        'axios',
-        'clsx',
-      ],
-      optimizeCss: true,
-      scrollRestoration: true,
-      optimizeServerReact: true,
-      webVitalsAttribution: ['CLS', 'LCP', 'FCP', 'FID', 'TTFB'],
-    }),
+    optimizePackageImports: [
+      '@chakra-ui/react',
+      'framer-motion',
+      'react-icons',
+      'react-hook-form',
+      'axios',
+      'clsx',
+    ],
+    optimizeCss: true,
+    scrollRestoration: true,
+    optimizeServerReact: true,
+    webVitalsAttribution: ['CLS', 'LCP', 'FCP', 'INP', 'TTFB'],
   },
   serverExternalPackages: ['@next/bundle-analyzer'],
   turbopack: {
@@ -62,22 +53,6 @@ const nextConfig = {
   poweredByHeader: false,
   compress: true,
   reactStrictMode: true,
-  ...(process.env.TURBOPACK !== '1' && {
-    modularizeImports: {
-      '@chakra-ui/react': {
-        transform: '@chakra-ui/react/{{member}}',
-      },
-      'react-icons': {
-        transform: 'react-icons/{{member}}',
-      },
-      'react-icons/bs': {
-        transform: 'react-icons/bs/{{member}}',
-      },
-      'react-icons/hi': {
-        transform: 'react-icons/hi/{{member}}',
-      },
-    },
-  }),
   bundlePagesRouterDependencies: true,
   webpack: (config, { isServer, dev, webpack }) => {
     if (isServer) {
