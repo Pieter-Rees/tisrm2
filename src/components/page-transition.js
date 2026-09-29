@@ -1,29 +1,22 @@
 'use client'
 
-import { Box } from '@chakra-ui/react';
-import { useState, useEffect } from 'react';
+import { Box } from '@chakra-ui/react'
 
-const PageTransition = ({ children, delay = 0.1 }) => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), delay * 1000);
-    return () => clearTimeout(timer);
-  }, [delay]);
-
+const PageTransition = ({ children }) => {
   return (
     <Box
-      opacity={isVisible ? 1 : 0}
-      transform={`translateY(${isVisible ? 0 : 20}px)`}
-      transition={{
-        duration: 0.5,
-        delay: delay,
-        ease: "ease-out"
+      opacity={1}
+      animation="pageIn 0.55s ease-out"
+      sx={{
+        '@keyframes pageIn': {
+          from: { opacity: 0, transform: 'translateY(10px)' },
+          to: { opacity: 1, transform: 'translateY(0)' },
+        },
       }}
     >
       {children}
     </Box>
-  );
-};
+  )
+}
 
-export default PageTransition;
+export default PageTransition

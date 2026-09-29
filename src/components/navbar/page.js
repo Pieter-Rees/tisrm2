@@ -1,162 +1,117 @@
-"use client"
+'use client'
 
-import { HStack, Button, Show, Flex, Center, Box, Divider, Hide } from "@chakra-ui/react"
+import { Button, Flex, Box } from '@chakra-ui/react'
 import Link from 'next/link'
-import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation'
+import { navCtaGap, navLinkGap } from '@/constants/spacing'
 
-export default function Navbar() {
-    const [visibleElements, setVisibleElements] = useState([]);
+const navLinks = [
+  { href: '/verzekeringen', label: 'Verzekeringen', match: (path) => path.startsWith('/verzekeringen') },
+  { href: '/taxi', label: 'Taxi', match: (path) => path.startsWith('/taxi') },
+  {
+    href: '/risk-management',
+    label: 'Risk Management',
+    match: (path) => path.startsWith('/risk-management'),
+  },
+  { href: '/over-ons', label: 'Over ons', match: (path) => path.startsWith('/over-ons') },
+  { href: '/bestanden', label: 'Bestanden', match: (path) => path.startsWith('/bestanden') },
+  { href: '/contact', label: 'Contact', match: (path) => path.startsWith('/contact') },
+]
 
-    useEffect(() => {
-        const timers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99].map(index => 
-            setTimeout(() => {
-                setVisibleElements(prev => [...prev, index]);
-            }, index * 20)
-        );
+export default function Navbar({ useLightChrome = true }) {
+  const pathname = usePathname()
 
-        return () => timers.forEach(timer => clearTimeout(timer));
-    }, []);
-
-    const handleSchadeClick = () => {
-        // Open in new window without referrer
-        window.open('https://schade.emsclaimsengine.com/index.php?template=tis&view=consument.login#identificatie_vragen', '_blank', 'noopener,noreferrer');
-    };
-
-    return (
-        <Flex alignItems='center'>
-            <Hide below='xl'>
-                <HStack gap='8' fontSize={{ base: 'md', '2xl': 'xl' }}>
-                    <Box
-                        opacity={visibleElements.includes(0) ? 1 : 0}
-                        transform={`translateY(${visibleElements.includes(0) ? 0 : -10}px)`}
-                        transition="all 0.2s ease-out"
-                        _hover={{
-                            transform: "translateY(-2px) scale(1.05)",
-                            transition: "all 0.2s ease-out"
-                        }}
-                    >
-                        <Link href="/">Home</Link>
-                    </Box>
-                    <Box
-                        opacity={visibleElements.includes(1) ? 1 : 0}
-                        transform={`translateY(${visibleElements.includes(1) ? 0 : -10}px)`}
-                        transition="all 0.2s ease-out"
-                        _hover={{
-                            transform: "translateY(-2px) scale(1.05)",
-                            transition: "all 0.2s ease-out"
-                        }}
-                    >
-                        <Link href="/verzekeringen">Verzekeringen</Link>
-                    </Box>
-                    <Box
-                        opacity={visibleElements.includes(2) ? 1 : 0}
-                        transform={`translateY(${visibleElements.includes(2) ? 0 : -10}px)`}
-                        transition="all 0.2s ease-out"
-                        _hover={{
-                            transform: "translateY(-2px) scale(1.05)",
-                            transition: "all 0.2s ease-out"
-                        }}
-                    >
-                        <Link href="/taxi">Taxi</Link>
-                    </Box>
-                    <Box
-                        opacity={visibleElements.includes(3) ? 1 : 0}
-                        transform={`translateY(${visibleElements.includes(3) ? 0 : -10}px)`}
-                        transition="all 0.2s ease-out"
-                        _hover={{
-                            transform: "translateY(-2px) scale(1.05)",
-                            transition: "all 0.2s ease-out"
-                        }}
-                    >
-                        <Link href="/risk-management">Risk Management</Link>
-                    </Box>
-                    <Box
-                        opacity={visibleElements.includes(4) ? 1 : 0}
-                        transform={`translateY(${visibleElements.includes(4) ? 0 : -10}px)`}
-                        transition="all 0.2s ease-out"
-                        _hover={{
-                            transform: "translateY(-2px) scale(1.05)",
-                            transition: "all 0.2s ease-out"
-                        }}
-                    >
-                        <Link href="/over-ons">Over ons</Link>
-                    </Box>
-                    <Box
-                        opacity={visibleElements.includes(5) ? 1 : 0}
-                        transform={`translateY(${visibleElements.includes(5) ? 0 : -10}px)`}
-                        transition="all 0.2s ease-out"
-                        _hover={{
-                            transform: "translateY(-2px) scale(1.05)",
-                            transition: "all 0.2s ease-out"
-                        }}
-                    >
-                        <Link href="/bestanden">Bestanden</Link>
-                    </Box>
-                    <Box
-                        opacity={visibleElements.includes(6) ? 1 : 0}
-                        transform={`translateY(${visibleElements.includes(6) ? 0 : -10}px)`}
-                        transition="all 0.2s ease-out"
-                        _hover={{
-                            transform: "translateY(-2px) scale(1.05)",
-                            transition: "all 0.2s ease-out"
-                        }}
-                    >
-                        <Link href="/contact">Contact</Link>
-                    </Box>
-                    <Center height='50px'>
-                        <Divider orientation='vertical' />
-                    </Center>
-                    <Flex flexDir='column' gap='4'>
-                        <Box
-                            opacity={visibleElements.includes(7) ? 1 : 0}
-                            transform={`scale(${visibleElements.includes(7) ? 1 : 0.9})`}
-                            transition="all 0.2s ease-out"
-                            _hover={{
-                                scale: 1.05,
-                                transform: "translateY(-2px)",
-                                transition: "all 0.2s ease-out"
-                            }}
-                            _active={{
-                                scale: 0.95,
-                                transition: "all 0.1s ease-out"
-                            }}
-                        >
-                            <Button
-                                as='a'
-                                href="/offerte"
-                                variant='blue'
-                                width='100%'
-                                minWidth='100%'
-                            >
-                                Offerte aanvragen
-                            </Button>
-                        </Box>
-                        <Box
-                            opacity={visibleElements.includes(8) ? 1 : 0}
-                            transform={`scale(${visibleElements.includes(8) ? 1 : 0.9})`}
-                            transition="all 0.2s ease-out"
-                            _hover={{
-                                scale: 1.05,
-                                transform: "translateY(-2px)",
-                                transition: "all 0.2s ease-out"
-                            }}
-                            _active={{
-                                scale: 0.95,
-                                transition: "all 0.1s ease-out"
-                            }}
-                        >
-                            <Button
-                                variant='blue'
-                                onClick={handleSchadeClick}
-                                width='100%'
-                                minWidth='100%'
-                            >
-                                Schade melden
-                            </Button>
-                        </Box>
-                    </Flex>
-                </HStack >
-            </Hide >
-        </Flex >
+  function handleSchadeClick() {
+    window.open(
+      'https://schade.emsclaimsengine.com/index.php?template=tis&view=consument.login#identificatie_vragen',
+      '_blank',
+      'noopener,noreferrer'
     )
+  }
+
+  const linkColor = useLightChrome ? 'navy.700' : 'white'
+  const mutedColor = useLightChrome ? 'stone.700' : 'white'
+  const dividerColor = useLightChrome ? 'stone.300' : 'whiteAlpha.400'
+
+  return (
+    <Flex flex="1" minW={0} justifyContent="flex-end" alignItems="center">
+      <Flex
+        display={{ base: 'none', xl: 'flex' }}
+        align="center"
+        justify="flex-end"
+        flex="1"
+        minW={0}
+        gap={4}
+        ml={8}
+      >
+          <Flex
+            as="nav"
+            aria-label="Hoofdnavigatie"
+            align="center"
+            flexWrap="nowrap"
+            gap={navLinkGap}
+            minW={0}
+          >
+            {navLinks.map((link) => {
+              const isActive = link.match(pathname)
+
+              return (
+                <Box
+                  as={Link}
+                  key={link.href}
+                  href={link.href}
+                  display="inline-flex"
+                  alignItems="center"
+                  flexShrink={0}
+                  px={2}
+                  py={2}
+                  mb="0"
+                  fontSize="sm"
+                  color={isActive ? linkColor : mutedColor}
+                  fontWeight={isActive ? '700' : '600'}
+                  letterSpacing="0.01em"
+                  whiteSpace="nowrap"
+                  borderBottom="2px solid"
+                  borderColor={isActive ? 'gold.400' : 'transparent'}
+                  _hover={{ color: linkColor, borderColor: 'gold.400', textDecoration: 'none' }}
+                  transition="color 0.2s ease, border-color 0.2s ease"
+                  aria-current={isActive ? 'page' : undefined}
+                >
+                  {link.label}
+                </Box>
+              )
+            })}
+          </Flex>
+
+          <Flex
+            align="center"
+            gap={navCtaGap}
+            flexShrink={0}
+            pl={6}
+            ml={2}
+            borderLeft="1px solid"
+            borderColor={dividerColor}
+          >
+            <Button
+              as={Link}
+              href="/offerte"
+              variant={useLightChrome ? 'blue' : 'white'}
+              size="sm"
+              px={5}
+            >
+              Offerte
+            </Button>
+            <Button
+              variant={useLightChrome ? 'outlineNavy' : 'outlineLight'}
+              size="sm"
+              onClick={handleSchadeClick}
+              px={4}
+              whiteSpace="nowrap"
+            >
+              Schade melden
+            </Button>
+          </Flex>
+      </Flex>
+    </Flex>
+  )
 }

@@ -1,42 +1,28 @@
-"use client"
+'use client'
 
-import GridLayout from "@/components/gridLayout"
-import { Container, VStack, Box } from '@chakra-ui/react'
-import Breadcrumb from "@/components/breadcrumb"
-import PageTransition from '@/components/page-transition'
-import { useState, useEffect } from 'react';
-
-const FadeInForm = ({ children, delay = 0 }) => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), delay * 1000);
-    return () => clearTimeout(timer);
-  }, [delay]);
-
-  return (
-    <Box
-      opacity={isVisible ? 1 : 0}
-      transform={`translateY(${isVisible ? 0 : 20}px)`}
-      transition="all 0.5s ease-out"
-    >
-      {children}
-    </Box>
-  );
-};
+import { Text, Flex } from '@chakra-ui/react'
+import InnerPage from '@/components/inner-page-layout'
+import RegistrationForm from '@/app/offerte/form'
+import { stackGap } from '@/constants/spacing'
 
 export default function Offerte() {
-    return (
-        <PageTransition>
-            <Container>
-                <GridLayout title='Offerte' breadcrumb={<Breadcrumb capitalizeLinks />}>
-                    <FadeInForm delay={0.1}>
-                        <VStack spacing={8} align="stretch">
-                            {/* Form content here */}
-                        </VStack>
-                    </FadeInForm>
-                </GridLayout>
-            </Container>
-        </PageTransition>
-    )
+  return (
+    <InnerPage
+      sidebar={false}
+      hero={{
+        eyebrow: 'Offerte',
+        title: 'Offerte aanvragen',
+        description: 'Vraag vrijblijvend een offerte aan. Wij denken graag met u mee.',
+        image: '/slider-4.jpg',
+      }}
+    >
+      <Flex direction="column" gap={stackGap}>
+        <Text variant="lead" mb="0" maxW="640px">
+          Vul het formulier in en wij nemen zo snel mogelijk contact met u op. Liever persoonlijk contact? Bel ons of
+          mail naar info@tisrm.nl.
+        </Text>
+        <RegistrationForm />
+      </Flex>
+    </InnerPage>
+  )
 }

@@ -1,34 +1,113 @@
 'use client'
 
 import Link from 'next/link'
-import { Box, Button, Center, Divider, Flex, VStack } from "@chakra-ui/react"
-import Logo from "@/components/logo"
+import { useEffect } from 'react'
+import { Box, Button, Divider, Flex, VStack, IconButton, Text, Portal } from '@chakra-ui/react'
+import Logo from '@/components/logo'
+import { BsX } from 'react-icons/bs'
+
+const mobileLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/verzekeringen', label: 'Verzekeringen' },
+  { href: '/taxi', label: 'Taxi' },
+  { href: '/risk-management', label: 'Risk Management' },
+  { href: '/over-ons', label: 'Over ons' },
+  { href: '/bestanden', label: 'Bestanden' },
+  { href: '/contact', label: 'Contact' },
+]
 
 export default function Sidenav({ showSideNav, handleToggle }) {
-    const handleSchadeClick = () => {
-        // Open in new window without referrer
-        window.open('https://schade.emsclaimsengine.com/index.php?template=tis&view=consument.login#identificatie_vragen', '_blank', 'noopener,noreferrer');
-        handleToggle(); // Close the mobile menu after clicking
-    };
+  function handleSchadeClick() {
+    window.open(
+      'https://schade.emsclaimsengine.com/index.php?template=tis&view=consument.login#identificatie_vragen',
+      '_blank',
+      'noopener,noreferrer'
+    )
+    handleToggle()
+  }
 
-    return (
-        <Flex boxShadow='lg' transition='ease-in-out .3s all' padding='8' paddingY='4' gap='4' flexDirection='column' zIndex='10' backgroundColor='white' position='fixed' left={showSideNav ? '0' : '-500px'} top='0' alignItems='center' justifyContent='center' height='full' >
-            <Flex paddingY='4' justifyContent='center' width='40'>
-                <Link href="/"><span onClick={() => handleToggle()}><Logo /></span></Link>
-            </Flex>
-            <VStack gap='8' fontSize={{ base: 'xl', '2xl': '2xl' }}>
-                <Link href="/"> <span onClick={() => handleToggle()}>Home</span></Link>
-                <Link href="/verzekeringen"> <span onClick={() => handleToggle()}>Verzekeringen</span></Link>
-                <Link href="/taxi"><span onClick={() => handleToggle()}>Taxi</span></Link>
-                <Link href="/risk-management"><span onClick={() => handleToggle()}>Risk Management</span></Link>
-                <Link href="/over-ons"><span onClick={() => handleToggle()}>Over ons</span></Link>
-                <Link href="/bestanden"><span onClick={() => handleToggle()}>Bestanden</span></Link>
-                <Link href="/contact"><span onClick={() => handleToggle()}>Contact</span></Link>
-                <Divider marginY='1' orientation='horizontal' />
+  useEffect(() => {
+    if (!showSideNav) return undefined
 
-                <Button as='a' href="/offerte" variant='blue'><span onClick={() => handleToggle()}>Offerte</span></Button>
-                <Button variant='blue' onClick={handleSchadeClick}>Schade melden</Button>
-            </VStack >
-        </Flex >
-    );
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = previousOverflow
+    }
+  }, [showSideNav])
+
+  return (
+    <Portal>
+      <Box
+        position="fixed"
+        inset="0"
+        bg="blackAlpha.500"
+        zIndex="30"
+        opacity={showSideNav ? 1 : 0}
+        pointerEvents={showSideNav ? 'auto' : 'none'}
+        transition="opacity 0.25s ease"
+        onClick={handleToggle}
+      />
+      <Flex
+        boxShadow="xl"
+        transition="transform 0.3s ease"
+        padding="8"
+        gap="6"
+        flexDirection="column"
+        zIndex="40"
+        backgroundColor="stone.100"
+        position="fixed"
+        left="0"
+        top="0"
+        transform={showSideNav ? 'translateX(0)' : 'translateX(-105%)'}
+        alignItems="stretch"
+        justifyContent="flex-start"
+        height="100dvh"
+        overflowY="auto"
+        width={{ base: '85%', sm: '360px' }}
+        maxW="400px"
+      >
+        <Flex justifyContent="space-between" alignItems="center">
+          <Link href="/" onClick={handleToggle}>
+            <Logo width="140px" />
+          </Link>
+          <IconButton
+            aria-label="Sluit menu"
+            icon={<BsX size={28} />}
+            variant="ghost"
+            color="navy.700"
+            border="none"
+            borderRadius="0"
+            onClick={handleToggle}
+            _hover={{ bg: 'stone.200', borderColor: 'transparent', transform: 'none' }}
+          />
+        </Flex>
+        <VStack align="stretch" spacing="1" fontSize="xl" fontWeight="600">
+          {mobileLinks.map((link) => (
+            <Text
+              as={Link}
+              key={link.href}
+              href={link.href}
+              onClick={handleToggle}
+              py="3"
+              mb="0"
+              color="navy.700"
+              borderBottom="1px solid"
+              borderColor="stone.300"
+              _hover={{ color: 'gold.500' }}
+            >
+              {link.label}
+            </Text>
+          ))}
+          <Divider marginY="3" />
+          <Button as={Link} href="/offerte" variant="blue" onClick={handleToggle}>
+            Offerte
+          </Button>
+          <Button variant="ghost" onClick={handleSchadeClick}>
+            Schade melden
+          </Button>
+        </VStack>
+      </Flex>
+    </Portal>
+  )
 }

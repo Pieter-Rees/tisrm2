@@ -1,8 +1,11 @@
+'use client'
+
 import React, { useState } from "react";
 import { Flex, Box, Checkbox, SimpleGrid, FormControl, FormLabel, FormErrorMessage, Input, Button, Divider, Heading } from "@chakra-ui/react";
 import { useForm } from 'react-hook-form'
-import axios, { isCancel, AxiosError } from 'axios';
+import axios from 'axios';
 import { Show } from '@chakra-ui/react'
+import { formMaxWidth } from '@/constants/spacing'
 export default function RegistrationForm() {
     const {
         handleSubmit,
@@ -18,24 +21,17 @@ export default function RegistrationForm() {
         values['tisrm'] = true
 
         const formAddress = 'https://pieterrees.nl/email'
-        console.log('Sending form data to:', formAddress)
-        console.log('Form data:', values)
-        
+
         axios({
             method: 'post',
             url: formAddress,
             data: values,
             timeout: 10000 // 10 second timeout
         })
-            .then((response) => {
-                console.log('Success response:', response)
+            .then(() => {
                 setShowForm(false)
             })
             .catch((error) => {
-                console.error('Error details:', error)
-                console.error('Error response:', error.response)
-                console.error('Error message:', error.message)
-                
                 let errorMessage = 'Contactformulier niet verzonden.';
                 
                 if (error.code === 'ERR_NETWORK') {
@@ -71,10 +67,10 @@ export default function RegistrationForm() {
             })
     }
     return (
-        <Flex width='full' justifyContent='center'>
+        <Flex width='full' justifyContent='flex-start'>
             {showForm ? (
-                <form style={{ width: '100%', maxWidth: '1200px' }} onSubmit={handleSubmit(onSubmit)}>
-                    <SimpleGrid minChildWidth={{ base: '100%', lg: '100px' }} spacing={{ base: '0', lg: '144px' }}>
+                <Box as="form" width='full' maxW={formMaxWidth} onSubmit={handleSubmit(onSubmit)}>
+                    <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={{ base: 8, lg: 14 }} width='full'>
                         <Box>
                             <FormControl isInvalid={errors.businessName}>
                                 <FormLabel htmlFor='businessName'>Naam onderneming</FormLabel>
@@ -204,16 +200,16 @@ export default function RegistrationForm() {
                                 </FormErrorMessage>
                             </FormControl>
 
-                            <Button mt='8' isLoading={isSubmitting} type='submit'>
+                            <Button mt='8' isLoading={isSubmitting} type='submit' variant='blue'>
                                 Verstuur
                             </Button>
                         </Box>
                     </SimpleGrid>
-                </form>
+                </Box>
             ) : (
                 <Box textAlign='center'>
-                    <Heading as='h2' size='xl'>Bedankt voor uw aanvraag</Heading>
-                    <Heading as='h3' size='lg'>Er zal spoedig contact met u worden opgenomen!</Heading>
+                    <Heading as='h2' variant='xl' mb='4'>Bedankt voor uw aanvraag</Heading>
+                    <Heading as='h3' variant='md' mb='0'>Er zal spoedig contact met u worden opgenomen!</Heading>
                 </Box>
             )}
 

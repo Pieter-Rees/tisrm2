@@ -14,7 +14,8 @@ const contactInfo = {
 
 const pageInfo = {
     title: contactInfo.name,
-    pageDescription: 'Web pagina van Tis Risk Managers'
+    pageDescription:
+        'TIS Risk Managers — onafhankelijk advies, maatwerk verzekeringen en risk management. Amsterdam, landelijk bereikbaar.'
 }
 
 const currentYear = new Date().getFullYear();
