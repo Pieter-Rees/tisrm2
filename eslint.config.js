@@ -33,18 +33,6 @@ const sharedGlobals = {
   __filename: 'readonly',
 };
 
-// Next's babel eslint-parser is not ESLint 10 ScopeManager-compatible yet.
-const nextConfigs = fixupConfigRules(nextPlugin).map((config) => {
-  if (config.name === 'next' && config.languageOptions?.parser) {
-    const { parser: _parser, ...languageOptions } = config.languageOptions;
-    return {
-      ...config,
-      languageOptions,
-    };
-  }
-  return config;
-});
-
 const eslintConfig = [
   {
     ignores: [
@@ -57,7 +45,7 @@ const eslintConfig = [
     ],
   },
   js.configs.recommended,
-  ...nextConfigs,
+  ...fixupConfigRules(nextPlugin),
   {
     files: ['**/*.{js,jsx,mjs,cjs,ts,tsx}'],
     languageOptions: {
