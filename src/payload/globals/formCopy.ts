@@ -1,11 +1,14 @@
 import type { GlobalConfig } from 'payload';
-import { anyone } from '../access/anyone';
 import { authenticated } from '../access/authenticated';
+import { publishedGlobalRead } from '../access/publishedGlobalRead';
 
 export const formCopy: GlobalConfig = {
   slug: 'formCopy',
+  versions: {
+    drafts: true,
+  },
   access: {
-    read: anyone,
+    read: publishedGlobalRead,
     update: authenticated,
   },
   fields: [

@@ -9,16 +9,26 @@ export const dynamic = 'force-dynamic';
 
 export default async function Verzekeringen() {
   const page = await getPageBySlug('verzekeringen');
+  const cmsCards = page?.cards?.length ? page.cards : null;
   const lists = page?.lists ?? [];
 
-  const cards = INSURANCE_CATEGORIES.map((card, index) => {
-    const cms = lists[index];
-    return {
-      ...card,
-      title: cms?.title || card.title,
-      description: cms?.items[0] || card.description,
-    };
-  });
+  const cards = cmsCards
+    ? cmsCards.map((card) => ({
+        id: card.ctaLink,
+        title: card.title,
+        description: card.description,
+        cta: card.cta,
+        ctaLink: card.ctaLink,
+        buttonVariant: card.buttonVariant,
+      }))
+    : INSURANCE_CATEGORIES.map((card, index) => {
+        const cms = lists[index];
+        return {
+          ...card,
+          title: cms?.title || card.title,
+          description: cms?.items[0] || card.description,
+        };
+      });
 
   return (
     <UnifiedLayout

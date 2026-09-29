@@ -5,15 +5,18 @@ services:
     build:
       context: /home/pieter/Development/tisrm2
       dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_SERVER_URL: ${NEXT_PUBLIC_SERVER_URL:-http://localhost:3011}
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:4000}
     container_name: tisrm2-frontend
     ports:
       - "3011:3011"
     environment:
       - NODE_ENV=production
       - DATABASE_URL=postgres://payload:payload@postgres:5432/payload
-      - PAYLOAD_SECRET=${PAYLOAD_SECRET}
-      - NEXT_PUBLIC_SERVER_URL=http://localhost:3011
-      - NEXT_PUBLIC_API_URL=http://localhost:4000
+      - PAYLOAD_SECRET=${PAYLOAD_SECRET:?PAYLOAD_SECRET must be set}
+      - NEXT_PUBLIC_SERVER_URL=${NEXT_PUBLIC_SERVER_URL:-http://localhost:3011}
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:4000}
     volumes:
       - payload_media:/app/media
     depends_on:

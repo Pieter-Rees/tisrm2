@@ -1,7 +1,6 @@
 'use client';
 
 import { SPACING_PATTERNS } from '@/constants/layout';
-import { contactInfo } from '@/data/general';
 import {
   toTelHref,
   useSiteSettings,
@@ -36,7 +35,7 @@ export default function ContactInfo({
       external: false,
     },
     {
-      href: contactInfo.social.linkedIn,
+      href: settings.linkedInUrl,
       label: <BsLinkedin size="24" />,
       external: true,
     },
@@ -54,9 +53,9 @@ export default function ContactInfo({
         </Box>
         <Box>
           <VStack alignItems="start" gap={SPACING_PATTERNS.navigation.item}>
-            <Text color="gray.800">{contactInfo.postalBox.box}</Text>
-            <Text color="gray.800">{contactInfo.postalBox.postalCode}</Text>
-            <Text color="gray.800">{contactInfo.postalBox.city}</Text>
+            <Text color="gray.800">{settings.postalBox.box}</Text>
+            <Text color="gray.800">{settings.postalBox.postalCode}</Text>
+            <Text color="gray.800">{settings.postalBox.city}</Text>
           </VStack>
         </Box>
       </SimpleGrid>

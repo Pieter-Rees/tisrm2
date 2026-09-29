@@ -30,6 +30,12 @@ export const defaultSiteSettings: SiteSettingsContextValue = {
     city: CONTACT_INFO.address.city,
     country: CONTACT_INFO.address.country,
   },
+  postalBox: {
+    box: CONTACT_INFO.postalBox.box,
+    postalCode: CONTACT_INFO.postalBox.postalCode,
+    city: CONTACT_INFO.postalBox.city,
+  },
+  linkedInUrl: CONTACT_INFO.social.linkedIn,
   navItems: DEFAULT_NAV_ITEMS,
 };
 
@@ -54,6 +60,14 @@ export function SiteSettingsProvider({
       city: value?.address?.city || defaultSiteSettings.address.city,
       country: value?.address?.country || defaultSiteSettings.address.country,
     },
+    postalBox: {
+      box: value?.postalBox?.box || defaultSiteSettings.postalBox.box,
+      postalCode:
+        value?.postalBox?.postalCode ||
+        defaultSiteSettings.postalBox.postalCode,
+      city: value?.postalBox?.city || defaultSiteSettings.postalBox.city,
+    },
+    linkedInUrl: value?.linkedInUrl || defaultSiteSettings.linkedInUrl,
     navItems:
       value?.navItems?.length ? value.navItems : defaultSiteSettings.navItems,
   };

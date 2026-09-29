@@ -1,6 +1,6 @@
-import { Box } from '@chakra-ui/react';
-import Card from '@/components/card';
 import { UnifiedLayout } from '@/components/layout';
+import { DownloadsGrid } from '@/components/cms/downloadsGrid';
+import { PageSections } from '@/components/cms/pageSections';
 import { AVAILABLE_DOCUMENTS } from '@/data/content';
 import { getPageBySlug } from '@/lib/payload/getPageBySlug';
 
@@ -8,46 +8,20 @@ export const dynamic = 'force-dynamic';
 
 export default async function Downloads() {
   const page = await getPageBySlug('downloads');
+  const fallbackDocuments = AVAILABLE_DOCUMENTS.map((doc) => ({
+    title: doc.title,
+    downloadLink: doc.link,
+  }));
+  const documents =
+    page?.documents?.length ? page.documents : fallbackDocuments;
 
   return (
     <UnifiedLayout title={page?.title || 'Downloads'}>
-      <Box
-        bg="gray.50"
-        borderRadius="xl"
-        p={{ base: '6', md: '8' }}
-        mb="8"
-        w="100%"
-      >
-        <Box
-          display="grid"
-          gridTemplateColumns={{
-            base: '1fr',
-            md: 'repeat(2, 1fr)',
-            lg: 'repeat(3, 1fr)',
-          }}
-          gap={{ base: '4', md: '6', lg: '8' }}
-          w="100%"
-          alignItems="stretch"
-          justifyItems="stretch"
-        >
-          {AVAILABLE_DOCUMENTS.map((doc, index) => (
-            <Box
-              key={doc.id || index}
-              w="100%"
-              h="100%"
-              display="flex"
-              alignItems="stretch"
-              minW="0"
-            >
-              <Card
-                variant="downloads"
-                title={doc.title}
-                downloadLink={doc.link}
-              />
-            </Box>
-          ))}
-        </Box>
-      </Box>
+      {page?.sections?.length ? (
+        <PageSections sections={page.sections} />
+      ) : (
+        <DownloadsGrid documents={documents} />
+      )}
     </UnifiedLayout>
   );
 }

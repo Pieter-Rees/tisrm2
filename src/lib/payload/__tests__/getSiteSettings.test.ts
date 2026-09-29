@@ -20,6 +20,12 @@ describe('mapSiteSettingsDoc', () => {
         { label: 'Home', href: '/' },
         { label: 'Contact', href: '/contact' },
       ],
+      postalBox: {
+        box: 'Postbus 1',
+        postalCode: '1100 AW',
+        city: 'Amsterdam',
+      },
+      linkedInUrl: 'https://www.linkedin.com/company/tisrm/',
     });
     expect(result).toEqual({
       companyName: 'TIS Risk Managers',
@@ -31,6 +37,12 @@ describe('mapSiteSettingsDoc', () => {
         city: 'Amsterdam',
         country: 'Nederland',
       },
+      postalBox: {
+        box: 'Postbus 1',
+        postalCode: '1100 AW',
+        city: 'Amsterdam',
+      },
+      linkedInUrl: 'https://www.linkedin.com/company/tisrm/',
       navItems: [
         { label: 'Home', href: '/' },
         { label: 'Contact', href: '/contact' },

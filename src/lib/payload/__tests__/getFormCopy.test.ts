@@ -1,8 +1,4 @@
-jest.mock('../getPayloadClient', () => ({
-  getPayloadClient: jest.fn(),
-}));
-
-import { getFormMessage } from '../getFormCopy';
+import { getFormMessage } from '../getFormMessage';
 
 describe('getFormMessage', () => {
   it('returns CMS value when present', () => {

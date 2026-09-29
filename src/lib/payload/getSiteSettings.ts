@@ -10,6 +10,12 @@ export type SiteSettingsView = {
     city: string;
     country: string;
   };
+  postalBox: {
+    box: string;
+    postalCode: string;
+    city: string;
+  };
+  linkedInUrl: string;
   navItems: Array<{ label: string; href: string }>;
 };
 
@@ -23,6 +29,12 @@ export function mapSiteSettingsDoc(doc: {
     city?: string | null;
     country?: string | null;
   } | null;
+  postalBox?: {
+    box?: string | null;
+    postalCode?: string | null;
+    city?: string | null;
+  } | null;
+  linkedInUrl?: string | null;
   navItems?: Array<{ label?: string | null; href?: string | null } | null> | null;
 }): SiteSettingsView {
   return {
@@ -35,6 +47,12 @@ export function mapSiteSettingsDoc(doc: {
       city: doc.address?.city ?? '',
       country: doc.address?.country ?? '',
     },
+    postalBox: {
+      box: doc.postalBox?.box ?? '',
+      postalCode: doc.postalBox?.postalCode ?? '',
+      city: doc.postalBox?.city ?? '',
+    },
+    linkedInUrl: doc.linkedInUrl ?? '',
     navItems: (doc.navItems ?? [])
       .filter((item): item is { label?: string | null; href?: string | null } => Boolean(item))
       .map((item) => ({

@@ -15,6 +15,8 @@ import {
 } from '@/components/page-animation';
 import { UI_CONSTANTS } from '@/constants/app';
 import { NAVIGATION_ROUTES } from '@/constants/app';
+import { PageSections } from '@/components/cms/pageSections';
+import { isCmsMediaSrc, pageImageSrc } from '@/lib/payload/cmsImage';
 import { getPageBySlug } from '@/lib/payload/getPageBySlug';
 
 export const dynamic = 'force-dynamic';
@@ -23,7 +25,7 @@ const ThreeElements = lazy(() => import('@/components/three-elements'));
 const Talker = lazy(() => import('@/components/talker'));
 const MeldSchade = lazy(() => import('@/components/meld-schade'));
 
-const HeroImage = () => (
+const HeroImage = ({ src }: { src: string }) => (
   <ScaleIn>
     <Box
       position="relative"
@@ -36,10 +38,11 @@ const HeroImage = () => (
       bg="gray.100"
     >
       <Image
-        src="/1.webp"
+        src={src}
         alt="TIS Risk Managers - Professional insurance and risk management services"
         fill
         priority
+        unoptimized={isCmsMediaSrc(src)}
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 60vw, 50vw"
         style={{
           objectFit: 'cover',
@@ -88,6 +91,12 @@ export default async function Homepage() {
   const page = await getPageBySlug('home');
   const body = page?.body ?? [];
   const lists = page?.lists ?? [];
+  const heroSrc = pageImageSrc(page?.featuredImageUrl, '/1.webp');
+  const testimonial = page?.testimonial;
+  const testimonialImage = pageImageSrc(
+    testimonial?.imageUrl,
+    '/rene.jpg',
+  );
 
   const featureCards = DEFAULT_FEATURE_CARDS.map((card, index) => {
     const cms = lists[index];
@@ -97,6 +106,14 @@ export default async function Homepage() {
       description: cms?.items[0] || card.description,
     };
   });
+
+  if (page?.sections?.length) {
+    return (
+      <UnifiedLayout variant="page" showSidebar={true}>
+        <PageSections sections={page.sections} />
+      </UnifiedLayout>
+    );
+  }
 
   return (
     <UnifiedLayout variant="page" showSidebar={true}>
@@ -113,7 +130,7 @@ export default async function Homepage() {
                   <Suspense
                     fallback={<Loading text="Loading hero image..." />}
                   >
-                    <HeroImage />
+                    <HeroImage src={heroSrc} />
                   </Suspense>
                 </GridItem>
 
@@ -188,10 +205,11 @@ export default async function Homepage() {
                 fallback={<Loading text="Loading testimonial..." />}
               >
                 <Talker
-                  name="René Enthoven"
-                  title="Directeur TIS Risk Managers"
-                  image="/rene.jpg"
+                  name={testimonial?.name || 'René Enthoven'}
+                  title={testimonial?.title || 'Directeur TIS Risk Managers'}
+                  image={testimonialImage}
                   quote={
+                    testimonial?.quote ||
                     body[4] ||
                     'De weldaden van een verzekering komen samen met het onheil aan het licht.'
                   }

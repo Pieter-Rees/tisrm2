@@ -1,9 +1,12 @@
 /**
- * Idempotent Phase 1 seed: pages by slug + siteSettings.
+ * Create-if-missing Phase 1 seed: pages by slug + siteSettings + formCopy.
+ * Existing pages/globals are left unchanged so editor edits survive re-seed.
  * Run: node --import tsx src/payload/seed/phase1.ts
  */
 import { config as loadEnv } from 'dotenv';
 import { getPayload } from 'payload';
+
+import { formCopySeedData } from './formCopyData';
 
 loadEnv({ path: '.env.local' });
 
@@ -221,7 +224,7 @@ const pages: PageSeed[] = [
   },
 ];
 
-async function upsertPage(
+async function createPageIfMissing(
   payload: Awaited<ReturnType<typeof getPayload>>,
   page: PageSeed,
 ) {
@@ -231,63 +234,91 @@ async function upsertPage(
     limit: 1,
   });
 
-  const data = {
-    title: page.title,
-    slug: page.slug,
-    body: page.body.map((text) => ({ text })),
-    lists: (page.lists ?? []).map((list) => ({
-      title: list.title,
-      items: list.items.map((label) => ({ label })),
-    })),
-  };
-
   if (existing.docs[0]) {
-    await payload.update({
-      collection: 'pages',
-      id: existing.docs[0].id,
-      data,
-    });
-    console.log(`updated page: ${page.slug}`);
-  } else {
-    await payload.create({
-      collection: 'pages',
-      data,
-    });
-    console.log(`created page: ${page.slug}`);
+    console.log(`skipped page: ${page.slug} (already exists)`);
+    return;
   }
+
+  await payload.create({
+    collection: 'pages',
+    data: {
+      title: page.title,
+      slug: page.slug,
+      _status: 'published',
+      body: page.body.map((text) => ({ text })),
+      lists: (page.lists ?? []).map((list) => ({
+        title: list.title,
+        items: list.items.map((label) => ({ label })),
+      })),
+    },
+  });
+  console.log(`created page: ${page.slug}`);
+}
+
+function isBlank(value: unknown): boolean {
+  return value == null || (typeof value === 'string' && value.trim() === '');
 }
 
 async function seed() {
   const payload = await getPayload({ config });
 
   for (const page of pages) {
-    await upsertPage(payload, page);
+    await createPageIfMissing(payload, page);
   }
 
-  await payload.updateGlobal({
-    slug: 'siteSettings',
-    data: {
-      companyName: 'TIS Risk Managers',
-      phone: '+31 20 636 8191',
-      email: 'info@tisrm.nl',
-      address: {
-        street: 'Muiderstraat 1',
-        postalCode: '1011 PZ',
-        city: 'Amsterdam',
-        country: 'Nederland',
+  const siteSettings = await payload.findGlobal({ slug: 'siteSettings' });
+  if (!isBlank(siteSettings?.companyName)) {
+    console.log('skipped siteSettings (already exists)');
+  } else {
+    await payload.updateGlobal({
+      slug: 'siteSettings',
+      data: {
+        _status: 'published',
+        companyName: 'TIS Risk Managers',
+        phone: '+31 20 636 8191',
+        email: 'info@tisrm.nl',
+        address: {
+          street: 'Muiderstraat 1',
+          postalCode: '1011 PZ',
+          city: 'Amsterdam',
+          country: 'Nederland',
+        },
+        navItems: [
+          { label: 'Home', href: '/' },
+          { label: 'Verzekeringen', href: '/verzekeringen' },
+          { label: 'Taxi', href: '/taxi' },
+          { label: 'Risk Management', href: '/risk-management' },
+          { label: 'Over ons', href: '/over-ons' },
+          { label: 'Downloads', href: '/downloads' },
+          { label: 'Contact', href: '/contact' },
+        ],
+        postalBox: {
+          box: 'Postbus 12887',
+          postalCode: '1100 AW',
+          city: 'Amsterdam',
+        },
+        linkedInUrl: 'https://www.linkedin.com/company/tisrm/',
       },
-      navItems: [
-        { label: 'Home', href: '/' },
-        { label: 'Verzekeringen', href: '/verzekeringen' },
-        { label: 'Taxi', href: '/taxi' },
-        { label: 'Risk Management', href: '/risk-management' },
-        { label: 'Over ons', href: '/over-ons' },
-        { label: 'Downloads', href: '/downloads' },
-        { label: 'Contact', href: '/contact' },
-      ],
-    },
-  });
-  console.log('updated siteSettings');
+    });
+    console.log('created siteSettings');
+  }
+
+  const formCopy = await payload.findGlobal({ slug: 'formCopy' });
+  const formCopyExists =
+    formCopy?.offerte != null || formCopy?.meldSchade != null;
+  if (formCopyExists) {
+    console.log('skipped formCopy (already exists)');
+  } else {
+    await payload.updateGlobal({
+      slug: 'formCopy',
+      data: {
+        _status: 'published',
+        offerte: formCopySeedData.offerte ?? {},
+        meldSchade: formCopySeedData.meldSchade ?? {},
+      },
+    });
+    console.log('created formCopy');
+  }
 }
 
 seed()

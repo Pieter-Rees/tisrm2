@@ -177,7 +177,14 @@ export interface Media {
 export interface Page {
   id: number;
   title: string;
+  /**
+   * Known slugs: home, over-ons, verzekeringen, verzekeringen-particulier, verzekeringen-zakelijk, taxi, risk-management, contact, downloads
+   */
   slug: string;
+  /**
+   * Hero or team photo for this page (Phase 2 media).
+   */
+  featuredImage?: (number | null) | Media;
   body?:
     | {
         text: string;
@@ -196,8 +203,118 @@ export interface Page {
         id?: string | null;
       }[]
     | null;
+  cards?:
+    | {
+        title: string;
+        description?: string | null;
+        cta?: string | null;
+        ctaLink?: string | null;
+        buttonVariant?: ('solid' | 'outline' | 'ghost' | 'subtle' | 'plain') | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Download cards (PDF upload or /documents/… link).
+   */
+  documents?:
+    | {
+        title: string;
+        /**
+         * e.g. /documents/algemene-voorwaarden.pdf
+         */
+        link?: string | null;
+        file?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  testimonial?: {
+    quote?: string | null;
+    name?: string | null;
+    title?: string | null;
+    image?: (number | null) | Media;
+  };
+  /**
+   * Optional page builder (Phase 3). When used, prefer rendering sections on the route.
+   */
+  sections?:
+    | (
+        | {
+            text: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'paragraph';
+          }
+        | {
+            title?: string | null;
+            items?:
+              | {
+                  label?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'list';
+          }
+        | {
+            heading: string;
+            paragraphs?:
+              | {
+                  text?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            lastParagraphIsLead?: boolean | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'headingSection';
+          }
+        | {
+            heading?: string | null;
+            description?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'cta';
+          }
+        | {
+            image: number | Media;
+            alt?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'image';
+          }
+        | {
+            cards?:
+              | {
+                  title: string;
+                  description?: string | null;
+                  cta?: string | null;
+                  ctaLink?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'cards';
+          }
+        | {
+            documents?:
+              | {
+                  title: string;
+                  link?: string | null;
+                  file?: (number | null) | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'downloads';
+          }
+      )[]
+    | null;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -325,6 +442,7 @@ export interface MediaSelect<T extends boolean = true> {
 export interface PagesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
+  featuredImage?: T;
   body?:
     | T
     | {
@@ -343,8 +461,118 @@ export interface PagesSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  cards?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        cta?: T;
+        ctaLink?: T;
+        buttonVariant?: T;
+        id?: T;
+      };
+  documents?:
+    | T
+    | {
+        title?: T;
+        link?: T;
+        file?: T;
+        id?: T;
+      };
+  testimonial?:
+    | T
+    | {
+        quote?: T;
+        name?: T;
+        title?: T;
+        image?: T;
+      };
+  sections?:
+    | T
+    | {
+        paragraph?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+              blockName?: T;
+            };
+        list?:
+          | T
+          | {
+              title?: T;
+              items?:
+                | T
+                | {
+                    label?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        headingSection?:
+          | T
+          | {
+              heading?: T;
+              paragraphs?:
+                | T
+                | {
+                    text?: T;
+                    id?: T;
+                  };
+              lastParagraphIsLead?: T;
+              id?: T;
+              blockName?: T;
+            };
+        cta?:
+          | T
+          | {
+              heading?: T;
+              description?: T;
+              id?: T;
+              blockName?: T;
+            };
+        image?:
+          | T
+          | {
+              image?: T;
+              alt?: T;
+              id?: T;
+              blockName?: T;
+            };
+        cards?:
+          | T
+          | {
+              cards?:
+                | T
+                | {
+                    title?: T;
+                    description?: T;
+                    cta?: T;
+                    ctaLink?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        downloads?:
+          | T
+          | {
+              documents?:
+                | T
+                | {
+                    title?: T;
+                    link?: T;
+                    file?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+      };
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -401,6 +629,15 @@ export interface SiteSetting {
     city?: string | null;
     country?: string | null;
   };
+  postalBox?: {
+    box?: string | null;
+    postalCode?: string | null;
+    city?: string | null;
+  };
+  /**
+   * Full LinkedIn company URL
+   */
+  linkedInUrl?: string | null;
   navItems?:
     | {
         label: string;
@@ -408,6 +645,7 @@ export interface SiteSetting {
         id?: string | null;
       }[]
     | null;
+  _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -493,6 +731,7 @@ export interface FormCopy {
       | boolean
       | null;
   };
+  _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -512,6 +751,14 @@ export interface SiteSettingsSelect<T extends boolean = true> {
         city?: T;
         country?: T;
       };
+  postalBox?:
+    | T
+    | {
+        box?: T;
+        postalCode?: T;
+        city?: T;
+      };
+  linkedInUrl?: T;
   navItems?:
     | T
     | {
@@ -519,6 +766,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
         href?: T;
         id?: T;
       };
+  _status?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -544,6 +792,7 @@ export interface FormCopySelect<T extends boolean = true> {
         helpers?: T;
         validationMessages?: T;
       };
+  _status?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

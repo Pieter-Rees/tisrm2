@@ -23,7 +23,18 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    remotePatterns: [],
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'tisrm.nl',
+        pathname: '/**',
+      },
+    ],
     unoptimized: false,
     loader: 'default',
     path: '/_next/image',
@@ -58,7 +69,7 @@ const nextConfig = {
     },
   },
   compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
+    removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error'] } : false,
     reactRemoveProperties: process.env.NODE_ENV === 'production',
   },
   generateEtags: true,

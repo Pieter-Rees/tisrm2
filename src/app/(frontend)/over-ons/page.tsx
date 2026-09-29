@@ -8,6 +8,7 @@ import StarList from '@/components/star-list';
 import { PARAGRAPH_STYLES } from '@/constants/typography';
 import { SPACING_SCALE } from '@/constants/layout';
 import { COMPANY_ENTITIES } from '@/data/content';
+import { isCmsMediaSrc, pageImageSrc } from '@/lib/payload/cmsImage';
 import { getPageBySlug } from '@/lib/payload/getPageBySlug';
 import { Box, Flex, Text } from '@chakra-ui/react';
 import Image from 'next/image';
@@ -18,6 +19,7 @@ export const dynamic = 'force-dynamic';
 export default async function Overons() {
   const page = await getPageBySlug('over-ons');
   const paragraphs = page?.body?.length ? page.body : [];
+  const teamSrc = pageImageSrc(page?.featuredImageUrl, '/team.jpg');
 
   return (
     <UnifiedLayout title={page?.title || 'Over ons'}>
@@ -56,10 +58,11 @@ export default async function Overons() {
                 overflow="hidden"
               >
                 <Image
-                  src="/team.jpg"
+                  src={teamSrc}
                   alt="Team photo of ENTO Group members"
                   width={750}
                   height={250}
+                  unoptimized={isCmsMediaSrc(teamSrc)}
                   style={{ display: 'block' }}
                 />
               </Box>

@@ -16,6 +16,11 @@ describe('mapPageDoc', () => {
       slug: 'over-ons',
       body: ['Eerste alinea.', 'Tweede alinea.'],
       lists: [],
+      featuredImageUrl: null,
+      documents: [],
+      cards: [],
+      testimonial: null,
+      sections: [],
     });
   });
 
