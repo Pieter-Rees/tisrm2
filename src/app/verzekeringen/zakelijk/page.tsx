@@ -87,7 +87,7 @@ export default function Zakelijk() {
             <Box
               bg="gray.50"
               p={COMPONENT_SPACING.card.lg}
-              borderRadius="lg"
+              borderRadius="xl"
               boxShadow="sm"
               transition="all 0.3s ease"
               _hover={{
@@ -105,7 +105,7 @@ export default function Zakelijk() {
             <Box
               bg="gray.50"
               p={COMPONENT_SPACING.card.lg}
-              borderRadius="lg"
+              borderRadius="xl"
               boxShadow="sm"
               transition="all 0.3s ease"
               _hover={{
@@ -123,7 +123,7 @@ export default function Zakelijk() {
             <Box
               bg="gray.50"
               p={COMPONENT_SPACING.card.lg}
-              borderRadius="lg"
+              borderRadius="xl"
               boxShadow="sm"
               transition="all 0.3s ease"
               _hover={{
@@ -141,7 +141,7 @@ export default function Zakelijk() {
             <Box
               bg="gray.50"
               p={COMPONENT_SPACING.card.lg}
-              borderRadius="lg"
+              borderRadius="xl"
               boxShadow="sm"
               transition="all 0.3s ease"
               _hover={{
@@ -159,7 +159,7 @@ export default function Zakelijk() {
             <Box
               bg="gray.50"
               p={COMPONENT_SPACING.card.lg}
-              borderRadius="lg"
+              borderRadius="xl"
               boxShadow="sm"
               transition="all 0.3s ease"
               _hover={{
@@ -177,7 +177,7 @@ export default function Zakelijk() {
             <Box
               bg="gray.50"
               p={COMPONENT_SPACING.card.lg}
-              borderRadius="lg"
+              borderRadius="xl"
               boxShadow="sm"
               transition="all 0.3s ease"
               _hover={{

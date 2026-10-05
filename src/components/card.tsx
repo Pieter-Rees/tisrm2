@@ -45,13 +45,13 @@ const Card = memo<CardProps>(
           <Box
             position="relative"
             overflow="hidden"
-            borderTopRadius="lg"
+            borderTopRadius="xl"
             height={{
-              base: '140px',
-              sm: '160px',
-              md: '180px',
-              lg: '200px',
-              xl: '240px',
+              base: '160px',
+              sm: '180px',
+              md: '200px',
+              lg: '220px',
+              xl: '260px',
             }}
             bg="gray.100"
           >

@@ -9,10 +9,12 @@ import { SECTION_SPACING } from '@/constants/typography';
 // Main testimonial container styles
 export const testimonialContainerStyles: SystemStyleObject = {
   py: SECTION_SPACING.large,
-  px: COMPONENT_SPACING.card.md,
+  px: COMPONENT_SPACING.card.lg,
   bg: 'gray.50',
   borderRadius: 'xl',
   boxShadow: 'sm',
+  border: '1px solid',
+  borderColor: 'gray.100',
 };
 
 // Testimonial content layout styles

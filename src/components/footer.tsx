@@ -40,12 +40,12 @@ const navigationLinks = [
 
 const footerLinkStyles = {
   color: 'white',
-  fontSize: 'sm',
+  fontSize: 'md',
   lineHeight: 'short',
   textDecoration: 'none',
   display: 'inline-flex',
   alignItems: 'center',
-  minH: '6',
+  minH: '8',
   transition: 'color 0.2s ease, transform 0.2s ease',
   _hover: {
     color: 'blue.200',
@@ -62,10 +62,10 @@ export default function Footer() {
           <Grid {...footerGridStyles}>
             <GridItem>
               <VStack alignItems="start" gap={SPACING_SCALE.sm}>
-                <Heading fontFamily="body" fontSize="md" color="white" mb="0">
+                <Heading fontFamily="body" fontSize="xl" color="white" mb="0">
                   Contact
                 </Heading>
-                <VStack alignItems="start" gap="1">
+                <VStack alignItems="start" gap="2">
                   {contactLinks.map(({ href, label, external }) => (
                     <Box key={href} asChild {...footerLinkStyles}>
                       <Link
@@ -85,10 +85,10 @@ export default function Footer() {
 
             <GridItem>
               <VStack alignItems="start" gap={SPACING_SCALE.sm}>
-                <Heading fontFamily="body" fontSize="md" color="white" mb="0">
+                <Heading fontFamily="body" fontSize="xl" color="white" mb="0">
                   Links
                 </Heading>
-                <VStack alignItems="start" gap="1">
+                <VStack alignItems="start" gap="2">
                   {navigationLinks.map(({ href, label }) => (
                     <Box key={href} asChild {...footerLinkStyles}>
                       <Link href={href}>{label}</Link>

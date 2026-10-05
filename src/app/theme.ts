@@ -77,13 +77,23 @@ export const system = createSystem(defaultConfig, {
         wide: { value: '0.025em' },
       },
       radii: {
-        sm: { value: '0.125rem' },
-        lg: { value: '0.5rem' },
+        sm: { value: '0.25rem' },
+        md: { value: '0.5rem' },
+        lg: { value: '0.75rem' },
+        xl: { value: '1rem' },
       },
       shadows: {
+        sm: {
+          value:
+            '0 1px 2px 0 rgba(0, 78, 130, 0.06), 0 1px 3px 0 rgba(0, 0, 0, 0.04)',
+        },
+        md: {
+          value:
+            '0 4px 12px -2px rgba(0, 78, 130, 0.08), 0 2px 6px -2px rgba(0, 0, 0, 0.04)',
+        },
         lg: {
           value:
-            '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+            '0 10px 24px -6px rgba(0, 78, 130, 0.12), 0 4px 10px -4px rgba(0, 0, 0, 0.05)',
         },
       },
       sizes: {

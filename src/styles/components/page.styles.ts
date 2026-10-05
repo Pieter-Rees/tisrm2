@@ -31,8 +31,8 @@ export const contactLogoContainerStyles: SystemStyleObject = {
 };
 
 export const contactImageContainerStyles: SystemStyleObject = {
-  borderRadius: 'lg',
-  boxShadow: 'lg',
+  borderRadius: 'xl',
+  boxShadow: 'md',
   overflow: 'hidden',
   position: 'relative',
   width: 'full',
@@ -69,7 +69,7 @@ export const contactCtaButtonStyles: SystemStyleObject = {
 export const riskHighlightBoxStyles: SystemStyleObject = {
   bg: 'blue.50',
   p: COMPONENT_SPACING.card.lg,
-  borderRadius: 'lg',
+  borderRadius: 'xl',
   borderLeft: '4px solid',
   borderColor: 'blue.700',
 };
@@ -77,7 +77,7 @@ export const riskHighlightBoxStyles: SystemStyleObject = {
 export const riskSummaryBoxStyles: SystemStyleObject = {
   bg: 'gray.50',
   p: COMPONENT_SPACING.card.lg,
-  borderRadius: 'lg',
+  borderRadius: 'xl',
   boxShadow: 'sm',
 };
 

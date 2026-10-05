@@ -106,7 +106,7 @@ export const SPACING_PATTERNS = {
   },
   // Cards
   card: {
-    padding: COMPONENT_SPACING.card.md,
+    padding: COMPONENT_SPACING.card.lg,
     gap: SPACING_SCALE.md,
   },
   // Headers
@@ -116,7 +116,7 @@ export const SPACING_PATTERNS = {
   },
   // Footers
   footer: {
-    padding: COMPONENT_SPACING.section.xl,
+    padding: COMPONENT_SPACING.section.lg,
     gap: SPACING_SCALE.lg,
   },
   // Forms

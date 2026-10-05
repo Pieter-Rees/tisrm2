@@ -47,8 +47,8 @@ export default function Overons() {
           <Box
             transform={{ base: '', lg: 'rotate(2deg)' }}
             width="fit-content"
-            borderRadius="lg"
-            boxShadow="lg"
+            borderRadius="xl"
+            boxShadow="md"
             overflow="hidden"
           >
             <Image

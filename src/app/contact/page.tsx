@@ -41,8 +41,8 @@ export default function Contact() {
           </GridItem>
           <GridItem display="flex" flexDirection="column" minW="0">
             <Box
-              borderRadius="lg"
-              boxShadow="lg"
+              borderRadius="xl"
+              boxShadow="md"
               overflow="hidden"
               position="relative"
               width="full"

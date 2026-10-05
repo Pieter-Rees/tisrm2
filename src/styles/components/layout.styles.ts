@@ -12,9 +12,10 @@ export const headerStyles: SystemStyleObject = {
   position: 'sticky',
   top: '0',
   zIndex: UI_CONSTANTS.zIndexes.sticky,
-  bg: 'white',
+  bg: 'rgba(255, 255, 255, 0.95)',
+  backdropFilter: 'blur(8px)',
   borderBottom: '1px',
-  borderColor: 'gray.200',
+  borderColor: 'gray.100',
   boxShadow: 'sm',
 };
 
@@ -58,11 +59,11 @@ export const sidebarContainerStyles: SystemStyleObject = {
 
 export const sidebarHelpBoxStyles: SystemStyleObject = {
   mt: SECTION_SPACING.small,
-  p: COMPONENT_SPACING.card.md,
+  p: COMPONENT_SPACING.card.lg,
   bg: 'blue.50',
-  borderRadius: 'md',
+  borderRadius: 'xl',
   border: '1px solid',
-  borderColor: 'blue.700',
+  borderColor: 'blue.200',
   textAlign: 'center',
 };
 

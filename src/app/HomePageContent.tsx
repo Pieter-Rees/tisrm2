@@ -13,7 +13,7 @@ import MeldSchade from '@/components/meld-schade';
 import { HomeFaq } from '@/components/seo/HomeFaq';
 import { UI_CONSTANTS } from '@/constants/app';
 import { SPACING_SCALE } from '@/constants/layout';
-import { SECTION_SPACING } from '@/constants/typography';
+import { HEADING_STYLES, SECTION_SPACING } from '@/constants/typography';
 
 const ThreeElements = lazy(() => import('@/components/three-elements'));
 const Talker = lazy(() => import('@/components/talker'));
@@ -23,11 +23,11 @@ function HeroImage() {
     <Box
       position="relative"
       width="full"
-      minHeight={{ base: '100px', md: '150px', lg: '230px' }}
+      minHeight={{ base: '220px', md: '320px', lg: '420px' }}
       height="full"
-      borderRadius="lg"
+      borderRadius="xl"
       overflow="hidden"
-      boxShadow="xl"
+      boxShadow="md"
       bg="gray.100"
     >
       <Image
@@ -50,12 +50,7 @@ export default function HomePageContent() {
     <UnifiedLayout variant="page" showSidebar={true}>
       <Flex direction="column" gap={SECTION_SPACING.medium}>
         <ErrorBoundary>
-          <Heading
-            as="h1"
-            size={{ base: 'xl', md: '2xl' }}
-            color="gray.800"
-            mb={SPACING_SCALE.xs}
-          >
+          <Heading as="h1" {...HEADING_STYLES.h1} color="gray.800">
             TIS Risk Managers — onafhankelijk verzekeringsadvies in Amsterdam
           </Heading>
           <Grid
@@ -76,10 +71,11 @@ export default function HomePageContent() {
                 >
                   <Box
                     bg="blue.700"
-                    borderRadius="lg"
-                    boxShadow="lg"
-                    overflow="hidden"
+                    borderRadius="xl"
+                    boxShadow="md"
+                    overflow="visible"
                     flex="1"
+                    minH="fit-content"
                     transition={UI_CONSTANTS.hover.button.transition}
                     _hover={{
                       bg: 'blue.900',
@@ -91,16 +87,12 @@ export default function HomePageContent() {
 
                   <Box hideFrom="lg" flex={{ base: 'initial', md: '1' }}>
                     <Box
-                      bg="blue.700"
-                      borderRadius="lg"
-                      boxShadow="lg"
-                      overflow="hidden"
+                      bg="white"
+                      borderRadius="xl"
+                      boxShadow="sm"
+                      overflow="visible"
                       height="full"
-                      transition={UI_CONSTANTS.hover.button.transition}
-                      _hover={{
-                        bg: 'blue.900',
-                        ...UI_CONSTANTS.hover.button,
-                      }}
+                      minH="fit-content"
                     >
                       <MeldSchade />
                     </Box>

@@ -9,11 +9,11 @@ import { SPACING_PATTERNS, SPACING_SCALE } from '@/constants/layout';
 export const CARD_VARIANTS = {
   default: {
     bg: 'white',
-    shadow: 'lg',
+    shadow: 'md',
   },
   sidebar: {
     bg: 'white',
-    shadow: 'md',
+    shadow: 'sm',
   },
   downloads: {
     bg: 'white',
@@ -25,18 +25,18 @@ export const CARD_VARIANTS = {
   },
   elevated: {
     bg: 'white',
-    shadow: 'xl',
+    shadow: 'lg',
   },
   featured: {
     bg: 'blue.50',
-    shadow: '2xl',
+    shadow: 'lg',
   },
 } as const;
 
 // Base card styles
 export const cardBaseStyles: SystemStyleObject = {
   border: '1px solid',
-  borderRadius: 'lg',
+  borderRadius: 'xl',
   overflow: 'hidden',
   height: '100%',
   width: '100%',
@@ -75,8 +75,8 @@ export const cardFocusStyles: SystemStyleObject = {
 export const cardImageStyles: SystemStyleObject = {
   position: 'relative',
   overflow: 'hidden',
-  borderTopRadius: 'lg',
-  height: { base: '140px', sm: '160px', md: '180px', lg: '200px', xl: '240px' },
+  borderTopRadius: 'xl',
+  height: { base: '160px', sm: '180px', md: '200px', lg: '220px', xl: '260px' },
   bg: 'gray.100',
 };
 

@@ -8,8 +8,10 @@ import { SPACING_PATTERNS, SPACING_SCALE } from '@/constants/layout';
 
 // Footer container styles
 export const footerContainerStyles: SystemStyleObject = {
-  bg: 'gray.700',
+  bg: 'gray.800',
   py: SPACING_PATTERNS.footer.padding,
+  borderTop: '1px solid',
+  borderColor: 'gray.700',
 };
 
 // Footer grid layout
@@ -26,7 +28,7 @@ export const footerColumnStyles: SystemStyleObject = {
 
 // Footer heading styles
 export const footerHeadingStyles: SystemStyleObject = {
-  fontSize: 'md',
+  fontSize: 'xl',
   color: 'white',
   mb: '0',
 };
@@ -41,18 +43,18 @@ export const footerTextStyles: SystemStyleObject = {
 // Footer links container styles
 export const footerLinksContainerStyles: SystemStyleObject = {
   alignItems: 'start',
-  gap: '1',
+  gap: '2',
 };
 
 // Footer link button styles
 export const footerLinkButtonStyles: SystemStyleObject = {
   color: 'white',
-  fontSize: 'sm',
+  fontSize: 'md',
   lineHeight: 'short',
   textDecoration: 'none',
   display: 'inline-flex',
   alignItems: 'center',
-  minH: '6',
+  minH: '8',
   transition: UI_CONSTANTS.hover.link.transition,
   _hover: {
     color: 'blue.200',

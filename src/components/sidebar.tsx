@@ -80,11 +80,11 @@ const Sidebar = memo<BaseComponentProps>(
 
         <Box
           mt={SECTION_SPACING.small}
-          p={COMPONENT_SPACING.card.md}
+          p={COMPONENT_SPACING.card.lg}
           bg="blue.50"
-          borderRadius="md"
+          borderRadius="xl"
           border="1px solid"
-          borderColor="blue.700"
+          borderColor="blue.200"
           textAlign="center"
         >
           <Box fontSize="sm" color="blue.900" fontWeight="medium" mb="1">

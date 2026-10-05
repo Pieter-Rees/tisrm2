@@ -433,7 +433,7 @@ export default function MeldSchadePage() {
                       <VStack align="stretch" gap={SPACING_SCALE.sm} width="full">
                         <Box
                           width="full"
-                          borderRadius="lg"
+                          borderRadius="xl"
                           border="1px solid"
                           borderColor={uploadError ? 'red.700' : 'gray.200'}
                           bg={uploadError ? 'red.50' : 'gray.50'}

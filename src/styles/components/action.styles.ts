@@ -10,11 +10,28 @@ import { COMPONENT_SPACING, SPACING_SCALE } from '@/constants/layout';
 export const actionButtonBaseStyles: SystemStyleObject = {
   width: 'full',
   height: 'full',
+  minH: 'fit-content',
   px: '0',
   py: '0',
   bg: 'blue.700',
   color: 'white',
   whiteSpace: 'normal',
+  borderRadius: 'xl',
+};
+
+/** Secondary CTA — outline on light ground; keeps full copy visible */
+export const actionButtonSecondaryStyles: SystemStyleObject = {
+  width: 'full',
+  height: 'full',
+  minH: 'fit-content',
+  px: '0',
+  py: '0',
+  bg: 'white',
+  color: 'blue.700',
+  borderWidth: '2px',
+  borderColor: 'blue.700',
+  whiteSpace: 'normal',
+  borderRadius: 'xl',
 };
 
 // Action content container styles
@@ -68,7 +85,10 @@ export const actionVariants = {
       alignItems: 'center',
       py: COMPONENT_SPACING.card.md,
     },
-    heading: actionHeadingStyles,
+    heading: {
+      ...actionHeadingStyles,
+      color: 'blue.700',
+    },
   },
 } satisfies Record<string, Record<string, SystemStyleObject>>;
 
@@ -78,6 +98,11 @@ export const actionStateStyles = {
     bg: 'blue.900',
     transform: 'translateY(-2px)',
     boxShadow: 'lg',
+  },
+  hoverSecondary: {
+    bg: 'blue.50',
+    transform: 'translateY(-2px)',
+    boxShadow: 'md',
   },
   active: {
     bg: 'blue.950',

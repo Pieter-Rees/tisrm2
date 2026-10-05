@@ -1,16 +1,16 @@
 # AFTER_CHECK
 
-Captured **2026-10-05T18:59:13.555Z** against `http://localhost:3011`.
+Captured **2026-10-05T19:14:08.149Z** against `https://tisrm.nl`.
 
-## Summary: PASS
+## Summary: FAIL
 
-- Pages with failures: 0/13
+- Pages with failures: 1/13
 - Keyword redirect failures: 0/2
 
 ## Keyword redirects
 
-- PASS: `/taxiverzekering` → `/taxi` (status 308, hops 1, final http://localhost:3011/taxi)
-- PASS: `/taxi-verzekering` → `/taxi` (status 308, hops 1, final http://localhost:3011/taxi)
+- PASS: `/taxiverzekering` → `/taxi` (status 308, hops 1, final https://tisrm.nl/taxi)
+- PASS: `/taxi-verzekering` → `/taxi` (status 308, hops 1, final https://tisrm.nl/taxi)
 
 ## Per-URL diffs
 
@@ -62,12 +62,22 @@ Captured **2026-10-05T18:59:13.555Z** against `http://localhost:3011`.
 
 ### PASS: `http://tisrm.nl`
 
-_Skipped against non-production base (host variant not applicable locally)_
+- **title**: `Onafhankelijk verzekeringsadvies Amsterdam | TIS Risk Managers` → `Verzekeringsadvies Amsterdam | TIS Risk Managers`
+- **openGraph.og:title**: `Onafhankelijk verzekeringsadvies Amsterdam` → `Verzekeringsadvies Amsterdam | TIS Risk Managers`
 
-### PASS: `http://www.tisrm.nl`
+### FAIL: `http://www.tisrm.nl`
 
-_Skipped against non-production base (host variant not applicable locally)_
+- **finalUrl**: `https://www.tisrm.nl/` → `https://tisrm.nl/`
+- **redirectHops**: `1` → `2`
+- **title**: `Onafhankelijk verzekeringsadvies Amsterdam | TIS Risk Managers` → `Verzekeringsadvies Amsterdam | TIS Risk Managers`
+- **openGraph.og:title**: `Onafhankelijk verzekeringsadvies Amsterdam` → `Verzekeringsadvies Amsterdam | TIS Risk Managers`
+
+Failures:
+- redirect hops 2
 
 ### PASS: `https://www.tisrm.nl`
 
-_Skipped against non-production base (host variant not applicable locally)_
+- **finalUrl**: `https://www.tisrm.nl` → `https://tisrm.nl/`
+- **redirectHops**: `0` → `1`
+- **title**: `Onafhankelijk verzekeringsadvies Amsterdam | TIS Risk Managers` → `Verzekeringsadvies Amsterdam | TIS Risk Managers`
+- **openGraph.og:title**: `Onafhankelijk verzekeringsadvies Amsterdam` → `Verzekeringsadvies Amsterdam | TIS Risk Managers`

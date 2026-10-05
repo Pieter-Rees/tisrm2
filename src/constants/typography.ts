@@ -103,9 +103,9 @@ export const LIST_STYLES = {
 
 /** Aligns with COMPONENT_SPACING.section (xs / sm / md) — grows on larger breakpoints */
 export const SECTION_SPACING = {
-  small: { base: '8', md: '12' },
-  medium: { base: '12', md: '16' },
-  large: { base: '16', md: '20' },
+  small: { base: '10', md: '14' },
+  medium: { base: '14', md: '20' },
+  large: { base: '18', md: '24' },
 } as const;
 
 export const CONTENT_WIDTH = {

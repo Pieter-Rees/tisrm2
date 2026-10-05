@@ -5,7 +5,8 @@ import Link from 'next/link';
 
 import { NAVIGATION_ROUTES } from '@/constants/app';
 import {
-  actionButtonBaseStyles,
+  actionButtonSecondaryStyles,
+  actionStateStyles,
   actionVariants,
 } from '@/styles/components/action.styles';
 
@@ -13,7 +14,14 @@ export default function MeldSchade() {
   const { content, heading } = actionVariants.schadeMelden;
 
   return (
-    <Button asChild {...actionButtonBaseStyles}>
+    <Button
+      asChild
+      variant="outline"
+      colorPalette="blue"
+      {...actionButtonSecondaryStyles}
+      _hover={actionStateStyles.hoverSecondary}
+      _active={{ bg: 'blue.100', transform: 'translateY(0)' }}
+    >
       <Link href={NAVIGATION_ROUTES.damageReport}>
         <Box display="flex" {...content}>
           <Heading as="h2" {...heading}>

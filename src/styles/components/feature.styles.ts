@@ -28,12 +28,10 @@ export const featureDescriptionStyles: SystemStyleObject = {
 // Feature grid styles
 export const featureGridStyles: SystemStyleObject = {
   gridTemplateColumns: { base: '1fr', md: 'repeat(3, 1fr)' },
-  gap: COMPONENT_SPACING.grid.md,
+  gap: COMPONENT_SPACING.grid.lg,
   alignItems: 'stretch',
   width: '100%',
-  // Ensure cards don't get too cramped on small screens
   minWidth: '0',
-  overflow: 'hidden',
 };
 
 // Feature grid item styles
@@ -45,11 +43,11 @@ export const featureGridItemStyles: SystemStyleObject = {
 // Feature call-to-action section styles (parent section gap owns vertical rhythm)
 export const featureCtaStyles: SystemStyleObject = {
   textAlign: 'center',
-  p: COMPONENT_SPACING.card.lg,
+  p: COMPONENT_SPACING.card.xl,
   bg: 'blue.50',
-  borderRadius: 'lg',
+  borderRadius: 'xl',
   border: '1px solid',
-  borderColor: 'blue.700',
+  borderColor: 'blue.200',
 };
 
 // Feature CTA heading styles
