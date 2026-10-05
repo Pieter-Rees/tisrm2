@@ -1,3 +1,5 @@
+'use client';
+
 import { FadeInUp, StaggerContainer } from '@/components/page-animation';
 import { UnifiedLayout } from '@/components/layout';
 import {

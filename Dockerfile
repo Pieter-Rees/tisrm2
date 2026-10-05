@@ -1,10 +1,13 @@
-FROM node:26-alpine AS base
+ARG NODE_VERSION=26
+FROM node:${NODE_VERSION}-alpine AS base
 
 FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 COPY package.json package-lock.json* ./
+# Keep install moving even if a transitive package lags on engines.range
+ENV NPM_CONFIG_ENGINE_STRICT=false
 RUN npm ci
 
 FROM base AS builder

@@ -1,3 +1,5 @@
+'use client';
+
 import Breadcrumb from '@/components/breadcrumb';
 import { FadeInUp, StaggerContainer } from '@/components/page-animation';
 import { UnifiedLayout } from '@/components/layout';
