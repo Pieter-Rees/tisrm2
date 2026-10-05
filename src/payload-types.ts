@@ -209,6 +209,10 @@ export interface Page {
         description?: string | null;
         cta?: string | null;
         ctaLink?: string | null;
+        /**
+         * Optional card image (home feature cards).
+         */
+        image?: (number | null) | Media;
         buttonVariant?: ('solid' | 'outline' | 'ghost' | 'subtle' | 'plain') | null;
         id?: string | null;
       }[]
@@ -234,7 +238,7 @@ export interface Page {
     image?: (number | null) | Media;
   };
   /**
-   * Optional page builder (Phase 3). When used, prefer rendering sections on the route.
+   * Page builder sections. Drag the handle on each block to reorder; frontend renders in this order.
    */
   sections?:
     | (
@@ -290,6 +294,7 @@ export interface Page {
                   description?: string | null;
                   cta?: string | null;
                   ctaLink?: string | null;
+                  image?: (number | null) | Media;
                   id?: string | null;
                 }[]
               | null;
@@ -468,6 +473,7 @@ export interface PagesSelect<T extends boolean = true> {
         description?: T;
         cta?: T;
         ctaLink?: T;
+        image?: T;
         buttonVariant?: T;
         id?: T;
       };
@@ -550,6 +556,7 @@ export interface PagesSelect<T extends boolean = true> {
                     description?: T;
                     cta?: T;
                     ctaLink?: T;
+                    image?: T;
                     id?: T;
                   };
               id?: T;

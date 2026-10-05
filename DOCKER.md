@@ -1,69 +1,60 @@
 # Docker Setup
 
-This project includes Docker configuration to run both the frontend and backend containers together.
+Runs the Next.js site (with Payload CMS), Postgres, and the separate form API backend.
 
 ## Prerequisites
 
-- Docker and Docker Compose installed
-- Both repositories cloned:
-  - `/home/pieter/Development/tisrm2` (frontend)
-  - `/home/pieter/Development/tis-risk-managers-backend` (backend)
+- Docker and Docker Compose
+- Sibling backend repo at `../tis-risk-managers-backend` (only needed for form submit APIs)
 
 ## Usage
 
-From the `tisrm2` directory, run:
+From `tisrm2`:
 
 ```bash
-docker-compose up --build
+docker compose up --build
 ```
 
-This will:
-1. Build both the frontend and backend Docker images
-2. Start both containers
-3. Connect them on a shared network
+This starts:
 
-## Services
+| Service | URL / port | Role |
+| --- | --- | --- |
+| frontend | http://localhost:3011 | Next.js site + Payload admin at `/admin` |
+| postgres | localhost:5433 → container 5432 | Payload database |
+| backend | http://localhost:4000 | Form/API backend |
 
-- **Frontend**: Available at http://localhost:3002
-- **Backend**: Available at http://localhost:4000
+On frontend start, `docker-entrypoint.sh` runs create-if-missing CMS seed + publish + phase-2 sync.
 
-The frontend is configured to communicate with the backend at `http://localhost:4000` when running in Docker.
-
-## Environment Variables
-
-### Frontend
-- `NEXT_PUBLIC_API_URL`: Backend API URL (defaults to production URL if not set)
-
-### Backend
-- `PORT`: Server port (default: 4000)
-- `FRONTEND_URL`: Frontend URL for CORS configuration
-- `SSL_KEY_PATH`: Path to SSL key file (optional, for HTTPS)
-- `SSL_CERT_PATH`: Path to SSL certificate file (optional, for HTTPS)
-
-## Building Individual Containers
-
-### Frontend only:
-```bash
-cd /home/pieter/Development/tisrm2
-docker build -t tisrm2-frontend .
-docker run -p 3002:3002 tisrm2-frontend
-```
-
-### Backend only:
-```bash
-cd /home/pieter/Development/tis-risk-managers-backend
-docker build -t tisrm2-backend .
-docker run -p 4000:4000 tisrm2-backend
-```
-
-## Stopping Containers
+## Local CMS (without full compose)
 
 ```bash
-docker-compose down
+docker compose up -d postgres
+cp .env.example .env.local   # if you do not have one yet
+npm install
+npm run cms:seed
+npm run cms:publish
+npm run dev -- -p 3011
 ```
 
-To also remove volumes:
+Then open http://localhost:3011 and http://localhost:3011/admin.
+
+## Environment
+
+Compose sets defaults; for local `npm run dev` use `.env.local` (see `.env.example`):
+
+- `DATABASE_URL` — Postgres (local: `postgres://payload:payload@localhost:5433/payload`)
+- `PAYLOAD_SECRET` — Payload encryption secret
+- `NEXT_PUBLIC_SERVER_URL` — site URL (default `http://localhost:3011`)
+- `NEXT_PUBLIC_API_URL` — form backend (default `http://localhost:4000`)
+
+## Stopping
+
 ```bash
-docker-compose down -v
+docker compose down
 ```
 
+Remove volumes (wipes CMS DB + media):
+
+```bash
+docker compose down -v
+```

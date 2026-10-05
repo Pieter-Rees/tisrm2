@@ -7,6 +7,8 @@ import { config as loadEnv } from 'dotenv';
 import { getPayload } from 'payload';
 
 import { formCopySeedData } from './formCopyData';
+import { isFormGroupPopulated } from './helpers';
+import { COMPANY_ENTITIES } from '../../data/content';
 
 loadEnv({ path: '.env.local' });
 
@@ -58,6 +60,12 @@ const pages: PageSeed[] = [
       'De ENTO Groep is opgericht in 1994 en is begonnen als zelfstandige auto lease maatschappij voor het MKB. In 1998 is daar de discipline verzekeringen aan toegevoegd. In 2002 werd middels een overname van een grote assurantie portefeuille uit het oosten van Nederland de basis voor het huidige concern gelegd. Inmiddels is de tweede generatie in het bedrijf gekomen. Door nieuwe impulsen zijn wij reeds ook gecertificeerd Risico Managers en als zodanig geregistreerd in het GRMC register.',
       'Thans bestaat de ENTO groep uit de ondernemingen:',
       'Uit een zeer modern en inspirerend kantoor wordt de onderneming gedreven met geavanceerde software en bedrijfsmodel. Door gebruik te maken van diverse gespecialiseerde diensten zoals een call center en een uitbesteedde schade afdeling zijn wij in staat met een relatief klein team een mooie omzet te genereren. Focus ligt op advisering in Risico management en financiële vraagstukken.',
+    ],
+    lists: [
+      {
+        title: 'Ondernemingen',
+        items: [...COMPANY_ENTITIES],
+      },
     ],
   },
   {
@@ -177,12 +185,28 @@ const pages: PageSeed[] = [
   {
     slug: 'taxi',
     title: 'Personenvervoer',
-    body: [
-      'Bent u op zoek naar een goede verzekering voor uw taxi, dan hebben wij voor u een passende oplossing. Onze taxiverzekering biedt een uitgebreide dekking, welke ook aan te vullen is met bijvoorbeeld de door het TX Keurmerk vereiste dekkingen, denk bijvoorbeeld aan de aansprakelijkheid voor bedrijven en de ongevallen inzittendenverzekering.',
-      "TIS Risk Managers biedt ook voor wagenparken oplossingen. Buiten het bieden van een scherpe offerte, kunnen wij een risico analyse van uw bedrijf maken. Waar zitten de risico's, wordt er misschien risico's over het hoofd gezien en hoe voorkomen e/o dekken wij dit af? Samen met de klant komen wij dan tot mooie resultaten en een langdurige samenwerking.",
-      "TIS Risk Managers biedt ook voor wagenparken oplossingen. Buiten het bieden van een scherpe offerte, kunnen wij een risico analyse van uw bedrijf maken. Waar zitten de risico's, wordt er misschien risico's over het hoofd gezien en hoe voorkomen e/o dekken wij dit af? Samen met de klant komen wij dan tot mooie resultaten en een langdurige samenwerking.",
-      'Bent u geïnteresseerd? Neem gerust contact met ons op, zodat wij een ontmoetingsgesprek kunnen inplannen!',
-      'De schadeafdeling van TIS Risk Managers is erg uniek, door haar transparantie. Door middel van een online dossier kan de klant de complete afwikkeling volgen door in te loggen. Hierdoor ziet de klant wat er gebeurd en de status achterhalen. Dit dossier is in te zien via zowel de PC, tablet als uw mobiele telefoon! U kunt via de app dan ook digitaal uw schademelden en stukken, als het schadeformulier, direct aan het schadedossier toevoegen. Mede hierdoor wordt veel tijd gewonnen.',
+    // Structured copy lives in lists (synced in phase2); keep body empty for new seeds.
+    body: [],
+    lists: [
+      {
+        title: 'Taxiverzekering',
+        items: [
+          'Bent u op zoek naar een goede verzekering voor uw taxi, dan hebben wij voor u een passende oplossing. Onze taxiverzekering biedt een uitgebreide dekking, welke ook aan te vullen is met bijvoorbeeld de door het TX Keurmerk vereiste dekkingen, denk bijvoorbeeld aan de aansprakelijkheid voor bedrijven en de ongevallen inzittendenverzekering.',
+        ],
+      },
+      {
+        title: 'Wagenpark',
+        items: [
+          "TIS Risk Managers biedt ook voor wagenparken oplossingen. Buiten het bieden van een scherpe offerte, kunnen wij een risico analyse van uw bedrijf maken. Waar zitten de risico's, wordt er misschien risico's over het hoofd gezien en hoe voorkomen e/o dekken wij dit af? Samen met de klant komen wij dan tot mooie resultaten en een langdurige samenwerking.",
+          'Bent u geïnteresseerd? Neem gerust contact met ons op, zodat wij een ontmoetingsgesprek kunnen inplannen!',
+        ],
+      },
+      {
+        title: 'Schadeafhandeling',
+        items: [
+          'De schadeafdeling van TIS Risk Managers is erg uniek, door haar transparantie. Door middel van een online dossier kan de klant de complete afwikkeling volgen door in te loggen. Hierdoor ziet de klant wat er gebeurd en de status achterhalen. Dit dossier is in te zien via zowel de PC, tablet als uw mobiele telefoon! U kunt via de app dan ook digitaal uw schademelden en stukken, als het schadeformulier, direct aan het schadedossier toevoegen. Mede hierdoor wordt veel tijd gewonnen.',
+        ],
+      },
     ],
   },
   {
@@ -304,20 +328,31 @@ async function seed() {
   }
 
   const formCopy = await payload.findGlobal({ slug: 'formCopy' });
-  const formCopyExists =
-    formCopy?.offerte != null || formCopy?.meldSchade != null;
-  if (formCopyExists) {
-    console.log('skipped formCopy (already exists)');
+  const offerteEmpty = !isFormGroupPopulated(formCopy?.offerte);
+  const meldEmpty = !isFormGroupPopulated(formCopy?.meldSchade);
+  if (!offerteEmpty && !meldEmpty) {
+    console.log('skipped formCopy (already populated)');
   } else {
     await payload.updateGlobal({
       slug: 'formCopy',
       data: {
         _status: 'published',
-        offerte: formCopySeedData.offerte ?? {},
-        meldSchade: formCopySeedData.meldSchade ?? {},
+        ...(offerteEmpty
+          ? { offerte: formCopySeedData.offerte ?? {} }
+          : {}),
+        ...(meldEmpty
+          ? { meldSchade: formCopySeedData.meldSchade ?? {} }
+          : {}),
       },
     });
-    console.log('created formCopy');
+    console.log(
+      `created formCopy (${[
+        offerteEmpty ? 'offerte' : null,
+        meldEmpty ? 'meldSchade' : null,
+      ]
+        .filter(Boolean)
+        .join(', ')})`,
+    );
   }
 }
 

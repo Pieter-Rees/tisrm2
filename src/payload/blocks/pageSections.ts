@@ -78,6 +78,11 @@ export const cardsBlock: Block = {
         { name: 'description', type: 'textarea' },
         { name: 'cta', type: 'text' },
         { name: 'ctaLink', type: 'text' },
+        {
+          name: 'image',
+          type: 'upload',
+          relationTo: 'media',
+        },
       ],
     },
   ],

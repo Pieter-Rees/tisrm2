@@ -12,6 +12,7 @@ export type PageCardView = {
   description: string;
   cta: string;
   ctaLink: string;
+  imageUrl: string | null;
   buttonVariant: ButtonVariant;
 };
 
@@ -75,6 +76,7 @@ export function mapPageCards(
     description?: string | null;
     cta?: string | null;
     ctaLink?: string | null;
+    image?: unknown;
     buttonVariant?: string | null;
   } | null> | null | undefined,
 ): PageCardView[] {
@@ -85,6 +87,7 @@ export function mapPageCards(
       description: card.description ?? '',
       cta: card.cta ?? 'Lees meer',
       ctaLink: card.ctaLink ?? '#',
+      imageUrl: resolveMediaUrl(card.image),
       buttonVariant: normalizeButtonVariant(card.buttonVariant),
     }))
     .filter((card) => card.title);

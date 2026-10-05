@@ -19,6 +19,10 @@ export const dynamic = 'force-dynamic';
 export default async function Overons() {
   const page = await getPageBySlug('over-ons');
   const paragraphs = page?.body?.length ? page.body : [];
+  const companyEntities =
+    page?.lists?.[0]?.items?.length ?
+      page.lists[0].items
+    : [...COMPANY_ENTITIES];
   const teamSrc = pageImageSrc(page?.featuredImageUrl, '/team.jpg');
 
   return (
@@ -32,7 +36,7 @@ export default async function Overons() {
               </FadeInUp>
               {index === 1 && (
                 <FadeInUp delay={0.2}>
-                  <StarList listItems={COMPANY_ENTITIES} />
+                  <StarList listItems={companyEntities} />
                 </FadeInUp>
               )}
             </Fragment>
@@ -40,7 +44,7 @@ export default async function Overons() {
 
           {paragraphs.length <= 1 && (
             <FadeInUp delay={0.2}>
-              <StarList listItems={COMPANY_ENTITIES} />
+              <StarList listItems={companyEntities} />
             </FadeInUp>
           )}
 

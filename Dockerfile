@@ -5,8 +5,7 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 COPY package.json package-lock.json* ./
-# Payload peers graphql@^16; project uses graphql@17 (see task-1 --legacy-peer-deps).
-RUN npm ci --legacy-peer-deps
+RUN npm ci
 
 FROM base AS builder
 WORKDIR /app

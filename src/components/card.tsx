@@ -12,6 +12,7 @@ import {
 
 import { SPACING_PATTERNS } from '@/constants/layout';
 import { HEADING_STYLES, PARAGRAPH_STYLES } from '@/constants/typography';
+import { isCmsMediaSrc } from '@/lib/payload/cmsImage';
 import { cn } from '@/lib/utils';
 import { getCardStyles } from '@/styles/components/card.styles';
 import type { CardProps } from '@/types/components';
@@ -60,6 +61,7 @@ const Card = memo<CardProps>(
                 objectFit: 'cover',
                 objectPosition: 'center',
               }}
+              unoptimized={isCmsMediaSrc(image)}
               loading={loading ? 'eager' : 'lazy'}
             />
           </Box>

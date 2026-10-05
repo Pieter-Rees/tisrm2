@@ -6,6 +6,7 @@ import { memo } from 'react';
 import { BsQuote } from 'react-icons/bs';
 
 import { PARAGRAPH_STYLES } from '@/constants/typography';
+import { isCmsMediaSrc } from '@/lib/payload/cmsImage';
 import { testimonialContainerStyles } from '@/styles/components/testimonial.styles';
 import type { TalkerProps } from '@/types/components';
 const DEFAULT_TESTIMONIAL = {
@@ -59,6 +60,7 @@ const Talker = memo<TalkerProps>(
                   objectFit: 'cover',
                   objectPosition: 'center',
                 }}
+                unoptimized={isCmsMediaSrc(image)}
                 priority
               />
             </Box>

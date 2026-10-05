@@ -117,6 +117,9 @@ export function PageSections({ sections }: PageSectionsProps) {
                       cta={card.cta}
                       ctaLink={card.ctaLink}
                       buttonVariant={card.buttonVariant}
+                      {...(card.imageUrl
+                        ? { image: pageImageSrc(card.imageUrl, '') }
+                        : {})}
                     />
                   )}
                 />

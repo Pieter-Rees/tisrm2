@@ -58,4 +58,30 @@ describe('mapPageDoc', () => {
     });
     expect(result.lists).toEqual([{ title: 'Keep', items: ['A'] }]);
   });
+
+  it('maps cards including image urls', () => {
+    const result = mapPageDoc({
+      title: 'Home',
+      slug: 'home',
+      cards: [
+        {
+          title: 'Risk Managers',
+          description: 'Desc',
+          cta: 'Lees meer',
+          ctaLink: '/risk-management',
+          image: { url: '/api/media/file/slider-2.jpg' },
+        },
+      ],
+    });
+    expect(result.cards).toEqual([
+      {
+        title: 'Risk Managers',
+        description: 'Desc',
+        cta: 'Lees meer',
+        ctaLink: '/risk-management',
+        imageUrl: '/api/media/file/slider-2.jpg',
+        buttonVariant: 'ghost',
+      },
+    ]);
+  });
 });

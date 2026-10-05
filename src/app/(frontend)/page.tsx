@@ -98,14 +98,28 @@ export default async function Homepage() {
     '/rene.jpg',
   );
 
-  const featureCards = DEFAULT_FEATURE_CARDS.map((card, index) => {
-    const cms = lists[index];
-    return {
-      ...card,
-      title: cms?.title || card.title,
-      description: cms?.items[0] || card.description,
-    };
-  });
+  const featureCards =
+    page?.cards?.length ?
+      page.cards.map((card, index) => ({
+        id: card.ctaLink || `card-${index}`,
+        image: pageImageSrc(
+          card.imageUrl,
+          DEFAULT_FEATURE_CARDS[index]?.image ?? '/slider-2.jpg',
+        ),
+        title: card.title,
+        description: card.description,
+        cta: card.cta,
+        ctaLink: card.ctaLink,
+        variant: 'elevated' as const,
+      }))
+    : DEFAULT_FEATURE_CARDS.map((card, index) => {
+        const cms = lists[index];
+        return {
+          ...card,
+          title: cms?.title || card.title,
+          description: cms?.items[0] || card.description,
+        };
+      });
 
   if (page?.sections?.length) {
     return (

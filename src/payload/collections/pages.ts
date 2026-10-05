@@ -78,6 +78,12 @@ export const pages: CollectionConfig = {
         { name: 'cta', type: 'text' },
         { name: 'ctaLink', type: 'text' },
         {
+          name: 'image',
+          type: 'upload',
+          relationTo: 'media',
+          admin: { description: 'Optional card image (home feature cards).' },
+        },
+        {
           name: 'buttonVariant',
           type: 'select',
           options: [
@@ -129,8 +135,10 @@ export const pages: CollectionConfig = {
       type: 'blocks',
       blocks: pageSectionBlocks,
       admin: {
+        isSortable: true,
+        initCollapsed: true,
         description:
-          'Optional page builder (Phase 3). When used, prefer rendering sections on the route.',
+          'Page builder sections. Drag the handle on each block to reorder; frontend renders in this order.',
       },
     },
   ],
