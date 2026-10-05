@@ -3,7 +3,7 @@
  */
 
 import type { SystemStyleObject } from '@chakra-ui/react';
-import { SPACING_PATTERNS } from '@/constants/layout';
+import { SPACING_PATTERNS, SPACING_SCALE } from '@/constants/layout';
 
 // Card variant definitions
 export const CARD_VARIANTS = {
@@ -91,13 +91,14 @@ export const cardContentStyles: SystemStyleObject = {
 // Action container styles
 export const cardActionStyles: SystemStyleObject = {
   mt: 'auto',
+  pt: SPACING_SCALE.md,
 };
 
 // Button styles within cards
 export const cardButtonStyles = {
   base: {
     width: 'full',
-    gap: '2',
+    gap: SPACING_SCALE.xs,
     transition: 'all 0.2s ease-in-out',
     _hover: {
       transform: 'translateY(-2px)',

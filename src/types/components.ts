@@ -59,6 +59,7 @@ export type CardVariant = 'default' | 'sidebar' | 'downloads' | 'elevated' | 'fe
 
 export interface CardProps extends BaseComponentProps {
   readonly title: string;
+  readonly titleAs?: 'h2' | 'h3' | 'h4';
   readonly description?: string | undefined;
   readonly image?: string | undefined;
   readonly altText?: string | undefined;

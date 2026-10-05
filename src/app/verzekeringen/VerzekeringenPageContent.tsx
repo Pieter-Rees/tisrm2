@@ -10,13 +10,14 @@ export default function VerzekeringenPageContent() {
   return (
     <UnifiedLayout
       title="Verzekeringen"
-      breadcrumb={<Breadcrumb capitalizeLinks />}
+      breadcrumb={<Breadcrumb />}
     >
       <AnimatedGrid
         items={INSURANCE_CATEGORIES}
         renderItem={(card) => (
           <Card
             title={card.title}
+            titleAs="h2"
             description={card.description}
             cta={card.cta}
             ctaLink={card.ctaLink}

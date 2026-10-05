@@ -22,7 +22,7 @@ import {
 } from 'react-icons/bs';
 
 import { CONTACT_INFO, NAVIGATION_ROUTES } from '@/constants/app';
-import { SPACING_PATTERNS } from '@/constants/layout';
+import { SPACING_PATTERNS, SPACING_SCALE } from '@/constants/layout';
 // import {
 //   navbarContainerStyles,
 //   navbarLinksContainerStyles,
@@ -119,7 +119,7 @@ const Navbar = memo(() => {
                 transform: 'translateY(0)',
               }}
               fontWeight="medium"
-              gap="2"
+              gap={SPACING_SCALE.xs}
             >
               Acties
               <BsChevronDown />
@@ -141,7 +141,7 @@ const Navbar = memo(() => {
             <MenuItem
               value="damage-report"
               asChild
-              gap="2"
+              gap={SPACING_SCALE.xs}
               _hover={{ bg: 'blue.50' }}
               cursor="pointer"
             >
@@ -153,7 +153,7 @@ const Navbar = memo(() => {
             <MenuItem
               value="quote"
               asChild
-              gap="2"
+              gap={SPACING_SCALE.xs}
               _hover={{ bg: 'blue.50' }}
               cursor="pointer"
             >
@@ -165,7 +165,7 @@ const Navbar = memo(() => {
             <MenuItem
               value="call"
               asChild
-              gap="2"
+              gap={SPACING_SCALE.xs}
               _hover={{ bg: 'blue.50' }}
               cursor="pointer"
             >

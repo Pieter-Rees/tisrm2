@@ -8,7 +8,12 @@ export const metadata = buildPageMetadata(PAGE_META.insuranceBusiness);
 
 export default function ZakelijkLayout({ children }: { children: ReactNode }) {
   return (
-    <WebPageJsonLdLayout pageKey="insuranceBusiness">
+    <WebPageJsonLdLayout
+      pageKey="insuranceBusiness"
+      withService
+      withBreadcrumbs
+      faqKey="insuranceBusiness"
+    >
       {children}
     </WebPageJsonLdLayout>
   );

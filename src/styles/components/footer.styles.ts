@@ -4,7 +4,7 @@
 
 import type { SystemStyleObject } from '@chakra-ui/react';
 import { UI_CONSTANTS } from '@/constants/app';
-import { SPACING_PATTERNS } from '@/constants/layout';
+import { SPACING_PATTERNS, SPACING_SCALE } from '@/constants/layout';
 
 // Footer container styles
 export const footerContainerStyles: SystemStyleObject = {
@@ -21,33 +21,35 @@ export const footerGridStyles: SystemStyleObject = {
 // Footer column styles
 export const footerColumnStyles: SystemStyleObject = {
   alignItems: 'start',
-  gap: '4',
+  gap: SPACING_SCALE.sm,
 };
 
 // Footer heading styles
 export const footerHeadingStyles: SystemStyleObject = {
   fontSize: 'md',
   color: 'white',
+  mb: '0',
 };
 
 // Footer text styles
 export const footerTextStyles: SystemStyleObject = {
   color: 'white',
   fontSize: 'sm',
+  m: '0',
 };
 
 // Footer links container styles
 export const footerLinksContainerStyles: SystemStyleObject = {
   alignItems: 'start',
-  gap: '2',
+  gap: '1',
 };
 
 // Footer link button styles
 export const footerLinkButtonStyles: SystemStyleObject = {
   color: 'white',
   fontSize: 'sm',
-  p: '0',
-  justifyContent: 'flex-start',
+  lineHeight: 'short',
+  textDecoration: 'none',
   transition: UI_CONSTANTS.hover.link.transition,
   _hover: {
     color: 'blue.200',

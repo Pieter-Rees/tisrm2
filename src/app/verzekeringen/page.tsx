@@ -1,19 +1,35 @@
 import { JsonLd } from '@/components/seo/JsonLd';
-import { getWebPageSchema } from '@/lib/seo/organizationSchema';
+import {
+  getBreadcrumbListSchema,
+  getServiceSchema,
+  getWebPageSchema,
+  SERVICE_TYPES,
+} from '@/lib/seo/organizationSchema';
 import { PAGE_META } from '@/lib/seo/pageMeta';
 
 import VerzekeringenPageContent from './VerzekeringenPageContent';
 
 export default function VerzekeringenPage() {
+  const page = PAGE_META.insurance;
+
   return (
     <>
       <JsonLd
         data={getWebPageSchema({
-          name: PAGE_META.insurance.title,
-          description: PAGE_META.insurance.description,
-          path: PAGE_META.insurance.path,
+          name: page.title,
+          description: page.description,
+          path: page.path,
         })}
       />
+      <JsonLd
+        data={getServiceSchema({
+          name: page.title,
+          description: page.description,
+          path: page.path,
+          serviceType: SERVICE_TYPES.insurance,
+        })}
+      />
+      <JsonLd data={getBreadcrumbListSchema([], page.path)} />
       <VerzekeringenPageContent />
     </>
   );

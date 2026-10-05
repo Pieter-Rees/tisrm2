@@ -7,7 +7,11 @@ import {
   PageAnimation,
   SlideInRight,
 } from '@/components/page-animation';
-import { HEADING_STYLES } from '@/constants/typography';
+import {
+  COMPONENT_SPACING,
+  SPACING_PATTERNS,
+} from '@/constants/layout';
+import { HEADING_STYLES, SECTION_SPACING } from '@/constants/typography';
 import {
   Box,
   Container,
@@ -37,14 +41,14 @@ export const PageLayout = ({
 }: PageLayoutProps) => {
   return (
     <PageAnimation>
-      <Container py="8" maxW={maxWidth}>
+      <Container py={SPACING_PATTERNS.page.padding} maxW={maxWidth}>
         <Grid
           templateColumns={{ base: '1fr', xl: showSidebar ? '3fr 1fr' : '1fr' }}
-          gap="8"
+          gap={SPACING_PATTERNS.page.section}
           alignItems="start"
         >
           <GridItem>
-            <Flex direction="column" gap="8">
+            <Flex direction="column" gap={COMPONENT_SPACING.section.xs}>
               {(title || breadcrumb) && (
                 <FadeInUp>
                   <Flex
@@ -52,7 +56,7 @@ export const PageLayout = ({
                     justify="space-between"
                     align={{ base: 'flex-start', lg: 'center' }}
                     direction={{ base: 'column', lg: 'row' }}
-                    gap="8"
+                    gap={SECTION_SPACING.small}
                   >
                     {title && (
                       <Heading as="h1" {...HEADING_STYLES.h1}>

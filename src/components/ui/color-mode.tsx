@@ -20,10 +20,11 @@ export function ColorModeProvider({
 }: ColorModeProviderProps) {
   return (
     <ThemeProvider
-      attribute={attribute as any}
+      attribute={attribute as 'class'}
       disableTransitionOnChange
       defaultTheme="light"
       forcedTheme="light"
+      enableSystem={false}
       {...props}
     >
       {children}

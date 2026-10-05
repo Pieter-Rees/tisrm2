@@ -2,6 +2,7 @@
 
 import { Box, Spinner, Text, VStack } from '@chakra-ui/react';
 import type { ComponentProps } from 'react';
+import { COMPONENT_SPACING, SPACING_SCALE } from '@/constants/layout';
 // import {
 //   loadingContentStyles,
 //   loadingSpinnerStyles,
@@ -22,7 +23,7 @@ export default function Loading({
   fullScreen = false,
 }: LoadingProps) {
   const content = (
-    <VStack gap="4">
+    <VStack gap={SPACING_SCALE.md}>
       <Spinner size={size} color="blue.500" />
       {text && (
         <Text fontSize="sm" color="gray.600">
@@ -57,7 +58,7 @@ export default function Loading({
       alignItems="center"
       justifyContent="center"
       minH="200px"
-      p="8"
+      p={COMPONENT_SPACING.card.xl}
     >
       {content}
     </Box>

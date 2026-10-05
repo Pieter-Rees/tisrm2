@@ -17,8 +17,8 @@ import {
   PageAnimation,
   SlideInRight,
 } from '@/components/page-animation';
-import { COMPONENT_SPACING, SPACING_PATTERNS } from '@/constants/layout';
-import { HEADING_STYLES } from '@/constants/typography';
+import { COMPONENT_SPACING, SPACING_PATTERNS, SPACING_SCALE } from '@/constants/layout';
+import { HEADING_STYLES, SECTION_SPACING } from '@/constants/typography';
 import { cn } from '@/lib/utils';
 import {
   layoutGridStyles,
@@ -88,7 +88,7 @@ const UnifiedLayout = memo<UnifiedLayoutProps>(
                   id="page-title"
                   as="h1"
                   {...HEADING_STYLES.h1}
-                  mb={{ base: '4', md: '6' }}
+                  mb={SPACING_SCALE.md}
                   textAlign={variant === 'centered' ? 'center' : undefined}
                 >
                   {title}
@@ -96,7 +96,7 @@ const UnifiedLayout = memo<UnifiedLayoutProps>(
               </Box>
             )}
             <ErrorBoundary>
-              <Box as="main">{children}</Box>
+              <Box>{children}</Box>
             </ErrorBoundary>
           </Box>
         </LayoutWrapper>
@@ -126,7 +126,7 @@ const UnifiedLayout = memo<UnifiedLayoutProps>(
                       justifyContent="space-between"
                       alignItems={{ base: 'flex-start', lg: 'center' }}
                       flexDirection={{ base: 'column', lg: 'row' }}
-                      gap="8"
+                      gap={SECTION_SPACING.small}
                     >
                       {title && (
                         <Heading as="h1" {...HEADING_STYLES.h1} mb="0">
@@ -149,14 +149,7 @@ const UnifiedLayout = memo<UnifiedLayoutProps>(
 
                 <FadeInUp delay={0.1}>
                   <ErrorBoundary>
-                    <Box
-                      as="main"
-                      role="main"
-                      aria-label="Main content"
-                      minH="200px"
-                    >
-                      {children}
-                    </Box>
+                    <Box minH="200px">{children}</Box>
                   </ErrorBoundary>
                 </FadeInUp>
               </Flex>
@@ -174,13 +167,13 @@ const UnifiedLayout = memo<UnifiedLayoutProps>(
                     <ErrorBoundary
                       fallback={
                         <Box
-                          p="4"
+                          p={COMPONENT_SPACING.card.md}
                           bg="gray.50"
                           borderRadius="md"
                           border="1px solid"
                           borderColor="gray.200"
                         >
-                          <Heading size="sm" color="gray.600" mb="2">
+                          <Heading size="sm" color="gray.600" mb={SPACING_SCALE.xs}>
                             Sidebar niet beschikbaar
                           </Heading>
                           <Box fontSize="sm" color="gray.500">

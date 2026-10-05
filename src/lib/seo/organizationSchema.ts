@@ -1,9 +1,19 @@
 import { APP_CONFIG, CONTACT_INFO } from '@/constants/app';
 
+import {
+  buildBreadcrumbItems,
+  toAbsoluteUrl,
+  type BreadcrumbItem,
+} from '@/lib/seo/breadcrumbs';
+
+const organizationId = `${APP_CONFIG.url}/#organization`;
+const websiteId = `${APP_CONFIG.url}/#website`;
+
 export function getOrganizationSchema() {
   return {
     '@context': 'https://schema.org',
     '@type': ['InsuranceAgency', 'LocalBusiness'],
+    '@id': organizationId,
     name: CONTACT_INFO.name,
     url: APP_CONFIG.url,
     email: CONTACT_INFO.email,
@@ -26,6 +36,20 @@ export function getOrganizationSchema() {
   };
 }
 
+export function getWebSiteSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': websiteId,
+    name: APP_CONFIG.name,
+    url: APP_CONFIG.url,
+    inLanguage: 'nl-NL',
+    publisher: {
+      '@id': organizationId,
+    },
+  };
+}
+
 type WebPageSchemaInput = {
   name: string;
   description: string;
@@ -37,25 +61,76 @@ export function getWebPageSchema({
   description,
   path,
 }: WebPageSchemaInput) {
-  const url = `${APP_CONFIG.url}${path === '/' ? '' : path}`;
+  const url = toAbsoluteUrl(path);
 
   return {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
+    '@id': `${url}/#webpage`,
     name,
     description,
     url,
     inLanguage: 'nl-NL',
     isPartOf: {
       '@type': 'WebSite',
+      '@id': websiteId,
       name: APP_CONFIG.name,
       url: APP_CONFIG.url,
     },
     publisher: {
-      '@type': 'Organization',
-      name: CONTACT_INFO.name,
-      url: APP_CONFIG.url,
+      '@id': organizationId,
     },
+  };
+}
+
+type ServiceSchemaInput = {
+  name: string;
+  description: string;
+  path: string;
+  serviceType: string;
+};
+
+export function getServiceSchema({
+  name,
+  description,
+  path,
+  serviceType,
+}: ServiceSchemaInput) {
+  const url = toAbsoluteUrl(path);
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${url}/#service`,
+    name,
+    description,
+    serviceType,
+    url,
+    provider: {
+      '@id': organizationId,
+    },
+    areaServed: {
+      '@type': 'Country',
+      name: 'Nederland',
+    },
+  };
+}
+
+export function getBreadcrumbListSchema(
+  items: BreadcrumbItem[] = [],
+  path?: string,
+) {
+  const listItems = items.length > 0 ? items : buildBreadcrumbItems(path ?? '/');
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: listItems.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: toAbsoluteUrl(item.path),
+    })),
   };
 }
 
@@ -68,7 +143,7 @@ export function getFaqPageSchema(faqs: FaqItem[]) {
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: faqs.map((faq) => ({
+    mainEntity: faqs.map(faq => ({
       '@type': 'Question',
       name: faq.question,
       acceptedAnswer: {
@@ -98,7 +173,7 @@ export const HOME_FAQS: FaqItem[] = [
   {
     question: 'Hoe werkt schadeafhandeling bij TIS?',
     answer:
-      'TIS biedt volledig digitale schadeafhandeling. Daardoor kunnen wij schades snel en vakkundig afwikkelen, van inbraak en stormschade tot bedrijfsschade.',
+      'TIS biedt volledig digitale schadeafhandeling. Zo wikkelen wij schades snel en vakkundig af, van inbraak en stormschade tot bedrijfsschade.',
   },
   {
     question: 'Adviseert TIS ook taxi- en personenvervoer?',
@@ -107,7 +182,14 @@ export const HOME_FAQS: FaqItem[] = [
   },
   {
     question: 'Waar is TIS Risk Managers gevestigd?',
-    answer:
-      'TIS Risk Managers is gevestigd aan de Muiderstraat 1, 1011 PZ Amsterdam. U bereikt ons via +31 20 636 8191 of info@tisrm.nl.',
+    answer: `TIS Risk Managers is gevestigd aan de ${CONTACT_INFO.address.street}, ${CONTACT_INFO.address.postalCode} ${CONTACT_INFO.address.city}. U bereikt ons via ${CONTACT_INFO.phone} of ${CONTACT_INFO.email}.`,
   },
 ];
+
+export const SERVICE_TYPES = {
+  insurance: 'Verzekeringsadvies',
+  insurancePersonal: 'Particuliere verzekeringen',
+  insuranceBusiness: 'Zakelijke verzekeringen',
+  taxi: 'Taxi- en personenvervoer verzekeringen',
+  riskManagement: 'Risk management',
+} as const;

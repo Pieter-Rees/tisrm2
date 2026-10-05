@@ -2,8 +2,12 @@ import Footer from '@/components/footer';
 import Header from '@/components/header';
 import { DevPerformanceMonitor } from '@/components/performance-monitor';
 import { JsonLd } from '@/components/seo/JsonLd';
-import { getOrganizationSchema } from '@/lib/seo/organizationSchema';
-import { GoogleTagManager } from '@next/third-parties/google';
+import { EXTERNAL_LINKS } from '@/constants/app';
+import {
+  getOrganizationSchema,
+  getWebSiteSchema,
+} from '@/lib/seo/organizationSchema';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
 import { Providers } from './providers';
@@ -23,8 +27,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="nl" suppressHydrationWarning className="light">
       <head>
-        <GoogleTagManager gtmId="G-3HPHN1BV1Q" />
         <JsonLd data={getOrganizationSchema()} />
+        <JsonLd data={getWebSiteSchema()} />
       </head>
       <body
         suppressHydrationWarning
@@ -44,6 +48,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           </main>
           <Footer />
         </Providers>
+        <GoogleAnalytics gaId={EXTERNAL_LINKS.gaId} />
       </body>
     </html>
   );

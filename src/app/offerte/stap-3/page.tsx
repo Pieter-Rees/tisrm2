@@ -22,6 +22,8 @@ import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useState, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { BsCheck2Circle, BsExclamationTriangle } from 'react-icons/bs';
+import { COMPONENT_SPACING, SPACING_SCALE } from '@/constants/layout';
+import { SECTION_SPACING } from '@/constants/typography';
 
 interface Step1Data {
   firstName: string;
@@ -179,7 +181,7 @@ export default function OfferteStep3() {
     return (
       <Container>
         <BaseLayout>
-          <VStack alignItems="flex-start" width="full" gap="8">
+          <VStack alignItems="flex-start" width="full" gap={SECTION_SPACING.small}>
             <OfferteStepNavigation
               currentStep={2}
               totalSteps={3}
@@ -189,7 +191,7 @@ export default function OfferteStep3() {
                 { title: 'Bevestiging', isCompleted: false },
               ]}
             />
-            <VStack gap="6" textAlign="center" py="12" width="full">
+            <VStack gap={COMPONENT_SPACING.form.group} textAlign="center" py={SECTION_SPACING.medium} width="full">
               <Box color="green.500" fontSize="4xl">
                 <BsCheck2Circle />
               </Box>
@@ -218,7 +220,7 @@ export default function OfferteStep3() {
   return (
     <Container>
       <BaseLayout title="Offerte aanvragen - Stap 3">
-        <VStack alignItems="flex-start" width="full" gap="8">
+        <VStack alignItems="flex-start" width="full" gap={SECTION_SPACING.small}>
           <OfferteStepNavigation
             currentStep={2}
             totalSteps={3}
@@ -230,9 +232,9 @@ export default function OfferteStep3() {
           />
 
           <Box width="full" maxW="xl" mx="auto">
-            <VStack gap="8" align="stretch">
+            <VStack gap={SECTION_SPACING.small} align="stretch">
               <Box textAlign="center">
-                <Heading as="h2" size="lg" mb="2">
+                <Heading as="h2" size="lg" mb={SPACING_SCALE.xs}>
                   Controleer uw gegevens
                 </Heading>
                 <Text color="gray.600">
@@ -243,13 +245,13 @@ export default function OfferteStep3() {
               {/* Error Alert */}
               {submissionState === 'error' && (
                 <Box
-                  p="4"
+                  p={COMPONENT_SPACING.card.md}
                   borderRadius="md"
                   bg="red.50"
                   borderLeft="4px solid"
                   borderColor="red.500"
                 >
-                  <Box display="flex" alignItems="center" gap="3">
+                  <Box display="flex" alignItems="center" gap={SPACING_SCALE.sm}>
                     <Box color="red.500">
                       <BsExclamationTriangle size="20" />
                     </Box>
@@ -266,13 +268,13 @@ export default function OfferteStep3() {
               )}
 
               {/* Review Data */}
-              <SimpleGrid columns={{ base: 1, md: 2 }} gap="6">
+              <SimpleGrid columns={{ base: 1, md: 2 }} gap={COMPONENT_SPACING.form.group}>
                 <Card.Root>
                   <Card.Header>
                     <Heading size="md">Contactgegevens</Heading>
                   </Card.Header>
                   <Card.Body>
-                    <VStack align="stretch" gap="3">
+                    <VStack align="stretch" gap={SPACING_SCALE.sm}>
                       <Box>
                         <Text fontSize="sm" color="gray.600">
                           Naam
@@ -298,7 +300,7 @@ export default function OfferteStep3() {
                     <Heading size="md">Bedrijfsgegevens</Heading>
                   </Card.Header>
                   <Card.Body>
-                    <VStack align="stretch" gap="3">
+                    <VStack align="stretch" gap={SPACING_SCALE.sm}>
                       <Box>
                         <Text fontSize="sm" color="gray.600">
                           E-mailadres
@@ -338,7 +340,7 @@ export default function OfferteStep3() {
 
               {/* Additional Message */}
               <Box as="form" onSubmit={handleSubmit(onSubmit)}>
-                <VStack gap="6" align="stretch">
+                <VStack gap={COMPONENT_SPACING.form.group} align="stretch">
                   <Field
                     label="Aanvullende informatie (optioneel)"
                     helperText="Vertel ons meer over uw specifieke verzekeringsbehoefte of stel eventuele vragen"
@@ -373,7 +375,7 @@ export default function OfferteStep3() {
                     </Text>
                   </label>
 
-                  <HStack gap="4">
+                  <HStack gap={SPACING_SCALE.md}>
                     <Button
                       onClick={goBack}
                       size="lg"

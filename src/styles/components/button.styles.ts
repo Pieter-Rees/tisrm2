@@ -1,4 +1,5 @@
 import type { SystemStyleObject } from '@chakra-ui/react';
+import { SPACING_SCALE } from '@/constants/layout';
 // import { UI_CONSTANTS } from '@/constants/app';
 
 export const buttonSizes = {
@@ -289,7 +290,7 @@ export const buttonBaseStyles: SystemStyleObject = {
   display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center',
-  gap: '2',
+  gap: SPACING_SCALE.xs,
   borderRadius: 'md',
   fontWeight: 'medium',
   transition: 'all 0.2s ease-in-out',

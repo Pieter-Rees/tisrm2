@@ -41,6 +41,9 @@ const nextConfig = {
   },
   typedRoutes: true,
   experimental: {
+    // typescript is aliased to @typescript/typescript6 for the compiler API;
+    // @typescript/native provides tsc 7. Disable CLI mode so Next uses the API.
+    useTypeScriptCli: false,
     ...(process.env.TURBOPACK !== '1' && {
       optimizePackageImports: [
         'framer-motion',
@@ -52,7 +55,7 @@ const nextConfig = {
       optimizeCss: true,
       scrollRestoration: true,
       optimizeServerReact: true,
-      webVitalsAttribution: ['CLS', 'LCP', 'FCP', 'FID', 'TTFB'],
+      webVitalsAttribution: ['CLS', 'LCP', 'FCP', 'INP', 'TTFB'],
     }),
   },
   serverExternalPackages: ['@next/bundle-analyzer'],
@@ -76,19 +79,9 @@ const nextConfig = {
   compress: true,
   reactStrictMode: true,
   ...(process.env.TURBOPACK !== '1' && {
-    // Chakra v3 has no `@chakra-ui/react/{{member}}` entrypoints — that
-    // transform breaks Turbopack/webpack with "Can't resolve .../Box".
-    modularizeImports: {
-      'react-icons': {
-        transform: 'react-icons/{{member}}',
-      },
-      'react-icons/bs': {
-        transform: 'react-icons/bs/{{member}}',
-      },
-      'react-icons/hi': {
-        transform: 'react-icons/hi/{{member}}',
-      },
-    },
+    // Prefer optimizePackageImports over modularizeImports for react-icons —
+    // per-icon file transforms break on react-icons >=5.7 packaging.
+    modularizeImports: {},
   }),
   bundlePagesRouterDependencies: true,
   webpack: (config, { isServer, dev, webpack }) => {

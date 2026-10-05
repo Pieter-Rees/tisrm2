@@ -10,6 +10,8 @@ import {
     Flex
 } from '@chakra-ui/react';
 import { FaCheck } from 'react-icons/fa';
+import { SPACING_SCALE } from '@/constants/layout';
+import { SECTION_SPACING } from '@/constants/typography';
 
 interface OfferteStepNavigationProps {
     currentStep: number;
@@ -27,7 +29,7 @@ export default function OfferteStepNavigation({
     steps
 }: OfferteStepNavigationProps) {
     return (
-        <Box my={8} width="full">
+        <Box my={SECTION_SPACING.small} width="full">
             <HStack gap={0} width="full" justify="space-between">
                 {steps.map((step, index) => {
                     const isActive = index === currentStep;
@@ -41,7 +43,7 @@ export default function OfferteStepNavigation({
                                 size="48px"
                                 bg={isCompleted ? "green.500" : isActive ? "blue.500" : "gray.200"}
                                 color={isCompleted || isActive ? "white" : "gray.500"}
-                                mb={3}
+                                mb={SPACING_SCALE.sm}
                                 position="relative"
                                 zIndex={2}
                             >

@@ -5,6 +5,8 @@ export const APP_CONFIG = {
   version: '2.0.0',
   author: 'TIS Risk Managers',
   url: 'https://tisrm.nl',
+  /** Bump when marketing content meaningfully changes (sitemap lastmod). */
+  contentUpdatedAt: '2026-10-05',
 } as const;
 
 export const CONTACT_INFO = {
@@ -44,7 +46,7 @@ export const NAVIGATION_ROUTES = {
 export const EXTERNAL_LINKS = {
   damageReport:
     'https://schade.emsclaimsengine.com/index.php?template=tis&view=consument.login#identificatie_vragen',
-  gtmId: 'G-3HPHN1BV1Q',
+  gaId: 'G-3HPHN1BV1Q',
 } as const;
 
 export const UI_CONSTANTS = {

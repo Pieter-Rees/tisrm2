@@ -35,7 +35,7 @@ const SimpleUnifiedLayout = ({ children, variant = 'page', title, breadcrumb, sh
                         </h1>
                     </header>
                 )}
-                <main>{children}</main>
+                <div>{children}</div>
             </section>
         );
     }
@@ -56,9 +56,9 @@ const SimpleUnifiedLayout = ({ children, variant = 'page', title, breadcrumb, sh
                                 )}
                             </header>
                         )}
-                        <main role="main" aria-label="Main content" style={{ minHeight: '200px' }}>
+                        <div style={{ minHeight: '200px' }}>
                             {children}
-                        </main>
+                        </div>
                     </div>
                 </div>
                 {showSidebar && (

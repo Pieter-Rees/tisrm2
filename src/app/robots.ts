@@ -34,6 +34,14 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
       },
       {
+        userAgent: 'Claude-SearchBot',
+        allow: '/',
+      },
+      {
+        userAgent: 'Claude-User',
+        allow: '/',
+      },
+      {
         userAgent: 'anthropic-ai',
         allow: '/',
       },

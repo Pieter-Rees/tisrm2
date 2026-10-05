@@ -3,13 +3,14 @@
  */
 
 import type { SystemStyleObject } from '@chakra-ui/react';
-import { SPACING_PATTERNS } from '@/constants/layout';
+import { COMPONENT_SPACING, SPACING_SCALE } from '@/constants/layout';
+import { SECTION_SPACING } from '@/constants/typography';
 
 // Style extractors removed due to TypeScript type conflicts
 
 // Breadcrumb styles
 export const breadcrumbContainerStyles: SystemStyleObject = {
-  gap: SPACING_PATTERNS.page.section,
+  gap: SPACING_SCALE.sm,
   fontSize: { base: 'md', xl: 'lg' },
   color: 'gray.700',
 };
@@ -26,7 +27,7 @@ export const breadcrumbSeparatorStyles: SystemStyleObject = {
 
 // Loading component styles
 export const loadingContentStyles: SystemStyleObject = {
-  gap: '4',
+  gap: SPACING_SCALE.md,
 };
 
 export const loadingSpinnerStyles: SystemStyleObject = {
@@ -56,17 +57,17 @@ export const loadingInlineStyles: SystemStyleObject = {
   alignItems: 'center',
   justifyContent: 'center',
   minH: '200px',
-  p: '8',
+  p: COMPONENT_SPACING.card.xl,
 };
 
 // Contact info styles
 export const contactInfoGridStyles: SystemStyleObject = {
-  gap: '10',
+  gap: COMPONENT_SPACING.grid.lg,
 };
 
 export const contactInfoColumnStyles: SystemStyleObject = {
   alignItems: 'start',
-  gap: '2',
+  gap: SPACING_SCALE.xs,
 };
 
 export const contactInfoTextStyles: SystemStyleObject = {
@@ -75,24 +76,24 @@ export const contactInfoTextStyles: SystemStyleObject = {
 
 export const contactInfoButtonsContainerStyles: SystemStyleObject = {
   justifyContent: 'start',
-  mt: '8',
+  mt: SECTION_SPACING.small,
 };
 
 export const contactInfoButtonsListStyles: SystemStyleObject = {
   alignItems: 'start',
-  gap: '2',
+  gap: SPACING_SCALE.xs,
 };
 
 // Footer logos styles
 export const footerLogosContainerStyles: SystemStyleObject = {
   backgroundColor: 'gray.100',
   flexDirection: { base: 'column', md: 'row' } as const,
-  py: '8',
-  gap: '8',
+  py: SECTION_SPACING.small,
+  gap: SECTION_SPACING.small,
   width: 'full',
   justifyContent: 'center',
   alignItems: 'center',
-  mt: '16',
+  mt: SECTION_SPACING.medium,
 };
 
 export const footerLogoItemStyles: SystemStyleObject = {
@@ -105,11 +106,11 @@ export const errorBoundaryContainerStyles: SystemStyleObject = {
   alignItems: 'center',
   justifyContent: 'center',
   minH: '200px',
-  p: '8',
+  p: COMPONENT_SPACING.card.xl,
 };
 
 export const errorBoundaryContentStyles: SystemStyleObject = {
-  gap: '4',
+  gap: SPACING_SCALE.md,
   textAlign: 'center',
 };
 

@@ -4,6 +4,7 @@
 
 import type { SystemStyleObject } from '@chakra-ui/react';
 import { SECTION_SPACING } from '@/constants/typography';
+import { COMPONENT_SPACING } from '@/constants/layout';
 
 // Feature section container styles
 export const featureSectionContainerStyles: SystemStyleObject = {
@@ -27,7 +28,7 @@ export const featureDescriptionStyles: SystemStyleObject = {
 // Feature grid styles
 export const featureGridStyles: SystemStyleObject = {
   gridTemplateColumns: { base: '1fr', md: 'repeat(3, 1fr)' },
-  gap: { base: '3', sm: '4', md: '6', lg: '8' },
+  gap: COMPONENT_SPACING.grid.md,
   alignItems: 'stretch',
   width: '100%',
   // Ensure cards don't get too cramped on small screens
@@ -41,11 +42,10 @@ export const featureGridItemStyles: SystemStyleObject = {
   minW: '0',
 };
 
-// Feature call-to-action section styles
+// Feature call-to-action section styles (parent section gap owns vertical rhythm)
 export const featureCtaStyles: SystemStyleObject = {
-  mt: { base: '12', lg: '16' },
   textAlign: 'center',
-  p: { base: '6', lg: '8' },
+  p: COMPONENT_SPACING.card.lg,
   bg: 'blue.50',
   borderRadius: 'lg',
   border: '1px solid',
@@ -57,18 +57,18 @@ export const featureCtaHeadingStyles: SystemStyleObject = {
   fontSize: { base: 'xl', lg: '2xl' },
   fontWeight: 'bold',
   color: 'blue.700',
-  mb: '4',
+  mb: COMPONENT_SPACING.card.sm,
 };
 
 // Feature CTA text styles
 export const featureCtaTextStyles: SystemStyleObject = {
   color: 'blue.600',
-  mb: '6',
+  mb: COMPONENT_SPACING.form.group,
   maxW: '2xl',
   mx: 'auto',
 };
 
 // Feature CTA button styles
 export const featureCtaButtonStyles: SystemStyleObject = {
-  gap: '2',
+  gap: COMPONENT_SPACING.nav.item,
 };

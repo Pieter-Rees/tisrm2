@@ -4,6 +4,8 @@
 
 import type { SystemStyleObject } from '@chakra-ui/react';
 import { UI_CONSTANTS } from '@/constants/app';
+import { COMPONENT_SPACING } from '@/constants/layout';
+import { SECTION_SPACING } from '@/constants/typography';
 
 // Contact page styles
 export const contactGridStyles: SystemStyleObject = {
@@ -11,7 +13,7 @@ export const contactGridStyles: SystemStyleObject = {
     base: 'repeat(1, 1fr)',
     md: 'repeat(2, 1fr)',
   },
-  gap: '6',
+  gap: COMPONENT_SPACING.form.group,
   alignItems: 'stretch',
   width: '100%',
 };
@@ -24,7 +26,7 @@ export const contactGridItemStyles: SystemStyleObject = {
 
 export const contactLogoContainerStyles: SystemStyleObject = {
   width: '100%',
-  py: '8',
+  py: SECTION_SPACING.small,
   justifyContent: 'center',
 };
 
@@ -67,7 +69,7 @@ export const contactCtaButtonStyles: SystemStyleObject = {
 // Risk management page styles
 export const riskHighlightBoxStyles: SystemStyleObject = {
   bg: 'blue.50',
-  p: '6',
+  p: COMPONENT_SPACING.card.lg,
   borderRadius: 'lg',
   borderLeft: '4px solid',
   borderColor: 'blue.500',
@@ -75,12 +77,11 @@ export const riskHighlightBoxStyles: SystemStyleObject = {
 
 export const riskSummaryBoxStyles: SystemStyleObject = {
   bg: 'gray.50',
-  p: '6',
+  p: COMPONENT_SPACING.card.lg,
   borderRadius: 'lg',
   boxShadow: 'sm',
 };
 
 export const riskItalicTextStyles: SystemStyleObject = {
   fontStyle: 'italic',
-  mt: '3',
 };

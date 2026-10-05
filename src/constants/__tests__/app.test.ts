@@ -17,6 +17,7 @@ describe('App Constants', () => {
       expect(APP_CONFIG.version).toBe('2.0.0');
       expect(APP_CONFIG.author).toBe('TIS Risk Managers');
       expect(APP_CONFIG.url).toBe('https://tisrm.nl');
+      expect(APP_CONFIG.contentUpdatedAt).toMatch(/^\d{4}-\d{2}-\d{2}$/);
     });
 
     it('should have correct structure', () => {
@@ -81,7 +82,7 @@ describe('App Constants', () => {
       expect(EXTERNAL_LINKS.damageReport).toBe(
         'https://schade.emsclaimsengine.com/index.php?template=tis&view=consument.login#identificatie_vragen'
       );
-      expect(EXTERNAL_LINKS.gtmId).toBe('G-3HPHN1BV1Q');
+      expect(EXTERNAL_LINKS.gaId).toBe('G-3HPHN1BV1Q');
     });
 
     it('should have valid URLs', () => {

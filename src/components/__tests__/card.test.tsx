@@ -108,8 +108,10 @@ const SimpleCard = React.memo(
           {hasAction && (
             <div style={{ marginTop: 'auto' }}>
               {phone && (
-                <button
+                <a
+                  href={phone}
                   style={{
+                    display: 'block',
                     width: '100%',
                     padding: '0.5rem 1rem',
                     border: '1px solid #10b981',
@@ -117,18 +119,19 @@ const SimpleCard = React.memo(
                     backgroundColor: 'transparent',
                     color: '#10b981',
                     cursor: 'pointer',
-                  }}
-                  onClick={() => {
-                    window.location.href = phone;
+                    textAlign: 'center',
                   }}
                 >
                   📞 Bel nu
-                </button>
+                </a>
               )}
 
               {downloadLink && (
-                <button
+                <a
+                  href={downloadLink}
+                  download
                   style={{
+                    display: 'block',
                     width: '100%',
                     padding: '0.5rem 1rem',
                     backgroundColor: '#3b82f6',
@@ -137,23 +140,18 @@ const SimpleCard = React.memo(
                     borderRadius: '0.375rem',
                     cursor: 'pointer',
                     fontWeight: '500',
-                  }}
-                  onClick={() => {
-                    const link = document.createElement('a');
-                    link.href = downloadLink;
-                    link.download = '';
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
+                    textAlign: 'center',
                   }}
                 >
                   📥 Download
-                </button>
+                </a>
               )}
 
               {cta && ctaLink && (
-                <button
+                <a
+                  href={ctaLink}
                   style={{
+                    display: 'block',
                     width: '100%',
                     padding: '0.5rem 1rem',
                     backgroundColor: '#3b82f6',
@@ -161,13 +159,11 @@ const SimpleCard = React.memo(
                     border: 'none',
                     borderRadius: '0.375rem',
                     cursor: 'pointer',
-                  }}
-                  onClick={() => {
-                    window.location.href = ctaLink;
+                    textAlign: 'center',
                   }}
                 >
                   {cta} →
-                </button>
+                </a>
               )}
             </div>
           )}
@@ -234,21 +230,29 @@ describe('Card Component', () => {
     expect(image).toBeInTheDocument();
   });
 
-  it('renders phone button when phone prop is provided', () => {
+  it('renders crawlable phone link when phone prop is provided', () => {
     render(<SimpleCard title="Test Card" phone="tel:+1234567890" />);
-    expect(screen.getByText('📞 Bel nu')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: '📞 Bel nu' })).toHaveAttribute(
+      'href',
+      'tel:+1234567890',
+    );
   });
 
-  it('renders download button when downloadLink prop is provided', () => {
+  it('renders crawlable download link when downloadLink prop is provided', () => {
     render(<SimpleCard title="Test Card" downloadLink="/test-file.pdf" />);
-    expect(screen.getByText('📥 Download')).toBeInTheDocument();
+    const link = screen.getByRole('link', { name: '📥 Download' });
+    expect(link).toHaveAttribute('href', '/test-file.pdf');
+    expect(link).toHaveAttribute('download');
   });
 
-  it('renders CTA button when cta and ctaLink props are provided', () => {
+  it('renders crawlable CTA link when cta and ctaLink props are provided', () => {
     render(
       <SimpleCard title="Test Card" cta="Learn More" ctaLink="/learn-more" />,
     );
-    expect(screen.getByText('Learn More →')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Learn More →' })).toHaveAttribute(
+      'href',
+      '/learn-more',
+    );
   });
 
   it('applies custom className', () => {

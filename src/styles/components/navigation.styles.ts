@@ -4,11 +4,13 @@
 
 import type { SystemStyleObject } from '@chakra-ui/react';
 import { UI_CONSTANTS } from '@/constants/app';
+import { COMPONENT_SPACING, SPACING_SCALE } from '@/constants/layout';
+import { SECTION_SPACING } from '@/constants/typography';
 
 // Navbar styles
 export const navbarContainerStyles: SystemStyleObject = {
   alignItems: 'center',
-  gap: '8',
+  gap: SECTION_SPACING.small,
   width: 'full',
   justifyContent: 'space-between',
 };
@@ -18,7 +20,7 @@ export const navbarLinksContainerStyles: SystemStyleObject = {
 };
 
 export const navbarLinksListStyles: SystemStyleObject = {
-  gap: '6',
+  gap: COMPONENT_SPACING.form.group,
   fontSize: { base: 'sm', '2xl': 'md' },
   fontWeight: 'medium',
   listStyleType: 'none',
@@ -69,7 +71,7 @@ export const navbarActionsButtonStyles: SystemStyleObject = {
     transform: 'translateY(0)',
   },
   fontWeight: 'medium',
-  gap: '2',
+  gap: SPACING_SCALE.xs,
 };
 
 export const navbarMenuContentStyles: SystemStyleObject = {
@@ -87,7 +89,7 @@ export const navbarMenuContentStyles: SystemStyleObject = {
 };
 
 export const navbarMenuItemStyles: SystemStyleObject = {
-  gap: '2',
+  gap: SPACING_SCALE.xs,
   _hover: { bg: 'blue.50' },
 };
 
@@ -114,7 +116,7 @@ export const getSidenavPositionStyles = (showSideNav: boolean): SystemStyleObjec
 
 export const sidenavCloseButtonContainerStyles: SystemStyleObject = {
   position: 'absolute',
-  top: '4',
+  top: COMPONENT_SPACING.card.md,
   right: '4',
   zIndex: '1',
 };
@@ -129,17 +131,17 @@ export const sidenavContentContainerStyles: SystemStyleObject = {
   height: 'full',
   justifyContent: 'center',
   alignItems: 'center',
-  p: '8',
+  p: COMPONENT_SPACING.card.xl,
   pt: '16',
-  gap: '8',
+  gap: SECTION_SPACING.small,
 };
 
 export const sidenavLogoContainerStyles: SystemStyleObject = {
-  mb: '4',
+  mb: SPACING_SCALE.md,
 };
 
 export const sidenavLinksContainerStyles: SystemStyleObject = {
-  gap: '3',
+  gap: SPACING_SCALE.sm,
   alignItems: 'center',
   width: 'full',
   listStyleType: 'none',
@@ -163,7 +165,7 @@ export const getSidenavLinkButtonStyles = (isActive: boolean): SystemStyleObject
   },
   _active: { bg: 'gray.100' },
   justifyContent: 'center',
-  py: '3',
+  py: SPACING_SCALE.sm,
 });
 
 export const sidenavSeparatorStyles: SystemStyleObject = {
@@ -174,7 +176,7 @@ export const sidenavSeparatorStyles: SystemStyleObject = {
 export const sidenavActionsContainerStyles: SystemStyleObject = {
   width: 'full',
   px: '4',
-  mt: '4',
+  mt: SPACING_SCALE.md,
 };
 
 export const sidenavActionsButtonStyles: SystemStyleObject = {
@@ -188,5 +190,5 @@ export const sidenavActionsButtonStyles: SystemStyleObject = {
   },
   _active: { bg: 'blue.700' },
   fontWeight: 'medium',
-  gap: '2',
+  gap: SPACING_SCALE.xs,
 };

@@ -5,6 +5,8 @@ import { memo } from 'react';
 
 import Card from '@/components/card';
 import { NAVIGATION_ROUTES } from '@/constants/app';
+import { COMPONENT_SPACING, SPACING_SCALE } from '@/constants/layout';
+import { SECTION_SPACING } from '@/constants/typography';
 
 interface CallToActionProps {
   className?: string;
@@ -17,8 +19,7 @@ const CallToAction = memo<CallToActionProps>(
       <Box
         className={className}
         data-testid={testId}
-        mt={{ base: '12', lg: '16' }}
-        p={{ base: '6', lg: '8' }}
+        p={COMPONENT_SPACING.card.lg}
         bg="blue.50"
         borderRadius="xl"
         border="1px solid"
@@ -26,22 +27,22 @@ const CallToAction = memo<CallToActionProps>(
         textAlign="center"
       >
         <Heading
-          as="h3"
+          as="h2"
           size="md"
           color="blue.900"
-          mb="3"
+          mb={SPACING_SCALE.sm}
           fontWeight="semibold"
         >
           Klaar voor persoonlijk advies?
         </Heading>
-        <Box fontSize="sm" color="blue.700" mb="8" maxW="lg" mx="auto">
+        <Box fontSize="sm" color="blue.700" mb={SECTION_SPACING.small} maxW="lg" mx="auto">
           Neem contact op voor een vrijblijvend gesprek over uw
           verzekeringsbehoefte
         </Box>
 
         <Grid
           templateColumns={{ base: '1fr', md: 'repeat(3, 1fr)' }}
-          gap="8"
+          gap={SECTION_SPACING.small}
           mx="auto"
         >
           <Card

@@ -44,9 +44,7 @@ const BaseLayout: FC<BaseLayoutProps> = memo(
         </Box>
       )}
       <ErrorBoundary>
-        <Box as="main" minH="200px">
-          {children}
-        </Box>
+        <Box minH="200px">{children}</Box>
       </ErrorBoundary>
     </Box>
   ),

@@ -50,9 +50,8 @@ const FEATURE_CARDS = [
     description:
       'TIS biedt u een volledig digitale schadeafhandeling. Door deze specialisatie staan wij bekend om het snel en vakkundig afwikkelen van uw schade, van een inbraak, stormschade of het verhalen van uw bedrijfsschade.',
     cta: 'Lees meer',
-    ctaLink: '#',
+    ctaLink: NAVIGATION_ROUTES.damageReport,
     variant: 'elevated' as const,
-    external: true,
   },
 ] as const;
 const ThreeElements = memo<ThreeElementsProps>(

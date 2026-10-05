@@ -1,22 +1,26 @@
 'use client';
 
+import Breadcrumb from '@/components/breadcrumb';
 import { FadeInUp, StaggerContainer } from '@/components/page-animation';
 import { UnifiedLayout } from '@/components/layout';
+import { FaqSection } from '@/components/seo/FaqSection';
 import {
   HEADING_STYLES,
   PARAGRAPH_STYLES,
+  PROSE_STACK_GAP,
   SECTION_SPACING,
 } from '@/constants/typography';
-import { Box, Flex, Heading, Text } from '@chakra-ui/react';
+import { PAGE_FAQS } from '@/lib/seo/pageFaqs';
+import { Flex, Heading, Text } from '@chakra-ui/react';
 
 export default function Taxi() {
   return (
-    <UnifiedLayout title="Personenvervoer">
+    <UnifiedLayout title="Personenvervoer" breadcrumb={<Breadcrumb />}>
       <StaggerContainer>
         <Flex direction="column" gap={SECTION_SPACING.medium}>
           <FadeInUp>
-            <Box>
-              <Heading as="h2" {...HEADING_STYLES.h2}>
+            <Flex as="section" direction="column" gap={PROSE_STACK_GAP}>
+              <Heading as="h2" {...HEADING_STYLES.h2} mb="0">
                 Taxiverzekering
               </Heading>
               <Text {...PARAGRAPH_STYLES.body}>
@@ -27,23 +31,12 @@ export default function Taxi() {
                 bijvoorbeeld aan de aansprakelijkheid voor bedrijven en de
                 ongevallen inzittendenverzekering.
               </Text>
-            </Box>
+            </Flex>
           </FadeInUp>
 
           <FadeInUp delay={0.1}>
-            <Text {...PARAGRAPH_STYLES.body}>
-              TIS Risk Managers biedt ook voor wagenparken oplossingen. Buiten
-              het bieden van een scherpe offerte, kunnen wij een risico analyse
-              van uw bedrijf maken. Waar zitten de risico&apos;s, wordt er
-              misschien risico&apos;s over het hoofd gezien en hoe voorkomen e/o
-              dekken wij dit af? Samen met de klant komen wij dan tot mooie
-              resultaten en een langdurige samenwerking.
-            </Text>
-          </FadeInUp>
-
-          <FadeInUp delay={0.2}>
-            <Box>
-              <Heading as="h2" {...HEADING_STYLES.h2}>
+            <Flex as="section" direction="column" gap={PROSE_STACK_GAP}>
+              <Heading as="h2" {...HEADING_STYLES.h2} mb="0">
                 Wagenpark
               </Heading>
               <Text {...PARAGRAPH_STYLES.body}>
@@ -58,12 +51,12 @@ export default function Taxi() {
                 Bent u geïnteresseerd? Neem gerust contact met ons op, zodat wij
                 een ontmoetingsgesprek kunnen inplannen!
               </Text>
-            </Box>
+            </Flex>
           </FadeInUp>
 
-          <FadeInUp delay={0.3}>
-            <Box>
-              <Heading as="h2" {...HEADING_STYLES.h2}>
+          <FadeInUp delay={0.2}>
+            <Flex as="section" direction="column" gap={PROSE_STACK_GAP}>
+              <Heading as="h2" {...HEADING_STYLES.h2} mb="0">
                 Schadeafhandeling
               </Heading>
               <Text {...PARAGRAPH_STYLES.body}>
@@ -76,7 +69,11 @@ export default function Taxi() {
                 het schadeformulier, direct aan het schadedossier toevoegen.
                 Mede hierdoor wordt veel tijd gewonnen.
               </Text>
-            </Box>
+            </Flex>
+          </FadeInUp>
+
+          <FadeInUp delay={0.3}>
+            <FaqSection faqs={PAGE_FAQS.taxi} />
           </FadeInUp>
         </Flex>
       </StaggerContainer>

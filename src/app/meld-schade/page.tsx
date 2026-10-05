@@ -24,6 +24,8 @@ import { BsCheck2Circle, BsExclamationTriangle } from 'react-icons/bs';
 
 import { BaseLayout } from '@/components/layout';
 import { Field } from '@/components/ui/field';
+import { COMPONENT_SPACING, SPACING_SCALE } from '@/constants/layout';
+import { SECTION_SPACING } from '@/constants/typography';
 import {
   getSchadeApiUrl,
   isValidDutchLicensePlate,
@@ -261,7 +263,7 @@ export default function MeldSchadePage() {
     <Container>
       <BaseLayout title="Schade melden">
         <Box width="full" maxW="xl" mx="auto">
-          <VStack gap="8" align="stretch">
+          <VStack gap={SECTION_SPACING.small} align="stretch">
             <Box textAlign="center">
               <Text color="gray.600">
                 Vul uw gegevens in en voeg documenten en foto&apos;s van de schade
@@ -270,7 +272,7 @@ export default function MeldSchadePage() {
             </Box>
 
             {submissionState === 'success' && (
-              <VStack gap="6" textAlign="center" py="6">
+              <VStack gap={COMPONENT_SPACING.form.group} textAlign="center" py={COMPONENT_SPACING.form.group}>
                 <Box color="green.500" fontSize="4xl">
                   <BsCheck2Circle />
                 </Box>
@@ -293,13 +295,13 @@ export default function MeldSchadePage() {
 
             {submissionState === 'error' && (
               <Box
-                p="4"
+                p={COMPONENT_SPACING.card.md}
                 borderRadius="md"
                 bg="red.50"
                 borderLeft="4px solid"
                 borderColor="red.500"
               >
-                <Box display="flex" alignItems="center" gap="3">
+                <Box display="flex" alignItems="center" gap={SPACING_SCALE.sm}>
                   <Box color="red.500">
                     <BsExclamationTriangle size="20" />
                   </Box>
@@ -318,7 +320,7 @@ export default function MeldSchadePage() {
             {submissionState !== 'success' && (
               <Box>
                 <form noValidate onSubmit={handleSubmit(onSubmit)}>
-                  <VStack align="stretch" gap="6">
+                  <VStack align="stretch" gap={COMPONENT_SPACING.form.group}>
                     <Field
                       label="Naam"
                       required
@@ -425,7 +427,7 @@ export default function MeldSchadePage() {
                       invalid={!!uploadError}
                       errorText={uploadError}
                     >
-                      <VStack align="stretch" gap="3" width="full">
+                      <VStack align="stretch" gap={SPACING_SCALE.sm} width="full">
                         <Box
                           width="full"
                           borderRadius="lg"
@@ -433,9 +435,9 @@ export default function MeldSchadePage() {
                           borderColor={uploadError ? 'red.300' : 'gray.200'}
                           bg={uploadError ? 'red.50' : 'gray.50'}
                           px="4"
-                          py="3"
+                          py={SPACING_SCALE.sm}
                         >
-                          <VStack align="stretch" gap="3" width="full">
+                          <VStack align="stretch" gap={SPACING_SCALE.sm} width="full">
                             <input
                               id="damage-upload"
                               type="file"
@@ -481,7 +483,7 @@ export default function MeldSchadePage() {
                           Documenten
                         </Text>
                         {selectedDocuments.length > 0 && (
-                          <VStack align="stretch" gap="2">
+                          <VStack align="stretch" gap={SPACING_SCALE.xs}>
                             {selectedDocuments.map(file => {
                               const identity = getFileIdentity(file);
 
@@ -494,7 +496,7 @@ export default function MeldSchadePage() {
                                   borderColor="gray.200"
                                   borderRadius="md"
                                   px="3"
-                                  py="2"
+                                  py={SPACING_SCALE.xs}
                                   bg="white"
                                 >
                                   <Box>
@@ -530,7 +532,7 @@ export default function MeldSchadePage() {
                             borderRadius="md"
                             bg="gray.50"
                             px="3"
-                            py="2"
+                            py={SPACING_SCALE.xs}
                           >
                             <Text fontSize="sm" color="gray.500">
                               Nog geen documenten gekozen
@@ -538,18 +540,18 @@ export default function MeldSchadePage() {
                           </Box>
                         )}
 
-                        <Text fontSize="sm" color="gray.600" fontWeight="medium" pt="2">
+                        <Text fontSize="sm" color="gray.600" fontWeight="medium" pt={SPACING_SCALE.xs}>
                           Foto&apos;s
                         </Text>
                         {selectedPhotos.length > 0 && (
-                          <HStack align="stretch" wrap="wrap" gap="3">
+                          <HStack align="stretch" wrap="wrap" gap={SPACING_SCALE.sm}>
                             {photoPreviews.map(({ file, identity, previewUrl }) => (
                               <Box
                                 key={identity}
                                 border="1px solid"
                                 borderColor="gray.200"
                                 borderRadius="md"
-                                p="2"
+                                p={SPACING_SCALE.xs}
                                 bg="white"
                                 width="140px"
                               >
@@ -560,7 +562,7 @@ export default function MeldSchadePage() {
                                   objectFit="cover"
                                   width="100%"
                                   height="90px"
-                                  mb="2"
+                                  mb={SPACING_SCALE.xs}
                                 />
                                 <Text
                                   fontSize="xs"
@@ -594,7 +596,7 @@ export default function MeldSchadePage() {
                             borderRadius="md"
                             bg="gray.50"
                             px="3"
-                            py="2"
+                            py={SPACING_SCALE.xs}
                           >
                             <Text fontSize="sm" color="gray.500">
                               Nog geen foto&apos;s gekozen

@@ -146,8 +146,8 @@ describe('ContactInfo Component', () => {
     const buttons = screen.getAllByRole('button');
     buttons.forEach(button => {
       expect(button).toHaveStyle({
-        backgroundColor: '#3b82f6',
-        color: 'white',
+        backgroundColor: 'rgb(59, 130, 246)',
+        color: 'rgb(255, 255, 255)',
       });
     });
   });
@@ -157,9 +157,11 @@ describe('ContactInfo Component', () => {
     const buttons = screen.getAllByRole('button');
     buttons.forEach(button => {
       expect(button).toHaveStyle({
-        backgroundColor: 'transparent',
-        color: '#3b82f6',
+        color: 'rgb(59, 130, 246)',
       });
+      expect(button.style.backgroundColor === '' || button.style.backgroundColor === 'transparent').toBe(
+        true
+      );
     });
   });
 

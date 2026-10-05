@@ -20,7 +20,9 @@ export const ButtonLink = forwardRef<HTMLButtonElement, ButtonLinkProps>(
       href.startsWith('mailto:') ||
       href.startsWith('tel:');
 
-    if (isExternal) {
+    // Prefer a real <a> for downloads and non-app URLs so crawlers and
+    // browsers get a crawlable, downloadable href.
+    if (isExternal || download) {
       return (
         <Button asChild ref={ref} {...props}>
           <a
@@ -31,7 +33,7 @@ export const ButtonLink = forwardRef<HTMLButtonElement, ButtonLinkProps>(
                 'noopener noreferrer'
               : undefined
             }
-            {...(download && { download })}
+            {...(download && { download: true })}
           >
             {children}
           </a>

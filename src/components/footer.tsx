@@ -3,6 +3,7 @@
 import FooterLogos from '@/components/footer-logos';
 import Logo from '@/components/logo';
 import { CURRENT_YEAR } from '@/constants/app';
+import { SPACING_SCALE } from '@/constants/layout';
 import { contactInfo } from '@/data/general';
 import {
   footerContainerStyles,
@@ -10,7 +11,6 @@ import {
 } from '@/styles/components/footer.styles';
 import {
   Box,
-  Button,
   Container,
   Flex,
   Grid,
@@ -33,7 +33,22 @@ const navigationLinks = [
   { href: '/risk-management', label: 'Risk Management' },
   { href: '/over-ons', label: 'Over ons' },
   { href: '/contact', label: 'Contact' },
+  { href: '/downloads', label: 'Downloads' },
+  { href: '/meld-schade', label: 'Schade melden' },
+  { href: '/documents/privacyverklaring.pdf', label: 'Privacy' },
 ] as const;
+
+const footerLinkStyles = {
+  color: 'white',
+  fontSize: 'sm',
+  lineHeight: 'short',
+  textDecoration: 'none',
+  transition: 'color 0.2s ease, transform 0.2s ease',
+  _hover: {
+    color: 'blue.200',
+    transform: 'translateX(4px)',
+  },
+} as const;
 
 export default function Footer() {
   return (
@@ -43,24 +58,16 @@ export default function Footer() {
         <Container>
           <Grid {...footerGridStyles}>
             <GridItem>
-              <VStack alignItems="start" gap="4">
-                <Heading fontSize="md" color="white">
+              <VStack alignItems="start" gap={SPACING_SCALE.sm}>
+                <Heading fontSize="md" color="white" mb="0">
                   Contact
                 </Heading>
-                <VStack alignItems="start" gap="2">
+                <VStack alignItems="start" gap="1">
                   {contactLinks.map(({ href, label, external }) => (
-                    <Button
+                    <Box
                       key={href}
                       asChild
-                      color="white"
-                      fontSize="sm"
-                      p="0"
-                      justifyContent="flex-start"
-                      variant="plain"
-                      _hover={{
-                        color: 'blue.200',
-                        transform: 'translateX(4px)',
-                      }}
+                      {...footerLinkStyles}
                     >
                       <Link
                         href={href as any}
@@ -71,47 +78,35 @@ export default function Footer() {
                       >
                         {label}
                       </Link>
-                    </Button>
+                    </Box>
                   ))}
                 </VStack>
               </VStack>
             </GridItem>
 
             <GridItem>
-              <VStack alignItems="start" gap="4">
-                <Heading fontSize="md" color="white">
+              <VStack alignItems="start" gap={SPACING_SCALE.sm}>
+                <Heading fontSize="md" color="white" mb="0">
                   Links
                 </Heading>
-                <VStack alignItems="start" gap="2">
+                <VStack alignItems="start" gap="1">
                   {navigationLinks.map(({ href, label }) => (
-                    <Button
-                      key={href}
-                      asChild
-                      color="white"
-                      fontSize="sm"
-                      p="0"
-                      justifyContent="flex-start"
-                      variant="plain"
-                      _hover={{
-                        color: 'blue.200',
-                        transform: 'translateX(4px)',
-                      }}
-                    >
+                    <Box key={href} asChild {...footerLinkStyles}>
                       <Link href={href}>{label}</Link>
-                    </Button>
+                    </Box>
                   ))}
                 </VStack>
               </VStack>
             </GridItem>
             <GridItem>
-              <VStack alignItems="start" gap="4">
+              <VStack alignItems="start" gap={SPACING_SCALE.sm}>
                 <Flex justifyContent="center" alignItems="center" w="100%">
                   <Link href="/">
                     <Logo width="200px" />
                   </Link>
                 </Flex>
                 <Flex textAlign="center">
-                  <Text color="white" fontSize="sm">
+                  <Text color="white" fontSize="sm" m="0">
                     © {CURRENT_YEAR} {contactInfo.name}. Alle rechten
                     voorbehouden.
                   </Text>

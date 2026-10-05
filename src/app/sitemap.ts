@@ -48,7 +48,7 @@ const marketingRoutes: Array<{
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date();
+  const lastModified = new Date(APP_CONFIG.contentUpdatedAt);
 
   return marketingRoutes.map(({ path, changeFrequency, priority }) => ({
     url: `${APP_CONFIG.url}${path === '/' ? '' : path}`,

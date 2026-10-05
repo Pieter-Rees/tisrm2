@@ -31,9 +31,8 @@ const SimpleThreeElements = ({ elements, className, 'data-testid': testId }: any
             description:
                 'TIS biedt u een volledig digitale schadeafhandeling. Door deze specialisatie staan wij bekend om het snel en vakkundig afwikkelen van uw schade, van een inbraak, stormschade of het verhalen van uw bedrijfsschade.',
             cta: 'Lees meer',
-            ctaLink: '#',
+            ctaLink: '/meld-schade',
             variant: 'elevated',
-            external: true,
         },
     ];
 

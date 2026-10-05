@@ -24,6 +24,8 @@ import {
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { COMPONENT_SPACING, SPACING_SCALE } from '@/constants/layout';
+import { SECTION_SPACING } from '@/constants/typography';
 
 interface Step1Data {
   firstName: string;
@@ -107,7 +109,7 @@ export default function OfferteStep2() {
   return (
     <Container>
       <BaseLayout title="Offerte aanvragen - Stap 2">
-        <VStack alignItems="flex-start" width="full" gap="8">
+        <VStack alignItems="flex-start" width="full" gap={SECTION_SPACING.small}>
           <OfferteStepNavigation
             currentStep={1}
             totalSteps={3}
@@ -119,9 +121,9 @@ export default function OfferteStep2() {
           />
 
           <Box width="full" maxW="md" mx="auto">
-            <VStack gap="6" align="stretch">
+            <VStack gap={COMPONENT_SPACING.form.group} align="stretch">
               <Box textAlign="center">
-                <Heading as="h2" size="lg" mb="2">
+                <Heading as="h2" size="lg" mb={SPACING_SCALE.xs}>
                   Bedrijfsgegevens
                 </Heading>
                 <Text color="gray.600">
@@ -130,7 +132,7 @@ export default function OfferteStep2() {
               </Box>
 
               <Box as="form" onSubmit={handleSubmit(onSubmit)}>
-                <VStack gap="6" align="stretch">
+                <VStack gap={COMPONENT_SPACING.form.group} align="stretch">
                   <Field
                     label="E-mailadres"
                     required
@@ -280,7 +282,7 @@ export default function OfferteStep2() {
                     />
                   </Field>
 
-                  <HStack gap="4">
+                  <HStack gap={SPACING_SCALE.md}>
                     <Button
                       onClick={goBack}
                       size="lg"

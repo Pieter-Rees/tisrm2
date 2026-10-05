@@ -7,5 +7,14 @@ import { PAGE_META } from '@/lib/seo/pageMeta';
 export const metadata = buildPageMetadata(PAGE_META.taxi);
 
 export default function TaxiLayout({ children }: { children: ReactNode }) {
-  return <WebPageJsonLdLayout pageKey="taxi">{children}</WebPageJsonLdLayout>;
+  return (
+    <WebPageJsonLdLayout
+      pageKey="taxi"
+      withService
+      withBreadcrumbs
+      faqKey="taxi"
+    >
+      {children}
+    </WebPageJsonLdLayout>
+  );
 }

@@ -1,5 +1,9 @@
 import { JsonLd } from '@/components/seo/JsonLd';
-import { getWebPageSchema } from '@/lib/seo/organizationSchema';
+import {
+  getFaqPageSchema,
+  getWebPageSchema,
+  HOME_FAQS,
+} from '@/lib/seo/organizationSchema';
 import { PAGE_META } from '@/lib/seo/pageMeta';
 
 import HomePageContent from './HomePageContent';
@@ -14,6 +18,7 @@ export default function Homepage() {
           path: PAGE_META.home.path,
         })}
       />
+      <JsonLd data={getFaqPageSchema(HOME_FAQS)} />
       <HomePageContent />
     </>
   );

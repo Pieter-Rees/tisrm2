@@ -15,6 +15,8 @@ import {
 } from '@chakra-ui/react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
+import { COMPONENT_SPACING, SPACING_SCALE } from '@/constants/layout';
+import { SECTION_SPACING } from '@/constants/typography';
 
 interface Step1FormData {
   firstName: string;
@@ -59,7 +61,7 @@ export default function OfferteStep1() {
   return (
     <Container>
       <BaseLayout title="Offerte aanvragen - Stap 1">
-        <VStack alignItems="flex-start" width="full" gap="8">
+        <VStack alignItems="flex-start" width="full" gap={SECTION_SPACING.small}>
           <OfferteStepNavigation
             currentStep={0}
             totalSteps={3}
@@ -71,9 +73,9 @@ export default function OfferteStep1() {
           />
 
           <Box width="full" maxW="md" mx="auto">
-            <VStack gap="6" align="stretch">
+            <VStack gap={COMPONENT_SPACING.form.group} align="stretch">
               <Box textAlign="center">
-                <Heading as="h2" size="lg" mb="2">
+                <Heading as="h2" size="lg" mb={SPACING_SCALE.xs}>
                   Contactgegevens
                 </Heading>
                 <Text color="gray.600">
@@ -82,7 +84,7 @@ export default function OfferteStep1() {
               </Box>
 
               <Box as="form" onSubmit={handleSubmit(onSubmit)}>
-                <VStack gap="6" >
+                <VStack gap={COMPONENT_SPACING.form.group} >
                   <Field
                     label="Voornaam"
                     required

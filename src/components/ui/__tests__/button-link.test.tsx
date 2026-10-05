@@ -36,7 +36,7 @@ const SimpleButtonLink = ({
         display: 'inline-block',
     };
 
-    if (isExternal) {
+    if (isExternal || download) {
         return (
             <a
                 href={href}
@@ -50,7 +50,8 @@ const SimpleButtonLink = ({
                 style={buttonStyle}
                 className={className}
                 data-testid={testId || 'button-link'}
-                data-external="true"
+                data-external={isExternal ? 'true' : undefined}
+                data-internal={!isExternal ? 'true' : undefined}
                 {...props}
             >
                 {children}
@@ -61,7 +62,6 @@ const SimpleButtonLink = ({
     return (
         <a
             href={href}
-            download={download || undefined}
             style={buttonStyle}
             className={className}
             data-testid={testId || 'button-link'}

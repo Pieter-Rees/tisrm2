@@ -5,9 +5,10 @@ import Image from 'next/image';
 import { memo } from 'react';
 import { BsQuote } from 'react-icons/bs';
 
-import { PARAGRAPH_STYLES } from '@/constants/typography';
+import { PARAGRAPH_STYLES, SECTION_SPACING } from '@/constants/typography';
 import { testimonialContainerStyles } from '@/styles/components/testimonial.styles';
 import type { TalkerProps } from '@/types/components';
+import { COMPONENT_SPACING, SPACING_SCALE } from '@/constants/layout';
 const DEFAULT_TESTIMONIAL = {
   name: 'René Enthoven',
   title: 'Directeur TIS Risk Managers',
@@ -35,11 +36,11 @@ const Talker = memo<TalkerProps>(
       >
         <Flex
           flexDirection={{ base: 'column', lg: 'row' }}
-          gap={{ base: '8', lg: '12' }}
+          gap={SECTION_SPACING.small}
           alignItems="center"
           justifyContent="center"
         >
-          <Box flex="0 0 auto" mb={{ base: '4', lg: '0' }}>
+          <Box flex="0 0 auto" mb={{ base: SPACING_SCALE.md.base, lg: "0" }}>
             <Box
               position="relative"
               width={{ base: '200px', lg: '280px' }}
@@ -64,7 +65,7 @@ const Talker = memo<TalkerProps>(
             </Box>
           </Box>
 
-          <VStack alignItems="center" gap="6" flex="1" textAlign="center">
+          <VStack alignItems="center" gap={COMPONENT_SPACING.form.group} flex="1" textAlign="center">
             <Box color="blue.500" opacity="0.6">
               <BsQuote size="48" />
             </Box>
@@ -79,7 +80,7 @@ const Talker = memo<TalkerProps>(
               {quote}
             </Box>
 
-            <VStack alignItems="center" gap="1" mt="4">
+            <VStack alignItems="center" gap={SPACING_SCALE.xs} mt={SPACING_SCALE.md}>
               <Text fontWeight="bold" fontSize="lg" color="gray.800">
                 {name}
               </Text>

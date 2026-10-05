@@ -4,7 +4,8 @@
 
 import type { SystemStyleObject } from '@chakra-ui/react';
 import { UI_CONSTANTS } from '@/constants/app';
-import { SPACING_PATTERNS } from '@/constants/layout';
+import { COMPONENT_SPACING, SPACING_PATTERNS } from '@/constants/layout';
+import { SECTION_SPACING } from '@/constants/typography';
 
 // Header styles
 export const headerStyles: SystemStyleObject = {
@@ -51,13 +52,13 @@ export const mobileMenuOverlayStyles: SystemStyleObject = {
 
 // Sidebar styles
 export const sidebarContainerStyles: SystemStyleObject = {
-  gap: '6',
+  gap: COMPONENT_SPACING.form.group,
   alignItems: 'stretch',
 };
 
 export const sidebarHelpBoxStyles: SystemStyleObject = {
-  mt: '8',
-  p: '4',
+  mt: SECTION_SPACING.small,
+  p: COMPONENT_SPACING.card.md,
   bg: 'blue.50',
   borderRadius: 'md',
   border: '1px solid',
@@ -103,8 +104,8 @@ export const contentHeaderStyles: SystemStyleObject = {
   justifyContent: 'space-between',
   alignItems: { base: 'flex-start', lg: 'center' },
   flexDirection: { base: 'column', lg: 'row' } as const,
-  mb: { base: '6', lg: '8' },
-  gap: '8',
+  mb: COMPONENT_SPACING.form.group,
+  gap: SECTION_SPACING.small,
 };
 
 // Breadcrumb container styles - moved to utility.styles.ts

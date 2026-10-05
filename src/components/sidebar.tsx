@@ -13,6 +13,8 @@ import { cn } from '@/lib/utils';
 //   sidebarHelpTextStyles,
 // } from '@/styles/components/layout.styles';
 import type { BaseComponentProps } from '@/types/components';
+import { COMPONENT_SPACING } from '@/constants/layout';
+import { SECTION_SPACING } from '@/constants/typography';
 
 const SIDEBAR_CARDS = [
   {
@@ -59,7 +61,7 @@ const Sidebar = memo<BaseComponentProps>(
         role="complementary"
         aria-label="Sidebar navigation and quick actions"
       >
-        <VStack gap="6" alignItems="stretch">
+        <VStack gap={COMPONENT_SPACING.form.group} alignItems="stretch">
           {SIDEBAR_CARDS.map(card => (
             <Card
               key={card.id}
@@ -76,8 +78,8 @@ const Sidebar = memo<BaseComponentProps>(
         </VStack>
 
         <Box
-          mt="8"
-          p="4"
+          mt={SECTION_SPACING.small}
+          p={COMPONENT_SPACING.card.md}
           bg="blue.50"
           borderRadius="md"
           border="1px solid"

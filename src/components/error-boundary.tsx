@@ -2,6 +2,7 @@
 
 import { Box, Button, Heading, Text, VStack } from '@chakra-ui/react';
 import { Component, type ErrorInfo, type ReactNode } from 'react';
+import { COMPONENT_SPACING, SPACING_SCALE } from '@/constants/layout';
 // import {
 //   errorBoundaryContainerStyles,
 //   errorBoundaryContentStyles,
@@ -46,9 +47,9 @@ export default class ErrorBoundary extends Component<Props, State> {
           alignItems="center"
           justifyContent="center"
           minH="200px"
-          p="8"
+          p={COMPONENT_SPACING.card.xl}
         >
-          <VStack gap="4" textAlign="center">
+          <VStack gap={SPACING_SCALE.md} textAlign="center">
             <Heading fontSize="lg" color="red.500">
               Er is iets misgegaan
             </Heading>

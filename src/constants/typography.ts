@@ -5,7 +5,7 @@ export const HEADING_STYLES = {
     lineHeight: 'tight',
     color: 'text.primary',
     letterSpacing: 'tight',
-    mb: { base: '6', lg: '8' },
+    mb: { base: '4', md: '5' },
   },
   h2: {
     fontSize: { base: 'xl', md: '2xl', lg: '3xl' },
@@ -13,21 +13,21 @@ export const HEADING_STYLES = {
     lineHeight: 'tight',
     color: 'text.primary',
     letterSpacing: 'tight',
-    mb: { base: '4', lg: '6' },
+    mb: { base: '3', md: '4' },
   },
   h3: {
     fontSize: { base: 'lg', md: 'xl', lg: '2xl' },
     fontWeight: 'semibold',
     lineHeight: 'tight',
     color: 'text.accent',
-    mb: { base: '3', lg: '4' },
+    mb: { base: '2', md: '3' },
   },
   h4: {
     fontSize: { base: 'md', md: 'lg', lg: 'xl' },
     fontWeight: 'semibold',
     lineHeight: 'normal',
     color: 'text.primary',
-    mb: { base: '2', lg: '3' },
+    mb: { base: '2', md: '2' },
   },
   h5: {
     fontSize: { base: 'sm', md: 'md', lg: 'lg' },
@@ -43,35 +43,38 @@ export const PARAGRAPH_STYLES = {
     fontSize: { base: 'md', lg: 'lg' },
     lineHeight: 'relaxed',
     color: 'text.secondary',
-    mb: { base: '4', lg: '6' },
+    mb: '0',
   },
   large: {
     fontSize: { base: 'lg', lg: 'xl' },
     lineHeight: 'relaxed',
     color: 'text.secondary',
-    mb: { base: '5', lg: '6' },
+    mb: '0',
   },
   small: {
     fontSize: { base: 'sm', lg: 'md' },
     lineHeight: 'normal',
     color: 'text.muted',
-    mb: { base: '3', lg: '4' },
+    mb: '0',
   },
   lead: {
     fontSize: { base: 'lg', lg: 'xl' },
     lineHeight: 'relaxed',
     color: 'text.primary',
     fontWeight: 'medium',
-    mb: { base: '6', lg: '8' },
+    mb: '0',
   },
 } as const;
 
+/** Gap between stacked paragraphs / prose blocks (parent Flex/VStack owns rhythm) */
+export const PROSE_STACK_GAP = { base: '4', md: '5' } as const;
+
 export const LIST_STYLES = {
   unordered: {
-    mb: { base: '4', lg: '6' },
+    mb: '0',
     pl: '0',
     listStyleType: 'none',
-    spacing: '3',
+    spacing: '2',
   },
   item: {
     fontSize: { base: 'md', lg: 'lg' },
@@ -79,7 +82,7 @@ export const LIST_STYLES = {
     color: 'text.secondary',
     display: 'flex',
     alignItems: 'flex-start',
-    mb: '3',
+    mb: '2',
   },
   itemIcon: {
     color: 'blue.700',
@@ -89,10 +92,11 @@ export const LIST_STYLES = {
   },
 } as const;
 
+/** Aligns with COMPONENT_SPACING.section (xs / sm / md) — grows on larger breakpoints */
 export const SECTION_SPACING = {
-  small: { base: '8', lg: '4' },
-  medium: { base: '12', lg: '8' },
-  large: { base: '16', lg: '20' },
+  small: { base: '8', md: '12' },
+  medium: { base: '12', md: '16' },
+  large: { base: '16', md: '20' },
 } as const;
 
 export const CONTENT_WIDTH = {
@@ -105,6 +109,7 @@ export const CONTENT_WIDTH = {
 const typography = {
   HEADING_STYLES,
   PARAGRAPH_STYLES,
+  PROSE_STACK_GAP,
   LIST_STYLES,
   SECTION_SPACING,
   CONTENT_WIDTH,

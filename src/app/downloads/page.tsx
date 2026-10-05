@@ -4,7 +4,9 @@ import { Box } from '@chakra-ui/react';
 import Card from '@/components/card';
 
 import { UnifiedLayout } from '@/components/layout';
+import { SECTION_SPACING } from '@/constants/typography';
 import { AVAILABLE_DOCUMENTS } from '@/data/content';
+import { COMPONENT_SPACING } from '@/constants/layout';
 
 export default function Downloads() {
     return (
@@ -12,8 +14,7 @@ export default function Downloads() {
             <Box
                 bg="gray.50"
                 borderRadius="xl"
-                p={{ base: '6', md: '8' }}
-                mb="8"
+                p={COMPONENT_SPACING.card.lg}
                 w="100%"
             >
                 <Box
@@ -23,7 +24,7 @@ export default function Downloads() {
                         md: 'repeat(2, 1fr)',
                         lg: 'repeat(3, 1fr)',
                     }}
-                    gap={{ base: '4', md: '6', lg: '8' }}
+                    gap={SECTION_SPACING.small}
                     w="100%"
                     alignItems="stretch"
                     justifyItems="stretch"
@@ -40,6 +41,7 @@ export default function Downloads() {
                             <Card
                                 variant="downloads"
                                 title={doc.title}
+                                titleAs="h2"
                                 downloadLink={doc.link}
                             />
                         </Box>

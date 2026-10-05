@@ -9,6 +9,7 @@ import CallUs from '@/components/call-us';
 import ErrorBoundary from '@/components/error-boundary';
 import Loading from '@/components/loading';
 import { UnifiedLayout } from '@/components/layout';
+import { HomeFaq } from '@/components/seo/HomeFaq';
 import {
   FadeInUp,
   ScaleIn,
@@ -16,6 +17,8 @@ import {
   StaggerContainer,
 } from '@/components/page-animation';
 import { UI_CONSTANTS } from '@/constants/app';
+import { SPACING_SCALE } from '@/constants/layout';
+import { SECTION_SPACING } from '@/constants/typography';
 
 const ThreeElements = lazy(() => import('@/components/three-elements'));
 const Talker = lazy(() => import('@/components/talker'));
@@ -54,21 +57,21 @@ export default function HomePageContent() {
   return (
     <UnifiedLayout variant="page" showSidebar={true}>
       <StaggerContainer>
-        <Flex direction="column" gap="12">
+        <Flex direction="column" gap={SECTION_SPACING.medium}>
           <ErrorBoundary>
             <FadeInUp>
               <Heading
                 as="h1"
                 size={{ base: 'xl', md: '2xl' }}
                 color="gray.800"
-                mb="2"
+                mb={SPACING_SCALE.xs}
               >
                 TIS Risk Managers — onafhankelijk verzekeringsadvies in
                 Amsterdam
               </Heading>
               <Grid
                 templateColumns={{ base: '1fr', lg: '2fr 1fr' }}
-                gap="8"
+                gap={SECTION_SPACING.small}
                 alignItems="stretch"
               >
                 <GridItem height="full">
@@ -82,7 +85,11 @@ export default function HomePageContent() {
                 <GridItem>
                   <Box height="full">
                     <SlideInRight delay={0.2}>
-                      <Flex direction="column" gap="4" height="full">
+                      <Flex
+                        direction="column"
+                        gap={SPACING_SCALE.md}
+                        height="full"
+                      >
                         <Box
                           bg="blue.700"
                           borderRadius="lg"
@@ -139,6 +146,12 @@ export default function HomePageContent() {
 
           <ErrorBoundary>
             <FadeInUp delay={0.4}>
+              <HomeFaq />
+            </FadeInUp>
+          </ErrorBoundary>
+
+          <ErrorBoundary>
+            <FadeInUp delay={0.45}>
               <Suspense fallback={<Loading text="Loading testimonial..." />}>
                 <Talker
                   name="René Enthoven"

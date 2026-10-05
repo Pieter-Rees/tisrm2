@@ -3,6 +3,8 @@
  */
 
 import type { SystemStyleObject } from '@chakra-ui/react';
+import { COMPONENT_SPACING } from '@/constants/layout';
+import { SECTION_SPACING } from '@/constants/typography';
 
 // Base action button styles
 export const actionButtonBaseStyles: SystemStyleObject = {
@@ -17,8 +19,8 @@ export const actionContentStyles: SystemStyleObject = {
   justifyContent: 'center',
   height: 'full',
   flexDirection: 'column',
-  p: '8',
-  gap: '8',
+  p: COMPONENT_SPACING.card.xl,
+  gap: SECTION_SPACING.small,
 };
 
 // Action icon styles
@@ -42,7 +44,7 @@ export const actionVariants = {
   callUs: {
     content: {
       ...actionContentStyles,
-      gap: '8',
+      gap: SECTION_SPACING.small,
     },
     icon: {
       ...actionIconStyles,
@@ -59,7 +61,7 @@ export const actionVariants = {
       ...actionContentStyles,
       pt: '8',
       pb: '6',
-      gap: '8',
+      gap: SECTION_SPACING.small,
     },
     heading: {
       ...actionHeadingStyles,

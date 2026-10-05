@@ -14,7 +14,6 @@ const SimpleCallToAction = React.memo(({
             className={className}
             data-testid={testId}
             style={{
-                marginTop: '3rem',
                 padding: '2rem',
                 backgroundColor: '#eff6ff',
                 borderRadius: '0.75rem',

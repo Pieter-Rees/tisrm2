@@ -15,8 +15,8 @@ export function Provider({
   ...props
 }: ProviderProps) {
   return (
-    <ChakraProvider value={value}>
-      <ColorModeProvider {...props}>{children}</ColorModeProvider>
-    </ChakraProvider>
+    <ColorModeProvider {...props}>
+      <ChakraProvider value={value}>{children}</ChakraProvider>
+    </ColorModeProvider>
   );
 }

@@ -3,13 +3,17 @@
 import Breadcrumb from '@/components/breadcrumb';
 import { FadeInUp, StaggerContainer } from '@/components/page-animation';
 import { UnifiedLayout } from '@/components/layout';
+import { FaqSection } from '@/components/seo/FaqSection';
 import StarList from '@/components/star-list';
 import {
   HEADING_STYLES,
   PARAGRAPH_STYLES,
+  PROSE_STACK_GAP,
   SECTION_SPACING,
 } from '@/constants/typography';
+import { PAGE_FAQS } from '@/lib/seo/pageFaqs';
 import { Box, Flex, Grid, GridItem, Heading, Text } from '@chakra-ui/react';
+import { COMPONENT_SPACING } from '@/constants/layout';
 
 export default function Particulier() {
   const list1 = [
@@ -29,10 +33,10 @@ export default function Particulier() {
   const list4 = ['Reis', 'Pleziervaartuigen', 'Recreatiegoederen'];
 
   return (
-    <UnifiedLayout title="Particulier" breadcrumb={<Breadcrumb capitalizeLinks />}>
+    <UnifiedLayout title="Particulier" breadcrumb={<Breadcrumb />}>
       <StaggerContainer>
         <Flex direction="column" gap={SECTION_SPACING.medium}>
-          <Flex direction="column" gap={SECTION_SPACING.small}>
+          <Flex direction="column" gap={PROSE_STACK_GAP}>
             <FadeInUp>
               <Text {...PARAGRAPH_STYLES.body}>
                 Iedereen is op zoek naar de goedkoopste verzekering, maar u
@@ -89,7 +93,7 @@ export default function Particulier() {
               <GridItem display="flex" flexDirection="column" minW="0">
                 <Box
                   bg="gray.50"
-                  p="6"
+                  p={COMPONENT_SPACING.card.lg}
                   borderRadius="lg"
                   boxShadow="sm"
                   transition="all 0.3s ease"
@@ -98,7 +102,7 @@ export default function Particulier() {
                     transform: 'translateY(-2px)',
                   }}
                 >
-                  <Heading as="h3" {...HEADING_STYLES.h4}>
+                  <Heading as="h2" {...HEADING_STYLES.h4}>
                     Onderweg
                   </Heading>
                   <StarList listItems={list1} />
@@ -107,7 +111,7 @@ export default function Particulier() {
               <GridItem display="flex" flexDirection="column" minW="0">
                 <Box
                   bg="gray.50"
-                  p="6"
+                  p={COMPONENT_SPACING.card.lg}
                   borderRadius="lg"
                   boxShadow="sm"
                   transition="all 0.3s ease"
@@ -116,7 +120,7 @@ export default function Particulier() {
                     transform: 'translateY(-2px)',
                   }}
                 >
-                  <Heading as="h3" {...HEADING_STYLES.h4}>
+                  <Heading as="h2" {...HEADING_STYLES.h4}>
                     Gezinssituatie
                   </Heading>
                   <StarList listItems={list2} />
@@ -125,7 +129,7 @@ export default function Particulier() {
               <GridItem display="flex" flexDirection="column" minW="0">
                 <Box
                   bg="gray.50"
-                  p="6"
+                  p={COMPONENT_SPACING.card.lg}
                   borderRadius="lg"
                   boxShadow="sm"
                   transition="all 0.3s ease"
@@ -134,7 +138,7 @@ export default function Particulier() {
                     transform: 'translateY(-2px)',
                   }}
                 >
-                  <Heading as="h3" {...HEADING_STYLES.h4}>
+                  <Heading as="h2" {...HEADING_STYLES.h4}>
                     Wonen
                   </Heading>
                   <StarList listItems={list3} />
@@ -143,7 +147,7 @@ export default function Particulier() {
               <GridItem display="flex" flexDirection="column" minW="0">
                 <Box
                   bg="gray.50"
-                  p="6"
+                  p={COMPONENT_SPACING.card.lg}
                   borderRadius="lg"
                   boxShadow="sm"
                   transition="all 0.3s ease"
@@ -152,13 +156,17 @@ export default function Particulier() {
                     transform: 'translateY(-2px)',
                   }}
                 >
-                  <Heading as="h3" {...HEADING_STYLES.h4}>
+                  <Heading as="h2" {...HEADING_STYLES.h4}>
                     Vrije tijd
                   </Heading>
                   <StarList listItems={list4} />
                 </Box>
               </GridItem>
             </Grid>
+          </FadeInUp>
+
+          <FadeInUp delay={0.3}>
+            <FaqSection faqs={PAGE_FAQS.insurancePersonal} />
           </FadeInUp>
         </Flex>
       </StaggerContainer>

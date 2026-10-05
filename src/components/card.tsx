@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Button, Heading, Icon, Text } from '@chakra-ui/react';
+import { Box, Heading, Icon, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 import { memo } from 'react';
 import {
@@ -10,14 +10,17 @@ import {
   BsTelephone,
 } from 'react-icons/bs';
 
-import { SPACING_PATTERNS } from '@/constants/layout';
+import { ButtonLink } from '@/components/ui/button-link';
+import { SPACING_PATTERNS, SPACING_SCALE } from '@/constants/layout';
 import { HEADING_STYLES, PARAGRAPH_STYLES } from '@/constants/typography';
 import { cn } from '@/lib/utils';
-import { getCardStyles } from '@/styles/components/card.styles';
+import { cardActionStyles, getCardStyles } from '@/styles/components/card.styles';
 import type { CardProps } from '@/types/components';
+
 const Card = memo<CardProps>(
   ({
     title,
+    titleAs = 'h3',
     description,
     image,
     altText,
@@ -72,15 +75,15 @@ const Card = memo<CardProps>(
           flexDirection="column"
         >
           {variant === 'downloads' && (
-            <Box display="flex" alignItems="center" gap="3" mb="4">
+            <Box display="flex" alignItems="center" gap={SPACING_SCALE.sm} mb={SPACING_SCALE.md}>
               <Icon as={BsFileEarmarkText} color="blue.500" boxSize="5" />
-              <Heading as="h3" {...HEADING_STYLES.h4} mb="0">
+              <Heading as={titleAs} {...HEADING_STYLES.h4} mb="0">
                 {title}
               </Heading>
             </Box>
           )}
           {variant !== 'downloads' && (
-            <Heading as="h3" {...HEADING_STYLES.h4}>
+            <Heading as={titleAs} {...HEADING_STYLES.h4}>
               {title}
             </Heading>
           )}
@@ -92,11 +95,12 @@ const Card = memo<CardProps>(
           )}
 
           {hasAction && (
-            <Box mt="auto">
+            <Box {...(description ? cardActionStyles : { mt: 'auto' })}>
               {phone && (
-                <Button
+                <ButtonLink
+                  href={phone}
                   width="full"
-                  gap="2"
+                  gap={SPACING_SCALE.xs}
                   transition="all 0.2s ease-in-out"
                   _hover={{
                     transform: 'translateY(-2px)',
@@ -104,21 +108,18 @@ const Card = memo<CardProps>(
                   }}
                   colorScheme="green"
                   variant="outline"
-                  onClick={e => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    window.location.href = phone;
-                  }}
                 >
                   <BsTelephone />
                   Bel nu
-                </Button>
+                </ButtonLink>
               )}
 
               {downloadLink && (
-                <Button
+                <ButtonLink
+                  href={downloadLink}
+                  download
                   width="full"
-                  gap="2"
+                  gap={SPACING_SCALE.xs}
                   transition="all 0.2s ease-in-out"
                   _hover={{
                     transform: 'translateY(-1px)',
@@ -130,26 +131,17 @@ const Card = memo<CardProps>(
                   size="md"
                   fontWeight="medium"
                   borderRadius="md"
-                  onClick={e => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    const link = document.createElement('a');
-                    link.href = downloadLink;
-                    link.download = '';
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                  }}
                 >
                   <BsDownload />
                   Download
-                </Button>
+                </ButtonLink>
               )}
 
               {cta && ctaLink && (
-                <Button
+                <ButtonLink
+                  href={ctaLink}
                   width="full"
-                  gap="2"
+                  gap={SPACING_SCALE.xs}
                   transition="all 0.2s ease-in-out"
                   _hover={{
                     transform: 'translateY(-2px)',
@@ -157,15 +149,10 @@ const Card = memo<CardProps>(
                   }}
                   colorScheme="blue"
                   variant="solid"
-                  onClick={e => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    window.location.href = ctaLink;
-                  }}
                 >
                   {cta}
                   <BsArrowRight />
-                </Button>
+                </ButtonLink>
               )}
             </Box>
           )}

@@ -4,6 +4,8 @@ import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
 import Link from 'next/link';
 import { BsTelephoneFill } from 'react-icons/bs';
 
+import { COMPONENT_SPACING } from '@/constants/layout';
+import { SECTION_SPACING } from '@/constants/typography';
 import {
   actionButtonBaseStyles,
   actionVariants,
@@ -19,8 +21,8 @@ export default function CallUs() {
           justifyContent="center"
           height="full"
           flexDirection="column"
-          p="8"
-          gap="8"
+          p={COMPONENT_SPACING.card.xl}
+          gap={SECTION_SPACING.small}
         >
           <Box color="white">
             <BsTelephoneFill size="32px" />
@@ -31,8 +33,6 @@ export default function CallUs() {
               <br />
               Bel ons!
             </Heading>
-          </Box>
-          <Box>
             <Text color="white">+31 20 636 8191</Text>
           </Box>
         </Flex>

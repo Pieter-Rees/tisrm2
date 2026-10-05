@@ -25,7 +25,7 @@ import {
 
 import Logo from '@/components/logo';
 import { CONTACT_INFO, NAVIGATION_ROUTES, UI_CONSTANTS } from '@/constants/app';
-import { SPACING_PATTERNS } from '@/constants/layout';
+import { SPACING_PATTERNS, SPACING_SCALE } from '@/constants/layout';
 import { cn } from '@/lib/utils';
 // import {
 //   sidenavContainerStyles,
@@ -164,7 +164,7 @@ const Sidenav = memo<SidenavProps>(
                     }}
                     _active={{ bg: isActive ? 'blue.200' : 'gray.100' }}
                     justifyContent="center"
-                    py="3"
+                    py={SPACING_SCALE.sm}
                   >
                     <Link
                       href={href}
@@ -181,7 +181,7 @@ const Sidenav = memo<SidenavProps>(
 
           <Separator borderColor="gray.300" width="80%" />
 
-          <Box width="full" px="4" mt="4">
+          <Box width="full" px={SPACING_SCALE.md} mt={SPACING_SCALE.md}>
             <MenuRoot>
               <MenuTrigger asChild>
                 <Button
@@ -196,7 +196,7 @@ const Sidenav = memo<SidenavProps>(
                   }}
                   _active={{ bg: 'blue.700' }}
                   fontWeight="medium"
-                  gap="2"
+                  gap={SPACING_SCALE.xs}
                 >
                   Acties
                   <BsChevronDown />
@@ -206,7 +206,7 @@ const Sidenav = memo<SidenavProps>(
                 <MenuItem
                   value="damage-report"
                   asChild
-                  gap="2"
+                  gap={SPACING_SCALE.xs}
                   _hover={{ bg: 'blue.50' }}
                   cursor="pointer"
                 >
@@ -221,7 +221,7 @@ const Sidenav = memo<SidenavProps>(
                 <MenuItem
                   value="quote"
                   asChild
-                  gap="2"
+                  gap={SPACING_SCALE.xs}
                   _hover={{ bg: 'blue.50' }}
                   cursor="pointer"
                 >
@@ -236,7 +236,7 @@ const Sidenav = memo<SidenavProps>(
                 <MenuItem
                   value="call"
                   asChild
-                  gap="2"
+                  gap={SPACING_SCALE.xs}
                   _hover={{ bg: 'blue.50' }}
                   cursor="pointer"
                 >

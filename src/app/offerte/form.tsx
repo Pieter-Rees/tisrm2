@@ -23,6 +23,8 @@ import {
   isValidEmail,
 } from '@/lib/utils';
 import type { OfferteFormData } from '@/types/forms';
+import { COMPONENT_SPACING, SPACING_SCALE } from '@/constants/layout';
+import { SECTION_SPACING } from '@/constants/typography';
 
 type SubmissionState = 'idle' | 'success' | 'error';
 export default function RegistrationForm() {
@@ -133,7 +135,7 @@ export default function RegistrationForm() {
 
   if (submissionState === 'success') {
     return (
-      <VStack gap="6" textAlign="center" py="12">
+      <VStack gap={COMPONENT_SPACING.form.group} textAlign="center" py={SECTION_SPACING.medium}>
         <Box color="green.500" fontSize="4xl">
           <BsCheck2Circle />
         </Box>
@@ -160,14 +162,14 @@ export default function RegistrationForm() {
     <Box as="form" onSubmit={handleSubmit(onSubmit)}>
       {submissionState === 'error' && (
         <Box
-          p="4"
-          mb="6"
+          p={COMPONENT_SPACING.card.md}
+          mb={COMPONENT_SPACING.form.field}
           borderRadius="md"
           bg="red.50"
           borderLeft="4px solid"
           borderColor="red.500"
         >
-          <Box display="flex" alignItems="center" gap="3">
+          <Box display="flex" alignItems="center" gap={SPACING_SCALE.sm}>
             <Box color="red.500">
               <BsExclamationTriangle size="20" />
             </Box>
@@ -183,8 +185,8 @@ export default function RegistrationForm() {
         </Box>
       )}
 
-      <SimpleGrid columns={{ base: 1, lg: 2 }} gap="8">
-        <VStack gap="6" align="stretch">
+      <SimpleGrid columns={{ base: 1, lg: 2 }} gap={SECTION_SPACING.small}>
+        <VStack gap={COMPONENT_SPACING.form.group} align="stretch">
           <Heading as="h3" size="md" color="gray.800">
             Persoonlijke gegevens
           </Heading>
@@ -274,7 +276,7 @@ export default function RegistrationForm() {
           </Field>
         </VStack>
 
-        <VStack gap="6" align="stretch">
+        <VStack gap={COMPONENT_SPACING.form.group} align="stretch">
           <Heading as="h3" size="md" color="gray.800">
             Bedrijfsgegevens
           </Heading>
@@ -357,7 +359,7 @@ export default function RegistrationForm() {
         </VStack>
       </SimpleGrid>
 
-      <Box mt="8">
+      <Box mt={SECTION_SPACING.small}>
         <Field
           label="Aanvullende informatie (optioneel)"
           helperText="Vertel ons meer over uw specifieke verzekeringsbehoefte of stel eventuele vragen"
@@ -378,7 +380,7 @@ export default function RegistrationForm() {
         </Field>
       </Box>
 
-      <Box mt="8">
+      <Box mt={SECTION_SPACING.small}>
         <label
           style={{
             display: 'flex',
@@ -392,7 +394,7 @@ export default function RegistrationForm() {
         </label>
       </Box>
 
-      <Box mt="8">
+      <Box mt={SECTION_SPACING.small}>
         <Button
           type="submit"
           loading={isSubmitting || isPending}
@@ -415,7 +417,7 @@ export default function RegistrationForm() {
       </Box>
 
       {filledFieldsCount > 0 && (
-        <Text fontSize="sm" color="gray.600" mt="4" textAlign="center">
+        <Text fontSize="sm" color="gray.600" mt={SPACING_SCALE.md} textAlign="center">
           Voortgang: {filledFieldsCount} / {totalRequiredFields} velden ingevuld
         </Text>
       )}

@@ -4,6 +4,8 @@ import { Box, Button, Flex, Heading } from '@chakra-ui/react';
 import Link from 'next/link';
 
 import { NAVIGATION_ROUTES } from '@/constants/app';
+import { COMPONENT_SPACING } from '@/constants/layout';
+import { SECTION_SPACING } from '@/constants/typography';
 import {
   actionButtonBaseStyles,
   actionVariants,
@@ -19,9 +21,9 @@ export default function MeldSchade() {
           justifyContent="center"
           height="full"
           flexDirection="column"
-          pt="8"
-          pb="6"
-          gap="8"
+          pt={SECTION_SPACING.small}
+          pb={COMPONENT_SPACING.form.group}
+          gap={SECTION_SPACING.small}
         >
           <Box>
             <Heading as="h2" fontSize="md" color="white">

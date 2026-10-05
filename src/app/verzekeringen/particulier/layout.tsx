@@ -12,7 +12,12 @@ export default function ParticulierLayout({
   children: ReactNode;
 }) {
   return (
-    <WebPageJsonLdLayout pageKey="insurancePersonal">
+    <WebPageJsonLdLayout
+      pageKey="insurancePersonal"
+      withService
+      withBreadcrumbs
+      faqKey="insurancePersonal"
+    >
       {children}
     </WebPageJsonLdLayout>
   );

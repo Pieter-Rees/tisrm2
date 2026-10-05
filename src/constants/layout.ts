@@ -116,7 +116,7 @@ export const SPACING_PATTERNS = {
   },
   // Footers
   footer: {
-    padding: COMPONENT_SPACING.section.lg,
+    padding: COMPONENT_SPACING.section.xl,
     gap: SPACING_SCALE.lg,
   },
   // Forms

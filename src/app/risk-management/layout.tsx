@@ -12,7 +12,12 @@ export default function RiskManagementLayout({
   children: ReactNode;
 }) {
   return (
-    <WebPageJsonLdLayout pageKey="riskManagement">
+    <WebPageJsonLdLayout
+      pageKey="riskManagement"
+      withService
+      withBreadcrumbs
+      faqKey="riskManagement"
+    >
       {children}
     </WebPageJsonLdLayout>
   );

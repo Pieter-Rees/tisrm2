@@ -3,11 +3,13 @@
  */
 
 import type { SystemStyleObject } from '@chakra-ui/react';
+import { COMPONENT_SPACING } from '@/constants/layout';
+import { SECTION_SPACING } from '@/constants/typography';
 
 // Main testimonial container styles
 export const testimonialContainerStyles: SystemStyleObject = {
-  py: { base: '12', lg: '20' },
-  px: { base: '4', lg: '8' },
+  py: SECTION_SPACING.large,
+  px: COMPONENT_SPACING.card.md,
   bg: 'gray.50',
   borderRadius: 'xl',
   boxShadow: 'sm',
@@ -56,7 +58,7 @@ export const testimonialAvatarStyles: SystemStyleObject = {
 export const testimonialContentStyles: SystemStyleObject = {
   alignItems: { base: 'center', lg: 'flex-start' },
   textAlign: { base: 'center', lg: 'left' },
-  gap: '6',
+  gap: COMPONENT_SPACING.form.group,
   flex: '1',
   maxW: { base: 'full', lg: '2xl' },
 };

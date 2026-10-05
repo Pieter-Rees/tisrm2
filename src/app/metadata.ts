@@ -38,6 +38,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
   },
+  icons: {
+    icon: [{ url: '/favicon.ico', sizes: 'any' }],
+  },
   openGraph: {
     title: PAGE_META.home.title,
     description: pageInfo.description,
