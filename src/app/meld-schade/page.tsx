@@ -26,6 +26,7 @@ import { BaseLayout } from '@/components/layout';
 import { Field } from '@/components/ui/field';
 import { COMPONENT_SPACING, SPACING_SCALE } from '@/constants/layout';
 import { SECTION_SPACING } from '@/constants/typography';
+import { primaryButtonStyles } from '@/styles/components/button.styles';
 import {
   getSchadeApiUrl,
   isValidDutchLicensePlate,
@@ -273,7 +274,7 @@ export default function MeldSchadePage() {
 
             {submissionState === 'success' && (
               <VStack gap={COMPONENT_SPACING.form.group} textAlign="center" py={COMPONENT_SPACING.form.group}>
-                <Box color="green.500" fontSize="4xl">
+                <Box color="green.700" fontSize="4xl">
                   <BsCheck2Circle />
                 </Box>
                 <Heading as="h3" size="md" color="green.700">
@@ -285,8 +286,10 @@ export default function MeldSchadePage() {
                 <Button
                   onClick={() => setSubmissionState('idle')}
                   variant="outline"
-                  colorScheme="green"
+                  color="green.700"
+                  borderColor="green.700"
                   size="sm"
+                  _hover={{ bg: 'green.50', color: 'green.800', borderColor: 'green.800' }}
                 >
                   Nieuwe melding indienen
                 </Button>
@@ -299,10 +302,10 @@ export default function MeldSchadePage() {
                 borderRadius="md"
                 bg="red.50"
                 borderLeft="4px solid"
-                borderColor="red.500"
+                borderColor="red.700"
               >
                 <Box display="flex" alignItems="center" gap={SPACING_SCALE.sm}>
-                  <Box color="red.500">
+                  <Box color="red.700">
                     <BsExclamationTriangle size="20" />
                   </Box>
                   <Box>
@@ -432,7 +435,7 @@ export default function MeldSchadePage() {
                           width="full"
                           borderRadius="lg"
                           border="1px solid"
-                          borderColor={uploadError ? 'red.300' : 'gray.200'}
+                          borderColor={uploadError ? 'red.700' : 'gray.200'}
                           bg={uploadError ? 'red.50' : 'gray.50'}
                           px="4"
                           py={SPACING_SCALE.sm}
@@ -454,7 +457,7 @@ export default function MeldSchadePage() {
                               htmlFor="damage-upload"
                               style={{
                                 border: '1px dashed',
-                                borderColor: uploadError ? '#FC8181' : '#90CDF4',
+                                borderColor: uploadError ? '#991919' : '#004e82',
                                 borderRadius: '0.375rem',
                                 background: '#FFFFFF',
                                 padding: '1.25rem 1rem',
@@ -515,7 +518,8 @@ export default function MeldSchadePage() {
                                     type="button"
                                     size="xs"
                                     variant="ghost"
-                                    colorScheme="red"
+                                    color="red.700"
+                                    _hover={{ bg: 'red.50', color: 'red.800' }}
                                     onClick={() => handleRemoveDocument(identity)}
                                   >
                                     Verwijderen
@@ -580,7 +584,8 @@ export default function MeldSchadePage() {
                                   type="button"
                                   size="xs"
                                   variant="ghost"
-                                  colorScheme="red"
+                                  color="red.700"
+                                  _hover={{ bg: 'red.50', color: 'red.800' }}
                                   onClick={() => handleRemovePhoto(identity)}
                                 >
                                   Verwijderen
@@ -631,15 +636,7 @@ export default function MeldSchadePage() {
                       loadingText="Bezig met versturen..."
                       size="lg"
                       width="full"
-                      bg="blue.500"
-                      color="white"
-                      transition="all 0.2s ease-in-out"
-                      _hover={{
-                        bg: 'blue.600',
-                        transform: 'translateY(-2px)',
-                        boxShadow: 'lg',
-                      }}
-                      _active={{ bg: 'blue.700' }}
+                      {...primaryButtonStyles}
                     >
                       Schade versturen
                     </Button>

@@ -24,7 +24,7 @@ export default function Loading({
 }: LoadingProps) {
   const content = (
     <VStack gap={SPACING_SCALE.md}>
-      <Spinner size={size} color="blue.500" />
+      <Spinner size={size} color="blue.700" />
       {text && (
         <Text fontSize="sm" color="gray.600">
           {text}

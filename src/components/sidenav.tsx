@@ -26,6 +26,7 @@ import Logo from '@/components/logo';
 import { CONTACT_INFO, NAVIGATION_ROUTES, UI_CONSTANTS } from '@/constants/app';
 import { SPACING_PATTERNS, SPACING_SCALE } from '@/constants/layout';
 import { cn } from '@/lib/utils';
+import { primaryButtonStyles } from '@/styles/components/button.styles';
 // import {
 //   sidenavContainerStyles,
 //   getSidenavPositionStyles,
@@ -108,10 +109,13 @@ const Sidenav = memo<SidenavProps>(
           <Button
             type="button"
             aria-label="Close navigation menu"
+            variant="ghost"
+            color="gray.700"
             minW="10"
             minH="10"
             transition="all 0.2s ease-in-out"
-            _hover={{ bg: 'gray.100' }}
+            _hover={{ bg: 'gray.100', color: 'blue.700' }}
+            _active={{ bg: 'gray.200' }}
             onClick={handleToggle}
           >
             <BsX size="20" />
@@ -159,14 +163,14 @@ const Sidenav = memo<SidenavProps>(
                     color={isActive ? 'blue.900' : 'gray.700'}
                     fontWeight={isActive ? 'semibold' : 'medium'}
                     border="1px solid"
-                    borderColor={isActive ? 'blue.200' : 'gray.200'}
+                    borderColor={isActive ? 'blue.700' : 'gray.200'}
                     borderRadius="md"
                     transition="all 0.2s ease-in-out"
                     _hover={{
                       bg: isActive ? 'blue.100' : 'gray.50',
                       color: 'blue.900',
                       transform: 'translateX(4px)',
-                      borderColor: 'blue.300',
+                      borderColor: 'blue.700',
                     }}
                     _active={{ bg: isActive ? 'blue.200' : 'gray.100' }}
                     justifyContent="center"
@@ -191,16 +195,8 @@ const Sidenav = memo<SidenavProps>(
             <MenuRoot>
               <MenuTrigger asChild>
                 <Button
-                  bg="blue.700"
-                  color="white"
+                  {...primaryButtonStyles}
                   width="full"
-                  transition="all 0.2s ease-in-out"
-                  _hover={{
-                    bg: 'blue.900',
-                    transform: 'translateY(-2px)',
-                    boxShadow: 'lg',
-                  }}
-                  _active={{ bg: 'blue.900' }}
                   fontWeight="medium"
                   gap={SPACING_SCALE.xs}
                 >

@@ -14,6 +14,7 @@ import { ButtonLink } from '@/components/ui/button-link';
 import { SPACING_PATTERNS, SPACING_SCALE } from '@/constants/layout';
 import { HEADING_STYLES, PARAGRAPH_STYLES } from '@/constants/typography';
 import { cn } from '@/lib/utils';
+import { primaryButtonStyles } from '@/styles/components/button.styles';
 import { cardActionStyles, getCardStyles } from '@/styles/components/card.styles';
 import type { CardProps } from '@/types/components';
 
@@ -76,7 +77,7 @@ const Card = memo<CardProps>(
         >
           {variant === 'downloads' && (
             <Box display="flex" alignItems="center" gap={SPACING_SCALE.sm} mb={SPACING_SCALE.md}>
-              <Icon as={BsFileEarmarkText} color="blue.500" boxSize="5" />
+              <Icon as={BsFileEarmarkText} color="blue.700" boxSize="5" />
               <Heading as={titleAs} {...HEADING_STYLES.h4} mb="0">
                 {title}
               </Heading>
@@ -102,12 +103,16 @@ const Card = memo<CardProps>(
                   width="full"
                   gap={SPACING_SCALE.xs}
                   transition="all 0.2s ease-in-out"
+                  variant="outline"
+                  color="green.700"
+                  borderColor="green.700"
                   _hover={{
                     transform: 'translateY(-2px)',
                     boxShadow: 'lg',
+                    bg: 'green.50',
+                    color: 'green.800',
+                    borderColor: 'green.800',
                   }}
-                  colorScheme="green"
-                  variant="outline"
                 >
                   <BsTelephone />
                   Bel nu
@@ -120,17 +125,10 @@ const Card = memo<CardProps>(
                   download
                   width="full"
                   gap={SPACING_SCALE.xs}
-                  transition="all 0.2s ease-in-out"
-                  _hover={{
-                    transform: 'translateY(-1px)',
-                    boxShadow: 'md',
-                  }}
-                  bg="blue.500"
-                  color="white"
                   variant="solid"
                   size="md"
                   fontWeight="medium"
-                  borderRadius="md"
+                  {...primaryButtonStyles}
                 >
                   <BsDownload />
                   Download
@@ -142,13 +140,8 @@ const Card = memo<CardProps>(
                   href={ctaLink}
                   width="full"
                   gap={SPACING_SCALE.xs}
-                  transition="all 0.2s ease-in-out"
-                  _hover={{
-                    transform: 'translateY(-2px)',
-                    boxShadow: 'lg',
-                  }}
-                  colorScheme="blue"
                   variant="solid"
+                  {...primaryButtonStyles}
                 >
                   {cta}
                   <BsArrowRight />

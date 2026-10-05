@@ -17,6 +17,7 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { COMPONENT_SPACING, SPACING_SCALE } from '@/constants/layout';
 import { SECTION_SPACING } from '@/constants/typography';
+import { primaryButtonStyles } from '@/styles/components/button.styles';
 
 interface Step1FormData {
   firstName: string;
@@ -158,15 +159,7 @@ export default function OfferteStep1() {
                     type="button"
                     size="lg"
                     width="full"
-                    bg="blue.500"
-                    color="white"
-                    transition="all 0.2s ease-in-out"
-                    _hover={{
-                      bg: 'blue.600',
-                      transform: 'translateY(-2px)',
-                      boxShadow: 'lg',
-                    }}
-                    _active={{ bg: 'blue.700' }}
+                    {...primaryButtonStyles}
                     disabled={!isFormValid || Object.keys(errors).length > 0}
                     onClick={handleSubmit(onSubmit)}
                   >

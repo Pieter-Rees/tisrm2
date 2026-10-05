@@ -18,14 +18,16 @@ import {
   Heading,
   HStack,
   Input,
+  Link,
   Text,
   VStack,
 } from '@chakra-ui/react';
+import NextLink from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { COMPONENT_SPACING, SPACING_SCALE } from '@/constants/layout';
 import { SECTION_SPACING } from '@/constants/typography';
+import { primaryButtonStyles } from '@/styles/components/button.styles';
 
 interface Step1Data {
   firstName: string;
@@ -58,7 +60,6 @@ export default function OfferteStep2() {
       damageFreeYears: '',
     },
   );
-  const [isCheckingData, setIsCheckingData] = useState(true);
 
   const {
     handleSubmit,
@@ -80,19 +81,6 @@ export default function OfferteStep2() {
     Boolean(watchedValues.carCode?.trim()) &&
     Boolean(watchedValues.damageFreeYears?.trim());
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsCheckingData(false);
-    }, 100);
-
-    return () => clearTimeout(timer);
-  }, []);
-  useEffect(() => {
-    if (!isCheckingData && !step1Data) {
-      router.push('/offerte/stap-1');
-    }
-  }, [step1Data, router, isCheckingData]);
-
   const onSubmit = (values: Step2FormData) => {
     setFormData(values);
     router.push('/offerte/stap-3');
@@ -101,10 +89,6 @@ export default function OfferteStep2() {
   const goBack = () => {
     router.push('/offerte/stap-1');
   };
-
-  if (isCheckingData || !step1Data) {
-    return null; // Loading or will redirect
-  }
 
   return (
     <Container>
@@ -119,6 +103,24 @@ export default function OfferteStep2() {
               { title: 'Bevestiging', isCompleted: false },
             ]}
           />
+
+          {!step1Data && (
+            <Box
+              p={COMPONENT_SPACING.card.md}
+              borderRadius="md"
+              bg="blue.50"
+              borderLeft="4px solid"
+              borderColor="blue.700"
+              width="full"
+            >
+              <Text color="blue.900" fontSize="sm">
+                Uw contactgegevens uit stap 1 ontbreken nog.{' '}
+                <Link asChild>
+                  <NextLink href="/offerte/stap-1">Ga naar stap 1</NextLink>
+                </Link>
+              </Text>
+            </Box>
+          )}
 
           <Box width="full" maxW="md" mx="auto">
             <VStack gap={COMPONENT_SPACING.form.group} align="stretch">
@@ -288,7 +290,8 @@ export default function OfferteStep2() {
                       size="lg"
                       flex="1"
                       variant="outline"
-                      colorScheme="gray"
+                      color="gray.700"
+                      borderColor="gray.700"
                       transition={UI_CONSTANTS.hover.subtle.transition}
                       _hover={UI_CONSTANTS.hover.subtle}
                     >
@@ -298,15 +301,7 @@ export default function OfferteStep2() {
                       type="button"
                       size="lg"
                       flex="1"
-                      bg="blue.500"
-                      color="white"
-                      transition="all 0.2s ease-in-out"
-                      _hover={{
-                        bg: 'blue.600',
-                        transform: 'translateY(-2px)',
-                        boxShadow: 'lg',
-                      }}
-                      _active={{ bg: 'blue.700' }}
+                      {...primaryButtonStyles}
                       disabled={!isFormValid || Object.keys(errors).length > 0}
                       onClick={handleSubmit(onSubmit)}
                     >

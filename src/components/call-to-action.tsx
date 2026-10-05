@@ -23,7 +23,7 @@ const CallToAction = memo<CallToActionProps>(
         bg="blue.50"
         borderRadius="xl"
         border="1px solid"
-        borderColor="blue.200"
+        borderColor="blue.700"
         textAlign="center"
       >
         <Heading

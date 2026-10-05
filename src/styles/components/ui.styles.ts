@@ -14,7 +14,7 @@ export const toastRootStyles: SystemStyleObject = {
 };
 
 export const toastSpinnerStyles: SystemStyleObject = {
-  color: 'blue.solid',
+  color: 'blue.700',
 };
 
 export const toastContentStyles: SystemStyleObject = {

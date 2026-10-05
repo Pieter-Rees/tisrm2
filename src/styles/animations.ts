@@ -102,7 +102,7 @@ export const animationConfig = {
     lift: { y: -4, boxShadow: '0 10px 25px rgba(0,0,0,0.1)' },
     rotate: { rotate: 2 },
     glow: { 
-      boxShadow: '0 0 20px rgba(59, 130, 246, 0.3)',
+      boxShadow: '0 0 20px rgba(0, 78, 130, 0.3)',
       transition: { duration: 0.2 },
     },
   },
@@ -111,7 +111,7 @@ export const animationConfig = {
   focus: {
     ring: {
       outline: '2px solid',
-      outlineColor: 'blue.500',
+      outlineColor: 'blue.700',
       outlineOffset: '2px',
     },
   },

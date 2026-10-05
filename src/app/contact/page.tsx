@@ -2,10 +2,10 @@
 
 import ContactInfo from '@/components/contact-info';
 import Logo from '@/components/logo';
-import { FadeInUp, ScaleIn, SlideInLeft } from '@/components/page-animation';
 import { UnifiedLayout } from '@/components/layout';
 import { COMPONENT_SPACING } from '@/constants/layout';
 import { PARAGRAPH_STYLES, SECTION_SPACING } from '@/constants/typography';
+import { primaryButtonStyles } from '@/styles/components/button.styles';
 import { Box, Button, Flex, Grid, GridItem, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
@@ -30,16 +30,14 @@ export default function Contact() {
           width="100%"
         >
           <GridItem display="flex" flexDirection="column" minW="0">
-            <SlideInLeft>
-              <Flex
-                width="100%"
-                py={SECTION_SPACING.small}
-                justifyContent="center"
-              >
-                <Logo />
-              </Flex>
-              <ContactInfo buttonVariant="outline" />
-            </SlideInLeft>
+            <Flex
+              width="100%"
+              py={SECTION_SPACING.small}
+              justifyContent="center"
+            >
+              <Logo />
+            </Flex>
+            <ContactInfo buttonVariant="outline" />
           </GridItem>
           <GridItem display="flex" flexDirection="column" minW="0">
             <Box
@@ -71,37 +69,17 @@ export default function Contact() {
           </GridItem>
         </Grid>
 
-        <ScaleIn delay={0.4}>
-          <Box textAlign="center">
-            <Flex direction="column" gap={SECTION_SPACING.small} align="center">
-              <FadeInUp delay={0.5}>
-                <Text {...PARAGRAPH_STYLES.body} textAlign="center">
-                  Wil u uw schade inzien of een schade melden, klik op
-                  onderstaande knop.
-                </Text>
-              </FadeInUp>
-              <FadeInUp delay={0.6}>
-                <Button
-                  bg="blue.500"
-                  color="white"
-                  borderRadius="lg"
-                  transition="all 0.2s ease-in-out"
-                  _hover={{
-                    bg: 'blue.600',
-                    transform: 'translateY(-2px)',
-                    boxShadow: 'lg',
-                  }}
-                  _active={{
-                    transform: 'translateY(0)',
-                  }}
-                  onClick={handleSchadeClick}
-                >
-                  Schade melden
-                </Button>
-              </FadeInUp>
-            </Flex>
-          </Box>
-        </ScaleIn>
+        <Box textAlign="center">
+          <Flex direction="column" gap={SECTION_SPACING.small} align="center">
+            <Text {...PARAGRAPH_STYLES.body} textAlign="center">
+              Wil u uw schade inzien of een schade melden, klik op
+              onderstaande knop.
+            </Text>
+            <Button {...primaryButtonStyles} onClick={handleSchadeClick}>
+              Schade melden
+            </Button>
+          </Flex>
+        </Box>
       </Flex>
     </UnifiedLayout>
   );

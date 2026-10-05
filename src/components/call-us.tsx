@@ -1,41 +1,31 @@
 'use client';
 
-import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
+import { Box, Button, Heading, Icon, Text } from '@chakra-ui/react';
 import Link from 'next/link';
 import { BsTelephoneFill } from 'react-icons/bs';
 
-import { COMPONENT_SPACING } from '@/constants/layout';
-import { SECTION_SPACING } from '@/constants/typography';
 import {
   actionButtonBaseStyles,
   actionVariants,
 } from '@/styles/components/action.styles';
 
 export default function CallUs() {
-  const { content: _content } = actionVariants.callUs;
+  const { content, icon, heading, text } = actionVariants.callUs;
 
   return (
     <Button asChild {...actionButtonBaseStyles}>
       <Link href="tel:+310206368191">
-        <Flex
-          justifyContent="center"
-          height="full"
-          flexDirection="column"
-          p={COMPONENT_SPACING.card.xl}
-          gap={SECTION_SPACING.small}
-        >
-          <Box color="white">
-            <BsTelephoneFill size="32px" />
-          </Box>
+        <Box display="flex" {...content}>
+          <Icon as={BsTelephoneFill} {...icon} />
           <Box>
-            <Heading as="h2" fontSize="md" color="white">
+            <Heading as="h2" {...heading}>
               Direct antwoord op uw vragen?
               <br />
               Bel ons!
             </Heading>
-            <Text color="white">+31 20 636 8191</Text>
+            <Text {...text}>+31 20 636 8191</Text>
           </Box>
-        </Flex>
+        </Box>
       </Link>
     </Button>
   );

@@ -1,5 +1,6 @@
 export const HEADING_STYLES = {
   h1: {
+    fontFamily: 'heading',
     fontSize: { base: '2xl', md: '3xl', lg: '4xl' },
     fontWeight: 'bold',
     lineHeight: 'tight',
@@ -8,6 +9,7 @@ export const HEADING_STYLES = {
     mb: { base: '4', md: '5' },
   },
   h2: {
+    fontFamily: 'heading',
     fontSize: { base: 'xl', md: '2xl', lg: '3xl' },
     fontWeight: 'bold',
     lineHeight: 'tight',
@@ -16,6 +18,7 @@ export const HEADING_STYLES = {
     mb: { base: '3', md: '4' },
   },
   h3: {
+    fontFamily: 'heading',
     fontSize: { base: 'lg', md: 'xl', lg: '2xl' },
     fontWeight: 'semibold',
     lineHeight: 'tight',
@@ -23,6 +26,7 @@ export const HEADING_STYLES = {
     mb: { base: '2', md: '3' },
   },
   h4: {
+    fontFamily: 'heading',
     fontSize: { base: 'md', md: 'lg', lg: 'xl' },
     fontWeight: 'semibold',
     lineHeight: 'normal',
@@ -30,6 +34,7 @@ export const HEADING_STYLES = {
     mb: { base: '2', md: '2' },
   },
   h5: {
+    fontFamily: 'heading',
     fontSize: { base: 'sm', md: 'md', lg: 'lg' },
     fontWeight: 'medium',
     lineHeight: 'normal',
@@ -40,24 +45,28 @@ export const HEADING_STYLES = {
 
 export const PARAGRAPH_STYLES = {
   body: {
+    fontFamily: 'body',
     fontSize: { base: 'md', lg: 'lg' },
     lineHeight: 'relaxed',
     color: 'text.secondary',
     mb: '0',
   },
   large: {
+    fontFamily: 'body',
     fontSize: { base: 'lg', lg: 'xl' },
     lineHeight: 'relaxed',
     color: 'text.secondary',
     mb: '0',
   },
   small: {
+    fontFamily: 'body',
     fontSize: { base: 'sm', lg: 'md' },
     lineHeight: 'normal',
     color: 'text.muted',
     mb: '0',
   },
   lead: {
+    fontFamily: 'body',
     fontSize: { base: 'lg', lg: 'xl' },
     lineHeight: 'relaxed',
     color: 'text.primary',

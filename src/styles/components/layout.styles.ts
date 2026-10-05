@@ -62,7 +62,7 @@ export const sidebarHelpBoxStyles: SystemStyleObject = {
   bg: 'blue.50',
   borderRadius: 'md',
   border: '1px solid',
-  borderColor: 'blue.200',
+  borderColor: 'blue.700',
   textAlign: 'center',
 };
 
@@ -75,7 +75,7 @@ export const sidebarHelpTitleStyles: SystemStyleObject = {
 
 export const sidebarHelpTextStyles: SystemStyleObject = {
   fontSize: 'xs',
-  color: 'blue.600',
+  color: 'blue.700',
 };
 
 // Main layout grid styles

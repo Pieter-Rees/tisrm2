@@ -49,7 +49,7 @@ export const featureCtaStyles: SystemStyleObject = {
   bg: 'blue.50',
   borderRadius: 'lg',
   border: '1px solid',
-  borderColor: 'blue.200',
+  borderColor: 'blue.700',
 };
 
 // Feature CTA heading styles
@@ -62,7 +62,7 @@ export const featureCtaHeadingStyles: SystemStyleObject = {
 
 // Feature CTA text styles
 export const featureCtaTextStyles: SystemStyleObject = {
-  color: 'blue.600',
+  color: 'blue.700',
   mb: COMPONENT_SPACING.form.group,
   maxW: '2xl',
   mx: 'auto',

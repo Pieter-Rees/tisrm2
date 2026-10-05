@@ -25,6 +25,7 @@ import {
 import type { OfferteFormData } from '@/types/forms';
 import { COMPONENT_SPACING, SPACING_SCALE } from '@/constants/layout';
 import { SECTION_SPACING } from '@/constants/typography';
+import { primaryButtonStyles } from '@/styles/components/button.styles';
 
 type SubmissionState = 'idle' | 'success' | 'error';
 export default function RegistrationForm() {
@@ -136,7 +137,7 @@ export default function RegistrationForm() {
   if (submissionState === 'success') {
     return (
       <VStack gap={COMPONENT_SPACING.form.group} textAlign="center" py={SECTION_SPACING.medium}>
-        <Box color="green.500" fontSize="4xl">
+        <Box color="green.700" fontSize="4xl">
           <BsCheck2Circle />
         </Box>
         <Heading as="h2" size="lg" color="green.700">
@@ -149,8 +150,10 @@ export default function RegistrationForm() {
         <Button
           onClick={() => setSubmissionState('idle')}
           variant="outline"
-          colorScheme="green"
+          color="green.700"
+          borderColor="green.700"
           size="sm"
+          _hover={{ bg: 'green.50', color: 'green.800', borderColor: 'green.800' }}
         >
           Nieuwe aanvraag indienen
         </Button>
@@ -167,10 +170,10 @@ export default function RegistrationForm() {
           borderRadius="md"
           bg="red.50"
           borderLeft="4px solid"
-          borderColor="red.500"
+          borderColor="red.700"
         >
           <Box display="flex" alignItems="center" gap={SPACING_SCALE.sm}>
-            <Box color="red.500">
+            <Box color="red.700">
               <BsExclamationTriangle size="20" />
             </Box>
             <Box>
@@ -401,15 +404,7 @@ export default function RegistrationForm() {
           loadingText="Versturen..."
           size="lg"
           width="full"
-          bg="blue.500"
-          color="white"
-          transition="all 0.2s ease-in-out"
-          _hover={{
-            bg: 'blue.600',
-            transform: 'translateY(-2px)',
-            boxShadow: 'lg',
-          }}
-          _active={{ bg: 'blue.700' }}
+          {...primaryButtonStyles}
           disabled={Object.keys(errors).length > 0}
         >
           Offerte aanvragen

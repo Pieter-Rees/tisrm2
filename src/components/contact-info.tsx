@@ -2,6 +2,10 @@
 
 import { SPACING_PATTERNS } from '@/constants/layout';
 import { contactInfo } from '@/data/general';
+import {
+  outlineButtonStyles,
+  primaryButtonStyles,
+} from '@/styles/components/button.styles';
 import type { ContactInfoProps } from '@/types/components';
 // import {
 //   contactInfoGridStyles,
@@ -74,6 +78,9 @@ export default function ContactInfo({
               variant={buttonVariant === 'solid' ? 'solid' : 'outline'}
               minW="10"
               minH="10"
+              {...(buttonVariant === 'solid' ?
+                primaryButtonStyles
+              : outlineButtonStyles)}
             >
               <Link
                 href={href as any}

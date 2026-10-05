@@ -18,7 +18,7 @@ export const breadcrumbContainerStyles: SystemStyleObject = {
 export const getBreadcrumbItemStyles = (isCurrentPage: boolean): SystemStyleObject => ({
   fontSize: 'xl',
   fontWeight: isCurrentPage ? 'bold' : 'normal',
-  color: isCurrentPage ? 'blue.600' : 'gray.700',
+  color: isCurrentPage ? 'blue.700' : 'gray.700',
 });
 
 export const breadcrumbSeparatorStyles: SystemStyleObject = {
@@ -31,7 +31,7 @@ export const loadingContentStyles: SystemStyleObject = {
 };
 
 export const loadingSpinnerStyles: SystemStyleObject = {
-  color: 'blue.500',
+  color: 'blue.700',
 };
 
 export const loadingTextStyles: SystemStyleObject = {
@@ -116,7 +116,7 @@ export const errorBoundaryContentStyles: SystemStyleObject = {
 
 export const errorBoundaryHeadingStyles: SystemStyleObject = {
   fontSize: 'lg',
-  color: 'red.500',
+  color: 'red.700',
 };
 
 export const errorBoundaryTextStyles: SystemStyleObject = {

@@ -1,23 +1,40 @@
-import { createSystem, defaultConfig } from '@chakra-ui/react';
+import { createSystem, defaultConfig, defineRecipe } from '@chakra-ui/react';
+
+// Chakra's button recipe rounds with the `l2` semantic radius (0.125rem here),
+// which left menu triggers and plain buttons looking square. `md` is the radius
+// the action buttons already use, so every button matches them.
+const buttonRecipe = defineRecipe({
+  base: {
+    borderRadius: 'md',
+  },
+});
 
 export const system = createSystem(defaultConfig, {
   theme: {
+    recipes: {
+      button: buttonRecipe,
+    },
     tokens: {
       colors: {
         blue: {
           50: { value: '#e6f7ff' },
           100: { value: '#b3e0ff' },
           200: { value: '#80c9ff' },
+          300: { value: '#0074c2' },
+          400: { value: '#0068ad' },
           500: { value: '#005c99' },
           600: { value: '#005791' },
           700: { value: '#004e82' },
+          800: { value: '#004675' },
           900: { value: '#003a66' },
+          950: { value: '#002e4d' },
         },
         gray: {
           50: { value: '#f9fafb' },
           100: { value: '#f3f4f6' },
           200: { value: '#e5e7eb' },
           300: { value: '#d1d5db' },
+          400: { value: '#5e656d' },
           500: { value: '#4e545b' },
           600: { value: '#454b52' },
           700: { value: '#33373d' },
@@ -26,8 +43,8 @@ export const system = createSystem(defaultConfig, {
         },
       },
       fonts: {
-        heading: { value: 'Inter, system-ui, sans-serif' },
-        body: { value: 'Inter, system-ui, sans-serif' },
+        heading: { value: 'var(--font-sans), system-ui, sans-serif' },
+        body: { value: 'var(--font-sans), system-ui, sans-serif' },
       },
       fontSizes: {
         xs: { value: '0.75rem' }, // 12px

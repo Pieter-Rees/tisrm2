@@ -18,7 +18,7 @@ export const CARD_VARIANTS = {
   downloads: {
     bg: 'white',
     border: '1px solid',
-    borderColor: 'blue.200',
+    borderColor: 'blue.700',
     shadow: 'sm',
     p: SPACING_PATTERNS.card.padding,
     transition: 'all 0.2s ease-in-out',
@@ -67,7 +67,7 @@ export const cardStateStyles = {
 // Focus styles
 export const cardFocusStyles: SystemStyleObject = {
   outline: '2px solid',
-  outlineColor: 'blue.500',
+  outlineColor: 'blue.700',
   outlineOffset: '2px',
 };
 

@@ -22,7 +22,7 @@ export const Toaster = () => {
         {toast => (
           <Toast.Root {...toastRootStyles}>
             {toast.type === 'loading' ?
-              <Spinner color="blue.500" />
+              <Spinner color="blue.700" />
               : <Toast.Indicator />}
             <Stack gap="1" flexDirection="column">
               {toast.title && <Toast.Title>{toast.title}</Toast.Title>}

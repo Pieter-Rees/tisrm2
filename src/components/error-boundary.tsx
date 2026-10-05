@@ -3,6 +3,7 @@
 import { Box, Button, Heading, Text, VStack } from '@chakra-ui/react';
 import { Component, type ErrorInfo, type ReactNode } from 'react';
 import { COMPONENT_SPACING, SPACING_SCALE } from '@/constants/layout';
+import { primaryButtonStyles } from '@/styles/components/button.styles';
 // import {
 //   errorBoundaryContainerStyles,
 //   errorBoundaryContentStyles,
@@ -50,7 +51,7 @@ export default class ErrorBoundary extends Component<Props, State> {
           p={COMPONENT_SPACING.card.xl}
         >
           <VStack gap={SPACING_SCALE.md} textAlign="center">
-            <Heading fontSize="lg" color="red.500">
+            <Heading fontSize="lg" color="red.700">
               Er is iets misgegaan
             </Heading>
             <Text color="gray.600">
@@ -59,8 +60,8 @@ export default class ErrorBoundary extends Component<Props, State> {
             </Text>
             <Button
               onClick={() => window.location.reload()}
-              colorScheme="blue"
               size="sm"
+              {...primaryButtonStyles}
             >
               Pagina herladen
             </Button>

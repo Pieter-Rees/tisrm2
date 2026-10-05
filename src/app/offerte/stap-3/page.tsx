@@ -13,17 +13,20 @@ import {
   Container,
   Heading,
   HStack,
+  Link,
   SimpleGrid,
   Text,
   Textarea,
   VStack,
 } from '@chakra-ui/react';
+import NextLink from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useCallback, useEffect, useState, useTransition } from 'react';
+import { useCallback, useState, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { BsCheck2Circle, BsExclamationTriangle } from 'react-icons/bs';
 import { COMPONENT_SPACING, SPACING_SCALE } from '@/constants/layout';
 import { SECTION_SPACING } from '@/constants/typography';
+import { primaryButtonStyles } from '@/styles/components/button.styles';
 
 interface Step1Data {
   firstName: string;
@@ -54,7 +57,6 @@ export default function OfferteStep3() {
     useState<SubmissionState>('idle');
   const [isPending, startTransition] = useTransition();
   const [errorMessage, setErrorMessage] = useState<string>('');
-  const [isCheckingData, setIsCheckingData] = useState(true);
 
   const {
     handleSubmit,
@@ -67,23 +69,6 @@ export default function OfferteStep3() {
       sendCopy: false,
     },
   });
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsCheckingData(false);
-    }, 100);
-
-    return () => clearTimeout(timer);
-  }, []);
-  useEffect(() => {
-    if (!isCheckingData) {
-      if (!step1Data) {
-        router.push('/offerte/stap-1');
-      } else if (!step2Data) {
-        router.push('/offerte/stap-2');
-      }
-    }
-  }, [step1Data, step2Data, router, isCheckingData]);
 
   const clearAllData = useCallback(() => {
     localStorage.removeItem('offerte-step1');
@@ -173,10 +158,6 @@ export default function OfferteStep3() {
     router.push('/offerte/stap-1');
   };
 
-  if (isCheckingData || !step1Data || !step2Data) {
-    return null;
-  }
-
   if (submissionState === 'success') {
     return (
       <Container>
@@ -192,7 +173,7 @@ export default function OfferteStep3() {
               ]}
             />
             <VStack gap={COMPONENT_SPACING.form.group} textAlign="center" py={SECTION_SPACING.medium} width="full">
-              <Box color="green.500" fontSize="4xl">
+              <Box color="green.700" fontSize="4xl">
                 <BsCheck2Circle />
               </Box>
               <Heading as="h2" size="lg" color="green.700">
@@ -205,8 +186,10 @@ export default function OfferteStep3() {
               <Button
                 onClick={startNewRequest}
                 variant="outline"
-                colorScheme="green"
+                color="green.700"
+                borderColor="green.700"
                 size="lg"
+                _hover={{ bg: 'green.50', color: 'green.800', borderColor: 'green.800' }}
               >
                 Nieuwe aanvraag indienen
               </Button>
@@ -231,6 +214,26 @@ export default function OfferteStep3() {
             ]}
           />
 
+          {(!step1Data || !step2Data) && (
+            <Box
+              p={COMPONENT_SPACING.card.md}
+              borderRadius="md"
+              bg="blue.50"
+              borderLeft="4px solid"
+              borderColor="blue.700"
+              width="full"
+            >
+              <Text color="blue.900" fontSize="sm">
+                Uw gegevens uit de vorige stappen ontbreken nog.{' '}
+                <Link asChild>
+                  {!step1Data ?
+                    <NextLink href="/offerte/stap-1">Ga naar stap 1</NextLink>
+                  : <NextLink href="/offerte/stap-2">Ga naar stap 2</NextLink>}
+                </Link>
+              </Text>
+            </Box>
+          )}
+
           <Box width="full" maxW="xl" mx="auto">
             <VStack gap={SECTION_SPACING.small} align="stretch">
               <Box textAlign="center">
@@ -249,10 +252,10 @@ export default function OfferteStep3() {
                   borderRadius="md"
                   bg="red.50"
                   borderLeft="4px solid"
-                  borderColor="red.500"
+                  borderColor="red.700"
                 >
                   <Box display="flex" alignItems="center" gap={SPACING_SCALE.sm}>
-                    <Box color="red.500">
+                    <Box color="red.700">
                       <BsExclamationTriangle size="20" />
                     </Box>
                     <Box>
@@ -280,7 +283,8 @@ export default function OfferteStep3() {
                           Naam
                         </Text>
                         <Text fontWeight="medium">
-                          {step1Data.firstName} {step1Data.lastName}
+                          {step1Data?.firstName ?? '-'}{' '}
+                          {step1Data?.lastName ?? '-'}
                         </Text>
                       </Box>
                       <Box>
@@ -288,7 +292,7 @@ export default function OfferteStep3() {
                           Bedrijfsnaam
                         </Text>
                         <Text fontWeight="medium">
-                          {step1Data.businessName}
+                          {step1Data?.businessName ?? '-'}
                         </Text>
                       </Box>
                     </VStack>
@@ -306,32 +310,40 @@ export default function OfferteStep3() {
                           E-mailadres
                         </Text>
                         <Text fontWeight="medium">
-                          {step2Data.emailAddress}
+                          {step2Data?.emailAddress ?? '-'}
                         </Text>
                       </Box>
                       <Box>
                         <Text fontSize="sm" color="gray.600">
                           Telefoonnummer
                         </Text>
-                        <Text fontWeight="medium">{step2Data.phoneNo}</Text>
+                        <Text fontWeight="medium">
+                          {step2Data?.phoneNo ?? '-'}
+                        </Text>
                       </Box>
                       <Box>
                         <Text fontSize="sm" color="gray.600">
                           KVK-nummer
                         </Text>
-                        <Text fontWeight="medium">{step2Data.kvkno}</Text>
+                        <Text fontWeight="medium">
+                          {step2Data?.kvkno ?? '-'}
+                        </Text>
                       </Box>
                       <Box>
                         <Text fontSize="sm" color="gray.600">
                           BTW-nummer
                         </Text>
-                        <Text fontWeight="medium">{step2Data.btwNumber}</Text>
+                        <Text fontWeight="medium">
+                          {step2Data?.btwNumber ?? '-'}
+                        </Text>
                       </Box>
                       <Box>
                         <Text fontSize="sm" color="gray.600">
                           Postcode
                         </Text>
-                        <Text fontWeight="medium">{step2Data.postalCode}</Text>
+                        <Text fontWeight="medium">
+                          {step2Data?.postalCode ?? '-'}
+                        </Text>
                       </Box>
                     </VStack>
                   </Card.Body>
@@ -381,7 +393,8 @@ export default function OfferteStep3() {
                       size="lg"
                       flex="1"
                       variant="outline"
-                      colorScheme="gray"
+                      color="gray.700"
+                      borderColor="gray.700"
                       transition={UI_CONSTANTS.hover.subtle.transition}
                       _hover={UI_CONSTANTS.hover.subtle}
                     >
@@ -393,15 +406,8 @@ export default function OfferteStep3() {
                       loadingText="Versturen..."
                       size="lg"
                       flex="1"
-                      bg="green.500"
-                      color="white"
-                      transition="all 0.2s ease-in-out"
-                      _hover={{
-                        bg: 'green.600',
-                        transform: 'translateY(-2px)',
-                        boxShadow: 'lg',
-                      }}
-                      _active={{ bg: 'green.700' }}
+                      {...primaryButtonStyles}
+                      disabled={!step1Data || !step2Data}
                     >
                       Offerte aanvragen
                     </Button>

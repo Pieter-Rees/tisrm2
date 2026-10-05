@@ -53,12 +53,11 @@ export const contactCtaSectionStyles: SystemStyleObject = {
 };
 
 export const contactCtaButtonStyles: SystemStyleObject = {
-  bg: 'blue.500',
+  bg: 'blue.700',
   color: 'white',
-  borderRadius: 'lg',
   transition: UI_CONSTANTS.hover.button.transition,
   _hover: {
-    bg: 'blue.600',
+    bg: 'blue.900',
     ...UI_CONSTANTS.hover.button,
   },
   _active: {
@@ -72,7 +71,7 @@ export const riskHighlightBoxStyles: SystemStyleObject = {
   p: COMPONENT_SPACING.card.lg,
   borderRadius: 'lg',
   borderLeft: '4px solid',
-  borderColor: 'blue.500',
+  borderColor: 'blue.700',
 };
 
 export const riskSummaryBoxStyles: SystemStyleObject = {

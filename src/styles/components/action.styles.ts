@@ -3,33 +3,38 @@
  */
 
 import type { SystemStyleObject } from '@chakra-ui/react';
-import { COMPONENT_SPACING } from '@/constants/layout';
-import { SECTION_SPACING } from '@/constants/typography';
+import { COMPONENT_SPACING, SPACING_SCALE } from '@/constants/layout';
 
-// Base action button styles
+// Base action button styles. Padding and wrapping come from the inner content
+// so the card can fill the surrounding box instead of the button size recipe.
 export const actionButtonBaseStyles: SystemStyleObject = {
   width: 'full',
   height: 'full',
+  px: '0',
+  py: '0',
   bg: 'blue.700',
   color: 'white',
+  whiteSpace: 'normal',
 };
 
 // Action content container styles
 export const actionContentStyles: SystemStyleObject = {
-  justifyContent: 'center',
+  width: 'full',
   height: 'full',
-  flexDirection: 'column',
-  p: COMPONENT_SPACING.card.xl,
-  gap: SECTION_SPACING.small,
+  justifyContent: 'center',
+  p: COMPONENT_SPACING.card.lg,
+  gap: SPACING_SCALE.md,
 };
 
 // Action icon styles
 export const actionIconStyles: SystemStyleObject = {
   color: 'white',
+  flexShrink: '0',
 };
 
 // Action heading styles
 export const actionHeadingStyles: SystemStyleObject = {
+  fontFamily: 'body',
   fontSize: 'md',
   color: 'white',
 };
@@ -41,48 +46,46 @@ export const actionTextStyles: SystemStyleObject = {
 
 // Specific action variants
 export const actionVariants = {
+  // Icon beside the text while the card is full width, stacked once it moves
+  // into the narrow hero column at lg
   callUs: {
     content: {
       ...actionContentStyles,
-      gap: SECTION_SPACING.small,
+      flexDirection: { base: 'column', sm: 'row', lg: 'column' },
+      alignItems: { base: 'flex-start', sm: 'center', lg: 'flex-start' },
     },
     icon: {
       ...actionIconStyles,
+      boxSize: { base: '6', lg: '7' },
     },
-    heading: {
-      ...actionHeadingStyles,
-    },
-    text: {
-      ...actionTextStyles,
-    },
+    heading: actionHeadingStyles,
+    text: actionTextStyles,
   },
   schadeMelden: {
     content: {
       ...actionContentStyles,
-      pt: '8',
-      pb: '6',
-      gap: SECTION_SPACING.small,
+      flexDirection: 'column',
+      alignItems: 'center',
+      py: COMPONENT_SPACING.card.md,
     },
-    heading: {
-      ...actionHeadingStyles,
-    },
+    heading: actionHeadingStyles,
   },
-} as const;
+} satisfies Record<string, Record<string, SystemStyleObject>>;
 
 // Interactive states
 export const actionStateStyles = {
   hover: {
-    bg: 'blue.600',
+    bg: 'blue.900',
     transform: 'translateY(-2px)',
     boxShadow: 'lg',
   },
   active: {
-    bg: 'blue.700',
+    bg: 'blue.950',
     transform: 'translateY(0)',
   },
   focus: {
     outline: '2px solid',
-    outlineColor: 'blue.300',
+    outlineColor: 'blue.700',
     outlineOffset: '2px',
   },
 } as const;

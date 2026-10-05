@@ -84,7 +84,7 @@ export const UI_CONSTANTS = {
     },
     link: {
       transition: 'all 0.2s ease',
-      color: 'blue.500',
+      color: 'blue.700',
       transform: 'translateX(2px)',
     },
     subtle: {

@@ -159,7 +159,7 @@ describe('App Constants', () => {
 
       it('should have link hover effects', () => {
         expect(UI_CONSTANTS.hover.link.transition).toBe('all 0.2s ease');
-        expect(UI_CONSTANTS.hover.link.color).toBe('blue.500');
+        expect(UI_CONSTANTS.hover.link.color).toBe('blue.700');
         expect(UI_CONSTANTS.hover.link.transform).toBe('translateX(2px)');
       });
 

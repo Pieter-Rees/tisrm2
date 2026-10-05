@@ -12,11 +12,6 @@ import { Suspense, lazy, memo, type ReactNode } from 'react';
 
 import ErrorBoundary from '@/components/error-boundary';
 import Loading from '@/components/loading';
-import {
-  FadeInUp,
-  PageAnimation,
-  SlideInRight,
-} from '@/components/page-animation';
 import { COMPONENT_SPACING, SPACING_PATTERNS, SPACING_SCALE } from '@/constants/layout';
 import { HEADING_STYLES, SECTION_SPACING } from '@/constants/typography';
 import { cn } from '@/lib/utils';
@@ -61,17 +56,14 @@ const UnifiedLayout = memo<UnifiedLayoutProps>(
     maxWidth = 'auto',
     columns: _columns = 6,
     gap = SPACING_PATTERNS.page.section,
-    animated = true,
     padding = SPACING_PATTERNS.page.padding,
     className,
     'data-testid': testId,
   }) => {
-    const LayoutWrapper = animated ? PageAnimation : Box;
-
     // Base layout for simple content
     if (variant === 'base' || variant === 'centered') {
       return (
-        <LayoutWrapper>
+        <Box>
           <Box
             className={cn('unified-layout', `variant-${variant}`, className)}
             data-testid={testId}
@@ -99,13 +91,13 @@ const UnifiedLayout = memo<UnifiedLayoutProps>(
               <Box>{children}</Box>
             </ErrorBoundary>
           </Box>
-        </LayoutWrapper>
+        </Box>
       );
     }
 
     // Page layout with optional sidebar
     return (
-      <LayoutWrapper>
+      <Box>
         <Container py={padding} maxW={maxWidth}>
           <Grid
             {...(showSidebar ?
@@ -119,85 +111,77 @@ const UnifiedLayout = memo<UnifiedLayoutProps>(
                 gap={COMPONENT_SPACING.section.xs}
               >
                 {(title || breadcrumb) && (
-                  <FadeInUp>
-                    <Flex
-                      as="header"
-                      width="full"
-                      justifyContent="space-between"
-                      alignItems={{ base: 'flex-start', lg: 'center' }}
-                      flexDirection={{ base: 'column', lg: 'row' }}
-                      gap={SECTION_SPACING.small}
-                    >
-                      {title && (
-                        <Heading as="h1" {...HEADING_STYLES.h1} mb="0">
-                          {title}
-                        </Heading>
-                      )}
+                  <Flex
+                    as="header"
+                    width="full"
+                    justifyContent="space-between"
+                    alignItems={{ base: 'flex-start', lg: 'center' }}
+                    flexDirection={{ base: 'column', lg: 'row' }}
+                    gap={SECTION_SPACING.small}
+                  >
+                    {title && (
+                      <Heading as="h1" {...HEADING_STYLES.h1} mb="0">
+                        {title}
+                      </Heading>
+                    )}
 
-                      {breadcrumb && (
-                        <Box
-                          as="nav"
-                          aria-label="Breadcrumb navigation"
-                          flexShrink="0"
-                        >
-                          {breadcrumb}
-                        </Box>
-                      )}
-                    </Flex>
-                  </FadeInUp>
+                    {breadcrumb && (
+                      <Box
+                        as="nav"
+                        aria-label="Breadcrumb navigation"
+                        flexShrink="0"
+                      >
+                        {breadcrumb}
+                      </Box>
+                    )}
+                  </Flex>
                 )}
 
-                <FadeInUp delay={0.1}>
-                  <ErrorBoundary>
-                    <Box minH="200px">{children}</Box>
-                  </ErrorBoundary>
-                </FadeInUp>
+                <ErrorBoundary>
+                  <Box minH="200px">{children}</Box>
+                </ErrorBoundary>
               </Flex>
             </GridItem>
 
             {showSidebar && (
               <GridItem hideBelow="xl">
-                <SlideInRight delay={0.2}>
-                  <Box
-                    as="aside"
-                    role="complementary"
-                    aria-label="Sidebar content"
-                    {...sidebarColumnStyles}
-                  >
-                    <ErrorBoundary
-                      fallback={
-                        <Box
-                          p={COMPONENT_SPACING.card.md}
-                          bg="gray.50"
-                          borderRadius="md"
-                          border="1px solid"
-                          borderColor="gray.200"
-                        >
-                          <Heading size="sm" color="gray.600" mb={SPACING_SCALE.xs}>
-                            Sidebar niet beschikbaar
-                          </Heading>
-                          <Box fontSize="sm" color="gray.500">
-                            Er is een probleem opgetreden bij het laden van de
-                            sidebar.
-                          </Box>
-                        </Box>
-                      }
-                    >
-                      <Suspense
-                        fallback={
-                          <Loading text="Loading sidebar..." size="sm" />
-                        }
+                <Box
+                  as="aside"
+                  role="complementary"
+                  aria-label="Sidebar content"
+                  {...sidebarColumnStyles}
+                >
+                  <ErrorBoundary
+                    fallback={
+                      <Box
+                        p={COMPONENT_SPACING.card.md}
+                        bg="gray.50"
+                        borderRadius="md"
+                        border="1px solid"
+                        borderColor="gray.200"
                       >
-                        <Sidebar />
-                      </Suspense>
-                    </ErrorBoundary>
-                  </Box>
-                </SlideInRight>
+                        <Heading size="sm" color="gray.600" mb={SPACING_SCALE.xs}>
+                          Sidebar niet beschikbaar
+                        </Heading>
+                        <Box fontSize="sm" color="gray.500">
+                          Er is een probleem opgetreden bij het laden van de
+                          sidebar.
+                        </Box>
+                      </Box>
+                    }
+                  >
+                    <Suspense
+                      fallback={<Loading text="Loading sidebar..." size="sm" />}
+                    >
+                      <Sidebar />
+                    </Suspense>
+                  </ErrorBoundary>
+                </Box>
               </GridItem>
             )}
           </Grid>
         </Container>
-      </LayoutWrapper>
+      </Box>
     );
   },
 );

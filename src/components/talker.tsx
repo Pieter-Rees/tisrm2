@@ -66,7 +66,7 @@ const Talker = memo<TalkerProps>(
           </Box>
 
           <VStack alignItems="center" gap={COMPONENT_SPACING.form.group} flex="1" textAlign="center">
-            <Box color="blue.500" opacity="0.6">
+            <Box color="blue.700">
               <BsQuote size="48" />
             </Box>
 

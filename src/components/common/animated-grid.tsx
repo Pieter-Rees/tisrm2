@@ -1,8 +1,7 @@
 'use client';
 
 import { memo, type ReactNode } from 'react';
-import { Grid, GridItem } from '@chakra-ui/react';
-import { FadeInUp, StaggerContainer } from '@/components/page-animation';
+import { Box, Grid, GridItem } from '@chakra-ui/react';
 import type { BaseComponentProps, ResponsiveValue } from '@/types/components';
 
 interface AnimatedGridProps extends BaseComponentProps {
@@ -31,7 +30,6 @@ const AnimatedGrid = memo<AnimatedGridProps>(({
   children,
   columns = DEFAULT_COLUMNS,
   gap = { base: '6', lg: '8' },
-  staggerDelay = 0.1,
   stretch = true,
   renderItem,
   items,
@@ -42,9 +40,7 @@ const AnimatedGrid = memo<AnimatedGridProps>(({
     if (items && renderItem) {
       return items.map((item, index) => (
         <GridItem key={item.id || index} display={stretch ? 'flex' : 'block'} minW="0" w="100%" h="100%">
-          <FadeInUp delay={index * staggerDelay}>
-            {renderItem(item, index)}
-          </FadeInUp>
+          {renderItem(item, index)}
         </GridItem>
       ));
     }
@@ -53,7 +49,7 @@ const AnimatedGrid = memo<AnimatedGridProps>(({
   };
 
   return (
-    <StaggerContainer className={className || ''} data-testid={testId || ''}>
+    <Box className={className || ''} data-testid={testId || ''} width="100%">
       <Grid
         templateColumns={columns}
         gap={gap}
@@ -65,7 +61,7 @@ const AnimatedGrid = memo<AnimatedGridProps>(({
       >
         {renderContent()}
       </Grid>
-    </StaggerContainer>
+    </Box>
   );
 });
 

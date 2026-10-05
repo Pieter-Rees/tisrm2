@@ -62,7 +62,7 @@ export default function Footer() {
           <Grid {...footerGridStyles}>
             <GridItem>
               <VStack alignItems="start" gap={SPACING_SCALE.sm}>
-                <Heading fontSize="md" color="white" mb="0">
+                <Heading fontFamily="body" fontSize="md" color="white" mb="0">
                   Contact
                 </Heading>
                 <VStack alignItems="start" gap="1">
@@ -85,7 +85,7 @@ export default function Footer() {
 
             <GridItem>
               <VStack alignItems="start" gap={SPACING_SCALE.sm}>
-                <Heading fontSize="md" color="white" mb="0">
+                <Heading fontFamily="body" fontSize="md" color="white" mb="0">
                   Links
                 </Heading>
                 <VStack alignItems="start" gap="1">

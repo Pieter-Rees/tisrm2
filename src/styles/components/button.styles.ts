@@ -2,6 +2,41 @@ import type { SystemStyleObject } from '@chakra-ui/react';
 import { SPACING_SCALE } from '@/constants/layout';
 // import { UI_CONSTANTS } from '@/constants/app';
 
+// Shared brand styles for call-to-action buttons. Spread these instead of
+// repeating colour props per page so every primary button stays the same blue.
+export const primaryButtonStyles: SystemStyleObject = {
+  bg: 'blue.700',
+  color: 'white',
+  transition: 'all 0.2s ease-in-out',
+  _hover: {
+    bg: 'blue.900',
+    transform: 'translateY(-2px)',
+    boxShadow: 'lg',
+  },
+  _active: {
+    bg: 'blue.950',
+    transform: 'translateY(0)',
+  },
+};
+
+// Brand counterpart for secondary call-to-action buttons.
+export const outlineButtonStyles: SystemStyleObject = {
+  color: 'blue.700',
+  borderColor: 'blue.700',
+  transition: 'all 0.2s ease-in-out',
+  _hover: {
+    bg: 'blue.50',
+    color: 'blue.900',
+    borderColor: 'blue.900',
+    transform: 'translateY(-2px)',
+    boxShadow: 'lg',
+  },
+  _active: {
+    bg: 'blue.100',
+    transform: 'translateY(0)',
+  },
+};
+
 export const buttonSizes = {
   xs: {
     height: '24px',
@@ -37,25 +72,25 @@ export const buttonSizes = {
 
 export const buttonVariants = {
   primary: {
-    bg: 'blue.500',
+    bg: 'blue.700',
     color: 'white',
     border: '1px solid',
-    borderColor: 'blue.500',
+    borderColor: 'blue.700',
     fontWeight: 'medium',
     _hover: {
-      bg: 'blue.600',
-      borderColor: 'blue.600',
+      bg: 'blue.900',
+      borderColor: 'blue.900',
       transform: 'translateY(-2px)',
       boxShadow: 'lg',
     },
     _active: {
-      bg: 'blue.700',
-      borderColor: 'blue.700',
+      bg: 'blue.950',
+      borderColor: 'blue.950',
       transform: 'translateY(0)',
     },
     _focus: {
       outline: '2px solid',
-      outlineColor: 'blue.300',
+      outlineColor: 'blue.700',
       outlineOffset: '2px',
     },
     _disabled: {
@@ -86,7 +121,7 @@ export const buttonVariants = {
     },
     _focus: {
       outline: '2px solid',
-      outlineColor: 'gray.300',
+      outlineColor: 'gray.700',
       outlineOffset: '2px',
     },
     _disabled: {
@@ -100,24 +135,24 @@ export const buttonVariants = {
   },
   outline: {
     bg: 'transparent',
-    color: 'blue.500',
+    color: 'blue.700',
     border: '1px solid',
-    borderColor: 'blue.500',
+    borderColor: 'blue.700',
     fontWeight: 'medium',
     _hover: {
       bg: 'blue.50',
-      borderColor: 'blue.600',
+      borderColor: 'blue.900',
       transform: 'translateY(-2px)',
       boxShadow: 'md',
     },
     _active: {
       bg: 'blue.100',
-      borderColor: 'blue.700',
+      borderColor: 'blue.950',
       transform: 'translateY(0)',
     },
     _focus: {
       outline: '2px solid',
-      outlineColor: 'blue.300',
+      outlineColor: 'blue.700',
       outlineOffset: '2px',
     },
     _disabled: {
@@ -131,23 +166,23 @@ export const buttonVariants = {
   },
   ghost: {
     bg: 'transparent',
-    color: 'blue.500',
+    color: 'blue.700',
     border: '1px solid',
     borderColor: 'transparent',
     fontWeight: 'medium',
     _hover: {
       bg: 'blue.50',
-      color: 'blue.600',
+      color: 'blue.900',
       transform: 'translateY(-1px)',
     },
     _active: {
       bg: 'blue.100',
-      color: 'blue.700',
+      color: 'blue.950',
       transform: 'translateY(0)',
     },
     _focus: {
       outline: '2px solid',
-      outlineColor: 'blue.300',
+      outlineColor: 'blue.700',
       outlineOffset: '2px',
     },
     _disabled: {
@@ -158,25 +193,25 @@ export const buttonVariants = {
     },
   },
   danger: {
-    bg: 'red.500',
+    bg: 'red.700',
     color: 'white',
     border: '1px solid',
-    borderColor: 'red.500',
+    borderColor: 'red.700',
     fontWeight: 'medium',
     _hover: {
-      bg: 'red.600',
-      borderColor: 'red.600',
+      bg: 'red.800',
+      borderColor: 'red.800',
       transform: 'translateY(-2px)',
       boxShadow: 'lg',
     },
     _active: {
-      bg: 'red.700',
-      borderColor: 'red.700',
+      bg: 'red.900',
+      borderColor: 'red.900',
       transform: 'translateY(0)',
     },
     _focus: {
       outline: '2px solid',
-      outlineColor: 'red.300',
+      outlineColor: 'red.700',
       outlineOffset: '2px',
     },
     _disabled: {
@@ -189,25 +224,25 @@ export const buttonVariants = {
     },
   },
   success: {
-    bg: 'green.500',
+    bg: 'green.700',
     color: 'white',
     border: '1px solid',
-    borderColor: 'green.500',
+    borderColor: 'green.700',
     fontWeight: 'medium',
     _hover: {
-      bg: 'green.600',
-      borderColor: 'green.600',
+      bg: 'green.800',
+      borderColor: 'green.800',
       transform: 'translateY(-2px)',
       boxShadow: 'lg',
     },
     _active: {
-      bg: 'green.700',
-      borderColor: 'green.700',
+      bg: 'green.900',
+      borderColor: 'green.900',
       transform: 'translateY(0)',
     },
     _focus: {
       outline: '2px solid',
-      outlineColor: 'green.300',
+      outlineColor: 'green.700',
       outlineOffset: '2px',
     },
     _disabled: {
@@ -223,25 +258,25 @@ export const buttonVariants = {
 
 export const footerButtonVariants = {
   primary: {
-    bg: 'blue.500',
+    bg: 'blue.700',
     color: 'white',
     border: '1px solid',
-    borderColor: 'blue.500',
+    borderColor: 'blue.700',
     fontWeight: 'medium',
     _hover: {
-      bg: 'blue.600',
-      borderColor: 'blue.600',
+      bg: 'blue.900',
+      borderColor: 'blue.900',
       transform: 'translateY(-2px)',
       boxShadow: 'lg',
     },
     _active: {
-      bg: 'blue.700',
-      borderColor: 'blue.700',
+      bg: 'blue.950',
+      borderColor: 'blue.950',
       transform: 'translateY(0)',
     },
     _focus: {
       outline: '2px solid',
-      outlineColor: 'blue.300',
+      outlineColor: 'blue.700',
       outlineOffset: '2px',
     },
     _disabled: {
@@ -272,7 +307,7 @@ export const footerButtonVariants = {
     },
     _focus: {
       outline: '2px solid',
-      outlineColor: 'gray.300',
+      outlineColor: 'gray.700',
       outlineOffset: '2px',
     },
     _disabled: {
@@ -297,7 +332,7 @@ export const buttonBaseStyles: SystemStyleObject = {
   cursor: 'pointer',
   _focus: {
     outline: '2px solid',
-    outlineColor: 'blue.300',
+    outlineColor: 'blue.700',
     outlineOffset: '2px',
   },
   _disabled: {
@@ -326,9 +361,9 @@ export const getButtonStyles = (
 
 export const legacyButtonStyles = {
   primary: {
-    bg: 'blue.500',
+    bg: 'blue.700',
     color: 'white',
-    _hover: { bg: 'blue.600' },
+    _hover: { bg: 'blue.900' },
   },
   secondary: {
     bg: 'gray.500',

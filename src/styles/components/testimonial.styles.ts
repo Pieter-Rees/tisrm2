@@ -65,8 +65,7 @@ export const testimonialContentStyles: SystemStyleObject = {
 
 // Quote icon styles
 export const testimonialQuoteIconStyles: SystemStyleObject = {
-  color: 'blue.500',
-  opacity: '0.8',
+  color: 'blue.700',
 };
 
 // Quote text styles

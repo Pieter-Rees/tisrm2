@@ -23,6 +23,7 @@ import {
 
 import { CONTACT_INFO, NAVIGATION_ROUTES } from '@/constants/app';
 import { SPACING_PATTERNS, SPACING_SCALE } from '@/constants/layout';
+import { primaryButtonStyles } from '@/styles/components/button.styles';
 // import {
 //   navbarContainerStyles,
 //   navbarLinksContainerStyles,
@@ -88,7 +89,7 @@ const Navbar = memo(() => {
                       !isActive ?
                         {
                           color: 'blue.700',
-                          borderBottomColor: 'blue.200',
+                          borderBottomColor: 'blue.700',
                           transform: 'translateY(-1px)',
                         }
                       : {}
@@ -107,18 +108,7 @@ const Navbar = memo(() => {
         <MenuRoot>
           <MenuTrigger asChild>
             <Button
-              bg="blue.700"
-              color="white"
-              transition="all 0.2s ease-in-out"
-              _hover={{
-                bg: 'blue.900',
-                transform: 'translateY(-2px)',
-                boxShadow: 'lg',
-              }}
-              _active={{
-                bg: 'blue.900',
-                transform: 'translateY(0)',
-              }}
+              {...primaryButtonStyles}
               fontWeight="medium"
               gap={SPACING_SCALE.xs}
             >

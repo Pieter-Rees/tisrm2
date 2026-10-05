@@ -40,14 +40,14 @@ export const navbarLinkWrapperStyles: SystemStyleObject = {
 };
 
 export const getNavbarLinkStyles = (isActive: boolean): SystemStyleObject => ({
-  color: isActive ? 'blue.500' : 'gray.900',
+  color: isActive ? 'blue.700' : 'gray.900',
   fontWeight: isActive ? '600' : '500',
   borderBottom: isActive ? '2px solid' : '2px solid transparent',
-  borderBottomColor: isActive ? 'blue.500' : 'transparent',
+  borderBottomColor: isActive ? 'blue.700' : 'transparent',
   transition: UI_CONSTANTS.hover.link.transition,
   _hover: !isActive ? {
-    color: 'blue.500',
-    borderBottomColor: 'blue.200',
+    color: 'blue.700',
+    borderBottomColor: 'blue.700',
     transform: 'translateY(-1px)',
   } : {},
 });
@@ -59,15 +59,15 @@ export const navbarActionsContainerStyles: SystemStyleObject = {
 };
 
 export const navbarActionsButtonStyles: SystemStyleObject = {
-  bg: 'blue.500',
+  bg: 'blue.700',
   color: 'white',
   transition: UI_CONSTANTS.hover.button.transition,
   _hover: {
-    bg: 'blue.600',
+    bg: 'blue.900',
     ...UI_CONSTANTS.hover.button,
   },
   _active: {
-    bg: 'blue.700',
+    bg: 'blue.950',
     transform: 'translateY(0)',
   },
   fontWeight: 'medium',
@@ -155,12 +155,12 @@ export const sidenavLinkItemStyles: SystemStyleObject = {
 
 export const getSidenavLinkButtonStyles = (isActive: boolean): SystemStyleObject => ({
   width: 'full',
-  color: isActive ? 'blue.600' : 'gray.700',
+  color: isActive ? 'blue.700' : 'gray.700',
   fontWeight: isActive ? 'semibold' : 'medium',
   transition: UI_CONSTANTS.hover.subtle.transition,
   _hover: {
     bg: 'gray.50',
-    color: 'blue.600',
+    color: 'blue.700',
     transform: 'translateX(4px)',
   },
   _active: { bg: 'gray.100' },
@@ -180,15 +180,15 @@ export const sidenavActionsContainerStyles: SystemStyleObject = {
 };
 
 export const sidenavActionsButtonStyles: SystemStyleObject = {
-  bg: 'blue.500',
+  bg: 'blue.700',
   color: 'white',
   width: 'full',
   transition: UI_CONSTANTS.hover.button.transition,
   _hover: {
-    bg: 'blue.600',
+    bg: 'blue.900',
     ...UI_CONSTANTS.hover.button,
   },
-  _active: { bg: 'blue.700' },
+  _active: { bg: 'blue.950' },
   fontWeight: 'medium',
   gap: SPACING_SCALE.xs,
 };

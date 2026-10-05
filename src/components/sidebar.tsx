@@ -84,7 +84,7 @@ const Sidebar = memo<BaseComponentProps>(
           bg="blue.50"
           borderRadius="md"
           border="1px solid"
-          borderColor="blue.200"
+          borderColor="blue.700"
           textAlign="center"
         >
           <Box fontSize="sm" color="blue.900" fontWeight="medium" mb="1">

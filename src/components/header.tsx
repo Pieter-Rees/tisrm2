@@ -46,10 +46,12 @@ const Header = memo(() => {
           <Box hideFrom="xl">
             <Button
               variant="ghost"
+              size="lg"
               color="gray.700"
               transition="all 0.2s ease-in-out"
-              _hover={{ bg: 'gray.100', color: 'blue.600' }}
+              _hover={{ bg: 'gray.100', color: 'blue.700' }}
               _active={{ bg: 'gray.200' }}
+              _icon={{ width: '7', height: '7' }}
               hideFrom="xl"
               onClick={handleToggle}
               aria-label={
@@ -59,8 +61,8 @@ const Header = memo(() => {
               aria-controls="mobile-navigation"
             >
               {showSideNav ?
-                <BsX size="24" />
-              : <BsList size="24" />}
+                <BsX size="28" />
+              : <BsList size="28" />}
             </Button>
           </Box>
         </Flex>
