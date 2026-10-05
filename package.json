@@ -26,7 +26,8 @@
     "clean": "rm -rf .next build static",
     "pre-commit": "npm run type-check && npm run lint && npm run format:check",
     "check:deps": "npx depcheck",
-    "security:audit": "npm audit --audit-level moderate"
+    "security:audit": "npm audit --audit-level moderate",
+    "seo:check": "node scripts/seo-check.mjs"
   },
   "dependencies": {
     "@chakra-ui/react": "^3.37.0",

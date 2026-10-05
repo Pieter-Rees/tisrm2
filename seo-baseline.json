@@ -1,0 +1,856 @@
+{
+  "capturedAt": "2026-10-05T18:38:15.321Z",
+  "site": "https://tisrm.nl",
+  "framework": "Next.js 16.3.8 (App Router) with React 19.3.0, Chakra UI 3.37, TypeScript",
+  "rendering": "Statically prerendered at build time (SSG). All marketing routes appear in build/prerender-manifest.json and production responses carry x-nextjs-prerender: 1 with x-nextjs-cache: HIT. Served by nginx/1.24.0 (Ubuntu) in front of next start (cache-control: s-maxage=31536000).",
+  "metadataLocation": "Root defaults in src/app/metadata.ts (consumed by src/app/layout.tsx) with title.template \"%s | TIS Risk Managers\", metadataBase from pageInfo.url and alternates.canonical \"/\". Per-route metadata is exported from each route layout.tsx via src/lib/seo/buildPageMetadata.ts using the strings in src/lib/seo/pageMeta.ts. robots.txt from src/app/robots.ts, sitemap.xml from src/app/sitemap.ts (URL list from NAVIGATION_ROUTES in src/constants/app.ts, base URL from APP_CONFIG.url). JSON-LD is injected by src/components/seo/JsonLd.tsx using src/lib/seo/organizationSchema.ts, breadcrumbs.ts and pageFaqs.ts.",
+  "capture": {
+    "method": "node fetch with redirect: \"manual\", following Location headers one hop at a time; HTML parsed with jsdom (scripts not executed, so values reflect the server-rendered HTML).",
+    "userAgent": "Chrome-like UA with tisrm-seo-baseline suffix",
+    "visibleBodyHash": "sha256 over document.body.textContent after removing script/style/noscript/template and collapsing all whitespace runs to single spaces.",
+    "visibleBodyHashMethod": "sha256 of body HTML with script/style/noscript/template removed, tags stripped, whitespace collapsed (seo-check.mjs)"
+  },
+  "robotsTxt": {
+    "url": "https://tisrm.nl/robots.txt",
+    "statusCode": 200,
+    "allowAll": true,
+    "userAgents": [
+      "*",
+      "Googlebot",
+      "Bingbot",
+      "GPTBot",
+      "ChatGPT-User",
+      "PerplexityBot",
+      "ClaudeBot",
+      "Claude-SearchBot",
+      "Claude-User",
+      "anthropic-ai"
+    ],
+    "sitemap": "https://tisrm.nl/sitemap.xml",
+    "notes": "Also served on https://www.tisrm.nl/robots.txt with the same content, pointing at the non-www sitemap."
+  },
+  "sitemapXml": {
+    "url": "https://tisrm.nl/sitemap.xml",
+    "statusCode": 200,
+    "contentType": "application/xml",
+    "urlCount": 10,
+    "lastModAll": "2026-10-05T00:00:00.000Z",
+    "urls": [
+      "https://tisrm.nl",
+      "https://tisrm.nl/taxi",
+      "https://tisrm.nl/verzekeringen",
+      "https://tisrm.nl/verzekeringen/particulier",
+      "https://tisrm.nl/verzekeringen/zakelijk",
+      "https://tisrm.nl/risk-management",
+      "https://tisrm.nl/over-ons",
+      "https://tisrm.nl/contact",
+      "https://tisrm.nl/downloads",
+      "https://tisrm.nl/meld-schade"
+    ]
+  },
+  "routesNotInSitemap": [
+    {
+      "url": "https://tisrm.nl/offerte",
+      "statusCode": 200,
+      "finalUrl": "https://tisrm.nl/offerte/stap-1",
+      "redirectHops": 1,
+      "redirectChain": [
+        {
+          "from": "https://tisrm.nl/offerte",
+          "status": 307,
+          "to": "https://tisrm.nl/offerte/stap-1"
+        }
+      ],
+      "title": "Offerte aanvragen | TIS Risk Managers",
+      "notes": "Indexable (robots: index, follow) but absent from the sitemap. 307 is a temporary redirect."
+    },
+    {
+      "url": "https://tisrm.nl/offerte/stap-1",
+      "statusCode": 200,
+      "finalUrl": "https://tisrm.nl/offerte/stap-1",
+      "redirectHops": 0,
+      "redirectChain": [],
+      "title": "Offerte aanvragen | TIS Risk Managers",
+      "canonical": "https://tisrm.nl/offerte",
+      "robots": "index, follow",
+      "notes": "Canonical points at /offerte, which itself 307-redirects back to /offerte/stap-1, so the canonical target is a redirect."
+    },
+    {
+      "url": "https://tisrm.nl/bestanden",
+      "statusCode": 200,
+      "finalUrl": "https://tisrm.nl/downloads",
+      "redirectHops": 1,
+      "redirectChain": [
+        {
+          "from": "https://tisrm.nl/bestanden",
+          "status": 308,
+          "to": "https://tisrm.nl/downloads"
+        }
+      ],
+      "notes": "Permanent redirect configured twice: next.config.mjs redirects() and permanentRedirect('/downloads') in src/app/bestanden/page.tsx. Behaves as expected; not in sitemap (correct)."
+    },
+    {
+      "url": "https://tisrm.nl/offerte/stap-2",
+      "statusCode": 200,
+      "finalUrl": "https://tisrm.nl/offerte/stap-2",
+      "redirectHops": 0,
+      "redirectChain": [],
+      "title": "Offerte aanvragen | TIS Risk Managers",
+      "canonical": "https://tisrm.nl/offerte",
+      "robots": "index, follow",
+      "notes": "Identical title, description and canonical to stap-1 and stap-3; all three inherit the /offerte layout metadata."
+    },
+    {
+      "url": "https://tisrm.nl/offerte/stap-3",
+      "statusCode": 200,
+      "finalUrl": "https://tisrm.nl/offerte/stap-3",
+      "redirectHops": 0,
+      "redirectChain": [],
+      "title": "Offerte aanvragen | TIS Risk Managers",
+      "canonical": "https://tisrm.nl/offerte",
+      "robots": "index, follow",
+      "notes": "Identical title, description and canonical to stap-1 and stap-2; all three inherit the /offerte layout metadata."
+    }
+  ],
+  "hostingAndHeaders": {
+    "server": "nginx/1.24.0 (Ubuntu)",
+    "deployedHostRulesDifferFromRepo": true,
+    "notes": "nginx-config-example.conf in the repo declares `return 301 https://tisrm.nl$request_uri` for www.tisrm.nl (lines 5-12) and for apex http (lines 17-25). Production does not behave that way: http redirects are 302 and https://www.tisrm.nl answers 200 with no redirect at all. The deployed nginx therefore differs from the committed example, or the www vhost is not served by it.",
+    "securityHeadersPresent": [],
+    "securityHeadersAbsent": [
+      "strict-transport-security",
+      "content-security-policy",
+      "x-frame-options",
+      "referrer-policy",
+      "permissions-policy",
+      "x-content-type-options"
+    ],
+    "extraServerNamesInExampleConfig": [
+      "mail.tisrm.nl",
+      "webmail.tisrm.nl",
+      "admin.tisrm.nl"
+    ],
+    "extraServerNamesProbe": "https://mail.tisrm.nl/ does not accept connections (curl exit: could not connect), so it is not a live duplicate-content host despite appearing in the example config's server_name list."
+  },
+  "baseUrlConfiguration": {
+    "siteUrl": "https://tisrm.nl hardcoded in APP_CONFIG.url (src/constants/app.ts) and used by sitemap.ts, robots.ts and metadataBase; not environment-driven.",
+    "envKeysPresent": [
+      "DATABASE_URL",
+      "PAYLOAD_SECRET",
+      "NEXT_PUBLIC_SERVER_URL"
+    ],
+    "notes": "NEXT_PUBLIC_SERVER_URL is defined in .env.local but not referenced anywhere in application code. NEXT_PUBLIC_API_URL is referenced in src/lib/utils.ts but is not in .env.local. No search-console verification tokens are set in metadata."
+  },
+  "llmsTxtContradiction": {
+    "file": "public/llms.txt line 40",
+    "claim": "- Offerte-aanvraagflow: https://tisrm.nl/offerte (noindex conversiestappen)",
+    "reality": "All of /offerte, /offerte/stap-1, /offerte/stap-2 and /offerte/stap-3 serve `robots: index, follow` in production. No noIndex is set in src/lib/seo/pageMeta.ts for the quote flow."
+  },
+  "notFoundBehaviour": {
+    "probeUrl": "https://tisrm.nl/deze-pagina-bestaat-niet-seo-probe",
+    "statusCode": 404,
+    "robotsMetas": [
+      "noindex",
+      "index, follow"
+    ],
+    "canonical": "https://tisrm.nl",
+    "h1": "404 - Page Not Found",
+    "title": "Onafhankelijk verzekeringsadvies Amsterdam | TIS Risk Managers",
+    "notes": "Returns a correct 404 status, but emits two conflicting robots metas, canonicals to the homepage, reuses the homepage title, and the H1 is in English on an nl site."
+  },
+  "pages": [
+    {
+      "inputUrl": "https://tisrm.nl/",
+      "kind": "sitemapUrl",
+      "statusCode": 200,
+      "finalUrl": "https://tisrm.nl/",
+      "redirectHops": 0,
+      "redirectChain": [],
+      "contentType": "text/html; charset=utf-8",
+      "xRobotsTag": null,
+      "title": "Onafhankelijk verzekeringsadvies Amsterdam | TIS Risk Managers",
+      "titleLength": 62,
+      "metaDescription": "Onafhankelijk verzekeringsadvies en risk management in Amsterdam. Maatwerk voor particulier, zakelijk en taxivervoer, met snelle digitale schadeafhandeling.",
+      "metaDescriptionLength": 156,
+      "canonical": "https://tisrm.nl",
+      "robots": "index, follow",
+      "htmlLang": "nl",
+      "h1": "TIS Risk Managers — onafhankelijk verzekeringsadvies in Amsterdam",
+      "h1Count": 1,
+      "h1All": [
+        "TIS Risk Managers — onafhankelijk verzekeringsadvies in Amsterdam"
+      ],
+      "openGraph": {
+        "og:title": "Onafhankelijk verzekeringsadvies Amsterdam",
+        "og:description": "Onafhankelijk verzekeringsadvies en risk management in Amsterdam. Maatwerk voor particulier, zakelijk en taxivervoer, met snelle digitale schadeafhandeling.",
+        "og:url": "https://tisrm.nl",
+        "og:site_name": "TIS Risk Managers",
+        "og:locale": "nl_NL",
+        "og:image": "https://tisrm.nl/1.webp",
+        "og:image:width": "1200",
+        "og:image:height": "630",
+        "og:image:alt": "TIS Risk Managers",
+        "og:type": "website"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:title": "Onafhankelijk verzekeringsadvies Amsterdam",
+        "twitter:description": "Onafhankelijk verzekeringsadvies en risk management in Amsterdam. Maatwerk voor particulier, zakelijk en taxivervoer, met snelle digitale schadeafhandeling.",
+        "twitter:image": "https://tisrm.nl/1.webp"
+      },
+      "jsonLdPresent": true,
+      "jsonLdTypes": [
+        "InsuranceAgency",
+        "LocalBusiness",
+        "WebSite",
+        "WebPage",
+        "FAQPage"
+      ],
+      "visibleBodyHash": "sha256:ed831fff1ba83eefa4324dd6e46bc38b1510e24302f0381cd214f3556fff2845",
+      "visibleBodyLength": 3226,
+      "notes": "Canonical is https://tisrm.nl (no trailing slash) while the served URL is https://tisrm.nl/.",
+      "navHash": null
+    },
+    {
+      "inputUrl": "https://tisrm.nl/taxi",
+      "kind": "sitemapUrl",
+      "statusCode": 200,
+      "finalUrl": "https://tisrm.nl/taxi",
+      "redirectHops": 0,
+      "redirectChain": [],
+      "contentType": "text/html; charset=utf-8",
+      "xRobotsTag": null,
+      "title": "Taxi- en personenvervoer verzekeringen | TIS Risk Managers",
+      "titleLength": 58,
+      "metaDescription": "Specialistische taxi- en personenvervoer verzekeringen. TIS Risk Managers kent de risico’s van de taxibranche.",
+      "metaDescriptionLength": 110,
+      "canonical": "https://tisrm.nl/taxi",
+      "robots": "index, follow",
+      "htmlLang": "nl",
+      "h1": "Personenvervoer",
+      "h1Count": 1,
+      "h1All": [
+        "Personenvervoer"
+      ],
+      "openGraph": {
+        "og:title": "Taxi- en personenvervoer verzekeringen",
+        "og:description": "Specialistische taxi- en personenvervoer verzekeringen. TIS Risk Managers kent de risico’s van de taxibranche.",
+        "og:url": "https://tisrm.nl/taxi",
+        "og:site_name": "TIS Risk Managers",
+        "og:locale": "nl_NL",
+        "og:image": "https://tisrm.nl/1.webp",
+        "og:image:width": "1200",
+        "og:image:height": "630",
+        "og:image:alt": "TIS Risk Managers",
+        "og:type": "website"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:title": "Taxi- en personenvervoer verzekeringen",
+        "twitter:description": "Specialistische taxi- en personenvervoer verzekeringen. TIS Risk Managers kent de risico’s van de taxibranche.",
+        "twitter:image": "https://tisrm.nl/1.webp"
+      },
+      "jsonLdPresent": true,
+      "jsonLdTypes": [
+        "InsuranceAgency",
+        "LocalBusiness",
+        "WebSite",
+        "WebPage",
+        "Service",
+        "BreadcrumbList",
+        "FAQPage"
+      ],
+      "visibleBodyHash": "sha256:4118d997c7a92f4d35867f2482ab2349971f36b5249c7c5e9a1ea1f409ebd531",
+      "visibleBodyLength": 2729,
+      "notes": "",
+      "navHash": "sha256:49d31b2bd11b69f8ec7968510d03dfe89a0c1f43f0260e3631ab72c8609ebc37"
+    },
+    {
+      "inputUrl": "https://tisrm.nl/verzekeringen",
+      "kind": "sitemapUrl",
+      "statusCode": 200,
+      "finalUrl": "https://tisrm.nl/verzekeringen",
+      "redirectHops": 0,
+      "redirectChain": [],
+      "contentType": "text/html; charset=utf-8",
+      "xRobotsTag": null,
+      "title": "Verzekeringen | TIS Risk Managers",
+      "titleLength": 33,
+      "metaDescription": "Overzicht van particuliere en zakelijke verzekeringen bij TIS Risk Managers. Maatwerk in plaats van standaardpolissen.",
+      "metaDescriptionLength": 118,
+      "canonical": "https://tisrm.nl/verzekeringen",
+      "robots": "index, follow",
+      "htmlLang": "nl",
+      "h1": "Verzekeringen",
+      "h1Count": 1,
+      "h1All": [
+        "Verzekeringen"
+      ],
+      "openGraph": {
+        "og:title": "Verzekeringen",
+        "og:description": "Overzicht van particuliere en zakelijke verzekeringen bij TIS Risk Managers. Maatwerk in plaats van standaardpolissen.",
+        "og:url": "https://tisrm.nl/verzekeringen",
+        "og:site_name": "TIS Risk Managers",
+        "og:locale": "nl_NL",
+        "og:image": "https://tisrm.nl/1.webp",
+        "og:image:width": "1200",
+        "og:image:height": "630",
+        "og:image:alt": "TIS Risk Managers",
+        "og:type": "website"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:title": "Verzekeringen",
+        "twitter:description": "Overzicht van particuliere en zakelijke verzekeringen bij TIS Risk Managers. Maatwerk in plaats van standaardpolissen.",
+        "twitter:image": "https://tisrm.nl/1.webp"
+      },
+      "jsonLdPresent": true,
+      "jsonLdTypes": [
+        "InsuranceAgency",
+        "LocalBusiness",
+        "WebSite",
+        "WebPage",
+        "Service",
+        "BreadcrumbList"
+      ],
+      "visibleBodyHash": "sha256:0b77390bd70a8df73342f98741a47185d309746bc50bce333ee6a454ad475521",
+      "visibleBodyLength": 1631,
+      "notes": "",
+      "navHash": "sha256:7cf173830a14560140f87d3af77395a8f01e1279ac7691e40b0557004a9ee06c"
+    },
+    {
+      "inputUrl": "https://tisrm.nl/verzekeringen/particulier",
+      "kind": "sitemapUrl",
+      "statusCode": 200,
+      "finalUrl": "https://tisrm.nl/verzekeringen/particulier",
+      "redirectHops": 0,
+      "redirectChain": [],
+      "contentType": "text/html; charset=utf-8",
+      "xRobotsTag": null,
+      "title": "Particuliere verzekeringen",
+      "titleLength": 26,
+      "metaDescription": "Particuliere verzekeringen op maat via TIS Risk Managers. Persoonlijk advies voor uw woning, aansprakelijkheid en meer.",
+      "metaDescriptionLength": 119,
+      "canonical": "https://tisrm.nl/verzekeringen/particulier",
+      "robots": "index, follow",
+      "htmlLang": "nl",
+      "h1": "Particulier",
+      "h1Count": 1,
+      "h1All": [
+        "Particulier"
+      ],
+      "openGraph": {
+        "og:title": "Particuliere verzekeringen",
+        "og:description": "Particuliere verzekeringen op maat via TIS Risk Managers. Persoonlijk advies voor uw woning, aansprakelijkheid en meer.",
+        "og:url": "https://tisrm.nl/verzekeringen/particulier",
+        "og:site_name": "TIS Risk Managers",
+        "og:locale": "nl_NL",
+        "og:image": "https://tisrm.nl/1.webp",
+        "og:image:width": "1200",
+        "og:image:height": "630",
+        "og:image:alt": "TIS Risk Managers",
+        "og:type": "website"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:title": "Particuliere verzekeringen",
+        "twitter:description": "Particuliere verzekeringen op maat via TIS Risk Managers. Persoonlijk advies voor uw woning, aansprakelijkheid en meer.",
+        "twitter:image": "https://tisrm.nl/1.webp"
+      },
+      "jsonLdPresent": true,
+      "jsonLdTypes": [
+        "InsuranceAgency",
+        "LocalBusiness",
+        "WebSite",
+        "WebPage",
+        "Service",
+        "BreadcrumbList",
+        "FAQPage"
+      ],
+      "visibleBodyHash": "sha256:4666eeb91e0e4eac9e8f85f555b8cf9adac04ee52ea17476a051704e006baa00",
+      "visibleBodyLength": 2391,
+      "notes": "Title has no \"| TIS Risk Managers\" brand suffix, unlike the other routes.",
+      "navHash": "sha256:25a656e616a8763b1e04f58630c3c573d607984976445ac3dda92feefc843253"
+    },
+    {
+      "inputUrl": "https://tisrm.nl/verzekeringen/zakelijk",
+      "kind": "sitemapUrl",
+      "statusCode": 200,
+      "finalUrl": "https://tisrm.nl/verzekeringen/zakelijk",
+      "redirectHops": 0,
+      "redirectChain": [],
+      "contentType": "text/html; charset=utf-8",
+      "xRobotsTag": null,
+      "title": "Zakelijke verzekeringen",
+      "titleLength": 23,
+      "metaDescription": "Zakelijke verzekeringen en risk management voor bedrijven. TIS Risk Managers adviseert over dekking die bij uw risico past.",
+      "metaDescriptionLength": 123,
+      "canonical": "https://tisrm.nl/verzekeringen/zakelijk",
+      "robots": "index, follow",
+      "htmlLang": "nl",
+      "h1": "Zakelijk",
+      "h1Count": 1,
+      "h1All": [
+        "Zakelijk"
+      ],
+      "openGraph": {
+        "og:title": "Zakelijke verzekeringen",
+        "og:description": "Zakelijke verzekeringen en risk management voor bedrijven. TIS Risk Managers adviseert over dekking die bij uw risico past.",
+        "og:url": "https://tisrm.nl/verzekeringen/zakelijk",
+        "og:site_name": "TIS Risk Managers",
+        "og:locale": "nl_NL",
+        "og:image": "https://tisrm.nl/1.webp",
+        "og:image:width": "1200",
+        "og:image:height": "630",
+        "og:image:alt": "TIS Risk Managers",
+        "og:type": "website"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:title": "Zakelijke verzekeringen",
+        "twitter:description": "Zakelijke verzekeringen en risk management voor bedrijven. TIS Risk Managers adviseert over dekking die bij uw risico past.",
+        "twitter:image": "https://tisrm.nl/1.webp"
+      },
+      "jsonLdPresent": true,
+      "jsonLdTypes": [
+        "InsuranceAgency",
+        "LocalBusiness",
+        "WebSite",
+        "WebPage",
+        "Service",
+        "BreadcrumbList",
+        "FAQPage"
+      ],
+      "visibleBodyHash": "sha256:693bbd3ed1f42d3669d666f8fbc1068c060bce4a1905e2b1742b8da223c0d7c3",
+      "visibleBodyLength": 2936,
+      "notes": "Title has no \"| TIS Risk Managers\" brand suffix, unlike the other routes.",
+      "navHash": "sha256:3e534b9d2323d965b07162259683c6975b8a6216d28cd3f7ac1535930e22eff5"
+    },
+    {
+      "inputUrl": "https://tisrm.nl/risk-management",
+      "kind": "sitemapUrl",
+      "statusCode": 200,
+      "finalUrl": "https://tisrm.nl/risk-management",
+      "redirectHops": 0,
+      "redirectChain": [],
+      "contentType": "text/html; charset=utf-8",
+      "xRobotsTag": null,
+      "title": "Risk management | TIS Risk Managers",
+      "titleLength": 35,
+      "metaDescription": "Professioneel risk management door GRMC-geregistreerde adviseurs. Inventariseer en beheers risico’s met TIS Risk Managers.",
+      "metaDescriptionLength": 122,
+      "canonical": "https://tisrm.nl/risk-management",
+      "robots": "index, follow",
+      "htmlLang": "nl",
+      "h1": "Risk Management",
+      "h1Count": 1,
+      "h1All": [
+        "Risk Management"
+      ],
+      "openGraph": {
+        "og:title": "Risk management",
+        "og:description": "Professioneel risk management door GRMC-geregistreerde adviseurs. Inventariseer en beheers risico’s met TIS Risk Managers.",
+        "og:url": "https://tisrm.nl/risk-management",
+        "og:site_name": "TIS Risk Managers",
+        "og:locale": "nl_NL",
+        "og:image": "https://tisrm.nl/1.webp",
+        "og:image:width": "1200",
+        "og:image:height": "630",
+        "og:image:alt": "TIS Risk Managers",
+        "og:type": "website"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:title": "Risk management",
+        "twitter:description": "Professioneel risk management door GRMC-geregistreerde adviseurs. Inventariseer en beheers risico’s met TIS Risk Managers.",
+        "twitter:image": "https://tisrm.nl/1.webp"
+      },
+      "jsonLdPresent": true,
+      "jsonLdTypes": [
+        "InsuranceAgency",
+        "LocalBusiness",
+        "WebSite",
+        "WebPage",
+        "Service",
+        "BreadcrumbList",
+        "FAQPage"
+      ],
+      "visibleBodyHash": "sha256:51681789f21d0f497b61f01bdc877fa97d3e3f0f7120c595342376cb383d1212",
+      "visibleBodyLength": 2677,
+      "notes": "",
+      "navHash": "sha256:b28348d78a091b0513140ab4aa4110ec042fdfbe271080d478de83e227cb983e"
+    },
+    {
+      "inputUrl": "https://tisrm.nl/over-ons",
+      "kind": "sitemapUrl",
+      "statusCode": 200,
+      "finalUrl": "https://tisrm.nl/over-ons",
+      "redirectHops": 0,
+      "redirectChain": [],
+      "contentType": "text/html; charset=utf-8",
+      "xRobotsTag": null,
+      "title": "Over ons | TIS Risk Managers",
+      "titleLength": 28,
+      "metaDescription": "Leer TIS Risk Managers kennen: gecertificeerde risicomanagers in Amsterdam met focus op maatwerkverzekeringen en snelle schadeafhandeling.",
+      "metaDescriptionLength": 138,
+      "canonical": "https://tisrm.nl/over-ons",
+      "robots": "index, follow",
+      "htmlLang": "nl",
+      "h1": "Over ons",
+      "h1Count": 1,
+      "h1All": [
+        "Over ons"
+      ],
+      "openGraph": {
+        "og:title": "Over ons",
+        "og:description": "Leer TIS Risk Managers kennen: gecertificeerde risicomanagers in Amsterdam met focus op maatwerkverzekeringen en snelle schadeafhandeling.",
+        "og:url": "https://tisrm.nl/over-ons",
+        "og:site_name": "TIS Risk Managers",
+        "og:locale": "nl_NL",
+        "og:image": "https://tisrm.nl/1.webp",
+        "og:image:width": "1200",
+        "og:image:height": "630",
+        "og:image:alt": "TIS Risk Managers",
+        "og:type": "website"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:title": "Over ons",
+        "twitter:description": "Leer TIS Risk Managers kennen: gecertificeerde risicomanagers in Amsterdam met focus op maatwerkverzekeringen en snelle schadeafhandeling.",
+        "twitter:image": "https://tisrm.nl/1.webp"
+      },
+      "jsonLdPresent": true,
+      "jsonLdTypes": [
+        "InsuranceAgency",
+        "LocalBusiness",
+        "WebSite",
+        "WebPage"
+      ],
+      "visibleBodyHash": "sha256:094ff80970a08e8eb2c135951526c0d2908d02b099fbf6e1afc340950457e53b",
+      "visibleBodyLength": 1879,
+      "notes": "",
+      "navHash": null
+    },
+    {
+      "inputUrl": "https://tisrm.nl/contact",
+      "kind": "sitemapUrl",
+      "statusCode": 200,
+      "finalUrl": "https://tisrm.nl/contact",
+      "redirectHops": 0,
+      "redirectChain": [],
+      "contentType": "text/html; charset=utf-8",
+      "xRobotsTag": null,
+      "title": "Contact | TIS Risk Managers",
+      "titleLength": 27,
+      "metaDescription": "Neem contact op met TIS Risk Managers in Amsterdam. Bel +31 20 636 8191 of mail info@tisrm.nl voor verzekeringsadvies op maat.",
+      "metaDescriptionLength": 126,
+      "canonical": "https://tisrm.nl/contact",
+      "robots": "index, follow",
+      "htmlLang": "nl",
+      "h1": "Contact",
+      "h1Count": 1,
+      "h1All": [
+        "Contact"
+      ],
+      "openGraph": {
+        "og:title": "Contact",
+        "og:description": "Neem contact op met TIS Risk Managers in Amsterdam. Bel +31 20 636 8191 of mail info@tisrm.nl voor verzekeringsadvies op maat.",
+        "og:url": "https://tisrm.nl/contact",
+        "og:site_name": "TIS Risk Managers",
+        "og:locale": "nl_NL",
+        "og:image": "https://tisrm.nl/1.webp",
+        "og:image:width": "1200",
+        "og:image:height": "630",
+        "og:image:alt": "TIS Risk Managers",
+        "og:type": "website"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:title": "Contact",
+        "twitter:description": "Neem contact op met TIS Risk Managers in Amsterdam. Bel +31 20 636 8191 of mail info@tisrm.nl voor verzekeringsadvies op maat.",
+        "twitter:image": "https://tisrm.nl/1.webp"
+      },
+      "jsonLdPresent": true,
+      "jsonLdTypes": [
+        "InsuranceAgency",
+        "LocalBusiness",
+        "WebSite",
+        "WebPage"
+      ],
+      "visibleBodyHash": "sha256:27038a80cca7ecfd23492c3fb4fe635d8b67647d8af46a3551d87b44c1fbbede",
+      "visibleBodyLength": 943,
+      "notes": "",
+      "navHash": null
+    },
+    {
+      "inputUrl": "https://tisrm.nl/downloads",
+      "kind": "sitemapUrl",
+      "statusCode": 200,
+      "finalUrl": "https://tisrm.nl/downloads",
+      "redirectHops": 0,
+      "redirectChain": [],
+      "contentType": "text/html; charset=utf-8",
+      "xRobotsTag": null,
+      "title": "Downloads | TIS Risk Managers",
+      "titleLength": 29,
+      "metaDescription": "Download documenten, formulieren en voorwaarden van TIS Risk Managers, waaronder schadeformulieren en privacyverklaring.",
+      "metaDescriptionLength": 120,
+      "canonical": "https://tisrm.nl/downloads",
+      "robots": "index, follow",
+      "htmlLang": "nl",
+      "h1": "Downloads",
+      "h1Count": 1,
+      "h1All": [
+        "Downloads"
+      ],
+      "openGraph": {
+        "og:title": "Downloads",
+        "og:description": "Download documenten, formulieren en voorwaarden van TIS Risk Managers, waaronder schadeformulieren en privacyverklaring.",
+        "og:url": "https://tisrm.nl/downloads",
+        "og:site_name": "TIS Risk Managers",
+        "og:locale": "nl_NL",
+        "og:image": "https://tisrm.nl/1.webp",
+        "og:image:width": "1200",
+        "og:image:height": "630",
+        "og:image:alt": "TIS Risk Managers",
+        "og:type": "website"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:title": "Downloads",
+        "twitter:description": "Download documenten, formulieren en voorwaarden van TIS Risk Managers, waaronder schadeformulieren en privacyverklaring.",
+        "twitter:image": "https://tisrm.nl/1.webp"
+      },
+      "jsonLdPresent": true,
+      "jsonLdTypes": [
+        "InsuranceAgency",
+        "LocalBusiness",
+        "WebSite",
+        "WebPage"
+      ],
+      "visibleBodyHash": "sha256:7fd1b795f204c8acdc125e103d56c539fd1ce99734325693adf4f145e5c85291",
+      "visibleBodyLength": 975,
+      "notes": "",
+      "navHash": null
+    },
+    {
+      "inputUrl": "https://tisrm.nl/meld-schade",
+      "kind": "sitemapUrl",
+      "statusCode": 200,
+      "finalUrl": "https://tisrm.nl/meld-schade",
+      "redirectHops": 0,
+      "redirectChain": [],
+      "contentType": "text/html; charset=utf-8",
+      "xRobotsTag": null,
+      "title": "Schade melden | TIS Risk Managers",
+      "titleLength": 33,
+      "metaDescription": "Meld eenvoudig schade bij TIS Risk Managers. Digitale schadeafhandeling voor snelle en vakkundige afwikkeling.",
+      "metaDescriptionLength": 110,
+      "canonical": "https://tisrm.nl/meld-schade",
+      "robots": "index, follow",
+      "htmlLang": "nl",
+      "h1": "Schade melden",
+      "h1Count": 1,
+      "h1All": [
+        "Schade melden"
+      ],
+      "openGraph": {
+        "og:title": "Schade melden",
+        "og:description": "Meld eenvoudig schade bij TIS Risk Managers. Digitale schadeafhandeling voor snelle en vakkundige afwikkeling.",
+        "og:url": "https://tisrm.nl/meld-schade",
+        "og:site_name": "TIS Risk Managers",
+        "og:locale": "nl_NL",
+        "og:image": "https://tisrm.nl/1.webp",
+        "og:image:width": "1200",
+        "og:image:height": "630",
+        "og:image:alt": "TIS Risk Managers",
+        "og:type": "website"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:title": "Schade melden",
+        "twitter:description": "Meld eenvoudig schade bij TIS Risk Managers. Digitale schadeafhandeling voor snelle en vakkundige afwikkeling.",
+        "twitter:image": "https://tisrm.nl/1.webp"
+      },
+      "jsonLdPresent": true,
+      "jsonLdTypes": [
+        "InsuranceAgency",
+        "LocalBusiness",
+        "WebSite",
+        "WebPage"
+      ],
+      "visibleBodyHash": "sha256:ee30ec967102165f7dd2a862fb3e98e745e9e8a785739b161e2bdd3a16f78fb9",
+      "visibleBodyLength": 842,
+      "notes": "",
+      "navHash": null
+    },
+    {
+      "inputUrl": "http://tisrm.nl",
+      "kind": "hostVariant",
+      "statusCode": 200,
+      "finalUrl": "https://tisrm.nl/",
+      "redirectHops": 1,
+      "redirectChain": [
+        {
+          "from": "http://tisrm.nl",
+          "status": 302,
+          "to": "https://tisrm.nl/"
+        }
+      ],
+      "contentType": "text/html; charset=utf-8",
+      "xRobotsTag": null,
+      "title": "Onafhankelijk verzekeringsadvies Amsterdam | TIS Risk Managers",
+      "titleLength": 62,
+      "metaDescription": "Onafhankelijk verzekeringsadvies en risk management in Amsterdam. Maatwerk voor particulier, zakelijk en taxivervoer, met snelle digitale schadeafhandeling.",
+      "metaDescriptionLength": 156,
+      "canonical": "https://tisrm.nl",
+      "robots": "index, follow",
+      "htmlLang": "nl",
+      "h1": "TIS Risk Managers — onafhankelijk verzekeringsadvies in Amsterdam",
+      "h1Count": 1,
+      "h1All": [
+        "TIS Risk Managers — onafhankelijk verzekeringsadvies in Amsterdam"
+      ],
+      "openGraph": {
+        "og:title": "Onafhankelijk verzekeringsadvies Amsterdam",
+        "og:description": "Onafhankelijk verzekeringsadvies en risk management in Amsterdam. Maatwerk voor particulier, zakelijk en taxivervoer, met snelle digitale schadeafhandeling.",
+        "og:url": "https://tisrm.nl",
+        "og:site_name": "TIS Risk Managers",
+        "og:locale": "nl_NL",
+        "og:image": "https://tisrm.nl/1.webp",
+        "og:image:width": "1200",
+        "og:image:height": "630",
+        "og:image:alt": "TIS Risk Managers",
+        "og:type": "website"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:title": "Onafhankelijk verzekeringsadvies Amsterdam",
+        "twitter:description": "Onafhankelijk verzekeringsadvies en risk management in Amsterdam. Maatwerk voor particulier, zakelijk en taxivervoer, met snelle digitale schadeafhandeling.",
+        "twitter:image": "https://tisrm.nl/1.webp"
+      },
+      "jsonLdPresent": true,
+      "jsonLdTypes": [
+        "InsuranceAgency",
+        "LocalBusiness",
+        "WebSite",
+        "WebPage",
+        "FAQPage"
+      ],
+      "visibleBodyHash": "sha256:ed831fff1ba83eefa4324dd6e46bc38b1510e24302f0381cd214f3556fff2845",
+      "visibleBodyLength": 3226,
+      "notes": "http -> https uses 302 (temporary) instead of 301. No www normalisation applied.",
+      "navHash": null
+    },
+    {
+      "inputUrl": "http://www.tisrm.nl",
+      "kind": "hostVariant",
+      "statusCode": 200,
+      "finalUrl": "https://www.tisrm.nl/",
+      "redirectHops": 1,
+      "redirectChain": [
+        {
+          "from": "http://www.tisrm.nl",
+          "status": 302,
+          "to": "https://www.tisrm.nl/"
+        }
+      ],
+      "contentType": "text/html; charset=utf-8",
+      "xRobotsTag": null,
+      "title": "Onafhankelijk verzekeringsadvies Amsterdam | TIS Risk Managers",
+      "titleLength": 62,
+      "metaDescription": "Onafhankelijk verzekeringsadvies en risk management in Amsterdam. Maatwerk voor particulier, zakelijk en taxivervoer, met snelle digitale schadeafhandeling.",
+      "metaDescriptionLength": 156,
+      "canonical": "https://tisrm.nl",
+      "robots": "index, follow",
+      "htmlLang": "nl",
+      "h1": "TIS Risk Managers — onafhankelijk verzekeringsadvies in Amsterdam",
+      "h1Count": 1,
+      "h1All": [
+        "TIS Risk Managers — onafhankelijk verzekeringsadvies in Amsterdam"
+      ],
+      "openGraph": {
+        "og:title": "Onafhankelijk verzekeringsadvies Amsterdam",
+        "og:description": "Onafhankelijk verzekeringsadvies en risk management in Amsterdam. Maatwerk voor particulier, zakelijk en taxivervoer, met snelle digitale schadeafhandeling.",
+        "og:url": "https://tisrm.nl",
+        "og:site_name": "TIS Risk Managers",
+        "og:locale": "nl_NL",
+        "og:image": "https://tisrm.nl/1.webp",
+        "og:image:width": "1200",
+        "og:image:height": "630",
+        "og:image:alt": "TIS Risk Managers",
+        "og:type": "website"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:title": "Onafhankelijk verzekeringsadvies Amsterdam",
+        "twitter:description": "Onafhankelijk verzekeringsadvies en risk management in Amsterdam. Maatwerk voor particulier, zakelijk en taxivervoer, met snelle digitale schadeafhandeling.",
+        "twitter:image": "https://tisrm.nl/1.webp"
+      },
+      "jsonLdPresent": true,
+      "jsonLdTypes": [
+        "InsuranceAgency",
+        "LocalBusiness",
+        "WebSite",
+        "WebPage",
+        "FAQPage"
+      ],
+      "visibleBodyHash": "sha256:ed831fff1ba83eefa4324dd6e46bc38b1510e24302f0381cd214f3556fff2845",
+      "visibleBodyLength": 3226,
+      "notes": "http -> https uses 302 and stays on the www host; no redirect to the canonical non-www host.",
+      "navHash": null
+    },
+    {
+      "inputUrl": "https://www.tisrm.nl",
+      "kind": "hostVariant",
+      "statusCode": 200,
+      "finalUrl": "https://www.tisrm.nl",
+      "redirectHops": 0,
+      "redirectChain": [],
+      "contentType": "text/html; charset=utf-8",
+      "xRobotsTag": null,
+      "title": "Onafhankelijk verzekeringsadvies Amsterdam | TIS Risk Managers",
+      "titleLength": 62,
+      "metaDescription": "Onafhankelijk verzekeringsadvies en risk management in Amsterdam. Maatwerk voor particulier, zakelijk en taxivervoer, met snelle digitale schadeafhandeling.",
+      "metaDescriptionLength": 156,
+      "canonical": "https://tisrm.nl",
+      "robots": "index, follow",
+      "htmlLang": "nl",
+      "h1": "TIS Risk Managers — onafhankelijk verzekeringsadvies in Amsterdam",
+      "h1Count": 1,
+      "h1All": [
+        "TIS Risk Managers — onafhankelijk verzekeringsadvies in Amsterdam"
+      ],
+      "openGraph": {
+        "og:title": "Onafhankelijk verzekeringsadvies Amsterdam",
+        "og:description": "Onafhankelijk verzekeringsadvies en risk management in Amsterdam. Maatwerk voor particulier, zakelijk en taxivervoer, met snelle digitale schadeafhandeling.",
+        "og:url": "https://tisrm.nl",
+        "og:site_name": "TIS Risk Managers",
+        "og:locale": "nl_NL",
+        "og:image": "https://tisrm.nl/1.webp",
+        "og:image:width": "1200",
+        "og:image:height": "630",
+        "og:image:alt": "TIS Risk Managers",
+        "og:type": "website"
+      },
+      "twitter": {
+        "twitter:card": "summary_large_image",
+        "twitter:title": "Onafhankelijk verzekeringsadvies Amsterdam",
+        "twitter:description": "Onafhankelijk verzekeringsadvies en risk management in Amsterdam. Maatwerk voor particulier, zakelijk en taxivervoer, met snelle digitale schadeafhandeling.",
+        "twitter:image": "https://tisrm.nl/1.webp"
+      },
+      "jsonLdPresent": true,
+      "jsonLdTypes": [
+        "InsuranceAgency",
+        "LocalBusiness",
+        "WebSite",
+        "WebPage",
+        "FAQPage"
+      ],
+      "visibleBodyHash": "sha256:ed831fff1ba83eefa4324dd6e46bc38b1510e24302f0381cd214f3556fff2845",
+      "visibleBodyLength": 3226,
+      "notes": "Serves 200 on the www host with identical body (same ETag/body hash as non-www). Duplicate host is only mitigated by the canonical tag, there is no 301 to https://tisrm.nl.",
+      "navHash": null
+    }
+  ]
+}
