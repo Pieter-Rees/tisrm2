@@ -15,9 +15,36 @@ import {
 describe('SEO schema helpers', () => {
   it('builds organization schema with stable @id', () => {
     const schema = getOrganizationSchema();
-    expect(schema['@type']).toEqual(['InsuranceAgency', 'LocalBusiness']);
+    expect(schema['@type']).toBe('InsuranceAgency');
     expect(schema['@id']).toBe('https://tisrm.nl/#organization');
     expect(schema.url).toBe('https://tisrm.nl');
+  });
+
+  it('describes the organization with the facts published on the site', () => {
+    const schema = getOrganizationSchema();
+    expect(schema.name).toBe('TIS Risk Managers');
+    expect(schema.telephone).toBe('+31 20 636 8191');
+    expect(schema.email).toBe('info@tisrm.nl');
+    expect(schema.logo).toBe('https://tisrm.nl/logo.svg');
+    expect(schema.address).toEqual({
+      '@type': 'PostalAddress',
+      streetAddress: 'Muiderstraat 1',
+      postalCode: '1011 PZ',
+      addressLocality: 'Amsterdam',
+      addressCountry: 'NL',
+    });
+    expect(schema.sameAs).toEqual(['https://www.linkedin.com/company/tisrm/']);
+    expect(schema.parentOrganization).toEqual({
+      '@type': 'Organization',
+      name: 'ENTO Groep',
+    });
+    expect(schema.knowsAbout).toEqual([
+      'Taxiverzekering',
+      'Personenvervoer verzekering',
+      'Zakelijke verzekeringen',
+      'Particuliere verzekeringen',
+      'Risk management',
+    ]);
   });
 
   it('builds website schema with stable @id', () => {
@@ -45,15 +72,21 @@ describe('SEO schema helpers', () => {
 
   it('builds service schema for service pages', () => {
     const schema = getServiceSchema({
-      name: 'Taxi- en personenvervoer verzekeringen',
+      name: 'Taxiverzekering',
       description: 'Specialistische taxi verzekeringen',
       path: '/taxi',
-      serviceType: 'Taxi- en personenvervoer verzekeringen',
+      serviceType: 'Taxiverzekering',
     });
     expect(schema['@type']).toBe('Service');
-    expect(schema.serviceType).toBe('Taxi- en personenvervoer verzekeringen');
+    expect(schema.name).toBe('Taxiverzekering');
+    expect(schema.serviceType).toBe('Taxiverzekering');
+    expect(schema.url).toBe('https://tisrm.nl/taxi');
     expect(schema.provider).toEqual({
       '@id': 'https://tisrm.nl/#organization',
+    });
+    expect(schema.areaServed).toEqual({
+      '@type': 'Country',
+      name: 'Nederland',
     });
   });
 

@@ -23,7 +23,7 @@ export default function VerzekeringenPage() {
       />
       <JsonLd
         data={getServiceSchema({
-          name: page.title,
+          name: SERVICE_TYPES.insurance,
           description: page.description,
           path: page.path,
           serviceType: SERVICE_TYPES.insurance,

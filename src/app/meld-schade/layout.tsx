@@ -12,6 +12,8 @@ export default function MeldSchadeLayout({
   children: ReactNode;
 }) {
   return (
-    <WebPageJsonLdLayout pageKey="damageReport">{children}</WebPageJsonLdLayout>
+    <WebPageJsonLdLayout pageKey="damageReport" withBreadcrumbs>
+      {children}
+    </WebPageJsonLdLayout>
   );
 }

@@ -8,6 +8,8 @@ export const metadata = buildPageMetadata(PAGE_META.about);
 
 export default function OverOnsLayout({ children }: { children: ReactNode }) {
   return (
-    <WebPageJsonLdLayout pageKey="about">{children}</WebPageJsonLdLayout>
+    <WebPageJsonLdLayout pageKey="about" withBreadcrumbs>
+      {children}
+    </WebPageJsonLdLayout>
   );
 }

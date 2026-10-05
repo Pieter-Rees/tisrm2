@@ -8,6 +8,8 @@ export const metadata = buildPageMetadata(PAGE_META.contact);
 
 export default function ContactLayout({ children }: { children: ReactNode }) {
   return (
-    <WebPageJsonLdLayout pageKey="contact">{children}</WebPageJsonLdLayout>
+    <WebPageJsonLdLayout pageKey="contact" withBreadcrumbs>
+      {children}
+    </WebPageJsonLdLayout>
   );
 }

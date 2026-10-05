@@ -9,17 +9,26 @@ import {
 const organizationId = `${APP_CONFIG.url}/#organization`;
 const websiteId = `${APP_CONFIG.url}/#website`;
 
+/** Topics TIS advises on; keep in sync with the service pages. */
+export const ORGANIZATION_KNOWS_ABOUT = [
+  'Taxiverzekering',
+  'Personenvervoer verzekering',
+  'Zakelijke verzekeringen',
+  'Particuliere verzekeringen',
+  'Risk management',
+] as const;
+
 export function getOrganizationSchema() {
   return {
     '@context': 'https://schema.org',
-    '@type': ['InsuranceAgency', 'LocalBusiness'],
+    '@type': 'InsuranceAgency',
     '@id': organizationId,
     name: CONTACT_INFO.name,
     url: APP_CONFIG.url,
     email: CONTACT_INFO.email,
     telephone: CONTACT_INFO.phone,
     image: `${APP_CONFIG.url}/1.webp`,
-    logo: `${APP_CONFIG.url}/1.webp`,
+    logo: `${APP_CONFIG.url}/logo.svg`,
     description: APP_CONFIG.description,
     address: {
       '@type': 'PostalAddress',
@@ -29,6 +38,11 @@ export function getOrganizationSchema() {
       addressCountry: 'NL',
     },
     sameAs: [CONTACT_INFO.social.linkedIn],
+    parentOrganization: {
+      '@type': 'Organization',
+      name: 'ENTO Groep',
+    },
+    knowsAbout: [...ORGANIZATION_KNOWS_ABOUT],
     areaServed: {
       '@type': 'Country',
       name: 'Nederland',
@@ -190,6 +204,6 @@ export const SERVICE_TYPES = {
   insurance: 'Verzekeringsadvies',
   insurancePersonal: 'Particuliere verzekeringen',
   insuranceBusiness: 'Zakelijke verzekeringen',
-  taxi: 'Taxi- en personenvervoer verzekeringen',
+  taxi: 'Taxiverzekering',
   riskManagement: 'Risk management',
 } as const;

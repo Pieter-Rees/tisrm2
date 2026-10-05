@@ -45,7 +45,7 @@ export function WebPageJsonLdLayout({
       {withService && pageKey in SERVICE_TYPES ?
         <JsonLd
           data={getServiceSchema({
-            name: page.title,
+            name: SERVICE_TYPES[pageKey as ServicePageKey],
             description: page.description,
             path: page.path,
             serviceType: SERVICE_TYPES[pageKey as ServicePageKey],

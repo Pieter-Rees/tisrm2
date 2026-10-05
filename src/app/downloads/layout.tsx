@@ -8,6 +8,8 @@ export const metadata = buildPageMetadata(PAGE_META.downloads);
 
 export default function DownloadsLayout({ children }: { children: ReactNode }) {
   return (
-    <WebPageJsonLdLayout pageKey="downloads">{children}</WebPageJsonLdLayout>
+    <WebPageJsonLdLayout pageKey="downloads" withBreadcrumbs>
+      {children}
+    </WebPageJsonLdLayout>
   );
 }
