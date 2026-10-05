@@ -1,6 +1,35 @@
+import { readdirSync, statSync } from 'node:fs';
+import { join } from 'node:path';
+
 import type { MetadataRoute } from 'next';
 
 import { APP_CONFIG, NAVIGATION_ROUTES } from '@/constants/app';
+
+const appDir = join(process.cwd(), 'src', 'app');
+
+/**
+ * Newest modification time of the files that make up a route, so every URL
+ * gets its own lastmod instead of one shared constant. Falls back to
+ * APP_CONFIG.contentUpdatedAt when the sources are not readable (e.g. a
+ * runtime that ships only the build output).
+ */
+function getRouteLastModified(path: string): Date {
+  const routeDir = join(appDir, ...path.split('/').filter(Boolean));
+
+  try {
+    const modifiedTimes = readdirSync(routeDir, { withFileTypes: true })
+      .filter(entry => entry.isFile())
+      .map(entry => statSync(join(routeDir, entry.name)).mtimeMs);
+
+    if (modifiedTimes.length > 0) {
+      return new Date(Math.max(...modifiedTimes));
+    }
+  } catch {
+    // Fall through to the configured date below.
+  }
+
+  return new Date(APP_CONFIG.contentUpdatedAt);
+}
 
 const marketingRoutes: Array<{
   path: string;
@@ -48,11 +77,9 @@ const marketingRoutes: Array<{
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date(APP_CONFIG.contentUpdatedAt);
-
   return marketingRoutes.map(({ path, changeFrequency, priority }) => ({
     url: `${APP_CONFIG.url}${path === '/' ? '' : path}`,
-    lastModified,
+    lastModified: getRouteLastModified(path),
     changeFrequency,
     priority,
   }));

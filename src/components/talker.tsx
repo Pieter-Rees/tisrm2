@@ -60,7 +60,7 @@ const Talker = memo<TalkerProps>(
                   objectFit: 'cover',
                   objectPosition: 'center',
                 }}
-                priority
+                loading="lazy"
               />
             </Box>
           </Box>

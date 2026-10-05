@@ -21,6 +21,25 @@ const nextConfig = {
         destination: '/downloads',
         permanent: true,
       },
+      // Keyword spellings people type and link to; /taxi is the canonical URL.
+      {
+        source: '/taxiverzekering',
+        destination: '/taxi',
+        permanent: true,
+      },
+      {
+        source: '/taxi-verzekering',
+        destination: '/taxi',
+        permanent: true,
+      },
+      // Safety net for www traffic that reaches the app: one hop to the apex.
+      // nginx should answer www itself so the hop never gets this far.
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.tisrm.nl' }],
+        destination: 'https://tisrm.nl/:path*',
+        permanent: true,
+      },
     ];
   },
   images: process.env.NEXT_EXPORT === 'true' ? { unoptimized: true } : {
