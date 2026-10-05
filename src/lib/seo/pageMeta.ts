@@ -1,6 +1,6 @@
 export const PAGE_META = {
   home: {
-    title: 'Onafhankelijk verzekeringsadvies Amsterdam',
+    title: 'Verzekeringsadvies Amsterdam',
     description:
       'TIS Risk Managers biedt onafhankelijk verzekeringsadvies en risk management in Amsterdam. Maatwerk voor particulier, zakelijk en taxivervoer.',
     path: '/',
@@ -36,9 +36,9 @@ export const PAGE_META = {
     path: '/verzekeringen/zakelijk',
   },
   taxi: {
-    title: 'Taxi- en personenvervoer verzekeringen',
+    title: 'Taxiverzekering & personenvervoer verzekering',
     description:
-      'Specialistische taxi- en personenvervoer verzekeringen. TIS Risk Managers kent de risico’s van de taxibranche.',
+      'Taxiverzekering voor taxibedrijven en chauffeurs: aansprakelijkheid, inzittendenverzekering en TX Keurmerk-dekkingen. Onafhankelijk advies uit Amsterdam.',
     path: '/taxi',
   },
   riskManagement: {
