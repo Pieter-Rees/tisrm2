@@ -84,11 +84,11 @@ const Talker = memo<TalkerProps>(
               <Text fontWeight="bold" fontSize="lg" color="gray.800">
                 {name}
               </Text>
-              <Text fontSize="md" color="gray.600">
+              <Text fontSize="md" color="gray.700">
                 {title}
               </Text>
               {company && (
-                <Text fontSize="sm" color="blue.600" fontWeight="medium">
+                <Text fontSize="sm" color="blue.900" fontWeight="medium">
                   {company}
                 </Text>
               )}

@@ -43,6 +43,9 @@ const footerLinkStyles = {
   fontSize: 'sm',
   lineHeight: 'short',
   textDecoration: 'none',
+  display: 'inline-flex',
+  alignItems: 'center',
+  minH: '6',
   transition: 'color 0.2s ease, transform 0.2s ease',
   _hover: {
     color: 'blue.200',

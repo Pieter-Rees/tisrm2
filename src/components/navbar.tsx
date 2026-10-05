@@ -106,16 +106,16 @@ const Navbar = memo(() => {
         <MenuRoot>
           <MenuTrigger asChild>
             <Button
-              bg="blue.500"
+              bg="blue.700"
               color="white"
               transition="all 0.2s ease-in-out"
               _hover={{
-                bg: 'blue.600',
+                bg: 'blue.900',
                 transform: 'translateY(-2px)',
                 boxShadow: 'lg',
               }}
               _active={{
-                bg: 'blue.700',
+                bg: 'blue.900',
                 transform: 'translateY(0)',
               }}
               fontWeight="medium"

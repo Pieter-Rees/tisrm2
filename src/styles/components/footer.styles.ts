@@ -50,6 +50,9 @@ export const footerLinkButtonStyles: SystemStyleObject = {
   fontSize: 'sm',
   lineHeight: 'short',
   textDecoration: 'none',
+  display: 'inline-flex',
+  alignItems: 'center',
+  minH: '6',
   transition: UI_CONSTANTS.hover.link.transition,
   _hover: {
     color: 'blue.200',

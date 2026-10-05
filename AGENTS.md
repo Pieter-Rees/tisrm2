@@ -7,3 +7,9 @@ This version has breaking changes — APIs, conventions, and file structure may 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->
+
+# Web agents
+
+Project subagents live in `.cursor/agents/`. For multi-step web work, follow `.cursor/rules/web-agents.mdc`.
+
+Stack: Next.js 16 App Router, React 19, Chakra UI 3, Jest. Checks: `npm run type-check`, `npm run lint`, `npm test`.

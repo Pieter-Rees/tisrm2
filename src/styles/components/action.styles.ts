@@ -10,7 +10,7 @@ import { SECTION_SPACING } from '@/constants/typography';
 export const actionButtonBaseStyles: SystemStyleObject = {
   width: 'full',
   height: 'full',
-  bg: 'blue.500',
+  bg: 'blue.700',
   color: 'white',
 };
 

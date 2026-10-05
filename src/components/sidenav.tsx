@@ -96,6 +96,9 @@ const Sidenav = memo<SidenavProps>(
         borderRight="1px solid"
         borderColor="gray.200"
         left={showSideNav ? '0' : '-100%'}
+        id="mobile-navigation"
+        aria-hidden={!showSideNav}
+        inert={!showSideNav}
       >
         <Box
           position="absolute"
@@ -104,6 +107,10 @@ const Sidenav = memo<SidenavProps>(
           zIndex="1"
         >
           <Button
+            type="button"
+            aria-label="Close navigation menu"
+            minW="10"
+            minH="10"
             transition="all 0.2s ease-in-out"
             _hover={{ bg: 'gray.100' }}
             onClick={handleToggle}
@@ -185,16 +192,16 @@ const Sidenav = memo<SidenavProps>(
             <MenuRoot>
               <MenuTrigger asChild>
                 <Button
-                  bg="blue.500"
+                  bg="blue.700"
                   color="white"
                   width="full"
                   transition="all 0.2s ease-in-out"
                   _hover={{
-                    bg: 'blue.600',
+                    bg: 'blue.900',
                     transform: 'translateY(-2px)',
                     boxShadow: 'lg',
                   }}
-                  _active={{ bg: 'blue.700' }}
+                  _active={{ bg: 'blue.900' }}
                   fontWeight="medium"
                   gap={SPACING_SCALE.xs}
                 >
