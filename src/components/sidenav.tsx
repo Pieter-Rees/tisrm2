@@ -10,7 +10,6 @@ import {
   MenuTrigger,
   Separator,
   VStack,
-  VisuallyHidden,
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -157,7 +156,7 @@ const Sidenav = memo<SidenavProps>(
                     asChild
                     width="full"
                     bg={isActive ? 'blue.50' : 'white'}
-                    color={isActive ? 'blue.600' : 'gray.700'}
+                    color={isActive ? 'blue.900' : 'gray.700'}
                     fontWeight={isActive ? 'semibold' : 'medium'}
                     border="1px solid"
                     borderColor={isActive ? 'blue.200' : 'gray.200'}
@@ -165,7 +164,7 @@ const Sidenav = memo<SidenavProps>(
                     transition="all 0.2s ease-in-out"
                     _hover={{
                       bg: isActive ? 'blue.100' : 'gray.50',
-                      color: 'blue.600',
+                      color: 'blue.900',
                       transform: 'translateX(4px)',
                       borderColor: 'blue.300',
                     }}

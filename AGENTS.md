@@ -10,6 +10,6 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 # Web agents
 
-Project subagents live in `.cursor/agents/`. For multi-step web work, follow `.cursor/rules/web-agents.mdc`.
+Project subagents live in `.cursor/agents/`. Always delegate work to `orchestrator`. It delegates further. Details: `.cursor/rules/web-agents.mdc`.
 
 Stack: Next.js 16 App Router, React 19, Chakra UI 3, Jest. Checks: `npm run type-check`, `npm run lint`, `npm test`.

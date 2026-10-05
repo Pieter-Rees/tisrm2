@@ -1,5 +1,5 @@
 ---
-description: Route multi-step web work through the project subagents
+description: Always hand project work to the orchestrator
 alwaysApply: true
 ---
 
@@ -7,18 +7,6 @@ alwaysApply: true
 
 Next.js 16 App Router, React 19, Chakra UI 3. Before a Next or Chakra API, read the installed docs (`node_modules/next/dist/docs/` or the Chakra MCP).
 
-For multi-step web work, delegate to `.cursor/agents/` in this order. Skip a stage that does not apply and say why.
-
-1. product-designer
-2. ui-designer
-3. explorer
-4. api-implementer and ui-implementer, in parallel when they do not touch the same files
-5. unit-tester
-6. e2e-tester only when an e2e runner exists (this repo uses Jest)
-7. code-reviewer
-8. security-auditor when auth, uploads, secrets, forms, or HTML injection change
-9. verifier
-
-Send red type-check, lint, or test output to debugger. Invoke a specialist with `/name`.
+Always delegate project work to `orchestrator` in `.cursor/agents/`. Do not call the other subagents yourself. Orchestrator delegates further and skips stages that do not apply.
 
 Checks: `npm run type-check`, `npm run lint`, `npm test`. camelCase. No commits, pushes, or branch switches unless asked. Do not edit translation JSON. Leave the Next.js block in `AGENTS.md` unchanged.

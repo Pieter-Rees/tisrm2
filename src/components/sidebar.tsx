@@ -12,9 +12,9 @@ import { cn } from '@/lib/utils';
 //   sidebarHelpTitleStyles,
 //   sidebarHelpTextStyles,
 // } from '@/styles/components/layout.styles';
-import type { BaseComponentProps } from '@/types/components';
 import { COMPONENT_SPACING } from '@/constants/layout';
 import { SECTION_SPACING } from '@/constants/typography';
+import type { BaseComponentProps } from '@/types/components';
 
 const SIDEBAR_CARDS = [
   {
@@ -67,6 +67,7 @@ const Sidebar = memo<BaseComponentProps>(
               key={card.id}
               variant={card.variant}
               title={card.title}
+              titleAs="h2"
               description={card.description}
               cta={card.cta}
               ctaLink={card.ctaLink}
@@ -86,18 +87,10 @@ const Sidebar = memo<BaseComponentProps>(
           borderColor="blue.200"
           textAlign="center"
         >
-          <Box
-            fontSize="sm"
-            color="blue.700"
-            fontWeight="medium"
-            mb="1"
-          >
+          <Box fontSize="sm" color="blue.900" fontWeight="medium" mb="1">
             Hulp nodig?
           </Box>
-          <Box
-            fontSize="xs"
-            color="blue.600"
-          >
+          <Box fontSize="xs" color="blue.900">
             Onze experts helpen u graag verder met al uw verzekeringsvragen
           </Box>
         </Box>

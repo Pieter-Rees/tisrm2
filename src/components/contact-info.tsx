@@ -23,12 +23,23 @@ import Link from 'next/link';
 import { BsLinkedin } from 'react-icons/bs';
 
 const contactButtons = [
-  { href: 'tel:+310206368191', label: '+31 20 636 8191', external: false },
-  { href: 'mailto:info@tisrm.nl', label: 'info@tisrm.nl', external: false },
+  {
+    href: 'tel:+310206368191',
+    label: '+31 20 636 8191',
+    external: false,
+    ariaLabel: undefined,
+  },
+  {
+    href: 'mailto:info@tisrm.nl',
+    label: 'info@tisrm.nl',
+    external: false,
+    ariaLabel: undefined,
+  },
   {
     href: contactInfo.social.linkedIn,
-    label: <BsLinkedin size="24" />,
+    label: <BsLinkedin size="24" aria-hidden="true" />,
     external: true,
+    ariaLabel: 'LinkedIn',
   },
 ] as const;
 
@@ -56,14 +67,17 @@ export default function ContactInfo({
 
       <Flex justifyContent="start" mt={SPACING_PATTERNS.page.section}>
         <HStack alignItems="start" gap={SPACING_PATTERNS.navigation.item}>
-          {contactButtons.map(({ href, label, external }) => (
+          {contactButtons.map(({ href, label, external, ariaLabel }) => (
             <Button
               key={href}
               asChild
               variant={buttonVariant === 'solid' ? 'solid' : 'outline'}
+              minW="10"
+              minH="10"
             >
               <Link
                 href={href as any}
+                aria-label={ariaLabel}
                 {...(external && {
                   target: '_blank',
                   rel: 'noopener noreferrer',

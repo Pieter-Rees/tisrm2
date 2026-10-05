@@ -55,7 +55,7 @@ const footerLinkStyles = {
 
 export default function Footer() {
   return (
-    <>
+    <Box as="footer">
       <FooterLogos width="auto" height="auto" />
       <Box {...footerContainerStyles}>
         <Container>
@@ -67,11 +67,7 @@ export default function Footer() {
                 </Heading>
                 <VStack alignItems="start" gap="1">
                   {contactLinks.map(({ href, label, external }) => (
-                    <Box
-                      key={href}
-                      asChild
-                      {...footerLinkStyles}
-                    >
+                    <Box key={href} asChild {...footerLinkStyles}>
                       <Link
                         href={href as any}
                         {...(external && {
@@ -104,7 +100,7 @@ export default function Footer() {
             <GridItem>
               <VStack alignItems="start" gap={SPACING_SCALE.sm}>
                 <Flex justifyContent="center" alignItems="center" w="100%">
-                  <Link href="/">
+                  <Link href="/" aria-label="TIS Risk Managers, ga naar home">
                     <Logo width="200px" />
                   </Link>
                 </Flex>
@@ -119,6 +115,6 @@ export default function Footer() {
           </Grid>
         </Container>
       </Box>
-    </>
+    </Box>
   );
 }

@@ -78,19 +78,20 @@ const Navbar = memo(() => {
                     alignItems="center"
                     py={SPACING_PATTERNS.navigation.item}
                     position="relative"
-                    color={isActive ? 'blue.500' : 'gray.700'}
+                    color={isActive ? 'blue.700' : 'gray.700'}
                     fontWeight={isActive ? '600' : '500'}
                     borderBottom="2px solid"
-                    borderBottomColor={isActive ? 'blue.500' : 'transparent'}
+                    borderBottomColor={isActive ? 'blue.700' : 'transparent'}
                     transition="all 0.2s ease-in-out"
+                    minH="6"
                     _hover={
                       !isActive ?
                         {
-                          color: 'blue.500',
+                          color: 'blue.700',
                           borderBottomColor: 'blue.200',
                           transform: 'translateY(-1px)',
                         }
-                        : {}
+                      : {}
                     }
                   >
                     {label}

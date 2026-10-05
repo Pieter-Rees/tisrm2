@@ -1,8 +1,8 @@
 'use client';
 
-import type { BreadcrumbProps } from '@/types/components';
-import { buildBreadcrumbItems } from '@/lib/seo/breadcrumbs';
 import { SPACING_SCALE } from '@/constants/layout';
+import { buildBreadcrumbItems } from '@/lib/seo/breadcrumbs';
+import type { BreadcrumbProps } from '@/types/components';
 import { Box, HStack } from '@chakra-ui/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -38,7 +38,7 @@ export default function Breadcrumb({
             className={itemClasses}
             fontSize="xl"
             fontWeight={isCurrentPage ? 'bold' : 'normal'}
-            color={isCurrentPage ? 'blue.600' : 'gray.700'}
+            color={isCurrentPage ? 'blue.900' : 'gray.700'}
             display="inline-flex"
             alignItems="center"
             gap={SPACING_SCALE.sm}
