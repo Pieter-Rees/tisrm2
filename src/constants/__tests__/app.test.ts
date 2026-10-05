@@ -11,7 +11,9 @@ describe('App Constants', () => {
   describe('APP_CONFIG', () => {
     it('should have correct app configuration', () => {
       expect(APP_CONFIG.name).toBe('TIS Risk Managers');
-      expect(APP_CONFIG.description).toBe('Professional insurance and risk management services');
+      expect(APP_CONFIG.description).toBe(
+        'Onafhankelijk verzekeringsadvies en risk management in Amsterdam. Maatwerk voor particulier, zakelijk en taxivervoer, met snelle digitale schadeafhandeling.',
+      );
       expect(APP_CONFIG.version).toBe('2.0.0');
       expect(APP_CONFIG.author).toBe('TIS Risk Managers');
       expect(APP_CONFIG.url).toBe('https://tisrm.nl');

@@ -9,6 +9,20 @@ const nextConfig = {
   distDir: 'build',
   output: process.env.NEXT_EXPORT === 'true' ? 'export' : undefined,
   trailingSlash: process.env.NEXT_EXPORT === 'true' ? true : false,
+  async redirects() {
+    return [
+      {
+        source: '/bestanden',
+        destination: '/downloads',
+        permanent: true,
+      },
+      {
+        source: '/bestanden/',
+        destination: '/downloads',
+        permanent: true,
+      },
+    ];
+  },
   images: process.env.NEXT_EXPORT === 'true' ? { unoptimized: true } : {
     formats: ['image/webp', 'image/avif'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
@@ -29,7 +43,6 @@ const nextConfig = {
   experimental: {
     ...(process.env.TURBOPACK !== '1' && {
       optimizePackageImports: [
-        '@chakra-ui/react',
         'framer-motion',
         'react-icons',
         'react-hook-form',
@@ -63,10 +76,9 @@ const nextConfig = {
   compress: true,
   reactStrictMode: true,
   ...(process.env.TURBOPACK !== '1' && {
+    // Chakra v3 has no `@chakra-ui/react/{{member}}` entrypoints — that
+    // transform breaks Turbopack/webpack with "Can't resolve .../Box".
     modularizeImports: {
-      '@chakra-ui/react': {
-        transform: '@chakra-ui/react/{{member}}',
-      },
       'react-icons': {
         transform: 'react-icons/{{member}}',
       },

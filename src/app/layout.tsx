@@ -1,6 +1,8 @@
 import Footer from '@/components/footer';
 import Header from '@/components/header';
 import { DevPerformanceMonitor } from '@/components/performance-monitor';
+import { JsonLd } from '@/components/seo/JsonLd';
+import { getOrganizationSchema } from '@/lib/seo/organizationSchema';
 import { GoogleTagManager } from '@next/third-parties/google';
 import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
@@ -19,9 +21,10 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" suppressHydrationWarning className="light">
+    <html lang="nl" suppressHydrationWarning className="light">
       <head>
         <GoogleTagManager gtmId="G-3HPHN1BV1Q" />
+        <JsonLd data={getOrganizationSchema()} />
       </head>
       <body
         suppressHydrationWarning

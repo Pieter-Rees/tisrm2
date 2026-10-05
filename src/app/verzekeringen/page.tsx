@@ -1,29 +1,20 @@
-'use client';
+import { JsonLd } from '@/components/seo/JsonLd';
+import { getWebPageSchema } from '@/lib/seo/organizationSchema';
+import { PAGE_META } from '@/lib/seo/pageMeta';
 
-import Breadcrumb from '@/components/breadcrumb';
-import Card from '@/components/card';
-import AnimatedGrid from '@/components/common/animated-grid';
-import { UnifiedLayout } from '@/components/layout';
-import { INSURANCE_CATEGORIES } from '@/data/content';
+import VerzekeringenPageContent from './VerzekeringenPageContent';
 
-export default function Verzekeringen() {
+export default function VerzekeringenPage() {
   return (
-    <UnifiedLayout
-      title="Verzekeringen"
-      breadcrumb={<Breadcrumb capitalizeLinks />}
-    >
-      <AnimatedGrid
-        items={INSURANCE_CATEGORIES}
-        renderItem={(card) => (
-          <Card
-            title={card.title}
-            description={card.description}
-            cta={card.cta}
-            ctaLink={card.ctaLink}
-            buttonVariant={card.buttonVariant}
-          />
-        )}
+    <>
+      <JsonLd
+        data={getWebPageSchema({
+          name: PAGE_META.insurance.title,
+          description: PAGE_META.insurance.description,
+          path: PAGE_META.insurance.path,
+        })}
       />
-    </UnifiedLayout>
+      <VerzekeringenPageContent />
+    </>
   );
 }

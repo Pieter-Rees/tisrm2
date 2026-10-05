@@ -1,4 +1,4 @@
-import { Box, Flex, Grid, GridItem } from '@chakra-ui/react';
+import { Box, Flex, Grid, GridItem, Heading } from '@chakra-ui/react';
 import Image from 'next/image';
 import { Suspense, lazy } from 'react';
 
@@ -13,9 +13,11 @@ import {
   SlideInRight,
   StaggerContainer,
 } from '@/components/page-animation';
+import { JsonLd } from '@/components/seo/JsonLd';
 import { UI_CONSTANTS } from '@/constants/app';
+import { getWebPageSchema } from '@/lib/seo/organizationSchema';
+import { PAGE_META } from '@/lib/seo/pageMeta';
 
-// Optimize lazy loading with better grouping
 const ThreeElements = lazy(() => import('@/components/three-elements'));
 const Talker = lazy(() => import('@/components/talker'));
 const MeldSchade = lazy(() => import('@/components/meld-schade'));
@@ -34,7 +36,7 @@ const HeroImage = () => (
     >
       <Image
         src="/1.webp"
-        alt="TIS Risk Managers - Professional insurance and risk management services"
+        alt="TIS Risk Managers - onafhankelijk verzekeringsadvies in Amsterdam"
         fill
         priority
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 60vw, 50vw"
@@ -50,10 +52,26 @@ const HeroImage = () => (
 export default function Homepage() {
   return (
     <UnifiedLayout variant="page" showSidebar={true}>
+      <JsonLd
+        data={getWebPageSchema({
+          name: PAGE_META.home.title,
+          description: PAGE_META.home.description,
+          path: PAGE_META.home.path,
+        })}
+      />
       <StaggerContainer>
         <Flex direction="column" gap="12">
           <ErrorBoundary>
             <FadeInUp>
+              <Heading
+                as="h1"
+                size={{ base: 'xl', md: '2xl' }}
+                color="gray.800"
+                mb="2"
+              >
+                TIS Risk Managers — onafhankelijk verzekeringsadvies in
+                Amsterdam
+              </Heading>
               <Grid
                 templateColumns={{ base: '1fr', lg: '2fr 1fr' }}
                 gap="8"
@@ -68,44 +86,41 @@ export default function Homepage() {
                 </GridItem>
 
                 <GridItem>
-                  <Box height="full">  
-                  <SlideInRight delay={0.2}>
-                    <Flex direction="column" gap="4" height="full">
-                      <Box
-                        bg="blue.700"
-                        borderRadius="lg"
-                        boxShadow="lg"
-                        overflow="hidden"
-
-                        flex="1"
-                        transition={UI_CONSTANTS.hover.button.transition}
-                        _hover={{
-                          bg: 'blue.600',
-                          ...UI_CONSTANTS.hover.button,
-                        }}
-                      >
-                        <CallUs />
-                      </Box>
-
-                      <Box hideFrom="lg">
+                  <Box height="full">
+                    <SlideInRight delay={0.2}>
+                      <Flex direction="column" gap="4" height="full">
                         <Box
-                          bg="blue.600"
+                          bg="blue.700"
                           borderRadius="lg"
                           boxShadow="lg"
                           overflow="hidden"
-                          transition={
-                            UI_CONSTANTS.hover.button.transition
-                          }
+                          flex="1"
+                          transition={UI_CONSTANTS.hover.button.transition}
                           _hover={{
-                            bg: 'blue.500',
+                            bg: 'blue.600',
                             ...UI_CONSTANTS.hover.button,
                           }}
                         >
-                          <MeldSchade />
+                          <CallUs />
                         </Box>
-                      </Box>
-                    </Flex>
-                  </SlideInRight>
+
+                        <Box hideFrom="lg">
+                          <Box
+                            bg="blue.600"
+                            borderRadius="lg"
+                            boxShadow="lg"
+                            overflow="hidden"
+                            transition={UI_CONSTANTS.hover.button.transition}
+                            _hover={{
+                              bg: 'blue.500',
+                              ...UI_CONSTANTS.hover.button,
+                            }}
+                          >
+                            <MeldSchade />
+                          </Box>
+                        </Box>
+                      </Flex>
+                    </SlideInRight>
                   </Box>
                 </GridItem>
               </Grid>
@@ -130,9 +145,7 @@ export default function Homepage() {
 
           <ErrorBoundary>
             <FadeInUp delay={0.4}>
-              <Suspense
-                fallback={<Loading text="Loading testimonial..." />}
-              >
+              <Suspense fallback={<Loading text="Loading testimonial..." />}>
                 <Talker
                   name="René Enthoven"
                   title="Directeur TIS Risk Managers"

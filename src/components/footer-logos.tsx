@@ -29,7 +29,13 @@ export default function FooterLogos({ height = 'auto' }: FooterLogosProps) {
     >
       {logos.map(({ src, alt }) => (
         <Box key={src} height={height} width="200px">
-          <Image src={src} alt={alt} width={1000} height={1000} />
+          <Image
+            src={src}
+            alt={alt}
+            width={200}
+            height={80}
+            style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
+          />
         </Box>
       ))}
     </Flex>

@@ -1,6 +1,7 @@
 export const APP_CONFIG = {
   name: 'TIS Risk Managers',
-  description: 'Professional insurance and risk management services',
+  description:
+    'Onafhankelijk verzekeringsadvies en risk management in Amsterdam. Maatwerk voor particulier, zakelijk en taxivervoer, met snelle digitale schadeafhandeling.',
   version: '2.0.0',
   author: 'TIS Risk Managers',
   url: 'https://tisrm.nl',
