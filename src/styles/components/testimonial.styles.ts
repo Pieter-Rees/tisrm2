@@ -2,14 +2,22 @@
  * Testimonial component styles - extracted from talker component
  */
 
-import type { SystemStyleObject } from '@chakra-ui/react';
 import { COMPONENT_SPACING } from '@/constants/layout';
-import { SECTION_SPACING } from '@/constants/typography';
+import type { SystemStyleObject } from '@chakra-ui/react';
+
+// Mobile stack rhythm (avatar, quote icon, quote, attribution). Wider on large screens
+// where the avatar sits beside the quote.
+const testimonialStackGap = COMPONENT_SPACING.form.group;
+const testimonialRowGap = {
+  base: testimonialStackGap.base,
+  md: testimonialStackGap.md,
+  lg: '12',
+} as const;
 
 // Main testimonial container styles
 export const testimonialContainerStyles: SystemStyleObject = {
-  py: SECTION_SPACING.large,
-  px: COMPONENT_SPACING.card.lg,
+  py: COMPONENT_SPACING.card.lg,
+  px: COMPONENT_SPACING.card.xl,
   bg: 'gray.50',
   borderRadius: 'xl',
   boxShadow: 'sm',
@@ -20,7 +28,7 @@ export const testimonialContainerStyles: SystemStyleObject = {
 // Testimonial content layout styles
 export const testimonialLayoutStyles: SystemStyleObject = {
   flexDirection: { base: 'column', lg: 'row' } as const,
-  gap: { base: '8', lg: '16' },
+  gap: testimonialRowGap,
   justifyContent: 'center',
   alignItems: 'center',
   maxW: '4xl',
@@ -60,7 +68,7 @@ export const testimonialAvatarStyles: SystemStyleObject = {
 export const testimonialContentStyles: SystemStyleObject = {
   alignItems: { base: 'center', lg: 'flex-start' },
   textAlign: { base: 'center', lg: 'left' },
-  gap: COMPONENT_SPACING.form.group,
+  gap: testimonialStackGap,
   flex: '1',
   maxW: { base: 'full', lg: '2xl' },
 };
