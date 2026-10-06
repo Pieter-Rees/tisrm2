@@ -8,7 +8,7 @@ export const PAGE_META = {
   about: {
     title: 'Over ons',
     description:
-      'Leer TIS Risk Managers kennen: gecertificeerde risicomanagers in Amsterdam met focus op maatwerkverzekeringen en snelle schadeafhandeling.',
+      'Leer TIS Risk Managers kennen: een familiebedrijf in Amsterdam met persoonlijk verzekeringsadvies, specialistische kennis en begeleiding van advies tot schade.',
     path: '/over-ons',
   },
   contact: {
