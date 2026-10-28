@@ -11,7 +11,13 @@ export const APP_CONFIG = {
 
 export const CONTACT_INFO = {
   name: 'TIS Risk Managers',
+  /** TIS Risk Managers is a trade name; the AFM licence is held by this entity. */
+  legalName: 'Alan Jacktar B.V.',
+  /** Human-readable, for display only. Use phoneHref for tel: links. */
   phone: '+31 20 636 8191',
+  /** E.164, no spaces and no trunk 0, so the number is actually dialable. */
+  phoneHref: 'tel:+31206368191',
+  damageEmail: 'schade@tisrm.nl',
   email: 'info@tisrm.nl',
   address: {
     street: 'Muiderstraat 1',
@@ -27,21 +33,63 @@ export const CONTACT_INFO = {
   social: {
     linkedIn: 'https://www.linkedin.com/company/tisrm/',
   },
+  /** Legally required on every page; supplied by TIS. */
+  registrations: {
+    kvk: '34181626',
+    afm: '12040755',
+    kifid: '300.014940',
+  },
+  openingHours: {
+    phone: { days: 'Maandag t/m vrijdag', from: '09:00', until: '17:30' },
+    office: { days: 'Maandag t/m vrijdag', from: '09:30', until: '16:30' },
+  },
 } as const;
 
 export const NAVIGATION_ROUTES = {
   home: '/',
-  insurance: '/verzekeringen',
-  insurancePersonal: '/verzekeringen/particulier',
-  insuranceBusiness: '/verzekeringen/zakelijk',
-  taxi: '/taxi',
-  riskManagement: '/risk-management',
+  businessInsurance: '/zakelijke-verzekeringen',
+  taxi: '/taxi-en-wagenparkverzekering',
+  realEstate: '/vastgoed-en-vve',
+  hospitality: '/horecaverzekering',
+  liability: '/aansprakelijkheidsverzekering',
+  construction: '/bouw-en-techniek',
+  absence: '/verzuim-en-personeel',
+  personalInsurance: '/particuliere-verzekeringen',
+  riskAdvice: '/risicoadvies',
+  knowledgeBase: '/kennisbank',
   about: '/over-ons',
   contact: '/contact',
-  damageReport: '/meld-schade',
+  damageReport: '/schade-melden',
   quote: '/offerte',
   downloads: '/downloads',
 } as const;
+
+/** Knowledge articles sit one level under the kennisbank hub. */
+export function getKnowledgeArticlePath(slug: string): string {
+  return `${NAVIGATION_ROUTES.knowledgeBase}/${slug}`;
+}
+
+/** Top level navigation, shared by the navbar and the mobile side nav. */
+export const PRIMARY_NAVIGATION = [
+  { href: NAVIGATION_ROUTES.home, label: 'Home' },
+  { href: NAVIGATION_ROUTES.businessInsurance, label: 'Zakelijk' },
+  { href: NAVIGATION_ROUTES.personalInsurance, label: 'Particulier' },
+  { href: NAVIGATION_ROUTES.riskAdvice, label: 'Risicoadvies' },
+  { href: NAVIGATION_ROUTES.knowledgeBase, label: 'Kennisbank' },
+  { href: NAVIGATION_ROUTES.about, label: 'Over ons' },
+  { href: NAVIGATION_ROUTES.downloads, label: 'Downloads' },
+  { href: NAVIGATION_ROUTES.contact, label: 'Contact' },
+] as const;
+
+/** Branch pages that sit under the business insurance hub. */
+export const BRANCH_ROUTES = [
+  { href: NAVIGATION_ROUTES.taxi, label: 'Taxi en wagenpark' },
+  { href: NAVIGATION_ROUTES.realEstate, label: 'Vastgoed en VvE' },
+  { href: NAVIGATION_ROUTES.hospitality, label: 'Horeca' },
+  { href: NAVIGATION_ROUTES.liability, label: 'Aansprakelijkheid' },
+  { href: NAVIGATION_ROUTES.construction, label: 'Bouw en techniek' },
+  { href: NAVIGATION_ROUTES.absence, label: 'Verzuim en personeel' },
+] as const;
 
 export const EXTERNAL_LINKS = {
   damageReport:

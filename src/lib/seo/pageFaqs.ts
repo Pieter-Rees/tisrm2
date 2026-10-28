@@ -2,67 +2,72 @@ import { CONTACT_INFO, NAVIGATION_ROUTES } from '@/constants/app';
 import type { FaqItem } from '@/lib/seo/organizationSchema';
 import { HOME_FAQS } from '@/lib/seo/organizationSchema';
 
+/**
+ * Only add questions here that are also rendered on the page itself; Google
+ * requires FAQ markup to match visible content.
+ */
 export const PAGE_FAQS = {
   home: HOME_FAQS,
   taxi: [
     {
-      question: 'Welke taxi- en personenvervoer verzekeringen biedt TIS?',
+      question: 'Kan ik overstappen midden in een verzekeringsjaar?',
       answer:
-        'TIS adviseert over taxiverzekeringen met uitgebreide dekking, inclusief aanvullingen die vaak voor TX Keurmerk nodig zijn, zoals bedrijfsaansprakelijkheid en ongevallen inzittenden.',
+        'Vaak wel. Wij kijken naar uw opzegtermijn en contractduur en zorgen dat er geen dag zonder dekking zit. Zelf opzeggen hoeft u niet, dat regelen wij.',
     },
     {
-      question: 'Kan TIS ook wagenparken voor taxibedrijven verzekeren?',
+      question: 'Welke dekkingen horen bij een taxiverzekering?',
       answer:
-        'Ja. Naast een scherpe offerte maken wij desgewenst een risicoanalyse van uw bedrijf, zodat dekking en preventie aansluiten op de risico’s van personenvervoer.',
+        'De wettelijk verplichte WA-verzekering voor taxivervoer vormt de basis. Afhankelijk van uw situatie breidt u die uit met beperkt of volledig casco, ongevallen inzittenden, schadeverzekering inzittenden, bedrijfsaansprakelijkheid en rechtsbijstand.',
     },
     {
-      question: 'Hoe vraag ik een taxi-offerte aan?',
-      answer: `Neem contact op via ${CONTACT_INFO.phone} of ${CONTACT_INFO.email}, of start een vrijblijvende aanvraag via ${NAVIGATION_ROUTES.quote}.`,
+      question: 'Wat is de beste taxiverzekering?',
+      answer:
+        'Die is niet voor iedere ondernemer hetzelfde. Naast de premie tellen de dekking, het eigen risico, de voorwaarden en de schadeafhandeling mee. Een zelfstandige chauffeur heeft andere verzekeringsbehoeften dan een onderneming met tientallen voertuigen.',
     },
   ] satisfies FaqItem[],
-  riskManagement: [
+  riskAdvice: [
     {
       question: 'Wat houdt risk management bij TIS in?',
       answer:
-        'TIS inventariseert bedrijfsrisico’s samen met u en vertaalt die naar concrete maatregelen en passende verzekeringen. Adviseurs zijn GRMC-geregistreerd.',
+        'Wij brengen samen met u de risico’s binnen uw onderneming in kaart en bepalen per risico wat u vermijdt, vermindert, verzekert of zelf draagt. Binnen TIS beschikken wij over GRMC-geregistreerde deskundigheid op het gebied van risicomanagement.',
     },
     {
-      question: 'Voor welke onderwerpen doen jullie een risico-inventarisatie?',
+      question: 'Waar kijken jullie naar bij een risico-inventarisatie?',
       answer:
-        'Onder meer bedrijfsmiddelen, bedrijfsactiviteiten, vervoer en logistiek, personeel en preventie.',
+        'Onder meer naar bedrijfsmiddelen, bedrijfsactiviteiten, vervoer en logistiek, personeel, preventie en de aansprakelijkheid die u in uw contracten heeft geregeld.',
     },
     {
       question: 'Is risk management alleen voor grote bedrijven?',
       answer:
-        'Nee. Ook kleinere organisaties profiteren van inzicht in risico’s en maatwerkdekking die niet te ruim of te krap is.',
+        'Nee. Ook kleinere organisaties profiteren van inzicht in hun risico’s en van dekking die niet te ruim en niet te krap is.',
     },
   ] satisfies FaqItem[],
-  insurancePersonal: [
+  personalInsurance: [
     {
-      question: 'Welke particuliere verzekeringen adviseert TIS?',
+      question: 'Welke particuliere verzekeringen verzorgt TIS?',
       answer:
-        'Onder meer mobiliteit, gezinssituatie, wonen en vrije tijd — van auto en aansprakelijkheid tot inboedel, reis en recreatie.',
+        'Van woon- en autoverzekeringen tot uitgebreidere oplossingen voor kostbaarheden, bijzondere voertuigen, monumentale panden en tweede woningen.',
     },
     {
       question: 'Waarom geen standaardpakket?',
       answer:
-        'Standaardpolissen dekken vaak te weinig of juist te veel. TIS stemt dekking af op uw persoonlijke situatie.',
+        'Vooral wanneer uw bezittingen of verzekeringsbehoeften afwijken van de standaard, is het belangrijk dat de verzekerde bedragen en voorwaarden aansluiten bij uw persoonlijke situatie.',
     },
     {
       question: 'Hoe meld ik als particulier schade?',
-      answer: `Via de digitale schadeafhandeling op ${NAVIGATION_ROUTES.damageReport}, of bel ${CONTACT_INFO.phone}.`,
+      answer: `Via het digitale formulier op ${NAVIGATION_ROUTES.damageReport}, per mail naar ${CONTACT_INFO.damageEmail} of telefonisch via ${CONTACT_INFO.phone}.`,
     },
   ] satisfies FaqItem[],
-  insuranceBusiness: [
+  businessInsurance: [
     {
-      question: 'Welke zakelijke verzekeringen biedt TIS?',
+      question: 'Welke verzekeringen heeft mijn bedrijf nodig?',
       answer:
-        'TIS adviseert over maatwerkdekkingen voor bedrijven, afgestemd op activiteiten, bedrijfsmiddelen, aansprakelijkheid en overige risicogebieden.',
+        'Dat hangt af van wat u doet, voor wie en met hoeveel mensen. Wij adviseren onder andere over aansprakelijkheid, gebouwen en inventaris, goederen en voorraad, bedrijfsschade, cyber, transport, motorrijtuigen en ziekteverzuim.',
     },
     {
-      question: 'Combineren jullie verzekeringen met risk management?',
+      question: 'Combineren jullie verzekeringen met risicomanagement?',
       answer:
-        'Ja. Voor bedrijven combineren wij graag risico-inventarisatie met passende verzekeringsoplossingen.',
+        'Ja. Niet ieder risico hoeft verzekerd te worden. Naast verzekeringsadvies ondersteunen wij ondernemers bij het inzichtelijk maken en beheersen van bedrijfsrisico’s.',
     },
     {
       question: 'Hoe start ik als ondernemer een adviesgesprek?',

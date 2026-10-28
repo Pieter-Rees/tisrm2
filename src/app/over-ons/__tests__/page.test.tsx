@@ -61,9 +61,15 @@ describe('Over ons page', () => {
 
   it('renders the three team members', () => {
     render(<Overons />);
-    expect(screen.getByText('René Enthoven')).toBeInTheDocument();
-    expect(screen.getByText('Kenny Enthoven')).toBeInTheDocument();
-    expect(screen.getByText('Anthony Enthoven')).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { level: 3, name: 'René Enthoven' }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { level: 3, name: 'Kenny Enthoven' }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { level: 3, name: 'Anthony Enthoven' }),
+    ).toBeInTheDocument();
   });
 
   it('links the kennismaken CTA to contact', () => {

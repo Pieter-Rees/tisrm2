@@ -1,53 +1,88 @@
 'use client';
 
-import { Box } from '@chakra-ui/react';
-import Card from '@/components/card';
+import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 
+import Breadcrumb from '@/components/breadcrumb';
+import Card from '@/components/card';
+import { ContentLink, PageCta } from '@/components/content';
 import { UnifiedLayout } from '@/components/layout';
-import { SECTION_SPACING } from '@/constants/typography';
-import { AVAILABLE_DOCUMENTS } from '@/data/content';
+import { NAVIGATION_ROUTES } from '@/constants/app';
 import { COMPONENT_SPACING } from '@/constants/layout';
+import {
+  HEADING_STYLES,
+  PARAGRAPH_STYLES,
+  PROSE_STACK_GAP,
+  SECTION_SPACING,
+} from '@/constants/typography';
+import { DOCUMENT_GROUPS } from '@/data/documents';
+import { PAGE_META } from '@/lib/seo/pageMeta';
 
 export default function Downloads() {
-    return (
-        <UnifiedLayout title="Downloads">
+  return (
+    <UnifiedLayout
+      title={PAGE_META.downloads.heading}
+      breadcrumb={<Breadcrumb />}
+    >
+      <Flex direction="column" gap={SECTION_SPACING.medium}>
+        <Flex as="section" direction="column" gap={PROSE_STACK_GAP}>
+          <Text {...PARAGRAPH_STYLES.lead}>
+            Hier vindt u belangrijke formulieren en documenten van TIS Risk
+            Managers. U kunt deze eenvoudig downloaden.
+          </Text>
+          <Text {...PARAGRAPH_STYLES.body}>
+            Heeft u vragen of kunt u een document niet vinden? Neem gerust
+            contact met ons op.
+          </Text>
+        </Flex>
+
+        {DOCUMENT_GROUPS.map(group => (
+          <Flex
+            as="section"
+            key={group.title}
+            direction="column"
+            gap={PROSE_STACK_GAP}
+          >
+            <Heading as="h2" {...HEADING_STYLES.h2} mb="0">
+              {group.title}
+            </Heading>
             <Box
-                bg="gray.50"
-                borderRadius="xl"
-                p={COMPONENT_SPACING.card.lg}
-                w="100%"
+              display="grid"
+              gridTemplateColumns={{
+                base: '1fr',
+                md: 'repeat(2, 1fr)',
+                lg: 'repeat(3, 1fr)',
+              }}
+              gap={COMPONENT_SPACING.grid.sm}
+              alignItems="stretch"
             >
-                <Box
-                    display="grid"
-                    gridTemplateColumns={{
-                        base: '1fr',
-                        md: 'repeat(2, 1fr)',
-                        lg: 'repeat(3, 1fr)',
-                    }}
-                    gap={SECTION_SPACING.small}
-                    w="100%"
-                    alignItems="stretch"
-                    justifyItems="stretch"
-                >
-                    {AVAILABLE_DOCUMENTS.map((doc, index) => (
-                        <Box
-                            key={doc.id || index}
-                            w="100%"
-                            h="100%"
-                            display="flex"
-                            alignItems="stretch"
-                            minW="0"
-                        >
-                            <Card
-                                variant="downloads"
-                                title={doc.title}
-                                titleAs="h2"
-                                downloadLink={doc.link}
-                            />
-                        </Box>
-                    ))}
-                </Box>
+              {group.documents.map(document => (
+                <Card
+                  key={document.id}
+                  variant="downloads"
+                  title={document.title}
+                  titleAs="h3"
+                  description={document.description}
+                  downloadLink={document.link}
+                />
+              ))}
             </Box>
-        </UnifiedLayout>
-    );
+          </Flex>
+        ))}
+
+        <Box as="section">
+          <ContentLink
+            href={NAVIGATION_ROUTES.damageReport}
+            label="Wilt u schade melden of heeft u hulp nodig bij de afhandeling?"
+          />
+        </Box>
+
+        <PageCta
+          title="Heeft u vragen?"
+          text="Kunt u een formulier niet vinden of heeft u hulp nodig? Onze adviseurs helpen u graag verder."
+          actionLabel="Neem contact op"
+          actionHref={NAVIGATION_ROUTES.contact}
+        />
+      </Flex>
+    </UnifiedLayout>
+  );
 }

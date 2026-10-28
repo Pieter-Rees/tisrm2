@@ -1,14 +1,17 @@
 'use client';
 
+import Breadcrumb from '@/components/breadcrumb';
+import { PageCta, SectionImage } from '@/components/content';
 import { UnifiedLayout } from '@/components/layout';
-import { ButtonLink } from '@/components/ui/button-link';
+import { NAVIGATION_ROUTES } from '@/constants/app';
+import { COMPONENT_SPACING, SPACING_SCALE } from '@/constants/layout';
 import {
   HEADING_STYLES,
   PARAGRAPH_STYLES,
   PROSE_STACK_GAP,
   SECTION_SPACING,
 } from '@/constants/typography';
-import { primaryButtonStyles } from '@/styles/components/button.styles';
+import { PAGE_META } from '@/lib/seo/pageMeta';
 import { Box, Flex, Grid, Heading, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 import type { ReactNode } from 'react';
@@ -37,39 +40,6 @@ const teamMembers = [
   },
 ] as const;
 
-function SectionImage({
-  src,
-  alt,
-  width,
-  height,
-  priority = false,
-}: {
-  src: string;
-  alt: string;
-  width: number;
-  height: number;
-  priority?: boolean;
-}) {
-  return (
-    <Box
-      width="full"
-      borderRadius="xl"
-      boxShadow="md"
-      overflow="hidden"
-      alignSelf={{ base: 'stretch', md: 'start' }}
-    >
-      <Image
-        src={src}
-        alt={alt}
-        width={width}
-        height={height}
-        priority={priority}
-        style={{ display: 'block', width: '100%', height: 'auto' }}
-      />
-    </Box>
-  );
-}
-
 function TextWithImageSection({
   heading,
   children,
@@ -83,7 +53,7 @@ function TextWithImageSection({
     alt: string;
     width: number;
     height: number;
-    priority?: boolean;
+    eager?: boolean;
   };
   reverse?: boolean;
 }) {
@@ -105,7 +75,7 @@ function TextWithImageSection({
           ? 'minmax(0, 1fr) minmax(0, 1.2fr)'
           : 'minmax(0, 1.2fr) minmax(0, 1fr)',
       }}
-      gap={{ base: PROSE_STACK_GAP, md: SECTION_SPACING.small }}
+      gap={COMPONENT_SPACING.grid.md}
       alignItems="start"
       width="full"
     >
@@ -126,8 +96,16 @@ function TextWithImageSection({
 
 export default function Overons() {
   return (
-    <UnifiedLayout title="Over ons">
+    <UnifiedLayout title={PAGE_META.about.heading} breadcrumb={<Breadcrumb />}>
       <Flex direction="column" gap={SECTION_SPACING.medium}>
+        <Flex as="section" direction="column" gap={PROSE_STACK_GAP}>
+          <Text {...PARAGRAPH_STYLES.lead}>
+            Geen onderneming is hetzelfde. Daarom geloven wij bij TIS Risk
+            Managers niet in standaardoplossingen, maar in verzekeringen en
+            risicoadvies die passen bij de onderneming én de ondernemer.
+          </Text>
+        </Flex>
+
         <TextWithImageSection
           heading="Verzekeren begint met begrijpen"
           image={{
@@ -135,14 +113,9 @@ export default function Overons() {
             alt: 'Het team van TIS Risk Managers voor het kantoor',
             width: 1600,
             height: 1200,
-            priority: true,
+            eager: true,
           }}
         >
-          <Text {...PARAGRAPH_STYLES.body}>
-            Geen onderneming is hetzelfde. Daarom geloven wij bij TIS Risk
-            Managers niet in standaardoplossingen, maar in verzekeringen en
-            risicoadvies die passen bij de onderneming én de ondernemer.
-          </Text>
           <Text {...PARAGRAPH_STYLES.body}>
             Wij adviseren bedrijven over hun risico&apos;s, brengen deze
             overzichtelijk in kaart en zoeken naar passende oplossingen. Van
@@ -188,7 +161,7 @@ export default function Overons() {
           </Text>
           <Text {...PARAGRAPH_STYLES.body}>
             Voor sommige branches is specialistische kennis essentieel. Zo
-            heeft TIS meer dan 30 jaar ervaring binnen het personenvervoer en
+            heeft TIS ruim 25 jaar ervaring binnen het personenvervoer en
             kennen wij de specifieke risico&apos;s en verzekeringsvraagstukken
             waarmee taxi- en vervoersondernemers te maken krijgen.
           </Text>
@@ -263,7 +236,7 @@ export default function Overons() {
           </Text>
           <Grid
             templateColumns={{ base: '1fr', md: 'repeat(3, 1fr)' }}
-            gap={SECTION_SPACING.small}
+            gap={COMPONENT_SPACING.grid.sm}
             width="full"
           >
             {teamMembers.map((member) => (
@@ -294,42 +267,23 @@ export default function Overons() {
                     }}
                   />
                 </Box>
-                <Flex direction="column" gap="1">
-                  <Text
-                    fontFamily="heading"
-                    fontWeight="semibold"
-                    color="text.primary"
-                    fontSize={{ base: 'md', md: 'lg' }}
-                  >
+                <Flex direction="column" gap={SPACING_SCALE.xs}>
+                  <Heading as="h3" {...HEADING_STYLES.h4} mb="0">
                     {member.name}
-                  </Text>
-                  <Text {...PARAGRAPH_STYLES.body} fontSize="sm">
-                    {member.role}
-                  </Text>
+                  </Heading>
+                  <Text {...PARAGRAPH_STYLES.small}>{member.role}</Text>
                 </Flex>
               </Flex>
             ))}
           </Grid>
         </Flex>
 
-        <Flex
-          as="section"
-          direction="column"
-          gap={PROSE_STACK_GAP}
-          align="flex-start"
-        >
-          <Heading as="h2" {...HEADING_STYLES.h2} mb="0">
-            Kennismaken?
-          </Heading>
-          <Text {...PARAGRAPH_STYLES.body}>
-            Benieuwd wat TIS Risk Managers voor uw onderneming kan betekenen?
-            Neem gerust contact met ons op. We maken graag kennis en kijken
-            samen naar uw risico&apos;s en verzekeringen.
-          </Text>
-          <ButtonLink href="/contact" {...primaryButtonStyles}>
-            Contact opnemen
-          </ButtonLink>
-        </Flex>
+        <PageCta
+          title="Kennismaken?"
+          text="Benieuwd wat TIS Risk Managers voor uw onderneming kan betekenen? Neem gerust contact met ons op. We maken graag kennis en kijken samen naar uw risico’s en verzekeringen."
+          actionLabel="Contact opnemen"
+          actionHref={NAVIGATION_ROUTES.contact}
+        />
       </Flex>
     </UnifiedLayout>
   );

@@ -5,6 +5,10 @@
  * Usage:
  *   SEO_CHECK_BASE_URL=http://localhost:3011 npm run seo:check
  *   SEO_CHECK_BASE_URL=https://tisrm.nl npm run seo:check
+ *
+ * The production base is only meaningful once the new site is deployed:
+ * production still serves the pre-migration URLs, so every route in the
+ * baseline would 404 there. See the comment on comparePages.
  */
 
 import { createHash } from 'node:crypto';
@@ -24,9 +28,19 @@ const baseUrl = (process.env.SEO_CHECK_BASE_URL || 'http://localhost:3011').repl
 );
 const isProductionBase = /^https:\/\/(www\.)?tisrm\.nl$/i.test(baseUrl);
 
-const keywordRedirects = [
-  { from: '/taxiverzekering', to: '/taxi' },
-  { from: '/taxi-verzekering', to: '/taxi' },
+// Every permanent redirect the URL contract promises: the two keyword vanity
+// paths plus the legacy paths the SEO route migration replaced. All of them
+// must land on their destination in exactly one permanent hop.
+const redirectChecks = [
+  { from: '/taxiverzekering', to: '/taxi-en-wagenparkverzekering' },
+  { from: '/taxi-verzekering', to: '/taxi-en-wagenparkverzekering' },
+  { from: '/taxi', to: '/taxi-en-wagenparkverzekering' },
+  { from: '/verzekeringen', to: '/zakelijke-verzekeringen' },
+  { from: '/verzekeringen/zakelijk', to: '/zakelijke-verzekeringen' },
+  { from: '/verzekeringen/particulier', to: '/particuliere-verzekeringen' },
+  { from: '/risk-management', to: '/risicoadvies' },
+  { from: '/meld-schade', to: '/schade-melden' },
+  { from: '/bestanden', to: '/downloads' },
 ];
 
 const FAIL_FIELDS = new Set(['visibleBodyHash', 'h1', 'navHash']);
@@ -293,6 +307,25 @@ function pathFromInput(inputUrl) {
   return new URL(inputUrl).pathname.replace(/\/$/, '') || '/';
 }
 
+/**
+ * Compare one baseline entry with what the site serves now.
+ *
+ * seo-baseline.json is no longer a content snapshot. It was captured from
+ * production before the SEO route migration, and production still serves that
+ * pre-migration site, so a fresh capture cannot describe the current URL
+ * contract and a capture from localhost would only assert that the code equals
+ * itself. The baseline was therefore reconciled down to what is knowable from
+ * NAVIGATION_ROUTES alone: status, final URL, redirect hops, canonical, og:url,
+ * og:image, og:type, robots and html lang. Copy-derived fields (title,
+ * metaDescription, h1, visibleBodyHash, navHash, og:title, og:description) are
+ * null there, and a null baseline value means "not asserted" — see the rule
+ * below.
+ *
+ * So this still fails loudly on a broken page: non-200, more than one redirect
+ * hop, a redirect loop, a missing or wrong canonical, a missing title, a
+ * missing H1, a noindex meta, or invalid JSON-LD. It does not claim to detect
+ * reworded copy until the new site is live and the baseline is re-captured.
+ */
 function comparePages(baselinePage, current, { skipHostVariants }) {
   const failures = [];
   const diffs = [];
@@ -314,7 +347,11 @@ function comparePages(baselinePage, current, { skipHostVariants }) {
   for (const field of fields) {
     const oldValue = baselinePage[field];
     const newValue = current[field];
-    if (oldValue !== newValue && !(oldValue == null && newValue == null)) {
+    // A null baseline value means the baseline does not know this field, so
+    // there is nothing to diff against. The presence checks further down still
+    // apply.
+    if (oldValue == null) continue;
+    if (oldValue !== newValue) {
       // finalUrl host differs when checking against localhost — compare paths.
       if (field === 'finalUrl' && !isProductionBase) {
         const oldPath = new URL(oldValue).pathname;
@@ -339,7 +376,8 @@ function comparePages(baselinePage, current, { skipHostVariants }) {
     'og:image',
     'og:type',
   ]) {
-    if (oldOg[key] !== newOg[key] && !(oldOg[key] == null && newOg[key] == null)) {
+    if (oldOg[key] == null) continue;
+    if (oldOg[key] !== newOg[key]) {
       diffs.push({ field: `openGraph.${key}`, old: oldOg[key], new: newOg[key] });
     }
   }
@@ -399,7 +437,7 @@ function comparePages(baselinePage, current, { skipHostVariants }) {
   return { failures: [...new Set(failures)], diffs };
 }
 
-async function checkKeywordRedirect(fromPath, toPath) {
+async function checkRedirect(fromPath, toPath) {
   const start = `${baseUrl}${fromPath}`;
   const result = await fetchChain(start);
   const failures = [];
@@ -447,9 +485,9 @@ function renderReport({
   const redirectFails = redirectResults.filter(r => r.failures.length).length;
   lines.push(
     `- Pages with failures: ${failCount}/${pageResults.length}`,
-    `- Keyword redirect failures: ${redirectFails}/${redirectResults.length}`,
+    `- Redirect failures: ${redirectFails}/${redirectResults.length}`,
     '',
-    '## Keyword redirects',
+    '## Redirects',
     '',
   );
 
@@ -510,12 +548,7 @@ async function main() {
 
     const fetched = await fetchChain(target);
     const current = extractPage(fetched);
-    // Seed navHash onto baseline comparison by computing from current only when baseline lacks it.
-    const baselineWithNav = {
-      ...baselinePage,
-      navHash: baselinePage.navHash ?? current.navHash,
-    };
-    const { failures, diffs } = comparePages(baselineWithNav, current, {
+    const { failures, diffs } = comparePages(baselinePage, current, {
       skipHostVariants: !isProductionBase,
     });
 
@@ -529,8 +562,8 @@ async function main() {
   }
 
   const redirectResults = [];
-  for (const rule of keywordRedirects) {
-    redirectResults.push(await checkKeywordRedirect(rule.from, rule.to));
+  for (const rule of redirectChecks) {
+    redirectResults.push(await checkRedirect(rule.from, rule.to));
   }
 
   const passed =

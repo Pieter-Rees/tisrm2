@@ -1,7 +1,10 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
-// Create a simplified CallUs component that mimics the original functionality
+import { CONTACT_INFO } from '@/constants/app';
+
+// Create a simplified CallUs component that mimics the original functionality.
+// Phone values come from CONTACT_INFO so the copy cannot drift from the real one.
 const SimpleCallUs = () => {
     return (
         <button style={{
@@ -17,7 +20,7 @@ const SimpleCallUs = () => {
             borderRadius: '0.375rem',
             cursor: 'pointer'
         }}>
-            <a href="tel:+310206368191" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <a href={CONTACT_INFO.phoneHref} style={{ textDecoration: 'none', color: 'inherit' }}>
                 <div style={{ display: 'flex', justifyContent: 'center', height: '100%', flexDirection: 'column', gap: '2rem' }}>
                     <div style={{ color: 'white' }}>
                         📞
@@ -30,7 +33,7 @@ const SimpleCallUs = () => {
                         </h2>
                     </div>
                     <div>
-                        <span style={{ color: 'white' }}>+31 20 636 8191</span>
+                        <span style={{ color: 'white' }}>{CONTACT_INFO.phone}</span>
                     </div>
                 </div>
             </a>
@@ -57,8 +60,8 @@ describe('CallUs Component', () => {
 
     it('has correct phone link', () => {
         render(<SimpleCallUs />);
-        const phoneLink = screen.getByText('+31 20 636 8191').closest('a');
-        expect(phoneLink).toHaveAttribute('href', 'tel:+310206368191');
+        const phoneLink = screen.getByText(CONTACT_INFO.phone).closest('a');
+        expect(phoneLink).toHaveAttribute('href', CONTACT_INFO.phoneHref);
     });
 
     it('renders phone icon', () => {
@@ -88,7 +91,7 @@ describe('CallUs Component', () => {
     it('has correct link attributes', () => {
         render(<SimpleCallUs />);
         const link = screen.getByRole('link');
-        expect(link).toHaveAttribute('href', 'tel:+310206368191');
+        expect(link).toHaveAttribute('href', CONTACT_INFO.phoneHref);
     });
 
     it('displays complete call to action message', () => {

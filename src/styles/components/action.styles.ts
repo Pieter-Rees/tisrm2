@@ -2,8 +2,9 @@
  * Action component styles - extracted from call-us, meld-schade components
  */
 
-import type { SystemStyleObject } from '@chakra-ui/react';
 import { COMPONENT_SPACING, SPACING_SCALE } from '@/constants/layout';
+import { HEADING_STYLES } from '@/constants/typography';
+import type { SystemStyleObject } from '@chakra-ui/react';
 
 // Base action button styles. Padding and wrapping come from the inner content
 // so the card can fill the surrounding box instead of the button size recipe.
@@ -14,7 +15,7 @@ export const actionButtonBaseStyles: SystemStyleObject = {
   px: '0',
   py: '0',
   bg: 'blue.700',
-  color: 'white',
+  color: 'text.inverse',
   whiteSpace: 'normal',
   borderRadius: 'xl',
 };
@@ -45,20 +46,20 @@ export const actionContentStyles: SystemStyleObject = {
 
 // Action icon styles
 export const actionIconStyles: SystemStyleObject = {
-  color: 'white',
+  color: 'text.inverse',
   flexShrink: '0',
 };
 
 // Action heading styles
 export const actionHeadingStyles: SystemStyleObject = {
-  fontFamily: 'body',
-  fontSize: 'md',
-  color: 'white',
+  ...HEADING_STYLES.h5,
+  color: 'text.inverse',
+  mb: '0',
 };
 
 // Action text styles
 export const actionTextStyles: SystemStyleObject = {
-  color: 'white',
+  color: 'text.inverse',
 };
 
 // Specific action variants
@@ -87,7 +88,7 @@ export const actionVariants = {
     },
     heading: {
       ...actionHeadingStyles,
-      color: 'blue.700',
+      color: 'text.accent',
     },
   },
 } satisfies Record<string, Record<string, SystemStyleObject>>;

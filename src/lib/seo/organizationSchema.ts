@@ -12,7 +12,12 @@ const websiteId = `${APP_CONFIG.url}/#website`;
 /** Topics TIS advises on; keep in sync with the service pages. */
 export const ORGANIZATION_KNOWS_ABOUT = [
   'Taxiverzekering',
-  'Personenvervoer verzekering',
+  'Wagenparkverzekering',
+  'VvE verzekering',
+  'Horecaverzekering',
+  'Bedrijfsaansprakelijkheidsverzekering',
+  'CAR-verzekering',
+  'Verzuimverzekering',
   'Zakelijke verzekeringen',
   'Particuliere verzekeringen',
   'Risk management',
@@ -24,6 +29,7 @@ export function getOrganizationSchema() {
     '@type': 'InsuranceAgency',
     '@id': organizationId,
     name: CONTACT_INFO.name,
+    legalName: CONTACT_INFO.legalName,
     url: APP_CONFIG.url,
     email: CONTACT_INFO.email,
     telephone: CONTACT_INFO.phone,
@@ -37,6 +43,14 @@ export function getOrganizationSchema() {
       addressLocality: CONTACT_INFO.address.city,
       addressCountry: 'NL',
     },
+    openingHoursSpecification: [
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        opens: CONTACT_INFO.openingHours.phone.from,
+        closes: CONTACT_INFO.openingHours.phone.until,
+      },
+    ],
     sameAs: [CONTACT_INFO.social.linkedIn],
     parentOrganization: {
       '@type': 'Organization',
@@ -134,7 +148,8 @@ export function getBreadcrumbListSchema(
   items: BreadcrumbItem[] = [],
   path?: string,
 ) {
-  const listItems = items.length > 0 ? items : buildBreadcrumbItems(path ?? '/');
+  const listItems =
+    items.length > 0 ? items : buildBreadcrumbItems(path ?? '/');
 
   return {
     '@context': 'https://schema.org',
@@ -172,7 +187,7 @@ export const HOME_FAQS: FaqItem[] = [
   {
     question: 'Wat doet TIS Risk Managers?',
     answer:
-      'TIS Risk Managers is een onafhankelijk adviesbureau in Amsterdam voor verzekeringen en risk management. Wij leveren maatwerk voor particulieren, bedrijven en taxivervoer.',
+      'TIS Risk Managers is een landelijk werkend assurantiekantoor in Amsterdam. Wij adviseren ondernemers in onder meer het personenvervoer, de horeca, de bouw en techniek, vastgoedeigenaren en VvE’s, en verzorgen daarnaast particuliere verzekeringen.',
   },
   {
     question: 'Zijn de adviseurs van TIS gecertificeerd?',
@@ -182,17 +197,17 @@ export const HOME_FAQS: FaqItem[] = [
   {
     question: 'Waarom kiest TIS voor maatwerkverzekeringen?',
     answer:
-      'Standaardpolissen dekken vaak te weinig of juist te veel. Maatwerk zorgt dat de dekking aansluit op uw persoonlijke of bedrijfsrisico’s.',
+      'Iedere onderneming heeft andere risico’s. Daarom kijken wij naar uw bedrijfsactiviteiten en stellen wij een passend verzekeringspakket samen, in plaats van een standaardoplossing.',
   },
   {
     question: 'Hoe werkt schadeafhandeling bij TIS?',
     answer:
-      'TIS biedt volledig digitale schadeafhandeling. Zo wikkelen wij schades snel en vakkundig af, van inbraak en stormschade tot bedrijfsschade.',
+      'Bij TIS beschikken wij over een eigen schadeafdeling. Wij beoordelen de dekking, begeleiden de schadeafhandeling, schakelen waar nodig een expert in en onderzoeken of de schade op een aansprakelijke tegenpartij verhaald kan worden.',
   },
   {
     question: 'Adviseert TIS ook taxi- en personenvervoer?',
     answer:
-      'Ja. TIS is gespecialiseerd in verzekeringen voor taxi- en personenvervoer en kent de specifieke risico’s van die branche.',
+      'Ja. Al ruim 25 jaar verzekeren wij taxibedrijven, zelfstandige chauffeurs, luxe personenvervoer, zorgvervoer en wagenparken.',
   },
   {
     question: 'Waar is TIS Risk Managers gevestigd?',
@@ -201,9 +216,43 @@ export const HOME_FAQS: FaqItem[] = [
 ];
 
 export const SERVICE_TYPES = {
-  insurance: 'Verzekeringsadvies',
-  insurancePersonal: 'Particuliere verzekeringen',
-  insuranceBusiness: 'Zakelijke verzekeringen',
-  taxi: 'Taxiverzekering',
-  riskManagement: 'Risk management',
+  businessInsurance: 'Zakelijke verzekeringen',
+  taxi: 'Taxiverzekering en wagenparkverzekering',
+  realEstate: 'Vastgoed- en VvE-verzekering',
+  hospitality: 'Horecaverzekering',
+  liability: 'Aansprakelijkheidsverzekering',
+  construction: 'CAR-verzekering en bouwverzekering',
+  absence: 'Verzuimverzekering',
+  personalInsurance: 'Particuliere verzekeringen',
+  riskAdvice: 'Risicoadvies en risk management',
 } as const;
+
+type ArticleSchemaInput = {
+  headline: string;
+  description: string;
+  path: string;
+};
+
+export function getArticleSchema({
+  headline,
+  description,
+  path,
+}: ArticleSchemaInput) {
+  const url = toAbsoluteUrl(path);
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    '@id': `${url}/#article`,
+    headline,
+    description,
+    url,
+    inLanguage: 'nl-NL',
+    author: {
+      '@id': organizationId,
+    },
+    publisher: {
+      '@id': organizationId,
+    },
+  };
+}

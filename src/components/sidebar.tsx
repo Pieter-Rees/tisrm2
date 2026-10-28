@@ -13,7 +13,11 @@ import { cn } from '@/lib/utils';
 //   sidebarHelpTextStyles,
 // } from '@/styles/components/layout.styles';
 import { COMPONENT_SPACING } from '@/constants/layout';
-import { SECTION_SPACING } from '@/constants/typography';
+import {
+  HEADING_STYLES,
+  PARAGRAPH_STYLES,
+  SECTION_SPACING,
+} from '@/constants/typography';
 import type { BaseComponentProps } from '@/types/components';
 
 const SIDEBAR_CARDS = [
@@ -46,7 +50,7 @@ const SIDEBAR_CARDS = [
     description: 'Neem direct contact met ons op voor persoonlijk advies',
     cta: 'Bel nu',
     ctaLink: undefined,
-    phone: `tel:${CONTACT_INFO.phone}`,
+    phone: CONTACT_INFO.phoneHref,
     buttonVariant: 'outline' as const,
   },
 ] as const;
@@ -87,10 +91,10 @@ const Sidebar = memo<BaseComponentProps>(
           borderColor="blue.200"
           textAlign="center"
         >
-          <Box fontSize="sm" color="blue.900" fontWeight="medium" mb="1">
+          <Box {...HEADING_STYLES.h5} color="text.accent" mb="1">
             Hulp nodig?
           </Box>
-          <Box fontSize="xs" color="blue.900">
+          <Box {...PARAGRAPH_STYLES.small} color="text.accent">
             Onze experts helpen u graag verder met al uw verzekeringsvragen
           </Box>
         </Box>

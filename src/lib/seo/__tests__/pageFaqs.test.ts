@@ -9,8 +9,8 @@ describe('PAGE_FAQS', () => {
 
   it('provides service FAQs for taxi, risk and insurance pages', () => {
     expect(PAGE_FAQS.taxi.length).toBeGreaterThanOrEqual(3);
-    expect(PAGE_FAQS.riskManagement.length).toBeGreaterThanOrEqual(3);
-    expect(PAGE_FAQS.insurancePersonal.length).toBeGreaterThanOrEqual(3);
-    expect(PAGE_FAQS.insuranceBusiness.length).toBeGreaterThanOrEqual(3);
+    expect(PAGE_FAQS.riskAdvice.length).toBeGreaterThanOrEqual(3);
+    expect(PAGE_FAQS.personalInsurance.length).toBeGreaterThanOrEqual(3);
+    expect(PAGE_FAQS.businessInsurance.length).toBeGreaterThanOrEqual(3);
   });
 });

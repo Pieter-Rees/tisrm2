@@ -4,6 +4,7 @@ import { Box, Button, Heading, Icon, Text } from '@chakra-ui/react';
 import Link from 'next/link';
 import { BsTelephoneFill } from 'react-icons/bs';
 
+import { CONTACT_INFO } from '@/constants/app';
 import {
   actionButtonBaseStyles,
   actionStateStyles,
@@ -20,7 +21,7 @@ export default function CallUs() {
       _hover={actionStateStyles.hover}
       _active={actionStateStyles.active}
     >
-      <Link href="tel:+310206368191">
+      <Link href={CONTACT_INFO.phoneHref}>
         <Box display="flex" {...content}>
           <Icon as={BsTelephoneFill} {...icon} />
           <Box>
@@ -29,7 +30,7 @@ export default function CallUs() {
               <br />
               Bel ons!
             </Heading>
-            <Text {...text}>+31 20 636 8191</Text>
+            <Text {...text}>{CONTACT_INFO.phone}</Text>
           </Box>
         </Box>
       </Link>

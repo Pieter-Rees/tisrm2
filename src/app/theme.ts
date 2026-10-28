@@ -123,6 +123,7 @@ export const system = createSystem(defaultConfig, {
         'text.secondary': { value: 'gray.700' },
         'text.muted': { value: 'gray.600' },
         'text.accent': { value: 'blue.700' },
+        'text.inverse': { value: 'white' },
       },
     },
   },

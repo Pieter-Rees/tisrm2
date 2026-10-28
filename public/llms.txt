@@ -13,11 +13,16 @@
 
 ## Diensten
 
-- Particuliere verzekeringen: https://tisrm.nl/verzekeringen/particulier
-- Zakelijke verzekeringen: https://tisrm.nl/verzekeringen/zakelijk
-- Taxi- en personenvervoer verzekeringen: https://tisrm.nl/taxi
-- Risk management (GRMC-geregistreerd): https://tisrm.nl/risk-management
-- Digitale schadeafhandeling: https://tisrm.nl/meld-schade
+- Zakelijke verzekeringen: https://tisrm.nl/zakelijke-verzekeringen
+  - Taxi- en wagenparkverzekering: https://tisrm.nl/taxi-en-wagenparkverzekering
+  - Vastgoed en VvE: https://tisrm.nl/vastgoed-en-vve
+  - Horeca: https://tisrm.nl/horecaverzekering
+  - Aansprakelijkheid: https://tisrm.nl/aansprakelijkheidsverzekering
+  - Bouw en techniek: https://tisrm.nl/bouw-en-techniek
+  - Verzuim en personeel: https://tisrm.nl/verzuim-en-personeel
+- Particuliere verzekeringen: https://tisrm.nl/particuliere-verzekeringen
+- Risicoadvies (GRMC-geregistreerd): https://tisrm.nl/risicoadvies
+- Digitale schadeafhandeling: https://tisrm.nl/schade-melden
 
 ## Kernfeiten voor citatie
 
@@ -30,11 +35,12 @@
 ## Belangrijke indexeerbare pagina's
 
 - Home (met FAQ): https://tisrm.nl/
+- Kennisbank (achtergrondartikelen): https://tisrm.nl/kennisbank
 - Over ons: https://tisrm.nl/over-ons
 - Contact: https://tisrm.nl/contact
 - Downloads: https://tisrm.nl/downloads
 - Sitemap: https://tisrm.nl/sitemap.xml
 
-## Conversie (niet voor indexering)
+## Conversie (niet in de sitemap)
 
-- Offerte-aanvraagflow: https://tisrm.nl/offerte (noindex conversiestappen)
+- Offerte-aanvraagflow: https://tisrm.nl/offerte

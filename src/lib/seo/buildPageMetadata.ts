@@ -24,20 +24,19 @@ export function buildPageMetadata({
 }: BuildPageMetadataInput): Metadata {
   const canonicalPath = path === '/' ? '/' : path;
   const absoluteUrl = `${APP_CONFIG.url}${canonicalPath === '/' ? '' : canonicalPath}`;
-  // Brand every title here instead of relying on the root title.template,
-  // which does not reach segments nested two levels deep.
-  const brandedTitle = `${title} | ${APP_CONFIG.name}`;
 
   return {
+    // Titles come from the copy deck exactly as written, so the root
+    // title.template must not append the brand a second time.
     title: {
-      absolute: brandedTitle,
+      absolute: title,
     },
     description,
     alternates: {
       canonical: canonicalPath,
     },
     openGraph: {
-      title: brandedTitle,
+      title,
       description,
       url: absoluteUrl,
       type: 'website',
@@ -47,12 +46,13 @@ export function buildPageMetadata({
     },
     twitter: {
       card: 'summary_large_image',
-      title: brandedTitle,
+      title,
       description,
       images: [defaultOgImage.url],
     },
-    robots: noIndex
-      ? {
+    robots:
+      noIndex ?
+        {
           index: false,
           follow: false,
         }

@@ -12,19 +12,20 @@ const ogImage = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(pageInfo.url),
+  // Page titles come from the copy deck verbatim, so no brand template here.
   title: {
-    default: `${PAGE_META.home.title} | ${pageInfo.name}`,
-    template: `%s | ${pageInfo.name}`,
+    default: PAGE_META.home.title,
+    template: '%s',
   },
-  description: pageInfo.description,
+  description: PAGE_META.home.description,
   keywords: [
     'verzekeringen',
-    'risk management',
-    'TIS',
+    'risicoadvies',
+    'TIS Risk Managers',
     'schadeafhandeling',
-    'bedrijfsverzekeringen',
+    'zakelijke verzekeringen',
     'particuliere verzekeringen',
-    'taxi verzekeringen',
+    'taxiverzekering',
     'verzekeringsadvies Amsterdam',
   ],
   authors: [{ name: pageInfo.name }],
@@ -42,8 +43,8 @@ export const metadata: Metadata = {
     icon: [{ url: '/favicon.ico', sizes: 'any' }],
   },
   openGraph: {
-    title: `${PAGE_META.home.title} | ${pageInfo.name}`,
-    description: pageInfo.description,
+    title: PAGE_META.home.title,
+    description: PAGE_META.home.description,
     type: 'website',
     locale: 'nl_NL',
     siteName: pageInfo.name,
@@ -52,8 +53,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${PAGE_META.home.title} | ${pageInfo.name}`,
-    description: pageInfo.description,
+    title: PAGE_META.home.title,
+    description: PAGE_META.home.description,
     images: [ogImage.url],
   },
   robots: {

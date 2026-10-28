@@ -8,12 +8,16 @@ import {
   GridItem,
   Heading,
 } from '@chakra-ui/react';
-import { Suspense, lazy, memo, type ReactNode } from 'react';
+import { memo, type ReactNode } from 'react';
 
 import ErrorBoundary from '@/components/error-boundary';
-import Loading from '@/components/loading';
+import Sidebar from '@/components/sidebar';
 import { COMPONENT_SPACING, SPACING_PATTERNS, SPACING_SCALE } from '@/constants/layout';
-import { HEADING_STYLES, SECTION_SPACING } from '@/constants/typography';
+import {
+  HEADING_STYLES,
+  PARAGRAPH_STYLES,
+  SECTION_SPACING,
+} from '@/constants/typography';
 import { cn } from '@/lib/utils';
 import {
   layoutGridStyles,
@@ -22,8 +26,6 @@ import {
   sidebarColumnStyles,
 } from '@/styles/components/layout.styles';
 import type { BaseComponentProps, ResponsiveValue } from '@/types/components';
-
-const Sidebar = lazy(() => import('@/components/sidebar'));
 
 interface UnifiedLayoutProps extends BaseComponentProps {
   /** Layout variant determines the structure */
@@ -73,6 +75,9 @@ const UnifiedLayout = memo<UnifiedLayoutProps>(
             maxW={maxWidth}
             mx="auto"
             p={variant === 'centered' ? padding : undefined}
+            display="flex"
+            flexDirection="column"
+            gap={SPACING_SCALE.md}
           >
             {title && (
               <Box as="header">
@@ -80,7 +85,7 @@ const UnifiedLayout = memo<UnifiedLayoutProps>(
                   id="page-title"
                   as="h1"
                   {...HEADING_STYLES.h1}
-                  mb={SPACING_SCALE.md}
+                  mb="0"
                   textAlign={variant === 'centered' ? 'center' : undefined}
                 >
                   {title}
@@ -160,21 +165,21 @@ const UnifiedLayout = memo<UnifiedLayoutProps>(
                         border="1px solid"
                         borderColor="gray.200"
                       >
-                        <Heading size="sm" color="gray.600" mb={SPACING_SCALE.xs}>
+                        <Heading
+                          {...HEADING_STYLES.h5}
+                          color="text.muted"
+                          mb={SPACING_SCALE.xs}
+                        >
                           Sidebar niet beschikbaar
                         </Heading>
-                        <Box fontSize="sm" color="gray.500">
+                        <Box {...PARAGRAPH_STYLES.small}>
                           Er is een probleem opgetreden bij het laden van de
                           sidebar.
                         </Box>
                       </Box>
                     }
                   >
-                    <Suspense
-                      fallback={<Loading text="Loading sidebar..." size="sm" />}
-                    >
-                      <Sidebar />
-                    </Suspense>
+                    <Sidebar />
                   </ErrorBoundary>
                 </Box>
               </GridItem>

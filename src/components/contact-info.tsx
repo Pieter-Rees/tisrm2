@@ -7,13 +7,6 @@ import {
   primaryButtonStyles,
 } from '@/styles/components/button.styles';
 import type { ContactInfoProps } from '@/types/components';
-// import {
-//   contactInfoGridStyles,
-//   contactInfoColumnStyles,
-//   contactInfoTextStyles,
-//   contactInfoButtonsContainerStyles,
-//   contactInfoButtonsListStyles,
-// } from '@/styles/components/utility.styles';
 import {
   Box,
   Button,
@@ -28,8 +21,8 @@ import { BsLinkedin } from 'react-icons/bs';
 
 const contactButtons = [
   {
-    href: 'tel:+310206368191',
-    label: '+31 20 636 8191',
+    href: contactInfo.phoneHref,
+    label: contactInfo.phone,
     external: false,
     ariaLabel: undefined,
   },
@@ -55,16 +48,16 @@ export default function ContactInfo({
       <SimpleGrid gap={SPACING_PATTERNS.page.section}>
         <Box>
           <VStack alignItems="start" gap={SPACING_PATTERNS.navigation.item}>
-            <Text color="gray.800">{contactInfo.address.street}</Text>
-            <Text color="gray.800">{contactInfo.email}</Text>
-            <Text color="gray.800">{contactInfo.address.city}</Text>
+            <Text color="text.primary">{contactInfo.address.street}</Text>
+            <Text color="text.primary">{contactInfo.email}</Text>
+            <Text color="text.primary">{contactInfo.address.city}</Text>
           </VStack>
         </Box>
         <Box>
           <VStack alignItems="start" gap={SPACING_PATTERNS.navigation.item}>
-            <Text color="gray.800">{contactInfo.postalBox.box}</Text>
-            <Text color="gray.800">{contactInfo.postalBox.postalCode}</Text>
-            <Text color="gray.800">{contactInfo.postalBox.city}</Text>
+            <Text color="text.primary">{contactInfo.postalBox.box}</Text>
+            <Text color="text.primary">{contactInfo.postalBox.postalCode}</Text>
+            <Text color="text.primary">{contactInfo.postalBox.city}</Text>
           </VStack>
         </Box>
       </SimpleGrid>

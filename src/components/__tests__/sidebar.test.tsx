@@ -1,6 +1,8 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 
+import { CONTACT_INFO } from '@/constants/app';
+
 
 const SimpleSidebar = ({ className, 'data-testid': testId }: any) => {
     const sidebarCards = [
@@ -30,7 +32,7 @@ const SimpleSidebar = ({ className, 'data-testid': testId }: any) => {
             description: 'Neem direct contact met ons op voor persoonlijk advies',
             cta: 'Bel nu',
             ctaLink: undefined,
-            phone: 'tel:+31205201234',
+            phone: CONTACT_INFO.phoneHref,
             buttonVariant: 'outline',
         },
     ];

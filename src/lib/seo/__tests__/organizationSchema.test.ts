@@ -1,3 +1,4 @@
+import { NAVIGATION_ROUTES } from '@/constants/app';
 import {
   buildBreadcrumbItems,
   formatBreadcrumbSegment,
@@ -40,7 +41,12 @@ describe('SEO schema helpers', () => {
     });
     expect(schema.knowsAbout).toEqual([
       'Taxiverzekering',
-      'Personenvervoer verzekering',
+      'Wagenparkverzekering',
+      'VvE verzekering',
+      'Horecaverzekering',
+      'Bedrijfsaansprakelijkheidsverzekering',
+      'CAR-verzekering',
+      'Verzuimverzekering',
       'Zakelijke verzekeringen',
       'Particuliere verzekeringen',
       'Risk management',
@@ -60,10 +66,10 @@ describe('SEO schema helpers', () => {
     const schema = getWebPageSchema({
       name: 'Taxi',
       description: 'Taxi verzekeringen',
-      path: '/taxi',
+      path: NAVIGATION_ROUTES.taxi,
     });
     expect(schema['@type']).toBe('WebPage');
-    expect(schema.url).toBe('https://tisrm.nl/taxi');
+    expect(schema.url).toBe(`https://tisrm.nl${NAVIGATION_ROUTES.taxi}`);
     expect(schema.publisher).toEqual({
       '@id': 'https://tisrm.nl/#organization',
     });
@@ -74,13 +80,13 @@ describe('SEO schema helpers', () => {
     const schema = getServiceSchema({
       name: 'Taxiverzekering',
       description: 'Specialistische taxi verzekeringen',
-      path: '/taxi',
+      path: NAVIGATION_ROUTES.taxi,
       serviceType: 'Taxiverzekering',
     });
     expect(schema['@type']).toBe('Service');
     expect(schema.name).toBe('Taxiverzekering');
     expect(schema.serviceType).toBe('Taxiverzekering');
-    expect(schema.url).toBe('https://tisrm.nl/taxi');
+    expect(schema.url).toBe(`https://tisrm.nl${NAVIGATION_ROUTES.taxi}`);
     expect(schema.provider).toEqual({
       '@id': 'https://tisrm.nl/#organization',
     });
@@ -91,25 +97,29 @@ describe('SEO schema helpers', () => {
   });
 
   it('builds breadcrumb list from path', () => {
-    const items = buildBreadcrumbItems('/verzekeringen/particulier');
+    const articlePath = `${NAVIGATION_ROUTES.knowledgeBase}/tx-keurmerk-verzekeringen`;
+    const items = buildBreadcrumbItems(articlePath);
     expect(items).toEqual([
       { name: 'Home', path: '/' },
-      { name: 'Verzekeringen', path: '/verzekeringen' },
-      { name: 'Particulier', path: '/verzekeringen/particulier' },
+      { name: 'Kennisbank', path: NAVIGATION_ROUTES.knowledgeBase },
+      {
+        name: 'Tx Keurmerk Verzekeringen',
+        path: articlePath,
+      },
     ]);
 
-    const schema = getBreadcrumbListSchema([], '/verzekeringen/particulier');
+    const schema = getBreadcrumbListSchema([], articlePath);
     expect(schema['@type']).toBe('BreadcrumbList');
     expect(schema.itemListElement).toHaveLength(3);
     expect(schema.itemListElement[2]).toMatchObject({
       position: 3,
-      name: 'Particulier',
-      item: 'https://tisrm.nl/verzekeringen/particulier',
+      name: 'Tx Keurmerk Verzekeringen',
+      item: `https://tisrm.nl${articlePath}`,
     });
   });
 
   it('formats hyphenated segments', () => {
-    expect(formatBreadcrumbSegment('risk-management')).toBe('Risk management');
+    expect(formatBreadcrumbSegment('risicoadvies')).toBe('Risicoadvies');
     expect(formatBreadcrumbSegment('custom-page')).toBe('Custom Page');
   });
 

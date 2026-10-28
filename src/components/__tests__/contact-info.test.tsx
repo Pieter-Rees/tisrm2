@@ -1,5 +1,7 @@
 import { render, screen } from '@testing-library/react';
 
+import { CONTACT_INFO } from '@/constants/app';
+
 // Create a simplified ContactInfo component that mimics the original functionality
 const SimpleContactInfo = ({
   buttonVariant = 'solid',
@@ -7,7 +9,7 @@ const SimpleContactInfo = ({
   buttonVariant?: 'solid' | 'outline';
 }) => {
   const contactButtons = [
-    { href: 'tel:+310206368191', label: '+31 20 636 8191', external: false },
+    { href: CONTACT_INFO.phoneHref, label: CONTACT_INFO.phone, external: false },
     { href: 'mailto:info@tisrm.nl', label: 'info@tisrm.nl', external: false },
     { href: 'https://linkedin.com', label: 'LinkedIn', external: true },
   ];
@@ -123,8 +125,8 @@ describe('ContactInfo Component', () => {
 
   it('has correct phone link', () => {
     render(<SimpleContactInfo />);
-    const phoneLink = screen.getByText('+31 20 636 8191').closest('a');
-    expect(phoneLink).toHaveAttribute('href', 'tel:+310206368191');
+    const phoneLink = screen.getByText(CONTACT_INFO.phone).closest('a');
+    expect(phoneLink).toHaveAttribute('href', CONTACT_INFO.phoneHref);
   });
 
   it('has correct email link', () => {

@@ -4,6 +4,7 @@ import { Accordion, Box, Heading, Span, Text } from '@chakra-ui/react';
 
 import type { FaqItem } from '@/lib/seo/organizationSchema';
 import { COMPONENT_SPACING, SPACING_SCALE } from '@/constants/layout';
+import { HEADING_STYLES, PARAGRAPH_STYLES } from '@/constants/typography';
 
 type FaqSectionProps = {
   faqs: readonly FaqItem[];
@@ -24,7 +25,12 @@ export function FaqSection({
       borderRadius="xl"
       p={COMPONENT_SPACING.card.lg}
     >
-      <Heading as="h2" id={headingId} fontSize="1.5rem" mb={COMPONENT_SPACING.form.group} color="gray.800">
+      <Heading
+        as="h2"
+        id={headingId}
+        {...HEADING_STYLES.h2}
+        mb={COMPONENT_SPACING.form.group}
+      >
         {title}
       </Heading>
 
@@ -48,19 +54,14 @@ export function FaqSection({
                 '& *': { cursor: 'pointer' },
               }}
             >
-              <Span
-                flex="1"
-                fontWeight="semibold"
-                fontSize="1.125rem"
-                color="gray.800"
-              >
+              <Span flex="1" {...HEADING_STYLES.h4} mb="0">
                 {faq.question}
               </Span>
               <Accordion.ItemIndicator />
             </Accordion.ItemTrigger>
             <Accordion.ItemContent>
               <Accordion.ItemBody px="0" pb={SPACING_SCALE.md} pt="0">
-                <Text color="gray.700" lineHeight="1.6" m="0">
+                <Text {...PARAGRAPH_STYLES.body} m="0">
                   {faq.answer}
                 </Text>
               </Accordion.ItemBody>

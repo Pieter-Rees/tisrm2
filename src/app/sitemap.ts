@@ -3,7 +3,12 @@ import { join } from 'node:path';
 
 import type { MetadataRoute } from 'next';
 
-import { APP_CONFIG, NAVIGATION_ROUTES } from '@/constants/app';
+import {
+  APP_CONFIG,
+  NAVIGATION_ROUTES,
+  getKnowledgeArticlePath,
+} from '@/constants/app';
+import { KNOWLEDGE_ARTICLES } from '@/data/kennisbank';
 
 const appDir = join(process.cwd(), 'src', 'app');
 
@@ -37,26 +42,51 @@ const marketingRoutes: Array<{
   priority: number;
 }> = [
   { path: NAVIGATION_ROUTES.home, changeFrequency: 'weekly', priority: 1 },
-  { path: NAVIGATION_ROUTES.taxi, changeFrequency: 'weekly', priority: 0.9 },
   {
-    path: NAVIGATION_ROUTES.insurance,
+    path: NAVIGATION_ROUTES.businessInsurance,
     changeFrequency: 'weekly',
     priority: 0.9,
   },
+  { path: NAVIGATION_ROUTES.taxi, changeFrequency: 'weekly', priority: 0.9 },
   {
-    path: NAVIGATION_ROUTES.insurancePersonal,
+    path: NAVIGATION_ROUTES.realEstate,
     changeFrequency: 'monthly',
     priority: 0.8,
   },
   {
-    path: NAVIGATION_ROUTES.insuranceBusiness,
+    path: NAVIGATION_ROUTES.hospitality,
     changeFrequency: 'monthly',
     priority: 0.8,
   },
   {
-    path: NAVIGATION_ROUTES.riskManagement,
+    path: NAVIGATION_ROUTES.liability,
     changeFrequency: 'monthly',
     priority: 0.8,
+  },
+  {
+    path: NAVIGATION_ROUTES.construction,
+    changeFrequency: 'monthly',
+    priority: 0.8,
+  },
+  {
+    path: NAVIGATION_ROUTES.absence,
+    changeFrequency: 'monthly',
+    priority: 0.8,
+  },
+  {
+    path: NAVIGATION_ROUTES.personalInsurance,
+    changeFrequency: 'monthly',
+    priority: 0.8,
+  },
+  {
+    path: NAVIGATION_ROUTES.riskAdvice,
+    changeFrequency: 'monthly',
+    priority: 0.8,
+  },
+  {
+    path: NAVIGATION_ROUTES.knowledgeBase,
+    changeFrequency: 'weekly',
+    priority: 0.7,
   },
   { path: NAVIGATION_ROUTES.about, changeFrequency: 'monthly', priority: 0.7 },
   {
@@ -74,6 +104,11 @@ const marketingRoutes: Array<{
     changeFrequency: 'monthly',
     priority: 0.7,
   },
+  ...KNOWLEDGE_ARTICLES.map(({ slug }) => ({
+    path: getKnowledgeArticlePath(slug),
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+  })),
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

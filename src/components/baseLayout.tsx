@@ -3,12 +3,12 @@
 import { Box, Heading } from '@chakra-ui/react';
 import { memo } from 'react';
 
-import ErrorBoundary from './error-boundary';
+import { HEADING_STYLES } from '@/constants/typography';
 import { cn } from '@/lib/utils';
 import type { BaseLayoutProps } from '@/types/components';
 import type { FC } from 'react';
+import ErrorBoundary from './error-boundary';
 
-const HEADING_SIZE = { base: 'lg', md: 'xl', lg: '2xl' } as const;
 const HEADING_ALIGNMENT = { base: 'center', md: 'left' } as const;
 
 const BaseLayout: FC<BaseLayoutProps> = memo(
@@ -33,10 +33,7 @@ const BaseLayout: FC<BaseLayoutProps> = memo(
           <Heading
             id="page-title"
             as="h1"
-            size={HEADING_SIZE}
-            color="gray.800"
-            fontWeight="bold"
-            lineHeight="tight"
+            {...HEADING_STYLES.h1}
             textAlign={HEADING_ALIGNMENT}
           >
             {title}

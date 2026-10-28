@@ -90,7 +90,7 @@ const Card = memo<CardProps>(
           )}
 
           {description && (
-            <Text {...PARAGRAPH_STYLES.body} flex="1">
+            <Text {...PARAGRAPH_STYLES.bodySmall} flex="1">
               {description}
             </Text>
           )}
@@ -126,8 +126,6 @@ const Card = memo<CardProps>(
                   width="full"
                   gap={SPACING_SCALE.xs}
                   variant="solid"
-                  size="md"
-                  fontWeight="medium"
                   {...primaryButtonStyles}
                 >
                   <BsDownload />

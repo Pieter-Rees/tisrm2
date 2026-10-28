@@ -1,5 +1,5 @@
 /**
- * Utility component styles - breadcrumb, loading, contact-info
+ * Utility component styles - loading, footer logos, error boundary
  */
 
 import type { SystemStyleObject } from '@chakra-ui/react';
@@ -7,23 +7,6 @@ import { COMPONENT_SPACING, SPACING_SCALE } from '@/constants/layout';
 import { SECTION_SPACING } from '@/constants/typography';
 
 // Style extractors removed due to TypeScript type conflicts
-
-// Breadcrumb styles
-export const breadcrumbContainerStyles: SystemStyleObject = {
-  gap: SPACING_SCALE.sm,
-  fontSize: { base: 'md', xl: 'lg' },
-  color: 'gray.700',
-};
-
-export const getBreadcrumbItemStyles = (isCurrentPage: boolean): SystemStyleObject => ({
-  fontSize: 'xl',
-  fontWeight: isCurrentPage ? 'bold' : 'normal',
-  color: isCurrentPage ? 'blue.700' : 'gray.700',
-});
-
-export const breadcrumbSeparatorStyles: SystemStyleObject = {
-  color: 'gray.400',
-};
 
 // Loading component styles
 export const loadingContentStyles: SystemStyleObject = {
@@ -58,30 +41,6 @@ export const loadingInlineStyles: SystemStyleObject = {
   justifyContent: 'center',
   minH: '200px',
   p: COMPONENT_SPACING.card.xl,
-};
-
-// Contact info styles
-export const contactInfoGridStyles: SystemStyleObject = {
-  gap: COMPONENT_SPACING.grid.lg,
-};
-
-export const contactInfoColumnStyles: SystemStyleObject = {
-  alignItems: 'start',
-  gap: SPACING_SCALE.xs,
-};
-
-export const contactInfoTextStyles: SystemStyleObject = {
-  color: 'gray.800',
-};
-
-export const contactInfoButtonsContainerStyles: SystemStyleObject = {
-  justifyContent: 'start',
-  mt: SECTION_SPACING.small,
-};
-
-export const contactInfoButtonsListStyles: SystemStyleObject = {
-  alignItems: 'start',
-  gap: SPACING_SCALE.xs,
 };
 
 // Footer logos styles

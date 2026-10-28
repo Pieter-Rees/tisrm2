@@ -73,6 +73,21 @@ export const PARAGRAPH_STYLES = {
     fontWeight: 'medium',
     mb: '0',
   },
+  bodySmall: {
+    fontFamily: 'body',
+    fontSize: { base: 'sm', lg: 'md' },
+    lineHeight: 'relaxed',
+    color: 'text.secondary',
+    mb: '0',
+  },
+  link: {
+    fontFamily: 'body',
+    fontSize: { base: 'md', lg: 'lg' },
+    fontWeight: 'medium',
+    lineHeight: 'relaxed',
+    color: 'text.accent',
+    mb: '0',
+  },
 } as const;
 
 /** Gap between stacked paragraphs / prose blocks (parent Flex/VStack owns rhythm) */
@@ -94,7 +109,7 @@ export const LIST_STYLES = {
     mb: '2',
   },
   itemIcon: {
-    color: 'blue.700',
+    color: 'text.accent',
     mr: '3',
     mt: '1',
     flexShrink: 0,

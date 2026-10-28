@@ -1,23 +1,23 @@
 import { buildPageMetadata } from '@/lib/seo/buildPageMetadata';
 
 describe('buildPageMetadata', () => {
-  it('brands titles with an absolute title so nested routes keep the suffix', () => {
+  it('uses the copy deck title verbatim instead of appending the brand', () => {
     const metadata = buildPageMetadata({
-      title: 'Particuliere verzekeringen',
+      title: 'Particuliere verzekeringen | TIS Risk Managers Amsterdam',
       description: 'Particuliere verzekeringen op maat.',
-      path: '/verzekeringen/particulier',
+      path: '/particuliere-verzekeringen',
     });
 
     expect(metadata.title).toEqual({
-      absolute: 'Particuliere verzekeringen | TIS Risk Managers',
+      absolute: 'Particuliere verzekeringen | TIS Risk Managers Amsterdam',
     });
     expect(metadata.openGraph?.title).toBe(
-      'Particuliere verzekeringen | TIS Risk Managers',
+      'Particuliere verzekeringen | TIS Risk Managers Amsterdam',
     );
     expect(metadata.openGraph?.url).toBe(
-      'https://tisrm.nl/verzekeringen/particulier',
+      'https://tisrm.nl/particuliere-verzekeringen',
     );
-    expect(metadata.alternates?.canonical).toBe('/verzekeringen/particulier');
+    expect(metadata.alternates?.canonical).toBe('/particuliere-verzekeringen');
   });
 
   it('keeps the home canonical slash-less and og:url on the apex', () => {

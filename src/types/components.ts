@@ -40,6 +40,8 @@ export interface BreadcrumbProps extends BaseComponentProps {
   readonly activeClasses?: string;
   readonly capitalizeLinks?: boolean;
   readonly maxItems?: number;
+  /** Label for the current page when the slug does not read well. */
+  readonly currentLabel?: string;
 }
 
 export interface NavbarProps extends BaseComponentProps {

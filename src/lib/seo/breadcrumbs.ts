@@ -1,15 +1,20 @@
 import { APP_CONFIG } from '@/constants/app';
 
 const SEGMENT_LABELS: Record<string, string> = {
-  verzekeringen: 'Verzekeringen',
-  particulier: 'Particulier',
-  zakelijk: 'Zakelijk',
-  taxi: 'Taxi',
-  'risk-management': 'Risk management',
+  'zakelijke-verzekeringen': 'Zakelijke verzekeringen',
+  'taxi-en-wagenparkverzekering': 'Taxi en wagenpark',
+  'vastgoed-en-vve': 'Vastgoed en VvE',
+  horecaverzekering: 'Horeca',
+  aansprakelijkheidsverzekering: 'Aansprakelijkheid',
+  'bouw-en-techniek': 'Bouw en techniek',
+  'verzuim-en-personeel': 'Verzuim en personeel',
+  'particuliere-verzekeringen': 'Particuliere verzekeringen',
+  risicoadvies: 'Risicoadvies',
+  kennisbank: 'Kennisbank',
   'over-ons': 'Over ons',
   contact: 'Contact',
   downloads: 'Downloads',
-  'meld-schade': 'Schade melden',
+  'schade-melden': 'Schade melden',
   offerte: 'Offerte',
 };
 

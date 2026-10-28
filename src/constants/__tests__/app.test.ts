@@ -33,7 +33,15 @@ describe('App Constants', () => {
     it('should have correct contact information', () => {
       expect(CONTACT_INFO.name).toBe('TIS Risk Managers');
       expect(CONTACT_INFO.phone).toBe('+31 20 636 8191');
+      expect(CONTACT_INFO.phoneHref).toBe('tel:+31206368191');
       expect(CONTACT_INFO.email).toBe('info@tisrm.nl');
+    });
+
+    it('should expose a dialable phoneHref without spaces or a trunk zero', () => {
+      expect(CONTACT_INFO.phoneHref).toMatch(/^tel:\+[1-9]\d+$/);
+      expect(CONTACT_INFO.phoneHref).toBe(
+        `tel:${CONTACT_INFO.phone.replace(/\s/g, '')}`,
+      );
     });
 
     it('should have correct address information', () => {
@@ -57,13 +65,19 @@ describe('App Constants', () => {
   describe('NAVIGATION_ROUTES', () => {
     it('should have all required navigation routes', () => {
       expect(NAVIGATION_ROUTES.home).toBe('/');
-      expect(NAVIGATION_ROUTES.insurance).toBe('/verzekeringen');
-      expect(NAVIGATION_ROUTES.insurancePersonal).toBe('/verzekeringen/particulier');
-      expect(NAVIGATION_ROUTES.insuranceBusiness).toBe('/verzekeringen/zakelijk');
-      expect(NAVIGATION_ROUTES.taxi).toBe('/taxi');
-      expect(NAVIGATION_ROUTES.riskManagement).toBe('/risk-management');
+      expect(NAVIGATION_ROUTES.businessInsurance).toBe('/zakelijke-verzekeringen');
+      expect(NAVIGATION_ROUTES.personalInsurance).toBe('/particuliere-verzekeringen');
+      expect(NAVIGATION_ROUTES.taxi).toBe('/taxi-en-wagenparkverzekering');
+      expect(NAVIGATION_ROUTES.realEstate).toBe('/vastgoed-en-vve');
+      expect(NAVIGATION_ROUTES.hospitality).toBe('/horecaverzekering');
+      expect(NAVIGATION_ROUTES.liability).toBe('/aansprakelijkheidsverzekering');
+      expect(NAVIGATION_ROUTES.construction).toBe('/bouw-en-techniek');
+      expect(NAVIGATION_ROUTES.absence).toBe('/verzuim-en-personeel');
+      expect(NAVIGATION_ROUTES.riskAdvice).toBe('/risicoadvies');
+      expect(NAVIGATION_ROUTES.knowledgeBase).toBe('/kennisbank');
       expect(NAVIGATION_ROUTES.about).toBe('/over-ons');
       expect(NAVIGATION_ROUTES.contact).toBe('/contact');
+      expect(NAVIGATION_ROUTES.damageReport).toBe('/schade-melden');
       expect(NAVIGATION_ROUTES.quote).toBe('/offerte');
       expect(NAVIGATION_ROUTES.downloads).toBe('/downloads');
     });

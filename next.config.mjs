@@ -21,15 +21,49 @@ const nextConfig = {
         destination: '/downloads',
         permanent: true,
       },
-      // Keyword spellings people type and link to; /taxi is the canonical URL.
+      // Old insurance URLs; each one points at its closest new page so the
+      // rankings those pages built up are not lost.
+      {
+        source: '/verzekeringen',
+        destination: '/zakelijke-verzekeringen',
+        permanent: true,
+      },
+      {
+        source: '/verzekeringen/zakelijk',
+        destination: '/zakelijke-verzekeringen',
+        permanent: true,
+      },
+      {
+        source: '/verzekeringen/particulier',
+        destination: '/particuliere-verzekeringen',
+        permanent: true,
+      },
+      {
+        source: '/taxi',
+        destination: '/taxi-en-wagenparkverzekering',
+        permanent: true,
+      },
+      {
+        source: '/risk-management',
+        destination: '/risicoadvies',
+        permanent: true,
+      },
+      // This address still appears in circulated material and in inbound
+      // links, so it has to keep resolving.
+      {
+        source: '/meld-schade',
+        destination: '/schade-melden',
+        permanent: true,
+      },
+      // Keyword spellings people type and link to.
       {
         source: '/taxiverzekering',
-        destination: '/taxi',
+        destination: '/taxi-en-wagenparkverzekering',
         permanent: true,
       },
       {
         source: '/taxi-verzekering',
-        destination: '/taxi',
+        destination: '/taxi-en-wagenparkverzekering',
         permanent: true,
       },
       // Safety net for www traffic that reaches the app: one hop to the apex.

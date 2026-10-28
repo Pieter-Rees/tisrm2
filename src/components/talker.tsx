@@ -6,7 +6,7 @@ import { memo } from 'react';
 import { BsQuote } from 'react-icons/bs';
 
 import { SPACING_SCALE } from '@/constants/layout';
-import { PARAGRAPH_STYLES } from '@/constants/typography';
+import { HEADING_STYLES, PARAGRAPH_STYLES } from '@/constants/typography';
 import {
   testimonialContainerStyles,
   testimonialContentStyles,
@@ -76,29 +76,30 @@ const Talker = memo<TalkerProps>(
             flex="1"
             textAlign="center"
           >
-            <Box color="blue.700">
+            <Box color="text.accent" aria-hidden="true">
               <BsQuote size="48" />
             </Box>
 
             <Box
               {...PARAGRAPH_STYLES.large}
               fontStyle="italic"
-              lineHeight="1.8"
+              lineHeight="loose"
               maxWidth="600px"
-              color="gray.700"
             >
               {quote}
             </Box>
 
             <VStack alignItems="center" gap={SPACING_SCALE.xs}>
-              <Text fontWeight="bold" fontSize="lg" color="gray.800">
+              <Text {...HEADING_STYLES.h4} mb="0">
                 {name}
               </Text>
-              <Text fontSize="md" color="gray.700">
-                {title}
-              </Text>
+              <Text {...PARAGRAPH_STYLES.body}>{title}</Text>
               {company && (
-                <Text fontSize="sm" color="blue.900" fontWeight="medium">
+                <Text
+                  {...PARAGRAPH_STYLES.small}
+                  color="text.accent"
+                  fontWeight="medium"
+                >
                   {company}
                 </Text>
               )}

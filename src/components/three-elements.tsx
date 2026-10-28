@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Grid, GridItem, Heading } from '@chakra-ui/react';
+import { Box, Grid, GridItem, Heading, Text } from '@chakra-ui/react';
 import { memo } from 'react';
 
 import Card from '@/components/card';
@@ -15,10 +15,6 @@ import {
   featureDescriptionStyles,
   featureGridStyles,
   featureGridItemStyles,
-  featureCtaStyles,
-  featureCtaHeadingStyles,
-  featureCtaTextStyles,
-  featureCtaButtonStyles,
 } from '@/styles/components/feature.styles';
 import { cn } from '@/lib/utils';
 import type { ThreeElementsProps } from '@/types/components';
@@ -28,9 +24,9 @@ const FEATURE_CARDS = [
     image: '/slider-2.jpg',
     title: 'Risk Managers',
     description:
-      'TIS is de laatste jaren meegegroeid met de ontwikkelingen in de verzekeringsmarkt, alsmede de veranderende behoefte van de klanten. Zodoende zijn de werknemers van TIS gediplomeerd als risico managers en geregistreerd in het register GRMC.',
+      'Onze adviseurs zijn GRMC-geregistreerd en combineren verzekeringskennis met risicomanagement en preventie. Zo bepalen we samen met u per risico wat u verzekert en wat u zelf draagt.',
     cta: 'Lees meer',
-    ctaLink: NAVIGATION_ROUTES.riskManagement,
+    ctaLink: NAVIGATION_ROUTES.riskAdvice,
     variant: 'elevated' as const,
   },
   {
@@ -38,17 +34,17 @@ const FEATURE_CARDS = [
     image: '/unieke-kenmerken.jpg',
     title: 'Maatwerk Verzekeringen',
     description:
-      'De verzekeringen van TIS zijn stuk voor stuk maatwerk. De standaard verzekeringsproducten zijn vaak niet toereikend, waardoor er een kans bestaat dat er geen dekking is óf juist dekking heeft voor zaken die geen betrekking hebben op u of uw bedrijf.',
+      'De verzekeringen van TIS zijn stuk voor stuk maatwerk. Standaard verzekeringsproducten zijn vaak niet toereikend, waardoor er dekking ontbreekt of juist dekking is voor zaken die niet op u of uw bedrijf van toepassing zijn.',
     cta: 'Lees meer',
-    ctaLink: NAVIGATION_ROUTES.insurance,
+    ctaLink: NAVIGATION_ROUTES.businessInsurance,
     variant: 'elevated' as const,
   },
   {
     id: 'schadeafhandeling',
     image: '/slider-3.jpg',
-    title: 'Digitale Schadeafhandeling',
+    title: 'Eigen Schadeafdeling',
     description:
-      'TIS biedt u een volledig digitale schadeafhandeling. Door deze specialisatie staan wij bekend om het snel en vakkundig afwikkelen van uw schade, van een inbraak, stormschade of het verhalen van uw bedrijfsschade.',
+      'Uw schade blijft bij ons. Wij beoordelen de dekking, begeleiden de afhandeling, schakelen waar nodig een expert in en onderzoeken de mogelijkheden om schade op een aansprakelijke tegenpartij te verhalen. U houdt één vast aanspreekpunt.',
     cta: 'Lees meer',
     ctaLink: NAVIGATION_ROUTES.damageReport,
     variant: 'elevated' as const,
@@ -58,22 +54,20 @@ const ThreeElements = memo<ThreeElementsProps>(
   ({ elements = FEATURE_CARDS, className, 'data-testid': testId }) => {
     return (
       <Box
+        as="section"
         className={cn('three-elements', className)}
         data-testid={testId}
         {...featureSectionContainerStyles}
-        aria-label="Key features and services"
+        aria-label="Waarom kiezen voor TIS?"
       >
         <Box {...featureHeaderStyles}>
-          <Heading as="h2" {...HEADING_STYLES.h2} textAlign="center">
+          <Heading as="h2" {...HEADING_STYLES.h2} mb="0" textAlign="center">
             Waarom kiezen voor TIS?
           </Heading>
-          <Box
-            {...PARAGRAPH_STYLES.large}
-            {...featureDescriptionStyles}
-          >
+          <Text {...PARAGRAPH_STYLES.large} {...featureDescriptionStyles}>
             Ontdek onze unieke aanpak en specialisaties die ons onderscheiden in
             de verzekeringsmarkt
-          </Box>
+          </Text>
         </Box>
 
         <Grid {...featureGridStyles}>

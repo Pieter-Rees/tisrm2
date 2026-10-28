@@ -1,0 +1,689 @@
+'use client';
+
+import {
+  Box,
+  Button,
+  chakra,
+  Heading,
+  HStack,
+  Image,
+  Input,
+  Text,
+  Textarea,
+  VisuallyHidden,
+  VStack,
+} from '@chakra-ui/react';
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  useTransition,
+} from 'react';
+import { useForm } from 'react-hook-form';
+import { BsCheck2Circle, BsExclamationTriangle } from 'react-icons/bs';
+
+import { Field } from '@/components/ui/field';
+import { COMPONENT_SPACING, SPACING_SCALE } from '@/constants/layout';
+import { HEADING_STYLES, SECTION_SPACING } from '@/constants/typography';
+import {
+  getUploadHttpErrorMessage,
+  MAX_TOTAL_UPLOAD_SIZE_BYTES,
+  validateDamageUploadGroups,
+} from '@/lib/upload-validation';
+import {
+  getSchadeApiUrl,
+  isValidDutchLicensePlate,
+  isValidDutchPhoneNumber,
+  isValidEmail,
+} from '@/lib/utils';
+import { primaryButtonStyles } from '@/styles/components/button.styles';
+
+type SubmissionState = 'idle' | 'success' | 'error';
+
+interface SchadeFormData {
+  name: string;
+  kenteken: string;
+  phone: string;
+  email: string;
+  description: string;
+  sendCopy: boolean;
+}
+
+const ACCEPTED_DOCUMENT_FILE_TYPES =
+  '.pdf,.doc,.docx,.xls,.xlsx,.txt,.csv,.odt,.ods';
+const ACCEPTED_PHOTO_FILE_TYPES = 'image/*';
+const ACCEPTED_UPLOAD_FILE_TYPES = `${ACCEPTED_DOCUMENT_FILE_TYPES},${ACCEPTED_PHOTO_FILE_TYPES}`;
+
+const getFileIdentity = (file: File): string =>
+  `${file.name}-${file.size}-${file.lastModified}`;
+
+const fileToDataUrl = (file: File): Promise<string> =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () =>
+      resolve(typeof reader.result === 'string' ? reader.result : '');
+    reader.onerror = () =>
+      reject(new Error('Kon voorbeeld van foto niet laden.'));
+    reader.readAsDataURL(file);
+  });
+
+const formatFileSize = (bytes: number): string => {
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+};
+
+export default function DamageForm() {
+  const [submissionState, setSubmissionState] =
+    useState<SubmissionState>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [uploadError, setUploadError] = useState('');
+  const [selectedDocuments, setSelectedDocuments] = useState<File[]>([]);
+  const [selectedPhotos, setSelectedPhotos] = useState<File[]>([]);
+  const [isPending, startTransition] = useTransition();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+  } = useForm<SchadeFormData>({
+    mode: 'onBlur',
+    defaultValues: {
+      name: '',
+      kenteken: '',
+      phone: '',
+      email: '',
+      description: '',
+      sendCopy: false,
+    },
+  });
+
+  const totalSelectedBytes = useMemo(() => {
+    return [...selectedDocuments, ...selectedPhotos].reduce(
+      (total, file) => total + file.size,
+      0,
+    );
+  }, [selectedDocuments, selectedPhotos]);
+
+  const [photoPreviews, setPhotoPreviews] = useState<
+    Array<{ identity: string; file: File; previewUrl: string }>
+  >([]);
+
+  useEffect(() => {
+    let isActive = true;
+
+    const loadPreviews = async () => {
+      const previews = await Promise.all(
+        selectedPhotos.map(async file => ({
+          identity: getFileIdentity(file),
+          file,
+          previewUrl: await fileToDataUrl(file),
+        })),
+      );
+
+      if (!isActive) return;
+      setPhotoPreviews(previews);
+    };
+
+    loadPreviews().catch(() => {
+      if (isActive) {
+        setPhotoPreviews([]);
+      }
+    });
+
+    return () => {
+      isActive = false;
+    };
+  }, [selectedPhotos]);
+
+  const handleAddUploads = useCallback((incomingFiles: File[]) => {
+    if (incomingFiles.length === 0) {
+      return;
+    }
+
+    setSubmissionState('idle');
+    setErrorMessage('');
+    setUploadError('');
+
+    const documentFiles = incomingFiles.filter(
+      file => !file.type.startsWith('image/'),
+    );
+    const photoFiles = incomingFiles.filter(file =>
+      file.type.startsWith('image/'),
+    );
+
+    setSelectedDocuments(previousFiles => {
+      const existingIds = new Set(previousFiles.map(getFileIdentity));
+      const uniqueNewFiles = documentFiles.filter(
+        file => !existingIds.has(getFileIdentity(file)),
+      );
+      return [...previousFiles, ...uniqueNewFiles];
+    });
+
+    setSelectedPhotos(previousFiles => {
+      const existingIds = new Set(previousFiles.map(getFileIdentity));
+      const uniqueNewFiles = photoFiles.filter(
+        file => !existingIds.has(getFileIdentity(file)),
+      );
+      return [...previousFiles, ...uniqueNewFiles];
+    });
+  }, []);
+
+  const handleRemoveDocument = useCallback((identity: string) => {
+    setSelectedDocuments(previousFiles =>
+      previousFiles.filter(file => getFileIdentity(file) !== identity),
+    );
+    setSubmissionState('idle');
+    setErrorMessage('');
+    setUploadError('');
+  }, []);
+
+  const handleRemovePhoto = useCallback((identity: string) => {
+    setSelectedPhotos(previousFiles =>
+      previousFiles.filter(file => getFileIdentity(file) !== identity),
+    );
+    setSubmissionState('idle');
+    setErrorMessage('');
+    setUploadError('');
+  }, []);
+
+  const onSubmit = useCallback(
+    async (values: SchadeFormData) => {
+      setSubmissionState('idle');
+      setErrorMessage('');
+      setUploadError('');
+
+      const filesValidationResult = validateDamageUploadGroups(
+        selectedDocuments,
+        selectedPhotos,
+      );
+      if (filesValidationResult !== true) {
+        setUploadError(filesValidationResult);
+        return;
+      }
+
+      startTransition(async () => {
+        try {
+          const formData = new FormData();
+          formData.append('name', values.name.trim());
+          formData.append('kenteken', values.kenteken.trim());
+          formData.append('phone', values.phone.trim());
+          formData.append('email', values.email.trim());
+          formData.append('description', values.description.trim());
+          formData.append('sendCopy', values.sendCopy ? 'true' : 'false');
+
+          selectedDocuments.forEach(file => {
+            formData.append('files', file);
+          });
+          selectedPhotos.forEach(file => {
+            formData.append('photos', file);
+          });
+
+          const response = await fetch(getSchadeApiUrl(), {
+            method: 'POST',
+            body: formData,
+            signal: AbortSignal.timeout(20000),
+          });
+
+          if (!response.ok) {
+            let backendError = '';
+            try {
+              const errorPayload = (await response.json()) as {
+                error?: string;
+              };
+              backendError = errorPayload.error ?? '';
+            } catch {
+              backendError = '';
+            }
+
+            throw new Error(
+              backendError || getUploadHttpErrorMessage(response.status),
+            );
+          }
+
+          setSubmissionState('success');
+          setSelectedDocuments([]);
+          setSelectedPhotos([]);
+          setUploadError('');
+          reset();
+        } catch (error) {
+          setSubmissionState('error');
+          if (error instanceof Error && error.name === 'TimeoutError') {
+            setErrorMessage('De upload duurde te lang. Probeer het opnieuw.');
+            return;
+          }
+
+          setErrorMessage(
+            error instanceof Error ?
+              error.message
+            : 'Er is een fout opgetreden tijdens het versturen.',
+          );
+        }
+      });
+    },
+    [reset, selectedDocuments, selectedPhotos],
+  );
+
+  return (
+    <Box width="full" maxW="xl" mx="auto">
+      <VStack gap={SECTION_SPACING.small} align="stretch">
+        <Box textAlign="center">
+          <Text color="text.muted">
+            Vul uw gegevens in en voeg documenten en foto&apos;s van de schade
+            toe.
+          </Text>
+        </Box>
+
+        {submissionState === 'success' && (
+          <VStack
+            gap={COMPONENT_SPACING.form.group}
+            textAlign="center"
+            py={COMPONENT_SPACING.form.group}
+          >
+            <Box color="green.700" fontSize="4xl">
+              <BsCheck2Circle />
+            </Box>
+            <Heading as="h3" {...HEADING_STYLES.h3} color="green.700">
+              Schade verstuurd
+            </Heading>
+            <Text color="text.secondary">
+              Uw melding is ontvangen. Wij nemen zo snel mogelijk contact op.
+            </Text>
+            <Button
+              onClick={() => setSubmissionState('idle')}
+              variant="outline"
+              color="green.700"
+              borderColor="green.700"
+              size="sm"
+              _hover={{
+                bg: 'green.50',
+                color: 'green.800',
+                borderColor: 'green.800',
+              }}
+            >
+              Nieuwe melding indienen
+            </Button>
+          </VStack>
+        )}
+
+        {submissionState === 'error' && (
+          <Box
+            p={COMPONENT_SPACING.card.md}
+            borderRadius="md"
+            bg="red.50"
+            borderLeft="4px solid"
+            borderColor="red.700"
+          >
+            <Box display="flex" alignItems="center" gap={SPACING_SCALE.sm}>
+              <Box color="red.700">
+                <BsExclamationTriangle size="20" />
+              </Box>
+              <Box>
+                <Heading as="h3" {...HEADING_STYLES.h4} color="red.700" mb="1">
+                  Versturen mislukt
+                </Heading>
+                <Text fontSize="sm" color="red.600">
+                  {errorMessage}
+                </Text>
+              </Box>
+            </Box>
+          </Box>
+        )}
+
+        {submissionState !== 'success' && (
+          <Box>
+            <form noValidate onSubmit={handleSubmit(onSubmit)}>
+              <VStack align="stretch" gap={COMPONENT_SPACING.form.group}>
+                <Field
+                  label="Naam"
+                  required
+                  invalid={!!errors.name}
+                  errorText={errors.name?.message}
+                >
+                  <Input
+                    {...register('name', {
+                      required: 'Naam is verplicht',
+                      minLength: {
+                        value: 2,
+                        message: 'Naam moet minimaal 2 karakters bevatten',
+                      },
+                    })}
+                    placeholder="Uw naam"
+                    autoComplete="name"
+                  />
+                </Field>
+
+                <Field
+                  label="Kenteken"
+                  invalid={!!errors.kenteken}
+                  errorText={errors.kenteken?.message}
+                >
+                  <Input
+                    {...register('kenteken', {
+                      validate: value => {
+                        const trimmedValue = value.trim();
+                        if (trimmedValue.length === 0) {
+                          return true;
+                        }
+
+                        return (
+                          isValidDutchLicensePlate(trimmedValue) ||
+                          'Voer een geldig Nederlands kenteken in (bijv. AB-12-CD)'
+                        );
+                      },
+                    })}
+                    placeholder="Uw kenteken"
+                    autoComplete="off"
+                  />
+                </Field>
+
+                <Field
+                  label="Telefoonnummer"
+                  required
+                  invalid={!!errors.phone}
+                  errorText={errors.phone?.message}
+                >
+                  <Input
+                    {...register('phone', {
+                      required: 'Telefoonnummer is verplicht',
+                      validate: value =>
+                        isValidDutchPhoneNumber(value) ||
+                        'Voer een geldig Nederlands telefoonnummer in',
+                    })}
+                    placeholder="Uw telefoonnummer"
+                    autoComplete="tel"
+                    inputMode="tel"
+                  />
+                </Field>
+
+                <Field
+                  label="E-mailadres"
+                  required
+                  invalid={!!errors.email}
+                  errorText={errors.email?.message}
+                >
+                  <Input
+                    {...register('email', {
+                      required: 'E-mailadres is verplicht',
+                      validate: value =>
+                        isValidEmail(value) || 'Voer een geldig e-mailadres in',
+                    })}
+                    type="email"
+                    placeholder="uw@email.nl"
+                    autoComplete="email"
+                  />
+                </Field>
+
+                <Field
+                  label="Beschrijving"
+                  required
+                  invalid={!!errors.description}
+                  errorText={errors.description?.message}
+                >
+                  <Textarea
+                    {...register('description', {
+                      required: 'Beschrijving is verplicht',
+                      minLength: {
+                        value: 10,
+                        message:
+                          'Beschrijving moet minimaal 10 karakters bevatten',
+                      },
+                    })}
+                    placeholder="Beschrijf kort wat er is gebeurd en welke schade u heeft."
+                    rows={4}
+                  />
+                </Field>
+
+                <Field
+                  label="Bestanden en foto's"
+                  required
+                  invalid={!!uploadError}
+                  errorText={uploadError}
+                >
+                  <VStack align="stretch" gap={SPACING_SCALE.sm} width="full">
+                    <Box
+                      width="full"
+                      borderRadius="xl"
+                      border="1px solid"
+                      borderColor={uploadError ? 'red.700' : 'gray.200'}
+                      bg={uploadError ? 'red.50' : 'gray.50'}
+                      px="4"
+                      py={SPACING_SCALE.sm}
+                    >
+                      <VStack
+                        align="stretch"
+                        gap={SPACING_SCALE.sm}
+                        width="full"
+                        css={{
+                          '& input:focus-visible + label': {
+                            outlineWidth: '2px',
+                            outlineStyle: 'solid',
+                            outlineColor: 'blue.700',
+                            outlineOffset: '2px',
+                          },
+                        }}
+                      >
+                        <VisuallyHidden asChild>
+                          <input
+                            id="damage-upload"
+                            type="file"
+                            multiple
+                            accept={ACCEPTED_UPLOAD_FILE_TYPES}
+                            onChange={event => {
+                              const files = Array.from(
+                                event.target.files ?? [],
+                              );
+                              handleAddUploads(files);
+                              event.currentTarget.value = '';
+                            }}
+                          />
+                        </VisuallyHidden>
+                        <chakra.label
+                          htmlFor="damage-upload"
+                          display="block"
+                          border="1px dashed"
+                          borderColor={uploadError ? 'red.700' : 'blue.700'}
+                          borderRadius="0.375rem"
+                          bg="white"
+                          px="4"
+                          py="5"
+                          textAlign="center"
+                          cursor="pointer"
+                          transition="all 0.2s ease-in-out"
+                        >
+                          <Text fontWeight="semibold" color="text.primary" mb="1">
+                            Klik om bestanden te kiezen
+                          </Text>
+                          <Text fontSize="sm" color="text.muted">
+                            {`Voeg documenten en foto's toe (maximaal ${Math.floor(MAX_TOTAL_UPLOAD_SIZE_BYTES / (1024 * 1024))} MB in totaal).`}
+                          </Text>
+                        </chakra.label>
+                        <Text fontSize="sm" color="text.muted">
+                          {(
+                            selectedDocuments.length + selectedPhotos.length ===
+                            0
+                          ) ?
+                            "Nog geen bestanden of foto's gekozen"
+                          : `${selectedDocuments.length} document(en), ${selectedPhotos.length} foto's`
+                          }
+                        </Text>
+                      </VStack>
+                    </Box>
+
+                    <Text fontSize="sm" color="text.muted" fontWeight="medium">
+                      Documenten
+                    </Text>
+                    {selectedDocuments.length > 0 && (
+                      <VStack align="stretch" gap={SPACING_SCALE.xs}>
+                        {selectedDocuments.map(file => {
+                          const identity = getFileIdentity(file);
+
+                          return (
+                            <HStack
+                              key={identity}
+                              justify="space-between"
+                              align="center"
+                              border="1px solid"
+                              borderColor="gray.200"
+                              borderRadius="md"
+                              px="3"
+                              py={SPACING_SCALE.xs}
+                              bg="white"
+                            >
+                              <Box>
+                                <Text
+                                  fontSize="sm"
+                                  fontWeight="medium"
+                                  color="text.primary"
+                                >
+                                  {file.name}
+                                </Text>
+                                <Text fontSize="xs" color="text.muted">
+                                  {formatFileSize(file.size)}
+                                </Text>
+                              </Box>
+                              <Button
+                                type="button"
+                                size="xs"
+                                variant="ghost"
+                                color="red.700"
+                                _hover={{ bg: 'red.50', color: 'red.800' }}
+                                onClick={() => handleRemoveDocument(identity)}
+                              >
+                                Verwijderen
+                              </Button>
+                            </HStack>
+                          );
+                        })}
+                      </VStack>
+                    )}
+                    {selectedDocuments.length === 0 && (
+                      <Box
+                        border="1px solid"
+                        borderColor="gray.200"
+                        borderRadius="md"
+                        bg="gray.50"
+                        px="3"
+                        py={SPACING_SCALE.xs}
+                      >
+                        <Text fontSize="sm" color="text.muted">
+                          Nog geen documenten gekozen
+                        </Text>
+                      </Box>
+                    )}
+
+                    <Text
+                      fontSize="sm"
+                      color="text.muted"
+                      fontWeight="medium"
+                      pt={SPACING_SCALE.xs}
+                    >
+                      Foto&apos;s
+                    </Text>
+                    {selectedPhotos.length > 0 && (
+                      <HStack
+                        align="stretch"
+                        wrap="wrap"
+                        gap={SPACING_SCALE.sm}
+                      >
+                        {photoPreviews.map(({ file, identity, previewUrl }) => (
+                          <Box
+                            key={identity}
+                            border="1px solid"
+                            borderColor="gray.200"
+                            borderRadius="md"
+                            p={SPACING_SCALE.xs}
+                            bg="white"
+                            width="140px"
+                          >
+                            <Image
+                              src={previewUrl}
+                              alt={file.name}
+                              borderRadius="sm"
+                              objectFit="cover"
+                              width="100%"
+                              height="90px"
+                              mb={SPACING_SCALE.xs}
+                            />
+                            <Text
+                              fontSize="xs"
+                              color="text.secondary"
+                              fontWeight="medium"
+                              lineClamp={2}
+                              mb="1"
+                            >
+                              {file.name}
+                            </Text>
+                            <Text fontSize="xs" color="text.muted" mb="1">
+                              {formatFileSize(file.size)}
+                            </Text>
+                            <Button
+                              type="button"
+                              size="xs"
+                              variant="ghost"
+                              color="red.700"
+                              _hover={{ bg: 'red.50', color: 'red.800' }}
+                              onClick={() => handleRemovePhoto(identity)}
+                            >
+                              Verwijderen
+                            </Button>
+                          </Box>
+                        ))}
+                      </HStack>
+                    )}
+                    {selectedPhotos.length === 0 && (
+                      <Box
+                        border="1px solid"
+                        borderColor="gray.200"
+                        borderRadius="md"
+                        bg="gray.50"
+                        px="3"
+                        py={SPACING_SCALE.xs}
+                      >
+                        <Text fontSize="sm" color="text.muted">
+                          Nog geen foto&apos;s gekozen
+                        </Text>
+                      </Box>
+                    )}
+                  </VStack>
+                </Field>
+
+                <Text fontSize="sm" color="text.muted">
+                  Totaal geselecteerd (documenten + foto&apos;s):{' '}
+                  {formatFileSize(totalSelectedBytes)}
+                </Text>
+
+                <label
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    cursor: 'pointer',
+                  }}
+                >
+                  <input type="checkbox" {...register('sendCopy')} />
+                  <Text color="text.secondary">
+                    Stuur mij een kopie van deze melding per e-mail
+                  </Text>
+                </label>
+
+                <Button
+                  type="submit"
+                  loading={isSubmitting || isPending}
+                  loadingText="Bezig met versturen..."
+                  size="lg"
+                  width="full"
+                  {...primaryButtonStyles}
+                >
+                  Schade versturen
+                </Button>
+              </VStack>
+            </form>
+          </Box>
+        )}
+      </VStack>
+    </Box>
+  );
+}

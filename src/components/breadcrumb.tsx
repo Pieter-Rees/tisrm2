@@ -11,16 +11,21 @@ export default function Breadcrumb({
   separator = '>',
   listClasses = '',
   activeClasses = '',
+  currentLabel,
 }: BreadcrumbProps) {
   const pathname = usePathname();
-  const items = buildBreadcrumbItems(pathname);
+  const items = buildBreadcrumbItems(pathname).map((item, index, all) =>
+    currentLabel && index === all.length - 1 ?
+      { ...item, name: currentLabel }
+    : item,
+  );
 
   return (
     <HStack
       as="ol"
       gap={SPACING_SCALE.sm}
-      fontSize={{ base: 'md', xl: 'lg' }}
-      color="gray.700"
+      fontSize={{ base: 'sm', xl: 'md' }}
+      color="text.secondary"
       listStyleType="none"
       m="0"
       p="0"
@@ -36,18 +41,18 @@ export default function Breadcrumb({
             as="li"
             key={item.path}
             className={itemClasses}
-            fontSize="xl"
             fontWeight={isCurrentPage ? 'bold' : 'normal'}
-            color={isCurrentPage ? 'blue.900' : 'gray.700'}
+            color={isCurrentPage ? 'text.accent' : 'text.secondary'}
             display="inline-flex"
             alignItems="center"
             gap={SPACING_SCALE.sm}
+            _hover={{ color: 'blue.900' }}
           >
             {isCurrentPage ?
               <span aria-current="page">{item.name}</span>
             : <Link href={item.path as any}>{item.name}</Link>}
             {!isLast && (
-              <Box as="span" aria-hidden="true" color="gray.400">
+              <Box as="span" aria-hidden="true" color="text.muted">
                 {separator}
               </Box>
             )}

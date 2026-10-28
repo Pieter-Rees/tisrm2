@@ -1,19 +1,26 @@
 import { render, screen } from '@testing-library/react';
 
-// Create a simplified Footer component that mimics the original functionality
+import { CONTACT_INFO, NAVIGATION_ROUTES } from '@/constants/app';
+
+const footerNavigationLinks = [
+  {
+    href: NAVIGATION_ROUTES.businessInsurance,
+    label: 'Zakelijke verzekeringen',
+  },
+  {
+    href: NAVIGATION_ROUTES.personalInsurance,
+    label: 'Particuliere verzekeringen',
+  },
+  { href: NAVIGATION_ROUTES.riskAdvice, label: 'Risicoadvies' },
+  { href: NAVIGATION_ROUTES.about, label: 'Over ons' },
+  { href: NAVIGATION_ROUTES.contact, label: 'Contact' },
+] as const;
+
 const SimpleFooter = () => {
   const contactLinks = [
-    { href: 'tel:+310206368191', label: '+31 20 636 8191', external: false },
+    { href: CONTACT_INFO.phoneHref, label: CONTACT_INFO.phone, external: false },
     { href: 'mailto:info@tisrm.nl', label: 'info@tisrm.nl', external: false },
     { href: 'https://linkedin.com', label: 'LinkedIn', external: true },
-  ];
-
-  const navigationLinks = [
-    { href: '/verzekeringen', label: 'Verzekeringen' },
-    { href: '/taxi', label: 'Taxi' },
-    { href: '/risk-management', label: 'Risk Management' },
-    { href: '/over-ons', label: 'Over ons' },
-    { href: '/contact', label: 'Contact' },
   ];
 
   return (
@@ -44,7 +51,7 @@ const SimpleFooter = () => {
           <div className="footer-column">
             <h3>Links</h3>
             <div className="navigation-links">
-              {navigationLinks.map(({ href, label }) => (
+              {footerNavigationLinks.map(({ href, label }) => (
                 <a key={href} href={href}>
                   {label}
                 </a>
@@ -76,7 +83,6 @@ describe('Footer', () => {
 
   it('displays company information', () => {
     render(<SimpleFooter />);
-    // Use more specific selector to avoid conflicts
     const logoElement = screen.getByText('TIS Risk Management', {
       selector: '.logo',
     });
@@ -85,7 +91,6 @@ describe('Footer', () => {
 
   it('displays contact information', () => {
     render(<SimpleFooter />);
-    // Use more specific selector for contact heading
     const contactHeading = screen.getByRole('heading', { name: 'Contact' });
     expect(contactHeading).toBeInTheDocument();
     expect(screen.getByText('+31 20 636 8191')).toBeInTheDocument();
@@ -95,8 +100,7 @@ describe('Footer', () => {
   it('displays navigation links', () => {
     render(<SimpleFooter />);
     expect(screen.getByText(/Over ons/)).toBeInTheDocument();
-    expect(screen.getByText(/Verzekeringen/)).toBeInTheDocument();
-    // Use more specific selector for navigation link
+    expect(screen.getByText(/Zakelijke verzekeringen/)).toBeInTheDocument();
     const contactLink = screen.getByRole('link', { name: 'Contact' });
     expect(contactLink).toBeInTheDocument();
   });
@@ -108,10 +112,13 @@ describe('Footer', () => {
 
   it('has correct contact link attributes', () => {
     render(<SimpleFooter />);
-    const phoneLink = screen.getByText('+31 20 636 8191');
+    const phoneLink = screen.getByText(CONTACT_INFO.phone);
     const emailLink = screen.getByText('info@tisrm.nl');
 
-    expect(phoneLink.closest('a')).toHaveAttribute('href', 'tel:+310206368191');
+    expect(phoneLink.closest('a')).toHaveAttribute(
+      'href',
+      CONTACT_INFO.phoneHref,
+    );
     expect(emailLink.closest('a')).toHaveAttribute(
       'href',
       'mailto:info@tisrm.nl',
@@ -120,14 +127,14 @@ describe('Footer', () => {
 
   it('has correct navigation link attributes', () => {
     render(<SimpleFooter />);
-    const verzekeringenLink = screen.getByText('Verzekeringen');
+    const businessLink = screen.getByText('Zakelijke verzekeringen');
     const contactLink = screen.getByRole('link', { name: 'Contact' });
 
-    expect(verzekeringenLink.closest('a')).toHaveAttribute(
+    expect(businessLink.closest('a')).toHaveAttribute(
       'href',
-      '/verzekeringen',
+      NAVIGATION_ROUTES.businessInsurance,
     );
-    expect(contactLink).toHaveAttribute('href', '/contact');
+    expect(contactLink).toHaveAttribute('href', NAVIGATION_ROUTES.contact);
   });
 
   it('has external link attributes for LinkedIn', () => {

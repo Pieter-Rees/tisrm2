@@ -1,12 +1,16 @@
 'use client';
 
-import { Box, Grid, Heading } from '@chakra-ui/react';
+import { Box, Grid, Heading, Text } from '@chakra-ui/react';
 import { memo } from 'react';
 
 import Card from '@/components/card';
-import { NAVIGATION_ROUTES } from '@/constants/app';
+import { CONTACT_INFO, NAVIGATION_ROUTES } from '@/constants/app';
 import { COMPONENT_SPACING, SPACING_SCALE } from '@/constants/layout';
-import { SECTION_SPACING } from '@/constants/typography';
+import {
+  HEADING_STYLES,
+  PARAGRAPH_STYLES,
+  SECTION_SPACING,
+} from '@/constants/typography';
 
 interface CallToActionProps {
   className?: string;
@@ -26,19 +30,18 @@ const CallToAction = memo<CallToActionProps>(
         borderColor="blue.700"
         textAlign="center"
       >
-        <Heading
-          as="h2"
-          size="md"
-          color="blue.900"
-          mb={SPACING_SCALE.sm}
-          fontWeight="semibold"
-        >
+        <Heading as="h2" {...HEADING_STYLES.h3} mb={SPACING_SCALE.sm}>
           Klaar voor persoonlijk advies?
         </Heading>
-        <Box fontSize="sm" color="blue.900" mb={SECTION_SPACING.small} maxW="lg" mx="auto">
+        <Text
+          {...PARAGRAPH_STYLES.body}
+          mb={SECTION_SPACING.small}
+          maxW="lg"
+          mx="auto"
+        >
           Neem contact op voor een vrijblijvend gesprek over uw
           verzekeringsbehoefte
-        </Box>
+        </Text>
 
         <Grid
           templateColumns={{ base: '1fr', md: 'repeat(3, 1fr)' }}
@@ -48,7 +51,7 @@ const CallToAction = memo<CallToActionProps>(
           <Card
             title="Bel direct"
             cta="Bel nu"
-            phone="tel:+310206368191"
+            phone={CONTACT_INFO.phoneHref}
             variant="sidebar"
             buttonVariant="solid"
           />

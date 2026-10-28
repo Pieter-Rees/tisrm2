@@ -1,106 +1,36 @@
-import React from 'react';
+import { NAVIGATION_ROUTES } from '@/constants/app';
+import { buildBreadcrumbItems } from '@/lib/seo/breadcrumbs';
 
-// Mock next/navigation
-const mockUsePathname = jest.fn();
-jest.mock('next/navigation', () => ({
-    usePathname: mockUsePathname,
-}));
-
-// Mock the types
-jest.mock('@/types/components', () => ({
-    BreadcrumbProps: {
-        separator: '>',
-        listClasses: '',
-        activeClasses: '',
-        capitalizeLinks: false,
-        maxItems: undefined,
-    },
-}));
-
-
-const createSimpleBreadcrumb = () => {
-    return function SimpleBreadcrumb({ separator: _separator = '>' }: { separator?: string }) {
-        const paths = mockUsePathname();
-        const pathNames = paths.split('/').filter((path: string) => path);
-
-        // This is the core logic we want to test
-        const breadcrumbItems = pathNames.map((link: string, index: number) => {
-            const href = `/${pathNames.slice(0, index + 1).join('/')}`;
-            const isCurrentPage = paths === href;
-            const itemLink = link;
-
-            return {
-                link: itemLink,
-                href,
-                isCurrentPage,
-                shouldShowSeparator: index < pathNames.length - 1
-            };
-        });
-
-        return breadcrumbItems;
-    };
-};
+const knowledgeArticleSlug = 'tx-keurmerk-verzekeringen';
+const nestedKnowledgePath = `${NAVIGATION_ROUTES.knowledgeBase}/${knowledgeArticleSlug}`;
 
 describe('Breadcrumb Logic', () => {
-    beforeEach(() => {
-        // Reset the mock before each test
-        mockUsePathname.mockClear();
+  it('builds items for a nested knowledge base article path', () => {
+    const items = buildBreadcrumbItems(nestedKnowledgePath);
+
+    expect(items).toHaveLength(3);
+    expect(items[0]).toEqual({ name: 'Home', path: '/' });
+    expect(items[1]).toEqual({
+      name: 'Kennisbank',
+      path: NAVIGATION_ROUTES.knowledgeBase,
     });
-
-    it('should parse path correctly', () => {
-        mockUsePathname.mockReturnValue('/verzekeringen/particulier');
-
-        const SimpleBreadcrumb = createSimpleBreadcrumb();
-        const result = SimpleBreadcrumb({ separator: '>' });
-
-        expect(result).toHaveLength(2);
-        expect(result[0]).toEqual({
-            link: 'verzekeringen',
-            href: '/verzekeringen',
-            isCurrentPage: false,
-            shouldShowSeparator: true
-        });
-        expect(result[1]).toEqual({
-            link: 'particulier',
-            href: '/verzekeringen/particulier',
-            isCurrentPage: true,
-            shouldShowSeparator: false
-        });
+    expect(items[2]).toEqual({
+      name: 'Tx Keurmerk Verzekeringen',
+      path: nestedKnowledgePath,
     });
+  });
 
-    it('should handle custom separator', () => {
-        mockUsePathname.mockReturnValue('/verzekeringen/particulier');
+  it('returns only home on the root path', () => {
+    expect(buildBreadcrumbItems('/')).toEqual([{ name: 'Home', path: '/' }]);
+  });
 
-        const SimpleBreadcrumb = createSimpleBreadcrumb();
-        const result = SimpleBreadcrumb({ separator: '/' });
+  it('builds a single-segment path for top-level routes', () => {
+    const items = buildBreadcrumbItems(NAVIGATION_ROUTES.personalInsurance);
 
-        expect(result).toHaveLength(2);
-        // The separator logic is handled in the render, but we can test the structure
-        expect(result[0].shouldShowSeparator).toBe(true);
-        expect(result[1].shouldShowSeparator).toBe(false);
+    expect(items).toHaveLength(2);
+    expect(items[1]).toEqual({
+      name: 'Particuliere verzekeringen',
+      path: NAVIGATION_ROUTES.personalInsurance,
     });
-
-    it('should handle empty path', () => {
-        mockUsePathname.mockReturnValue('/');
-
-        const SimpleBreadcrumb = createSimpleBreadcrumb();
-        const result = SimpleBreadcrumb({ separator: '>' });
-
-        expect(result).toHaveLength(0);
-    });
-
-    it('should handle single level path', () => {
-        mockUsePathname.mockReturnValue('/verzekeringen');
-
-        const SimpleBreadcrumb = createSimpleBreadcrumb();
-        const result = SimpleBreadcrumb({ separator: '>' });
-
-        expect(result).toHaveLength(1);
-        expect(result[0]).toEqual({
-            link: 'verzekeringen',
-            href: '/verzekeringen',
-            isCurrentPage: true,
-            shouldShowSeparator: false
-        });
-    });
+  });
 });

@@ -34,3 +34,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# client source copy documents (.docx/.pdf), not part of the build
+Hoofdpagina_s/

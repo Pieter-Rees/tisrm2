@@ -37,7 +37,7 @@ export function WebPageJsonLdLayout({
     <>
       <JsonLd
         data={getWebPageSchema({
-          name: page.title,
+          name: page.heading,
           description: page.description,
           path: page.path,
         })}
