@@ -1,22 +1,29 @@
 'use client';
 
-import { Box, Flex, Heading, Separator, Text } from '@chakra-ui/react';
+import { Box, Container, Flex, Heading, Text } from '@chakra-ui/react';
 import { Suspense, lazy } from 'react';
 
+import BackgroundVideo from '@/components/background-video';
+import ContactBand from '@/components/contact-band';
 import { ContentLink, LinkTile } from '@/components/content';
 import ErrorBoundary from '@/components/error-boundary';
 import { UnifiedLayout } from '@/components/layout';
 import Loading from '@/components/loading';
+import { PhotoVeil } from '@/components/media-frame';
 import MeldSchade from '@/components/meld-schade';
+import PageTransition from '@/components/page-transition';
 import { HomeFaq } from '@/components/seo/HomeFaq';
+import { ButtonLink } from '@/components/ui/button-link';
 import { NAVIGATION_ROUTES } from '@/constants/app';
 import { COMPONENT_SPACING } from '@/constants/layout';
+import { PAGE_CONTAINER, copyGap } from '@/constants/spacing';
 import {
   HEADING_STYLES,
   PARAGRAPH_STYLES,
   PROSE_STACK_GAP,
   SECTION_SPACING,
 } from '@/constants/typography';
+import { DESIGN_BUTTON_STYLES } from '@/styles/components/button.styles';
 
 const ThreeElements = lazy(() => import('@/components/three-elements'));
 const CallToAction = lazy(() => import('@/components/call-to-action'));
@@ -67,196 +74,220 @@ const BRANCHES = [
   },
 ] as const;
 
+const HERO_MIN_HEIGHT = { base: '100svh', md: '100vh' };
+
 export default function HomePageContent() {
   return (
-    <UnifiedLayout variant="page" showSidebar={true}>
-      <Flex direction="column" gap={SECTION_SPACING.medium}>
-        <ErrorBoundary>
-          <Box
-            as="header"
-            textAlign="center"
-            maxW="3xl"
-            mx="auto"
-            px={{ base: '2', md: '4' }}
-            pt={{ base: '2', md: '4' }}
-            pb={{ base: '4', md: '6' }}
+    <PageTransition>
+      <Box
+        as="section"
+        position="relative"
+        width="100%"
+        minHeight={HERO_MIN_HEIGHT}
+        overflow="hidden"
+      >
+        <BackgroundVideo />
+        <PhotoVeil />
+        <Container
+          {...PAGE_CONTAINER}
+          position="relative"
+          minHeight={HERO_MIN_HEIGHT}
+          display="flex"
+          alignItems="flex-end"
+          pt={{ base: 28, md: 36 }}
+          pb={{ base: 16, md: 24 }}
+        >
+          <Flex
+            direction="column"
+            gap={copyGap}
+            maxW={{ base: '100%', md: '860px' }}
+            opacity="0"
+            animation="heroFade 0.95s ease-out forwards"
           >
-            <Flex
-              direction="column"
-              align="center"
-              justify="center"
-              gap={{ base: '4', md: '5' }}
-            >
-              <Heading as="h1" {...HEADING_STYLES.h1} mb="0">
-                <Text
-                  as="span"
-                  // Logotype treatment: wider tracking than any letterSpacings step
-                  letterSpacing={{ base: '0.06em', md: '0.1em' }}
-                  textTransform="uppercase"
-                >
-                  TIS Risk Managers
-                </Text>
-              </Heading>
-              <Separator
-                w={{ base: '10', md: '14' }}
-                borderColor="blue.700"
-                size="sm"
-              />
-              <Text {...PARAGRAPH_STYLES.lead}>
-                Onafhankelijk verzekeringsadvies in Amsterdam
-              </Text>
+            <Box width="56px" height="1px" bg="gold.400" />
+            <Heading as="h1" {...HEADING_STYLES.display} color="white" mb="0">
+              TIS Risk Managers
+            </Heading>
+            <Text {...PARAGRAPH_STYLES.lead} color="white">
+              Onafhankelijk verzekeringsadvies in Amsterdam
+            </Text>
+            <Flex gap="4" wrap="wrap">
+              <ButtonLink
+                href={NAVIGATION_ROUTES.quote}
+                size="lg"
+                {...DESIGN_BUTTON_STYLES.onDark}
+              >
+                Offerte aanvragen
+              </ButtonLink>
+              <ButtonLink
+                href={NAVIGATION_ROUTES.contact}
+                size="lg"
+                {...DESIGN_BUTTON_STYLES.outlineOnDark}
+              >
+                Contact opnemen
+              </ButtonLink>
             </Flex>
-          </Box>
-          <Box
-            hideFrom="xl"
-            bg="white"
-            borderRadius="xl"
-            boxShadow="sm"
-            overflow="visible"
-            minH="fit-content"
-          >
-            <MeldSchade />
-          </Box>
-        </ErrorBoundary>
+          </Flex>
+        </Container>
+      </Box>
 
-        <Flex as="section" direction="column" gap={PROSE_STACK_GAP}>
-          <Text {...PARAGRAPH_STYLES.lead}>
-            TIS Risk Managers is een landelijk werkend assurantiekantoor
-            gevestigd in Amsterdam. Wij adviseren ondernemers in uiteenlopende
-            branches, waaronder het personenvervoer, de horeca, de bouw en
-            techniek, en daarnaast vastgoedeigenaren en VvE’s en hun
-            particuliere verzekeringen.
-          </Text>
-          <Text {...PARAGRAPH_STYLES.body}>
-            Bij TIS combineren we persoonlijk advies met passende
-            verzekeringsdekkingen en scherpe premies. Wij kijken verder dan
-            alleen de prijs en zorgen dat uw verzekeringen aansluiten bij de
-            risico’s die u loopt bij uw onderneming of privéleven.
-          </Text>
-        </Flex>
+      <UnifiedLayout variant="page" showSidebar={true}>
+        <Flex direction="column" gap={SECTION_SPACING.medium}>
+          <ErrorBoundary>
+            <Box
+              hideFrom="xl"
+              bg="white"
+              borderRadius="xl"
+              boxShadow="sm"
+              overflow="visible"
+              minH="fit-content"
+            >
+              <MeldSchade />
+            </Box>
+          </ErrorBoundary>
 
-        <ErrorBoundary>
-          <Suspense fallback={<Loading />}>
-            <ThreeElements />
-          </Suspense>
-        </ErrorBoundary>
+          <Flex as="section" direction="column" gap={PROSE_STACK_GAP}>
+            <Text {...PARAGRAPH_STYLES.lead}>
+              TIS Risk Managers is een landelijk werkend assurantiekantoor
+              gevestigd in Amsterdam. Wij adviseren ondernemers in uiteenlopende
+              branches, waaronder het personenvervoer, de horeca, de bouw en
+              techniek, en daarnaast vastgoedeigenaren en VvE’s en hun
+              particuliere verzekeringen.
+            </Text>
+            <Text {...PARAGRAPH_STYLES.body}>
+              Bij TIS combineren we persoonlijk advies met passende
+              verzekeringsdekkingen en scherpe premies. Wij kijken verder dan
+              alleen de prijs en zorgen dat uw verzekeringen aansluiten bij de
+              risico’s die u loopt bij uw onderneming of privéleven.
+            </Text>
+          </Flex>
 
-        <Flex as="section" direction="column" gap={PROSE_STACK_GAP}>
-          <Heading as="h2" {...HEADING_STYLES.h2} mb="0">
-            Zakelijke verzekeringen voor iedere onderneming
-          </Heading>
-          <Text {...PARAGRAPH_STYLES.body}>
-            Iedere onderneming heeft andere risico’s. Daarom kijken wij naar uw
-            bedrijfsactiviteiten en stellen wij een passend verzekeringspakket
-            samen. Naast onze algemene zakelijke verzekeringen hebben wij ruime
-            ervaring binnen een aantal specifieke branches.
-          </Text>
-          <Box
-            as="ul"
-            role="list"
-            listStyleType="none"
-            m="0"
-            p="0"
-            display="grid"
-            gridTemplateColumns={{ base: '1fr', md: 'repeat(2, 1fr)' }}
-            gap={COMPONENT_SPACING.grid.sm}
-          >
-            {BRANCHES.map(branch => (
-              <LinkTile
-                key={branch.href}
-                title={branch.title}
-                description={branch.description}
-                href={branch.href}
-                linkLabel={branch.linkLabel}
-              />
-            ))}
-          </Box>
-          <ContentLink
-            href={NAVIGATION_ROUTES.businessInsurance}
-            label="Bekijk alle zakelijke verzekeringen"
-          />
-        </Flex>
+          <ErrorBoundary>
+            <Suspense fallback={<Loading />}>
+              <ThreeElements />
+            </Suspense>
+          </ErrorBoundary>
 
-        <Flex as="section" direction="column" gap={PROSE_STACK_GAP}>
-          <Heading as="h2" {...HEADING_STYLES.h2} mb="0">
-            Laat uw verzekeringen beoordelen
-          </Heading>
-          <Text {...PARAGRAPH_STYLES.body}>
-            Sluiten uw verzekeringen nog aan bij uw huidige
-            bedrijfsactiviteiten?
-          </Text>
-          <Text {...PARAGRAPH_STYLES.body}>
-            Wij bekijken graag samen met u of uw bestaande verzekeringspakket
-            nog voldoet. Daarbij letten we onder andere op de premie, verzekerde
-            bedragen, polisvoorwaarden, mogelijke overlappingen en ontbrekende
-            dekkingen.
-          </Text>
-          <Text {...PARAGRAPH_STYLES.body}>
-            Zo krijgt u meer inzicht in de risico’s en bijbehorende
-            verzekeringen.
-          </Text>
-          <ContentLink
-            href={NAVIGATION_ROUTES.riskAdvice}
-            label="Laat uw verzekeringen beoordelen"
-          />
-        </Flex>
-
-        <Flex as="section" direction="column" gap={PROSE_STACK_GAP}>
-          <Heading as="h2" {...HEADING_STYLES.h2} mb="0">
-            Particulier verzekerd via TIS
-          </Heading>
-          <Text {...PARAGRAPH_STYLES.body}>
-            Naast ondernemers verzekeren wij particulieren voor wie de standaard
-            verzekeringsoplossing niet voldoet. Denk aan een hogere
-            inboedelwaarde, kostbaarheden, een oldtimer, een vakantiehuis of een
-            monumentaal pand. Ook hierbij kunt u rekenen op persoonlijk advies
-            en maatwerk.
-          </Text>
-          <ContentLink
-            href={NAVIGATION_ROUTES.personalInsurance}
-            label="Naar particuliere verzekeringen"
-          />
-        </Flex>
-
-        <Flex as="section" direction="column" gap={PROSE_STACK_GAP}>
-          <Heading as="h2" {...HEADING_STYLES.h2} mb="0">
-            Schade? Wij handelen het zelf af
-          </Heading>
-          <Text {...PARAGRAPH_STYLES.body}>
-            Bij TIS beschikken wij over een eigen schadeafdeling. Wij beoordelen
-            de dekking, begeleiden de schadeafhandeling, schakelen waar nodig
-            een expert in en onderzoeken de mogelijkheden om schade op een
-            aansprakelijke tegenpartij te verhalen. U houdt daarbij een
-            persoonlijk aanspreekpunt binnen TIS.
-          </Text>
-          <ContentLink
-            href={NAVIGATION_ROUTES.damageReport}
-            label="Naar schade melden"
-          />
-        </Flex>
-
-        <ErrorBoundary>
-          <Suspense fallback={<Loading />}>
-            <CallToAction />
-          </Suspense>
-        </ErrorBoundary>
-
-        <ErrorBoundary>
-          <HomeFaq />
-        </ErrorBoundary>
-
-        <ErrorBoundary>
-          <Suspense fallback={<Loading />}>
-            <Talker
-              name="René Enthoven"
-              title="Directeur TIS Risk Managers"
-              image="/rene.jpg"
-              quote="De weldaden van een verzekering komen samen met het onheil aan het licht."
-              company="TIS Risk Managers"
+          <Flex as="section" direction="column" gap={PROSE_STACK_GAP}>
+            <Heading as="h2" {...HEADING_STYLES.h2} mb="0">
+              Zakelijke verzekeringen voor iedere onderneming
+            </Heading>
+            <Text {...PARAGRAPH_STYLES.body}>
+              Iedere onderneming heeft andere risico’s. Daarom kijken wij naar
+              uw bedrijfsactiviteiten en stellen wij een passend
+              verzekeringspakket samen. Naast onze algemene zakelijke
+              verzekeringen hebben wij ruime ervaring binnen een aantal
+              specifieke branches.
+            </Text>
+            <Box
+              as="ul"
+              role="list"
+              listStyleType="none"
+              m="0"
+              p="0"
+              display="grid"
+              gridTemplateColumns={{ base: '1fr', md: 'repeat(2, 1fr)' }}
+              gap={COMPONENT_SPACING.grid.sm}
+            >
+              {BRANCHES.map(branch => (
+                <LinkTile
+                  key={branch.href}
+                  title={branch.title}
+                  description={branch.description}
+                  href={branch.href}
+                  linkLabel={branch.linkLabel}
+                />
+              ))}
+            </Box>
+            <ContentLink
+              href={NAVIGATION_ROUTES.businessInsurance}
+              label="Bekijk alle zakelijke verzekeringen"
             />
-          </Suspense>
-        </ErrorBoundary>
-      </Flex>
-    </UnifiedLayout>
+          </Flex>
+
+          <Flex as="section" direction="column" gap={PROSE_STACK_GAP}>
+            <Heading as="h2" {...HEADING_STYLES.h2} mb="0">
+              Laat uw verzekeringen beoordelen
+            </Heading>
+            <Text {...PARAGRAPH_STYLES.body}>
+              Sluiten uw verzekeringen nog aan bij uw huidige
+              bedrijfsactiviteiten?
+            </Text>
+            <Text {...PARAGRAPH_STYLES.body}>
+              Wij bekijken graag samen met u of uw bestaande verzekeringspakket
+              nog voldoet. Daarbij letten we onder andere op de premie,
+              verzekerde bedragen, polisvoorwaarden, mogelijke overlappingen en
+              ontbrekende dekkingen.
+            </Text>
+            <Text {...PARAGRAPH_STYLES.body}>
+              Zo krijgt u meer inzicht in de risico’s en bijbehorende
+              verzekeringen.
+            </Text>
+            <ContentLink
+              href={NAVIGATION_ROUTES.riskAdvice}
+              label="Laat uw verzekeringen beoordelen"
+            />
+          </Flex>
+
+          <Flex as="section" direction="column" gap={PROSE_STACK_GAP}>
+            <Heading as="h2" {...HEADING_STYLES.h2} mb="0">
+              Particulier verzekerd via TIS
+            </Heading>
+            <Text {...PARAGRAPH_STYLES.body}>
+              Naast ondernemers verzekeren wij particulieren voor wie de
+              standaard verzekeringsoplossing niet voldoet. Denk aan een hogere
+              inboedelwaarde, kostbaarheden, een oldtimer, een vakantiehuis of
+              een monumentaal pand. Ook hierbij kunt u rekenen op persoonlijk
+              advies en maatwerk.
+            </Text>
+            <ContentLink
+              href={NAVIGATION_ROUTES.personalInsurance}
+              label="Naar particuliere verzekeringen"
+            />
+          </Flex>
+
+          <Flex as="section" direction="column" gap={PROSE_STACK_GAP}>
+            <Heading as="h2" {...HEADING_STYLES.h2} mb="0">
+              Schade? Wij handelen het zelf af
+            </Heading>
+            <Text {...PARAGRAPH_STYLES.body}>
+              Bij TIS beschikken wij over een eigen schadeafdeling. Wij
+              beoordelen de dekking, begeleiden de schadeafhandeling, schakelen
+              waar nodig een expert in en onderzoeken de mogelijkheden om schade
+              op een aansprakelijke tegenpartij te verhalen. U houdt daarbij een
+              persoonlijk aanspreekpunt binnen TIS.
+            </Text>
+            <ContentLink
+              href={NAVIGATION_ROUTES.damageReport}
+              label="Naar schade melden"
+            />
+          </Flex>
+
+          <ErrorBoundary>
+            <Suspense fallback={<Loading />}>
+              <CallToAction />
+            </Suspense>
+          </ErrorBoundary>
+
+          <ErrorBoundary>
+            <HomeFaq />
+          </ErrorBoundary>
+
+          <ErrorBoundary>
+            <Suspense fallback={<Loading />}>
+              <Talker
+                name="René Enthoven"
+                title="Directeur TIS Risk Managers"
+                image="/rene.jpg"
+                quote="De weldaden van een verzekering komen samen met het onheil aan het licht."
+                company="TIS Risk Managers"
+              />
+            </Suspense>
+          </ErrorBoundary>
+        </Flex>
+      </UnifiedLayout>
+
+      <ContactBand />
+    </PageTransition>
   );
 }

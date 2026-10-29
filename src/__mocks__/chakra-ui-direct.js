@@ -22,6 +22,12 @@ const DOM_PROP_ALLOWLIST = new Set([
   'rel',
   'download',
   'children',
+  'muted',
+  'loop',
+  'playsInline',
+  'poster',
+  'controls',
+  'autoPlay',
 ]);
 
 function isDomSafeProp(key) {
@@ -70,6 +76,7 @@ const GridItem = createChakraMock('GridItem');
 const Heading = createChakraMock('Heading', 'h2');
 const Text = createChakraMock('Text', 'p');
 const Button = createChakraMock('Button', 'button');
+const IconButton = createChakraMock('IconButton', 'button');
 const Link = createChakraMock('Link', 'a');
 const Image = createChakraMock('Image', 'img');
 const Separator = createChakraMock('Separator', 'hr');
@@ -80,7 +87,10 @@ const VStack = createChakraMock('VStack');
 const Container = createChakraMock('Container');
 const SimpleGrid = createChakraMock('SimpleGrid');
 
+const chakra = tag => createChakraMock('Chakra', tag);
+
 module.exports = {
+  chakra,
   Box,
   Flex,
   Grid,
@@ -88,6 +98,7 @@ module.exports = {
   Heading,
   Text,
   Button,
+  IconButton,
   Link,
   Image,
   Separator,

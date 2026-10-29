@@ -74,6 +74,28 @@ export const navbarActionsButtonStyles: SystemStyleObject = {
   gap: SPACING_SCALE.xs,
 };
 
+// The primary button is navy, which disappears against the dark header chrome.
+export const navbarActionsButtonOnDarkStyles: SystemStyleObject = {
+  bg: 'white',
+  color: 'navy.700',
+  _hover: { bg: 'stone.200', color: 'navy.700' },
+  _active: { bg: 'stone.300' },
+  _focusVisible: {
+    outline: '2px solid',
+    outlineColor: 'gold.400',
+    outlineOffset: '2px',
+  },
+};
+
+// Matching ring for the light chrome, where a white outline would disappear.
+export const navbarActionsButtonFocusStyles: SystemStyleObject = {
+  _focusVisible: {
+    outline: '2px solid',
+    outlineColor: 'navy.700',
+    outlineOffset: '2px',
+  },
+};
+
 export const navbarMenuContentStyles: SystemStyleObject = {
   position: 'absolute',
   top: '100%',

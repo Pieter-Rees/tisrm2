@@ -28,9 +28,24 @@ import {
 } from '@/constants/app';
 import { SPACING_PATTERNS, SPACING_SCALE } from '@/constants/layout';
 import { primaryButtonStyles } from '@/styles/components/button.styles';
+import {
+  navbarActionsButtonFocusStyles,
+  navbarActionsButtonOnDarkStyles,
+} from '@/styles/components/navigation.styles';
 
-const Navbar = memo(() => {
+export interface NavbarProps {
+  /** Mirrors the header chrome so the links stay legible over the dark hero. */
+  useLightChrome?: boolean;
+}
+
+const Navbar = memo<NavbarProps>(({ useLightChrome = true }) => {
   const pathname = usePathname();
+
+  const linkColor = useLightChrome ? 'navy.700' : 'white';
+  const mutedColor = useLightChrome ? 'stone.700' : 'white';
+  // Gold clears 3:1 on the dark chrome but not on the light one, so the light
+  // state keeps the navy underline it already had.
+  const underlineColor = useLightChrome ? 'navy.700' : 'gold.400';
 
   return (
     <Flex
@@ -62,17 +77,17 @@ const Navbar = memo(() => {
                     alignItems="center"
                     py={SPACING_PATTERNS.navigation.item}
                     position="relative"
-                    color={isActive ? 'blue.700' : 'gray.700'}
+                    color={isActive ? linkColor : mutedColor}
                     fontWeight={isActive ? 'semibold' : 'medium'}
                     borderBottom="2px solid"
-                    borderBottomColor={isActive ? 'blue.700' : 'transparent'}
+                    borderBottomColor={isActive ? underlineColor : 'transparent'}
                     transition="all 0.2s ease-in-out"
                     minH="6"
                     _hover={
                       !isActive ?
                         {
-                          color: 'blue.700',
-                          borderBottomColor: 'blue.700',
+                          color: linkColor,
+                          borderBottomColor: underlineColor,
                           transform: 'translateY(-1px)',
                         }
                       : {}
@@ -92,6 +107,9 @@ const Navbar = memo(() => {
           <MenuTrigger asChild>
             <Button
               {...primaryButtonStyles}
+              {...(useLightChrome ?
+                navbarActionsButtonFocusStyles
+              : navbarActionsButtonOnDarkStyles)}
               fontWeight="medium"
               gap={SPACING_SCALE.xs}
             >

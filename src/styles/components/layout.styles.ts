@@ -7,17 +7,41 @@ import { UI_CONSTANTS } from '@/constants/app';
 import { COMPONENT_SPACING, SPACING_PATTERNS } from '@/constants/layout';
 import { SECTION_SPACING } from '@/constants/typography';
 
-// Header styles
-export const headerStyles: SystemStyleObject = {
-  position: 'sticky',
+// Header styles. The header is fixed so the home hero can run full-bleed
+// underneath it, which means it no longer reserves layout space -- every other
+// route gets that space back through `headerOffset` on <main>.
+const headerChromeStyles: SystemStyleObject = {
+  position: 'fixed',
   top: '0',
-  zIndex: UI_CONSTANTS.zIndexes.sticky,
-  bg: 'rgba(255, 255, 255, 0.95)',
-  backdropFilter: 'blur(8px)',
-  borderBottom: '1px',
-  borderColor: 'gray.100',
-  boxShadow: 'sm',
+  left: '0',
+  right: '0',
+  zIndex: UI_CONSTANTS.zIndexes.fixed,
+  backdropFilter: 'blur(16px)',
+  borderBottom: '1px solid',
+  transition:
+    'background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease',
 };
+
+const headerStylesLight: SystemStyleObject = {
+  ...headerChromeStyles,
+  bg: 'rgba(247, 245, 242, 0.96)',
+  borderColor: 'stone.300',
+  boxShadow: 'none',
+};
+
+const headerStylesDark: SystemStyleObject = {
+  ...headerChromeStyles,
+  bg: 'rgba(8, 22, 40, 0.92)',
+  borderColor: 'rgba(196, 165, 116, 0.45)',
+  boxShadow: '0 10px 30px rgba(5, 14, 26, 0.28)',
+};
+
+export const getHeaderStyles = (useLightChrome: boolean): SystemStyleObject =>
+  useLightChrome ? headerStylesLight : headerStylesDark;
+
+// Height of the fixed header, used as the top offset for non-home routes.
+// `--headerHeight` is declared once in `globalCss` (src/app/theme.ts).
+export const headerOffset = 'var(--headerHeight)';
 
 export const headerContainerStyles: SystemStyleObject = {
   alignItems: 'center',
@@ -30,18 +54,22 @@ export const headerLogoStyles: SystemStyleObject = {
   py: { base: '2', md: '3' },
 };
 
-export const headerNavStyles: SystemStyleObject = {
-  flex: '1',
-  hideBelow: 'xl',
-};
-
-export const headerMenuButtonStyles: SystemStyleObject = {
-  color: 'gray.900',
+export const getHeaderMenuButtonStyles = (
+  useLightChrome: boolean,
+): SystemStyleObject => ({
+  color: useLightChrome ? 'navy.700' : 'white',
   transition: UI_CONSTANTS.hover.subtle.transition,
-  _hover: UI_CONSTANTS.hover.subtle,
-  _active: { bg: 'gray.200' },
-  hideFrom: 'xl',
-};
+  _hover:
+    useLightChrome ?
+      { bg: 'stone.200', color: 'navy.700' }
+    : { bg: 'whiteAlpha.200', color: 'white' },
+  _active: { bg: useLightChrome ? 'stone.300' : 'whiteAlpha.300' },
+  _focusVisible: {
+    outline: '2px solid',
+    outlineColor: useLightChrome ? 'navy.700' : 'white',
+    outlineOffset: '2px',
+  },
+});
 
 // Mobile menu overlay styles
 export const mobileMenuOverlayStyles: SystemStyleObject = {
@@ -115,5 +143,5 @@ export const contentHeaderStyles: SystemStyleObject = {
 export const sidebarColumnStyles: SystemStyleObject = {
   hideBelow: 'xl',
   position: 'sticky',
-  top: '100px',
+  top: headerOffset,
 };

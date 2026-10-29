@@ -1,5 +1,4 @@
 import '@testing-library/jest-dom';
-import React from 'react';
 
 // Mock IntersectionObserver
 global.IntersectionObserver = class IntersectionObserver {
@@ -34,6 +33,17 @@ Object.defineProperty(window, 'matchMedia', {
 
 // Mock scrollTo
 Object.defineProperty(window, 'scrollTo', {
+  writable: true,
+  value: jest.fn(),
+});
+
+// jsdom has no media playback, so <video> autoplay would reject on undefined
+Object.defineProperty(window.HTMLMediaElement.prototype, 'play', {
+  writable: true,
+  value: jest.fn().mockResolvedValue(undefined),
+});
+
+Object.defineProperty(window.HTMLMediaElement.prototype, 'pause', {
   writable: true,
   value: jest.fn(),
 });

@@ -1,5 +1,6 @@
 import Footer from '@/components/footer';
 import Header from '@/components/header';
+import MainContent from '@/components/main-content';
 import { DevPerformanceMonitor } from '@/components/performance-monitor';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { EXTERNAL_LINKS } from '@/constants/app';
@@ -7,17 +8,28 @@ import {
   getOrganizationSchema,
   getWebSiteSchema,
 } from '@/lib/seo/organizationSchema';
-import { Plus_Jakarta_Sans } from 'next/font/google';
+import { Fraunces, Manrope } from 'next/font/google';
 import Script from 'next/script';
 import type { ReactNode } from 'react';
 import { Providers } from './providers';
 
-const sansFont = Plus_Jakarta_Sans({
+// Fraunces carries the editorial display headings; SOFT/WONK are the axes the
+// heading styles pin. `opsz` is left out so Next keeps its default optical size.
+const frauncesFont = Fraunces({
   subsets: ['latin'],
   display: 'swap',
   preload: true,
-  variable: '--font-sans',
-  fallback: ['system-ui', 'arial'],
+  variable: '--font-fraunces',
+  axes: ['SOFT', 'WONK'],
+  fallback: ['Georgia', 'serif'],
+});
+
+const manropeFont = Manrope({
+  subsets: ['latin'],
+  display: 'swap',
+  preload: true,
+  variable: '--font-manrope',
+  fallback: ['Helvetica Neue', 'arial'],
 });
 
 interface RootLayoutProps {
@@ -29,27 +41,17 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html
       lang="nl"
       suppressHydrationWarning
-      className={`light ${sansFont.variable}`}
+      className={`light ${frauncesFont.variable} ${manropeFont.variable}`}
     >
       <head>
         <JsonLd data={getOrganizationSchema()} />
         <JsonLd data={getWebSiteSchema()} />
       </head>
-      <body
-        suppressHydrationWarning
-        style={{ backgroundColor: 'white', color: 'black' }}
-      >
+      <body suppressHydrationWarning>
         <Providers>
           <DevPerformanceMonitor />
           <Header />
-          <main
-            style={{
-              width: '100%',
-              margin: '0 auto',
-            }}
-          >
-            {children}
-          </main>
+          <MainContent>{children}</MainContent>
           <Footer />
         </Providers>
         <Script id="ga-init" strategy="lazyOnload">

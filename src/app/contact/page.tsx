@@ -1,17 +1,17 @@
 'use client';
 
-import { Box, Flex, Grid, GridItem, Heading, Text } from '@chakra-ui/react';
+import { Box, Flex, Grid, GridItem, Heading } from '@chakra-ui/react';
 
 import Breadcrumb from '@/components/breadcrumb';
 import ContactInfo from '@/components/contact-info';
 import { ContentBlocks, PageCta, SectionImage } from '@/components/content';
 import { UnifiedLayout } from '@/components/layout';
 import Logo from '@/components/logo';
+import PageHero from '@/components/page-hero';
 import { CONTACT_INFO } from '@/constants/app';
 import { COMPONENT_SPACING } from '@/constants/layout';
 import {
   HEADING_STYLES,
-  PARAGRAPH_STYLES,
   PROSE_STACK_GAP,
   SECTION_SPACING,
 } from '@/constants/typography';
@@ -67,65 +67,65 @@ const registrationBlocks: readonly ContentBlock[] = [
 
 export default function Contact() {
   return (
-    <UnifiedLayout
-      title={PAGE_META.contact.heading}
-      breadcrumb={<Breadcrumb />}
-    >
-      <Flex direction="column" gap={SECTION_SPACING.medium}>
-        <Flex as="section" direction="column" gap={PROSE_STACK_GAP}>
-          <Text {...PARAGRAPH_STYLES.lead}>
-            Heeft u vragen over uw verzekeringen, wilt u een offerte aanvragen
-            of persoonlijk advies ontvangen? Neem gerust contact op met TIS Risk
-            Managers. Wij helpen u graag verder.
-          </Text>
-        </Flex>
+    <>
+      <PageHero
+        title={PAGE_META.contact.heading}
+        description="Heeft u vragen over uw verzekeringen, wilt u een offerte aanvragen of persoonlijk advies ontvangen? Neem gerust contact op met TIS Risk Managers. Wij helpen u graag verder."
+        image="/1.webp"
+      />
 
-        <Grid
-          as="section"
-          gridTemplateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }}
-          gap={COMPONENT_SPACING.grid.md}
-          alignItems="stretch"
-          width="100%"
-        >
-          <GridItem
-            display="flex"
-            flexDirection="column"
-            gap={PROSE_STACK_GAP}
-            minW="0"
+      <UnifiedLayout breadcrumb={<Breadcrumb />}>
+        <Flex direction="column" gap={SECTION_SPACING.medium}>
+          <Grid
+            as="section"
+            gridTemplateColumns={{
+              base: 'repeat(1, 1fr)',
+              md: 'repeat(2, 1fr)',
+            }}
+            gap={COMPONENT_SPACING.grid.md}
+            alignItems="stretch"
+            width="100%"
           >
-            <Heading as="h2" {...HEADING_STYLES.h2} mb="0">
-              Contactgegevens
-            </Heading>
-            <Flex width="100%" justifyContent="center">
-              <Logo />
-            </Flex>
-            <ContactInfo buttonVariant="outline" />
-          </GridItem>
-          <GridItem display="flex" flexDirection="column" minW="0">
-            <SectionImage
-              src="/bb.jpg"
-              alt="Kantoor van TIS Risk Managers aan de Muiderstraat in Amsterdam"
-              width={1800}
-              height={1201}
-              eager
-            />
-          </GridItem>
-        </Grid>
+            <GridItem
+              display="flex"
+              flexDirection="column"
+              gap={PROSE_STACK_GAP}
+              minW="0"
+            >
+              <Heading as="h2" {...HEADING_STYLES.h2} mb="0">
+                Contactgegevens
+              </Heading>
+              <Flex width="100%" justifyContent="center">
+                <Logo />
+              </Flex>
+              <ContactInfo buttonVariant="outline" />
+            </GridItem>
+            <GridItem display="flex" flexDirection="column" minW="0">
+              <SectionImage
+                src="/bb.jpg"
+                alt="Kantoor van TIS Risk Managers aan de Muiderstraat in Amsterdam"
+                width={1800}
+                height={1201}
+                eager
+              />
+            </GridItem>
+          </Grid>
 
-        <Box as="section">
-          <ContentBlocks blocks={openingHoursBlocks} />
-        </Box>
+          <Box as="section">
+            <ContentBlocks blocks={openingHoursBlocks} />
+          </Box>
 
-        <Box as="section">
-          <ContentBlocks blocks={registrationBlocks} />
-        </Box>
+          <Box as="section">
+            <ContentBlocks blocks={registrationBlocks} />
+          </Box>
 
-        <PageCta
-          title="Liever direct contact?"
-          text="Onze adviseurs staan op werkdagen voor u klaar en denken graag met u mee over uw verzekeringen en risico’s."
-          actionLabel="Vraag een offerte aan"
-        />
-      </Flex>
-    </UnifiedLayout>
+          <PageCta
+            title="Liever direct contact?"
+            text="Onze adviseurs staan op werkdagen voor u klaar en denken graag met u mee over uw verzekeringen en risico’s."
+            actionLabel="Vraag een offerte aan"
+          />
+        </Flex>
+      </UnifiedLayout>
+    </>
   );
 }

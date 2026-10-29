@@ -359,6 +359,74 @@ export const getButtonStyles = (
   };
 };
 
+// Design-language button treatments. Spread these onto `Button` / `ButtonLink`
+// instead of using a `variant` name, because Chakra v3 only types the stock
+// variants and custom ones need a codegen step.
+const designButtonBase: SystemStyleObject = {
+  borderRadius: '0',
+  fontWeight: 'semibold',
+  letterSpacing: '0.01em',
+  textTransform: 'none',
+  transition:
+    'background 0.25s ease, color 0.25s ease, transform 0.25s ease, border-color 0.25s ease',
+  _active: {
+    transform: 'translateY(1px)',
+  },
+  // The remapped ramps make Chakra's default ring near-black, which vanishes
+  // on the navy hero and the contact band. Gold reads on both surfaces.
+  _focusVisible: {
+    outline: '2px solid',
+    outlineColor: 'gold.400',
+    outlineOffset: '2px',
+  },
+};
+
+export const DESIGN_BUTTON_STYLES = {
+  /** Solid white button, for use on navy or photographic backgrounds */
+  onDark: {
+    ...designButtonBase,
+    bg: 'white',
+    color: 'navy.700',
+    _hover: {
+      bg: 'stone.200',
+      transform: 'translateY(-1px)',
+    },
+  },
+  /** Hairline outline button on navy or photographic backgrounds */
+  outlineOnDark: {
+    ...designButtonBase,
+    bg: 'transparent',
+    color: 'white',
+    border: '1px solid',
+    borderColor: 'whiteAlpha.700',
+    _hover: {
+      bg: 'whiteAlpha.200',
+      borderColor: 'white',
+      transform: 'translateY(-1px)',
+    },
+  },
+  /** Gold-underlined text link that nudges right on hover */
+  textLink: {
+    ...designButtonBase,
+    bg: 'transparent',
+    color: 'navy.700',
+    borderBottom: '1px solid',
+    borderColor: 'gold.400',
+    px: '0',
+    pb: '1',
+    height: 'auto',
+    minH: 'unset',
+    // Gold only carries the rule; the label stays navy so it keeps its
+    // contrast on the light surface.
+    _hover: {
+      bg: 'transparent',
+      color: 'navy.500',
+      borderColor: 'gold.500',
+      transform: 'translateX(4px)',
+    },
+  },
+} satisfies Record<string, SystemStyleObject>;
+
 export const legacyButtonStyles = {
   primary: {
     bg: 'blue.700',

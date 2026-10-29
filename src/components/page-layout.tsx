@@ -12,6 +12,7 @@ import {
   SPACING_PATTERNS,
 } from '@/constants/layout';
 import { HEADING_STYLES, SECTION_SPACING } from '@/constants/typography';
+import { headerOffset } from '@/styles/components/layout.styles';
 import {
   Box,
   Container,
@@ -84,7 +85,7 @@ export const PageLayout = ({
           {showSidebar && (
             <GridItem hideBelow="xl">
               <SlideInRight delay={0.2}>
-                <Box position="sticky" top="100px">
+                <Box position="sticky" top={headerOffset}>
                   <ErrorBoundary>
                     <Suspense fallback={<Loading text="Loading sidebar..." />}>
                       <Sidebar />

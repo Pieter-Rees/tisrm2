@@ -5,6 +5,7 @@ import { Box, Flex } from '@chakra-ui/react';
 import Breadcrumb from '@/components/breadcrumb';
 import { ContentBlocks, PageCta } from '@/components/content';
 import { UnifiedLayout } from '@/components/layout';
+import PageHero from '@/components/page-hero';
 import { FaqSection } from '@/components/seo/FaqSection';
 import { NAVIGATION_ROUTES, getKnowledgeArticlePath } from '@/constants/app';
 import { SECTION_SPACING } from '@/constants/typography';
@@ -12,12 +13,11 @@ import { PAGE_FAQS } from '@/lib/seo/pageFaqs';
 import { PAGE_META } from '@/lib/seo/pageMeta';
 import type { ContentBlock } from '@/types/content';
 
+/** Reused as the hero description, so it is no longer a body block. */
+const INTRO_LEAD =
+  'Al ruim 25 jaar verzekeren wij taxibedrijven, luxe personenvervoer met chauffeur, zorgvervoer en touringcarbedrijven. Van zelfstandige chauffeurs tot ondernemingen met een uitgebreid wagenpark.';
+
 const blocks: readonly ContentBlock[] = [
-  {
-    kind: 'paragraph',
-    variant: 'lead',
-    text: 'Al ruim 25 jaar verzekeren wij taxibedrijven, luxe personenvervoer met chauffeur, zorgvervoer en touringcarbedrijven. Van zelfstandige chauffeurs tot ondernemingen met een uitgebreid wagenpark.',
-  },
   {
     kind: 'paragraph',
     text: 'Dankzij onze jarenlange ervaring kennen wij de branche en de risico’s die daarbij horen. Wij zoeken naar passende verzekeringsdekkingen, goede voorwaarden en scherpe premies.',
@@ -187,19 +187,27 @@ const blocks: readonly ContentBlock[] = [
 
 export default function TaxiEnWagenparkverzekering() {
   return (
-    <UnifiedLayout title={PAGE_META.taxi.heading} breadcrumb={<Breadcrumb />}>
-      <Flex direction="column" gap={SECTION_SPACING.medium}>
-        <Box as="section">
-          <ContentBlocks blocks={blocks} />
-        </Box>
+    <>
+      <PageHero
+        title={PAGE_META.taxi.heading}
+        description={INTRO_LEAD}
+        image="/mercedes.png"
+      />
 
-        <FaqSection faqs={PAGE_FAQS.taxi} />
+      <UnifiedLayout breadcrumb={<Breadcrumb />}>
+        <Flex direction="column" gap={SECTION_SPACING.medium}>
+          <Box as="section">
+            <ContentBlocks blocks={blocks} />
+          </Box>
 
-        <PageCta
-          title="Plan een kennismaking"
-          text="Bel 020 636 8191 voor een vrijblijvend gesprek, of vraag direct een offerte aan."
-        />
-      </Flex>
-    </UnifiedLayout>
+          <FaqSection faqs={PAGE_FAQS.taxi} />
+
+          <PageCta
+            title="Plan een kennismaking"
+            text="Bel 020 636 8191 voor een vrijblijvend gesprek, of vraag direct een offerte aan."
+          />
+        </Flex>
+      </UnifiedLayout>
+    </>
   );
 }

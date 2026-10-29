@@ -5,6 +5,7 @@ import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 import Breadcrumb from '@/components/breadcrumb';
 import { ContentBlocks, LinkTile, PageCta } from '@/components/content';
 import { UnifiedLayout } from '@/components/layout';
+import PageHero from '@/components/page-hero';
 import { FaqSection } from '@/components/seo/FaqSection';
 import {
   BRANCH_ROUTES,
@@ -54,12 +55,11 @@ const BRANCH_TILES: Record<
   },
 };
 
+/** Reused as the hero description, so it is no longer a body block. */
+const INTRO_LEAD =
+  'Als ondernemer wilt u erop kunnen vertrouwen dat uw verzekeringen goed geregeld zijn. Dat de dekking aansluit bij uw werkzaamheden, dat u niet onnodig betaalt en dat er iemand voor u klaarstaat wanneer er schade ontstaat.';
+
 const introBlocks: readonly ContentBlock[] = [
-  {
-    kind: 'paragraph',
-    variant: 'lead',
-    text: 'Als ondernemer wilt u erop kunnen vertrouwen dat uw verzekeringen goed geregeld zijn. Dat de dekking aansluit bij uw werkzaamheden, dat u niet onnodig betaalt en dat er iemand voor u klaarstaat wanneer er schade ontstaat.',
-  },
   {
     kind: 'paragraph',
     text: 'Bij TIS Risk Managers stellen wij uw zakelijke verzekeringspakket samen op basis van uw bedrijfsactiviteiten en de risico’s die daarbij horen. Daarbij kijken we naar passende dekkingen, goede voorwaarden en scherpe premies.',
@@ -201,66 +201,71 @@ const adviceBlocks: readonly ContentBlock[] = [
 
 export default function ZakelijkeVerzekeringen() {
   return (
-    <UnifiedLayout
-      title={PAGE_META.businessInsurance.heading}
-      breadcrumb={<Breadcrumb />}
-    >
-      <Flex direction="column" gap={SECTION_SPACING.medium}>
-        <Box as="section">
-          <ContentBlocks blocks={introBlocks} />
-        </Box>
+    <>
+      <PageHero
+        title={PAGE_META.businessInsurance.heading}
+        description={INTRO_LEAD}
+        image="/slider-2.jpg"
+      />
 
-        <Box as="section">
-          <ContentBlocks blocks={coverageBlocks} />
-        </Box>
-
-        <Box as="section">
-          <ContentBlocks blocks={adviceBlocks} />
-        </Box>
-
-        <Flex as="section" direction="column" gap={PROSE_STACK_GAP}>
-          <Heading as="h2" {...HEADING_STYLES.h2} mb="0">
-            Onze specialisaties
-          </Heading>
-          <Text {...PARAGRAPH_STYLES.body}>
-            Wij verzorgen zakelijke verzekeringen voor uiteenlopende
-            ondernemingen. Daarnaast hebben wij ruime ervaring binnen een aantal
-            specifieke branches:
-          </Text>
-          <Box
-            as="ul"
-            listStyleType="none"
-            m="0"
-            p="0"
-            display="grid"
-            gridTemplateColumns={{ base: '1fr', md: 'repeat(2, 1fr)' }}
-            gap={COMPONENT_SPACING.grid.sm}
-          >
-            {BRANCH_ROUTES.map(({ href, label }) => (
-              <LinkTile
-                key={href}
-                title={label}
-                description={BRANCH_TILES[href]?.description}
-                href={href}
-                linkLabel={BRANCH_TILES[href]?.linkLabel ?? label}
-              />
-            ))}
+      <UnifiedLayout breadcrumb={<Breadcrumb />}>
+        <Flex direction="column" gap={SECTION_SPACING.medium}>
+          <Box as="section">
+            <ContentBlocks blocks={introBlocks} />
           </Box>
-          <Text {...PARAGRAPH_STYLES.body}>
-            Staat uw branche er niet bij? Dat betekent niet dat wij u niet
-            kunnen helpen. Onze zakelijke verzekeringen zijn bedoeld voor
-            ondernemingen in uiteenlopende sectoren. Neem gerust contact met ons
-            op om de mogelijkheden te bespreken.
-          </Text>
+
+          <Box as="section">
+            <ContentBlocks blocks={coverageBlocks} />
+          </Box>
+
+          <Box as="section">
+            <ContentBlocks blocks={adviceBlocks} />
+          </Box>
+
+          <Flex as="section" direction="column" gap={PROSE_STACK_GAP}>
+            <Heading as="h2" {...HEADING_STYLES.h2} mb="0">
+              Onze specialisaties
+            </Heading>
+            <Text {...PARAGRAPH_STYLES.body}>
+              Wij verzorgen zakelijke verzekeringen voor uiteenlopende
+              ondernemingen. Daarnaast hebben wij ruime ervaring binnen een
+              aantal specifieke branches:
+            </Text>
+            <Box
+              as="ul"
+              listStyleType="none"
+              m="0"
+              p="0"
+              display="grid"
+              gridTemplateColumns={{ base: '1fr', md: 'repeat(2, 1fr)' }}
+              gap={COMPONENT_SPACING.grid.sm}
+            >
+              {BRANCH_ROUTES.map(({ href, label }) => (
+                <LinkTile
+                  key={href}
+                  title={label}
+                  description={BRANCH_TILES[href]?.description}
+                  href={href}
+                  linkLabel={BRANCH_TILES[href]?.linkLabel ?? label}
+                />
+              ))}
+            </Box>
+            <Text {...PARAGRAPH_STYLES.body}>
+              Staat uw branche er niet bij? Dat betekent niet dat wij u niet
+              kunnen helpen. Onze zakelijke verzekeringen zijn bedoeld voor
+              ondernemingen in uiteenlopende sectoren. Neem gerust contact met
+              ons op om de mogelijkheden te bespreken.
+            </Text>
+          </Flex>
+
+          <FaqSection faqs={PAGE_FAQS.businessInsurance} />
+
+          <PageCta
+            title="Vraag een offerte aan of laat uw verzekeringen beoordelen"
+            text="Wilt u uw onderneming goed verzekeren of weten of uw huidige verzekeringspakket nog aansluit bij uw bedrijfsactiviteiten? Wij kijken graag met u mee en adviseren over passende verzekeringen, voorwaarden en premies."
+          />
         </Flex>
-
-        <FaqSection faqs={PAGE_FAQS.businessInsurance} />
-
-        <PageCta
-          title="Vraag een offerte aan of laat uw verzekeringen beoordelen"
-          text="Wilt u uw onderneming goed verzekeren of weten of uw huidige verzekeringspakket nog aansluit bij uw bedrijfsactiviteiten? Wij kijken graag met u mee en adviseren over passende verzekeringen, voorwaarden en premies."
-        />
-      </Flex>
-    </UnifiedLayout>
+      </UnifiedLayout>
+    </>
   );
 }
