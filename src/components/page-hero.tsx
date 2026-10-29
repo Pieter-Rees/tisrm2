@@ -67,7 +67,8 @@ const PageHero = ({
         display="flex"
         alignItems={isCover ? 'flex-end' : 'center'}
         pb={{ base: 12, md: 20 }}
-        pt={{ base: 12, md: 20 }}
+        // Clear the fixed header so the eyebrow/title never sit underneath it.
+        pt={{ base: 28, md: 36 }}
       >
         <Flex
           direction={isCover ? 'column' : { base: 'column', lg: 'row' }}

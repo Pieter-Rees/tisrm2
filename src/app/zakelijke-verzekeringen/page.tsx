@@ -206,6 +206,8 @@ export default function ZakelijkeVerzekeringen() {
         title={PAGE_META.businessInsurance.heading}
         description={INTRO_LEAD}
         image="/slider-2.jpg"
+        ctaLabel="Offerte aanvragen"
+        ctaHref={NAVIGATION_ROUTES.quote}
       />
 
       <UnifiedLayout breadcrumb={<Breadcrumb />}>

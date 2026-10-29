@@ -4,7 +4,6 @@ import { Box, Container, Flex, Heading, Text } from '@chakra-ui/react';
 import { Suspense, lazy } from 'react';
 
 import BackgroundVideo from '@/components/background-video';
-import ContactBand from '@/components/contact-band';
 import { ContentLink, LinkTile } from '@/components/content';
 import ErrorBoundary from '@/components/error-boundary';
 import { UnifiedLayout } from '@/components/layout';
@@ -286,8 +285,6 @@ export default function HomePageContent() {
           </ErrorBoundary>
         </Flex>
       </UnifiedLayout>
-
-      <ContactBand />
     </PageTransition>
   );
 }

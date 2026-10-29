@@ -8,7 +8,7 @@ import { ContentBlocks, PageCta, SectionImage } from '@/components/content';
 import { UnifiedLayout } from '@/components/layout';
 import Logo from '@/components/logo';
 import PageHero from '@/components/page-hero';
-import { CONTACT_INFO } from '@/constants/app';
+import { CONTACT_INFO, NAVIGATION_ROUTES } from '@/constants/app';
 import { COMPONENT_SPACING } from '@/constants/layout';
 import {
   HEADING_STYLES,
@@ -72,6 +72,8 @@ export default function Contact() {
         title={PAGE_META.contact.heading}
         description="Heeft u vragen over uw verzekeringen, wilt u een offerte aanvragen of persoonlijk advies ontvangen? Neem gerust contact op met TIS Risk Managers. Wij helpen u graag verder."
         image="/1.webp"
+        ctaLabel="Offerte aanvragen"
+        ctaHref={NAVIGATION_ROUTES.quote}
       />
 
       <UnifiedLayout breadcrumb={<Breadcrumb />}>

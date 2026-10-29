@@ -1,37 +1,21 @@
 'use client';
 
-import {
-  Box,
-  Button,
-  Flex,
-  MenuContent,
-  MenuItem,
-  MenuRoot,
-  MenuTrigger,
-  Separator,
-  VStack,
-} from '@chakra-ui/react';
+import { Box, Button, Flex, Separator, VStack } from '@chakra-ui/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { memo, useCallback, useEffect } from 'react';
-import {
-  BsChevronDown,
-  BsFileText,
-  BsShield,
-  BsTelephone,
-  BsX,
-} from 'react-icons/bs';
+import { BsX } from 'react-icons/bs';
 
 import Logo from '@/components/logo';
+import { ButtonLink } from '@/components/ui/button-link';
 import {
-  CONTACT_INFO,
   NAVIGATION_ROUTES,
   PRIMARY_NAVIGATION,
   UI_CONSTANTS,
 } from '@/constants/app';
 import { SPACING_PATTERNS, SPACING_SCALE } from '@/constants/layout';
 import { cn } from '@/lib/utils';
-import { primaryButtonStyles } from '@/styles/components/button.styles';
+import { DESIGN_BUTTON_STYLES } from '@/styles/components/button.styles';
 // import {
 //   sidenavContainerStyles,
 //   getSidenavPositionStyles,
@@ -188,68 +172,29 @@ const Sidenav = memo<SidenavProps>(
 
           <Separator borderColor="gray.300" width="80%" />
 
-          <Box width="full" px={SPACING_SCALE.md} mt={SPACING_SCALE.md}>
-            <MenuRoot>
-              <MenuTrigger asChild>
-                <Button
-                  {...primaryButtonStyles}
-                  width="full"
-                  fontWeight="medium"
-                  gap={SPACING_SCALE.xs}
-                >
-                  Acties
-                  <BsChevronDown />
-                </Button>
-              </MenuTrigger>
-              <MenuContent>
-                <MenuItem
-                  value="damage-report"
-                  asChild
-                  gap={SPACING_SCALE.xs}
-                  _hover={{ bg: 'blue.50' }}
-                  cursor="pointer"
-                >
-                  <Link
-                    href={NAVIGATION_ROUTES.damageReport}
-                    onClick={handleLinkClick}
-                  >
-                    <BsShield />
-                    Schade melden
-                  </Link>
-                </MenuItem>
-                <MenuItem
-                  value="quote"
-                  asChild
-                  gap={SPACING_SCALE.xs}
-                  _hover={{ bg: 'blue.50' }}
-                  cursor="pointer"
-                >
-                  <Link
-                    href={NAVIGATION_ROUTES.quote}
-                    onClick={handleLinkClick}
-                  >
-                    <BsFileText />
-                    Offerte aanvragen
-                  </Link>
-                </MenuItem>
-                <MenuItem
-                  value="call"
-                  asChild
-                  gap={SPACING_SCALE.xs}
-                  _hover={{ bg: 'blue.50' }}
-                  cursor="pointer"
-                >
-                  <Link
-                    href={CONTACT_INFO.phoneHref}
-                    onClick={handleLinkClick}
-                  >
-                    <BsTelephone />
-                    Bel nu
-                  </Link>
-                </MenuItem>
-              </MenuContent>
-            </MenuRoot>
-          </Box>
+          <VStack
+            width="full"
+            px={SPACING_SCALE.md}
+            mt={SPACING_SCALE.md}
+            gap={SPACING_SCALE.sm}
+          >
+            <ButtonLink
+              href={NAVIGATION_ROUTES.quote}
+              width="full"
+              onClick={handleLinkClick}
+              {...DESIGN_BUTTON_STYLES.onLight}
+            >
+              Offerte
+            </ButtonLink>
+            <ButtonLink
+              href={NAVIGATION_ROUTES.damageReport}
+              width="full"
+              onClick={handleLinkClick}
+              {...DESIGN_BUTTON_STYLES.outlineOnLight}
+            >
+              Schade melden
+            </ButtonLink>
+          </VStack>
         </Flex>
       </Flex>
     );

@@ -1,61 +1,50 @@
 'use client';
 
-import {
-  Box,
-  Button,
-  Flex,
-  HStack,
-  MenuContent,
-  MenuItem,
-  MenuRoot,
-  MenuTrigger,
-  VisuallyHidden,
-} from '@chakra-ui/react';
+import { Box, Flex, HStack } from '@chakra-ui/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { memo } from 'react';
-import {
-  BsChevronDown,
-  BsFileText,
-  BsShield,
-  BsTelephone,
-} from 'react-icons/bs';
 
-import {
-  CONTACT_INFO,
-  NAVIGATION_ROUTES,
-  PRIMARY_NAVIGATION,
-} from '@/constants/app';
-import { SPACING_PATTERNS, SPACING_SCALE } from '@/constants/layout';
-import { primaryButtonStyles } from '@/styles/components/button.styles';
-import {
-  navbarActionsButtonFocusStyles,
-  navbarActionsButtonOnDarkStyles,
-} from '@/styles/components/navigation.styles';
+import { ButtonLink } from '@/components/ui/button-link';
+import { NAVIGATION_ROUTES, PRIMARY_NAVIGATION } from '@/constants/app';
+import { SPACING_PATTERNS } from '@/constants/layout';
+import { navCtaGap } from '@/constants/spacing';
+import { DESIGN_BUTTON_STYLES } from '@/styles/components/button.styles';
 
 export interface NavbarProps {
   /** Mirrors the header chrome so the links stay legible over the dark hero. */
   useLightChrome?: boolean;
 }
 
+/**
+ * Link set from testing (Home, Zakelijk, …); CTA pair from design (Offerte /
+ * Schade melden) with the design chrome colours.
+ */
 const Navbar = memo<NavbarProps>(({ useLightChrome = true }) => {
   const pathname = usePathname();
 
   const linkColor = useLightChrome ? 'navy.700' : 'white';
   const mutedColor = useLightChrome ? 'stone.700' : 'white';
-  // Gold clears 3:1 on the dark chrome but not on the light one, so the light
-  // state keeps the navy underline it already had.
   const underlineColor = useLightChrome ? 'navy.700' : 'gold.400';
+  const dividerColor = useLightChrome ? 'stone.300' : 'whiteAlpha.400';
+  const primaryCtaStyles =
+    useLightChrome ? DESIGN_BUTTON_STYLES.onLight : DESIGN_BUTTON_STYLES.onDark;
+  const secondaryCtaStyles =
+    useLightChrome ?
+      DESIGN_BUTTON_STYLES.outlineOnLight
+    : DESIGN_BUTTON_STYLES.outlineOnDark;
 
   return (
     <Flex
       alignItems="center"
       gap={SPACING_PATTERNS.navigation.container}
       width="full"
-      justifyContent="space-between"
+      justifyContent="flex-end"
     >
       <Box hideBelow="xl">
         <HStack
+          as="nav"
+          aria-label="Hoofdnavigatie"
           gap={SPACING_PATTERNS.navigation.group}
           alignItems="center"
           fontSize={{ base: 'sm', '2xl': 'md' }}
@@ -80,9 +69,12 @@ const Navbar = memo<NavbarProps>(({ useLightChrome = true }) => {
                     color={isActive ? linkColor : mutedColor}
                     fontWeight={isActive ? 'semibold' : 'medium'}
                     borderBottom="2px solid"
-                    borderBottomColor={isActive ? underlineColor : 'transparent'}
+                    borderBottomColor={
+                      isActive ? underlineColor : 'transparent'
+                    }
                     transition="all 0.2s ease-in-out"
                     minH="6"
+                    whiteSpace="nowrap"
                     _hover={
                       !isActive ?
                         {
@@ -102,76 +94,34 @@ const Navbar = memo<NavbarProps>(({ useLightChrome = true }) => {
         </HStack>
       </Box>
 
-      <Box hideBelow="xl" position="relative">
-        <MenuRoot>
-          <MenuTrigger asChild>
-            <Button
-              {...primaryButtonStyles}
-              {...(useLightChrome ?
-                navbarActionsButtonFocusStyles
-              : navbarActionsButtonOnDarkStyles)}
-              fontWeight="medium"
-              gap={SPACING_SCALE.xs}
-            >
-              Acties
-              <BsChevronDown />
-            </Button>
-          </MenuTrigger>
-          <MenuContent
-            position="absolute"
-            top="100%"
-            right="0"
-            mt="1"
-            minW="200px"
-            bg="white"
-            border="1px solid"
-            borderColor="gray.200"
-            borderRadius="md"
-            boxShadow="lg"
-            zIndex="dropdown"
-          >
-            <MenuItem
-              value="damage-report"
-              asChild
-              gap={SPACING_SCALE.xs}
-              _hover={{ bg: 'blue.50' }}
-              cursor="pointer"
-            >
-              <Link href={NAVIGATION_ROUTES.damageReport}>
-                <BsShield />
-                Schade melden
-              </Link>
-            </MenuItem>
-            <MenuItem
-              value="quote"
-              asChild
-              gap={SPACING_SCALE.xs}
-              _hover={{ bg: 'blue.50' }}
-              cursor="pointer"
-            >
-              <Link href={NAVIGATION_ROUTES.quote}>
-                <BsFileText />
-                Offerte aanvragen
-              </Link>
-            </MenuItem>
-            <MenuItem
-              value="call"
-              asChild
-              gap={SPACING_SCALE.xs}
-              _hover={{ bg: 'blue.50' }}
-              cursor="pointer"
-            >
-              <Link href={CONTACT_INFO.phoneHref}>
-                <BsTelephone />
-                Bel nu
-                <VisuallyHidden>
-                  - Call us for immediate assistance: {CONTACT_INFO.phone}
-                </VisuallyHidden>
-              </Link>
-            </MenuItem>
-          </MenuContent>
-        </MenuRoot>
-      </Box>
+      <Flex
+        hideBelow="xl"
+        align="center"
+        gap={navCtaGap}
+        flexShrink={0}
+        pl="6"
+        ml="2"
+        borderLeft="1px solid"
+        borderColor={dividerColor}
+      >
+        <ButtonLink
+          href={NAVIGATION_ROUTES.quote}
+          size="sm"
+          px="5"
+          {...primaryCtaStyles}
+        >
+          Offerte
+        </ButtonLink>
+        <ButtonLink
+          href={NAVIGATION_ROUTES.damageReport}
+          size="sm"
+          px="4"
+          whiteSpace="nowrap"
+          {...secondaryCtaStyles}
+        >
+          Schade melden
+        </ButtonLink>
+      </Flex>
     </Flex>
   );
 });

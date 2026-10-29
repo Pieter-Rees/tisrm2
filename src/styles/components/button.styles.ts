@@ -405,6 +405,29 @@ export const DESIGN_BUTTON_STYLES = {
       transform: 'translateY(-1px)',
     },
   },
+  /** Solid navy button on the light stone header chrome */
+  onLight: {
+    ...designButtonBase,
+    bg: 'navy.700',
+    color: 'white',
+    _hover: {
+      bg: 'navy.800',
+      transform: 'translateY(-1px)',
+    },
+  },
+  /** Navy outline button on the light stone header chrome */
+  outlineOnLight: {
+    ...designButtonBase,
+    bg: 'transparent',
+    color: 'navy.700',
+    border: '1px solid',
+    borderColor: 'navy.700',
+    _hover: {
+      bg: 'stone.200',
+      borderColor: 'navy.800',
+      transform: 'translateY(-1px)',
+    },
+  },
   /** Gold-underlined text link that nudges right on hover */
   textLink: {
     ...designButtonBase,

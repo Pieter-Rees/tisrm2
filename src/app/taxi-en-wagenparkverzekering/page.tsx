@@ -192,6 +192,9 @@ export default function TaxiEnWagenparkverzekering() {
         title={PAGE_META.taxi.heading}
         description={INTRO_LEAD}
         image="/mercedes.png"
+        frame="product"
+        ctaLabel="Offerte aanvragen"
+        ctaHref={NAVIGATION_ROUTES.quote}
       />
 
       <UnifiedLayout breadcrumb={<Breadcrumb />}>
