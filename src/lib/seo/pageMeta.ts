@@ -73,7 +73,7 @@ export const PAGE_META = {
     title: 'Verzekeringen laten beoordelen | TIS Risk Managers',
     description:
       'GRMC-geregistreerde adviseurs nemen uw polissen door en bepalen met u per risico wat u verzekert en wat u zelf draagt. Bel 020 636 8191.',
-    heading: 'Risk Management voor ondernemers',
+    heading: 'Risk Management',
     path: NAVIGATION_ROUTES.riskAdvice,
   },
   knowledgeBase: {

@@ -41,7 +41,7 @@ const navigationLinks = [
     href: NAVIGATION_ROUTES.personalInsurance,
     label: 'Particuliere verzekeringen',
   },
-  { href: NAVIGATION_ROUTES.riskAdvice, label: 'Risicoadvies' },
+  { href: NAVIGATION_ROUTES.riskAdvice, label: 'Risk Management' },
   { href: NAVIGATION_ROUTES.knowledgeBase, label: 'Kennisbank' },
   { href: NAVIGATION_ROUTES.about, label: 'Over ons' },
   { href: NAVIGATION_ROUTES.contact, label: 'Contact' },

@@ -184,7 +184,7 @@ const Sidenav = memo<SidenavProps>(
               onClick={handleLinkClick}
               {...DESIGN_BUTTON_STYLES.onLight}
             >
-              Offerte
+              Offerte aanvragen
             </ButtonLink>
             <ButtonLink
               href={NAVIGATION_ROUTES.damageReport}

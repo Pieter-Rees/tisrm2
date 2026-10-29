@@ -5,6 +5,7 @@ import { Box, Flex } from '@chakra-ui/react';
 import Breadcrumb from '@/components/breadcrumb';
 import { ContentBlocks, PageCta } from '@/components/content';
 import { UnifiedLayout } from '@/components/layout';
+import PageHero from '@/components/page-hero';
 import { FaqSection } from '@/components/seo/FaqSection';
 import { NAVIGATION_ROUTES } from '@/constants/app';
 import { SECTION_SPACING } from '@/constants/typography';
@@ -12,11 +13,14 @@ import { PAGE_FAQS } from '@/lib/seo/pageFaqs';
 import { PAGE_META } from '@/lib/seo/pageMeta';
 import type { ContentBlock } from '@/types/content';
 
+const INTRO_LEAD =
+  'Goed risicomanagement begint met inzicht in de risico’s van uw onderneming. Niet ieder risico hoeft verzekerd te worden. Sommige risico’s kunt u beperken of voorkomen, terwijl andere risico’s beter verzekerd kunnen worden.';
+
 const blocks: readonly ContentBlock[] = [
   {
     kind: 'paragraph',
     variant: 'lead',
-    text: 'Goed risicomanagement begint met inzicht in de risico’s van uw onderneming. Niet ieder risico hoeft verzekerd te worden. Sommige risico’s kunt u beperken of voorkomen, terwijl andere risico’s beter verzekerd kunnen worden.',
+    text: INTRO_LEAD,
   },
   {
     kind: 'paragraph',
@@ -138,24 +142,31 @@ const blocks: readonly ContentBlock[] = [
 
 export default function Risicoadvies() {
   return (
-    <UnifiedLayout
-      title={PAGE_META.riskAdvice.heading}
-      breadcrumb={<Breadcrumb />}
-    >
-      <Flex direction="column" gap={SECTION_SPACING.medium}>
-        <Box as="section">
-          <ContentBlocks blocks={blocks} />
-        </Box>
+    <>
+      <PageHero
+        title={PAGE_META.riskAdvice.heading}
+        description={INTRO_LEAD}
+        image="/slider-4.jpg"
+        ctaLabel="Neem contact op"
+        ctaHref={NAVIGATION_ROUTES.contact}
+      />
 
-        <FaqSection faqs={PAGE_FAQS.riskAdvice} />
+      <UnifiedLayout breadcrumb={<Breadcrumb />}>
+        <Flex direction="column" gap={SECTION_SPACING.medium}>
+          <Box as="section">
+            <ContentBlocks blocks={blocks} />
+          </Box>
 
-        <PageCta
-          title="Plan een afspraak"
-          text="Wilt u weten welke risico’s uw onderneming loopt en welke daarvan u beter kunt verzekeren of voorkomen? Bel of mail ons voor een afspraak."
-          actionLabel="Neem contact op"
-          actionHref={NAVIGATION_ROUTES.contact}
-        />
-      </Flex>
-    </UnifiedLayout>
+          <FaqSection faqs={PAGE_FAQS.riskAdvice} />
+
+          <PageCta
+            title="Plan een afspraak"
+            text="Wilt u weten welke risico’s uw onderneming loopt en welke daarvan u beter kunt verzekeren of voorkomen? Bel of mail ons voor een afspraak."
+            actionLabel="Neem contact op"
+            actionHref={NAVIGATION_ROUTES.contact}
+          />
+        </Flex>
+      </UnifiedLayout>
+    </>
   );
 }

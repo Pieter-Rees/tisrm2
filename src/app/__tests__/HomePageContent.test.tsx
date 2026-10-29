@@ -9,11 +9,6 @@ jest.mock('@/components/layout', () => ({
   ),
 }));
 
-jest.mock('@/components/three-elements', () => ({
-  __esModule: true,
-  default: () => null,
-}));
-
 jest.mock('@/components/call-to-action', () => ({
   __esModule: true,
   default: () => null,

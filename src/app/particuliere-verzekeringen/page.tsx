@@ -5,17 +5,22 @@ import { Box, Flex } from '@chakra-ui/react';
 import Breadcrumb from '@/components/breadcrumb';
 import { ContentBlocks, PageCta } from '@/components/content';
 import { UnifiedLayout } from '@/components/layout';
+import PageHero from '@/components/page-hero';
 import { FaqSection } from '@/components/seo/FaqSection';
+import { NAVIGATION_ROUTES } from '@/constants/app';
 import { SECTION_SPACING } from '@/constants/typography';
 import { PAGE_FAQS } from '@/lib/seo/pageFaqs';
 import { PAGE_META } from '@/lib/seo/pageMeta';
 import type { ContentBlock } from '@/types/content';
 
+const INTRO_LEAD =
+  'Bij TIS Risk Managers verzorgen wij particuliere verzekeringen met persoonlijk advies en aandacht voor uw specifieke situatie. Van woon- en autoverzekeringen tot uitgebreidere verzekeringsoplossingen voor kostbaarheden, bijzondere voertuigen, monumentale panden en tweede woningen.';
+
 const blocks: readonly ContentBlock[] = [
   {
     kind: 'paragraph',
     variant: 'lead',
-    text: 'Bij TIS Risk Managers verzorgen wij particuliere verzekeringen met persoonlijk advies en aandacht voor uw specifieke situatie. Van woon- en autoverzekeringen tot uitgebreidere verzekeringsoplossingen voor kostbaarheden, bijzondere voertuigen, monumentale panden en tweede woningen.',
+    text: INTRO_LEAD,
   },
   {
     kind: 'paragraph',
@@ -152,22 +157,29 @@ const blocks: readonly ContentBlock[] = [
 
 export default function ParticuliereVerzekeringen() {
   return (
-    <UnifiedLayout
-      title={PAGE_META.personalInsurance.heading}
-      breadcrumb={<Breadcrumb />}
-    >
-      <Flex direction="column" gap={SECTION_SPACING.medium}>
-        <Box as="section">
-          <ContentBlocks blocks={blocks} />
-        </Box>
+    <>
+      <PageHero
+        title={PAGE_META.personalInsurance.heading}
+        description={INTRO_LEAD}
+        image="/slider-1.jpg"
+        ctaLabel="Offerte aanvragen"
+        ctaHref={NAVIGATION_ROUTES.quote}
+      />
 
-        <FaqSection faqs={PAGE_FAQS.personalInsurance} />
+      <UnifiedLayout breadcrumb={<Breadcrumb />}>
+        <Flex direction="column" gap={SECTION_SPACING.medium}>
+          <Box as="section">
+            <ContentBlocks blocks={blocks} />
+          </Box>
 
-        <PageCta
-          title="Vraag een offerte aan"
-          text="Wilt u uw woning, kostbaarheden, bijzondere voertuig of andere persoonlijke bezittingen verzekeren? Of wilt u uw bestaande verzekeringen laten beoordelen? Wij adviseren u graag over de mogelijkheden."
-        />
-      </Flex>
-    </UnifiedLayout>
+          <FaqSection faqs={PAGE_FAQS.personalInsurance} />
+
+          <PageCta
+            title="Vraag een offerte aan"
+            text="Wilt u uw woning, kostbaarheden, bijzondere voertuig of andere persoonlijke bezittingen verzekeren? Of wilt u uw bestaande verzekeringen laten beoordelen? Wij adviseren u graag over de mogelijkheden."
+          />
+        </Flex>
+      </UnifiedLayout>
+    </>
   );
 }

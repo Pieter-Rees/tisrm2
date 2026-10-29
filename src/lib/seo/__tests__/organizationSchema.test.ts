@@ -119,7 +119,7 @@ describe('SEO schema helpers', () => {
   });
 
   it('formats hyphenated segments', () => {
-    expect(formatBreadcrumbSegment('risicoadvies')).toBe('Risicoadvies');
+    expect(formatBreadcrumbSegment('risicoadvies')).toBe('Risk Management');
     expect(formatBreadcrumbSegment('custom-page')).toBe('Custom Page');
   });
 

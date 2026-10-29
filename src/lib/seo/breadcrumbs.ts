@@ -9,7 +9,7 @@ const SEGMENT_LABELS: Record<string, string> = {
   'bouw-en-techniek': 'Bouw en techniek',
   'verzuim-en-personeel': 'Verzuim en personeel',
   'particuliere-verzekeringen': 'Particuliere verzekeringen',
-  risicoadvies: 'Risicoadvies',
+  risicoadvies: 'Risk Management',
   kennisbank: 'Kennisbank',
   'over-ons': 'Over ons',
   contact: 'Contact',

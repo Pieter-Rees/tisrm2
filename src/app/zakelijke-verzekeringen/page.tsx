@@ -23,6 +23,8 @@ import { PAGE_FAQS } from '@/lib/seo/pageFaqs';
 import { PAGE_META } from '@/lib/seo/pageMeta';
 import type { ContentBlock } from '@/types/content';
 
+const SPECIALTIES_ANCHOR = 'specialisaties';
+
 const BRANCH_TILES: Record<
   string,
   { description: string; linkLabel: string }
@@ -224,7 +226,13 @@ export default function ZakelijkeVerzekeringen() {
             <ContentBlocks blocks={adviceBlocks} />
           </Box>
 
-          <Flex as="section" direction="column" gap={PROSE_STACK_GAP}>
+          <Flex
+            as="section"
+            id={SPECIALTIES_ANCHOR}
+            scrollMarginTop="var(--headerHeight)"
+            direction="column"
+            gap={PROSE_STACK_GAP}
+          >
             <Heading as="h2" {...HEADING_STYLES.h2} mb="0">
               Onze specialisaties
             </Heading>

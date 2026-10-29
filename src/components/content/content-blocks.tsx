@@ -14,6 +14,7 @@ import {
   PROSE_STACK_GAP,
   SECTION_SPACING,
 } from '@/constants/typography';
+import { toSectionId } from '@/lib/section-id';
 import type { ContentBlock } from '@/types/content';
 
 export function ContentLink({ href, label }: { href: string; label: string }) {
@@ -187,6 +188,10 @@ function renderBlock(block: ContentBlock, index: number) {
         <Heading
           key={`${block.text}-${index}`}
           as={block.level === 2 ? 'h2' : 'h3'}
+          id={block.level === 2 ? toSectionId(block.text) : undefined}
+          scrollMarginTop={
+            block.level === 2 ? 'var(--headerHeight)' : undefined
+          }
           {...(block.level === 2 ? HEADING_STYLES.h2 : HEADING_STYLES.h3)}
           mb="0"
           mt={block.level === 2 && index > 0 ? SECTION_SPACING.small : '0'}

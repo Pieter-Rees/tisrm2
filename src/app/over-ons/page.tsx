@@ -103,6 +103,8 @@ export default function Overons() {
         title={PAGE_META.about.heading}
         description="Geen onderneming is hetzelfde. Daarom geloven wij bij TIS Risk Managers niet in standaardoplossingen, maar in verzekeringen en risicoadvies die passen bij de onderneming én de ondernemer."
         image="/overOnsAdvies.jpg"
+        ctaLabel="Contact opnemen"
+        ctaHref={NAVIGATION_ROUTES.contact}
       />
 
       <EditorialBand

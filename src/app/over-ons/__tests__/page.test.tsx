@@ -74,7 +74,10 @@ describe('Over ons page', () => {
 
   it('links the kennismaken CTA to contact', () => {
     render(<Overons />);
-    const cta = screen.getByRole('link', { name: 'Contact opnemen' });
-    expect(cta).toHaveAttribute('href', '/contact');
+    const ctas = screen.getAllByRole('link', { name: 'Contact opnemen' });
+    expect(ctas.length).toBeGreaterThanOrEqual(1);
+    ctas.forEach(link => {
+      expect(link).toHaveAttribute('href', '/contact');
+    });
   });
 });

@@ -10,6 +10,7 @@ import { UnifiedLayout } from '@/components/layout';
 import Loading from '@/components/loading';
 import { PhotoVeil } from '@/components/media-frame';
 import MeldSchade from '@/components/meld-schade';
+import { COVER_HERO_MIN_HEIGHT } from '@/components/page-hero';
 import PageTransition from '@/components/page-transition';
 import { HomeFaq } from '@/components/seo/HomeFaq';
 import { ButtonLink } from '@/components/ui/button-link';
@@ -24,7 +25,6 @@ import {
 } from '@/constants/typography';
 import { DESIGN_BUTTON_STYLES } from '@/styles/components/button.styles';
 
-const ThreeElements = lazy(() => import('@/components/three-elements'));
 const CallToAction = lazy(() => import('@/components/call-to-action'));
 const Talker = lazy(() => import('@/components/talker'));
 
@@ -73,8 +73,6 @@ const BRANCHES = [
   },
 ] as const;
 
-const HERO_MIN_HEIGHT = { base: '100svh', md: '100vh' };
-
 export default function HomePageContent() {
   return (
     <PageTransition>
@@ -82,7 +80,7 @@ export default function HomePageContent() {
         as="section"
         position="relative"
         width="100%"
-        minHeight={HERO_MIN_HEIGHT}
+        minHeight={COVER_HERO_MIN_HEIGHT}
         overflow="hidden"
       >
         <BackgroundVideo />
@@ -90,11 +88,11 @@ export default function HomePageContent() {
         <Container
           {...PAGE_CONTAINER}
           position="relative"
-          minHeight={HERO_MIN_HEIGHT}
+          minHeight={COVER_HERO_MIN_HEIGHT}
           display="flex"
           alignItems="flex-end"
           pt={{ base: 28, md: 36 }}
-          pb={{ base: 16, md: 24 }}
+          pb={{ base: 12, md: 20 }}
         >
           <Flex
             direction="column"
@@ -133,16 +131,29 @@ export default function HomePageContent() {
       <UnifiedLayout variant="page" showSidebar={true}>
         <Flex direction="column" gap={SECTION_SPACING.medium}>
           <ErrorBoundary>
-            <Box
+            <Flex
               hideFrom="xl"
-              bg="white"
-              borderRadius="xl"
-              boxShadow="sm"
+              direction="column"
+              gap="3"
               overflow="visible"
               minH="fit-content"
             >
-              <MeldSchade />
-            </Box>
+              <Box bg="white" borderRadius="xl" boxShadow="sm">
+                <ButtonLink
+                  href={NAVIGATION_ROUTES.quote}
+                  width="full"
+                  size="lg"
+                  minH="14"
+                  borderRadius="xl"
+                  {...DESIGN_BUTTON_STYLES.onLight}
+                >
+                  Offerte aanvragen
+                </ButtonLink>
+              </Box>
+              <Box bg="white" borderRadius="xl" boxShadow="sm">
+                <MeldSchade />
+              </Box>
+            </Flex>
           </ErrorBoundary>
 
           <Flex as="section" direction="column" gap={PROSE_STACK_GAP}>
@@ -161,22 +172,20 @@ export default function HomePageContent() {
             </Text>
           </Flex>
 
-          <ErrorBoundary>
-            <Suspense fallback={<Loading />}>
-              <ThreeElements />
-            </Suspense>
-          </ErrorBoundary>
-
-          <Flex as="section" direction="column" gap={PROSE_STACK_GAP}>
+          <Flex
+            as="section"
+            direction="column"
+            gap={PROSE_STACK_GAP}
+            aria-label="Onze specialisaties"
+          >
             <Heading as="h2" {...HEADING_STYLES.h2} mb="0">
-              Zakelijke verzekeringen voor iedere onderneming
+              Onze specialisaties
             </Heading>
             <Text {...PARAGRAPH_STYLES.body}>
               Iedere onderneming heeft andere risico’s. Daarom kijken wij naar
               uw bedrijfsactiviteiten en stellen wij een passend
               verzekeringspakket samen. Naast onze algemene zakelijke
-              verzekeringen hebben wij ruime ervaring binnen een aantal
-              specifieke branches.
+              verzekeringen hebben wij ruime ervaring binnen deze branches.
             </Text>
             <Box
               as="ul"

@@ -11,6 +11,12 @@ import { Box, Container, Flex, Heading, Image, Text } from '@chakra-ui/react';
 
 type HeroFrame = 'cover' | 'portrait' | 'product';
 
+/** Shared cover hero height for home and PageHero pages. */
+export const COVER_HERO_MIN_HEIGHT = {
+  base: '58vh',
+  md: '72vh',
+} as const;
+
 function resolveFrame(image: string, frame: HeroFrame): HeroFrame {
   if (isProductImage(image)) return 'product';
   if (frame === 'portrait') return 'portrait';
@@ -38,7 +44,7 @@ const PageHero = ({
   ctaLabel,
   ctaHref,
   eyebrow,
-  minHeight = { base: '58vh', md: '72vh' },
+  minHeight = COVER_HERO_MIN_HEIGHT,
 }: PageHeroProps) => {
   const resolvedFrame = resolveFrame(image, frame);
   const isCover = resolvedFrame === 'cover';

@@ -74,7 +74,7 @@ export const PRIMARY_NAVIGATION = [
   { href: NAVIGATION_ROUTES.home, label: 'Home' },
   { href: NAVIGATION_ROUTES.businessInsurance, label: 'Zakelijk' },
   { href: NAVIGATION_ROUTES.personalInsurance, label: 'Particulier' },
-  { href: NAVIGATION_ROUTES.riskAdvice, label: 'Risicoadvies' },
+  { href: NAVIGATION_ROUTES.riskAdvice, label: 'Risk Management' },
   { href: NAVIGATION_ROUTES.knowledgeBase, label: 'Kennisbank' },
   { href: NAVIGATION_ROUTES.about, label: 'Over ons' },
   { href: NAVIGATION_ROUTES.downloads, label: 'Downloads' },
