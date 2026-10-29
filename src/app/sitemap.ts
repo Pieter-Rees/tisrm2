@@ -111,6 +111,9 @@ const marketingRoutes: Array<{
   })),
 ];
 
+/** `output: export` refuses metadata routes that are not pinned to static. */
+export const dynamic = 'force-static';
+
 export default function sitemap(): MetadataRoute.Sitemap {
   return marketingRoutes.map(({ path, changeFrequency, priority }) => ({
     url: `${APP_CONFIG.url}${path === '/' ? '' : path}`,

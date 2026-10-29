@@ -2,6 +2,9 @@ import type { MetadataRoute } from 'next';
 
 import { APP_CONFIG } from '@/constants/app';
 
+/** `output: export` refuses metadata routes that are not pinned to static. */
+export const dynamic = 'force-static';
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
