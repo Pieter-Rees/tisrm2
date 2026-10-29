@@ -17,10 +17,10 @@ const SimpleUnifiedLayout = ({ children, variant = 'page', title, breadcrumb, sh
 
     const headerStyle = {
         display: 'flex',
+        flexDirection: 'column' as const,
         width: '100%',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        gap: '2rem',
+        alignItems: 'flex-start',
+        gap: '0.5rem',
         marginBottom: '2rem',
     };
 
@@ -48,12 +48,12 @@ const SimpleUnifiedLayout = ({ children, variant = 'page', title, breadcrumb, sh
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
                         {(title || breadcrumb) && (
                             <header style={headerStyle}>
-                                {title && <h1 style={{ margin: 0 }}>{title}</h1>}
                                 {breadcrumb && (
                                     <nav aria-label="Breadcrumb navigation">
                                         {breadcrumb}
                                     </nav>
                                 )}
+                                {title && <h1 style={{ margin: 0 }}>{title}</h1>}
                             </header>
                         )}
                         <div style={{ minHeight: '200px' }}>

@@ -29,6 +29,8 @@ export default function Breadcrumb({
       listStyleType="none"
       m="0"
       p="0"
+      flexWrap="wrap"
+      rowGap={SPACING_SCALE.xs}
     >
       {items.map((item, index) => {
         const isCurrentPage = pathname === item.path;

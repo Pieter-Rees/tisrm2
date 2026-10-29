@@ -119,25 +119,20 @@ const UnifiedLayout = memo<UnifiedLayoutProps>(
                   <Flex
                     as="header"
                     width="full"
-                    justifyContent="space-between"
-                    alignItems={{ base: 'flex-start', lg: 'center' }}
-                    flexDirection={{ base: 'column', lg: 'row' }}
+                    alignItems="flex-start"
+                    flexDirection="column"
                     gap={SECTION_SPACING.small}
                   >
+                    {breadcrumb && (
+                      <Box as="nav" aria-label="Breadcrumb navigation" width="full">
+                        {breadcrumb}
+                      </Box>
+                    )}
+
                     {title && (
                       <Heading as="h1" {...HEADING_STYLES.h1} mb="0">
                         {title}
                       </Heading>
-                    )}
-
-                    {breadcrumb && (
-                      <Box
-                        as="nav"
-                        aria-label="Breadcrumb navigation"
-                        flexShrink="0"
-                      >
-                        {breadcrumb}
-                      </Box>
                     )}
                   </Flex>
                 )}

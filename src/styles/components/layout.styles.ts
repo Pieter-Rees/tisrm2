@@ -127,12 +127,12 @@ export const contentAreaStyles: SystemStyleObject = {
   gap: SPACING_PATTERNS.page.section,
 };
 
-// Header section within content
+// Header section within content — breadcrumb stacks above the title so long
+// paths never compete with the h1 for horizontal space.
 export const contentHeaderStyles: SystemStyleObject = {
   width: 'full',
-  justifyContent: 'space-between',
-  alignItems: { base: 'flex-start', lg: 'center' },
-  flexDirection: { base: 'column', lg: 'row' } as const,
+  alignItems: 'flex-start',
+  flexDirection: 'column',
   mb: COMPONENT_SPACING.form.group,
   gap: SECTION_SPACING.small,
 };

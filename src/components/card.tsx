@@ -76,9 +76,20 @@ const Card = memo<CardProps>(
           flexDirection="column"
         >
           {variant === 'downloads' && (
-            <Box display="flex" alignItems="center" gap={SPACING_SCALE.sm} mb={SPACING_SCALE.md}>
-              <Icon as={BsFileEarmarkText} color="blue.700" boxSize="5" />
-              <Heading as={titleAs} {...HEADING_STYLES.h4} mb="0">
+            <Box
+              display="flex"
+              alignItems="flex-start"
+              gap={SPACING_SCALE.sm}
+              mb={SPACING_SCALE.md}
+            >
+              <Icon
+                as={BsFileEarmarkText}
+                color="blue.700"
+                boxSize="5"
+                flexShrink={0}
+                mt="1"
+              />
+              <Heading as={titleAs} {...HEADING_STYLES.h4} mb="0" minW="0">
                 {title}
               </Heading>
             </Box>
@@ -90,7 +101,7 @@ const Card = memo<CardProps>(
           )}
 
           {description && (
-            <Text {...PARAGRAPH_STYLES.bodySmall} flex="1">
+            <Text {...PARAGRAPH_STYLES.bodySmall} flex="1" minW="0">
               {description}
             </Text>
           )}

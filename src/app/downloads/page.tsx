@@ -8,7 +8,7 @@ import { ContentLink, PageCta } from '@/components/content';
 import { UnifiedLayout } from '@/components/layout';
 import PageHero from '@/components/page-hero';
 import { NAVIGATION_ROUTES } from '@/constants/app';
-import { COMPONENT_SPACING } from '@/constants/layout';
+import { COMPONENT_SPACING, GRID_CONFIGS } from '@/constants/layout';
 import {
   HEADING_STYLES,
   PARAGRAPH_STYLES,
@@ -54,11 +54,7 @@ export default function Downloads() {
               </Heading>
               <Box
                 display="grid"
-                gridTemplateColumns={{
-                  base: '1fr',
-                  md: 'repeat(2, 1fr)',
-                  lg: 'repeat(3, 1fr)',
-                }}
+                gridTemplateColumns={GRID_CONFIGS.doubleColumn}
                 gap={COMPONENT_SPACING.grid.sm}
                 alignItems="stretch"
               >

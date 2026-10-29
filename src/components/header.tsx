@@ -3,12 +3,15 @@
 import { Box, Button, Container, Flex } from '@chakra-ui/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { memo, useEffect, useState } from 'react';
+import { type FocusEvent, memo, useEffect, useState } from 'react';
 import { BsList, BsX } from 'react-icons/bs';
 
 import Logo from '@/components/logo';
 import Navbar from '@/components/navbar';
 import Sidenav from '@/components/sidenav';
+import ZakelijkMegaMenu, {
+  useZakelijkMegaMenu,
+} from '@/components/zakelijk-mega-menu';
 import { NAVIGATION_ROUTES } from '@/constants/app';
 import { useDisclosure } from '@/hooks/use-disclosure';
 import {
@@ -34,6 +37,25 @@ const Header = memo(() => {
   // over it until the first scroll. Every other route gets light chrome.
   const isHome = pathname === NAVIGATION_ROUTES.home;
   const useLightChrome = !isHome || isScrolled;
+  const {
+    isZakelijkMenuOpen,
+    openZakelijkMenu,
+    closeZakelijkMenu,
+    scheduleCloseZakelijkMenu,
+  } = useZakelijkMegaMenu(pathname);
+
+  function handleHeaderBlur(event: FocusEvent<HTMLElement>) {
+    const nextTarget = event.relatedTarget;
+
+    if (
+      nextTarget instanceof Node &&
+      event.currentTarget.contains(nextTarget)
+    ) {
+      return;
+    }
+
+    closeZakelijkMenu();
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,7 +70,12 @@ const Header = memo(() => {
 
   return (
     <>
-      <Box as="header" role="banner" {...getHeaderStyles(useLightChrome)}>
+      <Box
+        as="header"
+        role="banner"
+        {...getHeaderStyles(useLightChrome)}
+        onBlur={handleHeaderBlur}
+      >
         <Container>
           <Flex {...headerContainerStyles} direction="row">
             <Box {...headerLogoStyles}>
@@ -62,7 +89,13 @@ const Header = memo(() => {
             </Box>
 
             <Box flex="1" hideBelow="xl">
-              <Navbar useLightChrome={useLightChrome} />
+              <Navbar
+                useLightChrome={useLightChrome}
+                isZakelijkMenuOpen={isZakelijkMenuOpen}
+                onZakelijkMenuEnter={openZakelijkMenu}
+                onZakelijkMenuLeave={scheduleCloseZakelijkMenu}
+                onZakelijkNavigate={closeZakelijkMenu}
+              />
             </Box>
 
             <Box hideFrom="xl">
@@ -86,6 +119,16 @@ const Header = memo(() => {
             </Box>
           </Flex>
         </Container>
+
+        {/* Direct child of the header so the sheet spans the header, not the
+            nav column. Absolute, not fixed: the header backdrop-filter would
+            trap a fixed panel the way it trapped the drawer. */}
+        <ZakelijkMegaMenu
+          isOpen={isZakelijkMenuOpen}
+          onMouseEnter={openZakelijkMenu}
+          onMouseLeave={closeZakelijkMenu}
+          onNavigate={closeZakelijkMenu}
+        />
       </Box>
 
       {/* The header's `backdrop-filter` makes it a containing block for fixed
